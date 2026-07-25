@@ -417,15 +417,45 @@ FAMILIES: tuple[tuple[Callable[[dict[str, Any]], Problem | None], Callable[[], I
 )
 
 
-def explore_random(samples: int = 500, seed: int | None = None) -> list[Problem]:
+_FAMILY_OF_BUILDER: dict[Any, str] = {}
+
+
+def _register_family_map() -> None:
+    """シャード分担のため builder 関数 -> 族名を対応づける。"""
+    _FAMILY_OF_BUILDER.update(
+        {
+            _mobius: "mobius",
+            _paley: "paley",
+            _matrix_recurrence_period: "linear_recurrence",
+            _cubic_tangent: "cubic_tangent",
+            _complex_rotation: "complex_rotation",
+            _gambler: "gambler",
+            _parabola_right_angle: "parabola",
+            _reciprocal_sequence: "reciprocal",
+            _complex_affine: "complex_affine",
+        }
+    )
+
+
+SHARD_FAMILIES = (
+    "mobius", "paley", "linear_recurrence", "cubic_tangent", "complex_rotation",
+    "gambler", "parabola", "reciprocal", "complex_affine",
+)
+
+
+def explore_random(samples: int = 500, seed: int | None = None,
+                   only_family: str | None = None) -> list[Problem]:
     """固定グリッドを超えてパラメータ空間をランダム探索する。
 
     計算資源がある環境（GitHub Actions 等）でこれを大きくすると、その分だけ
     新しい構造が見つかる。各族の妥当な範囲から引き、検証を通ったものだけ返す。
+    only_family を指定すると、その族だけを探索する（並列シャード用）。
     """
 
     import random as _random
 
+    if not _FAMILY_OF_BUILDER:
+        _register_family_map()
     rng = _random.Random(seed)
     out: list[Problem] = []
     space: list[tuple[Any, Any]] = [
@@ -444,6 +474,10 @@ def explore_random(samples: int = 500, seed: int | None = None) -> list[Problem]
         (_reciprocal_sequence, lambda: {"p": rng.randint(1, 9), "q": rng.randint(1, 9)}),
         (_complex_affine, lambda: {"br": rng.randint(-6, 6), "bi": rng.randint(-6, 6)}),
     ]
+    if only_family:
+        space = [(b, sm) for (b, sm) in space if only_family in _FAMILY_OF_BUILDER.get(b, "")]
+        if not space:
+            return []
     for _ in range(samples):
         build, sampler = rng.choice(space)
         params = sampler()
@@ -471,10 +505,11 @@ def all_problems() -> list[Problem]:
     return out
 
 
-def synthesize(explore: int = 0, seed: int | None = None) -> dict[str, Any]:
+def synthesize(explore: int = 0, seed: int | None = None,
+               only_family: str | None = None) -> dict[str, Any]:
     problems = all_problems()
     if explore:
-        problems = problems + explore_random(explore, seed)
+        problems = problems + explore_random(explore, seed, only_family)
     from collections import Counter
     records = [
         {

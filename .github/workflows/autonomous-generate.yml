@@ -1,16 +1,21 @@
 name: MathOS autonomous generation
 
 # 誰も見ていない時も MathOS が問題を作り続ける。
-# 6時間ごとにクラウド(GitHub Actions)で走り、生成→検証→新規性→評価→蓄積して
-# プールをコミットする。PC も Claude も不要。
+# 族ごとに並列シャードで大規模探索し、最後に1つのプールへマージしてコミットする。
+# PC も Claude も不要。計算資源(GitHub Actions)を並列に使い切る。
 on:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
     inputs:
-      max_new:
-        description: "1回に追加する上限（空なら無制限）"
+      explore:
+        description: "1シャードあたりの探索サンプル数"
         required: false
+        default: "6000"
+      rounds:
+        description: "1シャードのラウンド数"
+        required: false
+        default: "6"
 
 permissions:
   contents: write
@@ -20,52 +25,97 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  generate:
+  # ── 1) 族ごとに並列探索（20並列まで使える枠を活用） ──
+  explore:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        family:
+          - mobius
+          - paley
+          - linear_recurrence
+          - cubic_tangent
+          - complex_rotation
+          - gambler
+          - parabola
+          - reciprocal
+          - complex_affine
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install deps
         run: pip install sympy numpy scipy mpmath
 
-      - name: Run autonomous loop
+      - name: Explore ${{ matrix.family }}
+        env:
+          EXPLORE: ${{ github.event.inputs.explore || '6000' }}
+          ROUNDS: ${{ github.event.inputs.rounds || '6' }}
         run: |
-          ARGS=""
-          if [ -n "${{ github.event.inputs.max_new }}" ]; then
-            ARGS="--max-new ${{ github.event.inputs.max_new }}"
-          fi
-          # 余っている計算資源を使う: 大規模ランダム探索を複数ラウンド回す
-          for round in 1 2 3 4 5 6 7 8; do
-            echo "--- round $round ---"
-            python autonomous_loop.py $ARGS --explore 4000 --seed $((RANDOM)) | tee run_summary.json
+          OUT="shard_${{ matrix.family }}.json"
+          for r in $(seq 1 "$ROUNDS"); do
+            echo "--- ${{ matrix.family }} round $r ---"
+            python autonomous_loop.py \
+              --family "${{ matrix.family }}" \
+              --explore "$EXPLORE" \
+              --seed $((RANDOM * r + r)) \
+              --out "$OUT"
           done
 
-      - name: Run tests (verify engine still sound)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.family }}
+          path: shard_${{ matrix.family }}.json
+          if-no-files-found: ignore
+
+  # ── 2) 全シャードをマージして1つのプールにし、コミット ──
+  merge:
+    needs: explore
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install sympy numpy scipy mpmath
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: shards
+          merge-multiple: true
+
+      - name: Merge shards into the pool
         run: |
-          python -m unittest test_geometry_fusion_synthesis -v 2>&1 | tail -5 || true
+          ls -la shards || true
+          # 既存プールも入力に含めて蓄積する
+          python merge_shards.py \
+            --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
+            --output problem_synthesis/construct_pool.json | tee merge_summary.json
 
       - name: Commit grown pool
         run: |
           git config user.name  "mathos-bot"
           git config user.email "mathos-bot@users.noreply.github.com"
-          git add problem_synthesis/construct_pool.json problem_synthesis/autonomous_log.json
+          git add problem_synthesis/construct_pool.json
           if git diff --cached --quiet; then
             echo "no new problems this run"
           else
             TOTAL=$(python -c "import json;print(json.load(open('problem_synthesis/construct_pool.json',encoding='utf-8'))['summary']['total'])")
-            git commit -m "autonomous: pool now ${TOTAL} problems"
+            git commit -m "autonomous(parallel): pool now ${TOTAL} problems"
+            git pull --rebase --autostash origin master || true
             git push
           fi
 
-      - name: Upload summary
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: run-summary
-          path: run_summary.json
+          name: merge-summary
+          path: merge_summary.json
           if-no-files-found: ignore
