@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T06:13:56.137108+00:00",
+  "generated_at": "2026-07-25T06:16:17.534258+00:00",
   "method": {
     "loop": "compose -> verify -> novelty -> grade -> accumulate",
     "name": "MathOS autonomous pool",
@@ -6074,7 +6074,7 @@
     }
   ],
   "summary": {
-    "added_this_run": 0,
+    "added_this_run": 125,
     "band_counts": {
       "B_hard_university": 97,
       "C_standard_university": 29,
@@ -6092,14 +6092,14 @@
       "construct.parabola_right_angle_chord": 10,
       "construct.reciprocal_recurrence": 16
     },
-    "previous": 301,
+    "previous": 176,
     "run_stats": {
-      "dup": 396,
+      "dup": 271,
       "generated": 396,
       "not_novel": 0,
       "unverified": 0
     },
     "total": 176,
-    "world_corpus_size": 28095
+    "world_corpus_size": 176
   }
 }
