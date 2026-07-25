@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.hf_rows_cache/
+*.parquet
+*.pdf
+*.dvi
+*.aux
+*.log
+*.jsonl
+*.weights.json
+ui/
+x_analysis/
+# 巨大ベンチマーク/中間データ(コードとドキュメントだけ公開)
+generalization_benchmark*.json
+lift_lifter*.json
+corpus_lift*.json
+pdca_*.json
+hard_public_*.json
+more_public_*.json
+public_benchmark_*.json
+tex_benchmark_results*.json
+x_*.json
+domain_benchmark.jsonl
