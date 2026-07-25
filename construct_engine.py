@@ -244,11 +244,169 @@ def _grid_cubic_tangent() -> Iterable[dict[str, Any]]:
         yield {"coeff": coeff}
 
 
+# ===========================================================================
+# 以下、大学範囲の話題でも「高校数学で解ける」難問族（京大・難関大型）。
+# ===========================================================================
+
+# H1 複素数平面(高校): z_{n+1}=α z_n, α は 1 の原始 k 乗根 → 周期 k。
+def _complex_rotation(params: dict[str, Any]) -> Problem | None:
+    k, m = params["k"], params["m"]
+    if math.gcd(m, k) != 1:
+        return None
+    period = k  # 原始根なので周期 k
+    two_m = 2 * m
+    return Problem(
+        "construct.complex_rotation_period", "complex", "polar_form", params,
+        rf"複素数 \(\alpha=\cos\dfrac{{{two_m}\pi}}{{{k}}}+i\sin\dfrac{{{two_m}\pi}}{{{k}}}\) に対し，"
+        rf"複素数列を \(z_1=1,\ z_{{n+1}}=\alpha z_n\) で定める。"
+        r"\(z_n=1\) となる最小の正の整数 \(n\) を求めよ。",
+        str(period), str(period),
+        rf"\(z_n=\alpha^{{n-1}}\)。\(\alpha\) は偏角 \(\tfrac{{{two_m}\pi}}{{{k}}}\) の回転で，"
+        rf"\(\gcd({m},{k})=1\) だから \(\alpha^{{n-1}}=1\) となる最小は \(n-1={k}\)、"
+        rf"すなわち \(n={period}\)（高校：ド・モアブル）。",
+        ("PrimitiveRootOfUnity", "DeMoivrePower", "MinimalPeriod"),
+        True, True, "de_moivre_primitive_root_period",
+    )
+
+
+def _grid_complex_rotation() -> Iterable[dict[str, Any]]:
+    for k in (3, 4, 5, 6, 7, 8, 12):
+        for m in (1, 2, 3):
+            if math.gcd(m, k) == 1 and m < k:
+                yield {"k": k, "m": m}
+
+
+# H2 確率漸化式(高校): ギャンブラーの破産。等確率 or 偏り。
+def _gambler(params: dict[str, Any]) -> Problem | None:
+    N, k, pa, pb = params["N"], params["k"], params["pa"], params["pb"]
+    if pa == pb:
+        ans = sp.Rational(k, N)
+        ans_tex = sp.latex(ans)
+        sol = rf"到達確率を \(p_k\) とおくと \(p_k=\tfrac12 p_{{k+1}}+\tfrac12 p_{{k-1}}\)。"\
+              rf"これは等差数列で \(p_0=0,\ p_{{{N}}}=1\) より \(p_k=k/{N}\)。"
+    else:
+        r_ = sp.Rational(pb, pa)
+        ans = sp.simplify((1 - r_**k) / (1 - r_**N))
+        ans_tex = sp.latex(ans)
+        sol = rf"\(p_k=\tfrac{{{pa}}}{{{pa+pb}}}p_{{k+1}}+\tfrac{{{pb}}}{{{pa+pb}}}p_{{k-1}}\)。"\
+              rf"特性比 \(r={sp.latex(r_)}\) で \(p_k=\dfrac{{1-r^k}}{{1-r^N}}\)（高校：漸化式）。"
+    step = (rf"右へ確率 \(\tfrac{{{pa}}}{{{pa+pb}}}\)、左へ \(\tfrac{{{pb}}}{{{pa+pb}}}\)"
+            if pa != pb else r"左右へ等確率 \(\tfrac12\)")
+    return Problem(
+        "construct.gambler_ruin_probability", "probability", "linear_recurrence", params,
+        rf"数直線上の点が \(k={k}\) から出発し，各回 {step} で \(\pm1\) 動く。"
+        rf"\(0\) または \(N={N}\) に達したら止まる。\(N\) に先に到達する確率を求めよ。",
+        ans_tex, sp.sstr(ans), sol,
+        ("AbsorbingWalk", "BoundaryRecurrence", "RatioClosedForm"),
+        True, True, "gambler_ruin_boundary_recurrence",
+    )
+
+
+def _grid_gambler() -> Iterable[dict[str, Any]]:
+    for N in (4, 5, 6, 7):
+        for k in range(1, N):
+            yield {"N": N, "k": k, "pa": 1, "pb": 1}
+    for N, k, pa, pb in ((4, 1, 2, 1), (5, 2, 2, 1), (5, 3, 1, 2), (6, 2, 3, 1)):
+        yield {"N": N, "k": k, "pa": pa, "pb": pb}
+
+
+# H3 二次関数×軌跡(高校): 放物線上の2点と原点が直角 → 弦の定点。
+def _parabola_right_angle(params: dict[str, Any]) -> Problem | None:
+    c = params["c"]  # y = c x^2
+    a, b = sp.symbols("a b")
+    # A=(a,c a^2),B=(b,c b^2). OA⊥OB: ab + c^2 a^2 b^2=0 → ab=-1/c^2
+    ab = sp.Rational(-1, c * c)
+    # 弦AB: y = c(a+b)x - c ab = c(a+b)x + 1/c → x=0 で y=1/c
+    fixed_y = sp.Rational(1, c)
+    curve_tex = sp.latex(sp.Integer(c) * sp.Symbol("x") ** 2)
+    return Problem(
+        "construct.parabola_right_angle_chord", "geometry", "slope_product", params,
+        rf"放物線 \(y={curve_tex}\) 上の相異なる2点 \(A,B\) と原点 \(O\) が "
+        r"\(\angle AOB=90^\circ\) を満たしながら動く。"
+        r"このとき弦 \(AB\) が必ず通る定点を求めよ。",
+        rf"(0,\ {sp.latex(fixed_y)})", f"(0, {sp.sstr(fixed_y)})",
+        rf"\(A=(a,{c}a^2),B=(b,{c}b^2)\)。\(OA\perp OB\) から傾きの積 "
+        rf"\(\tfrac{{{c}a^2}}{{a}}\cdot\tfrac{{{c}b^2}}{{b}}={c}^2ab=-1\)，"
+        rf"すなわち \(ab=-1/{c}^2\)（一定）。弦 \(AB\) は \(y={c}(a+b)x-{c}ab\) で "
+        rf"\(x=0\) のとき \(y=1/{c}\)。定点 \((0,1/{c})\)（高校）。",
+        ("RightAngleCondition", "SlopeProductInvariant", "FixedPoint"),
+        True, True, "parabola_slope_product_fixed_point",
+    )
+
+
+def _grid_parabola_right_angle() -> Iterable[dict[str, Any]]:
+    for c in (1, 2, 3, 4):
+        yield {"c": c}
+
+
+# H4 数列×帰納法(高校): 逆数変換で解ける漸化式。
+def _reciprocal_sequence(params: dict[str, Any]) -> Problem | None:
+    p, q = params["p"], params["q"]  # a_{n+1}=a_n/(p + q a_n)
+    n = sp.symbols("n", positive=True, integer=True)
+    # 1/a_{n+1} = p/a_n + q → b_n=1/a_n は等差(公比p)+q
+    a = sp.Rational(1)
+    vals = [a]
+    for _ in range(1, 10):
+        a = a / (p + q * a)
+        vals.append(a)
+    # 一般項: b_n = p^{n-1} b_1 + q(p^{n-1}-1)/(p-1) if p!=1 else 1+q(n-1)
+    if p == 1:
+        bn = 1 + q * (n - 1)
+    else:
+        bn = sp.Integer(p) ** (n - 1) * 1 + q * (sp.Integer(p) ** (n - 1) - 1) / (p - 1)
+    an = sp.simplify(1 / bn)
+    ok = all(sp.simplify(an.subs(n, i + 1) - vals[i]) == 0 for i in range(len(vals)))
+    denom = (str(p) + _term(q, "a_n")).lstrip("+")
+    return Problem(
+        "construct.reciprocal_recurrence", "algebra", "reciprocal_transform", params,
+        rf"数列 \((a_n)\) を \(a_1=1,\ a_{{n+1}}=\dfrac{{a_n}}{{{denom}}}\) で定める。"
+        r"一般項 \(a_n\) を求めよ。",
+        sp.latex(an), sp.sstr(an),
+        rf"逆数 \(b_n=1/a_n\) をとると \(b_{{n+1}}={p}b_n+{q}\)（高校：逆数変換で"
+        r"線形漸化式）。これを解いて \(a_n=1/b_n\)。",
+        ("ReciprocalTransform", "LinearRecurrence", "GeneralTerm"),
+        bool(ok), bool(ok), "reciprocal_linearization",
+    )
+
+
+def _grid_reciprocal_sequence() -> Iterable[dict[str, Any]]:
+    for p, q in ((1, 1), (2, 1), (1, 3), (2, 3), (3, 1), (1, 2)):
+        yield {"p": p, "q": q}
+
+
+# H6 複素数列(高校 京大型): z_{n+1}=(z_n + β)/2 の極限(不動点)。
+def _complex_affine(params: dict[str, Any]) -> Problem | None:
+    br, bi = params["br"], params["bi"]  # β = br + bi i
+    beta = sp.Integer(br) + sp.Integer(bi) * sp.I
+    w = sp.simplify(beta)  # 不動点 w=(w+β)/2 → w=β
+    beta_tex = sp.latex(beta)
+    return Problem(
+        "construct.complex_affine_limit", "complex", "fixed_point", params,
+        rf"複素数列を \(z_1=1,\ z_{{n+1}}=\dfrac{{z_n+({beta_tex})}}{{2}}\) で定める。"
+        r"\(z_n\) の \(n\to\infty\) における極限を求めよ。",
+        sp.latex(w), sp.sstr(w),
+        rf"不動点 \(w=(w+{beta_tex})/2\) より \(w={beta_tex}\)。"
+        rf"\(z_{{n+1}}-w=\tfrac12(z_n-w)\) だから \(|z_n-w|\to0\)（高校：複素数平面）。",
+        ("FixedPointShift", "ContractionHalf", "ComplexLimit"),
+        True, True, "complex_affine_fixed_point_limit",
+    )
+
+
+def _grid_complex_affine() -> Iterable[dict[str, Any]]:
+    for br, bi in ((0, 1), (1, 1), (2, -1), (0, 3), (-1, 2), (3, 0)):
+        yield {"br": br, "bi": bi}
+
+
 FAMILIES: tuple[tuple[Callable[[dict[str, Any]], Problem | None], Callable[[], Iterable[dict[str, Any]]]], ...] = (
     (_mobius, _grid_mobius),
     (_paley, _grid_paley),
     (_matrix_recurrence_period, _grid_matrix_recurrence),
     (_cubic_tangent, _grid_cubic_tangent),
+    (_complex_rotation, _grid_complex_rotation),
+    (_gambler, _grid_gambler),
+    (_parabola_right_angle, _grid_parabola_right_angle),
+    (_reciprocal_sequence, _grid_reciprocal_sequence),
+    (_complex_affine, _grid_complex_affine),
 )
 
 
