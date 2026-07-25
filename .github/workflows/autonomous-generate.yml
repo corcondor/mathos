@@ -22,7 +22,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
 
@@ -39,7 +39,11 @@ jobs:
           if [ -n "${{ github.event.inputs.max_new }}" ]; then
             ARGS="--max-new ${{ github.event.inputs.max_new }}"
           fi
-          python autonomous_loop.py $ARGS | tee run_summary.json
+          # 余っている計算資源を使う: 大規模ランダム探索を複数ラウンド回す
+          for round in 1 2 3 4 5 6 7 8; do
+            echo "--- round $round ---"
+            python autonomous_loop.py $ARGS --explore 4000 --seed $((RANDOM)) | tee run_summary.json
+          done
 
       - name: Run tests (verify engine still sound)
         run: |

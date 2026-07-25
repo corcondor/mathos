@@ -417,6 +417,47 @@ FAMILIES: tuple[tuple[Callable[[dict[str, Any]], Problem | None], Callable[[], I
 )
 
 
+def explore_random(samples: int = 500, seed: int | None = None) -> list[Problem]:
+    """固定グリッドを超えてパラメータ空間をランダム探索する。
+
+    計算資源がある環境（GitHub Actions 等）でこれを大きくすると、その分だけ
+    新しい構造が見つかる。各族の妥当な範囲から引き、検証を通ったものだけ返す。
+    """
+
+    import random as _random
+
+    rng = _random.Random(seed)
+    out: list[Problem] = []
+    space: list[tuple[Any, Any]] = [
+        (_mobius, lambda: {"a": rng.randint(-9, 9), "b": rng.randint(-9, 9),
+                           "c": rng.randint(-3, 3), "d": rng.randint(-9, 9),
+                           "question": rng.choice(["fixed", "period"])}),
+        (_paley, lambda: {"p": rng.choice([13, 17, 29, 37, 41, 53, 61, 73, 89, 97,
+                                           101, 109, 113, 137, 149, 157, 173, 181, 193, 197])}),
+        (_matrix_recurrence_period, lambda: {"s": rng.randint(-5, 6), "t": rng.randint(-5, 6),
+                                             "m": rng.randint(3, 40)}),
+        (_cubic_tangent, lambda: {"coeff": rng.randint(-12, 12)}),
+        (_complex_rotation, lambda: {"k": rng.randint(3, 40), "m": rng.randint(1, 39)}),
+        (_gambler, lambda: {"N": rng.randint(4, 20), "k": rng.randint(1, 19),
+                            "pa": rng.randint(1, 5), "pb": rng.randint(1, 5)}),
+        (_parabola_right_angle, lambda: {"c": rng.randint(1, 20)}),
+        (_reciprocal_sequence, lambda: {"p": rng.randint(1, 9), "q": rng.randint(1, 9)}),
+        (_complex_affine, lambda: {"br": rng.randint(-6, 6), "bi": rng.randint(-6, 6)}),
+    ]
+    for _ in range(samples):
+        build, sampler = rng.choice(space)
+        params = sampler()
+        if params.get("k", 1) >= params.get("N", 10**9):
+            continue
+        try:
+            p = build(params)
+        except Exception:
+            continue
+        if p is not None and p.verified and p.independent_check:
+            out.append(p)
+    return out
+
+
 def all_problems() -> list[Problem]:
     out: list[Problem] = []
     for build, grid in FAMILIES:
@@ -430,8 +471,10 @@ def all_problems() -> list[Problem]:
     return out
 
 
-def synthesize() -> dict[str, Any]:
+def synthesize(explore: int = 0, seed: int | None = None) -> dict[str, Any]:
     problems = all_problems()
+    if explore:
+        problems = problems + explore_random(explore, seed)
     from collections import Counter
     records = [
         {

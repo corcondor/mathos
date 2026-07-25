@@ -1,0 +1,456 @@
+{
+  "generated_at": "2026-07-25T08:34:36.444261+00:00",
+  "method": {
+    "name": "Wolfram quantifier-elimination region synthesis",
+    "why": "SymPy に量化子消去が無く、有界パラメータの通過領域を厳密に出せないため"
+  },
+  "problems": [
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -1 + 2x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 1/2 \\ \\text{かつ}\\  -1 + 2x \\le y \\le x^{2}) \\ \\text{または}\\  (1/2 < x \\le 1 \\ \\text{かつ}\\  0 \\le y \\le x^{2}) \\ \\text{または}\\  (x > 1 \\ \\text{かつ}\\  0 \\le y \\le -1 + 2x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:2_0_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 2,
+        "hi": 1,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=2tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=2x/2\\) が区間 \\([0,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 1\\)）を動かすとき，直線 \\(y=2tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=1, y == 2 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-1 + 2*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 1/2] && Inequality[-1 + 2*x, LessEqual, y, LessEqual, x^2]) || (Inequality[1/2, Less, x, LessEqual, 1] && Inequality[0, LessEqual, y, LessEqual, x^2]) || (x > 1 && Inequality[0, LessEqual, y, LessEqual, -1 + 2*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -4 + 4x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 1 \\ \\text{かつ}\\  -4 + 4x \\le y \\le x^{2}) \\ \\text{または}\\  (1 < x \\le 2 \\ \\text{かつ}\\  0 \\le y \\le x^{2}) \\ \\text{または}\\  (x > 2 \\ \\text{かつ}\\  0 \\le y \\le -4 + 4x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:2_0_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 2,
+        "hi": 2,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=2tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=2x/2\\) が区間 \\([0,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 2\\)）を動かすとき，直線 \\(y=2tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=2, y == 2 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-4 + 4*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 1] && Inequality[-4 + 4*x, LessEqual, y, LessEqual, x^2]) || (Inequality[1, Less, x, LessEqual, 2] && Inequality[0, LessEqual, y, LessEqual, x^2]) || (x > 2 && Inequality[0, LessEqual, y, LessEqual, -4 + 4*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  -1 \\ \\text{かつ}\\  -1 + 2x \\le y \\le -1 - 2x) \\ \\text{または}\\  (-1 < x \\le 0 \\ \\text{かつ}\\  -1 + 2x \\le y \\le x^{2}) \\ \\text{または}\\  (0 < x \\le 1 \\ \\text{かつ}\\  -1 - 2x \\le y \\le x^{2}) \\ \\text{または}\\  (x > 1 \\ \\text{かつ}\\  -1 - 2x \\le y \\le -1 + 2x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:2_-1_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 2,
+        "hi": 1,
+        "lo": -1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=2tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=2x/2\\) が区間 \\([-1,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(-1\\le t\\le 1\\)）を動かすとき，直線 \\(y=2tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=-1 && t<=1, y == 2 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= -1 && Inequality[-1 + 2*x, LessEqual, y, LessEqual, -1 - 2*x]) || (Inequality[-1, Less, x, LessEqual, 0] && Inequality[-1 + 2*x, LessEqual, y, LessEqual, x^2]) || (Inequality[0, Less, x, LessEqual, 1] && Inequality[-1 - 2*x, LessEqual, y, LessEqual, x^2]) || (x > 1 && Inequality[-1 - 2*x, LessEqual, y, LessEqual, -1 + 2*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  1 \\ \\text{かつ}\\  -4 + 4x \\le y \\le -1 + 2x) \\ \\text{または}\\  (1 < x \\le 3/2 \\ \\text{かつ}\\  -4 + 4x \\le y \\le x^{2}) \\ \\text{または}\\  (3/2 < x \\le 2 \\ \\text{かつ}\\  -1 + 2x \\le y \\le x^{2}) \\ \\text{または}\\  (x > 2 \\ \\text{かつ}\\  -1 + 2x \\le y \\le -4 + 4x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:2_1_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 2,
+        "hi": 2,
+        "lo": 1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=2tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=2x/2\\) が区間 \\([1,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(1\\le t\\le 2\\)）を動かすとき，直線 \\(y=2tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=1 && t<=2, y == 2 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 1 && Inequality[-4 + 4*x, LessEqual, y, LessEqual, -1 + 2*x]) || (Inequality[1, Less, x, LessEqual, 3/2] && Inequality[-4 + 4*x, LessEqual, y, LessEqual, x^2]) || (Inequality[3/2, Less, x, LessEqual, 2] && Inequality[-1 + 2*x, LessEqual, y, LessEqual, x^2]) || (x > 2 && Inequality[-1 + 2*x, LessEqual, y, LessEqual, -4 + 4*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -1 + 3x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 1/3 \\ \\text{かつ}\\  -1 + 3x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (1/3 < x \\le 2/3 \\ \\text{かつ}\\  0 \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (x > 2/3 \\ \\text{かつ}\\  0 \\le y \\le -1 + 3x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:3_0_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 3,
+        "hi": 1,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=3tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=3x/2\\) が区間 \\([0,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 1\\)）を動かすとき，直線 \\(y=3tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=1, y == 3 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-1 + 3*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 1/3] && Inequality[-1 + 3*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (Inequality[1/3, Less, x, LessEqual, 2/3] && Inequality[0, LessEqual, y, LessEqual, (9*x^2)/4]) || (x > 2/3 && Inequality[0, LessEqual, y, LessEqual, -1 + 3*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -4 + 6x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 2/3 \\ \\text{かつ}\\  -4 + 6x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (2/3 < x \\le 4/3 \\ \\text{かつ}\\  0 \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (x > 4/3 \\ \\text{かつ}\\  0 \\le y \\le -4 + 6x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:3_0_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 3,
+        "hi": 2,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=3tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=3x/2\\) が区間 \\([0,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 2\\)）を動かすとき，直線 \\(y=3tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=2, y == 3 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-4 + 6*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 2/3] && Inequality[-4 + 6*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (Inequality[2/3, Less, x, LessEqual, 4/3] && Inequality[0, LessEqual, y, LessEqual, (9*x^2)/4]) || (x > 4/3 && Inequality[0, LessEqual, y, LessEqual, -4 + 6*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  -2/3 \\ \\text{かつ}\\  -1 + 3x \\le y \\le -1 - 3x) \\ \\text{または}\\  (-2/3 < x \\le 0 \\ \\text{かつ}\\  -1 + 3x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (0 < x \\le 2/3 \\ \\text{かつ}\\  -1 - 3x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (x > 2/3 \\ \\text{かつ}\\  -1 - 3x \\le y \\le -1 + 3x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:3_-1_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 3,
+        "hi": 1,
+        "lo": -1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=3tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=3x/2\\) が区間 \\([-1,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(-1\\le t\\le 1\\)）を動かすとき，直線 \\(y=3tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=-1 && t<=1, y == 3 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= -2/3 && Inequality[-1 + 3*x, LessEqual, y, LessEqual, -1 - 3*x]) || (Inequality[-2/3, Less, x, LessEqual, 0] && Inequality[-1 + 3*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (Inequality[0, Less, x, LessEqual, 2/3] && Inequality[-1 - 3*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (x > 2/3 && Inequality[-1 - 3*x, LessEqual, y, LessEqual, -1 + 3*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  2/3 \\ \\text{かつ}\\  -4 + 6x \\le y \\le -1 + 3x) \\ \\text{または}\\  (2/3 < x \\le 1 \\ \\text{かつ}\\  -4 + 6x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (1 < x \\le 4/3 \\ \\text{かつ}\\  -1 + 3x \\le y \\le (9x^{2})/4) \\ \\text{または}\\  (x > 4/3 \\ \\text{かつ}\\  -1 + 3x \\le y \\le -4 + 6x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:3_1_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 3,
+        "hi": 2,
+        "lo": 1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=3tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=3x/2\\) が区間 \\([1,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(1\\le t\\le 2\\)）を動かすとき，直線 \\(y=3tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=1 && t<=2, y == 3 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 2/3 && Inequality[-4 + 6*x, LessEqual, y, LessEqual, -1 + 3*x]) || (Inequality[2/3, Less, x, LessEqual, 1] && Inequality[-4 + 6*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (Inequality[1, Less, x, LessEqual, 4/3] && Inequality[-1 + 3*x, LessEqual, y, LessEqual, (9*x^2)/4]) || (x > 4/3 && Inequality[-1 + 3*x, LessEqual, y, LessEqual, -4 + 6*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -1 + 4x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 1/4 \\ \\text{かつ}\\  -1 + 4x \\le y \\le 4x^{2}) \\ \\text{または}\\  (1/4 < x \\le 1/2 \\ \\text{かつ}\\  0 \\le y \\le 4x^{2}) \\ \\text{または}\\  (x > 1/2 \\ \\text{かつ}\\  0 \\le y \\le -1 + 4x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:4_0_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 4,
+        "hi": 1,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=4tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=4x/2\\) が区間 \\([0,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 1\\)）を動かすとき，直線 \\(y=4tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=1, y == 4 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-1 + 4*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 1/4] && Inequality[-1 + 4*x, LessEqual, y, LessEqual, 4*x^2]) || (Inequality[1/4, Less, x, LessEqual, 1/2] && Inequality[0, LessEqual, y, LessEqual, 4*x^2]) || (x > 1/2 && Inequality[0, LessEqual, y, LessEqual, -1 + 4*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  0 \\ \\text{かつ}\\  -4 + 8x \\le y \\le 0) \\ \\text{または}\\  (0 < x \\le 1/2 \\ \\text{かつ}\\  -4 + 8x \\le y \\le 4x^{2}) \\ \\text{または}\\  (1/2 < x \\le 1 \\ \\text{かつ}\\  0 \\le y \\le 4x^{2}) \\ \\text{または}\\  (x > 1 \\ \\text{かつ}\\  0 \\le y \\le -4 + 8x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:4_0_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 4,
+        "hi": 2,
+        "lo": 0
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=4tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=4x/2\\) が区間 \\([0,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 2\\)）を動かすとき，直線 \\(y=4tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=0 && t<=2, y == 4 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 0 && Inequality[-4 + 8*x, LessEqual, y, LessEqual, 0]) || (Inequality[0, Less, x, LessEqual, 1/2] && Inequality[-4 + 8*x, LessEqual, y, LessEqual, 4*x^2]) || (Inequality[1/2, Less, x, LessEqual, 1] && Inequality[0, LessEqual, y, LessEqual, 4*x^2]) || (x > 1 && Inequality[0, LessEqual, y, LessEqual, -4 + 8*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  -1/2 \\ \\text{かつ}\\  -1 + 4x \\le y \\le -1 - 4x) \\ \\text{または}\\  (-1/2 < x \\le 0 \\ \\text{かつ}\\  -1 + 4x \\le y \\le 4x^{2}) \\ \\text{または}\\  (0 < x \\le 1/2 \\ \\text{かつ}\\  -1 - 4x \\le y \\le 4x^{2}) \\ \\text{または}\\  (x > 1/2 \\ \\text{かつ}\\  -1 - 4x \\le y \\le -1 + 4x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:4_-1_1",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 4,
+        "hi": 1,
+        "lo": -1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=4tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=4x/2\\) が区間 \\([-1,1]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(-1\\le t\\le 1\\)）を動かすとき，直線 \\(y=4tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=-1 && t<=1, y == 4 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= -1/2 && Inequality[-1 + 4*x, LessEqual, y, LessEqual, -1 - 4*x]) || (Inequality[-1/2, Less, x, LessEqual, 0] && Inequality[-1 + 4*x, LessEqual, y, LessEqual, 4*x^2]) || (Inequality[0, Less, x, LessEqual, 1/2] && Inequality[-1 - 4*x, LessEqual, y, LessEqual, 4*x^2]) || (x > 1/2 && Inequality[-1 - 4*x, LessEqual, y, LessEqual, -1 + 4*x])]"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(x \\le  1/2 \\ \\text{かつ}\\  -4 + 8x \\le y \\le -1 + 4x) \\ \\text{または}\\  (1/2 < x \\le 3/4 \\ \\text{かつ}\\  -4 + 8x \\le y \\le 4x^{2}) \\ \\text{または}\\  (3/4 < x \\le 1 \\ \\text{かつ}\\  -1 + 4x \\le y \\le 4x^{2}) \\ \\text{または}\\  (x > 1 \\ \\text{かつ}\\  -1 + 4x \\le y \\le -4 + 8x)",
+      "candidate_id": "wolfram:wolfram.passage_region_exact:4_1_2",
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "wolfram.passage_region_exact",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricFamily",
+          "QuantifierElimination",
+          "RegionDescription"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 4,
+        "hi": 2,
+        "lo": 1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=4tx-t^2\\) は \\(t\\) の上に凸な二次関数。頂点 \\(t=4x/2\\) が区間 \\([1,2]\\) の内か外かで最大値が変わり，最小値は端点でとる。場合分けして \\(y\\) の動く範囲を書けば領域が定まる（高校：二次関数の最大最小＋存在条件）。",
+      "statement_tex": "実数 \\(t\\)（\\(1\\le t\\le 2\\)）を動かすとき，直線 \\(y=4tx-t^2\\) が通過する領域を，\\(x,y\\) の不等式で表せ。",
+      "tool": "wolfram_reduce",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling"
+      },
+      "wolfram": {
+        "input": "Reduce[Exists[t, t>=1 && t<=2, y == 4 t x - t^2], {x,y}, Reals] // InputForm",
+        "output": "InputForm[(x <= 1/2 && Inequality[-4 + 8*x, LessEqual, y, LessEqual, -1 + 4*x]) || (Inequality[1/2, Less, x, LessEqual, 3/4] && Inequality[-4 + 8*x, LessEqual, y, LessEqual, 4*x^2]) || (Inequality[3/4, Less, x, LessEqual, 1] && Inequality[-1 + 4*x, LessEqual, y, LessEqual, 4*x^2]) || (x > 1 && Inequality[-1 + 4*x, LessEqual, y, LessEqual, -4 + 8*x])]"
+      }
+    }
+  ],
+  "summary": {
+    "count": 12
+  }
+}

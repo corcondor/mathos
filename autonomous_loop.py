@@ -56,7 +56,7 @@ def load_pool() -> dict[str, Any]:
     return {"problems": []}
 
 
-def run_once(max_new: int | None = None) -> dict[str, Any]:
+def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = None) -> dict[str, Any]:
     pool = load_pool()
     existing = pool.get("problems", [])
     seen_answer = {
@@ -66,7 +66,7 @@ def run_once(max_new: int | None = None) -> dict[str, Any]:
     seen_stmt = {canonical_surface(str(p.get("statement_tex", ""))) for p in existing}
 
     # 1. 合成
-    generated = gen_construct()["problems"]
+    generated = gen_construct(explore=explore, seed=seed)["problems"]
 
     # 3. 新規性の材料
     world = load_world_corpus()
@@ -182,9 +182,11 @@ def run_once(max_new: int | None = None) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-new", type=int, default=None)
+    parser.add_argument("--explore", type=int, default=0, help="ランダム探索のサンプル数(計算資源を使うほど増える)")
+    parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--deploy", action="store_true", help="配信バンドルにも書き出す")
     args = parser.parse_args()
-    report = run_once(max_new=args.max_new)
+    report = run_once(max_new=args.max_new, explore=args.explore, seed=args.seed)
     if args.deploy:
         for target in (
             Path("C:/Users/81808/sakumon-station/data/mathos/continuous_verified_problem_batch1.json"),
