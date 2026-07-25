@@ -106,7 +106,12 @@ def _mobius(params: dict[str, Any]) -> Problem | None:
 
 def _grid_mobius() -> Iterable[dict[str, Any]]:
     # 不動点: 固有値が実で相異なる行列
-    for a, b, c, d in ((5, -3, 1, 1), (3, 4, 1, 2), (7, -6, 1, 0), (2, 3, 1, 4)):
+    for a, b, c, d in (
+        (5, -3, 1, 1), (3, 4, 1, 2), (7, -6, 1, 0), (2, 3, 1, 4),
+        (4, -3, 1, 0), (5, -6, 1, 0), (6, -5, 1, 0), (3, -2, 1, 0),
+        (5, 2, 1, 4), (7, 3, 2, 2), (4, 5, 1, 2), (6, 1, 1, 3),
+        (2, 5, 1, 2), (3, 8, 1, 3), (5, 4, 2, 3), (7, 2, 1, 4),
+    ):
         yield {"a": a, "b": b, "c": c, "d": d, "question": "fixed"}
     # 周期: 回転(有限位数)を作る整数行列。det=1, tr が -1,0,1 → 位数 6,4,3
     for a, b, c, d in ((0, -1, 1, 0), (0, -1, 1, -1), (1, -1, 1, 0), (2, -1, 1, 0)):
@@ -146,7 +151,7 @@ def _paley(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_paley() -> Iterable[dict[str, Any]]:
-    for p in (13, 17, 29, 37, 41, 53):
+    for p in (13, 17, 29, 37, 41, 53, 61, 73, 89, 97, 101, 109, 113):
         yield {"p": p}
 
 
@@ -188,8 +193,8 @@ def _matrix_recurrence_period(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_matrix_recurrence() -> Iterable[dict[str, Any]]:
-    for s, t in ((1, 1), (1, 2), (2, 1), (3, -1)):
-        for m in (5, 7, 8, 11):
+    for s, t in ((1, 1), (1, 2), (2, 1), (3, -1), (1, 3), (2, 3), (3, 1), (1, -1), (4, 1), (2, -1)):
+        for m in (5, 7, 8, 9, 11, 13, 16, 17):
             yield {"s": s, "t": t, "m": m}
 
 
@@ -240,7 +245,7 @@ def _cubic_tangent(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_cubic_tangent() -> Iterable[dict[str, Any]]:
-    for coeff in (-3, -1, 0, 1, 2, -5):
+    for coeff in (-9, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6):
         yield {"coeff": coeff}
 
 
@@ -270,8 +275,8 @@ def _complex_rotation(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_complex_rotation() -> Iterable[dict[str, Any]]:
-    for k in (3, 4, 5, 6, 7, 8, 12):
-        for m in (1, 2, 3):
+    for k in (3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 18, 20, 24):
+        for m in (1, 2, 3, 4, 5):
             if math.gcd(m, k) == 1 and m < k:
                 yield {"k": k, "m": m}
 
@@ -303,11 +308,13 @@ def _gambler(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_gambler() -> Iterable[dict[str, Any]]:
-    for N in (4, 5, 6, 7):
+    for N in (4, 5, 6, 7, 8, 9, 10, 11, 12):
         for k in range(1, N):
             yield {"N": N, "k": k, "pa": 1, "pb": 1}
-    for N, k, pa, pb in ((4, 1, 2, 1), (5, 2, 2, 1), (5, 3, 1, 2), (6, 2, 3, 1)):
-        yield {"N": N, "k": k, "pa": pa, "pb": pb}
+    for N in (4, 5, 6, 7, 8):
+        for k in range(1, N):
+            for pa, pb in ((2, 1), (1, 2), (3, 1), (1, 3), (3, 2)):
+                yield {"N": N, "k": k, "pa": pa, "pb": pb}
 
 
 # H3 二次関数×軌跡(高校): 放物線上の2点と原点が直角 → 弦の定点。
@@ -335,7 +342,7 @@ def _parabola_right_angle(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_parabola_right_angle() -> Iterable[dict[str, Any]]:
-    for c in (1, 2, 3, 4):
+    for c in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10):
         yield {"c": c}
 
 
@@ -370,7 +377,7 @@ def _reciprocal_sequence(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_reciprocal_sequence() -> Iterable[dict[str, Any]]:
-    for p, q in ((1, 1), (2, 1), (1, 3), (2, 3), (3, 1), (1, 2)):
+    for p, q in ((1,1),(2,1),(1,3),(2,3),(3,1),(1,2),(3,2),(4,1),(1,4),(2,5),(5,1),(3,4),(4,3),(5,2),(1,5),(2,7)):
         yield {"p": p, "q": q}
 
 
@@ -393,7 +400,7 @@ def _complex_affine(params: dict[str, Any]) -> Problem | None:
 
 
 def _grid_complex_affine() -> Iterable[dict[str, Any]]:
-    for br, bi in ((0, 1), (1, 1), (2, -1), (0, 3), (-1, 2), (3, 0)):
+    for br, bi in ((0,1),(1,1),(2,-1),(0,3),(-1,2),(3,0),(1,-2),(2,3),(-2,1),(0,-1),(4,1),(1,4),(-3,2),(2,2),(5,-1),(0,5)):
         yield {"br": br, "bi": bi}
 
 

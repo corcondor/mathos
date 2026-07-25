@@ -194,9 +194,15 @@ CURATION_DBS = (
 CORPUS_TEX_DIR = Path("C:/Users/81808/.openclaw/workspace/corpus")
 
 
+CORPUS_SNAPSHOT = ROOT / "problem_synthesis" / "local_hard_corpus.json"
+
+
 def load_local_hard_corpus() -> list[dict[str, str]]:
     """ユーザー自作の本物の難問（作問ステーションDB・手作りTeX）をローカルから。
-    ネット不要。これが最も信頼できる新規性・難易度の基準。"""
+    ネット不要。これが最も信頼できる新規性・難易度の基準。
+
+    ローカルの DB / TeX が無い環境（GitHub Actions などクラウド）では、
+    リポジトリに同梱したスナップショットへフォールバックする。"""
 
     import sqlite3
 
@@ -226,6 +232,13 @@ def load_local_hard_corpus() -> list[dict[str, str]]:
             if text and text not in seen:
                 seen.add(text)
                 rows.append({"source": "corpus_tex", "id": path.stem, "statement": text})
+    if not rows and CORPUS_SNAPSHOT.exists():
+        # クラウド実行: 同梱スナップショットを使う
+        try:
+            payload = json.loads(CORPUS_SNAPSHOT.read_text(encoding="utf-8"))
+            rows = list(payload.get("problems", []))
+        except (OSError, json.JSONDecodeError):
+            rows = []
     return rows
 
 

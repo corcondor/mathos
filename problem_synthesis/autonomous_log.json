@@ -1,0 +1,20 @@
+[
+  {
+    "at": "2026-07-25T06:13:04.383214+00:00",
+    "added": 215,
+    "total": 301,
+    "generated": 396,
+    "dup": 181,
+    "not_novel": 0,
+    "unverified": 0
+  },
+  {
+    "at": "2026-07-25T06:13:56.137108+00:00",
+    "added": 0,
+    "total": 176,
+    "generated": 396,
+    "dup": 396,
+    "not_novel": 0,
+    "unverified": 0
+  }
+]

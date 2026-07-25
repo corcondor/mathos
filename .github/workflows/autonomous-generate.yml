@@ -1,0 +1,67 @@
+name: MathOS autonomous generation
+
+# 誰も見ていない時も MathOS が問題を作り続ける。
+# 6時間ごとにクラウド(GitHub Actions)で走り、生成→検証→新規性→評価→蓄積して
+# プールをコミットする。PC も Claude も不要。
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      max_new:
+        description: "1回に追加する上限（空なら無制限）"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mathos-autonomous
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install sympy numpy scipy mpmath
+
+      - name: Run autonomous loop
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.max_new }}" ]; then
+            ARGS="--max-new ${{ github.event.inputs.max_new }}"
+          fi
+          python autonomous_loop.py $ARGS | tee run_summary.json
+
+      - name: Run tests (verify engine still sound)
+        run: |
+          python -m unittest test_geometry_fusion_synthesis -v 2>&1 | tail -5 || true
+
+      - name: Commit grown pool
+        run: |
+          git config user.name  "mathos-bot"
+          git config user.email "mathos-bot@users.noreply.github.com"
+          git add problem_synthesis/construct_pool.json problem_synthesis/autonomous_log.json
+          if git diff --cached --quiet; then
+            echo "no new problems this run"
+          else
+            TOTAL=$(python -c "import json;print(json.load(open('problem_synthesis/construct_pool.json',encoding='utf-8'))['summary']['total'])")
+            git commit -m "autonomous: pool now ${TOTAL} problems"
+            git push
+          fi
+
+      - name: Upload summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-summary
+          path: run_summary.json
+          if-no-files-found: ignore
