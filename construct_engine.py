@@ -560,6 +560,7 @@ def explore_random(samples: int = 500, seed: int | None = None,
         _register_family_map()
     rng = _random.Random(seed)
     out: list[Problem] = []
+    seen_parameters: set[tuple[str, tuple[tuple[str, Any], ...]]] = set()
     space: list[tuple[Any, Any]] = [
         (_mobius, lambda: {"a": rng.randint(-9, 9), "b": rng.randint(-9, 9),
                            "c": rng.randint(-3, 3), "d": rng.randint(-9, 9),
@@ -585,6 +586,10 @@ def explore_random(samples: int = 500, seed: int | None = None,
         params = sampler()
         if params.get("k", 1) >= params.get("N", 10**9):
             continue
+        parameter_key = (build.__name__, tuple(sorted(params.items())))
+        if parameter_key in seen_parameters:
+            continue
+        seen_parameters.add(parameter_key)
         try:
             p = build(params)
         except Exception:

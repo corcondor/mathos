@@ -15,7 +15,7 @@ on:
       rounds:
         description: "1シャードのラウンド数"
         required: false
-        default: "6"
+        default: "1"
 
 permissions:
   contents: write
@@ -59,7 +59,7 @@ jobs:
       - name: Explore ${{ matrix.family }}
         env:
           EXPLORE: ${{ github.event.inputs.explore || '6000' }}
-          ROUNDS: ${{ github.event.inputs.rounds || '6' }}
+          ROUNDS: ${{ github.event.inputs.rounds || '1' }}
         run: |
           OUT="shard_${{ matrix.family }}.json"
           if [[ "${{ matrix.family }}" == ultradeep_* ]]; then

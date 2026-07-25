@@ -6,6 +6,7 @@ from construct_engine import (
     FIXED_SHARD_FAMILY_IDS,
     SHARD_FAMILIES,
     all_problems,
+    explore_random,
 )
 from deep_families import DEEP_FAMILIES
 
@@ -64,6 +65,23 @@ class DeepFamiliesTest(unittest.TestCase):
         self.assertEqual(
             covered,
             {problem.statement_tex for problem in all_problems()},
+        )
+
+    def test_random_exploration_deduplicates_parameter_tuples(self) -> None:
+        problems = explore_random(
+            samples=6000,
+            seed=7,
+            only_family="cubic_tangent",
+        )
+        self.assertLessEqual(len(problems), 25)
+        self.assertEqual(
+            len(problems),
+            len(
+                {
+                    tuple(sorted(problem.parameters.items()))
+                    for problem in problems
+                }
+            ),
         )
 
 
