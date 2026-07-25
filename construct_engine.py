@@ -492,9 +492,20 @@ def explore_random(samples: int = 500, seed: int | None = None,
     return out
 
 
+def _deep_families():
+    try:
+        from math_os_prototype.deep_families import DEEP_FAMILIES
+    except ImportError:
+        try:
+            from deep_families import DEEP_FAMILIES
+        except ImportError:
+            return ()
+    return DEEP_FAMILIES
+
+
 def all_problems() -> list[Problem]:
     out: list[Problem] = []
-    for build, grid in FAMILIES + LAYERED_FAMILIES:
+    for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
         for params in grid():
             try:
                 p = build(params)
