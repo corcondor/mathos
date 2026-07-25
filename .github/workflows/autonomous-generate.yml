@@ -98,12 +98,14 @@ jobs:
           python merge_shards.py \
             --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
+          python export_generation_report.py
 
       - name: Commit grown pool
         run: |
           git config user.name  "mathos-bot"
           git config user.email "mathos-bot@users.noreply.github.com"
-          git add problem_synthesis/construct_pool.json
+          git add problem_synthesis/construct_pool.json \
+                  docs/generated/latest-generation-report.md
           if git diff --cached --quiet; then
             echo "no new problems this run"
           else

@@ -31,6 +31,10 @@ python -m construct_engine                 # 対象構築問題を生成
 python -m build_construct_pool --write-deploy   # 実類似度付きで配信プールへ
 ```
 
+最新の問題数、難易度帯、検証ゲート、深層族の具体的な問題文は
+[自律作問・検証レポート](docs/generated/latest-generation-report.md) に記録する。
+この文書はプールから自動生成され、6時間ごとの自律生成でも更新される。
+
 ## 限界(正直に)
 
 真の意味的新規性・難易度は「解法木の深さ」で測るのが理想で、これは解く網の
