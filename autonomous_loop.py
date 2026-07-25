@@ -47,10 +47,10 @@ PER_FAMILY_CAP = 150
 LOG = HERE / "problem_synthesis" / "autonomous_log.json"
 
 
-def load_pool() -> dict[str, Any]:
-    if POOL.exists():
+def load_pool(path: Path = POOL) -> dict[str, Any]:
+    if path.exists():
         try:
-            return json.loads(POOL.read_text(encoding="utf-8"))
+            return json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
     return {"problems": []}
@@ -58,7 +58,8 @@ def load_pool() -> dict[str, Any]:
 
 def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = None,
              only_family: str | None = None, out_path: Path | None = None) -> dict[str, Any]:
-    pool = load_pool()
+    target = out_path or POOL
+    pool = load_pool(target if target.exists() else POOL)
     existing = pool.get("problems", [])
     seen_answer = {
         (p.get("family_id"), canonical_surface(str(p.get("answer_tex", ""))))
@@ -156,7 +157,6 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
         },
         "problems": interleaved,
     }
-    target = out_path or POOL
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(
         json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8"
@@ -194,7 +194,7 @@ def main() -> int:
                       only_family=args.family, out_path=args.out)
     if args.deploy:
         for target in (
-            Path("C:/Users/81808/sakumon-station/data/mathos/continuous_verified_problem_batch1.json"),
+            Path("C:/Users/81808/.openclaw/workspace/math-web/data/mathos/continuous_verified_problem_batch1.json"),
             Path("C:/Users/81808/.openclaw/workspace/discord-bot/mathos_batches/continuous_verified_problem_batch1.json"),
         ):
             if target.parent.exists():

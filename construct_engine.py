@@ -440,7 +440,109 @@ def _register_family_map() -> None:
 SHARD_FAMILIES = (
     "mobius", "paley", "linear_recurrence", "cubic_tangent", "complex_rotation",
     "gambler", "parabola", "reciprocal", "complex_affine",
+    "ultradeep_paley_tree", "ultradeep_paley_four_cycles",
+    "ultradeep_cyclotomic_norm", "ultradeep_gambler_variance",
+    "ultradeep_cubic_triangle",
 )
+
+FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {
+    "mobius": frozenset(
+        {
+            "construct.mobius_fixed_points",
+            "construct.mobius_iteration_period",
+        }
+    ),
+    "paley": frozenset(
+        {
+            "construct.paley_common_neighbors",
+            "layered.paley_triangle_count",
+            "deep.paley_spectrum_triangles",
+        }
+    ),
+    "linear_recurrence": frozenset(
+        {
+            "construct.linear_recurrence_mod_period",
+            "layered.recurrence_period_observable",
+            "deep.recurrence_period_quadratic_character",
+        }
+    ),
+    "cubic_tangent": frozenset(
+        {
+            "construct.cubic_tangent_midpoint_locus",
+            "layered.cubic_tangent_iteration",
+            "deep.tangent_iteration_growth",
+        }
+    ),
+    "complex_rotation": frozenset(
+        {
+            "construct.complex_rotation_period",
+            "layered.rotation_orbit_hull_area",
+            "deep.rotation_diagonal_product_divisors",
+            "deep.polygon_subset_centroid",
+        }
+    ),
+    "gambler": frozenset({"construct.gambler_ruin_probability"}),
+    "parabola": frozenset({"construct.parabola_right_angle_chord"}),
+    "reciprocal": frozenset({"construct.reciprocal_recurrence"}),
+    "complex_affine": frozenset({"construct.complex_affine_limit"}),
+    "ultradeep_paley_tree": frozenset(
+        {"ultradeep.paley_spanning_tree_divisor_count"}
+    ),
+    "ultradeep_paley_four_cycles": frozenset(
+        {"ultradeep.paley_four_cycle_divisor_count"}
+    ),
+    "ultradeep_cyclotomic_norm": frozenset(
+        {"ultradeep.cyclotomic_distance_norm_divisor_count"}
+    ),
+    "ultradeep_gambler_variance": frozenset(
+        {"ultradeep.gambler_absorption_variance_divisor_count"}
+    ),
+    "ultradeep_cubic_triangle": frozenset(
+        {"ultradeep.cubic_root_triangle_discriminant_divisor_count"}
+    ),
+}
+
+FIXED_SHARD_BUILDER_NAMES: dict[str, frozenset[str]] = {
+    "mobius": frozenset({"_mobius"}),
+    "paley": frozenset(
+        {"_paley", "_layered_paley_triangles", "_deep_paley_spectrum"}
+    ),
+    "linear_recurrence": frozenset(
+        {
+            "_matrix_recurrence_period",
+            "_layered_period_observable",
+            "_deep_recurrence_qr",
+        }
+    ),
+    "cubic_tangent": frozenset(
+        {"_cubic_tangent", "_layered_tangent_iteration", "_deep_tangent_growth"}
+    ),
+    "complex_rotation": frozenset(
+        {
+            "_complex_rotation",
+            "_layered_rotation_hull",
+            "_deep_rotation_divisors",
+            "_deep_centroid_subsets",
+        }
+    ),
+    "gambler": frozenset({"_gambler"}),
+    "parabola": frozenset({"_parabola_right_angle"}),
+    "reciprocal": frozenset({"_reciprocal_sequence"}),
+    "complex_affine": frozenset({"_complex_affine"}),
+    "ultradeep_paley_tree": frozenset({"_ultradeep_paley_tree_divisors"}),
+    "ultradeep_paley_four_cycles": frozenset(
+        {"_ultradeep_paley_four_cycle_divisors"}
+    ),
+    "ultradeep_cyclotomic_norm": frozenset(
+        {"_ultradeep_cyclotomic_norm_divisors"}
+    ),
+    "ultradeep_gambler_variance": frozenset(
+        {"_ultradeep_gambler_variance_divisors"}
+    ),
+    "ultradeep_cubic_triangle": frozenset(
+        {"_ultradeep_cubic_triangle_divisors"}
+    ),
+}
 
 
 def explore_random(samples: int = 500, seed: int | None = None,
@@ -503,22 +605,39 @@ def _deep_families():
     return DEEP_FAMILIES
 
 
-def all_problems() -> list[Problem]:
+def all_problems(only_family: str | None = None) -> list[Problem]:
+    allowed_ids = (
+        FIXED_SHARD_FAMILY_IDS.get(only_family, frozenset())
+        if only_family
+        else None
+    )
+    allowed_builders = (
+        FIXED_SHARD_BUILDER_NAMES.get(only_family, frozenset())
+        if only_family
+        else None
+    )
     out: list[Problem] = []
     for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
+        if allowed_builders is not None and build.__name__ not in allowed_builders:
+            continue
         for params in grid():
             try:
                 p = build(params)
             except Exception:
                 p = None
-            if p is not None and p.verified and p.independent_check:
+            if (
+                p is not None
+                and p.verified
+                and p.independent_check
+                and (allowed_ids is None or p.family_id in allowed_ids)
+            ):
                 out.append(p)
     return out
 
 
 def synthesize(explore: int = 0, seed: int | None = None,
                only_family: str | None = None) -> dict[str, Any]:
-    problems = all_problems()
+    problems = all_problems(only_family)
     if explore:
         problems = problems + explore_random(explore, seed, only_family)
     from collections import Counter

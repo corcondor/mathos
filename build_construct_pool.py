@@ -34,7 +34,7 @@ except ImportError:  # pragma: no cover
 
 HERE = Path(__file__).resolve().parent
 DEPLOY_TARGETS = (
-    Path("C:/Users/81808/sakumon-station/data/mathos/continuous_verified_problem_batch1.json"),
+    Path("C:/Users/81808/.openclaw/workspace/math-web/data/mathos/continuous_verified_problem_batch1.json"),
     Path("C:/Users/81808/.openclaw/workspace/discord-bot/mathos_batches/continuous_verified_problem_batch1.json"),
 )
 RECORD_OUTPUT = HERE / "problem_synthesis" / "construct_pool.json"

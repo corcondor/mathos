@@ -43,7 +43,16 @@ def build_report(payload: dict[str, Any]) -> str:
     summary = payload.get("summary", {})
     family_counts = Counter(p.get("family_id", "unknown") for p in problems)
     band_counts = Counter(_band(p) for p in problems)
-    deep = [p for p in problems if str(p.get("family_id", "")).startswith("deep.")]
+    deep = [
+        p
+        for p in problems
+        if str(p.get("family_id", "")).startswith(("deep.", "ultradeep."))
+    ]
+    ultradeep = [
+        p
+        for p in deep
+        if str(p.get("family_id", "")).startswith("ultradeep.")
+    ]
     representative: dict[str, dict[str, Any]] = {}
     for problem in sorted(deep, key=_score, reverse=True):
         representative.setdefault(problem["family_id"], problem)
@@ -69,6 +78,8 @@ def build_report(payload: dict[str, Any]) -> str:
         f"- 検証済み問題: **{len(problems)}問**",
         f"- 構造族: **{len(family_counts)}族**",
         f"- 深層族: **{len(deep)}問 / {len(representative)}族**",
+        f"- うち10射以上の超深層族: **{len(ultradeep)}問 / "
+        f"{len({p['family_id'] for p in ultradeep})}族**",
         f"- 世界コーパス: **{summary.get('world_corpus_size', '未記録')}問**",
         "",
         "| 難易度帯 | 問題数 |",
@@ -111,7 +122,8 @@ def build_report(payload: dict[str, Any]) -> str:
             "",
             "## 深層族の生成例",
             "",
-            "深層族は1問につき8個の射を合成する。以下は各族で難易度推定値が",
+            "深層族は1問につき8個以上、超深層族は10〜12個の射を合成する。"
+            "以下は各族で難易度推定値が",
             "最も高い実データであり、説明用に新しく書き直した問題ではない。",
             "",
         ]

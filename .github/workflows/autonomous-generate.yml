@@ -43,6 +43,11 @@ jobs:
           - parabola
           - reciprocal
           - complex_affine
+          - ultradeep_paley_tree
+          - ultradeep_paley_four_cycles
+          - ultradeep_cyclotomic_norm
+          - ultradeep_gambler_variance
+          - ultradeep_cubic_triangle
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -57,14 +62,22 @@ jobs:
           ROUNDS: ${{ github.event.inputs.rounds || '6' }}
         run: |
           OUT="shard_${{ matrix.family }}.json"
-          for r in $(seq 1 "$ROUNDS"); do
-            echo "--- ${{ matrix.family }} round $r ---"
+          if [[ "${{ matrix.family }}" == ultradeep_* ]]; then
+            echo "--- ${{ matrix.family }} exact parameter grid ---"
             python autonomous_loop.py \
               --family "${{ matrix.family }}" \
-              --explore "$EXPLORE" \
-              --seed $((RANDOM * r + r)) \
+              --explore 0 \
               --out "$OUT"
-          done
+          else
+            for r in $(seq 1 "$ROUNDS"); do
+              echo "--- ${{ matrix.family }} round $r ---"
+              python autonomous_loop.py \
+                --family "${{ matrix.family }}" \
+                --explore "$EXPLORE" \
+                --seed $((RANDOM * r + r)) \
+                --out "$OUT"
+            done
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
