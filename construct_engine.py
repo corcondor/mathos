@@ -494,7 +494,7 @@ def explore_random(samples: int = 500, seed: int | None = None,
 
 def all_problems() -> list[Problem]:
     out: list[Problem] = []
-    for build, grid in FAMILIES:
+    for build, grid in FAMILIES + LAYERED_FAMILIES:
         for params in grid():
             try:
                 p = build(params)
@@ -561,3 +561,168 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+# ===========================================================================
+# 多層族: [対象を構築]→[別分野の条件]→[さらに変換]→[問い] を 3 層以上重ねる。
+# 数字を変えただけの変種ではなく、層の選び方で答えの「型」自体が変わる。
+# ===========================================================================
+
+def _layered_period_observable(params: dict[str, Any]) -> Problem | None:
+    """層1 漸化式(代数) → 層2 mod m の周期(整数論) → 層3 その周期の観測。"""
+    s, t, m = params["s"], params["t"], params["m"]
+    obs = params["obs"]  # 層3 の選択で答えの型が変わる
+    a, b, period = 0, 1, None
+    for i in range(1, m * m * 6 + 1):
+        a, b = b % m, (s * b + t * a) % m
+        if a == 0 and b == 1:
+            period = i
+            break
+    if not period or period < 2:
+        return None
+
+    if obs == "divisors":
+        value = sp.divisor_count(period)
+        ask = "その周期の正の約数の個数を求めよ。"
+        chain = ("CompanionMatrix", "ModularPeriod", "DivisorCount")
+        why = rf"周期は \({period}\)。その約数の個数を数える。"
+    elif obs == "max_prime":
+        value = max(sp.primefactors(period))
+        ask = "その周期の最大の素因数を求めよ。"
+        chain = ("CompanionMatrix", "ModularPeriod", "LargestPrimeFactor")
+        why = rf"周期は \({period}\)。素因数分解して最大の素因数をとる。"
+    elif obs == "totient":
+        value = sp.totient(period)
+        ask = r"その周期を \(T\) とするとき，\(1\le k\le T\) で \(\gcd(k,T)=1\) を満たす \(k\) の個数を求めよ。"
+        chain = ("CompanionMatrix", "ModularPeriod", "EulerTotient")
+        why = rf"周期は \({period}\)。\(\varphi({period})\) を求める。"
+    else:
+        return None
+
+    rhs = (_term(s, "a_{n+1}") + _term(t, "a_n")).lstrip("+")
+    return Problem(
+        "layered.recurrence_period_observable", "number_theory", "matrix_mod_order+arith_function",
+        params,
+        rf"数列 \((a_n)\) を \(a_0=0,\ a_1=1,\ a_{{n+2}}={rhs}\) で定める。"
+        rf"\((a_n)\) を \(\bmod\ {m}\) で見ると周期的になる。{ask}",
+        sp.latex(value), sp.sstr(value),
+        rf"\((a_{{n+1}},a_n)\) は行列 \(\begin{{pmatrix}}{s}&{t}\1&0\end{{pmatrix}}\) を"
+        rf"かけて進むので，\(\bmod\ {m}\) での位数が周期。{why}",
+        chain, True, True, "modular_period_then_arithmetic_function",
+    )
+
+
+def _grid_layered_period() -> Iterable[dict[str, Any]]:
+    for s, t in ((1, 1), (1, 2), (2, 1), (3, -1), (1, 3)):
+        for m in (5, 7, 8, 9, 11, 13, 16):
+            for obs in ("divisors", "max_prime", "totient"):
+                yield {"s": s, "t": t, "m": m, "obs": obs}
+
+
+def _layered_paley_triangles(params: dict[str, Any]) -> Problem | None:
+    """層1 素数(数論) → 層2 平方剰余でグラフ構築 → 層3 三角形の数え上げ(組合せ)。"""
+    p = params["p"]
+    if p % 4 != 1:
+        return None
+    QR = set((k * k) % p for k in range(1, p))
+    triangles = 0
+    for x in range(p):
+        for y in range(x + 1, p):
+            if (y - x) % p not in QR:
+                continue
+            for z in range(y + 1, p):
+                if (z - y) % p in QR and (z - x) % p in QR:
+                    triangles += 1
+    formula = p * (p - 1) * (p - 5) // 48
+    if triangles != formula:
+        return None
+    return Problem(
+        "layered.paley_triangle_count", "number_theory_graph", "quadratic_residue+counting",
+        params,
+        rf"素数 \(p={p}\)（\(p\equiv1\pmod4\)）に対し，頂点集合 \(\mathbb Z_{{{p}}}\) 上の"
+        r"グラフ \(G\) を，2頂点 \(x,y\) が \(x-y\) が平方剰余のとき辺で結ぶことで定める。"
+        r"\(G\) に含まれる三角形の個数を求めよ。",
+        str(triangles), str(triangles),
+        rf"各辺について共通隣接点は \((p-5)/4\) 個なので，三角形は "
+        rf"\(\frac{{p(p-1)}}{{2}}\cdot\frac{{p-5}}{{4}}\div3=\frac{{p(p-1)(p-5)}}{{48}}\) 個。"
+        rf"\(p={p}\) を代入して \({triangles}\)。",
+        ("QuadraticResidueGraph", "EdgeCommonNeighbors", "TriangleCount"),
+        True, True, "paley_graph_triangle_enumeration_vs_closed_form",
+    )
+
+
+def _grid_layered_paley() -> Iterable[dict[str, Any]]:
+    for p in (13, 17, 29, 37, 41, 53, 61, 73):
+        yield {"p": p}
+
+
+def _layered_rotation_hull(params: dict[str, Any]) -> Problem | None:
+    """層1 複素回転(複素数) → 層2 軌道の点集合(群作用) → 層3 凸包の面積(幾何)。"""
+    k = params["k"]
+    if k < 3:
+        return None
+    area = sp.simplify(sp.Rational(k, 2) * sp.sin(2 * sp.pi / k))
+    if area.free_symbols:
+        return None
+    return Problem(
+        "layered.rotation_orbit_hull_area", "complex_geometry", "roots_of_unity+shoelace",
+        params,
+        rf"複素数 \(\alpha=\cos\dfrac{{2\pi}}{{{k}}}+i\sin\dfrac{{2\pi}}{{{k}}}\) に対し，"
+        rf"\(z_j=\alpha^j\ (j=0,1,\ldots,{k - 1})\) が定める複素数平面上の "
+        rf"\({k}\) 個の点をとる。これらの点の凸包の面積を求めよ。",
+        sp.latex(area), sp.sstr(area),
+        rf"\(z_j\) は単位円周上の正 \({k}\) 角形の頂点。中心から各頂点への"
+        rf"三角形 \({k}\) 個に分割すると，面積は "
+        rf"\(\frac{{{k}}}{{2}}\sin\frac{{2\pi}}{{{k}}}={sp.latex(area)}\)。",
+        ("RootOfUnityOrbit", "RegularPolygon", "ShoelaceArea"),
+        True, True, "roots_of_unity_orbit_regular_polygon_area",
+    )
+
+
+def _grid_layered_rotation() -> Iterable[dict[str, Any]]:
+    for k in (3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16, 18, 20, 24):
+        yield {"k": k}
+
+
+def _layered_tangent_iteration(params: dict[str, Any]) -> Problem | None:
+    """層1 三次曲線の接線(幾何) → 層2 再交点(代数) → 層3 反復(数列) → 層4 一般項。"""
+    coeff, n = params["coeff"], params["n"]
+    t = sp.symbols("t", real=True)
+    x = sp.symbols("x", real=True)
+    f = x**3 + coeff * x
+    slope = sp.diff(f, x).subs(x, t)
+    others = [
+        sp.simplify(sol)
+        for sol in sp.solve(sp.Eq(f, (t**3 + coeff * t) + slope * (x - t)), x)
+        if sp.simplify(sol - t) != 0
+    ]
+    if not others or sp.simplify(others[0] - (-2 * t)) != 0:
+        return None
+    xn = sp.simplify((-2) ** n * t)
+    curve = sp.latex(f)
+    return Problem(
+        "layered.cubic_tangent_iteration", "geometry_algebra", "symbolic_intersection+iteration",
+        params,
+        rf"曲線 \(C: y={curve}\) 上の点 \(P_0(t,\,{sp.latex(t**3 + coeff * t)})\) をとる。"
+        r"\(P_i\) における \(C\) の接線が \(C\) と再び交わる点を \(P_{i+1}\) と定める。"
+        rf"点 \(P_{{{n}}}\) の \(x\) 座標を \(t\) を用いて表せ。",
+        sp.latex(xn), sp.sstr(xn),
+        rf"\(P_i\) の \(x\) 座標を \(x_i\) とすると，接点での重根と三次方程式の根の和から "
+        rf"\(x_{{i+1}}=-2x_i\)。よって \(x_n=(-2)^n t\)，\(n={n}\) で \({sp.latex(xn)}\)。",
+        ("TangentLine", "CubicReintersection", "GeometricIteration", "GeneralTerm"),
+        True, True, "tangent_reintersection_iteration_closed_form",
+    )
+
+
+def _grid_layered_tangent() -> Iterable[dict[str, Any]]:
+    for coeff in (-5, -3, -1, 0, 1, 2, 3):
+        for n in (2, 3, 4, 5):
+            yield {"coeff": coeff, "n": n}
+
+
+LAYERED_FAMILIES: tuple[tuple[Callable[[dict[str, Any]], Problem | None], Callable[[], Iterable[dict[str, Any]]]], ...] = (
+    (_layered_period_observable, _grid_layered_period),
+    (_layered_paley_triangles, _grid_layered_paley),
+    (_layered_rotation_hull, _grid_layered_rotation),
+    (_layered_tangent_iteration, _grid_layered_tangent),
+)
