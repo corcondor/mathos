@@ -1,0 +1,669 @@
+{
+  "candidates": [
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:9748d58af584",
+      "falsification_attempts": [
+        "not executed: random acute-triangle orbit search is scheduled"
+      ],
+      "family_id": "research.geometry.centroid_pedal_iteration",
+      "hardness": {
+        "reasons": [
+          "iteration on a two-dimensional moduli space",
+          "global classification"
+        ],
+        "score": 15
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0656,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "Centroid",
+        "PedalProjection",
+        "TriangleFormation",
+        "SimilarityNormalization",
+        "ModuliProjection",
+        "Iteration",
+        "Compactification",
+        "LimitSet",
+        "PeriodicDecomposition",
+        "ClassificationQuery"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: symbolic fixed-point backend is currently unsupported"
+      ],
+      "query_type": "dynamical_classification",
+      "statement_tex": "鋭角不等辺三角形 \\(T_0\\) をとる。\\(T_n\\) の重心から3辺へ下ろした垂線の足が作る三角形を \\(T_{n+1}\\) とする。各段階で重心を原点，面積を1，第1頂点を正の \\(x\\) 軸上に置く相似正規化を行う。三角形のモジュライ空間における全ての極限集合と周期軌道を分類せよ。",
+      "structural_signature": "Triangle:Centroid:InteriorPoint -> InteriorPoint:PedalProjection:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:SimilarityNormalization:NormalizedTriangle -> NormalizedTriangle:ModuliProjection:TriangleModuli -> TriangleModuli:Iteration:Orbit -> Orbit:Compactification:CompactOrbit -> CompactOrbit:LimitSet:InvariantSet -> InvariantSet:PeriodicDecomposition:PeriodicData -> PeriodicData:ClassificationQuery:Classification",
+      "title": "重心ペダル三角形の反復力学",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:85faf24233b2",
+      "falsification_attempts": [
+        "not executed: real-parameter branch sampling is scheduled"
+      ],
+      "family_id": "research.geometry.quartic_orthocenter_locus",
+      "hardness": {
+        "reasons": [
+          "singularity resolution",
+          "projective genus computation"
+        ],
+        "score": 10
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.06,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "MovingPoint",
+        "TriangleAttachment",
+        "AltitudeConstruction",
+        "Intersection",
+        "RationalCoordinateMap",
+        "ParameterElimination",
+        "ProjectiveClosure",
+        "SingularityResolution",
+        "GenusComputation",
+        "ClassificationQuery"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: resultant and singularity-resolution pipeline is unavailable"
+      ],
+      "query_type": "algebraic_curve_invariants",
+      "statement_tex": "\\(A=(-1,0),B=(1,0)\\) とし，\\(P\\) を \\(x^4+y^4=1,\\ y>0\\) 上で動かす。三角形 \\(ABP\\) の垂心 \\(H(P)\\) の軌跡の射影閉包について，既約分解・全特異点・幾何種数を決定せよ。",
+      "structural_signature": "Superellipse:MovingPoint:Point -> Point:TriangleAttachment:Triangle -> Triangle:AltitudeConstruction:LinePair -> LinePair:Intersection:Orthocenter -> Orthocenter:RationalCoordinateMap:RationalImage -> RationalImage:ParameterElimination:AffineCurve -> AffineCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:SingularityResolution:ResolvedCurve -> ResolvedCurve:GenusComputation:CurveInvariants -> CurveInvariants:ClassificationQuery:Classification",
+      "title": "四次曲線上の頂点が作る垂心軌跡",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:1e523fa79950",
+      "falsification_attempts": [
+        "not executed: rational-angle sampling is scheduled"
+      ],
+      "family_id": "research.geometry.ellipse_tritangent_center_locus",
+      "hardness": {
+        "reasons": [
+          "two continuous shift parameters",
+          "necessary-and-sufficient classification"
+        ],
+        "score": 13
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.088,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "TrigonometricChart",
+        "TwoShiftAction",
+        "TangentDualization",
+        "PairwiseIntersection",
+        "CenterPairConstruction",
+        "MidpointCombination",
+        "TrigonometricNormalForm",
+        "ParameterElimination",
+        "ConicRecognition",
+        "ParameterClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: generic symbolic elimination exceeds the configured contract"
+      ],
+      "query_type": "parameter_classification",
+      "statement_tex": "楕円 \\(E:x^2/a^2+y^2/b^2=1\\ (a>b>0)\\) の媒介点を \\(P(t)\\) とする。接線 \\(l_t,l_{t+\\alpha},l_{t+\\beta}\\) が作る三角形の九点中心を \\(N(t)\\)とする。\\(0<\\alpha<\\beta<2\\pi\\) に対し，\\(N(t)\\) の軌跡が円錐曲線となるための必要十分条件を求め，各場合の方程式を決定せよ。",
+      "structural_signature": "Ellipse:TrigonometricChart:ParameterCircle -> ParameterCircle:TwoShiftAction:ParameterTriple -> ParameterTriple:TangentDualization:LineTriple -> LineTriple:PairwiseIntersection:Triangle -> Triangle:CenterPairConstruction:CircumcenterOrthocenterPair -> CircumcenterOrthocenterPair:MidpointCombination:NinePointCenter -> NinePointCenter:TrigonometricNormalForm:ParametricCenterCurve -> ParametricCenterCurve:ParameterElimination:Locus -> Locus:ConicRecognition:ConicCondition -> ConicCondition:ParameterClassification:Classification",
+      "title": "楕円の三接線が作る三角形中心の分類",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:d385e8785bb5",
+      "falsification_attempts": [
+        "not executed: circle and ellipse sampling is scheduled"
+      ],
+      "family_id": "research.geometry.inversion_evolute_commutator",
+      "hardness": {
+        "reasons": [
+          "nested envelopes",
+          "classification modulo similarity"
+        ],
+        "score": 13
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0928,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "EvoluteWithSource",
+        "CircleInversionOfPair",
+        "RegularBranchSelection",
+        "SecondEvoluteConstruction",
+        "CurveComparison",
+        "BranchCompatibility",
+        "SimilarityWitness",
+        "SimilarityQuotient",
+        "CommutatorVanishing",
+        "ConicClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: no branch-safe evolute backend for rational quartics"
+      ],
+      "query_type": "commutation_classification",
+      "statement_tex": "原点を通らない非退化実円錐曲線 \\(C\\) と単位円反転 \\(I\\) を考える。正則枝ごとの発展曲線を \\(\\mathcal E(C)\\) とする。\\(I(\\mathcal E(C))\\) と \\(\\mathcal E(I(C))\\) が相似変換で一致する円錐曲線 \\(C\\) を，相似を除いて全て分類せよ。",
+      "structural_signature": "Conic:EvoluteWithSource:ConicEvolutePair -> ConicEvolutePair:CircleInversionOfPair:InvertedConicEvolutePair -> InvertedConicEvolutePair:RegularBranchSelection:RegularCurvePair -> RegularCurvePair:SecondEvoluteConstruction:EvolutePair -> EvolutePair:CurveComparison:ComparedCurvePair -> ComparedCurvePair:BranchCompatibility:CompatibleCurvePair -> CompatibleCurvePair:SimilarityWitness:SimilarityData -> SimilarityData:SimilarityQuotient:SimilarityClassPair -> SimilarityClassPair:CommutatorVanishing:Constraint -> Constraint:ConicClassification:Classification",
+      "title": "反転と発展曲線の可換性",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:6044f0fddc9f",
+      "falsification_attempts": [
+        "not executed: finite Fourier truncation search is scheduled"
+      ],
+      "family_id": "research.geometry.minkowski_polar_iteration",
+      "hardness": {
+        "reasons": [
+          "infinite-dimensional state before algebraic restriction",
+          "global convergence"
+        ],
+        "score": 15
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0608,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "PolarPairing",
+        "MinkowskiPairing",
+        "MinkowskiAddition",
+        "AreaNormalization",
+        "Iteration",
+        "SupportFunctionChart",
+        "FixedPointEquation",
+        "LinearEquivalenceQuotient",
+        "StabilityAnalysis",
+        "GlobalClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: functional fixed-point solver is unavailable"
+      ],
+      "query_type": "convex_dynamical_classification",
+      "statement_tex": "原点対称で \\(C^\\infty\\) 級，厳密凸な代数的凸体 \\(K\\subset\\mathbb R^2\\)を面積 \\(\\pi\\) に正規化する。極体を \\(K^\\circ\\) とし，\\(\\Phi(K)\\) を \\(K+K^\\circ\\) を再び面積 \\(\\pi\\) に正規化した凸体とする。代数的境界を持つ固定点を線形同値を除いて分類し，\\(\\Phi^n(K)\\) の収束・非収束条件を決定せよ。",
+      "structural_signature": "AlgebraicConvexBody:PolarPairing:BodyDualPair -> BodyDualPair:MinkowskiPairing:BodyPair -> BodyPair:MinkowskiAddition:ConvexBody -> ConvexBody:AreaNormalization:NormalizedBody -> NormalizedBody:Iteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:FixedPointEquation:FunctionalEquation -> FunctionalEquation:LinearEquivalenceQuotient:ModuliConstraint -> ModuliConstraint:StabilityAnalysis:StabilityData -> StabilityData:GlobalClassification:Classification",
+      "title": "Minkowski和と極双対による凸体力学",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:0fa1f45bb975",
+      "falsification_attempts": [
+        "not executed: small-degree coefficient sampling is scheduled"
+      ],
+      "family_id": "research.geometry.polynomial_evolute_real_cusps",
+      "hardness": {
+        "reasons": [
+          "variable degree",
+          "real algebraic stratification",
+          "extremal classification"
+        ],
+        "score": 12
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.1145,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "CoefficientSpace",
+        "UniversalPolynomial",
+        "GraphEmbedding",
+        "NormalField",
+        "Envelope",
+        "SingularityCondition",
+        "RealStratification",
+        "CuspCountFunction",
+        "GlobalMaximum",
+        "ExtremizerClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: quantifier elimination exceeds the configured degree budget"
+      ],
+      "query_type": "extremal_real_singularity_count",
+      "statement_tex": "\\(d\\ge3\\) を固定し，実係数モニック多項式 \\(f\\)（次数 \\(d\\)）のグラフ \\(y=f(x)\\) の発展曲線を考える。係数を動かしたときに現れ得る孤立実尖点の最大数を \\(d\\) の式で求め，最大値を達成する多項式を係数空間の連結成分ごとに特徴付けよ。",
+      "structural_signature": "MonicPolynomial:CoefficientSpace:ParameterSpace -> ParameterSpace:UniversalPolynomial:PolynomialFamily -> PolynomialFamily:GraphEmbedding:PlaneCurveFamily -> PlaneCurveFamily:NormalField:NormalFamilyBundle -> NormalFamilyBundle:Envelope:EvoluteFamily -> EvoluteFamily:SingularityCondition:DiscriminantSystem -> DiscriminantSystem:RealStratification:StratifiedSpace -> StratifiedSpace:CuspCountFunction:ConstructibleFunction -> ConstructibleFunction:GlobalMaximum:ExtremalValue -> ExtremalValue:ExtremizerClassification:Classification",
+      "title": "多項式グラフの発展曲線に現れる実尖点の最大数",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:28cad76be8f4",
+      "falsification_attempts": [
+        "not executed: low-degree curve checks are scheduled"
+      ],
+      "family_id": "research.geometry.isogonal_curve_transform",
+      "hardness": {
+        "reasons": [
+          "base-point resolution",
+          "formula uniform in degree and tangent data"
+        ],
+        "score": 12
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0547,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "VertexMultiplicityData",
+        "QuadraticCremonaMap",
+        "BasePointBlowup",
+        "StrictTransform",
+        "DegreeAndExceptionalData",
+        "SingularityExtraction",
+        "DeltaInvariant",
+        "AdjunctionFormula",
+        "GenusCorrection",
+        "ClosedFormulaQuery"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: blowup bookkeeping is not represented in the current kernel"
+      ],
+      "query_type": "birational_invariant_formula",
+      "statement_tex": "三角形の重心座標で等角共役写像を \\(\\iota[x:y:z]=[yz:zx:xy]\\) とする。三頂点を成分に持たない既約平面曲線\\(C\\) について，次数，三頂点での重複度，接錐のデータから\\(\\overline{\\iota(C)}\\) の次数・全特異点・幾何種数を与える完全な公式を求めよ。",
+      "structural_signature": "PlaneCurve:VertexMultiplicityData:DecoratedCurve -> DecoratedCurve:QuadraticCremonaMap:RationalImage -> RationalImage:BasePointBlowup:ResolvedMap -> ResolvedMap:StrictTransform:TransformedCurve -> TransformedCurve:DegreeAndExceptionalData:DecoratedTransform -> DecoratedTransform:SingularityExtraction:SingularityData -> SingularityData:DeltaInvariant:DeltaData -> DeltaData:AdjunctionFormula:ArithmeticGenusWithCorrections -> ArithmeticGenusWithCorrections:GenusCorrection:GeometricGenus -> GeometricGenus:ClosedFormulaQuery:Classification",
+      "title": "曲線の等角共役像の次数・種数公式",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:b61768bbba3f",
+      "falsification_attempts": [
+        "not executed: m=2,3 envelope sampling is scheduled"
+      ],
+      "family_id": "research.geometry.inverted_chord_envelope",
+      "hardness": {
+        "reasons": [
+          "degree growth with an integer parameter",
+          "envelope after inversion"
+        ],
+        "score": 15
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0601,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "TrigonometricChart",
+        "MultiplicationMap",
+        "ChordConstruction",
+        "CircleInversion",
+        "EnvelopeStationarity",
+        "TrigonometricAlgebraization",
+        "ParameterElimination",
+        "IrreducibleDecomposition",
+        "GenusComputation",
+        "IntegerParameterClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: symbolic resultant size is expected to grow with m"
+      ],
+      "query_type": "degree_genus_classification",
+      "statement_tex": "楕円 \\(E:x^2/a^2+y^2/b^2=1\\) を \\(P(t)\\) で媒介表示し，整数 \\(m\\ge2\\)に対して弦 \\(P(t)P(mt)\\) を考える。各弦を単位円反転で原点を通る円へ移した円族の包絡線について，既約成分，次数，幾何種数を \\(m\\) の関数として決定し，有理成分を持つ \\(m\\) を分類せよ。",
+      "structural_signature": "Ellipse:TrigonometricChart:ParameterCircle -> ParameterCircle:MultiplicationMap:PointPair -> PointPair:ChordConstruction:LineFamily -> LineFamily:CircleInversion:CircleFamily -> CircleFamily:EnvelopeStationarity:EnvelopeSystem -> EnvelopeSystem:TrigonometricAlgebraization:PolynomialSystem -> PolynomialSystem:ParameterElimination:AlgebraicCurve -> AlgebraicCurve:IrreducibleDecomposition:CurveComponents -> CurveComponents:GenusComputation:ComponentInvariants -> ComponentInvariants:IntegerParameterClassification:Classification",
+      "title": "楕円の倍角弦を反転した円族の包絡線",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:58705023a353",
+      "falsification_attempts": [
+        "not executed: random convex-polygon iteration is scheduled"
+      ],
+      "family_id": "research.geometry.cyclic_polygon_circumcenter_iteration",
+      "hardness": {
+        "reasons": [
+          "high-dimensional rational dynamics",
+          "all periods and basins"
+        ],
+        "score": 14
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "selfauthored",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0656,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ConsecutiveTriple",
+        "Circumcenter",
+        "PolygonFormation",
+        "MomentNormalization",
+        "Iteration",
+        "SimilarityQuotient",
+        "OrbitClosure",
+        "PeriodicAndLimitData",
+        "PeriodicPointEquation",
+        "AlgebraicDecomposition",
+        "GlobalClassification"
+      ],
+      "morphism_count": 11,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: polygon-moduli dynamics backend is unavailable"
+      ],
+      "query_type": "polygon_dynamical_classification",
+      "statement_tex": "同一直線上に3点を持たない凸 \\(n\\) 角形 \\(P_0=(V_1,\\ldots,V_n)\\) に対し，\\(V_{i-1},V_i,V_{i+1}\\) の外心を新しい頂点 \\(W_i\\) として \\(P_{k+1}\\)を作る。重心0・二次モーメント1に正規化しながら反復するとき，全ての周期軌道と収束する初期多角形を相似を除いて分類せよ。",
+      "structural_signature": "ConvexPolygon:ConsecutiveTriple:TriangleCycle -> TriangleCycle:Circumcenter:PointCycle -> PointCycle:PolygonFormation:Polygon -> Polygon:MomentNormalization:NormalizedPolygon -> NormalizedPolygon:Iteration:PolygonOrbit -> PolygonOrbit:SimilarityQuotient:PolygonModuliOrbit -> PolygonModuliOrbit:OrbitClosure:CompactifiedOrbit -> CompactifiedOrbit:PeriodicAndLimitData:DynamicalData -> DynamicalData:PeriodicPointEquation:PeriodicConstraint -> PeriodicConstraint:AlgebraicDecomposition:PeriodicData -> PeriodicData:GlobalClassification:Classification",
+      "title": "巡回三頂点外心写像による多角形力学",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:f6e4eaf12c3f",
+      "falsification_attempts": [
+        "not executed: r=2,3 numerical sampling is scheduled"
+      ],
+      "family_id": "research.geometry.superellipse_symmedian_locus",
+      "hardness": {
+        "reasons": [
+          "uniform dependence on r",
+          "triangle-center rational map"
+        ],
+        "score": 13
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0705,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "MovingPoint",
+        "TriangleAttachment",
+        "SideLengthSquareWeights",
+        "BarycentricCombination",
+        "RationalCoordinateMap",
+        "ParameterElimination",
+        "ProjectiveClosure",
+        "IrreducibleDecomposition",
+        "GenusComputation",
+        "IntegerParameterClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: symbolic elimination is budgeted only for small r"
+      ],
+      "query_type": "parametric_locus_classification",
+      "statement_tex": "\\(A=(-1,0),B=(1,0)\\) とし，\\(P\\) を \\(x^{2r}+y^{2r}=1,\\ y>0\\)上で動かす。三角形 \\(ABP\\) の類似重心（symmedian point）\\(K(P)\\) の軌跡の射影閉包について，次数・既約成分・幾何種数を \\(r\\ge2\\) の関数として決定し，有理軌跡となる \\(r\\) を分類せよ。",
+      "structural_signature": "SuperellipseFamily:MovingPoint:Point -> Point:TriangleAttachment:Triangle -> Triangle:SideLengthSquareWeights:BarycentricWeights -> BarycentricWeights:BarycentricCombination:SymmedianPoint -> SymmedianPoint:RationalCoordinateMap:RationalImage -> RationalImage:ParameterElimination:AlgebraicCurve -> AlgebraicCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:IrreducibleDecomposition:CurveComponents -> CurveComponents:GenusComputation:ComponentInvariants -> ComponentInvariants:IntegerParameterClassification:Classification",
+      "title": "超楕円上の頂点が作る類似重心の軌跡",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:99f36fb8a7f7",
+      "falsification_attempts": [
+        "not executed: Fourier truncation search is scheduled"
+      ],
+      "family_id": "research.geometry.offset_polar_duality",
+      "hardness": {
+        "reasons": [
+          "functional equation",
+          "algebraicity plus convexity constraints"
+        ],
+        "score": 13
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0806,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "SupportAndDualChart",
+        "OffsetAddition",
+        "CurveReconstruction",
+        "PolarOnFirstBranch",
+        "RegularityRestriction",
+        "SimilarityComparison",
+        "SimilarityInvariantExtraction",
+        "OffsetParameterElimination",
+        "FunctionalConstraint",
+        "AlgebraicCurveClassification"
+      ],
+      "morphism_count": 10,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: support-function equation solver is unavailable"
+      ],
+      "query_type": "duality_commutation_classification",
+      "statement_tex": "原点を内部に持つ \\(C^\\infty\\) 級厳密凸代数曲線 \\(C\\) に対し，外向き距離 \\(s\\) の平行曲線を \\(C_s\\)，極双対を \\(C^\\circ\\) とする。\\((C_s)^\\circ\\) と \\((C^\\circ)_t\\) がある \\(s,t>0\\) で相似になる代数曲線 \\(C\\) を相似を除いて分類せよ。",
+      "structural_signature": "AlgebraicConvexCurve:SupportAndDualChart:PairedSupport -> PairedSupport:OffsetAddition:OffsetSupportPair -> OffsetSupportPair:CurveReconstruction:OffsetCurvePair -> OffsetCurvePair:PolarOnFirstBranch:PolarComparedPair -> PolarComparedPair:RegularityRestriction:RegularCurvePair -> RegularCurvePair:SimilarityComparison:CurvePair -> CurvePair:SimilarityInvariantExtraction:InvariantPair -> InvariantPair:OffsetParameterElimination:ParameterConstraint -> ParameterConstraint:FunctionalConstraint:SupportEquation -> SupportEquation:AlgebraicCurveClassification:Classification",
+      "title": "平行曲線と極双対の可換性",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "research:072d0b7bba0a",
+      "falsification_attempts": [
+        "not executed: one-step degree sampling is scheduled"
+      ],
+      "family_id": "research.geometry.iterated_conic_caustic_degree",
+      "hardness": {
+        "reasons": [
+          "iterated singular envelopes",
+          "classification of exceptional parameters"
+        ],
+        "score": 14
+      },
+      "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0556,
+          "passed": true
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "IncidentRayFamily",
+        "ReflectionLaw",
+        "Envelope",
+        "ProjectiveClosure",
+        "DegenerateComponentRemoval",
+        "Iteration",
+        "DegreeSequence",
+        "AsymptoticGrowth",
+        "DegreeDynamics",
+        "ExceptionalParameterExtraction",
+        "ProjectiveClassification"
+      ],
+      "morphism_count": 11,
+      "not_claimed_human_open": true,
+      "proof_attempts": [
+        "not executed: iterated-envelope backend is unavailable"
+      ],
+      "query_type": "degree_growth_classification",
+      "statement_tex": "光源 \\(S\\) と，\\(S\\) を通らない非退化実円錐曲線 \\(C_0\\) をとる。\\(C_{n+1}\\) を，\\(S\\) から \\(C_n\\) へ入射して反射する光線族の包絡線の射影閉包とする。退化成分を除いた次数列の成長率を決定し，次数が有界または周期的となる \\((C_0,S)\\) を射影同値を除いて分類せよ。",
+      "structural_signature": "ConicSourcePair:IncidentRayFamily:RayFamily -> RayFamily:ReflectionLaw:ReflectedRayFamily -> ReflectedRayFamily:Envelope:Caustic -> Caustic:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:DegenerateComponentRemoval:ReducedCurve -> ReducedCurve:Iteration:CurveOrbit -> CurveOrbit:DegreeSequence:IntegerSequence -> IntegerSequence:AsymptoticGrowth:GrowthInvariant -> GrowthInvariant:DegreeDynamics:DegreeDynamicsData -> DegreeDynamicsData:ExceptionalParameterExtraction:ParameterConstraint -> ParameterConstraint:ProjectiveClassification:Classification",
+      "title": "円錐曲線の反射焦線を反復したときの次数成長",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    }
+  ],
+  "generated_at": "2026-07-26T04:39:50.642384+00:00",
+  "rejected_candidates": [],
+  "semantics": {
+    "creativity_unit": "unique typed structural_signature, not parameter variants",
+    "unresolved_by_mathos": "MathOS has not proved or refuted the candidate. This is not a claim that the problem is open to humanity."
+  },
+  "summary": {
+    "parameter_variants": 0,
+    "reference_corpus_size": 28074,
+    "rejected": 0,
+    "retained": 12,
+    "unique_query_types": 12,
+    "unique_structural_signatures": 12
+  }
+}

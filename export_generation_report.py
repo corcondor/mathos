@@ -75,7 +75,7 @@ def build_report(payload: dict[str, Any]) -> str:
         "## スナップショット",
         "",
         f"- 生成日時: `{_format_time(str(payload.get('generated_at', 'unknown')))}`",
-        f"- 検証済み問題: **{len(problems)}問**",
+        f"- 検証済み問題インスタンス: **{len(problems)}問**",
         f"- 構造族: **{len(family_counts)}族**",
         f"- 深層族: **{len(deep)}問 / {len(representative)}族**",
         f"- うち10射以上の超深層族: **{len(ultradeep)}問 / "
@@ -90,6 +90,9 @@ def build_report(payload: dict[str, Any]) -> str:
 
     lines.extend(
         [
+            "",
+            "ここで問題インスタンス数は、同じ構造族のパラメータ違いを含む。",
+            "創造性・構造多様性はインスタンス数ではなく構造族数と射列で評価する。",
             "",
             "## 生成ループ",
             "",
