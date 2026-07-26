@@ -2,23 +2,23 @@
   "autonomous_search": {
     "added": 12,
     "atlas_morphisms": 92,
-    "attempts": 21,
+    "attempts": 27,
     "base_maximum_nearest_similarity": 0.82,
-    "depth_ceiling": 16,
-    "depth_floor": 13,
+    "depth_ceiling": 17,
+    "depth_floor": 14,
     "domain_counts": {
-      "cayley_spectral": 15,
-      "convex_body": 15,
-      "markov_dynamics": 15,
-      "plane_curve": 15,
-      "polynomial": 16,
-      "triangle_dynamics": 15
+      "cayley_spectral": 17,
+      "convex_body": 18,
+      "markov_dynamics": 17,
+      "plane_curve": 17,
+      "polynomial": 17,
+      "triangle_dynamics": 17
     },
     "domains": 6,
-    "epoch": 8,
+    "epoch": 9,
     "quotient": "typed operation classes + type aliases + numeric erasure + commuting-block normalization",
     "requested": 12,
-    "seed": 136437961522396,
+    "seed": 193263169616124,
     "similarity_rule": "max(0.55, 0.82 - 0.015 * (depth - 10))"
   },
   "candidates": [
@@ -7496,9 +7496,945 @@
         "error": null,
         "passed": true
       }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:8d30d2b2f91ad156",
+      "constraint_skeleton": [
+        "finite",
+        "irreducible",
+        "reversible"
+      ],
+      "effective_morphism_count": 16,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.markov_dynamics.8d30d2b2f9",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 19
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "StateLumping",
+        "ProductChain",
+        "StateLumping",
+        "ProductChain",
+        "LazyPerturbation",
+        "DoobTransform",
+        "TimeReversal",
+        "DoobTransform",
+        "LazyPerturbation",
+        "TimeReversal",
+        "KilledChain",
+        "GreenOperator",
+        "HittingMomentSystem",
+        "MomentRecurrence",
+        "DenominatorArithmetic",
+        "MarkovMomentQuery"
+      ],
+      "morphism_count": 16,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "hitting_moment_arithmetic",
+      "quotient_signature": "MarkovChain|StateLumping/ProductChain/StateLumping/ProductChain/LazyPerturbation/DoobTransform/TimeReversal/DoobTransform/LazyPerturbation/TimeReversal/KilledChain/GreenOperator/HittingMomentSystem/MomentRecurrence/DenominatorArithmetic/MarkovMomentQuery|Classification|finite,irreducible,reversible",
+      "search_trace": {
+        "domain": "markov_dynamics",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.381,
+        "seed": 193263169616124,
+        "similarity_limit": 0.73,
+        "target_depth": 16
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「有限既約可逆Markov連鎖と指定状態集合を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 自己同型軌道に沿って強 lumping する，(2) 自身との同期積連鎖を作る，(3) 自己同型軌道に沿って強 lumping する，(4) 自身との同期積連鎖を作る，(5) 恒等遷移との凸結合でlazy化する，(6) 正の固有関数によるDoob変換を施す，(7) 定常分布に関する時間反転をとる，(8) 正の固有関数によるDoob変換を施す，(9) 恒等遷移との凸結合でlazy化する，(10) 定常分布に関する時間反転をとる，(11) 指定集合で吸収させ過渡核をとる，(12) 過渡核のGreen作用素をとる，(13) 到達時刻の高次モーメント連立系を作る，(14) モーメント次数方向の漸化式を抽出する，(15) 既約分母と素数ごとの付値列を抽出する。最後に、付値列が周期的または有界となる連鎖を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "MarkovChain:StateLumping:MarkovChain -> MarkovChain:ProductChain:MarkovChain -> MarkovChain:StateLumping:MarkovChain -> MarkovChain:ProductChain:MarkovChain -> MarkovChain:LazyPerturbation:MarkovChain -> MarkovChain:DoobTransform:MarkovChain -> MarkovChain:TimeReversal:MarkovChain -> MarkovChain:DoobTransform:MarkovChain -> MarkovChain:LazyPerturbation:MarkovChain -> MarkovChain:TimeReversal:MarkovChain -> MarkovChain:KilledChain:TransientKernel -> TransientKernel:GreenOperator:GreenKernel -> GreenKernel:HittingMomentSystem:MomentSystem -> MomentSystem:MomentRecurrence:RecurrenceData -> RecurrenceData:DenominatorArithmetic:ArithmeticData -> ArithmeticData:MarkovMomentQuery:Classification",
+      "title": "Markov関手と到達時刻不変量（StateLumping・ProductChain・MomentRecurrence・DenominatorArithmetic）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:b9ff873c655a9d39",
+      "constraint_skeleton": [
+        "nondegenerate",
+        "acute_when_pedal_is_used",
+        "mod_similarity"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.triangle_dynamics.b9ff873c65",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 18
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0625,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "MedialTransform",
+        "ExcentralTransform",
+        "OrthocenterMark",
+        "PedalProjection",
+        "TriangleFormation",
+        "IncenterMark",
+        "SideReflectionTrace",
+        "TriangleFormation",
+        "SimilarityNormalization",
+        "ModuliProjection",
+        "InducedIteration",
+        "OrbitCompactification",
+        "LimitSetExtraction",
+        "TriangleDynamicsQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "triangle_moduli_dynamics",
+      "quotient_signature": "Triangle|AffineTriangleEndofunctor/MetricTriangleEndofunctor/OrthogonalityCenterMark/PedalProjection/TriangleFormation/MetricCenterMark/SideReflectionTrace/TriangleFormation/SimilarityNormalization/ModuliProjection/InducedIteration/OrbitCompactification/LimitSetExtraction/TriangleDynamicsQuery|Classification|acute_when_pedal_is_used,mod_similarity,nondegenerate",
+      "search_trace": {
+        "domain": "triangle_dynamics",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.3684,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 三辺の中点三角形へ移す，(2) 傍心三角形へ移す，(3) 垂心を標識点として付加する，(4) 標識点から三辺への垂足三点をとる，(5) 三点を頂点とする向き付き三角形を作る，(6) 内心を標識点として付加する，(7) 標識点を三辺に関して反射した三点をとる，(8) 三点を頂点とする向き付き三角形を作る，(9) 重心・面積・向きを固定して相似正規化する，(10) 相似類のモジュライ点へ射影する，(11) ここまでの合成が誘導する写像を反復する，(12) 退化三角形を境界として軌道をコンパクト化する，(13) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "Triangle:MedialTransform:Triangle -> Triangle:ExcentralTransform:Triangle -> Triangle:OrthocenterMark:MarkedTriangle -> MarkedTriangle:PedalProjection:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:IncenterMark:MarkedTriangle -> MarkedTriangle:SideReflectionTrace:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:SimilarityNormalization:NormalizedTriangle -> NormalizedTriangle:ModuliProjection:TriangleModuli -> TriangleModuli:InducedIteration:ModuliOrbit -> ModuliOrbit:OrbitCompactification:CompactOrbit -> CompactOrbit:LimitSetExtraction:DynamicalData -> DynamicalData:TriangleDynamicsQuery:Classification",
+      "title": "三角形変換の合成力学（MedialTransform・ExcentralTransform・OrbitCompactification・LimitSetExtraction）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:acf85f87846dbbd0",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.acf85f8784",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 16
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "Catacaustic",
+        "Evolute",
+        "OffsetCurve",
+        "Catacaustic",
+        "IsogonalCremona",
+        "OffsetCurve",
+        "ProjectiveDual",
+        "Evolute",
+        "CircleInversion",
+        "PolarReciprocal",
+        "IsogonalCremona",
+        "ProjectiveDual",
+        "CircleInversion",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|Catacaustic/Evolute/OffsetCurve/Catacaustic/IsogonalCremona/OffsetCurve/ProjectiveDual/Evolute/CircleInversion/PolarReciprocal/IsogonalCremona/ProjectiveDual/CircleInversion/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.1667,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 固定光源からの反射光線族の包絡線をとる，(2) 法線族の包絡線である発展曲線をとる，(3) 法線方向の代数的平行曲線をとる，(4) 固定光源からの反射光線族の包絡線をとる，(5) 固定基準三角形に関する等角共役Cremona像をとる，(6) 法線方向の代数的平行曲線をとる，(7) 正則接線族の射影双対曲線をとる，(8) 法線族の包絡線である発展曲線をとる，(9) 原点中心の円反転像をとる，(10) 固定非退化二次形式に関する極逆像をとる，(11) 固定基準三角形に関する等角共役Cremona像をとる，(12) 正則接線族の射影双対曲線をとる，(13) 原点中心の円反転像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（Catacaustic・Evolute・ProjectiveDual・CircleInversion）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:aaf9e6b7b26c2ed9",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.aaf9e6b7b2",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 18
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0625,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ProjectionBody",
+        "CentroidBody",
+        "IntersectionBody",
+        "DifferenceBody",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "DifferenceBody",
+        "CentroidBody",
+        "MinkowskiPolarSum",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|ProjectionBody/CentroidBody/IntersectionBody/DifferenceBody/SteinerSymmetrization/PolarDual/DifferenceBody/CentroidBody/MinkowskiPolarSum/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.2632,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 射影体をとる，(2) 重心体をとる，(3) 交叉体をとる，(4) 差体をとる，(5) 主慣性軸方向にSteiner対称化する，(6) 原点に関する極体をとる，(7) 差体をとる，(8) 重心体をとる，(9) 自身と極体のMinkowski和をとる，(10) 面積と二次モーメントを固定して正規化する，(11) ここまでの凸体関手を反復する，(12) 支持関数の軌道へ移す，(13) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（ProjectionBody・CentroidBody・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:fe53bf60ae6e1183",
+      "constraint_skeleton": [
+        "finite_abelian",
+        "symmetric_connection_set",
+        "connected"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.cayley_spectral.fe53bf60ae",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 17
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "mathnet",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "PowerResidueConnection",
+        "CayleyConstruction",
+        "GraphPower",
+        "DistanceTwoGraph",
+        "GraphPower",
+        "GraphComplement",
+        "DistanceTwoGraph",
+        "GraphComplement",
+        "LaplacianOperator",
+        "CharacterDiagonalization",
+        "SpectralMoments",
+        "ClosedWalkExtraction",
+        "WalkArithmeticInvariant",
+        "WalkCongruenceQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "closed_walk_congruence",
+      "quotient_signature": "FiniteGroup|PowerResidueConnection/CayleyConstruction/GraphPower/DistanceTwoGraph/GraphPower/GraphComplement/DistanceTwoGraph/GraphComplement/LaplacianOperator/CharacterDiagonalization/SpectralMoments/ClosedWalkExtraction/WalkArithmeticInvariant/WalkCongruenceQuery|Classification|connected,finite_abelian,symmetric_connection_set",
+      "search_trace": {
+        "domain": "cayley_spectral",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.7143,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「有限アーベル群と、その自己同型で不変な生成集合を初期データとする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 冪剰余類の自己同型軌道を生成集合とする，(2) 対応する無向Cayleyグラフを作る，(3) 距離が指定範囲以内の頂点を結ぶグラフ冪をとる，(4) 距離2の頂点を結ぶグラフをとる，(5) 距離が指定範囲以内の頂点を結ぶグラフ冪をとる，(6) ループを除いた補グラフをとる，(7) 距離2の頂点を結ぶグラフをとる，(8) ループを除いた補グラフをとる，(9) 組合せLaplacianを群環上に表す，(10) 指標表で同時対角化してスペクトルを得る，(11) スペクトルモーメント列を作る，(12) 閉歩道数と原始閉路数を抽出する，(13) 閉路数列の合同不変量を抽出する。最後に、閉路数列が指定合同周期を持つ場合を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "FiniteGroup:PowerResidueConnection:ConnectionSet -> ConnectionSet:CayleyConstruction:CayleyGraph -> CayleyGraph:GraphPower:CayleyGraph -> CayleyGraph:DistanceTwoGraph:CayleyGraph -> CayleyGraph:GraphPower:CayleyGraph -> CayleyGraph:GraphComplement:CayleyGraph -> CayleyGraph:DistanceTwoGraph:CayleyGraph -> CayleyGraph:GraphComplement:CayleyGraph -> CayleyGraph:LaplacianOperator:MatrixOperator -> MatrixOperator:CharacterDiagonalization:Spectrum -> Spectrum:SpectralMoments:MomentSequence -> MomentSequence:ClosedWalkExtraction:WalkData -> WalkData:WalkArithmeticInvariant:ArithmeticData -> ArithmeticData:WalkCongruenceQuery:Classification",
+      "title": "Cayleyグラフのスペクトル合成（PowerResidueConnection・CayleyConstruction・ClosedWalkExtraction・WalkArithmeticInvariant）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:426371ae3a6c8b4f",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 16,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.426371ae3a",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 19
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "Catacaustic",
+        "OffsetCurve",
+        "CircleInversion",
+        "Catacaustic",
+        "IsogonalCremona",
+        "PolarReciprocal",
+        "Evolute",
+        "OffsetCurve",
+        "CircleInversion",
+        "Evolute",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "HessianCurve",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 16,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|Catacaustic/OffsetCurve/CircleInversion/Catacaustic/IsogonalCremona/PolarReciprocal/Evolute/OffsetCurve/CircleInversion/Evolute/ProjectiveClosure/AffineChartChange/HessianCurve/ProjectiveDual/IsogonalCremona/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.25,
+        "seed": 193263169616124,
+        "similarity_limit": 0.73,
+        "target_depth": 16
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 固定光源からの反射光線族の包絡線をとる，(2) 法線方向の代数的平行曲線をとる，(3) 原点中心の円反転像をとる，(4) 固定光源からの反射光線族の包絡線をとる，(5) 固定基準三角形に関する等角共役Cremona像をとる，(6) 固定非退化二次形式に関する極逆像をとる，(7) 法線族の包絡線である発展曲線をとる，(8) 法線方向の代数的平行曲線をとる，(9) 原点中心の円反転像をとる，(10) 法線族の包絡線である発展曲線をとる，(11) 射影閉包をとり無限遠点を加える，(12) 基点を避ける一般アフィンチャートへ移す，(13) 定義多項式のHessian曲線をとる，(14) 正則接線族の射影双対曲線をとる，(15) 固定基準三角形に関する等角共役Cremona像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（Catacaustic・OffsetCurve・ProjectiveDual・IsogonalCremona）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:5df568a188c0bba4",
+      "constraint_skeleton": [
+        "finite",
+        "irreducible",
+        "reversible"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.markov_dynamics.5df568a188",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 17
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "LazyPerturbation",
+        "DoobTransform",
+        "ProductChain",
+        "LazyPerturbation",
+        "ProductChain",
+        "StateLumping",
+        "TimeReversal",
+        "StateLumping",
+        "DoobTransform",
+        "KilledChain",
+        "GreenOperator",
+        "HittingMomentSystem",
+        "MomentRecurrence",
+        "MarkovRecurrenceQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "hitting_moment_recurrence",
+      "quotient_signature": "MarkovChain|LazyPerturbation/DoobTransform/ProductChain/LazyPerturbation/ProductChain/StateLumping/TimeReversal/StateLumping/DoobTransform/KilledChain/GreenOperator/HittingMomentSystem/MomentRecurrence/MarkovRecurrenceQuery|Classification|finite,irreducible,reversible",
+      "search_trace": {
+        "domain": "markov_dynamics",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.4706,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「有限既約可逆Markov連鎖と指定状態集合を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 恒等遷移との凸結合でlazy化する，(2) 正の固有関数によるDoob変換を施す，(3) 自身との同期積連鎖を作る，(4) 恒等遷移との凸結合でlazy化する，(5) 自身との同期積連鎖を作る，(6) 自己同型軌道に沿って強 lumping する，(7) 定常分布に関する時間反転をとる，(8) 自己同型軌道に沿って強 lumping する，(9) 正の固有関数によるDoob変換を施す，(10) 指定集合で吸収させ過渡核をとる，(11) 過渡核のGreen作用素をとる，(12) 到達時刻の高次モーメント連立系を作る，(13) モーメント次数方向の漸化式を抽出する。最後に、到達時刻モーメントの漸化式次数が低下する場合を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "MarkovChain:LazyPerturbation:MarkovChain -> MarkovChain:DoobTransform:MarkovChain -> MarkovChain:ProductChain:MarkovChain -> MarkovChain:LazyPerturbation:MarkovChain -> MarkovChain:ProductChain:MarkovChain -> MarkovChain:StateLumping:MarkovChain -> MarkovChain:TimeReversal:MarkovChain -> MarkovChain:StateLumping:MarkovChain -> MarkovChain:DoobTransform:MarkovChain -> MarkovChain:KilledChain:TransientKernel -> TransientKernel:GreenOperator:GreenKernel -> GreenKernel:HittingMomentSystem:MomentSystem -> MomentSystem:MomentRecurrence:RecurrenceData -> RecurrenceData:MarkovRecurrenceQuery:Classification",
+      "title": "Markov関手と到達時刻不変量（LazyPerturbation・DoobTransform・HittingMomentSystem・MomentRecurrence）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:5a3684d7167817bb",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 16,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.5a3684d716",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 20
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ProjectionBody",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "CentroidBody",
+        "MinkowskiPolarSum",
+        "SteinerSymmetrization",
+        "ProjectionBody",
+        "IntersectionBody",
+        "MinkowskiPolarSum",
+        "PolarDual",
+        "DifferenceBody",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 16,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|ProjectionBody/SteinerSymmetrization/DifferenceBody/CentroidBody/MinkowskiPolarSum/SteinerSymmetrization/ProjectionBody/IntersectionBody/MinkowskiPolarSum/PolarDual/DifferenceBody/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.3333,
+        "seed": 193263169616124,
+        "similarity_limit": 0.73,
+        "target_depth": 16
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 射影体をとる，(2) 主慣性軸方向にSteiner対称化する，(3) 差体をとる，(4) 重心体をとる，(5) 自身と極体のMinkowski和をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 射影体をとる，(8) 交叉体をとる，(9) 自身と極体のMinkowski和をとる，(10) 原点に関する極体をとる，(11) 差体をとる，(12) 面積と二次モーメントを固定して正規化する，(13) ここまでの凸体関手を反復する，(14) 支持関数の軌道へ移す，(15) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（ProjectionBody・SteinerSymmetrization・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:297ab4f2fb6cbc10",
+      "constraint_skeleton": [
+        "square_free",
+        "monic_normalization",
+        "degree_at_least_three"
+      ],
+      "effective_morphism_count": 17,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.polynomial.297ab4f2fb",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 21
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0938,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "DerivativeRenormalization",
+        "GraeffeTransform",
+        "DerivativeRenormalization",
+        "ShiftConjugacy",
+        "GraeffeTransform",
+        "CriticalValuePolynomial",
+        "ReciprocalPolynomial",
+        "ShiftConjugacy",
+        "ReciprocalPolynomial",
+        "RootMultiset",
+        "PolynomialReconstruction",
+        "RootMultiset",
+        "PowerMomentSequence",
+        "HankelConstruction",
+        "MinorSequence",
+        "RecurrenceExtraction",
+        "RecurrenceOrderQuery"
+      ],
+      "morphism_count": 17,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "recurrence_order_drop",
+      "quotient_signature": "Polynomial|DerivativeRenormalization/GraeffeTransform/DerivativeRenormalization/ShiftConjugacy/GraeffeTransform/CriticalValuePolynomial/ReciprocalPolynomial/ShiftConjugacy/ReciprocalPolynomial/RootMultiset/PolynomialReconstruction/RootMultiset/PowerMomentSequence/HankelConstruction/MinorSequence/RecurrenceExtraction/RecurrenceOrderQuery|Classification|degree_at_least_three,monic_normalization,square_free",
+      "search_trace": {
+        "domain": "polynomial",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.5,
+        "seed": 193263169616124,
+        "similarity_limit": 0.715,
+        "target_depth": 17
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 導関数をモニックに再正規化する，(2) 根を二乗するGraeffe変換を施す，(3) 導関数をモニックに再正規化する，(4) 根の重心を0へ移す平行移動共役を施す，(5) 根を二乗するGraeffe変換を施す，(6) 臨界値を根にもつ消去多項式を作る，(7) 根を逆数へ移す相反多項式をとる，(8) 根の重心を0へ移す平行移動共役を施す，(9) 根を逆数へ移す相反多項式をとる，(10) 重複度付き根配置へ移す，(11) 根配置からモニック多項式を再構成する，(12) 重複度付き根配置へ移す，(13) 根の冪和モーメント列を作る，(14) モーメントからHankel行列族を作る，(15) 主小行列式列をとる，(16) 満たす最小線形漸化式を抽出する。最後に、漸化式の最小次数が低下する係数条件を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:GraeffeTransform:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:GraeffeTransform:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PowerMomentSequence:MomentSequence -> MomentSequence:HankelConstruction:HankelMatrix -> HankelMatrix:MinorSequence:DeterminantSequence -> DeterminantSequence:RecurrenceExtraction:RecurrenceData -> RecurrenceData:RecurrenceOrderQuery:Classification",
+      "title": "多項式変換と算術観測（DerivativeRenormalization・GraeffeTransform・MinorSequence・RecurrenceExtraction）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:15ef9d8478a4e45a",
+      "constraint_skeleton": [
+        "nondegenerate",
+        "acute_when_pedal_is_used",
+        "mod_similarity"
+      ],
+      "effective_morphism_count": 16,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.triangle_dynamics.15ef9d8478",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 20
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ExcentralTransform",
+        "MedialTransform",
+        "SymmedianMark",
+        "CevianTrace",
+        "TriangleFormation",
+        "ExcentralTransform",
+        "SymmedianMark",
+        "PedalProjection",
+        "TriangleFormation",
+        "AnticomplementaryTransform",
+        "SimilarityNormalization",
+        "ModuliProjection",
+        "InducedIteration",
+        "OrbitCompactification",
+        "LimitSetExtraction",
+        "TriangleDynamicsQuery"
+      ],
+      "morphism_count": 16,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "triangle_moduli_dynamics",
+      "quotient_signature": "Triangle|MetricTriangleEndofunctor/AffineTriangleEndofunctor/BarycentricCenterMark/CevianTrace/TriangleFormation/MetricTriangleEndofunctor/BarycentricCenterMark/PedalProjection/TriangleFormation/AffineTriangleEndofunctor/SimilarityNormalization/ModuliProjection/InducedIteration/OrbitCompactification/LimitSetExtraction/TriangleDynamicsQuery|Classification|acute_when_pedal_is_used,mod_similarity,nondegenerate",
+      "search_trace": {
+        "domain": "triangle_dynamics",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.4,
+        "seed": 193263169616124,
+        "similarity_limit": 0.73,
+        "target_depth": 16
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 傍心三角形へ移す，(2) 三辺の中点三角形へ移す，(3) 類似重心を標識点として付加する，(4) 標識点を通る三本のcevianの辺上の足をとる，(5) 三点を頂点とする向き付き三角形を作る，(6) 傍心三角形へ移す，(7) 類似重心を標識点として付加する，(8) 標識点から三辺への垂足三点をとる，(9) 三点を頂点とする向き付き三角形を作る，(10) 反中点三角形へ移す，(11) 重心・面積・向きを固定して相似正規化する，(12) 相似類のモジュライ点へ射影する，(13) ここまでの合成が誘導する写像を反復する，(14) 退化三角形を境界として軌道をコンパクト化する，(15) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "Triangle:ExcentralTransform:Triangle -> Triangle:MedialTransform:Triangle -> Triangle:SymmedianMark:MarkedTriangle -> MarkedTriangle:CevianTrace:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:ExcentralTransform:Triangle -> Triangle:SymmedianMark:MarkedTriangle -> MarkedTriangle:PedalProjection:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:AnticomplementaryTransform:Triangle -> Triangle:SimilarityNormalization:NormalizedTriangle -> NormalizedTriangle:ModuliProjection:TriangleModuli -> TriangleModuli:InducedIteration:ModuliOrbit -> ModuliOrbit:OrbitCompactification:CompactOrbit -> CompactOrbit:LimitSetExtraction:DynamicalData -> DynamicalData:TriangleDynamicsQuery:Classification",
+      "title": "三角形変換の合成力学（ExcentralTransform・MedialTransform・OrbitCompactification・LimitSetExtraction）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:9ae6fcebc6bfeee4",
+      "constraint_skeleton": [
+        "finite_abelian",
+        "symmetric_connection_set",
+        "connected"
+      ],
+      "effective_morphism_count": 14,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.cayley_spectral.9ae6fcebc6",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 17
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0625,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "CharacterLevelConnection",
+        "CayleyConstruction",
+        "GraphPower",
+        "GraphComplement",
+        "GraphPower",
+        "DistanceTwoGraph",
+        "GraphComplement",
+        "DistanceTwoGraph",
+        "LaplacianOperator",
+        "CharacterDiagonalization",
+        "SpectralMoments",
+        "ClosedWalkExtraction",
+        "WalkArithmeticInvariant",
+        "WalkCongruenceQuery"
+      ],
+      "morphism_count": 14,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "closed_walk_congruence",
+      "quotient_signature": "FiniteGroup|CharacterLevelConnection/CayleyConstruction/GraphPower/GraphComplement/GraphPower/DistanceTwoGraph/GraphComplement/DistanceTwoGraph/LaplacianOperator/CharacterDiagonalization/SpectralMoments/ClosedWalkExtraction/WalkArithmeticInvariant/WalkCongruenceQuery|Classification|connected,finite_abelian,symmetric_connection_set",
+      "search_trace": {
+        "domain": "cayley_spectral",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.6667,
+        "seed": 193263169616124,
+        "similarity_limit": 0.76,
+        "target_depth": 14
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「有限アーベル群と、その自己同型で不変な生成集合を初期データとする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 非自明指標の値が指定軌道に属する元を生成集合とする，(2) 対応する無向Cayleyグラフを作る，(3) 距離が指定範囲以内の頂点を結ぶグラフ冪をとる，(4) ループを除いた補グラフをとる，(5) 距離が指定範囲以内の頂点を結ぶグラフ冪をとる，(6) 距離2の頂点を結ぶグラフをとる，(7) ループを除いた補グラフをとる，(8) 距離2の頂点を結ぶグラフをとる，(9) 組合せLaplacianを群環上に表す，(10) 指標表で同時対角化してスペクトルを得る，(11) スペクトルモーメント列を作る，(12) 閉歩道数と原始閉路数を抽出する，(13) 閉路数列の合同不変量を抽出する。最後に、閉路数列が指定合同周期を持つ場合を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "FiniteGroup:CharacterLevelConnection:ConnectionSet -> ConnectionSet:CayleyConstruction:CayleyGraph -> CayleyGraph:GraphPower:CayleyGraph -> CayleyGraph:GraphComplement:CayleyGraph -> CayleyGraph:GraphPower:CayleyGraph -> CayleyGraph:DistanceTwoGraph:CayleyGraph -> CayleyGraph:GraphComplement:CayleyGraph -> CayleyGraph:DistanceTwoGraph:CayleyGraph -> CayleyGraph:LaplacianOperator:MatrixOperator -> MatrixOperator:CharacterDiagonalization:Spectrum -> Spectrum:SpectralMoments:MomentSequence -> MomentSequence:ClosedWalkExtraction:WalkData -> WalkData:WalkArithmeticInvariant:ArithmeticData -> ArithmeticData:WalkCongruenceQuery:Classification",
+      "title": "Cayleyグラフのスペクトル合成（CharacterLevelConnection・CayleyConstruction・ClosedWalkExtraction・WalkArithmeticInvariant）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:61462bca92d6999b",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 15,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.61462bca92",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 18
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "IntersectionBody",
+        "DifferenceBody",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "ProjectionBody",
+        "IntersectionBody",
+        "ProjectionBody",
+        "PolarDual",
+        "CentroidBody",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "VolumeNormalization",
+        "ConvexFixedPointQuery"
+      ],
+      "morphism_count": 15,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_functor_fixed_points",
+      "quotient_signature": "ConvexBody|IntersectionBody/DifferenceBody/SteinerSymmetrization/DifferenceBody/CentroidBody/SteinerSymmetrization/ProjectionBody/IntersectionBody/ProjectionBody/PolarDual/CentroidBody/PolarDual/MinkowskiPolarSum/VolumeNormalization/ConvexFixedPointQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 9,
+        "nearest_prior_structural_similarity": 0.3158,
+        "seed": 193263169616124,
+        "similarity_limit": 0.745,
+        "target_depth": 15
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 交叉体をとる，(2) 差体をとる，(3) 主慣性軸方向にSteiner対称化する，(4) 差体をとる，(5) 重心体をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 射影体をとる，(8) 交叉体をとる，(9) 射影体をとる，(10) 原点に関する極体をとる，(11) 重心体をとる，(12) 原点に関する極体をとる，(13) 自身と極体のMinkowski和をとる，(14) 面積と二次モーメントを固定して正規化する。最後に、合成関手の固定体を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:ConvexFixedPointQuery:Classification",
+      "title": "凸体関手の合成力学（IntersectionBody・DifferenceBody・MinkowskiPolarSum・VolumeNormalization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
     }
   ],
-  "generated_at": "2026-07-26T14:08:57.417703+00:00",
+  "generated_at": "2026-07-26T19:43:54.667764+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
@@ -7506,15 +8442,15 @@
   },
   "summary": {
     "added_by_autonomous_search": 12,
-    "autonomous_candidates": 91,
-    "current_depth_floor": 13,
+    "autonomous_candidates": 103,
+    "current_depth_floor": 14,
     "current_runtime_corpus_size": 176,
     "parameter_variants": 0,
     "reference_corpus_size": 28074,
     "reference_corpus_size_max": 28074,
     "rejected": 0,
-    "retained": 103,
+    "retained": 115,
     "unique_query_types": 23,
-    "unique_structural_signatures": 103
+    "unique_structural_signatures": 115
   }
 }
