@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-26T07:38:12.459826+00:00",
+  "generated_at": "2026-07-26T07:41:49.198892+00:00",
   "method": {
     "name": "MathOS Japanese entrance-mathematics structural pool",
     "numeric_variants_count_as_new": false,
@@ -2609,58 +2609,6 @@
     },
     {
       "accepted": true,
-      "answer_tex": "16",
-      "candidate_id": "construct:layered.recurrence_period_observable:483",
-      "curriculum_certificate": {
-        "abstract_morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "DivisorCount"
-        ],
-        "lowering_chain": [
-          "recurrence",
-          "congruence",
-          "finite_counting",
-          "integer_factorization"
-        ],
-        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
-        "type_checked": true,
-        "uses_only_school_level_primitives": true
-      },
-      "difficulty": {
-        "band": "B_hard_university",
-        "condition": 0,
-        "construct": 1,
-        "score": 9.22
-      },
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "DivisorCount"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "closest_source": "sakumon_curation",
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1633
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&3\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 11\\) での位数が周期。周期は \\(120\\)。その約数の個数を数える。",
-      "source_generator": "construct_atlas",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 11\\) で見ると周期的になる。その周期の正の約数の個数を求めよ。",
-      "structure_key": "9f758d0ad20a54bf91992559c6fae0df09e299ccc0e6222550820d363e0c55ed",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
-    },
-    {
-      "accepted": true,
       "answer_tex": "32",
       "candidate_id": "construct:layered.recurrence_period_observable:485",
       "curriculum_certificate": {
@@ -2704,58 +2652,6 @@
       "source_generator": "construct_atlas",
       "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 11\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
       "structure_key": "4ef6047ff0aa60ce3a0f94b8855b687f99812c63fe4076e9011faf79c09ca58a",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
-    },
-    {
-      "accepted": true,
-      "answer_tex": "13",
-      "candidate_id": "construct:layered.recurrence_period_observable:487",
-      "curriculum_certificate": {
-        "abstract_morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "LargestPrimeFactor"
-        ],
-        "lowering_chain": [
-          "recurrence",
-          "congruence",
-          "finite_counting",
-          "integer_factorization"
-        ],
-        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
-        "type_checked": true,
-        "uses_only_school_level_primitives": true
-      },
-      "difficulty": {
-        "band": "B_hard_university",
-        "condition": 0,
-        "construct": 1,
-        "score": 10.72
-      },
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "LargestPrimeFactor"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "closest_source": "sakumon_curation",
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1641
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&3\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 13\\) での位数が周期。周期は \\(156\\)。素因数分解して最大の素因数をとる。",
-      "source_generator": "construct_atlas",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 13\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
-      "structure_key": "69ec9359b0faf2619f60fcd8239a0f888d8c20920b5eeee1d715d42794da814d",
       "tool": "matrix_mod_order+arith_function",
       "verification": {
         "exact_backend": true,
@@ -3656,7 +3552,7 @@
     }
   ],
   "summary": {
-    "certified_structures": 36,
+    "certified_structures": 34,
     "domain_counts": {
       "algebra": 2,
       "algebraic_geometry": 2,
@@ -3673,7 +3569,7 @@
       "geometry_algebra": 2,
       "geometry_analysis": 1,
       "linear_algebra_number_theory": 1,
-      "number_theory": 4,
+      "number_theory": 2,
       "probability": 1,
       "projective_geometry": 1,
       "real_analysis": 5
@@ -3701,7 +3597,7 @@
       "fusion.trig_floor_integral": 1,
       "lattice_paths.dyck_reflection_catalan_count": 1,
       "layered.cubic_tangent_iteration": 1,
-      "layered.recurrence_period_observable": 3,
+      "layered.recurrence_period_observable": 1,
       "layered.rotation_orbit_hull_area": 1,
       "passage_region.line_family_sweep": 1,
       "passage_region.parabola_family_sweep": 1,
@@ -3717,14 +3613,14 @@
     },
     "geometry_algebra_structures": 24,
     "rejected": {
-      "same_structure_variant": 658,
-      "scope_lowering": 435
+      "same_structure_variant": 82,
+      "scope_lowering": 60
     },
     "source_counts": {
-      "construct_atlas": 20,
+      "construct_atlas": 18,
       "geometry_fusion": 4,
       "typed_continuous": 12
     },
-    "total_instances": 36
+    "total_instances": 34
   }
 }

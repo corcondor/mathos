@@ -5,13 +5,13 @@
 
 ## 結果
 
-- 検証済み構造: **36**
+- 検証済み構造: **34**
 - 構造族: **34**
 - 幾何・代数・複素数系: **24**
 - ギャンブラー破産系: **0**
 - Paley・グラフ理論を表面に出す問題: **0**
-- 同一構造の数値変種として除外: **658**
-- 高校範囲への還元を証明できず除外: **435**
+- 同一構造の数値変種として除外: **82**
+- 高校範囲への還元を証明できず除外: **60**
 
 ## 採用契約
 
@@ -59,8 +59,6 @@
 | `geometry_analysis` | `deep.tangent_iteration_growth` | `differentiation -> tangent_line -> recurrence -> logarithm -> sequence_limit` |
 | `linear_algebra_number_theory` | `recurrence.cassini_fibonacci_determinant_invariant` | `recurrence -> mathematical_induction -> algebraic_identity` |
 | `number_theory` | `construct.linear_recurrence_mod_period` | `recurrence -> congruence -> finite_state_iteration` |
-| `number_theory` | `layered.recurrence_period_observable` | `recurrence -> congruence -> finite_counting -> integer_factorization` |
-| `number_theory` | `layered.recurrence_period_observable` | `recurrence -> congruence -> finite_counting -> integer_factorization` |
 | `number_theory` | `layered.recurrence_period_observable` | `recurrence -> congruence -> finite_counting -> integer_factorization` |
 | `probability` | `probability.left_to_right_maxima_expectation` | `permutation -> indicator_counting -> expectation` |
 | `projective_geometry` | `ultradeep.geometry_ellipse_tangent_pair_locus` | `ellipse -> differentiation -> tangent_line -> simultaneous_equations -> parameter_elimination -> locus` |
