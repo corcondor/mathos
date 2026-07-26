@@ -5,13 +5,13 @@
 
 ## 結果
 
-- 検証済み構造: **34**
-- 構造族: **34**
-- 幾何・代数・複素数系: **24**
+- 検証済み構造: **36**
+- 構造族: **36**
+- 幾何・代数・複素数系: **26**
 - ギャンブラー破産系: **0**
 - Paley・グラフ理論を表面に出す問題: **0**
-- 同一構造の数値変種として除外: **82**
-- 高校範囲への還元を証明できず除外: **60**
+- 同一構造の数値変種として除外: **89**
+- 高校範囲への還元を証明できず除外: **51**
 
 ## 採用契約
 
@@ -33,6 +33,8 @@
 
 | 分野 | 構造族 | lowering |
 |---|---|---|
+| `algebra` | `construct.mobius_fixed_points` | `rational_function -> quadratic_equation -> fixed_point_equation` |
+| `algebra` | `construct.mobius_iteration_period` | `rational_function -> function_composition -> periodicity` |
 | `algebra` | `construct.reciprocal_recurrence` | `recurrence -> algebraic_transform -> sequence_limit` |
 | `algebra` | `polynomial.interpolation_harmonic_observable` | `polynomial_factorization -> finite_difference -> differentiation` |
 | `algebraic_geometry` | `algebraic_geometry.cubic_discriminant_triangle_area` | `polynomial_roots -> vieta_relations -> coordinate_area -> one_variable_extremum` |
