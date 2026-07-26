@@ -5,19 +5,19 @@
 
 ## スナップショット
 
-- 生成日時: `2026-07-25 21:43:18 +0000`
-- 検証済み問題: **847問**
-- 構造族: **24族**
-- 深層族: **61問 / 10族**
-- うち10射以上の超深層族: **34問 / 5族**
+- 生成日時: `2026-07-26 01:51:43 +0000`
+- 検証済み問題: **1088問**
+- 構造族: **29族**
+- 深層族: **302問 / 15族**
+- うち10射以上の超深層族: **275問 / 10族**
 - 世界コーパス: **未記録問**
 
 | 難易度帯 | 問題数 |
 |---|---:|
 | `A_olympiad` | 15 |
-| `B_hard_university` | 538 |
-| `C_standard_university` | 124 |
-| `D_textbook` | 170 |
+| `B_hard_university` | 707 |
+| `C_standard_university` | 166 |
+| `D_textbook` | 200 |
 
 ## 生成ループ
 
@@ -43,10 +43,10 @@
 
 | ゲート | 通過 |
 |---|---:|
-| backend計算 | 847/847 |
-| 独立検証 | 847/847 |
-| LiftCertificate型検査 | 847/847 |
-| コーパス新規性 | 847/847 |
+| backend計算 | 1088/1088 |
+| 独立検証 | 1088/1088 |
+| LiftCertificate型検査 | 1088/1088 |
+| コーパス新規性 | 1088/1088 |
 
 ## 深層族の生成例
 
@@ -218,6 +218,111 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 <summary>検証済み解法記録</summary>
 
 一次モーメントの差分方程式から \(E[T]=3(12-3)\)。二次モーメントにも条件付けして解くと \(\operatorname{Var}(T)=\frac{3(12-3)(12^2-2-2\cdot 3(12-3))}{3}=792\)。\(792=2^{3}\cdot 3^{2}\cdot 11\) より約数は \(24\) 個。
+
+</details>
+
+### `ultradeep.geometry_astroid_envelope_area`
+
+- 難易度: `B_hard_university` / score `8.87`
+- backend: `line_envelope+stationarity+numeric_shoelace`
+- 独立検証: `symbolic_envelope_conditions_vs_numeric_shoelace`
+- 最大表層類似度: `0.123`
+- 射: `CircleParameter → AxisEndpointPair → JoiningLine → LineFamily → EnvelopeStationarity → ParameterElimination → AstroidIdentification → ClosedCurveOrientation → GreenAreaMorphism → AreaObservation`
+
+**問題**
+
+\(0<\theta<\frac{\pi}{2}\) に対し，点 \(A_\theta=(5\cos\theta,0)\), \(B_\theta=(0,7\sin\theta)\) をとる。直線 \(A_\theta B_\theta\) を対称性により全象限へ拡張して得られる直線族の包絡線が囲む面積を求めよ。
+
+**答**: \frac{105 \pi}{8}
+
+<details>
+<summary>検証済み解法記録</summary>
+
+直線族を \(F=\frac{x}{5\cos\theta}+\frac{y}{7\sin\theta}-1=0\) とする。\(F=F_\theta=0\) から \(x=5\cos^3\theta,\ y=7\sin^3\theta\)。したがって包絡線はアステロイドであり，Greenの公式より \(\frac12\oint(x\,dy-y\,dx)=\frac{105 \pi}{8}\)。
+
+</details>
+
+### `ultradeep.geometry_ellipse_tangent_pair_locus`
+
+- 難易度: `B_hard_university` / score `13.77`
+- backend: `dual_conic+tangent_intersection+linear_system`
+- 独立検証: `closed_intersection_formula_vs_numeric_two_line_solve`
+- 最大表層類似度: `0.1329`
+- 射: `EllipseObject → TrigonometricChart → PairedParameterShift → TangentDualization → DualLinePair → LinearIntersection → TrigonometricDiagonalization → HomothetyRecognition → ConicElimination → LocusEquationObservation`
+
+**問題**
+
+楕円 \(E:\frac{x^2}{25}+\frac{y^2}{16}=1\) 上の点を \(P(t)=(5\cos t,4\sin t)\) とする。\(P(t+\frac{\pi}{5})\) と \(P(t-\frac{\pi}{5})\) における2本の接線の交点を \(Q(t)\)とするとき，\(Q(t)\) の軌跡の方程式を求めよ。
+
+**答**: \frac{x^2}{25}+\frac{y^2}{16}=\frac{1}{\left(\frac{1}{4} + \frac{\sqrt{5}}{4}\right)^{2}}
+
+<details>
+<summary>検証済み解法記録</summary>
+
+2本の接線の方程式を加減して解くと \(Q(t)=(5\sec\frac{\pi}{5}\cos t,4\sec\frac{\pi}{5}\sin t)\)。よって軌跡は \(\frac{x^2}{25}+\frac{y^2}{16}=\frac{1}{\left(\frac{1}{4} + \frac{\sqrt{5}}{4}\right)^{2}}\)。
+
+</details>
+
+### `ultradeep.geometry_orthocenter_locus_area`
+
+- 難易度: `B_hard_university` / score `12.20`
+- backend: `orthocenter+linear_image+numeric_shoelace`
+- 独立検証: `altitude_coordinate_formula_vs_numeric_locus_shoelace`
+- 最大表層類似度: `0.0874`
+- 射: `EllipseObject → MajorAxisVertexPair → MovingTriangle → AltitudeConstraint → OrthocenterIntersection → CoordinateSolve → LinearImageRecognition → ImageEllipse → DeterminantAreaScaling → AreaObservation`
+
+**問題**
+
+楕円 \(E:\frac{x^2}{25}+\frac{y^2}{16}=1\) の長軸の端点を \(A=(-5,0),B=(5,0)\) とする。\(E\) 上を動く点 \(P\ne A,B\) に対し，三角形 \(ABP\) の垂心を \(H\) とする。\(H\) の軌跡が囲む面積を求めよ。
+
+**答**: \frac{125 \pi}{4}
+
+<details>
+<summary>検証済み解法記録</summary>
+
+\(P=(5\cos t,4\sin t)\) とおく。\(AB\) が水平なので垂心の \(x\) 座標は \(5\cos t\)。もう1本の高さから \(H=(5\cos t,\frac{25}{4}\sin t)\)。したがって軌跡は半軸 \(5,\frac{25}{4}\) の楕円で，面積は \(\frac{125 \pi}{4}\)。
+
+</details>
+
+### `ultradeep.geometry_parabola_normal_envelope`
+
+- 難易度: `D_textbook` / score `2.28`
+- backend: `normal_family+resultant+evolute`
+- 独立検証: `symbolic_resultant_identity_vs_parametric_substitution`
+- 最大表層類似度: `0.0804`
+- 射: `ParabolaObject → TangentVector → NormalDirection → NormalLine → NormalLineFamily → EnvelopeStationarity → StationaryParameterSolve → EvoluteParametrization → ResultantElimination → ImplicitCurveObservation`
+
+**問題**
+
+放物線 \(C:y=\frac{x^2}{100}\) 上の各点で法線を引く。この法線族の包絡線の方程式を求めよ。
+
+**答**: 4(y-50)^3=675x^2
+
+<details>
+<summary>検証済み解法記録</summary>
+
+\(C\) を \(P(t)=(50t,25t^2)\) と表示する。法線族は \(F=x+ty-50t-25t^3=0\)。\(F=F_t=0\) から \(x=-50t^3,\ y=50+75t^2\)。消去すると \(4(y-50)^3=675x^2\)。
+
+</details>
+
+### `ultradeep.geometry_regular_polygon_minkowski_perimeter`
+
+- 難易度: `B_hard_university` / score `8.56`
+- backend: `minkowski_sum+support_faces+convex_hull`
+- 独立検証: `regular_polygon_formula_vs_all_vertex_sums_convex_hull`
+- 最大表層類似度: `0.0847`
+- 射: `RootOfUnityChart → RegularPolygon → HalfStepRotation → SecondRegularPolygon → MinkowskiAddition → SupportDirectionMerge → VertexSumHull → RegularDoublePolygon → EdgeLengthObservation → PerimeterObservation`
+
+**問題**
+
+同じ中心・外接円半径 \(1\) の正 \(11\) 角形 \(P,Q\) があり，\(Q\) は \(P\) を中心のまわりに \(\frac{\pi}{11}\) 回転したものとする。Minkowski和 \(P+Q=\{p+q\mid p\in P,q\in Q\}\) の周長を求めよ。
+
+**答**: 44 \sin{\left(\frac{\pi}{11} \right)}
+
+<details>
+<summary>検証済み解法記録</summary>
+
+両多角形の辺の法線方向は交互に現れるため，\(P+Q\) は正 \(22\)角形になる。隣接頂点間の距離は \(2\cdot 1\sin\frac{\pi}{11}\)。したがって周長は \(22\cdot2\cdot 1\sin\frac{\pi}{11}=44 \sin{\left(\frac{\pi}{11} \right)}\)。
 
 </details>
 
