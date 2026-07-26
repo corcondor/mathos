@@ -9,11 +9,15 @@ from construct_engine import (
     explore_random,
 )
 from deep_families import DEEP_FAMILIES
+from geometry_deep_families import GEOMETRY_DEEP_FAMILIES
+
+
+ALL_DEEP_FAMILIES = DEEP_FAMILIES + GEOMETRY_DEEP_FAMILIES
 
 
 class DeepFamiliesTest(unittest.TestCase):
     def test_every_family_has_verified_candidates(self) -> None:
-        for build, grid in DEEP_FAMILIES:
+        for build, grid in ALL_DEEP_FAMILIES:
             candidates = [
                 problem
                 for parameters in grid()
@@ -27,12 +31,12 @@ class DeepFamiliesTest(unittest.TestCase):
 
     def test_ultradeep_families_have_at_least_ten_morphisms(self) -> None:
         ultradeep = []
-        for build, grid in DEEP_FAMILIES:
+        for build, grid in ALL_DEEP_FAMILIES:
             for parameters in grid():
                 problem = build(parameters)
                 if problem is not None and problem.family_id.startswith("ultradeep."):
                     ultradeep.append(problem)
-        self.assertEqual(len({problem.family_id for problem in ultradeep}), 5)
+        self.assertEqual(len({problem.family_id for problem in ultradeep}), 10)
         self.assertTrue(
             all(len(problem.morphism_chain) >= 10 for problem in ultradeep)
         )
@@ -82,6 +86,29 @@ class DeepFamiliesTest(unittest.TestCase):
                     for problem in problems
                 }
             ),
+        )
+
+    def test_geometry_families_do_not_collapse_to_divisor_count(self) -> None:
+        representatives = []
+        for build, grid in GEOMETRY_DEEP_FAMILIES:
+            problem = next(
+                (
+                    candidate
+                    for parameters in grid()
+                    if (candidate := build(parameters)) is not None
+                ),
+                None,
+            )
+            self.assertIsNotNone(problem, build.__name__)
+            representatives.append(problem)
+
+        self.assertEqual(len(representatives), 5)
+        self.assertTrue(
+            all("約数" not in problem.statement_tex for problem in representatives)
+        )
+        self.assertGreaterEqual(
+            len({problem.morphism_chain[-1] for problem in representatives}),
+            4,
         )
 
 

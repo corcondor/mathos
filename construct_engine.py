@@ -443,6 +443,9 @@ SHARD_FAMILIES = (
     "ultradeep_paley_tree", "ultradeep_paley_four_cycles",
     "ultradeep_cyclotomic_norm", "ultradeep_gambler_variance",
     "ultradeep_cubic_triangle",
+    "geometry_astroid", "geometry_ellipse_tangent_pair",
+    "geometry_parabola_evolute", "geometry_orthocenter_locus",
+    "geometry_minkowski_polygon",
 )
 
 FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {
@@ -500,6 +503,21 @@ FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {
     "ultradeep_cubic_triangle": frozenset(
         {"ultradeep.cubic_root_triangle_discriminant_divisor_count"}
     ),
+    "geometry_astroid": frozenset(
+        {"ultradeep.geometry_astroid_envelope_area"}
+    ),
+    "geometry_ellipse_tangent_pair": frozenset(
+        {"ultradeep.geometry_ellipse_tangent_pair_locus"}
+    ),
+    "geometry_parabola_evolute": frozenset(
+        {"ultradeep.geometry_parabola_normal_envelope"}
+    ),
+    "geometry_orthocenter_locus": frozenset(
+        {"ultradeep.geometry_orthocenter_locus_area"}
+    ),
+    "geometry_minkowski_polygon": frozenset(
+        {"ultradeep.geometry_regular_polygon_minkowski_perimeter"}
+    ),
 }
 
 FIXED_SHARD_BUILDER_NAMES: dict[str, frozenset[str]] = {
@@ -541,6 +559,19 @@ FIXED_SHARD_BUILDER_NAMES: dict[str, frozenset[str]] = {
     ),
     "ultradeep_cubic_triangle": frozenset(
         {"_ultradeep_cubic_triangle_divisors"}
+    ),
+    "geometry_astroid": frozenset({"_geometry_astroid_envelope"}),
+    "geometry_ellipse_tangent_pair": frozenset(
+        {"_geometry_ellipse_tangent_pair"}
+    ),
+    "geometry_parabola_evolute": frozenset(
+        {"_geometry_parabola_normal_envelope"}
+    ),
+    "geometry_orthocenter_locus": frozenset(
+        {"_geometry_orthocenter_locus"}
+    ),
+    "geometry_minkowski_polygon": frozenset(
+        {"_geometry_minkowski_polygon"}
     ),
 }
 
@@ -602,12 +633,16 @@ def explore_random(samples: int = 500, seed: int | None = None,
 def _deep_families():
     try:
         from math_os_prototype.deep_families import DEEP_FAMILIES
+        from math_os_prototype.geometry_deep_families import (
+            GEOMETRY_DEEP_FAMILIES,
+        )
     except ImportError:
         try:
             from deep_families import DEEP_FAMILIES
+            from geometry_deep_families import GEOMETRY_DEEP_FAMILIES
         except ImportError:
             return ()
-    return DEEP_FAMILIES
+    return DEEP_FAMILIES + GEOMETRY_DEEP_FAMILIES
 
 
 def all_problems(only_family: str | None = None) -> list[Problem]:

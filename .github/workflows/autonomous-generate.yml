@@ -48,6 +48,11 @@ jobs:
           - ultradeep_cyclotomic_norm
           - ultradeep_gambler_variance
           - ultradeep_cubic_triangle
+          - geometry_astroid
+          - geometry_ellipse_tangent_pair
+          - geometry_parabola_evolute
+          - geometry_orthocenter_locus
+          - geometry_minkowski_polygon
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -62,7 +67,7 @@ jobs:
           ROUNDS: ${{ github.event.inputs.rounds || '1' }}
         run: |
           OUT="shard_${{ matrix.family }}.json"
-          if [[ "${{ matrix.family }}" == ultradeep_* ]]; then
+          if [[ "${{ matrix.family }}" == ultradeep_* || "${{ matrix.family }}" == geometry_* ]]; then
             echo "--- ${{ matrix.family }} exact parameter grid ---"
             python autonomous_loop.py \
               --family "${{ matrix.family }}" \
