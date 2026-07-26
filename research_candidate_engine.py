@@ -462,7 +462,25 @@ def build_payload() -> dict[str, Any]:
     }
 
 
-def apply_corpus_screen(payload: dict[str, Any]) -> dict[str, Any]:
+def _preserve_stronger_corpus_evidence(
+    current: dict[str, Any],
+    previous: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Keep a larger successful screen when a reduced CI corpus is used."""
+
+    if not previous:
+        return current
+    if not current.get("passed") or not previous.get("passed"):
+        return current
+    if int(previous.get("corpus_size", 0)) <= int(current.get("corpus_size", 0)):
+        return current
+    return previous
+
+
+def apply_corpus_screen(
+    payload: dict[str, Any],
+    previous_payload: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     try:
         from math_os_prototype.jukenmath_full_audit import surface_ngrams
         from math_os_prototype.world_novelty_check import (
@@ -484,6 +502,10 @@ def apply_corpus_screen(payload: dict[str, Any]) -> dict[str, Any]:
         for record in world
     ]
     juken_hashes = load_jukenmath_hashes()
+    previous_by_family = {
+        record.get("family_id"): record
+        for record in (previous_payload or {}).get("candidates", [])
+    }
     retained: list[dict[str, Any]] = []
     rejected = list(payload["rejected_candidates"])
     for record in payload["candidates"]:
@@ -492,13 +514,27 @@ def apply_corpus_screen(payload: dict[str, Any]) -> dict[str, Any]:
             world_grams,
             juken_hashes,
         )
-        record["known_problem_screen"]["corpus"] = {
+        corpus_evidence = {
             "passed": novelty["world_novel"],
             "corpus_size": len(world),
             "maximum_surface_jaccard": novelty["max_surface_jaccard"],
             "closest_source": novelty["closest_source"],
             "exact_jukenmath_collision": novelty["exact_jukenmath_collision"],
         }
+        previous_record = previous_by_family.get(record["family_id"], {})
+        if previous_record.get("statement_tex") == record["statement_tex"]:
+            previous_evidence = previous_record.get(
+                "known_problem_screen", {}
+            ).get("corpus")
+            corpus_evidence = _preserve_stronger_corpus_evidence(
+                corpus_evidence,
+                previous_evidence,
+            )
+        record["known_problem_screen"]["corpus"] = corpus_evidence
+        record["known_problem_screen"]["passed"] = (
+            record["known_problem_screen"]["passed"]
+            and corpus_evidence["passed"]
+        )
         if novelty["world_novel"]:
             retained.append(record)
         else:
@@ -507,6 +543,10 @@ def apply_corpus_screen(payload: dict[str, Any]) -> dict[str, Any]:
 
     payload["candidates"] = retained
     payload["rejected_candidates"] = rejected
+    corpus_sizes = [
+        int(record["known_problem_screen"]["corpus"]["corpus_size"])
+        for record in retained
+    ]
     payload["summary"].update(
         {
             "retained": len(retained),
@@ -517,7 +557,9 @@ def apply_corpus_screen(payload: dict[str, Any]) -> dict[str, Any]:
             "unique_query_types": len(
                 {record["query_type"] for record in retained}
             ),
-            "reference_corpus_size": len(world),
+            "reference_corpus_size": min(corpus_sizes, default=len(world)),
+            "reference_corpus_size_max": max(corpus_sizes, default=len(world)),
+            "current_runtime_corpus_size": len(world),
         }
     )
     return payload
@@ -537,6 +579,7 @@ def build_report(payload: dict[str, Any]) -> str:
         f"- 異なる型付き射列: **{summary['unique_structural_signatures']}件**",
         f"- 問いの型: **{summary['unique_query_types']}種類**",
         f"- 数値替え: **{summary['parameter_variants']}件**",
+        f"- 各候補の照合母数: **{summary['reference_corpus_size']}問以上**",
         "",
         "## 候補",
         "",
@@ -551,7 +594,25 @@ def build_report(payload: dict[str, Any]) -> str:
                 f"- 射数: `{record['morphism_count']}`",
                 f"- 問い: `{record['query_type']}`",
                 f"- 難度仮説: `{record['hardness']['score']}`",
-                f"- 既知問題照合: `{record['known_problem_screen']['passed']}`",
+                "- 既知問題との表層衝突: `"
+                + (
+                    "検出なし"
+                    if record["known_problem_screen"]["passed"]
+                    else "検出あり"
+                )
+                + "`",
+                "- 表層照合コーパス: `"
+                + str(
+                    record["known_problem_screen"]["corpus"]["corpus_size"]
+                )
+                + "問`",
+                "- 最大表層Jaccard: `"
+                + str(
+                    record["known_problem_screen"]["corpus"][
+                        "maximum_surface_jaccard"
+                    ]
+                )
+                + "`",
                 "",
                 str(record["statement_tex"]),
                 "",
@@ -578,14 +639,20 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
-    payload = apply_corpus_screen(build_payload())
+    previous_payload: dict[str, Any] | None = None
+    if args.output.exists():
+        try:
+            previous_payload = json.loads(args.output.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            previous_payload = None
+    payload = apply_corpus_screen(build_payload(), previous_payload)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True),
-        encoding="utf-8",
-    )
+    with args.output.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+        stream.write("\n")
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(build_report(payload), encoding="utf-8")
+    with args.report.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(build_report(payload))
     print(json.dumps(payload["summary"], ensure_ascii=False))
     return 0
 

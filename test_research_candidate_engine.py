@@ -4,6 +4,7 @@ import unittest
 
 from research_candidate_engine import (
     TypedMorphism,
+    _preserve_stronger_corpus_evidence,
     build_payload,
     screen_known_problem,
     typecheck_chain,
@@ -54,6 +55,19 @@ class ResearchCandidateEngineTest(unittest.TestCase):
         passed, error = typecheck_chain(chain)
         self.assertFalse(passed)
         self.assertIsNotNone(error)
+
+    def test_reduced_ci_corpus_does_not_replace_stronger_evidence(self) -> None:
+        current = {"passed": True, "corpus_size": 176}
+        previous = {"passed": True, "corpus_size": 28074}
+        self.assertIs(
+            _preserve_stronger_corpus_evidence(current, previous),
+            previous,
+        )
+        failed = {"passed": False, "corpus_size": 28100}
+        self.assertIs(
+            _preserve_stronger_corpus_evidence(failed, previous),
+            failed,
+        )
 
 
 if __name__ == "__main__":
