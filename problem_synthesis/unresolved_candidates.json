@@ -19,7 +19,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0656,
           "passed": true
@@ -73,7 +73,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.06,
           "passed": true
@@ -127,7 +127,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.088,
           "passed": true
@@ -181,7 +181,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0928,
           "passed": true
@@ -235,7 +235,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0608,
           "passed": true
@@ -290,7 +290,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.1145,
           "passed": true
@@ -344,7 +344,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0547,
           "passed": true
@@ -398,7 +398,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0601,
           "passed": true
@@ -451,10 +451,10 @@
       "hold_reason": "well-typed and no local famous-problem marker, but current backend produced neither proof nor counterexample",
       "known_problem_screen": {
         "corpus": {
-          "closest_source": "selfauthored",
-          "corpus_size": 28074,
+          "closest_source": "sakumon_curation",
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
-          "maximum_surface_jaccard": 0.0656,
+          "maximum_surface_jaccard": 0.0533,
           "passed": true
         },
         "matches": [],
@@ -507,7 +507,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0705,
           "passed": true
@@ -561,7 +561,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0806,
           "passed": true
@@ -615,7 +615,7 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
+          "corpus_size": 176,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0556,
           "passed": true
@@ -652,7 +652,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-26T04:39:50.642384+00:00",
+  "generated_at": "2026-07-26T04:42:04.355362+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
@@ -660,7 +660,7 @@
   },
   "summary": {
     "parameter_variants": 0,
-    "reference_corpus_size": 28074,
+    "reference_corpus_size": 176,
     "rejected": 0,
     "retained": 12,
     "unique_query_types": 12,
