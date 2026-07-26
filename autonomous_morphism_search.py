@@ -396,7 +396,7 @@ def search_chain(
             distinct = {edge.operation_class for edge in result}
             reduced = effective_depth(result)
             if (
-                len(distinct) >= max(6, depth // 2)
+                len(distinct) >= max(6, min(10, depth // 3))
                 and reduced >= max(8, int(depth * 0.85))
             ):
                 return result
@@ -511,7 +511,7 @@ def grow_payload(
     previous_search = (previous_payload or {}).get("autonomous_search", {})
     previous_epoch = int(previous_search.get("epoch", 0))
     epoch = previous_epoch + (1 if count > 0 else 0)
-    depth_floor = 10 + min((max(epoch, 1) - 1) // 2, 20)
+    depth_floor = 10 + min((max(epoch, 1) - 1) // 2, 40)
     depth_ceiling = depth_floor + 3
     stable_seed = int(
         hashlib.sha256(

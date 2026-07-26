@@ -1,0 +1,65 @@
+name: MathOS autonomous morphism research
+
+on:
+  schedule:
+    - cron: "30 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "今回追加する型付き研究候補数"
+        required: false
+        default: "12"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mathos-autonomous
+  cancel-in-progress: false
+
+jobs:
+  grow-research-atlas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependency
+        run: pip install numpy sympy
+
+      - name: Validate structural search
+        run: |
+          python -m unittest \
+            test_autonomous_morphism_search \
+            test_novelty_sketch \
+            test_research_candidate_engine
+
+      - name: Grow unresolved research queue
+        run: |
+          python research_candidate_engine.py \
+            --autonomous-count "${{ github.event.inputs.count || '12' }}"
+
+      - name: Commit new structural candidates
+        run: |
+          git config user.name  "mathos-bot"
+          git config user.email "mathos-bot@users.noreply.github.com"
+          git add problem_synthesis/unresolved_candidates.json \
+                  docs/generated/latest-research-candidates.md
+          if git diff --cached --quiet; then
+            echo "no new quotient signatures this run"
+          else
+            HELD=$(python -c "import json;print(json.load(open('problem_synthesis/unresolved_candidates.json',encoding='utf-8'))['summary']['retained'])")
+            git commit -m "autonomous(atlas): research queue now ${HELD} structures"
+            git pull --rebase --autostash origin master
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autonomous-research-report
+          path: docs/generated/latest-research-candidates.md
+          if-no-files-found: error

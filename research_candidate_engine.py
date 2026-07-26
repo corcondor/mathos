@@ -472,7 +472,22 @@ def _preserve_stronger_corpus_evidence(
         return current
     if not current.get("passed") or not previous.get("passed"):
         return current
-    if int(previous.get("corpus_size", 0)) <= int(current.get("corpus_size", 0)):
+    previous_size = int(previous.get("corpus_size", 0))
+    current_size = int(current.get("corpus_size", 0))
+    if previous_size < current_size:
+        return current
+    if previous_size > current_size:
+        return previous
+    method_strength = {
+        "exact_3gram_jaccard": 2,
+        "minhash64_conservative": 1,
+    }
+    previous_strength = method_strength.get(
+        str(previous.get("method", "exact_3gram_jaccard")),
+        0,
+    )
+    current_strength = method_strength.get(str(current.get("method", "")), 0)
+    if previous_strength <= current_strength:
         return current
     return previous
 
@@ -502,6 +517,10 @@ def apply_corpus_screen(
         for record in world
     ]
     juken_hashes = load_jukenmath_hashes()
+    try:
+        from math_os_prototype.novelty_sketch import screen_snapshot
+    except ImportError:  # pragma: no cover
+        from novelty_sketch import screen_snapshot
     previous_by_family = {
         record.get("family_id"): record
         for record in (previous_payload or {}).get("candidates", [])
@@ -520,7 +539,26 @@ def apply_corpus_screen(
             "maximum_surface_jaccard": novelty["max_surface_jaccard"],
             "closest_source": novelty["closest_source"],
             "exact_jukenmath_collision": novelty["exact_jukenmath_collision"],
+            "method": "exact_3gram_jaccard",
         }
+        sketch = screen_snapshot(record["statement_tex"])
+        if sketch and sketch["corpus_size"] > len(world):
+            corpus_evidence = {
+                "passed": novelty["world_novel"] and sketch["passed"],
+                "corpus_size": sketch["corpus_size"],
+                "maximum_surface_jaccard": max(
+                    novelty["max_surface_jaccard"],
+                    sketch["estimated_maximum_surface_jaccard"],
+                ),
+                "closest_source": sketch["closest_source"],
+                "exact_jukenmath_collision": (
+                    novelty["exact_jukenmath_collision"]
+                    or sketch["exact_surface_collision"]
+                ),
+                "method": sketch["method"],
+                "rejection_threshold": sketch["rejection_threshold"],
+                "scope": sketch["scope"],
+            }
         previous_record = previous_by_family.get(record["family_id"], {})
         if previous_record.get("statement_tex") == record["statement_tex"]:
             previous_evidence = previous_record.get(
@@ -535,7 +573,7 @@ def apply_corpus_screen(
             record["known_problem_screen"]["passed"]
             and corpus_evidence["passed"]
         )
-        if novelty["world_novel"]:
+        if corpus_evidence["passed"]:
             retained.append(record)
         else:
             record["rejection_reason"] = "reference corpus collision"
@@ -624,6 +662,13 @@ def build_report(payload: dict[str, Any]) -> str:
                     record["known_problem_screen"]["corpus"][
                         "maximum_surface_jaccard"
                     ]
+                )
+                + "`",
+                "- 照合方式: `"
+                + str(
+                    record["known_problem_screen"]["corpus"].get(
+                        "method", "exact_3gram_jaccard"
+                    )
                 )
                 + "`",
                 "",

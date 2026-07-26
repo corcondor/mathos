@@ -68,6 +68,20 @@ class ResearchCandidateEngineTest(unittest.TestCase):
             _preserve_stronger_corpus_evidence(failed, previous),
             failed,
         )
+        approximate = {
+            "passed": True,
+            "corpus_size": 28074,
+            "method": "minhash64_conservative",
+        }
+        exact = {
+            "passed": True,
+            "corpus_size": 28074,
+            "method": "exact_3gram_jaccard",
+        }
+        self.assertIs(
+            _preserve_stronger_corpus_evidence(approximate, exact),
+            exact,
+        )
 
 
 if __name__ == "__main__":

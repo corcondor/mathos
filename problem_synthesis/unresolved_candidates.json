@@ -1,8 +1,8 @@
 {
   "autonomous_search": {
-    "added": 12,
+    "added": 0,
     "atlas_morphisms": 92,
-    "attempts": 13,
+    "attempts": 0,
     "base_maximum_nearest_similarity": 0.82,
     "depth_ceiling": 15,
     "depth_floor": 12,
@@ -17,8 +17,8 @@
     "domains": 6,
     "epoch": 5,
     "quotient": "typed operation classes + type aliases + numeric erasure + commuting-block normalization",
-    "requested": 12,
-    "seed": 80217942594906,
+    "requested": 0,
+    "seed": 149566441757880,
     "similarity_rule": "max(0.55, 0.82 - 0.015 * (depth - 10))"
   },
   "candidates": [
@@ -44,6 +44,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0656,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -98,6 +99,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.06,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -152,6 +154,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.088,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -206,6 +209,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0928,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -260,6 +264,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0608,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -315,6 +320,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.1145,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -369,6 +375,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0547,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -423,6 +430,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0601,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -477,6 +485,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0656,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -532,6 +541,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0705,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -586,6 +596,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0806,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -640,6 +651,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0556,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -701,6 +713,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0317,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -773,6 +786,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -845,6 +859,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0291,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -917,6 +932,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0297,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -987,6 +1003,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0322,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1058,6 +1075,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0298,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1130,6 +1148,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0297,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1203,6 +1222,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1274,6 +1294,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.03,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1344,6 +1365,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0288,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1417,6 +1439,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0315,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1489,6 +1512,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0313,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1560,6 +1584,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.033,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1630,6 +1655,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0295,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1702,6 +1728,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0293,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1774,6 +1801,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0291,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1846,6 +1874,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0333,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1916,6 +1945,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0305,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -1989,6 +2019,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.03,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2061,6 +2092,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0338,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2134,6 +2166,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0285,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2207,6 +2240,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0357,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2279,6 +2313,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0284,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2352,6 +2387,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.03,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2424,6 +2460,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0338,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2497,6 +2534,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0296,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2569,6 +2607,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2642,6 +2681,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0268,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2715,6 +2755,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0316,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2786,6 +2827,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0283,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2860,6 +2902,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0323,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -2933,6 +2976,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0286,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3005,6 +3049,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.03,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3076,6 +3121,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0261,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3150,6 +3196,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3224,6 +3271,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0335,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3298,6 +3346,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0278,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3372,6 +3421,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0288,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3446,6 +3496,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0275,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3520,6 +3571,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0346,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3591,6 +3643,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3664,6 +3717,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0307,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3737,6 +3791,7 @@
           "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0315,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3807,9 +3862,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0302,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3879,9 +3935,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0301,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -3951,9 +4008,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0276,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4026,9 +4084,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0335,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4100,9 +4159,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0304,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4172,9 +4232,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0268,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4246,9 +4307,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0295,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4321,9 +4383,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0281,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4395,9 +4458,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0332,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4470,9 +4534,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.029,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4543,9 +4608,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0288,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4616,9 +4682,10 @@
       "known_problem_screen": {
         "corpus": {
           "closest_source": "sakumon_curation",
-          "corpus_size": 176,
+          "corpus_size": 28074,
           "exact_jukenmath_collision": false,
           "maximum_surface_jaccard": 0.0316,
+          "method": "exact_3gram_jaccard",
           "passed": true
         },
         "matches": [],
@@ -4664,19 +4731,19 @@
       }
     }
   ],
-  "generated_at": "2026-07-26T05:33:26.977637+00:00",
+  "generated_at": "2026-07-26T05:38:11.431623+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
     "unresolved_by_mathos": "MathOS has not proved or refuted the candidate. This is not a claim that the problem is open to humanity."
   },
   "summary": {
-    "added_by_autonomous_search": 12,
+    "added_by_autonomous_search": 0,
     "autonomous_candidates": 55,
     "current_depth_floor": 12,
-    "current_runtime_corpus_size": 176,
+    "current_runtime_corpus_size": 28074,
     "parameter_variants": 0,
-    "reference_corpus_size": 176,
+    "reference_corpus_size": 28074,
     "reference_corpus_size_max": 28074,
     "rejected": 0,
     "retained": 67,

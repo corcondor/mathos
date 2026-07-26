@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -43,7 +44,11 @@ except ImportError:  # pragma: no cover
 
 ROOT = Path(__file__).resolve().parent
 MATHNET_PARQUET = Path(
-    "C:/Users/81808/.openclaw/workspace/memory/mathnet/data/all/train-00000-of-00001.parquet"
+    os.environ.get(
+        "MATHOS_MATHNET_PARQUET",
+        "C:/Users/81808/.openclaw/workspace/memory/mathnet/data/all/"
+        "train-00000-of-00001.parquet",
+    )
 )
 SELF_CORPUS = ROOT / "problem_synthesis" / "all_problems_selfauthored81.jsonl"
 NOVELTY_SURFACE_THRESHOLD = 0.60
