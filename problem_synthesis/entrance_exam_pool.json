@@ -1,0 +1,3730 @@
+{
+  "generated_at": "2026-07-26T07:38:12.459826+00:00",
+  "method": {
+    "name": "MathOS Japanese entrance-mathematics structural pool",
+    "numeric_variants_count_as_new": false,
+    "pipeline": "typed object -> morphism composition -> exact backend -> independent check -> upper-secondary lowering -> structural quotient",
+    "selection_unit": "family_id + morphism_chain + constraint_skeleton + query_signature"
+  },
+  "problems": [
+    {
+      "accepted": true,
+      "answer_tex": "\\frac{1}{3 n - 2}",
+      "candidate_id": "construct:construct.reciprocal_recurrence:076",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ReciprocalTransform",
+          "LinearRecurrence",
+          "GeneralTerm"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "algebraic_transform",
+          "sequence_limit"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "C_standard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 6.41
+      },
+      "domain": "algebra",
+      "family_id": "construct.reciprocal_recurrence",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ReciprocalTransform",
+          "LinearRecurrence",
+          "GeneralTerm"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "continuous_verified_problem_batch1",
+        "corpus_novel": true,
+        "exact_jukenmath_collision": false,
+        "maximum_surface_jaccard": 0.3895
+      },
+      "solution_tex": "逆数 \\(b_n=1/a_n\\) をとると \\(b_{n+1}=1b_n+3\\)（高校：逆数変換で線形漸化式）。これを解いて \\(a_n=1/b_n\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_1=1,\\ a_{n+1}=\\dfrac{a_n}{1+3a_n}\\) で定める。一般項 \\(a_n\\) を求めよ。",
+      "structure_key": "200e423f84a3bf56bc1e01f343cbdf0e1f128c406b5c17413744ec05ac6a1be8",
+      "tool": "reciprocal_transform",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "reciprocal_linearization"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\displaystyle\\sum_{k=1}^{2027}\\frac1k",
+      "candidate_id": "phase04_interpolation_harmonic_observable",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "Interpolation",
+          "VanishingTransform",
+          "Differentiate",
+          "EvaluateAtZero"
+        ],
+        "lowering_chain": [
+          "polynomial_factorization",
+          "finite_difference",
+          "differentiation"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "algebra",
+      "family_id": "polynomial.interpolation_harmonic_observable",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "polynomial.interpolation_harmonic_observable",
+        "morphism_chain": [
+          "Interpolation",
+          "VanishingTransform",
+          "Differentiate",
+          "EvaluateAtZero"
+        ],
+        "query_sort": "Rational",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "Polynomial",
+            "domain": "SampleConstraint",
+            "name": "Interpolation"
+          },
+          {
+            "codomain": "RootFactoredPolynomial",
+            "domain": "Polynomial",
+            "name": "VanishingTransform"
+          },
+          {
+            "codomain": "PolynomialObservable",
+            "domain": "RootFactoredPolynomial",
+            "name": "Differentiate"
+          },
+          {
+            "codomain": "Rational",
+            "domain": "PolynomialObservable",
+            "name": "EvaluateAtZero"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "Polynomial",
+          "domain": "SampleConstraint",
+          "name": "Interpolation"
+        },
+        {
+          "codomain": "RootFactoredPolynomial",
+          "domain": "Polynomial",
+          "name": "VanishingTransform"
+        },
+        {
+          "codomain": "PolynomialObservable",
+          "domain": "RootFactoredPolynomial",
+          "name": "Differentiate"
+        },
+        {
+          "codomain": "Rational",
+          "domain": "PolynomialObservable",
+          "name": "EvaluateAtZero"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase03_finite_field_quadratic_zero_count",
+            "score": 0.0775,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.0578,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01_even_quartic_parabola_hull",
+            "score": 0.0573,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01b_cubic_discriminant_triangle",
+            "score": 0.0526,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 4,
+          "public": 0,
+          "self_authored": 0,
+          "total": 4
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.0775,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 4,
+          "compared_prior_families": 4,
+          "family_collision": false,
+          "family_id": "polynomial.interpolation_harmonic_observable",
+          "morphism_chain_signature": "Interpolation>VanishingTransform>Differentiate>EvaluateAtZero",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "invariant": "P_m(0)=H_m",
+        "parameter": "number of samples m",
+        "selected": 2027,
+        "tested_values": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "query_sort": "Rational",
+      "semantic_parser_observation": {
+        "canonical_signature": "c42d7fda92018f0d1324130c",
+        "definitions": [
+          "Equals",
+          "Evaluation",
+          "Find",
+          "Polynomial",
+          "Satisfies"
+        ],
+        "morphism_chain": [
+          "Evaluation"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Evaluation:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(Q(x)=xP(x)-1\\) とおくと，\\(\\deg Q\\le 2027\\) かつ \\(Q(1)=\\cdots=Q(2027)=0\\) である。\\(Q(0)=-1\\) より \\(Q(x)=\\frac1{2027!}\\prod_{k=1}^{2027}(x-k)\\)。一方 \\(Q'(0)=P(0)\\) だから，対数微分を用いて \\(P(0)=\\sum_{k=1}^{2027}1/k\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "次数が \\( 2026 \\) 以下の実係数多項式 \\(P(x)\\) が \\(P(k)=1/k\\;(k=1,2,\\ldots,2027)\\) を満たすとき，\\(P(0)\\) の値を求めよ。",
+      "structure_key": "4eb63ede21644df8fc720156fe4440a0584503c8d6082a608c53dccf21c65db7",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_interpolation_family_check",
+        "trace": {
+          "interpolated_P0": {
+            "2": "3/2",
+            "3": "11/6",
+            "4": "25/12",
+            "5": "137/60",
+            "6": "49/20",
+            "7": "363/140",
+            "8": "761/280",
+            "9": "7129/2520",
+            "10": "7381/2520",
+            "11": "83711/27720"
+          },
+          "tested_values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "3\\sqrt3",
+      "candidate_id": "phase01b_cubic_discriminant_triangle",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootSet",
+          "ParabolaEmbedding",
+          "VandermondeArea",
+          "Discriminant",
+          "Maximum"
+        ],
+        "lowering_chain": [
+          "polynomial_roots",
+          "vieta_relations",
+          "coordinate_area",
+          "one_variable_extremum"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "algebraic_geometry",
+      "family_id": "algebraic_geometry.cubic_discriminant_triangle_area",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "algebraic_geometry.cubic_discriminant_triangle_area",
+        "morphism_chain": [
+          "RootSet",
+          "ParabolaEmbedding",
+          "VandermondeArea",
+          "Discriminant",
+          "Maximum"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "ThreeRealRootFamily",
+            "domain": "EquationFamily",
+            "name": "RootSet"
+          },
+          {
+            "codomain": "TriangleFamily",
+            "domain": "ThreeRealRootFamily",
+            "name": "ParabolaEmbedding"
+          },
+          {
+            "codomain": "RootDifferenceProduct",
+            "domain": "TriangleFamily",
+            "name": "VandermondeArea"
+          },
+          {
+            "codomain": "RealFunction",
+            "domain": "RootDifferenceProduct",
+            "name": "Discriminant"
+          },
+          {
+            "codomain": "Real",
+            "domain": "RealFunction",
+            "name": "Maximum"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "ThreeRealRootFamily",
+          "domain": "EquationFamily",
+          "name": "RootSet"
+        },
+        {
+          "codomain": "TriangleFamily",
+          "domain": "ThreeRealRootFamily",
+          "name": "ParabolaEmbedding"
+        },
+        {
+          "codomain": "RootDifferenceProduct",
+          "domain": "TriangleFamily",
+          "name": "VandermondeArea"
+        },
+        {
+          "codomain": "RealFunction",
+          "domain": "RootDifferenceProduct",
+          "name": "Discriminant"
+        },
+        {
+          "codomain": "Real",
+          "domain": "RealFunction",
+          "name": "Maximum"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase01_even_quartic_parabola_hull",
+            "score": 0.6036,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 1,
+          "public": 0,
+          "self_authored": 0,
+          "total": 1
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.6036,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 1,
+          "compared_prior_families": 1,
+          "family_collision": false,
+          "family_id": "algebraic_geometry.cubic_discriminant_triangle_area",
+          "morphism_chain_signature": "RootSet>ParabolaEmbedding>VandermondeArea>Discriminant>Maximum",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "observation": "Vandermonde area",
+        "parameter": "constant term t",
+        "real_root_phase": "-2<t<2",
+        "selected_phase": "discriminant maximum at t=0"
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "9dc8458f4a6c3e6ac61af5f7",
+        "definitions": [
+          "Area",
+          "Distinct",
+          "Equals",
+          "Equation",
+          "Find",
+          "FiniteShape",
+          "Forall",
+          "Map",
+          "Maximum",
+          "Point2",
+          "Polygon",
+          "Region2",
+          "RootSet"
+        ],
+        "morphism_chain": [
+          "Equation",
+          "RootSet",
+          "Map"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Maximum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "3実根を \\(\\alpha,\\beta,\\gamma\\) とする。放物線上の3点の面積 \\(S\\) はVandermonde行列式から \\(2S=|(\\alpha-\\beta)(\\beta-\\gamma)(\\gamma-\\alpha)|\\)。一方 \\(x^3-3x+t\\) の判別式は \\(108-27t^2\\) だから \\(4S^2=108-27t^2\\)。3実根をもつ範囲は \\(|t|<2\\) であり，\\(t=0\\) のとき \\(\\boxed{S=3\\sqrt3}\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "実数 \\(t\\) に対し，方程式 \\(x^3-3x+t=0\\) が相異なる3実根をもつとする。各実根 \\(r\\) に点 \\((r,r^2)\\) を対応させて得られる三角形の面積の最大値を求めよ。",
+      "structure_key": "adf604a8d214a48c58e2457f1c82eb58bfb74ffd500035b776b1acf6b8acfe2e",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_discriminant_plus_direct_root_area_scan",
+        "trace": {
+          "area_squared": "-27*(t - 2)*(t + 2)/4",
+          "discriminant": "-27*(t - 2)*(t + 2)",
+          "maximum": "3*sqrt(3)",
+          "sampled_best": 5.1961524227
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "16",
+      "candidate_id": "phase01_even_quartic_parabola_hull",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootSet",
+          "ParabolaEmbedding",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "lowering_chain": [
+          "polynomial_roots",
+          "vieta_relations",
+          "coordinate_area",
+          "one_variable_extremum"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "algebraic_geometry",
+      "family_id": "algebraic_geometry.even_quartic_parabola_hull_area",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "algebraic_geometry.even_quartic_parabola_hull_area",
+        "morphism_chain": [
+          "RootSet",
+          "ParabolaEmbedding",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "RealRootSetFamily",
+            "domain": "EquationFamily",
+            "name": "RootSet"
+          },
+          {
+            "codomain": "PointSetFamily",
+            "domain": "RealRootSetFamily",
+            "name": "ParabolaEmbedding"
+          },
+          {
+            "codomain": "RegionFamily",
+            "domain": "PointSetFamily",
+            "name": "ConvexHull"
+          },
+          {
+            "codomain": "RealFunction",
+            "domain": "RegionFamily",
+            "name": "Area"
+          },
+          {
+            "codomain": "Real",
+            "domain": "RealFunction",
+            "name": "Maximum"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "RealRootSetFamily",
+          "domain": "EquationFamily",
+          "name": "RootSet"
+        },
+        {
+          "codomain": "PointSetFamily",
+          "domain": "RealRootSetFamily",
+          "name": "ParabolaEmbedding"
+        },
+        {
+          "codomain": "RegionFamily",
+          "domain": "PointSetFamily",
+          "name": "ConvexHull"
+        },
+        {
+          "codomain": "RealFunction",
+          "domain": "RegionFamily",
+          "name": "Area"
+        },
+        {
+          "codomain": "Real",
+          "domain": "RealFunction",
+          "name": "Maximum"
+        }
+      ],
+      "novelty": {
+        "closest": [],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 0,
+          "public": 0,
+          "self_authored": 0,
+          "total": 0
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.0,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 0,
+          "compared_prior_families": 0,
+          "family_collision": false,
+          "family_id": "algebraic_geometry.even_quartic_parabola_hull_area",
+          "morphism_chain_signature": "RootSet>ParabolaEmbedding>ConvexHull>Area>Maximum",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "c",
+        "phase_variable": "q=uv",
+        "selected": 6,
+        "selection_reason": "interior rational maximizer and integral exact maximum",
+        "tested_values": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "8728afb48e6a08f8d0841ba0",
+        "definitions": [
+          "Area",
+          "ConvexHull",
+          "Distinct",
+          "Equals",
+          "Equation",
+          "Find",
+          "Forall",
+          "Map",
+          "Maximum",
+          "Point2",
+          "Region2",
+          "RootSet"
+        ],
+        "morphism_chain": [
+          "Equation",
+          "RootSet",
+          "Map",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Maximum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "根を \\(-u,-v,v,u\\;(u>v>0)\\) とおくと \\(u^2+v^2=6,\\ uv=q\\) である。4点は台形をなし，その面積 \\(S\\) は \\(S=(u+v)(u^2-v^2)\\)。したがって \\(S^2=(6+2q)^2(6-2q)\\;(0<q<6/2)\\)。これを微分すると \\(q=1\\) で最大となり，\\(\\boxed{S=16}\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "実数 \\(t\\) に対し，方程式 \\(x^4-6x^2+t=0\\) が相異なる4実根をもつとする。各実根 \\(r\\) に点 \\((r,r^2)\\) を対応させるとき，これら4点の凸包の面積の最大値を求めよ。",
+      "structure_key": "29f96ea58481ff53e9bb2fad52523ed028fc20cdb101e92f9f4cf2bbd07042fd",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_stationarity_plus_dense_parameter_scan",
+        "trace": {
+          "area_squared": "-8*(q - 3)*(q + 3)**2",
+          "maximizer_q": "1",
+          "maximum": "16",
+          "numerical_best": 15.9999999063
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "54",
+      "candidate_id": "construct:ultradeep.cubic_root_triangle_discriminant_divisor_count:015",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CubicPolynomial",
+          "ThreeRealRootSet",
+          "ParabolaEmbedding",
+          "TriangleConstruction",
+          "VandermondeDeterminant",
+          "AreaSquare",
+          "PolynomialDiscriminant",
+          "IntegerNormalization",
+          "PrimeFactorization",
+          "DivisorCount",
+          "ArithmeticObservation"
+        ],
+        "lowering_chain": [
+          "polynomial_roots",
+          "vieta_relations",
+          "coordinate_area",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 2,
+        "score": 13.92
+      },
+      "domain": "algebraic_geometry_number_theory",
+      "family_id": "ultradeep.cubic_root_triangle_discriminant_divisor_count",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CubicPolynomial",
+          "ThreeRealRootSet",
+          "ParabolaEmbedding",
+          "TriangleConstruction",
+          "VandermondeDeterminant",
+          "AreaSquare",
+          "PolynomialDiscriminant",
+          "IntegerNormalization",
+          "PrimeFactorization",
+          "DivisorCount",
+          "ArithmeticObservation"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1354
+      },
+      "solution_tex": "Vandermonde 行列式から \\(4S^2\\) は三次式の判別式に等しい。判別式は \\(27(4\\cdot 4^6-(-16)^2)=27\\cdot 16128\\) だから \\(M=16128=2^{8}\\cdot 3^{2}\\cdot 7\\)。したがって正の約数は \\(54\\) 個。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "方程式 \\(x^3-48x+(-16)=0\\) の3実根を \\(\\alpha,\\beta,\\gamma\\) とする。放物線 \\(y=x^2\\) 上の3点 \\((\\alpha,\\alpha^2),(\\beta,\\beta^2),(\\gamma,\\gamma^2)\\) が作る三角形の面積を \\(S\\) とし，\\(M=\\frac{4S^2}{27}\\) と定める。\\(M\\) が整数であることを示し，\\(M\\) の正の約数の個数を求めよ。",
+      "structure_key": "e0a264f1914bea36208952b3901948c9cc08ddf904503d5c863c15ce4bbc2546",
+      "tool": "cubic_discriminant+vandermonde_area+numeric_roots",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_discriminant_identity_vs_numeric_root_triangle_area"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\frac{2\\sqrt2}{3}",
+      "candidate_id": "phase08_tangent_intercept_centroid",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "TangentDual",
+          "AxisIntercepts",
+          "Centroid",
+          "Norm",
+          "Minimum"
+        ],
+        "lowering_chain": [
+          "differentiation",
+          "tangent_line",
+          "centroid",
+          "quadratic_minimum"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "analytic_geometry",
+      "family_id": "conic_duality.tangent_intercept_centroid_minimum",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "conic_duality.tangent_intercept_centroid_minimum",
+        "morphism_chain": [
+          "TangentDual",
+          "AxisIntercepts",
+          "Centroid",
+          "Norm",
+          "Minimum"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "TangentLineFamily",
+            "domain": "Conic",
+            "name": "TangentDual"
+          },
+          {
+            "codomain": "PointPairFamily",
+            "domain": "TangentLineFamily",
+            "name": "AxisIntercepts"
+          },
+          {
+            "codomain": "PointFamily",
+            "domain": "PointPairFamily",
+            "name": "Centroid"
+          },
+          {
+            "codomain": "RealFunction",
+            "domain": "PointFamily",
+            "name": "Norm"
+          },
+          {
+            "codomain": "Real",
+            "domain": "RealFunction",
+            "name": "Minimum"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "TangentLineFamily",
+          "domain": "Conic",
+          "name": "TangentDual"
+        },
+        {
+          "codomain": "PointPairFamily",
+          "domain": "TangentLineFamily",
+          "name": "AxisIntercepts"
+        },
+        {
+          "codomain": "PointFamily",
+          "domain": "PointPairFamily",
+          "name": "Centroid"
+        },
+        {
+          "codomain": "RealFunction",
+          "domain": "PointFamily",
+          "name": "Norm"
+        },
+        {
+          "codomain": "Real",
+          "domain": "RealFunction",
+          "name": "Minimum"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase05_cycle_laplacian_pseudodeterminant",
+            "score": 0.0789,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.0595,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01b_cubic_discriminant_triangle",
+            "score": 0.0549,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01_even_quartic_parabola_hull",
+            "score": 0.0468,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase03_finite_field_quadratic_zero_count",
+            "score": 0.044,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 8,
+          "public": 0,
+          "self_authored": 0,
+          "total": 8
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.0789,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 8,
+          "compared_prior_families": 8,
+          "family_collision": false,
+          "family_id": "conic_duality.tangent_intercept_centroid_minimum",
+          "morphism_chain_signature": "TangentDual>AxisIntercepts>Centroid>Norm>Minimum",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "intercept a with b=4/a",
+        "phase_boundary": "self-dual point a=b=2"
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "a1b4a45a7b7d33935915f7d9",
+        "definitions": [
+          "Centroid",
+          "Curve2",
+          "Equals",
+          "Find",
+          "FiniteShape",
+          "Line2",
+          "Minimum",
+          "Point2",
+          "Polygon",
+          "RegularPolygon"
+        ],
+        "morphism_chain": [
+          "Minimum"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Minimum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(A=(a,0),B=(0,b)\\) とおく。直線 \\(x/a+y/b=1\\) が \\(xy=1\\) に接する条件は \\(ab=4\\)。重心は \\(G=(a/3,b/3)\\) なので \\(OG^2=(a^2+b^2)/9\\ge2ab/9=8/9\\)。等号は \\(a=b=2\\)のとき成立する。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "第1象限で双曲線 \\(xy=1\\) に接する直線が正の \\(x\\) 軸，\\(y\\) 軸と交わる点をそれぞれ \\(A,B\\) とする。三角形 \\(OAB\\) の重心 \\(G\\) について，\\(OG\\) の最小値を求めよ。",
+      "structure_key": "1417dac211b72a2a3cda9051d545286dc879c86f3e0c7ec9edc14ed1e6a94e05",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "tangency_discriminant_plus_global_AMGM_check",
+        "trace": {
+          "critical_points": [
+            "2"
+          ],
+          "minimum": "2*sqrt(2)/3",
+          "squared_distance": "(a**4 + 16)/(9*a**2)"
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\frac{105 \\pi}{8}",
+      "candidate_id": "construct:ultradeep.geometry_astroid_envelope_area:026",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CircleParameter",
+          "AxisEndpointPair",
+          "JoiningLine",
+          "LineFamily",
+          "EnvelopeStationarity",
+          "ParameterElimination",
+          "AstroidIdentification",
+          "ClosedCurveOrientation",
+          "GreenAreaMorphism",
+          "AreaObservation"
+        ],
+        "lowering_chain": [
+          "trigonometric_parameter",
+          "tangent_line",
+          "parameter_elimination",
+          "definite_integral",
+          "area"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 0,
+        "score": 8.87
+      },
+      "domain": "analytic_geometry",
+      "family_id": "ultradeep.geometry_astroid_envelope_area",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CircleParameter",
+          "AxisEndpointPair",
+          "JoiningLine",
+          "LineFamily",
+          "EnvelopeStationarity",
+          "ParameterElimination",
+          "AstroidIdentification",
+          "ClosedCurveOrientation",
+          "GreenAreaMorphism",
+          "AreaObservation"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.123
+      },
+      "solution_tex": "直線族を \\(F=\\frac{x}{5\\cos\\theta}+\\frac{y}{7\\sin\\theta}-1=0\\) とする。\\(F=F_\\theta=0\\) から \\(x=5\\cos^3\\theta,\\ y=7\\sin^3\\theta\\)。したがって包絡線はアステロイドであり，Greenの公式より \\(\\frac12\\oint(x\\,dy-y\\,dx)=\\frac{105 \\pi}{8}\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "\\(0<\\theta<\\frac{\\pi}{2}\\) に対し，点 \\(A_\\theta=(5\\cos\\theta,0)\\), \\(B_\\theta=(0,7\\sin\\theta)\\) をとる。直線 \\(A_\\theta B_\\theta\\) を対称性により全象限へ拡張して得られる直線族の包絡線が囲む面積を求めよ。",
+      "structure_key": "568e4bfe2943fff66d01fdc92759fe1edd68d750a9f041c4e15177ba8fcc8335",
+      "tool": "line_envelope+stationarity+numeric_shoelace",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_envelope_conditions_vs_numeric_shoelace"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\displaystyle\\frac1{n+1}\\binom{2n}{n}",
+      "candidate_id": "phase20_catalan_dyck_reflection",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "LatticePathEncoding",
+          "ReflectionPrinciple",
+          "BinomialDifference"
+        ],
+        "lowering_chain": [
+          "lattice_path",
+          "combination",
+          "reflection_bijection"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "combinatorics",
+      "family_id": "lattice_paths.dyck_reflection_catalan_count",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "lattice_paths.dyck_reflection_catalan_count",
+        "morphism_chain": [
+          "LatticePathEncoding",
+          "ReflectionPrinciple",
+          "BinomialDifference"
+        ],
+        "query_sort": "CatalanClosedForm",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "BallotSequenceFamily",
+            "domain": "MonotonePathFamily",
+            "name": "LatticePathEncoding"
+          },
+          {
+            "codomain": "SignedPathDifference",
+            "domain": "BallotSequenceFamily",
+            "name": "ReflectionPrinciple"
+          },
+          {
+            "codomain": "CatalanClosedForm",
+            "domain": "SignedPathDifference",
+            "name": "BinomialDifference"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "BallotSequenceFamily",
+          "domain": "MonotonePathFamily",
+          "name": "LatticePathEncoding"
+        },
+        {
+          "codomain": "SignedPathDifference",
+          "domain": "BallotSequenceFamily",
+          "name": "ReflectionPrinciple"
+        },
+        {
+          "codomain": "CatalanClosedForm",
+          "domain": "SignedPathDifference",
+          "name": "BinomialDifference"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase03_finite_field_quadratic_zero_count",
+            "score": 0.0685,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase11_nonlinear_recurrence_square_increment",
+            "score": 0.0493,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01b_cubic_discriminant_triangle",
+            "score": 0.0449,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase08_tangent_intercept_centroid",
+            "score": 0.0446,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase12_boundary_layer_integral_limit",
+            "score": 0.0438,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 20,
+          "public": 0,
+          "self_authored": 0,
+          "total": 20
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.0685,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 20,
+          "compared_prior_families": 20,
+          "family_collision": false,
+          "family_id": "lattice_paths.dyck_reflection_catalan_count",
+          "morphism_chain_signature": "LatticePathEncoding>ReflectionPrinciple>BinomialDifference",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "grid size n",
+        "principle": "Andre reflection",
+        "tested_values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "query_sort": "CatalanClosedForm",
+      "semantic_parser_observation": {
+        "canonical_signature": "00f152c83af84e03f3746e95",
+        "definitions": [
+          "Curve2",
+          "Equals",
+          "Find",
+          "Line2",
+          "Or",
+          "Point2"
+        ],
+        "morphism_chain": [],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Unknown:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": [
+          "no_composable_morphism"
+        ]
+      },
+      "solution_tex": "対角線を越える経路を鏡像原理で数える。全 \\(\\binom{2n}{n}\\) 通りから，境界を越える経路（\\((-1,1)\\) を始点とする経路と一対一対応し \\(\\binom{2n}{n-1}\\) 通り）を引くと，\\(\\binom{2n}{n}-\\binom{2n}{n-1}=\\frac1{n+1}\\binom{2n}{n}\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "格子点 \\((0,0)\\) から \\((n,n)\\) へ，右または上へ 1 ずつ進む最短経路のうち，直線 \\(y=x\\) を越えない（常に \\(y\\le x\\) を保つ）ものの総数を求めよ。",
+      "structure_key": "77b2058f23b53edd0283057a01413ef804c5b79a825e6c68b1fab045ab495747",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exhaustive_dyck_enumeration_plus_reflection_formula",
+        "trace": {
+          "enumerated": {
+            "1": 1,
+            "2": 2,
+            "3": 5,
+            "4": 14,
+            "5": 42,
+            "6": 132,
+            "7": 429
+          },
+          "reflection_formula": {
+            "1": 1,
+            "2": 2,
+            "3": 5,
+            "4": 14,
+            "5": 42,
+            "6": 132,
+            "7": 429
+          }
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\displaystyle\\frac{2^n+2\\cos\\frac{n\\pi}3}{3}",
+      "candidate_id": "phase14_roots_of_unity_binomial_filter",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "BinomialGeneratingFunction",
+          "RootOfUnityFilter",
+          "TrigonometricNormalForm"
+        ],
+        "lowering_chain": [
+          "binomial_theorem",
+          "complex_plane",
+          "roots_of_unity"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "combinatorics_number_theory",
+      "family_id": "binomial.roots_of_unity_filter_mod3",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "binomial.roots_of_unity_filter_mod3",
+        "morphism_chain": [
+          "BinomialGeneratingFunction",
+          "RootOfUnityFilter",
+          "TrigonometricNormalForm"
+        ],
+        "query_sort": "ClosedForm",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "GeneratingFunctionFamily",
+            "domain": "BinomialSubsumFamily",
+            "name": "BinomialGeneratingFunction"
+          },
+          {
+            "codomain": "CharacterSumFamily",
+            "domain": "GeneratingFunctionFamily",
+            "name": "RootOfUnityFilter"
+          },
+          {
+            "codomain": "ClosedForm",
+            "domain": "CharacterSumFamily",
+            "name": "TrigonometricNormalForm"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "GeneratingFunctionFamily",
+          "domain": "BinomialSubsumFamily",
+          "name": "BinomialGeneratingFunction"
+        },
+        {
+          "codomain": "CharacterSumFamily",
+          "domain": "GeneratingFunctionFamily",
+          "name": "RootOfUnityFilter"
+        },
+        {
+          "codomain": "ClosedForm",
+          "domain": "CharacterSumFamily",
+          "name": "TrigonometricNormalForm"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase07_binomial_beta_duality",
+            "score": 0.3131,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase13_telescoping_triple_partial_fraction",
+            "score": 0.2165,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase05_cycle_laplacian_pseudodeterminant",
+            "score": 0.1085,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase06_random_bridge_zero_observable",
+            "score": 0.08,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.0736,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 14,
+          "public": 0,
+          "self_authored": 0,
+          "total": 14
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.3131,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 14,
+          "compared_prior_families": 14,
+          "family_collision": false,
+          "family_id": "binomial.roots_of_unity_filter_mod3",
+          "morphism_chain_signature": "BinomialGeneratingFunction>RootOfUnityFilter>TrigonometricNormalForm",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "binomial upper index n",
+        "residue_modulus": 3,
+        "tested_values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      },
+      "query_sort": "ClosedForm",
+      "semantic_parser_observation": {
+        "canonical_signature": "6f7645eb34d49393f897d584",
+        "definitions": [
+          "Find",
+          "FiniteSum",
+          "Integer",
+          "Natural"
+        ],
+        "morphism_chain": [
+          "FiniteSum"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:FiniteSum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(\\omega=e^{2\\pi i/3}\\) とおくと，\\(1+\\omega+\\omega^2=0\\) より \\(\\frac13\\sum_{j=0}^{2}(1+\\omega^j)^n\\) が \\(3\\mid k\\) の項だけを取り出す。\\((1+1)^n=2^n\\)，\\((1+\\omega)^n+(1+\\omega^2)^n=2\\cos(n\\pi/3)\\) だから，和は \\(\\dfrac{2^n+2\\cos(n\\pi/3)}3\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "正の整数 \\(n\\) に対し，\\(\\displaystyle\\sum_{3\\mid k}\\binom{n}{k}\\)（\\(k\\) は \\(3\\) の倍数を走る）を \\(n\\) の式で表せ。",
+      "structure_key": "f80095bba016ea218bc653afeb3e4e6125067cb6c9c5ce0b860e2dbd7953fb6e",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exact_binomial_sum_vs_root_of_unity_filter",
+        "trace": {
+          "brute_force": {
+            "1": 1,
+            "2": 1,
+            "3": 2,
+            "4": 5,
+            "5": 11,
+            "6": 22,
+            "7": 43,
+            "8": 85,
+            "9": 170,
+            "10": 341,
+            "11": 683,
+            "12": 1366,
+            "13": 2731,
+            "14": 5461,
+            "15": 10922,
+            "16": 21845,
+            "17": 43691,
+            "18": 87382,
+            "19": 174763,
+            "20": 349525,
+            "21": 699050,
+            "22": 1398101,
+            "23": 2796203,
+            "24": 5592406
+          },
+          "trig_closed_form": {
+            "1": 1,
+            "2": 1,
+            "3": 2,
+            "4": 5,
+            "5": 11,
+            "6": 22,
+            "7": 43,
+            "8": 85,
+            "9": 170,
+            "10": 341,
+            "11": 683,
+            "12": 1366,
+            "13": 2731,
+            "14": 5461,
+            "15": 10922,
+            "16": 21845,
+            "17": 43691,
+            "18": 87382,
+            "19": 174763,
+            "20": 349525,
+            "21": 699050,
+            "22": 1398101,
+            "23": 2796203,
+            "24": 5592406
+          }
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "-1 + 2 i",
+      "candidate_id": "construct:construct.complex_affine_limit:084",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "FixedPointShift",
+          "ContractionHalf",
+          "ComplexLimit"
+        ],
+        "lowering_chain": [
+          "complex_number",
+          "geometric_sequence",
+          "sequence_limit"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 10.89
+      },
+      "domain": "complex",
+      "family_id": "construct.complex_affine_limit",
+      "lift_certificate": {
+        "morphism_chain": [
+          "FixedPointShift",
+          "ContractionHalf",
+          "ComplexLimit"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "continuous_verified_problem_batch1",
+        "corpus_novel": true,
+        "exact_jukenmath_collision": false,
+        "maximum_surface_jaccard": 0.2583
+      },
+      "solution_tex": "不動点 \\(w=(w+-1 + 2 i)/2\\) より \\(w=-1 + 2 i\\)。\\(z_{n+1}-w=\\tfrac12(z_n-w)\\) だから \\(|z_n-w|\\to0\\)（高校：複素数平面）。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "複素数列を \\(z_1=1,\\ z_{n+1}=\\dfrac{z_n+(-1 + 2 i)}{2}\\) で定める。\\(z_n\\) の \\(n\\to\\infty\\) における極限を求めよ。",
+      "structure_key": "299ea976f2c18ab5b310f5b434c8cd91a50fd68ae6c1fd299cc6c1a9a3f10dad",
+      "tool": "fixed_point",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "complex_affine_fixed_point_limit"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "33",
+      "candidate_id": "construct:construct.complex_rotation_period:416",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "PrimitiveRootOfUnity",
+          "DeMoivrePower",
+          "MinimalPeriod"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "de_moivre",
+          "integer_period"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 9.85
+      },
+      "domain": "complex",
+      "family_id": "construct.complex_rotation_period",
+      "lift_certificate": {
+        "morphism_chain": [
+          "PrimitiveRootOfUnity",
+          "DeMoivrePower",
+          "MinimalPeriod"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "continuous_verified_problem_batch1",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.2
+      },
+      "solution_tex": "\\(z_n=\\alpha^{n-1}\\)。\\(\\alpha\\) は偏角 \\(\\tfrac{10\\pi}{33}\\) の回転で，\\(\\gcd(5,33)=1\\) だから \\(\\alpha^{n-1}=1\\) となる最小は \\(n-1=33\\)、すなわち \\(n=33\\)（高校：ド・モアブル）。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "複素数 \\(\\alpha=\\cos\\dfrac{10\\pi}{33}+i\\sin\\dfrac{10\\pi}{33}\\) に対し，複素数列を \\(z_1=1,\\ z_{n+1}=\\alpha z_n\\) で定める。\\(z_n=1\\) となる最小の正の整数 \\(n\\) を求めよ。",
+      "structure_key": "07e290f1c1b2ea3d1faffec734b82de1fea184edc8fec9f2480a20bc54c7e230",
+      "tool": "polar_form",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "de_moivre_primitive_root_period"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "8",
+      "candidate_id": "construct:ultradeep.cyclotomic_distance_norm_divisor_count:011",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootOfUnity",
+          "CoprimeIndexFilter",
+          "PrimitiveRootSet",
+          "DistanceMultiset",
+          "DistanceProduct",
+          "CyclotomicPolynomial",
+          "PolynomialEvaluation",
+          "AlgebraicNorm",
+          "IntegerInvariant",
+          "PrimeFactorization",
+          "DivisorCount"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "roots_of_unity",
+          "polynomial_factorization",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "A_olympiad",
+        "condition": 2,
+        "construct": 1,
+        "score": 14.97
+      },
+      "domain": "complex_algebra_number_theory",
+      "family_id": "ultradeep.cyclotomic_distance_norm_divisor_count",
+      "lift_certificate": {
+        "morphism_chain": [
+          "RootOfUnity",
+          "CoprimeIndexFilter",
+          "PrimitiveRootSet",
+          "DistanceMultiset",
+          "DistanceProduct",
+          "CyclotomicPolynomial",
+          "PolynomialEvaluation",
+          "AlgebraicNorm",
+          "IntegerInvariant",
+          "PrimeFactorization",
+          "DivisorCount"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1111
+      },
+      "solution_tex": "積に現れるのは原始 \\(9\\) 乗根だから，\\(\\prod(4-\\zeta_j)=\\Phi_{9}(4)=4161\\)。共役が対になるので絶対値の積も \\(L=4161\\)。\\(L=3\\cdot 19\\cdot 73\\) より，正の約数は \\(8\\) 個。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "\\(\\zeta_j=\\cos\\frac{2\\pi j}{9}+i\\sin\\frac{2\\pi j}{9}\\) とし，\\(1\\le j\\le 9\\) かつ \\(\\gcd(j,9)=1\\) を満たす \\(j\\) について \\(L=\\prod |4-\\zeta_j|\\) と定める。\\(L\\) が整数であることを示し，\\(L\\) の正の約数の個数を求めよ。",
+      "structure_key": "8e0a8f218b9459c41c1367e2768c0d8473fb6bc0229de7fd4dc82ecbe4035af5",
+      "tool": "cyclotomic_polynomial+algebraic_norm+numeric_product",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "cyclotomic_evaluation_vs_numeric_primitive_root_product"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "n\\sin\\frac{\\pi}{n}",
+      "candidate_id": "phase02_reciprocal_complex_root_polygon",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ComplexRootSet",
+          "CyclicOrder",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "roots_of_unity",
+          "polygon_area",
+          "trigonometry"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "complex_geometry",
+      "family_id": "complex_geometry.reciprocal_root_polygon_area",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "complex_geometry.reciprocal_root_polygon_area",
+        "morphism_chain": [
+          "ComplexRootSet",
+          "CyclicOrder",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "query_sort": "SymbolicReal",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "ComplexPointSetFamily",
+            "domain": "EquationFamily",
+            "name": "ComplexRootSet"
+          },
+          {
+            "codomain": "CyclicPolygonFamily",
+            "domain": "ComplexPointSetFamily",
+            "name": "CyclicOrder"
+          },
+          {
+            "codomain": "RegionFamily",
+            "domain": "CyclicPolygonFamily",
+            "name": "ConvexHull"
+          },
+          {
+            "codomain": "RealFunction",
+            "domain": "RegionFamily",
+            "name": "Area"
+          },
+          {
+            "codomain": "SymbolicReal",
+            "domain": "RealFunction",
+            "name": "Maximum"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "ComplexPointSetFamily",
+          "domain": "EquationFamily",
+          "name": "ComplexRootSet"
+        },
+        {
+          "codomain": "CyclicPolygonFamily",
+          "domain": "ComplexPointSetFamily",
+          "name": "CyclicOrder"
+        },
+        {
+          "codomain": "RegionFamily",
+          "domain": "CyclicPolygonFamily",
+          "name": "ConvexHull"
+        },
+        {
+          "codomain": "RealFunction",
+          "domain": "RegionFamily",
+          "name": "Area"
+        },
+        {
+          "codomain": "SymbolicReal",
+          "domain": "RealFunction",
+          "name": "Maximum"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase01_even_quartic_parabola_hull",
+            "score": 0.1356,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01b_cubic_discriminant_triangle",
+            "score": 0.108,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 2,
+          "public": 0,
+          "self_authored": 0,
+          "total": 2
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.1356,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 2,
+          "compared_prior_families": 2,
+          "family_collision": false,
+          "family_id": "complex_geometry.reciprocal_root_polygon_area",
+          "morphism_chain_signature": "ComplexRootSet>CyclicOrder>ConvexHull>Area>Maximum",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameters": [
+          "n",
+          "t=cos(theta)"
+        ],
+        "phase_boundary": "theta=pi/2 gives a regular 2n-gon",
+        "tested_n": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "query_sort": "SymbolicReal",
+      "semantic_parser_observation": {
+        "canonical_signature": "17becdb9ac2d3167c76070e4",
+        "definitions": [
+          "Area",
+          "ConvexHull",
+          "Equals",
+          "Equation",
+          "Find",
+          "Integer",
+          "Maximum",
+          "Point2",
+          "Prime",
+          "Region2",
+          "RootSet"
+        ],
+        "morphism_chain": [
+          "Equation",
+          "RootSet",
+          "ConvexHull",
+          "Area",
+          "Maximum"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Maximum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(t=\\cos\\theta\\;(0<\\theta<\\pi)\\) とおく。根の偏角の間隔は \\(2\\theta/n,\\ 2(\\pi-\\theta)/n\\) と交互に並ぶので，\\(A_n(t)=\\frac n2\\{\\sin(2\\theta/n)+\\sin(2(\\pi-\\theta)/n)\\}\\)。加法定理よりこれは \\(n\\sin(\\pi/n)\\cos((2\\theta-\\pi)/n)\\) であり，\\(\\theta=\\pi/2\\)，すなわち \\(t=0\\) のとき最大となる。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "整数 \\(n\\ge2\\) と \\(-1<t<1\\) に対し，方程式 \\(z^{2n}-2tz^n+1=0\\) の全ての根を複素数平面上の点とみなす。それらの凸包の面積を \\(A_n(t)\\) とするとき，\\(\\max_{-1<t<1}A_n(t)\\) を求めよ。",
+      "structure_key": "8bc74125d6a1208a5a20a788215e1fa84bf3a50e881311896d6c1b7fb7de1886",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "trigonometric_normal_form_plus_grid_search",
+        "trace": {
+          "maximum": "n*sin(pi/n)",
+          "maximum_grid_error": 0.0,
+          "tested_n": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "99",
+      "candidate_id": "construct:deep.polygon_subset_centroid:647",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootOfUnity",
+          "RegularPolygon",
+          "SubsetFamily",
+          "CentroidMap",
+          "VanishingSum",
+          "CyclotomicRelation",
+          "SymmetryReduction",
+          "SubsetCount"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "roots_of_unity",
+          "centroid",
+          "combination"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "C_standard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 7.49
+      },
+      "domain": "complex_geometry",
+      "family_id": "deep.polygon_subset_centroid",
+      "lift_certificate": {
+        "morphism_chain": [
+          "RootOfUnity",
+          "RegularPolygon",
+          "SubsetFamily",
+          "CentroidMap",
+          "VanishingSum",
+          "CyclotomicRelation",
+          "SymmetryReduction",
+          "SubsetCount"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1078
+      },
+      "solution_tex": "重心が中心であることは \\(\\sum_{j\\in S}z_j=0\\) と同値。\\(z_j\\) は1の \\(12\\) 乗根なので，和が消える部分集合を数えればよい。巡回対称性から，正多角形をなす頂点集合とその合併が条件を満たす。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "単位円に内接する正 \\(12\\) 角形の頂点を \\(z_j=\\cos\\frac{2\\pi j}{12}+i\\sin\\frac{2\\pi j}{12}\\ (j=0,1,\\ldots,11)\\) とする。空でない部分集合 \\(S\\) であって，\\(S\\) に属する頂点の重心が円の中心と一致するものの個数を求めよ。",
+      "structure_key": "ebff2ddac65bcc9377b4a429508add3f9b20a245ca9f6a3bba48808fd3066669",
+      "tool": "roots_of_unity+subset_enumeration",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exhaustive_subset_vanishing_sum_count"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "6",
+      "candidate_id": "construct:deep.rotation_diagonal_product_divisors:571",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootOfUnity",
+          "RegularPolygon",
+          "VertexDistances",
+          "PolynomialFactorization",
+          "LimitEvaluation",
+          "DistanceProduct",
+          "IntegerValue",
+          "DivisorCount"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "roots_of_unity",
+          "distance",
+          "polynomial_factorization",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 2,
+        "score": 12.45
+      },
+      "domain": "complex_geometry",
+      "family_id": "deep.rotation_diagonal_product_divisors",
+      "lift_certificate": {
+        "morphism_chain": [
+          "RootOfUnity",
+          "RegularPolygon",
+          "VertexDistances",
+          "PolynomialFactorization",
+          "LimitEvaluation",
+          "DistanceProduct",
+          "IntegerValue",
+          "DivisorCount"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1078
+      },
+      "solution_tex": "\\(z^{12}-1=\\prod_{j=0}^{11}(z-z_j)\\) の両辺を \\(z-1\\) で割り \\(z\\to1\\) とすると \\(\\prod_{j=1}^{11}(1-z_j)=12\\)。絶対値をとって \\(L=12\\)。よって約数の個数は \\(6\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "単位円に内接する正 \\(12\\) 角形の頂点を \\(z_j=\\cos\\frac{2\\pi j}{12}+i\\sin\\frac{2\\pi j}{12}\\ (j=0,1,\\ldots,11)\\) とする。頂点 \\(z_0\\) から他の \\(11\\) 個の頂点までの距離の積を \\(L\\) とするとき，\\(L\\) の正の約数の個数を求めよ。",
+      "structure_key": "2d58e72e18e77439f266b410e481c01108e1ce0913b3fd3d5a87da999fe61186",
+      "tool": "roots_of_unity+product+divisor_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "cyclotomic_product_identity_plus_numeric_check"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "- \\frac{15 \\sqrt{10 - 2 \\sqrt{5}}}{16} + \\frac{15 \\sqrt{3} \\left(1 + \\sqrt{5}\\right)}{16}",
+      "candidate_id": "construct:layered.rotation_orbit_hull_area:509",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RootOfUnityOrbit",
+          "RegularPolygon",
+          "ShoelaceArea"
+        ],
+        "lowering_chain": [
+          "complex_plane",
+          "de_moivre",
+          "regular_polygon",
+          "area"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "A_olympiad",
+        "condition": 0,
+        "construct": 1,
+        "score": 14.57
+      },
+      "domain": "complex_geometry",
+      "family_id": "layered.rotation_orbit_hull_area",
+      "lift_certificate": {
+        "morphism_chain": [
+          "RootOfUnityOrbit",
+          "RegularPolygon",
+          "ShoelaceArea"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1125
+      },
+      "solution_tex": "\\(z_j\\) は単位円周上の正 \\(15\\) 角形の頂点。中心から各頂点への三角形 \\(15\\) 個に分割すると，面積は \\(\\frac{15}{2}\\sin\\frac{2\\pi}{15}=- \\frac{15 \\sqrt{10 - 2 \\sqrt{5}}}{16} + \\frac{15 \\sqrt{3} \\left(1 + \\sqrt{5}\\right)}{16}\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "複素数 \\(\\alpha=\\cos\\dfrac{2\\pi}{15}+i\\sin\\dfrac{2\\pi}{15}\\) に対し，\\(z_j=\\alpha^j\\ (j=0,1,\\ldots,14)\\) が定める複素数平面上の \\(15\\) 個の点をとる。これらの点の凸包の面積を求めよ。",
+      "structure_key": "78f19bd063c54e82920203aade70e1df81eace7253c7119e6b39083df1a455a5",
+      "tool": "roots_of_unity+shoelace",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "roots_of_unity_orbit_regular_polygon_area"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "4(y-50)^3=675x^2",
+      "candidate_id": "construct:ultradeep.geometry_parabola_normal_envelope:024",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ParabolaObject",
+          "TangentVector",
+          "NormalDirection",
+          "NormalLine",
+          "NormalLineFamily",
+          "EnvelopeStationarity",
+          "StationaryParameterSolve",
+          "EvoluteParametrization",
+          "ResultantElimination",
+          "ImplicitCurveObservation"
+        ],
+        "lowering_chain": [
+          "parabola",
+          "differentiation",
+          "normal_line",
+          "parameter_elimination",
+          "locus"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "D_textbook",
+        "condition": 0,
+        "construct": 0,
+        "score": 2.28
+      },
+      "domain": "differential_geometry",
+      "family_id": "ultradeep.geometry_parabola_normal_envelope",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParabolaObject",
+          "TangentVector",
+          "NormalDirection",
+          "NormalLine",
+          "NormalLineFamily",
+          "EnvelopeStationarity",
+          "StationaryParameterSolve",
+          "EvoluteParametrization",
+          "ResultantElimination",
+          "ImplicitCurveObservation"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0804
+      },
+      "solution_tex": "\\(C\\) を \\(P(t)=(50t,25t^2)\\) と表示する。法線族は \\(F=x+ty-50t-25t^3=0\\)。\\(F=F_t=0\\) から \\(x=-50t^3,\\ y=50+75t^2\\)。消去すると \\(4(y-50)^3=675x^2\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "放物線 \\(C:y=\\frac{x^2}{100}\\) 上の各点で法線を引く。この法線族の包絡線の方程式を求めよ。",
+      "structure_key": "7fcf6a83ea08477c5a48c89807bea907f203677653cd93960ee94cf258a52c7b",
+      "tool": "normal_family+resultant+evolute",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_resultant_identity_vs_parametric_substitution"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\frac{125 \\pi}{4}",
+      "candidate_id": "construct:ultradeep.geometry_orthocenter_locus_area:009",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "EllipseObject",
+          "MajorAxisVertexPair",
+          "MovingTriangle",
+          "AltitudeConstraint",
+          "OrthocenterIntersection",
+          "CoordinateSolve",
+          "LinearImageRecognition",
+          "ImageEllipse",
+          "DeterminantAreaScaling",
+          "AreaObservation"
+        ],
+        "lowering_chain": [
+          "ellipse",
+          "inner_product",
+          "orthocenter",
+          "parameter_elimination",
+          "area"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 2,
+        "score": 12.2
+      },
+      "domain": "euclidean_geometry",
+      "family_id": "ultradeep.geometry_orthocenter_locus_area",
+      "lift_certificate": {
+        "morphism_chain": [
+          "EllipseObject",
+          "MajorAxisVertexPair",
+          "MovingTriangle",
+          "AltitudeConstraint",
+          "OrthocenterIntersection",
+          "CoordinateSolve",
+          "LinearImageRecognition",
+          "ImageEllipse",
+          "DeterminantAreaScaling",
+          "AreaObservation"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0874
+      },
+      "solution_tex": "\\(P=(5\\cos t,4\\sin t)\\) とおく。\\(AB\\) が水平なので垂心の \\(x\\) 座標は \\(5\\cos t\\)。もう1本の高さから \\(H=(5\\cos t,\\frac{25}{4}\\sin t)\\)。したがって軌跡は半軸 \\(5,\\frac{25}{4}\\) の楕円で，面積は \\(\\frac{125 \\pi}{4}\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "楕円 \\(E:\\frac{x^2}{25}+\\frac{y^2}{16}=1\\) の長軸の端点を \\(A=(-5,0),B=(5,0)\\) とする。\\(E\\) 上を動く点 \\(P\\ne A,B\\) に対し，三角形 \\(ABP\\) の垂心を \\(H\\) とする。\\(H\\) の軌跡が囲む面積を求めよ。",
+      "structure_key": "a3648490745d0017d9abc8e3b60888e11db9a75538d76193eba2bcd8f9103e5b",
+      "tool": "orthocenter+linear_image+numeric_shoelace",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "altitude_coordinate_formula_vs_numeric_locus_shoelace"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(0,\\ \\frac{1}{10})",
+      "candidate_id": "construct:construct.parabola_right_angle_chord:363",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RightAngleCondition",
+          "SlopeProductInvariant",
+          "FixedPoint"
+        ],
+        "lowering_chain": [
+          "coordinate_geometry",
+          "inner_product",
+          "quadratic_equation"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "D_textbook",
+        "condition": 1,
+        "construct": 0,
+        "score": 4.96
+      },
+      "domain": "geometry",
+      "family_id": "construct.parabola_right_angle_chord",
+      "lift_certificate": {
+        "morphism_chain": [
+          "RightAngleCondition",
+          "SlopeProductInvariant",
+          "FixedPoint"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1135
+      },
+      "solution_tex": "\\(A=(a,10a^2),B=(b,10b^2)\\)。\\(OA\\perp OB\\) から傾きの積 \\(\\tfrac{10a^2}{a}\\cdot\\tfrac{10b^2}{b}=10^2ab=-1\\)，すなわち \\(ab=-1/10^2\\)（一定）。弦 \\(AB\\) は \\(y=10(a+b)x-10ab\\) で \\(x=0\\) のとき \\(y=1/10\\)。定点 \\((0,1/10)\\)（高校）。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "放物線 \\(y=10 x^{2}\\) 上の相異なる2点 \\(A,B\\) と原点 \\(O\\) が \\(\\angle AOB=90^\\circ\\) を満たしながら動く。このとき弦 \\(AB\\) が必ず通る定点を求めよ。",
+      "structure_key": "2ee5348e50d57ba71f331e50de9aa7fb2fa0d1e78646d4e47ed0cd841c047af9",
+      "tool": "slope_product",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "parabola_slope_product_fixed_point"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "7/12",
+      "answer_tex": "\\frac{7}{12}",
+      "candidate_id": "geomfusion:passage_region.line_family_sweep:000",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ParametricLineFamily",
+          "ExistenceElimination",
+          "SweptRegionArea"
+        ],
+        "lowering_chain": [
+          "quadratic_range",
+          "parameter_elimination",
+          "definite_integral",
+          "area"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "passage_region.line_family_sweep",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricLineFamily",
+          "ExistenceElimination",
+          "SweptRegionArea"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "T": 1,
+        "X": 1,
+        "a": 2
+      },
+      "solution_tex": "各 \\(x\\) を固定すると \\(y={a}tx-t^2\\) は \\(t\\) の上に凸な二次関数。\\(t={a}x/2\\) が区間内なら最大値 \\((2x)^2/4\\)，端点で最小値をとる。区間ごとに \\(y\\) の動く幅を \\(x\\) で積分すると面積が定まる。",
+      "source_generator": "geometry_fusion",
+      "statement_tex": "実数 \\(t\\)（\\(0\\le t\\le 1\\)）を動かすとき，直線 \\(y=2tx-t^2\\) が通過する領域を \\(D\\) とする。\\(0\\le x\\le 1\\) の範囲で \\(D\\) の面積を求めよ。",
+      "structure_key": "56a073bcfa10a23440b47aa95b50ac01d5cd21d1f77919f3625d3ca4fe3a526e",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "parameter_existence_elimination_plus_numeric_area"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "83/30",
+      "answer_tex": "\\frac{83}{30}",
+      "candidate_id": "geomfusion:passage_region.parabola_family_sweep:011",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ParametricParabolaFamily",
+          "ExistenceElimination",
+          "SweptRegionArea"
+        ],
+        "lowering_chain": [
+          "quadratic_range",
+          "parameter_elimination",
+          "definite_integral",
+          "area"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": "A",
+      "domain": "geometry",
+      "family_id": "passage_region.parabola_family_sweep",
+      "lift_certificate": {
+        "morphism_chain": [
+          "ParametricParabolaFamily",
+          "ExistenceElimination",
+          "SweptRegionArea"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "T": 1,
+        "X": 1
+      },
+      "solution_tex": "\\(x\\) を固定すると \\(y=tx^2-t^2\\) は \\(t\\) の上に凸な二次関数で，頂点 \\(t=x^2/2\\) と区間端 \\(t=\\pm T\\) の値から \\(y\\) の動く範囲が定まる。これを \\(x\\) で積分する。",
+      "source_generator": "geometry_fusion",
+      "statement_tex": "実数 \\(t\\)（\\(-1\\le t\\le 1\\)）を動かすとき，放物線 \\(y=tx^2-t^2\\) が通過する領域の，\\(-1\\le x\\le 1\\) における面積を求めよ。",
+      "structure_key": "e6516c5b357cde7d4d470e5bc76d322bf87e55553f37984fe55538fb24375c9a",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "parameter_existence_elimination_plus_numeric_area"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "y=28 x^{3} - 10 x",
+      "candidate_id": "construct:construct.cubic_tangent_midpoint_locus:399",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "TangentLine",
+          "CubicReintersection",
+          "MidpointLocus"
+        ],
+        "lowering_chain": [
+          "differentiation",
+          "tangent_line",
+          "vieta_relations",
+          "parameter_elimination",
+          "locus"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 8.83
+      },
+      "domain": "geometry_algebra",
+      "family_id": "construct.cubic_tangent_midpoint_locus",
+      "lift_certificate": {
+        "morphism_chain": [
+          "TangentLine",
+          "CubicReintersection",
+          "MidpointLocus"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1154
+      },
+      "solution_tex": "\\(P\\) での接線と \\(C\\) の交点は \\(x=-2t\\)（三次方程式の根の和より）。よって \\(Q(-2t,\\cdot)\\)，中点 \\(M\\) を \\(t\\) で表し消去すると軌跡が得られる。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "曲線 \\(C: y=x^{3} - 10 x\\) 上の点 \\(P(t,\\,t^{3} - 10 t)\\) における接線が \\(C\\) と再び交わる点を \\(Q\\) とする。\\(t\\) が動くとき，線分 \\(PQ\\) の中点 \\(M\\) の軌跡を求めよ。",
+      "structure_key": "94ff898c00762570bcd3986ead795bd4cbbe2640bdf34c3499f1e431a1568fca",
+      "tool": "symbolic_intersection",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "symbolic_tangent_intersection_locus"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "- 32 t",
+      "candidate_id": "construct:layered.cubic_tangent_iteration:517",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "TangentLine",
+          "CubicReintersection",
+          "GeometricIteration",
+          "GeneralTerm"
+        ],
+        "lowering_chain": [
+          "differentiation",
+          "tangent_line",
+          "recurrence",
+          "mathematical_induction"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "C_standard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 7.18
+      },
+      "domain": "geometry_algebra",
+      "family_id": "layered.cubic_tangent_iteration",
+      "lift_certificate": {
+        "morphism_chain": [
+          "TangentLine",
+          "CubicReintersection",
+          "GeometricIteration",
+          "GeneralTerm"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0762
+      },
+      "solution_tex": "\\(P_i\\) の \\(x\\) 座標を \\(x_i\\) とすると，接点での重根と三次方程式の根の和から \\(x_{i+1}=-2x_i\\)。よって \\(x_n=(-2)^n t\\)，\\(n=5\\) で \\(- 32 t\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "曲線 \\(C: y=x^{3} - 5 x\\) 上の点 \\(P_0(t,\\,t^{3} - 5 t)\\) をとる。\\(P_i\\) における \\(C\\) の接線が \\(C\\) と再び交わる点を \\(P_{i+1}\\) と定める。点 \\(P_{5}\\) の \\(x\\) 座標を \\(t\\) を用いて表せ。",
+      "structure_key": "5b762083a0d6905ab7c87f31674390b04eac84e376995246a3b5fb75fa61b2b7",
+      "tool": "symbolic_intersection+iteration",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "tangent_reintersection_iteration_closed_form"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\log{\\left(2 \\right)}",
+      "candidate_id": "construct:deep.tangent_iteration_growth:552",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CubicCurve",
+          "TangentLine",
+          "Reintersection",
+          "RootSumRelation",
+          "GeometricIteration",
+          "GeneralTerm",
+          "GrowthRate",
+          "LogarithmicLimit"
+        ],
+        "lowering_chain": [
+          "differentiation",
+          "tangent_line",
+          "recurrence",
+          "logarithm",
+          "sequence_limit"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 11.0
+      },
+      "domain": "geometry_analysis",
+      "family_id": "deep.tangent_iteration_growth",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CubicCurve",
+          "TangentLine",
+          "Reintersection",
+          "RootSumRelation",
+          "GeometricIteration",
+          "GeneralTerm",
+          "GrowthRate",
+          "LogarithmicLimit"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1475
+      },
+      "solution_tex": "接点で重根をもつことと三次方程式の根の和の関係から \\(x_{i+1}=-2x_i\\)。したがって \\(x_n=(-2)^n t\\)，\\(|x_n|=2^n|t|\\)。\\(\\frac{\\log|x_n|}{n}=\\log 2+\\frac{\\log|t|}{n}\\to\\log 2\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "曲線 \\(C: y=x^{3} - 9 x\\) 上に点 \\(P_0(t,\\,t^{3} - 9 t)\\)（\\(t>0\\)）をとる。\\(P_i\\) における \\(C\\) の接線が \\(C\\) と再び交わる点を \\(P_{i+1}\\) と定め，\\(P_n\\) の \\(x\\) 座標を \\(x_n\\) とする。極限 \\(\\displaystyle\\lim_{n\\to\\infty}\\frac{\\log|x_n|}{n}\\) を求めよ。",
+      "structure_key": "c517cccb5decf016b8935c4df0b2c6ddde4273904d1a573d29056551bf9a006c",
+      "tool": "symbolic_intersection+iteration+limit",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "tangent_iteration_ratio_then_log_limit"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "(-1)^n",
+      "candidate_id": "phase19_cassini_fibonacci_matrix_invariant",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "MatrixModel",
+          "DeterminantFunctor",
+          "SignReduction"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "mathematical_induction",
+          "algebraic_identity"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "linear_algebra_number_theory",
+      "family_id": "recurrence.cassini_fibonacci_determinant_invariant",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "recurrence.cassini_fibonacci_determinant_invariant",
+        "morphism_chain": [
+          "MatrixModel",
+          "DeterminantFunctor",
+          "SignReduction"
+        ],
+        "query_sort": "SignInvariant",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "MatrixPowerFamily",
+            "domain": "FibonacciRecurrenceFamily",
+            "name": "MatrixModel"
+          },
+          {
+            "codomain": "DeterminantInvariantFamily",
+            "domain": "MatrixPowerFamily",
+            "name": "DeterminantFunctor"
+          },
+          {
+            "codomain": "SignInvariant",
+            "domain": "DeterminantInvariantFamily",
+            "name": "SignReduction"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "MatrixPowerFamily",
+          "domain": "FibonacciRecurrenceFamily",
+          "name": "MatrixModel"
+        },
+        {
+          "codomain": "DeterminantInvariantFamily",
+          "domain": "MatrixPowerFamily",
+          "name": "DeterminantFunctor"
+        },
+        {
+          "codomain": "SignInvariant",
+          "domain": "DeterminantInvariantFamily",
+          "name": "SignReduction"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase11_nonlinear_recurrence_square_increment",
+            "score": 0.1901,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase16_tridiagonal_path_determinant",
+            "score": 0.1508,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase05_cycle_laplacian_pseudodeterminant",
+            "score": 0.1288,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase07_binomial_beta_duality",
+            "score": 0.1057,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.1037,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 19,
+          "public": 0,
+          "self_authored": 0,
+          "total": 19
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.1901,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 19,
+          "compared_prior_families": 19,
+          "family_collision": false,
+          "family_id": "recurrence.cassini_fibonacci_determinant_invariant",
+          "morphism_chain_signature": "MatrixModel>DeterminantFunctor>SignReduction",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "invariant": "det of the Fibonacci companion matrix power",
+        "parameter": "index n",
+        "tested_values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      },
+      "query_sort": "SignInvariant",
+      "semantic_parser_observation": {
+        "canonical_signature": "ebf5d4ba86fc95132b5e27b3",
+        "definitions": [
+          "Equals",
+          "Find",
+          "Sequence"
+        ],
+        "morphism_chain": [],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Unknown:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": [
+          "no_composable_morphism"
+        ]
+      },
+      "solution_tex": "\\(A=\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix}\\) とおくと \\(A^n=\\begin{pmatrix}F_{n+1}&F_n\\\\F_n&F_{n-1}\\end{pmatrix}\\)。両辺の行列式をとると \\(\\det(A^n)=(\\det A)^n=(-1)^n\\)，左辺は \\(F_{n+1}F_{n-1}-F_n^2\\) だから \\(F_{n-1}F_{n+1}-F_n^2=(-1)^n\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "フィボナッチ数列を \\(F_1=F_2=1,\\ F_{n+2}=F_{n+1}+F_n\\) で定める。\\(n\\ge2\\) に対し \\(F_{n-1}F_{n+1}-F_n^2\\) を求めよ。",
+      "structure_key": "20cac83772bb0faf5edb017f2e55196a997dd70e308a88e400a78422e3cd20bc",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exact_fibonacci_identity_plus_matrix_determinant",
+        "trace": {
+          "identity": {
+            "1": -1,
+            "2": 1,
+            "3": -1,
+            "4": 1,
+            "5": -1,
+            "6": 1,
+            "7": -1,
+            "8": 1,
+            "9": -1,
+            "10": 1,
+            "11": -1,
+            "12": 1,
+            "13": -1,
+            "14": 1,
+            "15": -1,
+            "16": 1,
+            "17": -1,
+            "18": 1,
+            "19": -1,
+            "20": 1,
+            "21": -1,
+            "22": 1,
+            "23": -1,
+            "24": 1,
+            "25": -1,
+            "26": 1,
+            "27": -1,
+            "28": 1,
+            "29": -1,
+            "30": 1
+          }
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "54",
+      "candidate_id": "construct:construct.linear_recurrence_mod_period:507",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CompanionMatrix",
+          "ModularReduction",
+          "MultiplicativeOrder"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "congruence",
+          "finite_state_iteration"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 8.91
+      },
+      "domain": "number_theory",
+      "family_id": "construct.linear_recurrence_mod_period",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularReduction",
+          "MultiplicativeOrder"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "continuous_verified_problem_batch1",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.3645
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}-5&-4\\\\1&0\\end{pmatrix}\\) をかけて進む。\\(\\bmod\\ 27\\) でこの行列の乗法的位数が周期。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=-5a_{n+1}-4a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 27\\) で見たときの最小周期を求めよ。",
+      "structure_key": "8c8d211140494ea81250dd9d89589c9b9cb1dee8490369026bb1e74e41e06019",
+      "tool": "matrix_mod_order",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "companion_matrix_modular_order"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "16",
+      "candidate_id": "construct:layered.recurrence_period_observable:483",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "DivisorCount"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "congruence",
+          "finite_counting",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 9.22
+      },
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "DivisorCount"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1633
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&3\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 11\\) での位数が周期。周期は \\(120\\)。その約数の個数を数える。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 11\\) で見ると周期的になる。その周期の正の約数の個数を求めよ。",
+      "structure_key": "9f758d0ad20a54bf91992559c6fae0df09e299ccc0e6222550820d363e0c55ed",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "32",
+      "candidate_id": "construct:layered.recurrence_period_observable:485",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "EulerTotient"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "congruence",
+          "finite_counting",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "A_olympiad",
+        "condition": 1,
+        "construct": 2,
+        "score": 15.67
+      },
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "EulerTotient"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1416
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&3\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 11\\) での位数が周期。周期は \\(120\\)。\\(\\varphi(120)\\) を求める。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 11\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
+      "structure_key": "4ef6047ff0aa60ce3a0f94b8855b687f99812c63fe4076e9011faf79c09ca58a",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "13",
+      "candidate_id": "construct:layered.recurrence_period_observable:487",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "LargestPrimeFactor"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "congruence",
+          "finite_counting",
+          "integer_factorization"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 1,
+        "score": 10.72
+      },
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "LargestPrimeFactor"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1641
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&3\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 13\\) での位数が周期。周期は \\(156\\)。素因数分解して最大の素因数をとる。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+3a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 13\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
+      "structure_key": "69ec9359b0faf2619f60fcd8239a0f888d8c20920b5eeee1d715d42794da814d",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\displaystyle\\sum_{k=1}^{n}\\frac1k",
+      "candidate_id": "phase17_permutation_record_expectation",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "RecordIndicator",
+          "LinearityExpectation",
+          "HarmonicSum"
+        ],
+        "lowering_chain": [
+          "permutation",
+          "indicator_counting",
+          "expectation"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "probability",
+      "family_id": "probability.left_to_right_maxima_expectation",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "probability.left_to_right_maxima_expectation",
+        "morphism_chain": [
+          "RecordIndicator",
+          "LinearityExpectation",
+          "HarmonicSum"
+        ],
+        "query_sort": "RationalHarmonic",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "IndicatorFamily",
+            "domain": "UniformPermutationFamily",
+            "name": "RecordIndicator"
+          },
+          {
+            "codomain": "ProbabilitySumFamily",
+            "domain": "IndicatorFamily",
+            "name": "LinearityExpectation"
+          },
+          {
+            "codomain": "RationalHarmonic",
+            "domain": "ProbabilitySumFamily",
+            "name": "HarmonicSum"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "IndicatorFamily",
+          "domain": "UniformPermutationFamily",
+          "name": "RecordIndicator"
+        },
+        {
+          "codomain": "ProbabilitySumFamily",
+          "domain": "IndicatorFamily",
+          "name": "LinearityExpectation"
+        },
+        {
+          "codomain": "RationalHarmonic",
+          "domain": "ProbabilitySumFamily",
+          "name": "HarmonicSum"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase06_random_bridge_zero_observable",
+            "score": 0.119,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase04_interpolation_harmonic_observable",
+            "score": 0.112,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01b_cubic_discriminant_triangle",
+            "score": 0.0486,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase10_gcd_matrix_incidence_factorization",
+            "score": 0.0472,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase01_even_quartic_parabola_hull",
+            "score": 0.0467,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 17,
+          "public": 0,
+          "self_authored": 0,
+          "total": 17
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.119,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 17,
+          "compared_prior_families": 17,
+          "family_collision": false,
+          "family_id": "probability.left_to_right_maxima_expectation",
+          "morphism_chain_signature": "RecordIndicator>LinearityExpectation>HarmonicSum",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "permutation length n",
+        "per_position_probability": "1/i",
+        "tested_values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "query_sort": "RationalHarmonic",
+      "semantic_parser_observation": {
+        "canonical_signature": "84a60c77f85ea9fab668fb89",
+        "definitions": [
+          "Cardinality",
+          "Expectation",
+          "Find",
+          "Maximum"
+        ],
+        "morphism_chain": [
+          "Cardinality",
+          "Maximum"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Maximum:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "第 \\(i\\) 項が左からの最大値になるのは，最初の \\(i\\) 項の中で第 \\(i\\) 項が最大のときで，その確率は \\(1/i\\)。指示関数の期待値の線形性より，求める期待値は \\(\\sum_{i=1}^{n}\\frac1i=H_n\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "\\(1,2,\\ldots,n\\) の順列を一様に選ぶ。左から見てそれまでの最大値を更新する項の個数（左から右への最大値の個数）の期待値を求めよ。",
+      "structure_key": "3c3b1ef7c1646a34b73653826f7677a2fcd82684f543710c933c17b6cd7ef3ef",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exhaustive_position_indicator_plus_total_expectation",
+        "trace": {
+          "expectation": {
+            "1": "1",
+            "2": "3/2",
+            "3": "11/6",
+            "4": "25/12",
+            "5": "137/60",
+            "6": "49/20",
+            "7": "363/140"
+          },
+          "position_probability": {
+            "1": {
+              "1": "1"
+            },
+            "2": {
+              "1": "1",
+              "2": "1/2"
+            },
+            "3": {
+              "1": "1",
+              "2": "1/2",
+              "3": "1/3"
+            },
+            "4": {
+              "1": "1",
+              "2": "1/2",
+              "3": "1/3",
+              "4": "1/4"
+            },
+            "5": {
+              "1": "1",
+              "2": "1/2",
+              "3": "1/3",
+              "4": "1/4",
+              "5": "1/5"
+            },
+            "6": {
+              "1": "1",
+              "2": "1/2",
+              "3": "1/3",
+              "4": "1/4",
+              "5": "1/5",
+              "6": "1/6"
+            },
+            "7": {
+              "1": "1",
+              "2": "1/2",
+              "3": "1/3",
+              "4": "1/4",
+              "5": "1/5",
+              "6": "1/6",
+              "7": "1/7"
+            }
+          }
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\frac{x^2}{25}+\\frac{y^2}{16}=\\frac{1}{\\left(\\frac{1}{4} + \\frac{\\sqrt{5}}{4}\\right)^{2}}",
+      "candidate_id": "construct:ultradeep.geometry_ellipse_tangent_pair_locus:056",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "EllipseObject",
+          "TrigonometricChart",
+          "PairedParameterShift",
+          "TangentDualization",
+          "DualLinePair",
+          "LinearIntersection",
+          "TrigonometricDiagonalization",
+          "HomothetyRecognition",
+          "ConicElimination",
+          "LocusEquationObservation"
+        ],
+        "lowering_chain": [
+          "ellipse",
+          "differentiation",
+          "tangent_line",
+          "simultaneous_equations",
+          "parameter_elimination",
+          "locus"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": {
+        "band": "B_hard_university",
+        "condition": 0,
+        "construct": 2,
+        "score": 13.77
+      },
+      "domain": "projective_geometry",
+      "family_id": "ultradeep.geometry_ellipse_tangent_pair_locus",
+      "lift_certificate": {
+        "morphism_chain": [
+          "EllipseObject",
+          "TrigonometricChart",
+          "PairedParameterShift",
+          "TangentDualization",
+          "DualLinePair",
+          "LinearIntersection",
+          "TrigonometricDiagonalization",
+          "HomothetyRecognition",
+          "ConicElimination",
+          "LocusEquationObservation"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1329
+      },
+      "solution_tex": "2本の接線の方程式を加減して解くと \\(Q(t)=(5\\sec\\frac{\\pi}{5}\\cos t,4\\sec\\frac{\\pi}{5}\\sin t)\\)。よって軌跡は \\(\\frac{x^2}{25}+\\frac{y^2}{16}=\\frac{1}{\\left(\\frac{1}{4} + \\frac{\\sqrt{5}}{4}\\right)^{2}}\\)。",
+      "source_generator": "construct_atlas",
+      "statement_tex": "楕円 \\(E:\\frac{x^2}{25}+\\frac{y^2}{16}=1\\) 上の点を \\(P(t)=(5\\cos t,4\\sin t)\\) とする。\\(P(t+\\frac{\\pi}{5})\\) と \\(P(t-\\frac{\\pi}{5})\\) における2本の接線の交点を \\(Q(t)\\)とするとき，\\(Q(t)\\) の軌跡の方程式を求めよ。",
+      "structure_key": "7d68a689badb53510ef9c0dda8ecc420f375758c372b94da5ee92efcf95cb8eb",
+      "tool": "dual_conic+tangent_intersection+linear_system",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "closed_intersection_formula_vs_numeric_two_line_solve"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\log 2",
+      "candidate_id": "phase12_boundary_layer_integral_limit",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ComplementIntegral",
+          "PowerSubstitution",
+          "DominatedConvergence"
+        ],
+        "lowering_chain": [
+          "definite_integral",
+          "substitution",
+          "inequality",
+          "sequence_limit"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "real_analysis",
+      "family_id": "analysis.boundary_layer_integral_limit",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "analysis.boundary_layer_integral_limit",
+        "morphism_chain": [
+          "ComplementIntegral",
+          "PowerSubstitution",
+          "DominatedConvergence"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "BoundaryIntegral",
+            "domain": "IntegralSequence",
+            "name": "ComplementIntegral"
+          },
+          {
+            "codomain": "FixedDomainIntegral",
+            "domain": "BoundaryIntegral",
+            "name": "PowerSubstitution"
+          },
+          {
+            "codomain": "Real",
+            "domain": "FixedDomainIntegral",
+            "name": "DominatedConvergence"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "BoundaryIntegral",
+          "domain": "IntegralSequence",
+          "name": "ComplementIntegral"
+        },
+        {
+          "codomain": "FixedDomainIntegral",
+          "domain": "BoundaryIntegral",
+          "name": "PowerSubstitution"
+        },
+        {
+          "codomain": "Real",
+          "domain": "FixedDomainIntegral",
+          "name": "DominatedConvergence"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase11_nonlinear_recurrence_square_increment",
+            "score": 0.2321,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase07_binomial_beta_duality",
+            "score": 0.0924,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase06_random_bridge_zero_observable",
+            "score": 0.0862,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase09_finite_field_inverse_square_product",
+            "score": 0.056,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.0479,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 12,
+          "public": 0,
+          "self_authored": 0,
+          "total": 12
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.2321,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 12,
+          "compared_prior_families": 12,
+          "family_collision": false,
+          "family_id": "analysis.boundary_layer_integral_limit",
+          "morphism_chain_signature": "ComplementIntegral>PowerSubstitution>DominatedConvergence",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "boundary exponent n",
+        "phase": "boundary layer near x=1",
+        "tested_values": [
+          10,
+          50,
+          200,
+          1000
+        ]
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "0f5feab0785d196e5cc35f87",
+        "definitions": [
+          "Equals",
+          "Find",
+          "Integral",
+          "Limit"
+        ],
+        "morphism_chain": [
+          "Integral"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Limit:v0(v1)",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": [
+          "no_constraints"
+        ]
+      },
+      "solution_tex": "\\(1-I_n=\\int_0^1x^n/(1+x^n)\\,dx\\) である。\\(u=x^n\\) とおけば \\(n(1-I_n)=\\int_0^1u^{1/n}/(1+u)\\,du\\)。被積分関数は \\(1/(1+u)\\) に収束し，1で支配されるので，極限は \\(\\int_0^1du/(1+u)=\\log2\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "\\(I_n=\\displaystyle\\int_0^1\\frac{dx}{1+x^n}\\) とおく。\\(\\displaystyle\\lim_{n\\to\\infty}n(1-I_n)\\) を求めよ。",
+      "structure_key": "c30fe9c2e3cbf36ae8d83e27af38d6472c36e9738ad438e909922fa90d9a71ee",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "exact_substitution_plus_high_precision_quadrature",
+        "trace": {
+          "approximations": {
+            "10": 0.6190571296711522,
+            "50": 0.6770510331474522,
+            "200": 0.6890572661851557,
+            "1000": 0.6923256141231349
+          },
+          "target": 0.6931471805599453
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "\\dfrac{\\pi}{4}",
+      "candidate_id": "phase15_king_property_symmetric_integral",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "ReflectionSubstitution",
+          "PairwiseAddition",
+          "EvaluateMeasure"
+        ],
+        "lowering_chain": [
+          "definite_integral",
+          "substitution",
+          "trigonometric_identity"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "real_analysis",
+      "family_id": "analysis.reflection_symmetric_integral",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "analysis.reflection_symmetric_integral",
+        "morphism_chain": [
+          "ReflectionSubstitution",
+          "PairwiseAddition",
+          "EvaluateMeasure"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "ComplementaryIntegralFamily",
+            "domain": "ParametricIntegralFamily",
+            "name": "ReflectionSubstitution"
+          },
+          {
+            "codomain": "ConstantIntegral",
+            "domain": "ComplementaryIntegralFamily",
+            "name": "PairwiseAddition"
+          },
+          {
+            "codomain": "Real",
+            "domain": "ConstantIntegral",
+            "name": "EvaluateMeasure"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "ComplementaryIntegralFamily",
+          "domain": "ParametricIntegralFamily",
+          "name": "ReflectionSubstitution"
+        },
+        {
+          "codomain": "ConstantIntegral",
+          "domain": "ComplementaryIntegralFamily",
+          "name": "PairwiseAddition"
+        },
+        {
+          "codomain": "Real",
+          "domain": "ConstantIntegral",
+          "name": "EvaluateMeasure"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase13_telescoping_triple_partial_fraction",
+            "score": 0.2316,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase07_binomial_beta_duality",
+            "score": 0.2056,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase12_boundary_layer_integral_limit",
+            "score": 0.1909,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase14_roots_of_unity_binomial_filter",
+            "score": 0.1102,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase05_cycle_laplacian_pseudodeterminant",
+            "score": 0.1094,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 15,
+          "public": 0,
+          "self_authored": 0,
+          "total": 15
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.2316,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 15,
+          "compared_prior_families": 15,
+          "family_collision": false,
+          "family_id": "analysis.reflection_symmetric_integral",
+          "morphism_chain_signature": "ReflectionSubstitution>PairwiseAddition>EvaluateMeasure",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "invariant": "value is independent of n",
+        "parameter": "exponent n",
+        "tested_values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "b80a9d5dadf9b68c35c23f9e",
+        "definitions": [
+          "Equals",
+          "Find",
+          "Integer",
+          "Integral",
+          "Natural"
+        ],
+        "morphism_chain": [
+          "Integral"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Unknown:v0",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(x\\mapsto \\frac\\pi2-x\\) と置換すると \\(\\sin\\) と \\(\\cos\\) が入れ替わり，\\(I_n=\\int_0^{\\pi/2}\\frac{\\cos^n x}{\\sin^n x+\\cos^n x}\\,dx\\)。元の \\(I_n\\) と辺々加えると被積分関数は \\(1\\) になるので \\(2I_n=\\int_0^{\\pi/2}dx=\\frac\\pi2\\)，すなわち \\(I_n=\\frac\\pi4\\)（\\(n\\) によらない）。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "正の整数 \\(n\\) に対し，\\(\\displaystyle I_n=\\int_0^{\\pi/2}\\frac{\\sin^n x}{\\sin^n x+\\cos^n x}\\,dx\\) を求めよ。",
+      "structure_key": "dc06fc3282185ba52c2f4077ae7e7d74b011fbf5ae0ae7f7e42c5dc0b804ac3d",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "reflection_symmetry_proof_plus_high_precision_quadrature",
+        "trace": {
+          "approximations": {
+            "1": 0.7853981633974483,
+            "2": 0.7853981633974483,
+            "3": 0.7853981633974483,
+            "4": 0.7853981633974483,
+            "5": 0.7853981633974483,
+            "8": 0.7853981633974483
+          },
+          "target": 0.7853981633974483
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_tex": "2",
+      "candidate_id": "phase11_nonlinear_recurrence_square_increment",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "SquareObservable",
+          "IncrementLimit",
+          "StolzCesaro",
+          "PositiveSquareRoot"
+        ],
+        "lowering_chain": [
+          "recurrence",
+          "inequality",
+          "sequence_limit"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "domain": "real_analysis",
+      "family_id": "asymptotic.recurrence_square_increment",
+      "lift_certificate": {
+        "errors": [],
+        "family_id": "asymptotic.recurrence_square_increment",
+        "morphism_chain": [
+          "SquareObservable",
+          "IncrementLimit",
+          "StolzCesaro",
+          "PositiveSquareRoot"
+        ],
+        "query_sort": "Real",
+        "type_checked": true,
+        "typed_edges": [
+          {
+            "codomain": "IncrementSequence",
+            "domain": "PositiveRecurrence",
+            "name": "SquareObservable"
+          },
+          {
+            "codomain": "RealLimit",
+            "domain": "IncrementSequence",
+            "name": "IncrementLimit"
+          },
+          {
+            "codomain": "SquaredAsymptotic",
+            "domain": "RealLimit",
+            "name": "StolzCesaro"
+          },
+          {
+            "codomain": "Real",
+            "domain": "SquaredAsymptotic",
+            "name": "PositiveSquareRoot"
+          }
+        ]
+      },
+      "morphisms": [
+        {
+          "codomain": "IncrementSequence",
+          "domain": "PositiveRecurrence",
+          "name": "SquareObservable"
+        },
+        {
+          "codomain": "RealLimit",
+          "domain": "IncrementSequence",
+          "name": "IncrementLimit"
+        },
+        {
+          "codomain": "SquaredAsymptotic",
+          "domain": "RealLimit",
+          "name": "StolzCesaro"
+        },
+        {
+          "codomain": "Real",
+          "domain": "SquaredAsymptotic",
+          "name": "PositiveSquareRoot"
+        }
+      ],
+      "novelty": {
+        "closest": [
+          {
+            "id": "phase10_gcd_matrix_incidence_factorization",
+            "score": 0.1238,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase07_binomial_beta_duality",
+            "score": 0.0794,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase02_reciprocal_complex_root_polygon",
+            "score": 0.0774,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase06_random_bridge_zero_observable",
+            "score": 0.0656,
+            "source": "current_batch"
+          },
+          {
+            "id": "phase05_cycle_laplacian_pseudodeterminant",
+            "score": 0.0643,
+            "source": "current_batch"
+          }
+        ],
+        "comparison_counts": {
+          "external": 0,
+          "previously_generated": 11,
+          "public": 0,
+          "self_authored": 0,
+          "total": 11
+        },
+        "corpus_novel": true,
+        "exact_matches": [],
+        "maximum_surface_jaccard": 0.1238,
+        "scope_note": "Novelty combines a surface n-gram collision test over the public, self-authored, previously generated, and external corpora with a structural check on family id and morphism-chain signature. It is not a proof of worldwide historical originality.",
+        "structural": {
+          "chain_collision": false,
+          "compared_prior_chains": 11,
+          "compared_prior_families": 11,
+          "family_collision": false,
+          "family_id": "asymptotic.recurrence_square_increment",
+          "morphism_chain_signature": "SquareObservable>IncrementLimit>StolzCesaro>PositiveSquareRoot",
+          "structural_novel": true
+        },
+        "surface_novel": true,
+        "threshold": 0.78
+      },
+      "phase_diagram": {
+        "parameter": "coefficient in a_(n+1)=a_n+c/a_n",
+        "predicted_general_limit": "sqrt(2c)",
+        "selected": 2
+      },
+      "query_sort": "Real",
+      "semantic_parser_observation": {
+        "canonical_signature": "e3934f70b73c433dd86b327e",
+        "definitions": [
+          "Equals",
+          "Find",
+          "Limit",
+          "Sequence"
+        ],
+        "morphism_chain": [
+          "Limit"
+        ],
+        "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
+        "query_signature": "compute:Limit:v0(v1)",
+        "status": "observed",
+        "type_checked": true,
+        "warnings": []
+      },
+      "solution_tex": "\\(a_n>0\\) かつ単調増加なので \\(a_n\\to\\infty\\)。\\(a_{n+1}^2-a_n^2=4+4/a_n^2\\to4\\) である。Stolz--Cesaroの定理から \\(a_n^2/n\\to4\\)。\\(a_n>0\\) より求める極限は \\(2\\)。",
+      "source_generator": "typed_continuous",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_1=1,\\ a_{n+1}=a_n+2/a_n\\) で定める。\\(\\displaystyle\\lim_{n\\to\\infty}a_n/\\sqrt n\\) を求めよ。",
+      "structure_key": "6d2a4e853bc9293eee42f6bdff2c49e33ba31a9ca20cf17d35d1f83d3b64421d",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "increment_limit_proof_plus_long_horizon_simulation",
+        "trace": {
+          "errors": {
+            "1000": 0.0018043820117932263,
+            "10000": 0.00023803653454024243,
+            "100000": 2.956084930660907e-05,
+            "300000": 1.0769156246759337e-05
+          },
+          "ratios": {
+            "1000": 2.0018043820117932,
+            "10000": 2.0002380365345402,
+            "100000": 2.0000295608493066,
+            "300000": 2.0000107691562468
+          }
+        }
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "5/2",
+      "answer_tex": "\\frac{5}{2}",
+      "candidate_id": "geomfusion:fusion.trig_absolute_value_integral:017",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "TrigDifference",
+          "SignPartition",
+          "AbsoluteIntegral"
+        ],
+        "lowering_chain": [
+          "trigonometric_equation",
+          "sign_partition",
+          "definite_integral"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": "A",
+      "domain": "real_analysis",
+      "family_id": "fusion.trig_absolute_value_integral",
+      "lift_certificate": {
+        "morphism_chain": [
+          "TrigDifference",
+          "SignPartition",
+          "AbsoluteIntegral"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "k": 2
+      },
+      "solution_tex": "\\(\\sin x=\\sin 2x\\) となる \\(x\\) で符号が変わる。各区間で絶対値を外し，符号に注意して積分を足し合わせる。",
+      "source_generator": "geometry_fusion",
+      "statement_tex": "定積分 \\(\\displaystyle\\int_0^{\\pi}\\left|\\sin x-\\sin 2x\\right|\\,dx\\) を求めよ。",
+      "structure_key": "82efb0dd5c0f1a26c6359d919637b9190a26afa56effda033dcd4b6201f9c36e",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "sign_partition_plus_high_precision_quadrature"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "-pi",
+      "answer_tex": "- \\pi",
+      "candidate_id": "geomfusion:fusion.trig_floor_integral:018",
+      "curriculum_certificate": {
+        "abstract_morphism_chain": [
+          "TrigLevelSets",
+          "FloorStep",
+          "PiecewiseIntegral"
+        ],
+        "lowering_chain": [
+          "trigonometric_inequality",
+          "piecewise_function",
+          "definite_integral"
+        ],
+        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
+        "type_checked": true,
+        "uses_only_school_level_primitives": true
+      },
+      "difficulty": "A",
+      "domain": "real_analysis",
+      "family_id": "fusion.trig_floor_integral",
+      "lift_certificate": {
+        "morphism_chain": [
+          "TrigLevelSets",
+          "FloorStep",
+          "PiecewiseIntegral"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "a": 0,
+        "b": 2
+      },
+      "solution_tex": "\\(0+2\\sin x\\) が各整数値をまたぐ \\(x\\) を求め，床関数が一定になる区間の長さに整数値を掛けて足す。対称性を使うと計算が軽くなる。",
+      "source_generator": "geometry_fusion",
+      "statement_tex": "\\(\\lfloor\\ \\rfloor\\) を床関数とする。定積分 \\(\\displaystyle\\int_0^{2\\pi}\\lfloor 0+2\\sin x\\rfloor\\,dx\\) を求めよ。",
+      "structure_key": "0a08ca425166e796f74fc636a7f1681116b01d7c5e1d0baf071b43d8e2276846",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "level_set_partition_plus_high_precision_quadrature"
+      }
+    }
+  ],
+  "summary": {
+    "certified_structures": 36,
+    "domain_counts": {
+      "algebra": 2,
+      "algebraic_geometry": 2,
+      "algebraic_geometry_number_theory": 1,
+      "analytic_geometry": 2,
+      "combinatorics": 1,
+      "combinatorics_number_theory": 1,
+      "complex": 2,
+      "complex_algebra_number_theory": 1,
+      "complex_geometry": 4,
+      "differential_geometry": 1,
+      "euclidean_geometry": 1,
+      "geometry": 3,
+      "geometry_algebra": 2,
+      "geometry_analysis": 1,
+      "linear_algebra_number_theory": 1,
+      "number_theory": 4,
+      "probability": 1,
+      "projective_geometry": 1,
+      "real_analysis": 5
+    },
+    "families": 34,
+    "family_counts": {
+      "algebraic_geometry.cubic_discriminant_triangle_area": 1,
+      "algebraic_geometry.even_quartic_parabola_hull_area": 1,
+      "analysis.boundary_layer_integral_limit": 1,
+      "analysis.reflection_symmetric_integral": 1,
+      "asymptotic.recurrence_square_increment": 1,
+      "binomial.roots_of_unity_filter_mod3": 1,
+      "complex_geometry.reciprocal_root_polygon_area": 1,
+      "conic_duality.tangent_intercept_centroid_minimum": 1,
+      "construct.complex_affine_limit": 1,
+      "construct.complex_rotation_period": 1,
+      "construct.cubic_tangent_midpoint_locus": 1,
+      "construct.linear_recurrence_mod_period": 1,
+      "construct.parabola_right_angle_chord": 1,
+      "construct.reciprocal_recurrence": 1,
+      "deep.polygon_subset_centroid": 1,
+      "deep.rotation_diagonal_product_divisors": 1,
+      "deep.tangent_iteration_growth": 1,
+      "fusion.trig_absolute_value_integral": 1,
+      "fusion.trig_floor_integral": 1,
+      "lattice_paths.dyck_reflection_catalan_count": 1,
+      "layered.cubic_tangent_iteration": 1,
+      "layered.recurrence_period_observable": 3,
+      "layered.rotation_orbit_hull_area": 1,
+      "passage_region.line_family_sweep": 1,
+      "passage_region.parabola_family_sweep": 1,
+      "polynomial.interpolation_harmonic_observable": 1,
+      "probability.left_to_right_maxima_expectation": 1,
+      "recurrence.cassini_fibonacci_determinant_invariant": 1,
+      "ultradeep.cubic_root_triangle_discriminant_divisor_count": 1,
+      "ultradeep.cyclotomic_distance_norm_divisor_count": 1,
+      "ultradeep.geometry_astroid_envelope_area": 1,
+      "ultradeep.geometry_ellipse_tangent_pair_locus": 1,
+      "ultradeep.geometry_orthocenter_locus_area": 1,
+      "ultradeep.geometry_parabola_normal_envelope": 1
+    },
+    "geometry_algebra_structures": 24,
+    "rejected": {
+      "same_structure_variant": 658,
+      "scope_lowering": 435
+    },
+    "source_counts": {
+      "construct_atlas": 20,
+      "geometry_fusion": 4,
+      "typed_continuous": 12
+    },
+    "total_instances": 36
+  }
+}

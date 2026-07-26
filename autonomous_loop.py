@@ -42,8 +42,9 @@ except ImportError:  # pragma: no cover
 
 HERE = Path(__file__).resolve().parent
 POOL = HERE / "problem_synthesis" / "construct_pool.json"
-# 1族が支配して水増しにならないための上限（多様性優先）
-PER_FAMILY_CAP = 150
+# 同じ構造の数値違いを蓄積しても創造性は増えない。検算・較正用に
+# 少数だけ残し、公開指標は構造署名で数える。
+PER_FAMILY_CAP = 5
 LOG = HERE / "problem_synthesis" / "autonomous_log.json"
 
 

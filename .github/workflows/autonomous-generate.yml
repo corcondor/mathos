@@ -35,18 +35,13 @@ jobs:
       matrix:
         family:
           - mobius
-          - paley
           - linear_recurrence
           - cubic_tangent
           - complex_rotation
-          - gambler
           - parabola
           - reciprocal
           - complex_affine
-          - ultradeep_paley_tree
-          - ultradeep_paley_four_cycles
           - ultradeep_cyclotomic_norm
-          - ultradeep_gambler_variance
           - ultradeep_cubic_triangle
           - geometry_astroid
           - geometry_ellipse_tangent_pair
@@ -117,14 +112,17 @@ jobs:
             --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
           python export_generation_report.py
+          python build_entrance_pool.py
 
       - name: Commit grown pool
         run: |
           git config user.name  "mathos-bot"
           git config user.email "mathos-bot@users.noreply.github.com"
           git add problem_synthesis/construct_pool.json \
+                  problem_synthesis/entrance_exam_pool.json \
                   problem_synthesis/unresolved_candidates.json \
                   docs/generated/latest-generation-report.md \
+                  docs/generated/latest-entrance-pool-report.md \
                   docs/generated/latest-research-candidates.md
           if git diff --cached --quiet; then
             echo "no new problems this run"
