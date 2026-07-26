@@ -567,6 +567,7 @@ def apply_corpus_screen(
 
 def build_report(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
+    autonomous = payload.get("autonomous_search", {})
     lines = [
         "# MathOS 研究候補・保留キュー",
         "",
@@ -580,6 +581,17 @@ def build_report(payload: dict[str, Any]) -> str:
         f"- 問いの型: **{summary['unique_query_types']}種類**",
         f"- 数値替え: **{summary['parameter_variants']}件**",
         f"- 各候補の照合母数: **{summary['reference_corpus_size']}問以上**",
+        f"- atlas自律探索候補: **{summary.get('autonomous_candidates', 0)}件**",
+        f"- 今回の自律追加: **{summary.get('added_by_autonomous_search', 0)}件**",
+        f"- 現在の探索深さ下限: **{summary.get('current_depth_floor', 10)}射**",
+        "",
+        "## 自律探索",
+        "",
+        f"- 世代: `{autonomous.get('epoch', 0)}`",
+        f"- 射アトラス: `{autonomous.get('atlas_morphisms', 0)}射`",
+        f"- チャート: `{autonomous.get('domains', 0)}領域`",
+        f"- 探索試行: `{autonomous.get('attempts', 0)}`",
+        f"- 商: `{autonomous.get('quotient', 'not run')}`",
         "",
         "## 候補",
         "",
@@ -594,6 +606,7 @@ def build_report(payload: dict[str, Any]) -> str:
                 f"- 射数: `{record['morphism_count']}`",
                 f"- 問い: `{record['query_type']}`",
                 f"- 難度仮説: `{record['hardness']['score']}`",
+                f"- 生成元: `{record.get('origin', 'curated_seed')}`",
                 "- 既知問題との表層衝突: `"
                 + (
                     "検出なし"
@@ -638,6 +651,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument(
+        "--autonomous-count",
+        type=int,
+        default=0,
+        help="typed atlas searchで今回追加する保留候補数",
+    )
+    parser.add_argument("--seed", type=int, default=None)
     args = parser.parse_args()
     previous_payload: dict[str, Any] | None = None
     if args.output.exists():
@@ -645,7 +665,31 @@ def main() -> int:
             previous_payload = json.loads(args.output.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             previous_payload = None
-    payload = apply_corpus_screen(build_payload(), previous_payload)
+    try:
+        from math_os_prototype.autonomous_morphism_search import grow_payload
+    except ImportError:  # pragma: no cover
+        from autonomous_morphism_search import grow_payload
+
+    payload = grow_payload(
+        build_payload(),
+        previous_payload,
+        count=max(args.autonomous_count, 0),
+        seed=args.seed,
+    )
+    retained: list[dict[str, Any]] = []
+    rejected = list(payload["rejected_candidates"])
+    for record in payload["candidates"]:
+        matches = screen_known_problem(record["statement_tex"])
+        if matches:
+            record["known_problem_screen"]["passed"] = False
+            record["known_problem_screen"]["matches"] = matches
+            record["rejection_reason"] = "known-problem marker collision"
+            rejected.append(record)
+        else:
+            retained.append(record)
+    payload["candidates"] = retained
+    payload["rejected_candidates"] = rejected
+    payload = apply_corpus_screen(payload, previous_payload)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as stream:
         stream.write(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))

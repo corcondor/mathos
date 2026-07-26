@@ -16,6 +16,10 @@ on:
         description: "1シャードのラウンド数"
         required: false
         default: "1"
+      research_count:
+        description: "型付き射アトラスから追加する研究候補数"
+        required: false
+        default: "12"
 
 permissions:
   contents: write
@@ -104,6 +108,12 @@ jobs:
       - name: Install deps
         run: pip install sympy numpy scipy mpmath
 
+      - name: Validate typed morphism search
+        run: |
+          python -m unittest \
+            test_autonomous_morphism_search \
+            test_research_candidate_engine
+
       - uses: actions/download-artifact@v4
         with:
           path: shards
@@ -117,7 +127,8 @@ jobs:
             --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
           python export_generation_report.py
-          python research_candidate_engine.py
+          python research_candidate_engine.py \
+            --autonomous-count "${{ github.event.inputs.research_count || '12' }}"
 
       - name: Commit grown pool
         run: |
