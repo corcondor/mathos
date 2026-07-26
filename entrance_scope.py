@@ -18,35 +18,6 @@ CURRICULUM = "jp_upper_secondary_math_IA_IIB_IIIC"
 # a high-school label is not sufficient.
 FAMILY_LOWERINGS: dict[str, tuple[str, ...]] = {
     # --- 追加登録: 高校範囲の道具に分解できる族 ---
-    "construct.paley_common_neighbors": (
-        "modular_arithmetic",
-        "quadratic_residues",
-        "counting_by_cases",
-    ),
-    "layered.paley_triangle_count": (
-        "modular_arithmetic",
-        "quadratic_residues",
-        "counting_by_cases",
-        "combination_counting",
-    ),
-    "deep.paley_spectrum_triangles": (
-        "modular_arithmetic",
-        "quadratic_residues",
-        "counting_by_cases",
-        "combination_counting",
-    ),
-    "ultradeep.paley_spanning_tree_divisor_count": (
-        "modular_arithmetic",
-        "quadratic_residues",
-        "counting_by_cases",
-        "divisor_counting",
-    ),
-    "ultradeep.paley_four_cycle_divisor_count": (
-        "modular_arithmetic",
-        "quadratic_residues",
-        "counting_by_cases",
-        "divisor_counting",
-    ),
     "construct.mobius_fixed_points": (
         "rational_function",
         "quadratic_equation",
@@ -56,23 +27,6 @@ FAMILY_LOWERINGS: dict[str, tuple[str, ...]] = {
         "rational_function",
         "function_composition",
         "periodicity",
-    ),
-    "construct.gambler_ruin_probability": (
-        "probability_recurrence",
-        "arithmetic_sequence",
-        "boundary_condition",
-    ),
-    "ultradeep.gambler_absorption_variance_divisor_count": (
-        "probability_recurrence",
-        "expectation_linearity",
-        "boundary_condition",
-        "divisor_counting",
-    ),
-    "deep.recurrence_period_quadratic_character": (
-        "linear_recurrence",
-        "modular_arithmetic",
-        "periodicity",
-        "quadratic_residues",
     ),
     "ultradeep.geometry_regular_polygon_minkowski_perimeter": (
         "regular_polygon",
