@@ -652,14 +652,14 @@
       }
     }
   ],
-  "generated_at": "2026-07-26T04:46:29.534677+00:00",
+  "generated_at": "2026-07-26T04:55:04.337495+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
     "unresolved_by_mathos": "MathOS has not proved or refuted the candidate. This is not a claim that the problem is open to humanity."
   },
   "summary": {
-    "current_runtime_corpus_size": 28074,
+    "current_runtime_corpus_size": 176,
     "parameter_variants": 0,
     "reference_corpus_size": 28074,
     "reference_corpus_size_max": 28074,
