@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-26T04:55:03.716381+00:00",
+  "generated_at": "2026-07-26T05:33:26.235191+00:00",
   "method": {
     "name": "MathOS autonomous pool (parallel shards merged)"
   },
@@ -25665,13 +25665,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "6",
-      "candidate_id": "construct:construct.mobius_fixed_points:2111",
+      "answer_tex": "- \\frac{9}{14}",
+      "candidate_id": "construct:construct.mobius_fixed_points:487",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.57
+        "score": 8.58
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -25684,12 +25684,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "continuous_verified_problem_batch1",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1908
+        "maximum_surface_jaccard": 0.0987
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-6\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{6 x}{7} + \\frac{6}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&-9\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{4 x}{3} - \\frac{3}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -25917,13 +25917,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-7",
-      "candidate_id": "construct:construct.mobius_fixed_points:543",
+      "answer_tex": "- \\frac{9}{16}",
+      "candidate_id": "construct:construct.mobius_fixed_points:838",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.57
+        "score": 8.58
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -25938,10 +25938,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.094
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&-7\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{4} + \\frac{7}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{9 x}{7} - \\frac{9}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -26169,13 +26169,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:576",
+      "answer_tex": "- \\frac{5}{8}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1334",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.57
+        "score": 8.58
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -26190,10 +26190,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1141
+        "maximum_surface_jaccard": 0.0977
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&-5\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{5}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&5\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{5 x}{3} - \\frac{5}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -26421,8 +26421,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{9}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:659",
+      "answer_tex": "6",
+      "candidate_id": "construct:construct.mobius_fixed_points:2111",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -26440,12 +26440,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "sakumon_curation",
+        "closest_source": "continuous_verified_problem_batch1",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1034
+        "maximum_surface_jaccard": 0.1908
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{9}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-6\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{6 x}{7} + \\frac{6}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -26632,8 +26632,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1070",
+      "answer_tex": "-7",
+      "candidate_id": "construct:construct.mobius_fixed_points:543",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -26653,10 +26653,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1053
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} + \\frac{2}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&-7\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{4} + \\frac{7}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -26843,8 +26843,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "5",
-      "candidate_id": "construct:construct.mobius_fixed_points:1442",
+      "answer_tex": "\\frac{5}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:576",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -26864,10 +26864,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1047
+        "maximum_surface_jaccard": 0.1141
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&-5\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{5}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&-5\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{5}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -27054,8 +27054,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-3",
-      "candidate_id": "construct:construct.mobius_fixed_points:1453",
+      "answer_tex": "- \\frac{9}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:659",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -27075,10 +27075,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1047
+        "maximum_surface_jaccard": 0.1034
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{4} + \\frac{9}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{9}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -27265,8 +27265,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{2}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1608",
+      "answer_tex": "\\frac{2}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1070",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -27286,10 +27286,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1272
+        "maximum_surface_jaccard": 0.1053
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&-2\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} + \\frac{2}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -27476,8 +27476,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "1",
-      "candidate_id": "construct:construct.mobius_fixed_points:460",
+      "answer_tex": "5",
+      "candidate_id": "construct:construct.mobius_fixed_points:1442",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -27497,10 +27497,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1184
+        "maximum_surface_jaccard": 0.1047
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-3\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&-5\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{5}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -27687,8 +27687,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{7}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:564",
+      "answer_tex": "-3",
+      "candidate_id": "construct:construct.mobius_fixed_points:1453",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -27708,10 +27708,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1053
+        "maximum_surface_jaccard": 0.1047
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&-7\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} + \\frac{7}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{4} + \\frac{9}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -27898,8 +27898,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{7}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:781",
+      "answer_tex": "- \\frac{2}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1608",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -27919,10 +27919,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1141
+        "maximum_surface_jaccard": 0.1272
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&-7\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{7}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&-2\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -28109,8 +28109,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1211",
+      "answer_tex": "1",
+      "candidate_id": "construct:construct.mobius_fixed_points:460",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -28130,10 +28130,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1047
+        "maximum_surface_jaccard": 0.1184
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&-7\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{5} + \\frac{7}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-3\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} + \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -28320,8 +28320,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-8",
-      "candidate_id": "construct:construct.mobius_fixed_points:712",
+      "answer_tex": "- \\frac{7}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:564",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -28341,10 +28341,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1047
+        "maximum_surface_jaccard": 0.1053
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-8\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{6 x}{5} + \\frac{8}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&-7\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} + \\frac{7}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -28531,13 +28531,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:661",
+      "answer_tex": "- \\frac{7}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:781",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.56
+        "score": 8.57
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -28550,12 +28550,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "continuous_verified_problem_batch1",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1908
+        "maximum_surface_jaccard": 0.1141
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&-4\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2}{3} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&-7\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{2} + \\frac{7}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -28742,13 +28742,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1781",
+      "answer_tex": "\\frac{7}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1211",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.56
+        "score": 8.57
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -28761,12 +28761,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "continuous_verified_problem_batch1",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1894
+        "maximum_surface_jaccard": 0.1047
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{7} - \\frac{6 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&-7\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{5} + \\frac{7}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -28953,13 +28953,13 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2126",
+      "answer_tex": "-8",
+      "candidate_id": "construct:construct.mobius_fixed_points:712",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
         "construct": 2,
-        "score": 8.56
+        "score": 8.57
       },
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -28972,12 +28972,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "continuous_verified_problem_batch1",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1908
+        "maximum_surface_jaccard": 0.1047
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&3\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&-8\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{6 x}{5} + \\frac{8}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -29164,8 +29164,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-2",
-      "candidate_id": "construct:construct.mobius_fixed_points:2140",
+      "answer_tex": "\\frac{2}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:661",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -29185,10 +29185,10 @@
       "novelty": {
         "closest_source": "continuous_verified_problem_batch1",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1894
+        "maximum_surface_jaccard": 0.1908
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&-2\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{5} - \\frac{2}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&-4\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2}{3} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -29375,8 +29375,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2685",
+      "answer_tex": "\\frac{9}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1781",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -29398,8 +29398,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1894
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&3\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{7} - \\frac{8 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{7} - \\frac{6 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -29586,8 +29586,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{1}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:405",
+      "answer_tex": "\\frac{3}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2126",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -29605,12 +29605,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "sakumon_curation",
+        "closest_source": "continuous_verified_problem_batch1",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1908
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&1\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{8} - \\frac{1}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&3\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -29797,8 +29797,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{14}",
-      "candidate_id": "construct:construct.mobius_fixed_points:435",
+      "answer_tex": "-2",
+      "candidate_id": "construct:construct.mobius_fixed_points:2140",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -29816,12 +29816,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "sakumon_curation",
+        "closest_source": "continuous_verified_problem_batch1",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.105
+        "maximum_surface_jaccard": 0.1894
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&-2\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{5} - \\frac{2}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -30008,8 +30008,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-1",
-      "candidate_id": "construct:construct.mobius_fixed_points:436",
+      "answer_tex": "\\frac{1}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2685",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -30027,12 +30027,12 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "sakumon_curation",
+        "closest_source": "continuous_verified_problem_batch1",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1
+        "maximum_surface_jaccard": 0.1894
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&7\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} - \\frac{7}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&3\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{7} - \\frac{8 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -30219,8 +30219,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{15}",
-      "candidate_id": "construct:construct.mobius_fixed_points:445",
+      "answer_tex": "- \\frac{1}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:405",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -30240,10 +30240,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1142
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-1\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{9} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&1\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{8} - \\frac{1}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -30430,8 +30430,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{8}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:492",
+      "answer_tex": "\\frac{1}{14}",
+      "candidate_id": "construct:construct.mobius_fixed_points:435",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -30451,10 +30451,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1055
+        "maximum_surface_jaccard": 0.105
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8}{7} - \\frac{4 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -30641,8 +30641,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{5}{4}",
-      "candidate_id": "construct:construct.mobius_fixed_points:585",
+      "answer_tex": "-1",
+      "candidate_id": "construct:construct.mobius_fixed_points:436",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -30662,10 +30662,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.1
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&5\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{7} - \\frac{5}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&7\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} - \\frac{7}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -30852,8 +30852,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:612",
+      "answer_tex": "\\frac{1}{15}",
+      "candidate_id": "construct:construct.mobius_fixed_points:445",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -30873,10 +30873,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1067
+        "maximum_surface_jaccard": 0.1142
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&5\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-1\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{9} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31029,8 +31029,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:683",
+      "answer_tex": "\\frac{8}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:492",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31050,10 +31050,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1055
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&9\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{8} - \\frac{7 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8}{7} - \\frac{4 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31206,8 +31206,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{9}",
-      "candidate_id": "construct:construct.mobius_fixed_points:874",
+      "answer_tex": "- \\frac{5}{4}",
+      "candidate_id": "construct:construct.mobius_fixed_points:585",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31227,10 +31227,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-7\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7}{4} - \\frac{5 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&5\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{7} - \\frac{5}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31383,8 +31383,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{3}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:899",
+      "answer_tex": "\\frac{1}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:612",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31404,10 +31404,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1142
+        "maximum_surface_jaccard": 0.1067
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-3\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} - \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&5\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31560,8 +31560,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "2",
-      "candidate_id": "construct:construct.mobius_fixed_points:981",
+      "answer_tex": "\\frac{3}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:683",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31583,8 +31583,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-4\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} - \\frac{4}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&9\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{8} - \\frac{7 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31737,8 +31737,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "3",
-      "candidate_id": "construct:construct.mobius_fixed_points:1110",
+      "answer_tex": "\\frac{7}{9}",
+      "candidate_id": "construct:construct.mobius_fixed_points:874",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31758,10 +31758,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{5} - \\frac{9}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-7\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7}{4} - \\frac{5 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -31914,8 +31914,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{4}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3316",
+      "answer_tex": "- \\frac{3}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:899",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -31935,10 +31935,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1142
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&8\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4}{3} - \\frac{4 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-3\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{9} - \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32091,8 +32091,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "9",
-      "candidate_id": "construct:construct.mobius_fixed_points:3515",
+      "answer_tex": "2",
+      "candidate_id": "construct:construct.mobius_fixed_points:981",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32114,8 +32114,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{7} - \\frac{9}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-4\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} - \\frac{4}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32268,8 +32268,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{4}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:423",
+      "answer_tex": "3",
+      "candidate_id": "construct:construct.mobius_fixed_points:1110",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32291,8 +32291,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&4\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{5} - \\frac{9}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32404,8 +32404,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-5",
-      "candidate_id": "construct:construct.mobius_fixed_points:445",
+      "answer_tex": "\\frac{4}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3316",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32425,10 +32425,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-5\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{4} - \\frac{5}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&8\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4}{3} - \\frac{4 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32540,8 +32540,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:570",
+      "answer_tex": "9",
+      "candidate_id": "construct:construct.mobius_fixed_points:3515",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32561,10 +32561,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1055
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&6\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{6}{5} - \\frac{4 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{7} - \\frac{9}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32676,8 +32676,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:624",
+      "answer_tex": "\\frac{4}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:423",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32697,10 +32697,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1152
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-1\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&4\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32812,8 +32812,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{10}",
-      "candidate_id": "construct:construct.mobius_fixed_points:672",
+      "answer_tex": "-5",
+      "candidate_id": "construct:construct.mobius_fixed_points:445",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32833,10 +32833,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991
+        "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&7\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7}{4} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-5\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{4} - \\frac{5}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -32948,8 +32948,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{16}",
-      "candidate_id": "construct:construct.mobius_fixed_points:701",
+      "answer_tex": "\\frac{2}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:570",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -32969,10 +32969,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.1055
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&3\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{7} - \\frac{9 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&6\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{6}{5} - \\frac{4 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33084,8 +33084,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:764",
+      "answer_tex": "\\frac{1}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:624",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33105,10 +33105,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1152
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&7\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7}{8} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-1\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33220,8 +33220,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{10}",
-      "candidate_id": "construct:construct.mobius_fixed_points:770",
+      "answer_tex": "\\frac{7}{10}",
+      "candidate_id": "construct:construct.mobius_fixed_points:672",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33241,10 +33241,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1004
+        "maximum_surface_jaccard": 0.0991
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{4} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&7\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7}{4} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33356,8 +33356,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{10}",
-      "candidate_id": "construct:construct.mobius_fixed_points:786",
+      "answer_tex": "\\frac{3}{16}",
+      "candidate_id": "construct:construct.mobius_fixed_points:701",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33377,10 +33377,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1142
+        "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&1\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{6} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&3\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{7} - \\frac{9 x}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33492,8 +33492,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:806",
+      "answer_tex": "\\frac{7}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:764",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33513,10 +33513,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&5\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&7\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7}{8} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33628,8 +33628,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{4}",
-      "candidate_id": "construct:construct.mobius_fixed_points:848",
+      "answer_tex": "\\frac{9}{10}",
+      "candidate_id": "construct:construct.mobius_fixed_points:770",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33649,10 +33649,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1007
+        "maximum_surface_jaccard": 0.1004
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&6\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{6}{5} - \\frac{3 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-9\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{4} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33764,8 +33764,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{14}",
-      "candidate_id": "construct:construct.mobius_fixed_points:949",
+      "answer_tex": "\\frac{1}{10}",
+      "candidate_id": "construct:construct.mobius_fixed_points:786",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33785,10 +33785,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.1142
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-9\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&1\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{6} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -33900,8 +33900,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "-4",
-      "candidate_id": "construct:construct.mobius_fixed_points:1065",
+      "answer_tex": "\\frac{5}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:806",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -33921,10 +33921,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&5\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34036,8 +34036,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1531",
+      "answer_tex": "\\frac{3}{4}",
+      "candidate_id": "construct:construct.mobius_fixed_points:848",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34057,10 +34057,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1063
+        "maximum_surface_jaccard": 0.1007
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&-2\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{2} - \\frac{5}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&6\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{6}{5} - \\frac{3 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34172,8 +34172,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{14}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1728",
+      "answer_tex": "\\frac{9}{14}",
+      "candidate_id": "construct:construct.mobius_fixed_points:949",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34195,8 +34195,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-3\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-9\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34308,8 +34308,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{6}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1897",
+      "answer_tex": "-4",
+      "candidate_id": "construct:construct.mobius_fixed_points:1065",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34329,10 +34329,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1063
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-6\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{2} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34444,8 +34444,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{8}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2157",
+      "answer_tex": "\\frac{5}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1531",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34465,10 +34465,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0988
+        "maximum_surface_jaccard": 0.1063
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&8\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8}{5} - \\frac{8 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&-2\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{2} - \\frac{5}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34580,8 +34580,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{5}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2359",
+      "answer_tex": "\\frac{3}{14}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1728",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34601,10 +34601,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1063
+        "maximum_surface_jaccard": 0.1016
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{7} - \\frac{5}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}9&-3\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{5} - \\frac{9 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34716,8 +34716,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{5}{6}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2637",
+      "answer_tex": "\\frac{6}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1897",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34737,10 +34737,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1023
+        "maximum_surface_jaccard": 0.1063
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&5\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{5}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-6\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{2} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34852,8 +34852,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "8",
-      "candidate_id": "construct:construct.mobius_fixed_points:2769",
+      "answer_tex": "\\frac{8}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2157",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -34875,8 +34875,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0988
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-8\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{7} - \\frac{8}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&8\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8}{5} - \\frac{8 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -34988,8 +34988,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3119",
+      "answer_tex": "- \\frac{5}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2359",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35009,10 +35009,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1063
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{5} - \\frac{6 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5 x}{7} - \\frac{5}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35090,8 +35090,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{17}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3264",
+      "answer_tex": "- \\frac{5}{6}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2637",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35111,10 +35111,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991
+        "maximum_surface_jaccard": 0.1023
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{8 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&5\\\\0&-4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{5}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35192,8 +35192,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3453",
+      "answer_tex": "8",
+      "candidate_id": "construct:construct.mobius_fixed_points:2769",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35213,10 +35213,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1164
+        "maximum_surface_jaccard": 0.0988
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-5\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-8\\\\0&7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8 x}{7} - \\frac{8}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35294,8 +35294,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{8}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:591",
+      "answer_tex": "\\frac{9}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3119",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35315,10 +35315,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1055
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{7} - \\frac{8}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{5} - \\frac{6 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35396,8 +35396,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:646",
+      "answer_tex": "\\frac{2}{17}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3264",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35417,10 +35417,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.0991
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-9\\\\0&-2\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{2} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{8 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35498,8 +35498,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:828",
+      "answer_tex": "\\frac{5}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3453",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35519,10 +35519,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1141
+        "maximum_surface_jaccard": 0.1164
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&3\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{2} - \\frac{7 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-5\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35600,8 +35600,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{2}",
-      "candidate_id": "construct:construct.mobius_fixed_points:914",
+      "answer_tex": "- \\frac{8}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:591",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35621,10 +35621,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1055
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} - \\frac{9}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&8\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{7} - \\frac{8}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35702,8 +35702,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{1}{6}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1178",
+      "answer_tex": "\\frac{9}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:646",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35723,10 +35723,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1055
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-1&-1\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{5} - \\frac{1}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-9\\\\0&-2\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{2} - \\frac{3 x}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35804,8 +35804,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1231",
+      "answer_tex": "\\frac{3}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:828",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35825,10 +35825,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1063
+        "maximum_surface_jaccard": 0.1141
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5}{8} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&3\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{2} - \\frac{7 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -35906,8 +35906,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{14}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1555",
+      "answer_tex": "\\frac{9}{2}",
+      "candidate_id": "construct:construct.mobius_fixed_points:914",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -35927,10 +35927,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1067
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&5\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{4 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-9\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{5} - \\frac{9}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36008,8 +36008,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{2}{9}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2751",
+      "answer_tex": "- \\frac{1}{6}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1178",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36029,10 +36029,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1228
+        "maximum_surface_jaccard": 0.1055
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&2\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-1&-1\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{5} - \\frac{1}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36110,8 +36110,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{7}{4}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2779",
+      "answer_tex": "\\frac{5}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1231",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36131,10 +36131,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0996
+        "maximum_surface_jaccard": 0.1063
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&7\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{3} - \\frac{7}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&5\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5}{8} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36212,8 +36212,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3106",
+      "answer_tex": "\\frac{5}{14}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1555",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36233,10 +36233,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1156
+        "maximum_surface_jaccard": 0.1067
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&1\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{6} - \\frac{7 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&5\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{5}{6} - \\frac{4 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36314,8 +36314,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{7}{12}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3134",
+      "answer_tex": "- \\frac{2}{9}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2751",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36335,10 +36335,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1023
+        "maximum_surface_jaccard": 0.1228
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&7\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{7}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&2\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{1}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36416,8 +36416,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{9}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3143",
+      "answer_tex": "- \\frac{7}{4}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2779",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36437,10 +36437,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1055
+        "maximum_surface_jaccard": 0.0996
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&1\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{4 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&7\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{3} - \\frac{7}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36518,8 +36518,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:3271",
+      "answer_tex": "\\frac{1}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3106",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36539,10 +36539,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1141
+        "maximum_surface_jaccard": 0.1156
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-3\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{2} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&1\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{6} - \\frac{7 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36620,8 +36620,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{12}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2632",
+      "answer_tex": "- \\frac{7}{12}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3134",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36641,10 +36641,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.105
+        "maximum_surface_jaccard": 0.1023
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{7 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}4&7\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{2} - \\frac{7}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36722,8 +36722,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{4}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:033",
+      "answer_tex": "\\frac{1}{9}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3143",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36743,10 +36743,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1055
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&1\\\\0&5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{4 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36824,8 +36824,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{4}{3}",
-      "candidate_id": "construct:construct.mobius_fixed_points:084",
+      "answer_tex": "\\frac{3}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:3271",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36845,10 +36845,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1004
+        "maximum_surface_jaccard": 0.1141
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} - \\frac{4}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-3\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{2} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -36926,8 +36926,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{6}{17}",
-      "candidate_id": "construct:construct.mobius_fixed_points:222",
+      "answer_tex": "\\frac{1}{12}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2632",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -36947,10 +36947,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.102
+        "maximum_surface_jaccard": 0.105
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&6\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{9 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{7 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37028,8 +37028,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{15}",
-      "candidate_id": "construct:construct.mobius_fixed_points:228",
+      "answer_tex": "\\frac{4}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:033",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37049,10 +37049,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1082
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&2\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37130,8 +37130,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{3}{17}",
-      "candidate_id": "construct:construct.mobius_fixed_points:357",
+      "answer_tex": "- \\frac{4}{3}",
+      "candidate_id": "construct:construct.mobius_fixed_points:084",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37151,10 +37151,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1126
+        "maximum_surface_jaccard": 0.1004
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&3\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{3} - \\frac{8 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}6&-4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2 x}{3} - \\frac{4}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37232,8 +37232,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:747",
+      "answer_tex": "\\frac{6}{17}",
+      "candidate_id": "construct:construct.mobius_fixed_points:222",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37253,10 +37253,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1156
+        "maximum_surface_jaccard": 0.102
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&7\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7}{6} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&6\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{9 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37334,8 +37334,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{9}{8}",
-      "candidate_id": "construct:construct.mobius_fixed_points:849",
+      "answer_tex": "\\frac{2}{15}",
+      "candidate_id": "construct:construct.mobius_fixed_points:228",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37355,10 +37355,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094
+        "maximum_surface_jaccard": 0.1082
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{7} - \\frac{9}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&2\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37436,8 +37436,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{9}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:076",
+      "answer_tex": "\\frac{3}{17}",
+      "candidate_id": "construct:construct.mobius_fixed_points:357",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37457,10 +37457,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1126
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-9\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{8} - \\frac{9}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-8&3\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{3} - \\frac{8 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37538,8 +37538,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{8}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:903",
+      "answer_tex": "\\frac{7}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:747",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37559,10 +37559,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1
+        "maximum_surface_jaccard": 0.1156
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&8\\\\0&3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8}{3} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-5&7\\\\0&6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7}{6} - \\frac{5 x}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37640,8 +37640,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{11}",
-      "candidate_id": "construct:construct.mobius_fixed_points:991",
+      "answer_tex": "- \\frac{9}{8}",
+      "candidate_id": "construct:construct.mobius_fixed_points:849",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37661,10 +37661,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1005
+        "maximum_surface_jaccard": 0.094
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&9\\\\0&-7\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{7} - \\frac{9}{7}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37742,8 +37742,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{8}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1001",
+      "answer_tex": "- \\frac{9}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:076",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37763,10 +37763,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-8\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8}{5} - \\frac{2 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-9\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3 x}{8} - \\frac{9}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37844,8 +37844,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{2}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:221",
+      "answer_tex": "\\frac{8}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:903",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37865,10 +37865,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991
+        "maximum_surface_jaccard": 0.1
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-2\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{2}{5} - \\frac{8 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-2&8\\\\0&3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8}{3} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -37946,8 +37946,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "4",
-      "candidate_id": "construct:construct.mobius_fixed_points:998",
+      "answer_tex": "\\frac{2}{11}",
+      "candidate_id": "construct:construct.mobius_fixed_points:991",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -37967,10 +37967,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1005
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&4\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-2\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2}{9} - \\frac{2 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38048,8 +38048,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{6}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1137",
+      "answer_tex": "\\frac{8}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1001",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38069,10 +38069,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1094
+        "maximum_surface_jaccard": 0.1
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-6\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}2&-8\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{8}{5} - \\frac{2 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38150,8 +38150,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "7",
-      "candidate_id": "construct:construct.mobius_fixed_points:1646",
+      "answer_tex": "\\frac{2}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:221",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38171,10 +38171,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1164
+        "maximum_surface_jaccard": 0.0991
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&7\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{6} - \\frac{7}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}8&-2\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{2}{5} - \\frac{8 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38252,8 +38252,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{9}{7}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1877",
+      "answer_tex": "4",
+      "candidate_id": "construct:construct.mobius_fixed_points:998",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38273,10 +38273,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1012
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&9\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{9}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&4\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4 x}{3} - \\frac{4}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38354,8 +38354,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{6}{5}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1926",
+      "answer_tex": "\\frac{6}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1137",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38375,10 +38375,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1063
+        "maximum_surface_jaccard": 0.1094
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-1&-6\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{4} - \\frac{3}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}5&-6\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{3}{4} - \\frac{5 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38456,8 +38456,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{4}{13}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2303",
+      "answer_tex": "7",
+      "candidate_id": "construct:construct.mobius_fixed_points:1646",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38477,10 +38477,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059
+        "maximum_surface_jaccard": 0.1164
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{4}{9} - \\frac{4 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&7\\\\0&-6\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{6} - \\frac{7}{6}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38558,8 +38558,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "- \\frac{5}{9}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2338",
+      "answer_tex": "\\frac{9}{7}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1877",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38579,10 +38579,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094
+        "maximum_surface_jaccard": 0.1012
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&5\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=- \\frac{x}{8} - \\frac{5}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-3&9\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{9}{4} - \\frac{3 x}{4}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38660,8 +38660,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{7}{16}",
-      "candidate_id": "construct:construct.mobius_fixed_points:158",
+      "answer_tex": "- \\frac{6}{5}",
+      "candidate_id": "construct:construct.mobius_fixed_points:1926",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38681,10 +38681,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0988
+        "maximum_surface_jaccard": 0.1063
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-7\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7}{9} - \\frac{7 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-1&-6\\\\0&4\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{4} - \\frac{3}{2}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38762,8 +38762,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{8}",
-      "candidate_id": "construct:construct.mobius_fixed_points:734",
+      "answer_tex": "\\frac{4}{13}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2303",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38783,10 +38783,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.105
+        "maximum_surface_jaccard": 0.1059
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{3 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-4&4\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{4}{9} - \\frac{4 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38864,8 +38864,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{8}{15}",
-      "candidate_id": "construct:construct.mobius_fixed_points:1692",
+      "answer_tex": "- \\frac{5}{9}",
+      "candidate_id": "construct:construct.mobius_fixed_points:2338",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38885,10 +38885,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991
+        "maximum_surface_jaccard": 0.094
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-6&8\\\\0&9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{8}{9} - \\frac{2 x}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}1&5\\\\0&-8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=- \\frac{x}{8} - \\frac{5}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -38966,8 +38966,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{5}{4}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2366",
+      "answer_tex": "\\frac{7}{16}",
+      "candidate_id": "construct:construct.mobius_fixed_points:158",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -38987,10 +38987,10 @@
       "novelty": {
         "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1016
+        "maximum_surface_jaccard": 0.0988
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-7&5\\\\0&-3\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{7 x}{3} - \\frac{5}{3}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}7&-7\\\\0&-9\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{7}{9} - \\frac{7 x}{9}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
@@ -39068,8 +39068,8 @@
     },
     {
       "accepted": true,
-      "answer_tex": "\\frac{1}{17}",
-      "candidate_id": "construct:construct.mobius_fixed_points:2694",
+      "answer_tex": "\\frac{1}{8}",
+      "candidate_id": "construct:construct.mobius_fixed_points:734",
       "difficulty": {
         "band": "B_hard_university",
         "condition": 0,
@@ -39091,8 +39091,8 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.105
       },
-      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}-9&1\\\\0&8\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
-      "statement_tex": "関数 \\(f(x)=\\frac{1}{8} - \\frac{9 x}{8}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
+      "solution_tex": "\\(f(x)=x\\) は \\((cx+d)x=ax+b\\)、すなわち二次方程式に帰着し，その解が不動点。行列 \\(M=\\begin{pmatrix}3&-1\\\\0&-5\\end{pmatrix}\\) の固有ベクトルの傾きに対応する。",
+      "statement_tex": "関数 \\(f(x)=\\frac{1}{5} - \\frac{3 x}{5}\\) を定める。合成を \\(f_1=f,\\ f_{n+1}=f\\circ f_n\\) で帰納的に定める。\\(f\\) の不動点をすべて求めよ。",
       "tool": "matrix_eigen",
       "verification": {
         "exact_backend": true,
