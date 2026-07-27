@@ -68,6 +68,21 @@ def _records(payload: dict[str, Any]) -> Iterable[dict[str, Any]]:
             yield problem
 
 
+def _traceback_report() -> dict[str, Any]:
+    """トレースバック方式（演繹閉包の各ノード）の生成物。"""
+    try:
+        from math_os_prototype.traceback_engine import synthesize as synthesize_traceback
+    except ImportError:  # pragma: no cover
+        try:
+            from traceback_engine import synthesize as synthesize_traceback
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize_traceback()
+    except Exception:
+        return {"problems": []}
+
+
 def build_pool(
     construct_path: Path = DEFAULT_CONSTRUCT,
 ) -> dict[str, Any]:
@@ -79,6 +94,7 @@ def build_pool(
             _records(build_batch_report([], [], [])),
         ),
         ("geometry_fusion", _records(synthesize_geometry())),
+        ("traceback_closure", _records(_traceback_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()

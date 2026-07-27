@@ -17,6 +17,55 @@ CURRICULUM = "jp_upper_secondary_math_IA_IIB_IIIC"
 # school-level primitives needed to reconstruct the solution; merely attaching
 # a high-school label is not sufficient.
 FAMILY_LOWERINGS: dict[str, tuple[str, ...]] = {
+    # --- traceback 方式（演繹閉包の各ノード）---
+    "traceback.cubic_tangent.iterate_x_n": (
+        "differentiation",
+        "geometric_sequence",
+        "general_term",
+    ),
+    "traceback.cubic_tangent.log_growth_limit": (
+        "geometric_sequence",
+        "logarithm",
+        "limit_evaluation",
+    ),
+    "traceback.cubic_tangent.midpoint_locus": (
+        "differentiation",
+        "midpoint",
+        "locus_elimination",
+    ),
+    "traceback.cubic_tangent.reintersection_x": (
+        "differentiation",
+        "cubic_equation",
+        "vieta_relations",
+    ),
+    "traceback.regular_polygon.area": (
+        "trigonometric_ratio",
+        "triangle_decomposition",
+        "area_sum",
+    ),
+    "traceback.regular_polygon.centroid_zero_subsets": (
+        "complex_plane",
+        "symmetry",
+        "subset_counting",
+    ),
+    "traceback.regular_polygon.diagonal_count": (
+        "combination_counting",
+    ),
+    "traceback.regular_polygon.distance_product_divisors": (
+        "complex_plane",
+        "polynomial_factorization",
+        "divisor_counting",
+    ),
+    "traceback.regular_polygon.sum_sq_pairwise": (
+        "complex_plane",
+        "vector_sum",
+        "squared_distance",
+    ),
+    "traceback.regular_polygon.vertex_distance_product": (
+        "complex_plane",
+        "polynomial_factorization",
+        "limit_evaluation",
+    ),
     # --- 追加登録: 高校範囲の道具に分解できる族 ---
     "construct.mobius_fixed_points": (
         "rational_function",

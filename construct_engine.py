@@ -630,6 +630,21 @@ def explore_random(samples: int = 500, seed: int | None = None,
     return out
 
 
+def _traceback_families():
+    """トレースバック方式: 1構築から演繹閉包の各ノードを問題として切り出す。"""
+    try:
+        from math_os_prototype.traceback_engine import cut_problems
+    except ImportError:
+        try:
+            from traceback_engine import cut_problems
+        except ImportError:
+            return []
+    try:
+        return cut_problems()
+    except Exception:
+        return []
+
+
 def _deep_families():
     try:
         from math_os_prototype.deep_families import DEEP_FAMILIES
@@ -657,6 +672,16 @@ def all_problems(only_family: str | None = None) -> list[Problem]:
         else None
     )
     out: list[Problem] = []
+    # トレースバック方式: 1 つの構築から演繹閉包の各ノードを問題として切り出す。
+    # 族を書かずに問題が増えるので、族フィルタ時のみ絞り込む。
+    for problem in _traceback_families():
+        if allowed_ids is not None and problem.family_id not in allowed_ids:
+            continue
+        if allowed_builders is not None and not any(
+            name in problem.family_id for name in allowed_builders
+        ):
+            continue
+        out.append(problem)
     for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
         if allowed_builders is not None and build.__name__ not in allowed_builders:
             continue
