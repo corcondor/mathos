@@ -582,12 +582,18 @@ FIXED_SHARD_BUILDER_NAMES: dict[str, frozenset[str]] = {
 
 
 def explore_random(samples: int = 500, seed: int | None = None,
-                   only_family: str | None = None) -> list[Problem]:
+                   only_family: str | None = None,
+                   known_signatures: set[tuple[str, tuple[str, ...]]] | None = None,
+                   ) -> list[Problem]:
     """固定グリッドを超えてパラメータ空間をランダム探索する。
 
     計算資源がある環境（GitHub Actions 等）でこれを大きくすると、その分だけ
     新しい構造が見つかる。各族の妥当な範囲から引き、検証を通ったものだけ返す。
     only_family を指定すると、その族だけを探索する（並列シャード用）。
+
+    探索が返すのは **新しい構造だけ** である。パラメータを変えても射の連鎖が
+    同じなら、それは同じ問題を数字違いで作っているにすぎない。固定グリッドで
+    既に出ている構造も known_signatures で除外する。
     """
 
     import random as _random
@@ -597,6 +603,7 @@ def explore_random(samples: int = 500, seed: int | None = None,
     rng = _random.Random(seed)
     out: list[Problem] = []
     seen_parameters: set[tuple[str, tuple[tuple[str, Any], ...]]] = set()
+    seen_structures: set[tuple[str, tuple[str, ...]]] = set(known_signatures or ())
     space: list[tuple[Any, Any]] = [
         (_mobius, lambda: {"a": rng.randint(-9, 9), "b": rng.randint(-9, 9),
                            "c": rng.randint(-3, 3), "d": rng.randint(-9, 9),
@@ -631,6 +638,10 @@ def explore_random(samples: int = 500, seed: int | None = None,
         except Exception:
             continue
         if p is not None and p.verified and p.independent_check:
+            signature = (p.family_id, tuple(p.morphism_chain))
+            if signature in seen_structures:
+                continue
+            seen_structures.add(signature)
             out.append(p)
     return out
 
@@ -750,7 +761,10 @@ def synthesize(explore: int = 0, seed: int | None = None,
                only_family: str | None = None) -> dict[str, Any]:
     problems = all_problems(only_family)
     if explore:
-        problems = problems + explore_random(explore, seed, only_family)
+        known = {(p.family_id, tuple(p.morphism_chain)) for p in problems}
+        problems = problems + explore_random(
+            explore, seed, only_family, known_signatures=known
+        )
     from collections import Counter
     records = [
         {
