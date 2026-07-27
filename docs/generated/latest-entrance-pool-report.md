@@ -5,12 +5,12 @@
 
 ## 結果
 
-- 検証済み構造: **36**
-- 構造族: **36**
-- 幾何・代数・複素数系: **26**
+- 検証済み構造: **46**
+- 構造族: **46**
+- 幾何・代数・複素数系: **36**
 - ギャンブラー破産系: **0**
 - Paley・グラフ理論を表面に出す問題: **0**
-- 同一構造の数値変種として除外: **89**
+- 同一構造の数値変種として除外: **179**
 - 高校範囲への還元を証明できず除外: **51**
 
 ## 採用契約
@@ -51,6 +51,12 @@
 | `complex_geometry` | `deep.polygon_subset_centroid` | `complex_plane -> roots_of_unity -> centroid -> combination` |
 | `complex_geometry` | `deep.rotation_diagonal_product_divisors` | `complex_plane -> roots_of_unity -> distance -> polynomial_factorization -> integer_factorization` |
 | `complex_geometry` | `layered.rotation_orbit_hull_area` | `complex_plane -> de_moivre -> regular_polygon -> area` |
+| `complex_geometry` | `traceback.regular_polygon.area` | `trigonometric_ratio -> triangle_decomposition -> area_sum` |
+| `complex_geometry` | `traceback.regular_polygon.centroid_zero_subsets` | `complex_plane -> symmetry -> subset_counting` |
+| `complex_geometry` | `traceback.regular_polygon.diagonal_count` | `combination_counting` |
+| `complex_geometry` | `traceback.regular_polygon.distance_product_divisors` | `complex_plane -> polynomial_factorization -> divisor_counting` |
+| `complex_geometry` | `traceback.regular_polygon.sum_sq_pairwise` | `complex_plane -> vector_sum -> squared_distance` |
+| `complex_geometry` | `traceback.regular_polygon.vertex_distance_product` | `complex_plane -> polynomial_factorization -> limit_evaluation` |
 | `differential_geometry` | `ultradeep.geometry_parabola_normal_envelope` | `parabola -> differentiation -> normal_line -> parameter_elimination -> locus` |
 | `euclidean_geometry` | `ultradeep.geometry_orthocenter_locus_area` | `ellipse -> inner_product -> orthocenter -> parameter_elimination -> area` |
 | `geometry` | `construct.parabola_right_angle_chord` | `coordinate_geometry -> inner_product -> quadratic_equation` |
@@ -58,6 +64,10 @@
 | `geometry` | `passage_region.parabola_family_sweep` | `quadratic_range -> parameter_elimination -> definite_integral -> area` |
 | `geometry_algebra` | `construct.cubic_tangent_midpoint_locus` | `differentiation -> tangent_line -> vieta_relations -> parameter_elimination -> locus` |
 | `geometry_algebra` | `layered.cubic_tangent_iteration` | `differentiation -> tangent_line -> recurrence -> mathematical_induction` |
+| `geometry_algebra` | `traceback.cubic_tangent.iterate_x_n` | `differentiation -> geometric_sequence -> general_term` |
+| `geometry_algebra` | `traceback.cubic_tangent.log_growth_limit` | `geometric_sequence -> logarithm -> limit_evaluation` |
+| `geometry_algebra` | `traceback.cubic_tangent.midpoint_locus` | `differentiation -> midpoint -> locus_elimination` |
+| `geometry_algebra` | `traceback.cubic_tangent.reintersection_x` | `differentiation -> cubic_equation -> vieta_relations` |
 | `geometry_analysis` | `deep.tangent_iteration_growth` | `differentiation -> tangent_line -> recurrence -> logarithm -> sequence_limit` |
 | `linear_algebra_number_theory` | `recurrence.cassini_fibonacci_determinant_invariant` | `recurrence -> mathematical_induction -> algebraic_identity` |
 | `number_theory` | `construct.linear_recurrence_mod_period` | `recurrence -> congruence -> finite_state_iteration` |
