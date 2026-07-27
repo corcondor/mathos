@@ -446,6 +446,11 @@ SHARD_FAMILIES = (
     "geometry_astroid", "geometry_ellipse_tangent_pair",
     "geometry_parabola_evolute", "geometry_orthocenter_locus",
     "geometry_minkowski_polygon",
+    # トレースバック方式の構築（演繹閉包を切り出す）。
+    # 構築 1 つが 1 シャードで、そのノード数だけ問題が出る。
+    "traceback_regular_polygon", "traceback_cubic_tangent",
+    "traceback_ellipse_tangent", "traceback_lattice_path",
+    "traceback_digit_power", "traceback_triangle_centers",
 )
 
 FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {
@@ -645,6 +650,33 @@ def _traceback_families():
         return []
 
 
+_TRACEBACK_SHARDS_READY = False
+
+
+def _ensure_traceback_shards() -> None:
+    """トレースバックの構築ごとにシャードを登録する。
+
+    構築を 1 つ足すだけでシャードが 1 つ増え，GitHub Actions の並列
+    マトリクスがそのまま拾う。族 ID を手で書き写す必要はない。
+    """
+    global _TRACEBACK_SHARDS_READY
+    if _TRACEBACK_SHARDS_READY:
+        return
+    _TRACEBACK_SHARDS_READY = True
+    by_construction: dict[str, set[str]] = {}
+    for problem in _traceback_families():
+        construction = str((problem.parameters or {}).get("construction") or "")
+        if not construction:
+            continue
+        by_construction.setdefault(construction, set()).add(problem.family_id)
+    for construction, family_ids in by_construction.items():
+        shard = f"traceback_{construction}"
+        FIXED_SHARD_FAMILY_IDS[shard] = frozenset(family_ids)
+        FIXED_SHARD_BUILDER_NAMES[shard] = frozenset(
+            {f"traceback.{construction}."}
+        )
+
+
 def _deep_families():
     try:
         from math_os_prototype.deep_families import DEEP_FAMILIES
@@ -661,6 +693,7 @@ def _deep_families():
 
 
 def all_problems(only_family: str | None = None) -> list[Problem]:
+    _ensure_traceback_shards()
     allowed_ids = (
         FIXED_SHARD_FAMILY_IDS.get(only_family, frozenset())
         if only_family
@@ -672,6 +705,8 @@ def all_problems(only_family: str | None = None) -> list[Problem]:
         else None
     )
     out: list[Problem] = []
+    # 数値だけ違う同一構造は作らない。構造署名で一意化する。
+    seen_structures: set[tuple[str, tuple[str, ...]]] = set()
     # トレースバック方式: 1 つの構築から演繹閉包の各ノードを問題として切り出す。
     # 族を書かずに問題が増えるので、族フィルタ時のみ絞り込む。
     for problem in _traceback_families():
@@ -681,7 +716,14 @@ def all_problems(only_family: str | None = None) -> list[Problem]:
             name in problem.family_id for name in allowed_builders
         ):
             continue
+        signature = (problem.family_id, tuple(problem.morphism_chain))
+        if signature in seen_structures:
+            continue
+        seen_structures.add(signature)
         out.append(problem)
+    # グリッドは新しい構造を探すために回すが、同じ構造署名が二度出たら捨てる。
+    # 同じ問題を何十個も作って後段で除外するのは、そのぶんの計算資源を
+    # 新しい構築に使えていないというだけのことである。
     for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
         if allowed_builders is not None and build.__name__ not in allowed_builders:
             continue
@@ -696,6 +738,10 @@ def all_problems(only_family: str | None = None) -> list[Problem]:
                 and p.independent_check
                 and (allowed_ids is None or p.family_id in allowed_ids)
             ):
+                signature = (p.family_id, tuple(p.morphism_chain))
+                if signature in seen_structures:
+                    continue
+                seen_structures.add(signature)
                 out.append(p)
     return out
 

@@ -48,6 +48,13 @@ jobs:
           - geometry_parabola_evolute
           - geometry_orthocenter_locus
           - geometry_minkowski_polygon
+          # トレースバック方式: 1構築の演繹閉包を丸ごと切り出すシャード
+          - traceback_regular_polygon
+          - traceback_cubic_tangent
+          - traceback_ellipse_tangent
+          - traceback_lattice_path
+          - traceback_digit_power
+          - traceback_triangle_centers
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -62,7 +69,7 @@ jobs:
           ROUNDS: ${{ github.event.inputs.rounds || '1' }}
         run: |
           OUT="shard_${{ matrix.family }}.json"
-          if [[ "${{ matrix.family }}" == ultradeep_* || "${{ matrix.family }}" == geometry_* ]]; then
+          if [[ "${{ matrix.family }}" == ultradeep_* || "${{ matrix.family }}" == geometry_* || "${{ matrix.family }}" == traceback_* ]]; then
             echo "--- ${{ matrix.family }} exact parameter grid ---"
             python autonomous_loop.py \
               --family "${{ matrix.family }}" \

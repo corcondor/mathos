@@ -113,6 +113,11 @@ def build_pool(
                 rejected["same_structure_variant"] += 1
                 continue
             record = dict(problem)
+            # 高校の語彙へ書き換えた文章を配信本文として採用する。
+            if certificate.get("surface_rewritten"):
+                record["statement_tex"] = certificate["statement_tex_lowered"]
+                record["solution_tex"] = certificate["solution_tex_lowered"]
+                record["statement_tex_original"] = problem.get("statement_tex")
             record["curriculum_certificate"] = certificate
             record["structure_key"] = key
             record["source_generator"] = source
@@ -156,6 +161,11 @@ def build_pool(
             "family_counts": dict(family_counts),
             "domain_counts": dict(domain_counts),
             "geometry_algebra_structures": geometry_algebra,
+            "surface_rewritten": sum(
+                1
+                for p in problems
+                if (p.get("curriculum_certificate") or {}).get("surface_rewritten")
+            ),
             "source_counts": dict(source_counts),
             "rejected": dict(rejected),
         },
@@ -176,11 +186,12 @@ def render_report(report: dict[str, Any]) -> str:
         f"- 検証済み構造: **{summary['certified_structures']}**",
         f"- 構造族: **{summary['families']}**",
         f"- 幾何・代数・複素数系: **{summary['geometry_algebra_structures']}**",
-        "- ギャンブラー破産系: **0**",
-        "- Paley・グラフ理論を表面に出す問題: **0**",
+        f"- 高校の語彙へ書き換えた問題: "
+        f"**{summary.get('surface_rewritten', 0)}**",
         f"- 同一構造の数値変種として除外: "
-        f"**{summary['rejected'].get('same_structure_variant', 0)}**",
-        f"- 高校範囲への還元を証明できず除外: "
+        f"**{summary['rejected'].get('same_structure_variant', 0)}**"
+        "（生成時点で潰しているため通常は 0）",
+        f"- 高校の語彙へ還元できず除外: "
         f"**{summary['rejected'].get('scope_lowering', 0)}**",
         "",
         "## 採用契約",
@@ -195,9 +206,12 @@ def render_report(report: dict[str, Any]) -> str:
         "  -> Discord配信",
         "```",
         "",
+        "判定は族の名前では行わない。射の連鎖が高校の原始操作へ還元できるか、",
+        "そして問題文と解法が高校の語彙で書けるかだけを見る。",
         "内部探索で大学数学の概念を使うこと自体は禁止しない。",
-        "ただし問題文と完結した解法を高校範囲へ還元できない候補は、",
-        "研究キューには残しても受験用プールへは出さない。",
+        "行列で導いた一次分数変換も、平方剰余で作ったグラフも、",
+        "問題文を高校の言葉で書き直せる限り受験用プールへ出す。",
+        "書き直せない候補だけを研究キューに残す。",
         "",
         "## 構造一覧",
         "",
