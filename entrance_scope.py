@@ -499,6 +499,7 @@ def certify_entrance_scope(
 
     # 1) すべての射に還元が登録されているか
     lowering: list[str] = []
+    by_morphism: list[dict[str, Any]] = []
     for morphism in morphisms:
         primitives = MORPHISM_LOWERING.get(morphism)
         if primitives is None:
@@ -510,6 +511,9 @@ def certify_entrance_scope(
                 return None
             if primitive not in lowering:
                 lowering.append(primitive)
+        # どの射がどの原始操作に落ちるかを射ごとに残す。
+        # lowering_chain は重複を除いた集合なので、位置で対応づけてはいけない。
+        by_morphism.append({"morphism": morphism, "primitives": list(primitives)})
 
     # 2) 問題文と解法を高校の語彙へ書き換える
     statement = str(problem.get("statement_tex") or "")
@@ -528,6 +532,7 @@ def certify_entrance_scope(
         "type_checked": True,
         "abstract_morphism_chain": morphisms,
         "lowering_chain": lowering,
+        "lowering_by_morphism": by_morphism,
         "uses_only_school_level_primitives": True,
     }
     if lowered_statement != statement or lowered_solution != solution:

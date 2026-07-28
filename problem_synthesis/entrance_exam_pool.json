@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T14:39:31.887044+00:00",
+  "generated_at": "2026-07-28T14:50:50.588798+00:00",
   "method": {
     "name": "MathOS Japanese entrance-mathematics structural pool",
     "numeric_variants_count_as_new": false,
@@ -17,6 +17,29 @@
           "MobiusToMatrix",
           "Eigenstructure",
           "FixedPointSolve"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "MobiusToMatrix",
+            "primitives": [
+              "rational_function",
+              "function_composition"
+            ]
+          },
+          {
+            "morphism": "Eigenstructure",
+            "primitives": [
+              "quadratic_equation",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "FixedPointSolve",
+            "primitives": [
+              "quadratic_equation",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "rational_function",
@@ -72,6 +95,28 @@
           "LinearRecurrence",
           "GeneralTerm"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ReciprocalTransform",
+            "primitives": [
+              "recurrence",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "LinearRecurrence",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "GeneralTerm",
+            "primitives": [
+              "general_term"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "algebraic_identity",
@@ -121,6 +166,34 @@
           "VanishingTransform",
           "Differentiate",
           "EvaluateAtZero"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "Interpolation",
+            "primitives": [
+              "polynomial_factorization",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "VanishingTransform",
+            "primitives": [
+              "roots_of_unity",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "Differentiate",
+            "primitives": [
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "EvaluateAtZero",
+            "primitives": [
+              "remainder_theorem"
+            ]
+          }
         ],
         "lowering_chain": [
           "polynomial_factorization",
@@ -320,6 +393,29 @@
           "TelescopeCollapse",
           "SimplifyRational"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PartialFraction",
+            "primitives": [
+              "rational_function",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "TelescopeCollapse",
+            "primitives": [
+              "sum_of_series",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "SimplifyRational",
+            "primitives": [
+              "rational_function",
+              "algebraic_identity"
+            ]
+          }
+        ],
         "lowering_chain": [
           "rational_function",
           "algebraic_identity",
@@ -517,6 +613,41 @@
           "Discriminant",
           "Maximum"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootSet",
+            "primitives": [
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "ParabolaEmbedding",
+            "primitives": [
+              "parabola",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "VandermondeArea",
+            "primitives": [
+              "area_shoelace",
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "Discriminant",
+            "primitives": [
+              "quadratic_discriminant"
+            ]
+          },
+          {
+            "morphism": "Maximum",
+            "primitives": [
+              "extremum",
+              "differentiation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "polynomial_factorization",
           "parabola",
@@ -692,6 +823,40 @@
           "ConvexHull",
           "Area",
           "Maximum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootSet",
+            "primitives": [
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "ParabolaEmbedding",
+            "primitives": [
+              "parabola",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "ConvexHull",
+            "primitives": [
+              "convex_hull"
+            ]
+          },
+          {
+            "morphism": "Area",
+            "primitives": [
+              "area_shoelace"
+            ]
+          },
+          {
+            "morphism": "Maximum",
+            "primitives": [
+              "extremum",
+              "differentiation"
+            ]
+          }
         ],
         "lowering_chain": [
           "polynomial_factorization",
@@ -879,6 +1044,83 @@
           "DivisorCount",
           "ArithmeticObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicPolynomial",
+            "primitives": [
+              "polynomial_expansion",
+              "vieta_relations"
+            ]
+          },
+          {
+            "morphism": "ThreeRealRootSet",
+            "primitives": [
+              "differentiation",
+              "extremum",
+              "quadratic_discriminant"
+            ]
+          },
+          {
+            "morphism": "ParabolaEmbedding",
+            "primitives": [
+              "parabola",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "VandermondeDeterminant",
+            "primitives": [
+              "polynomial_factorization",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "AreaSquare",
+            "primitives": [
+              "area_shoelace"
+            ]
+          },
+          {
+            "morphism": "PolynomialDiscriminant",
+            "primitives": [
+              "vieta_relations",
+              "polynomial_expansion",
+              "quadratic_discriminant"
+            ]
+          },
+          {
+            "morphism": "IntegerNormalization",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          },
+          {
+            "morphism": "ArithmeticObservation",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          }
+        ],
         "lowering_chain": [
           "polynomial_expansion",
           "vieta_relations",
@@ -948,6 +1190,43 @@
           "Centroid",
           "Norm",
           "Minimum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TangentDual",
+            "primitives": [
+              "tangent_line",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "AxisIntercepts",
+            "primitives": [
+              "line_equation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "Centroid",
+            "primitives": [
+              "coordinate_geometry",
+              "midpoint"
+            ]
+          },
+          {
+            "morphism": "Norm",
+            "primitives": [
+              "complex_modulus",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "Minimum",
+            "primitives": [
+              "extremum",
+              "differentiation"
+            ]
+          }
         ],
         "lowering_chain": [
           "tangent_line",
@@ -1147,6 +1426,75 @@
           "GreenAreaMorphism",
           "AreaObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "AxisEndpointPair",
+            "primitives": [
+              "ellipse",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "JoiningLine",
+            "primitives": [
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "LineFamily",
+            "primitives": [
+              "line_equation",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "EnvelopeStationarity",
+            "primitives": [
+              "envelope",
+              "parameter_elimination",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "ParameterElimination",
+            "primitives": [
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "AstroidIdentification",
+            "primitives": [
+              "parametric_curve",
+              "envelope"
+            ]
+          },
+          {
+            "morphism": "ClosedCurveOrientation",
+            "primitives": [
+              "parametric_curve",
+              "area_integral"
+            ]
+          },
+          {
+            "morphism": "GreenAreaMorphism",
+            "primitives": [
+              "definite_integral",
+              "area_integral"
+            ]
+          },
+          {
+            "morphism": "AreaObservation",
+            "primitives": [
+              "area_integral"
+            ]
+          }
+        ],
         "lowering_chain": [
           "circle_equation",
           "ellipse",
@@ -1209,6 +1557,30 @@
           "LatticePathEncoding",
           "ReflectionPrinciple",
           "BinomialDifference"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "LatticePathEncoding",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "ReflectionPrinciple",
+            "primitives": [
+              "counting",
+              "combination",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "BinomialDifference",
+            "primitives": [
+              "combination",
+              "algebraic_identity"
+            ]
+          }
         ],
         "lowering_chain": [
           "counting",
@@ -1393,6 +1765,36 @@
           "PrimeFactorization",
           "DivisorCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "ReflectionBijection",
+            "primitives": [
+              "counting",
+              "combination",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
+        ],
         "lowering_chain": [
           "counting",
           "recurrence",
@@ -1462,6 +1864,30 @@
           "ReflectionBijection",
           "SubsetCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "ReflectionBijection",
+            "primitives": [
+              "counting",
+              "combination",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "counting",
           "recurrence",
@@ -1527,6 +1953,30 @@
           "ReflectionBijection",
           "SubsetCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "ReflectionBijection",
+            "primitives": [
+              "counting",
+              "combination",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "counting",
           "recurrence",
@@ -1591,6 +2041,22 @@
           "PathStateSpace",
           "SubsetCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "counting",
           "recurrence",
@@ -1651,6 +2117,22 @@
         "abstract_morphism_chain": [
           "PathStateSpace",
           "SubsetCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
         ],
         "lowering_chain": [
           "counting",
@@ -1714,6 +2196,35 @@
           "SubsetCount",
           "PrimeFactorization",
           "DivisorCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "counting",
@@ -1780,6 +2291,28 @@
           "BinomialExpansion",
           "IntegralTransform",
           "BetaEvaluation"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "BinomialExpansion",
+            "primitives": [
+              "polynomial_expansion",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "IntegralTransform",
+            "primitives": [
+              "definite_integral"
+            ]
+          },
+          {
+            "morphism": "BetaEvaluation",
+            "primitives": [
+              "definite_integral",
+              "polynomial_expansion"
+            ]
+          }
         ],
         "lowering_chain": [
           "polynomial_expansion",
@@ -1984,6 +2517,28 @@
           "BinomialGeneratingFunction",
           "RootOfUnityFilter",
           "TrigonometricNormalForm"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "BinomialGeneratingFunction",
+            "primitives": [
+              "combination",
+              "polynomial_expansion"
+            ]
+          },
+          {
+            "morphism": "RootOfUnityFilter",
+            "primitives": [
+              "roots_of_unity",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "TrigonometricNormalForm",
+            "primitives": [
+              "trigonometric_identity"
+            ]
+          }
         ],
         "lowering_chain": [
           "combination",
@@ -2217,6 +2772,29 @@
           "ContractionHalf",
           "ComplexLimit"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "FixedPointShift",
+            "primitives": [
+              "recurrence",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "ContractionHalf",
+            "primitives": [
+              "geometric_sequence",
+              "limit"
+            ]
+          },
+          {
+            "morphism": "ComplexLimit",
+            "primitives": [
+              "complex_plane",
+              "limit"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "algebraic_identity",
@@ -2268,6 +2846,27 @@
           "PrimitiveRootOfUnity",
           "DeMoivrePower",
           "MinimalPeriod"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PrimitiveRootOfUnity",
+            "primitives": [
+              "roots_of_unity",
+              "de_moivre"
+            ]
+          },
+          {
+            "morphism": "DeMoivrePower",
+            "primitives": [
+              "de_moivre"
+            ]
+          },
+          {
+            "morphism": "MinimalPeriod",
+            "primitives": [
+              "periodicity"
+            ]
+          }
         ],
         "lowering_chain": [
           "roots_of_unity",
@@ -2326,6 +2925,82 @@
           "IntegerInvariant",
           "PrimeFactorization",
           "DivisorCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnity",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "CoprimeIndexFilter",
+            "primitives": [
+              "gcd_lcm",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "PrimitiveRootSet",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "DistanceMultiset",
+            "primitives": [
+              "distance_formula",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "DistanceProduct",
+            "primitives": [
+              "distance_formula",
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "CyclotomicPolynomial",
+            "primitives": [
+              "polynomial_factorization",
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "PolynomialEvaluation",
+            "primitives": [
+              "remainder_theorem",
+              "polynomial_expansion"
+            ]
+          },
+          {
+            "morphism": "AlgebraicNorm",
+            "primitives": [
+              "polynomial_factorization",
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "IntegerInvariant",
+            "primitives": [
+              "integer_arithmetic",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "roots_of_unity",
@@ -2393,6 +3068,41 @@
           "ConvexHull",
           "Area",
           "Maximum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ComplexRootSet",
+            "primitives": [
+              "complex_plane",
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "CyclicOrder",
+            "primitives": [
+              "symmetry",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "ConvexHull",
+            "primitives": [
+              "convex_hull"
+            ]
+          },
+          {
+            "morphism": "Area",
+            "primitives": [
+              "area_shoelace"
+            ]
+          },
+          {
+            "morphism": "Maximum",
+            "primitives": [
+              "extremum",
+              "differentiation"
+            ]
+          }
         ],
         "lowering_chain": [
           "complex_plane",
@@ -2605,6 +3315,60 @@
           "SymmetryReduction",
           "SubsetCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnity",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "SubsetFamily",
+            "primitives": [
+              "combination"
+            ]
+          },
+          {
+            "morphism": "CentroidMap",
+            "primitives": [
+              "coordinate_geometry",
+              "midpoint"
+            ]
+          },
+          {
+            "morphism": "VanishingSum",
+            "primitives": [
+              "roots_of_unity",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "CyclotomicRelation",
+            "primitives": [
+              "roots_of_unity",
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "SymmetryReduction",
+            "primitives": [
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "roots_of_unity",
           "regular_polygon",
@@ -2670,6 +3434,59 @@
           "IntegerValue",
           "DivisorCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnity",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "VertexDistances",
+            "primitives": [
+              "distance_formula",
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "PolynomialFactorization",
+            "primitives": [
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "LimitEvaluation",
+            "primitives": [
+              "limit"
+            ]
+          },
+          {
+            "morphism": "DistanceProduct",
+            "primitives": [
+              "distance_formula",
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "IntegerValue",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
+        ],
         "lowering_chain": [
           "roots_of_unity",
           "regular_polygon",
@@ -2729,6 +3546,28 @@
           "RegularPolygon",
           "ShoelaceArea"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnityOrbit",
+            "primitives": [
+              "roots_of_unity",
+              "de_moivre",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "ShoelaceArea",
+            "primitives": [
+              "area_shoelace"
+            ]
+          }
+        ],
         "lowering_chain": [
           "roots_of_unity",
           "de_moivre",
@@ -2779,6 +3618,28 @@
           "RegularPolygon",
           "TriangleDecomposition",
           "AreaSum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "TriangleDecomposition",
+            "primitives": [
+              "triangle_area",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "AreaSum",
+            "primitives": [
+              "triangle_area",
+              "sum_of_series"
+            ]
+          }
         ],
         "lowering_chain": [
           "regular_polygon",
@@ -2844,6 +3705,34 @@
           "SubsetFamily",
           "VanishingSum",
           "SymmetryCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "SubsetFamily",
+            "primitives": [
+              "combination"
+            ]
+          },
+          {
+            "morphism": "VanishingSum",
+            "primitives": [
+              "roots_of_unity",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "SymmetryCount",
+            "primitives": [
+              "symmetry",
+              "counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "regular_polygon",
@@ -2913,6 +3802,28 @@
           "PairCounting",
           "EdgeExclusion"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "PairCounting",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "EdgeExclusion",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "regular_polygon",
           "counting",
@@ -2976,6 +3887,40 @@
           "DistanceProduct",
           "IntegerValue",
           "DivisorCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnity",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "PolynomialFactorization",
+            "primitives": [
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "DistanceProduct",
+            "primitives": [
+              "distance_formula",
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "IntegerValue",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "roots_of_unity",
@@ -3047,6 +3992,28 @@
           "VectorSumVanishing",
           "SquaredDistanceSum"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "VectorSumVanishing",
+            "primitives": [
+              "vector_addition",
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "SquaredDistanceSum",
+            "primitives": [
+              "distance_formula",
+              "sum_of_series"
+            ]
+          }
+        ],
         "lowering_chain": [
           "regular_polygon",
           "vector_addition",
@@ -3114,6 +4081,33 @@
           "LimitEvaluation",
           "DistanceProduct"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnity",
+            "primitives": [
+              "roots_of_unity"
+            ]
+          },
+          {
+            "morphism": "PolynomialFactorization",
+            "primitives": [
+              "polynomial_factorization"
+            ]
+          },
+          {
+            "morphism": "LimitEvaluation",
+            "primitives": [
+              "limit"
+            ]
+          },
+          {
+            "morphism": "DistanceProduct",
+            "primitives": [
+              "distance_formula",
+              "polynomial_factorization"
+            ]
+          }
+        ],
         "lowering_chain": [
           "roots_of_unity",
           "polynomial_factorization",
@@ -3180,6 +4174,28 @@
           "EllipseObject",
           "DualLinePair",
           "CoordinateSolve"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "DualLinePair",
+            "primitives": [
+              "line_equation",
+              "tangent_line"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "ellipse",
@@ -3253,6 +4269,34 @@
           "DualLinePair",
           "EdgeLengthObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "DualLinePair",
+            "primitives": [
+              "line_equation",
+              "tangent_line"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          }
+        ],
         "lowering_chain": [
           "ellipse",
           "tangent_line",
@@ -3324,6 +4368,29 @@
           "EllipseObject",
           "TangentLine",
           "MidpointLocus"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "MidpointLocus",
+            "primitives": [
+              "midpoint",
+              "locus",
+              "parameter_elimination"
+            ]
+          }
         ],
         "lowering_chain": [
           "ellipse",
@@ -3397,6 +4464,34 @@
           "TangentLine",
           "CoordinateSolve",
           "ShoelaceArea"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "ShoelaceArea",
+            "primitives": [
+              "area_shoelace"
+            ]
+          }
         ],
         "lowering_chain": [
           "ellipse",
@@ -3473,6 +4568,33 @@
           "RightAngleCondition",
           "CircleParameter"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "RightAngleCondition",
+            "primitives": [
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "ellipse",
           "tangent_line",
@@ -3546,6 +4668,28 @@
           "TangentLine",
           "CoordinateSolve"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
+        ],
         "lowering_chain": [
           "ellipse",
           "tangent_line",
@@ -3617,6 +4761,28 @@
           "AsymptoteLine",
           "CoordinateSolve"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "AsymptoteLine",
+            "primitives": [
+              "hyperbola",
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
+        ],
         "lowering_chain": [
           "hyperbola",
           "line_equation",
@@ -3687,6 +4853,35 @@
           "TangentLine",
           "AsymptoteLine",
           "LinearIntersection"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "AsymptoteLine",
+            "primitives": [
+              "hyperbola",
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "LinearIntersection",
+            "primitives": [
+              "simultaneous_equations",
+              "line_equation"
+            ]
+          }
         ],
         "lowering_chain": [
           "hyperbola",
@@ -3760,6 +4955,34 @@
           "TangentLine",
           "AsymptoteLine",
           "ShoelaceArea"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "AsymptoteLine",
+            "primitives": [
+              "hyperbola",
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "ShoelaceArea",
+            "primitives": [
+              "area_shoelace"
+            ]
+          }
         ],
         "lowering_chain": [
           "hyperbola",
@@ -3835,6 +5058,33 @@
           "RightAngleCondition",
           "CircleParameter"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "RightAngleCondition",
+            "primitives": [
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "hyperbola",
           "tangent_line",
@@ -3907,6 +5157,21 @@
           "HyperbolaObject",
           "Eccentricity"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "Eccentricity",
+            "primitives": [
+              "hyperbola",
+              "algebraic_identity"
+            ]
+          }
+        ],
         "lowering_chain": [
           "hyperbola",
           "algebraic_identity"
@@ -3971,6 +5236,21 @@
         "abstract_morphism_chain": [
           "HyperbolaObject",
           "FocalProperty"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          }
         ],
         "lowering_chain": [
           "hyperbola",
@@ -4037,6 +5317,28 @@
           "HyperbolaObject",
           "FocalProperty",
           "CoordinateSolve"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "HyperbolaObject",
+            "primitives": [
+              "hyperbola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "hyperbola",
@@ -4107,6 +5409,27 @@
           "FocalProperty",
           "EdgeLengthObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "hyperbola",
@@ -4173,6 +5496,27 @@
           "ParabolaObject",
           "FocalProperty",
           "Midpoint"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "Midpoint",
+            "primitives": [
+              "midpoint"
+            ]
+          }
         ],
         "lowering_chain": [
           "parabola",
@@ -4244,6 +5588,28 @@
           "FocalProperty",
           "Minimum"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "Minimum",
+            "primitives": [
+              "extremum",
+              "differentiation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "hyperbola",
@@ -4314,6 +5680,27 @@
           "FocalProperty",
           "ParameterElimination"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "ParameterElimination",
+            "primitives": [
+              "parameter_elimination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "hyperbola",
@@ -4382,6 +5769,28 @@
           "ParabolaObject",
           "FocalProperty",
           "SimplifyRational"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "FocalProperty",
+            "primitives": [
+              "hyperbola",
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "SimplifyRational",
+            "primitives": [
+              "rational_function",
+              "algebraic_identity"
+            ]
+          }
         ],
         "lowering_chain": [
           "parabola",
@@ -4454,6 +5863,28 @@
           "TangentLine",
           "LinearIntersection"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "LinearIntersection",
+            "primitives": [
+              "simultaneous_equations",
+              "line_equation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "tangent_line",
@@ -4524,6 +5955,28 @@
           "ParabolaObject",
           "TangentLine",
           "SlopeProductInvariant"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "SlopeProductInvariant",
+            "primitives": [
+              "line_equation",
+              "algebraic_identity"
+            ]
+          }
         ],
         "lowering_chain": [
           "parabola",
@@ -4602,6 +6055,76 @@
           "EdgeLengthObservation",
           "PerimeterObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RootOfUnityChart",
+            "primitives": [
+              "roots_of_unity",
+              "complex_plane"
+            ]
+          },
+          {
+            "morphism": "RegularPolygon",
+            "primitives": [
+              "regular_polygon"
+            ]
+          },
+          {
+            "morphism": "HalfStepRotation",
+            "primitives": [
+              "de_moivre",
+              "complex_plane"
+            ]
+          },
+          {
+            "morphism": "SecondRegularPolygon",
+            "primitives": [
+              "regular_polygon",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "MinkowskiAddition",
+            "primitives": [
+              "vector_addition",
+              "convex_hull"
+            ]
+          },
+          {
+            "morphism": "SupportDirectionMerge",
+            "primitives": [
+              "vector_addition",
+              "convex_hull"
+            ]
+          },
+          {
+            "morphism": "VertexSumHull",
+            "primitives": [
+              "vector_addition",
+              "convex_hull"
+            ]
+          },
+          {
+            "morphism": "RegularDoublePolygon",
+            "primitives": [
+              "regular_polygon",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "PerimeterObservation",
+            "primitives": [
+              "distance_formula",
+              "sum_of_series"
+            ]
+          }
+        ],
         "lowering_chain": [
           "roots_of_unity",
           "complex_plane",
@@ -4676,6 +6199,79 @@
           "ResultantElimination",
           "ImplicitCurveObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParabolaObject",
+            "primitives": [
+              "parabola"
+            ]
+          },
+          {
+            "morphism": "TangentVector",
+            "primitives": [
+              "differentiation",
+              "vector_addition"
+            ]
+          },
+          {
+            "morphism": "NormalDirection",
+            "primitives": [
+              "normal_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "NormalLine",
+            "primitives": [
+              "normal_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "NormalLineFamily",
+            "primitives": [
+              "normal_line",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "EnvelopeStationarity",
+            "primitives": [
+              "envelope",
+              "parameter_elimination",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "StationaryParameterSolve",
+            "primitives": [
+              "differentiation",
+              "extremum"
+            ]
+          },
+          {
+            "morphism": "EvoluteParametrization",
+            "primitives": [
+              "parametric_curve",
+              "normal_line",
+              "envelope"
+            ]
+          },
+          {
+            "morphism": "ResultantElimination",
+            "primitives": [
+              "simultaneous_equations",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "ImplicitCurveObservation",
+            "primitives": [
+              "locus",
+              "parameter_elimination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "differentiation",
@@ -4746,6 +6342,76 @@
           "DeterminantAreaScaling",
           "AreaObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "MajorAxisVertexPair",
+            "primitives": [
+              "ellipse",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "MovingTriangle",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "AltitudeConstraint",
+            "primitives": [
+              "inner_product",
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "OrthocenterIntersection",
+            "primitives": [
+              "triangle_center",
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "LinearImageRecognition",
+            "primitives": [
+              "coordinate_geometry",
+              "vector_addition"
+            ]
+          },
+          {
+            "morphism": "ImageEllipse",
+            "primitives": [
+              "ellipse",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "DeterminantAreaScaling",
+            "primitives": [
+              "area_shoelace",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "AreaObservation",
+            "primitives": [
+              "area_integral"
+            ]
+          }
+        ],
         "lowering_chain": [
           "ellipse",
           "coordinate_geometry",
@@ -4811,6 +6477,27 @@
           "SlopeProductInvariant",
           "FixedPoint"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RightAngleCondition",
+            "primitives": [
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "SlopeProductInvariant",
+            "primitives": [
+              "line_equation",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "FixedPoint",
+            "primitives": [
+              "simultaneous_equations"
+            ]
+          }
+        ],
         "lowering_chain": [
           "inner_product",
           "line_equation",
@@ -4860,6 +6547,29 @@
           "ParametricLineFamily",
           "ExistenceElimination",
           "SweptRegionArea"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParametricLineFamily",
+            "primitives": [
+              "line_equation",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "ExistenceElimination",
+            "primitives": [
+              "parameter_elimination",
+              "quadratic_range"
+            ]
+          },
+          {
+            "morphism": "SweptRegionArea",
+            "primitives": [
+              "parameter_elimination",
+              "area_integral"
+            ]
+          }
         ],
         "lowering_chain": [
           "line_equation",
@@ -4912,6 +6622,29 @@
           "ExistenceElimination",
           "SweptRegionArea"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ParametricParabolaFamily",
+            "primitives": [
+              "parabola",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "ExistenceElimination",
+            "primitives": [
+              "parameter_elimination",
+              "quadratic_range"
+            ]
+          },
+          {
+            "morphism": "SweptRegionArea",
+            "primitives": [
+              "parameter_elimination",
+              "area_integral"
+            ]
+          }
+        ],
         "lowering_chain": [
           "parabola",
           "parameter_elimination",
@@ -4961,6 +6694,31 @@
           "TangentLine",
           "CubicReintersection",
           "MidpointLocus"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "CubicReintersection",
+            "primitives": [
+              "vieta_relations",
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "MidpointLocus",
+            "primitives": [
+              "midpoint",
+              "locus",
+              "parameter_elimination"
+            ]
+          }
         ],
         "lowering_chain": [
           "tangent_line",
@@ -5014,6 +6772,36 @@
           "CubicReintersection",
           "GeometricIteration",
           "GeneralTerm"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "CubicReintersection",
+            "primitives": [
+              "vieta_relations",
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "GeometricIteration",
+            "primitives": [
+              "geometric_sequence",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "GeneralTerm",
+            "primitives": [
+              "general_term"
+            ]
+          }
         ],
         "lowering_chain": [
           "tangent_line",
@@ -5070,6 +6858,41 @@
           "RootSumRelation",
           "GeometricIteration",
           "GeneralTerm"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicCurve",
+            "primitives": [
+              "differentiation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "RootSumRelation",
+            "primitives": [
+              "vieta_relations"
+            ]
+          },
+          {
+            "morphism": "GeometricIteration",
+            "primitives": [
+              "geometric_sequence",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "GeneralTerm",
+            "primitives": [
+              "general_term"
+            ]
+          }
         ],
         "lowering_chain": [
           "differentiation",
@@ -5144,6 +6967,49 @@
           "GeneralTerm",
           "GrowthRate",
           "LogarithmicLimit"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicCurve",
+            "primitives": [
+              "differentiation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "GeometricIteration",
+            "primitives": [
+              "geometric_sequence",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "GeneralTerm",
+            "primitives": [
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "GrowthRate",
+            "primitives": [
+              "geometric_sequence",
+              "limit"
+            ]
+          },
+          {
+            "morphism": "LogarithmicLimit",
+            "primitives": [
+              "logarithm",
+              "limit"
+            ]
+          }
         ],
         "lowering_chain": [
           "differentiation",
@@ -5220,6 +7086,42 @@
           "Midpoint",
           "LocusElimination"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicCurve",
+            "primitives": [
+              "differentiation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "Reintersection",
+            "primitives": [
+              "vieta_relations",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "Midpoint",
+            "primitives": [
+              "midpoint"
+            ]
+          },
+          {
+            "morphism": "LocusElimination",
+            "primitives": [
+              "locus",
+              "parameter_elimination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "differentiation",
           "coordinate_geometry",
@@ -5291,6 +7193,35 @@
           "TangentLine",
           "RootSumRelation",
           "Reintersection"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicCurve",
+            "primitives": [
+              "differentiation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "RootSumRelation",
+            "primitives": [
+              "vieta_relations"
+            ]
+          },
+          {
+            "morphism": "Reintersection",
+            "primitives": [
+              "vieta_relations",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "differentiation",
@@ -5364,6 +7295,62 @@
           "GrowthRate",
           "LogarithmicLimit"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CubicCurve",
+            "primitives": [
+              "differentiation",
+              "coordinate_geometry"
+            ]
+          },
+          {
+            "morphism": "TangentLine",
+            "primitives": [
+              "tangent_line",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "Reintersection",
+            "primitives": [
+              "vieta_relations",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "RootSumRelation",
+            "primitives": [
+              "vieta_relations"
+            ]
+          },
+          {
+            "morphism": "GeometricIteration",
+            "primitives": [
+              "geometric_sequence",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "GeneralTerm",
+            "primitives": [
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "GrowthRate",
+            "primitives": [
+              "geometric_sequence",
+              "limit"
+            ]
+          },
+          {
+            "morphism": "LogarithmicLimit",
+            "primitives": [
+              "logarithm",
+              "limit"
+            ]
+          }
+        ],
         "lowering_chain": [
           "differentiation",
           "coordinate_geometry",
@@ -5432,6 +7419,79 @@
           "PrimeFactorization",
           "DivisorCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PrimeField",
+            "primitives": [
+              "congruence",
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "QuadraticResidueSet",
+            "primitives": [
+              "congruence",
+              "square_number",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "PaleyGraph",
+            "primitives": [
+              "congruence",
+              "square_number",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "StronglyRegularParameters",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "CommonNeighborRelation",
+            "primitives": [
+              "counting",
+              "congruence"
+            ]
+          },
+          {
+            "morphism": "OppositeVertexPairing",
+            "primitives": [
+              "regular_polygon",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "FourCycleDoubleCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "CycleCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
+        ],
         "lowering_chain": [
           "congruence",
           "integer_arithmetic",
@@ -5498,6 +7558,28 @@
           "ModularReduction",
           "MultiplicativeOrder"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CompanionMatrix",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "ModularReduction",
+            "primitives": [
+              "congruence"
+            ]
+          },
+          {
+            "morphism": "MultiplicativeOrder",
+            "primitives": [
+              "congruence",
+              "periodicity"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "general_term",
@@ -5554,6 +7636,61 @@
           "PrimeFactorization",
           "EulerCriterion",
           "LegendreSymbol"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "LinearRecurrence",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "CompanionMatrix",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "ModularReduction",
+            "primitives": [
+              "congruence"
+            ]
+          },
+          {
+            "morphism": "MultiplicativeOrder",
+            "primitives": [
+              "congruence",
+              "periodicity"
+            ]
+          },
+          {
+            "morphism": "MinimalPeriod",
+            "primitives": [
+              "periodicity"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "EulerCriterion",
+            "primitives": [
+              "congruence",
+              "square_number"
+            ]
+          },
+          {
+            "morphism": "LegendreSymbol",
+            "primitives": [
+              "congruence",
+              "square_number"
+            ]
+          }
         ],
         "lowering_chain": [
           "recurrence",
@@ -5618,6 +7755,29 @@
           "ModularPeriod",
           "DivisorCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CompanionMatrix",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "ModularPeriod",
+            "primitives": [
+              "congruence",
+              "periodicity"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "general_term",
@@ -5673,6 +7833,28 @@
           "ModularPeriod",
           "LargestPrimeFactor"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CompanionMatrix",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "ModularPeriod",
+            "primitives": [
+              "congruence",
+              "periodicity"
+            ]
+          },
+          {
+            "morphism": "LargestPrimeFactor",
+            "primitives": [
+              "prime_factorization"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "general_term",
@@ -5727,6 +7909,29 @@
           "ModularPeriod",
           "EulerTotient"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CompanionMatrix",
+            "primitives": [
+              "recurrence",
+              "general_term"
+            ]
+          },
+          {
+            "morphism": "ModularPeriod",
+            "primitives": [
+              "congruence",
+              "periodicity"
+            ]
+          },
+          {
+            "morphism": "EulerTotient",
+            "primitives": [
+              "gcd_lcm",
+              "counting"
+            ]
+          }
+        ],
         "lowering_chain": [
           "recurrence",
           "general_term",
@@ -5780,6 +7985,29 @@
           "DivisorSumExpansion",
           "PrimePowerReduction",
           "MultiplicativeAssembly"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DivisorSumExpansion",
+            "primitives": [
+              "divisor_counting",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "PrimePowerReduction",
+            "primitives": [
+              "prime_factorization",
+              "congruence"
+            ]
+          },
+          {
+            "morphism": "MultiplicativeAssembly",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "divisor_counting",
@@ -6058,6 +8286,22 @@
           "PowerSequence",
           "DecimalDigitCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PowerSequence",
+            "primitives": [
+              "geometric_sequence",
+              "exponential"
+            ]
+          },
+          {
+            "morphism": "DecimalDigitCount",
+            "primitives": [
+              "logarithm",
+              "integer_arithmetic"
+            ]
+          }
+        ],
         "lowering_chain": [
           "geometric_sequence",
           "exponential",
@@ -6121,6 +8365,28 @@
           "PowerSequence",
           "DecimalDigitCount",
           "ArithmeticObservation"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PowerSequence",
+            "primitives": [
+              "geometric_sequence",
+              "exponential"
+            ]
+          },
+          {
+            "morphism": "DecimalDigitCount",
+            "primitives": [
+              "logarithm",
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "ArithmeticObservation",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          }
         ],
         "lowering_chain": [
           "geometric_sequence",
@@ -6187,6 +8453,21 @@
           "PowerSequence",
           "ArithmeticObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PowerSequence",
+            "primitives": [
+              "geometric_sequence",
+              "exponential"
+            ]
+          },
+          {
+            "morphism": "ArithmeticObservation",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          }
+        ],
         "lowering_chain": [
           "geometric_sequence",
           "exponential",
@@ -6247,6 +8528,22 @@
         "abstract_morphism_chain": [
           "PowerSequence",
           "LeadingDigit"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PowerSequence",
+            "primitives": [
+              "geometric_sequence",
+              "exponential"
+            ]
+          },
+          {
+            "morphism": "LeadingDigit",
+            "primitives": [
+              "logarithm",
+              "integer_arithmetic"
+            ]
+          }
         ],
         "lowering_chain": [
           "geometric_sequence",
@@ -6311,6 +8608,28 @@
           "PowerSequence",
           "LeadingDigit",
           "ArithmeticObservation"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PowerSequence",
+            "primitives": [
+              "geometric_sequence",
+              "exponential"
+            ]
+          },
+          {
+            "morphism": "LeadingDigit",
+            "primitives": [
+              "logarithm",
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "ArithmeticObservation",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          }
         ],
         "lowering_chain": [
           "geometric_sequence",
@@ -6377,6 +8696,30 @@
           "EdgeCommonNeighbors",
           "TriangleCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "QuadraticResidueGraph",
+            "primitives": [
+              "congruence",
+              "square_number",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "EdgeCommonNeighbors",
+            "primitives": [
+              "counting",
+              "congruence"
+            ]
+          },
+          {
+            "morphism": "TriangleCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "congruence",
           "square_number",
@@ -6431,6 +8774,34 @@
           "InscribedAngle",
           "CosineRule",
           "ShoelaceArea"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "InscribedAngle",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "CosineRule",
+            "primitives": [
+              "sine_cosine_rule"
+            ]
+          },
+          {
+            "morphism": "ShoelaceArea",
+            "primitives": [
+              "area_shoelace"
+            ]
+          }
         ],
         "lowering_chain": [
           "circle_equation",
@@ -6504,6 +8875,27 @@
           "CircleParameter",
           "CosineRule"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "CosineRule",
+            "primitives": [
+              "sine_cosine_rule"
+            ]
+          }
+        ],
         "lowering_chain": [
           "circle_equation",
           "trigonometric_ratio",
@@ -6574,6 +8966,28 @@
           "InscribedAngle",
           "CosineRule"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "InscribedAngle",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "CosineRule",
+            "primitives": [
+              "sine_cosine_rule"
+            ]
+          }
+        ],
         "lowering_chain": [
           "circle_equation",
           "trigonometric_ratio",
@@ -6641,6 +9055,28 @@
           "CyclicQuadrilateral",
           "InscribedAngle",
           "CosineRule"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "InscribedAngle",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "CosineRule",
+            "primitives": [
+              "sine_cosine_rule"
+            ]
+          }
         ],
         "lowering_chain": [
           "circle_equation",
@@ -6711,6 +9147,30 @@
           "InscribedAngle",
           "PtolemyRelation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "InscribedAngle",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "PtolemyRelation",
+            "primitives": [
+              "circle_equation",
+              "sine_cosine_rule",
+              "algebraic_identity"
+            ]
+          }
+        ],
         "lowering_chain": [
           "circle_equation",
           "trigonometric_ratio",
@@ -6779,6 +9239,21 @@
           "CyclicQuadrilateral",
           "ArithmeticObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "CyclicQuadrilateral",
+            "primitives": [
+              "circle_equation",
+              "trigonometric_ratio"
+            ]
+          },
+          {
+            "morphism": "ArithmeticObservation",
+            "primitives": [
+              "integer_arithmetic"
+            ]
+          }
+        ],
         "lowering_chain": [
           "circle_equation",
           "trigonometric_ratio",
@@ -6842,6 +9317,28 @@
           "TriangleConstruction",
           "IncircleRadius",
           "EdgeLengthObservation"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "IncircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -6914,6 +9411,36 @@
           "CircleParameter",
           "IncircleRadius",
           "EulerTriangleIdentity"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "IncircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          },
+          {
+            "morphism": "EulerTriangleIdentity",
+            "primitives": [
+              "triangle_center",
+              "circle_equation",
+              "algebraic_identity"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -6989,6 +9516,29 @@
           "ExcircleRadius",
           "IncircleRadius"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "ExcircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          },
+          {
+            "morphism": "IncircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          }
+        ],
         "lowering_chain": [
           "coordinate_geometry",
           "triangle_area",
@@ -7058,6 +9608,29 @@
           "TriangleConstruction",
           "ExcircleRadius",
           "IncircleRadius"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "ExcircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          },
+          {
+            "morphism": "IncircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7129,6 +9702,28 @@
           "TriangleConstruction",
           "ExcircleRadius",
           "CircleParameter"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "ExcircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7202,6 +9797,28 @@
           "EdgeLengthObservation",
           "ExcircleRadius"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "ExcircleRadius",
+            "primitives": [
+              "triangle_area",
+              "triangle_center"
+            ]
+          }
+        ],
         "lowering_chain": [
           "coordinate_geometry",
           "triangle_area",
@@ -7273,6 +9890,34 @@
           "CircleParameter",
           "OrthocenterIntersection",
           "EdgeLengthObservation"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "OrthocenterIntersection",
+            "primitives": [
+              "triangle_center",
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7349,6 +9994,21 @@
           "TriangleConstruction",
           "ShoelaceArea"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "ShoelaceArea",
+            "primitives": [
+              "area_shoelace"
+            ]
+          }
+        ],
         "lowering_chain": [
           "coordinate_geometry",
           "triangle_area",
@@ -7415,6 +10075,28 @@
           "TriangleConstruction",
           "CircleParameter",
           "CoordinateSolve"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7488,6 +10170,34 @@
           "CircleParameter",
           "OrthocenterIntersection",
           "JoiningLine"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          },
+          {
+            "morphism": "OrthocenterIntersection",
+            "primitives": [
+              "triangle_center",
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "JoiningLine",
+            "primitives": [
+              "line_equation"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7564,6 +10274,28 @@
           "EdgeLengthObservation",
           "IncenterWeights"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "IncenterWeights",
+            "primitives": [
+              "triangle_center",
+              "coordinate_geometry"
+            ]
+          }
+        ],
         "lowering_chain": [
           "coordinate_geometry",
           "triangle_area",
@@ -7636,6 +10368,28 @@
           "EdgeLengthObservation",
           "IncenterWeights"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "EdgeLengthObservation",
+            "primitives": [
+              "distance_formula"
+            ]
+          },
+          {
+            "morphism": "IncenterWeights",
+            "primitives": [
+              "triangle_center",
+              "coordinate_geometry"
+            ]
+          }
+        ],
         "lowering_chain": [
           "coordinate_geometry",
           "triangle_area",
@@ -7706,6 +10460,28 @@
           "TriangleConstruction",
           "CentroidMap",
           "CircleParameter"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "CentroidMap",
+            "primitives": [
+              "coordinate_geometry",
+              "midpoint"
+            ]
+          },
+          {
+            "morphism": "CircleParameter",
+            "primitives": [
+              "circle_equation"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7778,6 +10554,29 @@
           "TriangleConstruction",
           "OrthocenterIntersection",
           "CoordinateSolve"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TriangleConstruction",
+            "primitives": [
+              "coordinate_geometry",
+              "triangle_area"
+            ]
+          },
+          {
+            "morphism": "OrthocenterIntersection",
+            "primitives": [
+              "triangle_center",
+              "inner_product"
+            ]
+          },
+          {
+            "morphism": "CoordinateSolve",
+            "primitives": [
+              "coordinate_geometry",
+              "simultaneous_equations"
+            ]
+          }
         ],
         "lowering_chain": [
           "coordinate_geometry",
@@ -7853,6 +10652,29 @@
           "BoundaryRecurrence",
           "RatioClosedForm"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "AbsorbingWalk",
+            "primitives": [
+              "probability",
+              "recurrence_probability"
+            ]
+          },
+          {
+            "morphism": "BoundaryRecurrence",
+            "primitives": [
+              "recurrence",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "RatioClosedForm",
+            "primitives": [
+              "geometric_sequence",
+              "general_term"
+            ]
+          }
+        ],
         "lowering_chain": [
           "probability",
           "recurrence_probability",
@@ -7906,6 +10728,27 @@
           "RecordIndicator",
           "LinearityExpectation",
           "HarmonicSum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "RecordIndicator",
+            "primitives": [
+              "probability",
+              "expectation"
+            ]
+          },
+          {
+            "morphism": "LinearityExpectation",
+            "primitives": [
+              "expectation"
+            ]
+          },
+          {
+            "morphism": "HarmonicSum",
+            "primitives": [
+              "sum_of_series"
+            ]
+          }
         ],
         "lowering_chain": [
           "probability",
@@ -8122,6 +10965,33 @@
           "Expectation",
           "FiniteSum"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "BridgePathSpace",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "ZeroIndicators",
+            "primitives": [
+              "counting"
+            ]
+          },
+          {
+            "morphism": "Expectation",
+            "primitives": [
+              "expectation"
+            ]
+          },
+          {
+            "morphism": "FiniteSum",
+            "primitives": [
+              "sum_of_series"
+            ]
+          }
+        ],
         "lowering_chain": [
           "counting",
           "combination",
@@ -8304,6 +11174,23 @@
           "DiceGeneratingFunction",
           "ModalOutcome"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "ModalOutcome",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "probability",
           "polynomial_expansion",
@@ -8367,6 +11254,36 @@
           "ModalOutcome",
           "PrimeFactorization",
           "DivisorCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "ModalOutcome",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "probability",
@@ -8436,6 +11353,30 @@
           "RootOfUnityFilter",
           "ComplexRootSet"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "RootOfUnityFilter",
+            "primitives": [
+              "roots_of_unity",
+              "sum_of_series"
+            ]
+          },
+          {
+            "morphism": "ComplexRootSet",
+            "primitives": [
+              "complex_plane",
+              "roots_of_unity"
+            ]
+          }
+        ],
         "lowering_chain": [
           "probability",
           "polynomial_expansion",
@@ -8502,6 +11443,23 @@
           "DiceGeneratingFunction",
           "SubsetCount"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "probability",
           "polynomial_expansion",
@@ -8560,6 +11518,23 @@
         "abstract_morphism_chain": [
           "DiceGeneratingFunction",
           "VarianceOfSum"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "VarianceOfSum",
+            "primitives": [
+              "variance",
+              "expectation"
+            ]
+          }
         ],
         "lowering_chain": [
           "probability",
@@ -8625,6 +11600,30 @@
           "DiceGeneratingFunction",
           "ModalOutcome",
           "SubsetCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "DiceGeneratingFunction",
+            "primitives": [
+              "probability",
+              "polynomial_expansion",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "ModalOutcome",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          },
+          {
+            "morphism": "SubsetCount",
+            "primitives": [
+              "counting",
+              "combination"
+            ]
+          }
         ],
         "lowering_chain": [
           "probability",
@@ -8699,6 +11698,91 @@
           "IntegerInvariant",
           "PrimeFactorization",
           "DivisorCount"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "PathStateSpace",
+            "primitives": [
+              "counting",
+              "recurrence"
+            ]
+          },
+          {
+            "morphism": "AbsorbingBoundary",
+            "primitives": [
+              "recurrence_probability",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "SymmetricRandomWalk",
+            "primitives": [
+              "probability",
+              "recurrence_probability"
+            ]
+          },
+          {
+            "morphism": "HittingTime",
+            "primitives": [
+              "expectation",
+              "recurrence_probability"
+            ]
+          },
+          {
+            "morphism": "FirstMomentConditioning",
+            "primitives": [
+              "conditional_probability",
+              "expectation"
+            ]
+          },
+          {
+            "morphism": "FirstMomentLinearSystem",
+            "primitives": [
+              "expectation",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "SecondMomentConditioning",
+            "primitives": [
+              "conditional_probability",
+              "variance"
+            ]
+          },
+          {
+            "morphism": "SecondMomentLinearSystem",
+            "primitives": [
+              "variance",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "VarianceTransform",
+            "primitives": [
+              "variance",
+              "expectation"
+            ]
+          },
+          {
+            "morphism": "IntegerInvariant",
+            "primitives": [
+              "integer_arithmetic",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "PrimeFactorization",
+            "primitives": [
+              "prime_factorization"
+            ]
+          },
+          {
+            "morphism": "DivisorCount",
+            "primitives": [
+              "prime_factorization",
+              "divisor_counting"
+            ]
+          }
         ],
         "lowering_chain": [
           "counting",
@@ -8775,6 +11859,77 @@
           "ConicElimination",
           "LocusEquationObservation"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "EllipseObject",
+            "primitives": [
+              "ellipse"
+            ]
+          },
+          {
+            "morphism": "TrigonometricChart",
+            "primitives": [
+              "trigonometric_identity",
+              "complex_plane"
+            ]
+          },
+          {
+            "morphism": "PairedParameterShift",
+            "primitives": [
+              "parameter_elimination",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "TangentDualization",
+            "primitives": [
+              "tangent_line",
+              "parameter_elimination"
+            ]
+          },
+          {
+            "morphism": "DualLinePair",
+            "primitives": [
+              "line_equation",
+              "tangent_line"
+            ]
+          },
+          {
+            "morphism": "LinearIntersection",
+            "primitives": [
+              "simultaneous_equations",
+              "line_equation"
+            ]
+          },
+          {
+            "morphism": "TrigonometricDiagonalization",
+            "primitives": [
+              "trigonometric_identity",
+              "de_moivre"
+            ]
+          },
+          {
+            "morphism": "HomothetyRecognition",
+            "primitives": [
+              "coordinate_geometry",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "ConicElimination",
+            "primitives": [
+              "parameter_elimination",
+              "simultaneous_equations"
+            ]
+          },
+          {
+            "morphism": "LocusEquationObservation",
+            "primitives": [
+              "locus",
+              "parameter_elimination"
+            ]
+          }
+        ],
         "lowering_chain": [
           "ellipse",
           "trigonometric_identity",
@@ -8839,6 +11994,29 @@
           "ComplementIntegral",
           "PowerSubstitution",
           "DominatedConvergence"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ComplementIntegral",
+            "primitives": [
+              "definite_integral",
+              "area_integral"
+            ]
+          },
+          {
+            "morphism": "PowerSubstitution",
+            "primitives": [
+              "definite_integral",
+              "algebraic_identity"
+            ]
+          },
+          {
+            "morphism": "DominatedConvergence",
+            "primitives": [
+              "limit",
+              "inequality"
+            ]
+          }
         ],
         "lowering_chain": [
           "definite_integral",
@@ -9007,6 +12185,27 @@
           "ReflectionSubstitution",
           "PairwiseAddition",
           "EvaluateMeasure"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "ReflectionSubstitution",
+            "primitives": [
+              "definite_integral",
+              "symmetry"
+            ]
+          },
+          {
+            "morphism": "PairwiseAddition",
+            "primitives": [
+              "vector_addition"
+            ]
+          },
+          {
+            "morphism": "EvaluateMeasure",
+            "primitives": [
+              "area_integral"
+            ]
+          }
         ],
         "lowering_chain": [
           "definite_integral",
@@ -9178,6 +12377,36 @@
           "IncrementLimit",
           "StolzCesaro",
           "PositiveSquareRoot"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "SquareObservable",
+            "primitives": [
+              "square_number",
+              "integer_arithmetic"
+            ]
+          },
+          {
+            "morphism": "IncrementLimit",
+            "primitives": [
+              "limit",
+              "differentiation"
+            ]
+          },
+          {
+            "morphism": "StolzCesaro",
+            "primitives": [
+              "limit",
+              "sequence"
+            ]
+          },
+          {
+            "morphism": "PositiveSquareRoot",
+            "primitives": [
+              "quadratic_equation",
+              "inequality"
+            ]
+          }
         ],
         "lowering_chain": [
           "square_number",
@@ -9359,6 +12588,28 @@
           "SignPartition",
           "AbsoluteIntegral"
         ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TrigDifference",
+            "primitives": [
+              "trigonometric_identity"
+            ]
+          },
+          {
+            "morphism": "SignPartition",
+            "primitives": [
+              "trigonometric_equation",
+              "inequality"
+            ]
+          },
+          {
+            "morphism": "AbsoluteIntegral",
+            "primitives": [
+              "definite_integral",
+              "trigonometric_equation"
+            ]
+          }
+        ],
         "lowering_chain": [
           "trigonometric_identity",
           "trigonometric_equation",
@@ -9407,6 +12658,29 @@
           "TrigLevelSets",
           "FloorStep",
           "PiecewiseIntegral"
+        ],
+        "lowering_by_morphism": [
+          {
+            "morphism": "TrigLevelSets",
+            "primitives": [
+              "trigonometric_equation",
+              "inequality"
+            ]
+          },
+          {
+            "morphism": "FloorStep",
+            "primitives": [
+              "inequality",
+              "counting"
+            ]
+          },
+          {
+            "morphism": "PiecewiseIntegral",
+            "primitives": [
+              "definite_integral",
+              "inequality"
+            ]
+          }
         ],
         "lowering_chain": [
           "trigonometric_equation",
