@@ -5,11 +5,11 @@
 
 ## 結果
 
-- 検証済み構造: **81**
-- 構造族: **79**
-- 幾何・代数・複素数系: **51**
+- 検証済み構造: **100**
+- 構造族: **98**
+- 幾何・代数・複素数系: **64**
 - 高校の語彙へ書き換えた問題: **4**
-- 同一構造の数値変種として除外: **51**（生成時点で潰しているため通常は 0）
+- 同一構造の数値変種として除外: **70**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
 
 ## 採用契約
@@ -72,6 +72,13 @@
 | `conic_geometry` | `traceback.ellipse_tangent.contact_triangle_area` | `ellipse -> tangent_line -> differentiation -> coordinate_geometry -> simultaneous_equations -> area_shoelace` |
 | `conic_geometry` | `traceback.ellipse_tangent.monge_radius_sq` | `ellipse -> tangent_line -> differentiation -> inner_product -> circle_equation` |
 | `conic_geometry` | `traceback.ellipse_tangent.tangent_slope_product` | `ellipse -> tangent_line -> differentiation -> coordinate_geometry -> simultaneous_equations` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.asymptote_distance_product` | `hyperbola -> line_equation -> coordinate_geometry -> simultaneous_equations` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.asymptote_intersection_x` | `hyperbola -> tangent_line -> differentiation -> line_equation -> simultaneous_equations` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.asymptote_triangle_area` | `hyperbola -> tangent_line -> differentiation -> line_equation -> area_shoelace` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.director_circle_radius_sq` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.eccentricity_sq` | `hyperbola -> algebraic_identity` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.focal_distance_difference` | `hyperbola -> distance_formula` |
+| `conic_geometry` | `traceback.hyperbola_asymptote.semi_latus_rectum` | `hyperbola -> distance_formula -> coordinate_geometry -> simultaneous_equations` |
 | `convex_geometry` | `ultradeep.geometry_regular_polygon_minkowski_perimeter` | `roots_of_unity -> complex_plane -> regular_polygon -> de_moivre -> symmetry -> vector_addition -> convex_hull -> distance_formula -> sum_of_series` |
 | `differential_geometry` | `ultradeep.geometry_parabola_normal_envelope` | `parabola -> differentiation -> vector_addition -> normal_line -> parameter_elimination -> envelope -> extremum -> parametric_curve -> simultaneous_equations -> locus` |
 | `euclidean_geometry` | `ultradeep.geometry_orthocenter_locus_area` | `ellipse -> coordinate_geometry -> triangle_area -> inner_product -> line_equation -> triangle_center -> simultaneous_equations -> vector_addition -> parameter_elimination -> area_shoelace -> area_integral` |
@@ -98,6 +105,12 @@
 | `number_theory` | `traceback.digit_power.leading_digit` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.leading_one_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory_graph` | `layered.paley_triangle_count` | `congruence -> square_number -> counting -> combination` |
+| `plane_geometry` | `traceback.incircle_excircle.contact_segment_longest` | `coordinate_geometry -> triangle_area -> triangle_center -> distance_formula` |
+| `plane_geometry` | `traceback.incircle_excircle.euler_OI_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> algebraic_identity` |
+| `plane_geometry` | `traceback.incircle_excircle.exradii_product` | `coordinate_geometry -> triangle_area -> triangle_center` |
+| `plane_geometry` | `traceback.incircle_excircle.exradii_reciprocal_sum` | `coordinate_geometry -> triangle_area -> triangle_center` |
+| `plane_geometry` | `traceback.incircle_excircle.exradii_sum` | `coordinate_geometry -> triangle_area -> triangle_center -> circle_equation` |
+| `plane_geometry` | `traceback.incircle_excircle.exradius_opposite_longest` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center` |
 | `plane_geometry` | `traceback.triangle_centers.OH_dist_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> inner_product -> distance_formula` |
 | `plane_geometry` | `traceback.triangle_centers.area` | `coordinate_geometry -> triangle_area -> area_shoelace` |
 | `plane_geometry` | `traceback.triangle_centers.circumradius_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> simultaneous_equations` |
@@ -109,6 +122,12 @@
 | `probability` | `construct.gambler_ruin_probability` | `probability -> recurrence_probability -> recurrence -> simultaneous_equations -> geometric_sequence -> general_term` |
 | `probability` | `probability.left_to_right_maxima_expectation` | `probability -> expectation -> sum_of_series` |
 | `probability` | `probability.random_bridge_zero_count` | `counting -> combination -> expectation -> sum_of_series` |
+| `probability` | `traceback.dice_sum.modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `traceback.dice_sum.modal_ways_divisor_count` | `probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
+| `probability` | `traceback.dice_sum.prob_sum_divisible_by_3` | `probability -> polynomial_expansion -> counting -> roots_of_unity -> sum_of_series -> complex_plane` |
+| `probability` | `traceback.dice_sum.total_outcomes` | `probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `traceback.dice_sum.variance_times_12` | `probability -> polynomial_expansion -> counting -> variance -> expectation` |
+| `probability` | `traceback.dice_sum.ways_for_modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
 | `probability_linear_algebra_number_theory` | `ultradeep.gambler_absorption_variance_divisor_count` | `counting -> recurrence -> recurrence_probability -> simultaneous_equations -> probability -> expectation -> conditional_probability -> variance -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `projective_geometry` | `ultradeep.geometry_ellipse_tangent_pair_locus` | `ellipse -> trigonometric_identity -> complex_plane -> parameter_elimination -> symmetry -> tangent_line -> line_equation -> simultaneous_equations -> de_moivre -> coordinate_geometry -> locus` |
 | `real_analysis` | `analysis.boundary_layer_integral_limit` | `definite_integral -> area_integral -> algebraic_identity -> limit -> inequality` |

@@ -1,8 +1,13 @@
 name: MathOS autonomous morphism research
 
+# 定期実行を止めた。この探索が書き出す unresolved_candidates.json は
+# どの生成器・プール・配信からも読まれていない。6時間ごとに20分の枠
+# （月あたり約2400分）を使って、誰も読まないファイルを更新していた。
+#
+# 「導ける量を全部列挙する」役割は traceback_engine の演繹閉包が担う。
+# あちらは構築から実際に問題を切り出すので、同じ計算資源で成果が出る。
+# 手動で回したいときだけ workflow_dispatch から起動する。
 on:
-  schedule:
-    - cron: "30 */6 * * *"
   workflow_dispatch:
     inputs:
       count:

@@ -607,6 +607,288 @@ def grid_triangle_centers() -> Iterable[tuple[int, int, int, int, int, int]]:
         (0, 0, 21, 0, 6, 8),     # 10-17-21
         (0, 0, 16, 0, 5, 12),    # 13-15-16
     )
+# ---------------------------------------------------------------------------
+# 構築 7: 双曲線・その接線・2本の漸近線
+# ---------------------------------------------------------------------------
+def closure_hyperbola_asymptote(
+    params: tuple[int, int, int, int],
+) -> list[DerivedNode]:
+    """双曲線と漸近線という構築から、導ける量を列挙する。"""
+
+    a, b, num, den = params
+    x, y = sp.symbols("x y", real=True)
+    x0 = sp.Rational(num, den)
+    y2 = sp.nsimplify(b**2 * (x0**2 / a**2 - 1))
+    if y2 <= 0:
+        return []
+    y0 = sp.sqrt(y2)
+    if not y0.is_rational:
+        return []
+    tangent = x * x0 / a**2 - y * y0 / b**2 - 1
+    try:
+        P = sp.solve([tangent, y - sp.Rational(b, a) * x], [x, y], dict=True)[0]
+        Q = sp.solve([tangent, y + sp.Rational(b, a) * x], [x, y], dict=True)[0]
+    except (IndexError, NotImplementedError):
+        return []
+    base = f"双曲線 x^2/{a}^2-y^2/{b}^2=1 と，その上の点における接線・2本の漸近線"
+    nodes: list[DerivedNode] = []
+
+    def add(key, raw, question, hidden, morphisms, solution, scope):
+        value = _exact(raw)
+        if value is not None:
+            nodes.append(DerivedNode(
+                key, value, question, (base,), hidden, morphisms, solution, scope,
+            ))
+
+    add("asymptote_triangle_area",
+        sp.Rational(1, 2) * sp.Abs(P[x] * Q[y] - Q[x] * P[y]),
+        r"接線と2本の漸近線が囲む三角形の面積を求めよ。"
+        r"（この値は接点の取り方によらないことを確かめよ。）",
+        ("接点を (a\\sec\\theta, b\\tan\\theta) と置く", "漸近線との交点"),
+        ("HyperbolaObject", "TangentLine", "AsymptoteLine", "ShoelaceArea"),
+        r"接点を \((x_0,y_0)\) とすると接線は \(\frac{xx_0}{a^2}-\frac{yy_0}{b^2}=1\)。"
+        r"漸近線 \(y=\pm\frac{b}{a}x\) との交点を求めて面積を計算すると "
+        r"\(ab\) となり，接点によらない。",
+        ("双曲線", "接線", "座標平面の面積"))
+
+    add("asymptote_distance_product",
+        (sp.Abs(b * x0 - a * y0) / sp.sqrt(a**2 + b**2))
+        * (sp.Abs(b * x0 + a * y0) / sp.sqrt(a**2 + b**2)),
+        r"双曲線上の点から2本の漸近線までの距離の積を求めよ。",
+        ("点と直線の距離", "双曲線の方程式で b^2x^2-a^2y^2 を消す"),
+        ("HyperbolaObject", "AsymptoteLine", "CoordinateSolve"),
+        r"距離の積は \(\frac{|b^2x_0^2-a^2y_0^2|}{a^2+b^2}\)。"
+        r"双曲線の式より分子は \(a^2b^2\) で一定。",
+        ("双曲線", "点と直線の距離"))
+
+    add("asymptote_intersection_x", P[x],
+        r"接線と漸近線 \(y=\frac{b}{a}x\) の交点の \(x\) 座標を求めよ。",
+        ("接線の方程式",),
+        ("HyperbolaObject", "TangentLine", "AsymptoteLine", "LinearIntersection"),
+        r"接線と漸近線を連立する。",
+        ("双曲線", "接線", "連立方程式"))
+
+    add("focal_distance_difference", sp.Integer(2 * a),
+        r"双曲線上の点から2つの焦点までの距離の差の絶対値を求めよ。",
+        ("焦点の座標",),
+        ("HyperbolaObject", "FocalProperty"),
+        r"双曲線の定義そのもので \(2a\)。",
+        ("双曲線", "2点間の距離"))
+
+    add("director_circle_radius_sq", sp.Integer(a**2 - b**2),
+        r"双曲線に引いた2本の接線が直交するような点全体は円をなす。"
+        r"その半径の平方を求めよ。",
+        ("接する条件（判別式 0）", "傾きの積 = -1"),
+        ("HyperbolaObject", "TangentLine", "RightAngleCondition", "CircleParameter"),
+        r"傾き \(m\) の接線条件から \(m\) の二次方程式を作り，"
+        r"解の積 \(=-1\) とおくと \(x^2+y^2=a^2-b^2\)。",
+        ("双曲線", "判別式", "円の方程式"))
+
+    add("semi_latus_rectum", sp.Rational(b**2, a),
+        r"焦点を通り主軸に垂直な弦の長さの半分を求めよ。",
+        ("焦点の x 座標を代入",),
+        ("HyperbolaObject", "FocalProperty", "CoordinateSolve"),
+        r"\(x=\sqrt{a^2+b^2}\) を代入して \(y\) を求める。",
+        ("双曲線", "焦点"))
+
+    add("eccentricity_sq", sp.Rational(a**2 + b**2, a**2),
+        r"離心率の平方を求めよ。",
+        ("焦点距離と a の比",),
+        ("HyperbolaObject", "Eccentricity"),
+        r"\(e^2=\frac{a^2+b^2}{a^2}\)。",
+        ("双曲線", "離心率"))
+    return nodes
+
+
+def grid_hyperbola() -> Iterable[tuple[int, int, int, int]]:
+    return ((4, 3, 20, 4), (5, 12, 25, 3), (3, 4, 15, 3), (12, 5, 60, 4))
+
+
+# ---------------------------------------------------------------------------
+# 構築 8: 三角形の内接円と3つの傍接円
+# ---------------------------------------------------------------------------
+def closure_incircle_excircle(
+    params: tuple[int, int, int, int, int, int],
+) -> list[DerivedNode]:
+    """内接円・傍接円という構築から、導ける量を列挙する。"""
+
+    ax, ay, bx, by, cx, cy = params
+    A = sp.Matrix([ax, ay])
+    B = sp.Matrix([bx, by])
+    C = sp.Matrix([cx, cy])
+    la = sp.sqrt((B[0]-C[0])**2 + (B[1]-C[1])**2)
+    lb = sp.sqrt((A[0]-C[0])**2 + (A[1]-C[1])**2)
+    lc = sp.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2)
+    if not all(bool(side.is_rational) for side in (la, lb, lc)):
+        return []
+    area = sp.Rational(1, 2)*sp.Abs(
+        (B[0]-A[0])*(C[1]-A[1]) - (C[0]-A[0])*(B[1]-A[1]))
+    if area == 0:
+        return []
+    s = sp.simplify((la + lb + lc) / 2)
+    r = sp.simplify(area / s)
+    R = sp.simplify(la * lb * lc / (4 * area))
+    ra = sp.simplify(area / (s - la))
+    rb = sp.simplify(area / (s - lb))
+    rc = sp.simplify(area / (s - lc))
+    base = (
+        f"3辺の長さが {la}, {lb}, {lc} の三角形の内接円と3つの傍接円"
+    )
+    nodes: list[DerivedNode] = []
+
+    def add(key, raw, question, hidden, morphisms, solution, scope):
+        value = _exact(raw)
+        if value is not None:
+            nodes.append(DerivedNode(
+                key, value, question, (base,), hidden, morphisms, solution, scope,
+            ))
+
+    # 内接円の半径と外接円の半径は triangle_centers 構築が既に切り出している。
+    # 同じ問題文を2つの構築から出さないよう、ここでは傍接円側だけを扱う。
+    add("exradius_opposite_longest", ra,
+        r"最長辺に接する傍接円の半径を求めよ。",
+        ("傍接円の半径 r_A = S/(s-a)",),
+        ("TriangleConstruction", "EdgeLengthObservation", "ExcircleRadius"),
+        r"\(r_A=\frac{S}{s-a}\)。",
+        ("三角形の面積", "傍接円"))
+
+    add("exradii_sum", ra + rb + rc,
+        r"3つの傍接円の半径の和を求めよ。",
+        ("和が 4R+r に等しいこと",),
+        ("TriangleConstruction", "ExcircleRadius", "CircleParameter"),
+        r"\(r_A+r_B+r_C=4R+r\) を用いてもよい。",
+        ("三角形の面積", "傍接円", "外接円"))
+
+    add("exradii_product", ra * rb * rc,
+        r"3つの傍接円の半径の積を求めよ。",
+        ("積が S^2/r に等しいこと",),
+        ("TriangleConstruction", "ExcircleRadius", "IncircleRadius"),
+        r"\(r_Ar_Br_C=\frac{S^2}{r}\)。",
+        ("三角形の面積", "傍接円"))
+
+    add("exradii_reciprocal_sum", 1/ra + 1/rb + 1/rc,
+        r"3つの傍接円の半径の逆数の和を求めよ。",
+        ("逆数の和が 1/r に等しいこと",),
+        ("TriangleConstruction", "ExcircleRadius", "IncircleRadius"),
+        r"\(\frac1{r_A}+\frac1{r_B}+\frac1{r_C}=\frac1r\)。",
+        ("三角形の面積", "内接円", "傍接円"))
+
+    add("euler_OI_sq", R**2 - 2*R*r,
+        r"外心と内心の距離の平方を求めよ。",
+        ("オイラーの定理 OI^2 = R^2-2Rr",),
+        ("TriangleConstruction", "CircleParameter", "IncircleRadius",
+         "EulerTriangleIdentity"),
+        r"オイラーの定理 \(OI^2=R^2-2Rr\) による。",
+        ("外接円", "内接円", "2点間の距離"))
+
+    add("contact_segment_longest", s - la,
+        r"最長辺に対する頂点から内接円の接点までの長さを求めよ。",
+        ("接線の長さが等しいこと",),
+        ("TriangleConstruction", "IncircleRadius", "EdgeLengthObservation"),
+        r"1つの頂点から内接円に引いた2本の接線の長さは等しく \(s-a\)。",
+        ("内接円", "接線の長さ"))
+    return nodes
+
+
+def grid_incircle() -> Iterable[tuple[int, int, int, int, int, int]]:
+    return (
+        (0, 0, 14, 0, 5, 12),   # 13-14-15
+        (0, 0, 13, 0, 4, 3),    # 5-12-13
+        (0, 0, 21, 0, 6, 8),    # 10-17-21
+        (0, 0, 16, 0, 5, 12),   # 13-15-16
+    )
+
+
+# ---------------------------------------------------------------------------
+# 構築 9: n 個のサイコロの和（確率 × 1 の 3 乗根）
+# ---------------------------------------------------------------------------
+def closure_dice_sum(n: int) -> list[DerivedNode]:
+    """サイコロの和という構築から、導ける量を列挙する。
+
+    最後のノードは確率と 1 の 3 乗根フィルタの融合であり、
+    普段は組み合わせない道具が1問の中で交差する。
+    """
+
+    if n < 2 or n > 10:
+        return []
+    z = sp.symbols("z")
+    poly = sp.Poly(sp.expand((z + z**2 + z**3 + z**4 + z**5 + z**6) ** n), z)
+    coefficients = {m[0]: c for m, c in zip(poly.monoms(), poly.coeffs())}
+    total = 6**n
+    peak = sp.Rational(7 * n, 2)
+    modal_sum = int(peak) if peak.is_integer else int(sp.floor(peak))
+    modal_ways = sp.Integer(coefficients.get(modal_sum, 0))
+    omega = sp.exp(2 * sp.pi * sp.I / 3)
+
+    def generating(t):
+        return (t + t**2 + t**3 + t**4 + t**5 + t**6) ** n
+
+    multiples_of_three = sp.simplify(
+        (generating(1) + generating(omega) + generating(omega**2)) / 3
+    )
+    base = f"{n} 個のさいころを同時に投げたときの出目の和"
+    nodes: list[DerivedNode] = []
+
+    def add(key, raw, question, hidden, morphisms, solution, scope):
+        value = _exact(raw)
+        if value is not None:
+            nodes.append(DerivedNode(
+                key, value, question, (base,), hidden, morphisms, solution, scope,
+            ))
+
+    add("modal_sum", sp.Integer(modal_sum),
+        r"和として最も起こりやすい値を求めよ。",
+        ("分布の対称性",),
+        ("DiceGeneratingFunction", "ModalOutcome"),
+        rf"分布は \(\frac{{7n}}{{2}}\) について対称なので中央の値が最頻。",
+        ("確率", "場合の数"))
+
+    add("ways_for_modal_sum", modal_ways,
+        rf"和が {modal_sum} となる目の出方は何通りか。",
+        ("(z+z^2+…+z^6)^n の係数",),
+        ("DiceGeneratingFunction", "ModalOutcome", "SubsetCount"),
+        r"各さいころに対応する多項式の積を展開し，該当する次数の係数を読む。",
+        ("確率", "場合の数", "多項式の展開"))
+
+    add("modal_ways_divisor_count",
+        sp.Integer(sp.divisor_count(int(modal_ways))) if modal_ways else None,
+        rf"和が {modal_sum} となる目の出方の総数の，正の約数の個数を求めよ。",
+        ("係数の素因数分解",),
+        ("DiceGeneratingFunction", "ModalOutcome", "PrimeFactorization",
+         "DivisorCount"),
+        r"場合の数を求めてから素因数分解する。",
+        ("確率", "場合の数", "約数の個数"))
+
+    add("variance_times_12", sp.Integer(35 * n),
+        r"和の分散の 12 倍を求めよ。",
+        ("1個あたりの分散 35/12", "独立性による分散の加法性"),
+        ("DiceGeneratingFunction", "VarianceOfSum"),
+        rf"1個の分散は \(\frac{{35}}{{12}}\)。独立なので和の分散は \(\frac{{35\cdot{n}}}{{12}}\)。",
+        ("確率", "分散"))
+
+    add("prob_sum_divisible_by_3",
+        sp.Rational(int(multiples_of_three), total),
+        r"和が 3 の倍数となる確率を求めよ。",
+        ("1 の 3 乗根 \\omega を代入して係数を取り出す",),
+        ("DiceGeneratingFunction", "RootOfUnityFilter", "ComplexRootSet"),
+        r"\(f(z)=(z+\cdots+z^6)^n\) とすると，求める場合の数は "
+        r"\(\frac{f(1)+f(\omega)+f(\omega^2)}{3}\)。"
+        r"\(\omega\) は 1 の虚数3乗根。",
+        ("確率", "複素数", "1の3乗根"))
+
+    add("total_outcomes", sp.Integer(total),
+        r"目の出方は全部で何通りか。",
+        (),
+        ("DiceGeneratingFunction", "SubsetCount"),
+        rf"\(6^{{{n}}}\)。",
+        ("場合の数",))
+    return nodes
+
+
+def grid_dice() -> Iterable[int]:
+    return (3, 4, 5, 6, 8)
+
+
 
 
 # ---------------------------------------------------------------------------
@@ -669,7 +951,35 @@ CONSTRUCTIONS: tuple[tuple[str, Callable[[Any], list[DerivedNode]], Callable[[],
             rf"\(C({p[4]},{p[5]})\) を頂点とする三角形 \(ABC\) を考える。"
         ),
     ),
+    (
+        "hyperbola_asymptote",
+        closure_hyperbola_asymptote,
+        grid_hyperbola,
+        lambda p: (
+            rf"双曲線 \(H:\dfrac{{x^2}}{{{p[0]**2}}}"
+            rf"-\dfrac{{y^2}}{{{p[1]**2}}}=1\) を考える。"
+        ),
+    ),
+    (
+        "incircle_excircle",
+        closure_incircle_excircle,
+        grid_incircle,
+        lambda p: (
+            rf"座標平面上の3点 \(A({p[0]},{p[1]})\), \(B({p[2]},{p[3]})\), "
+            rf"\(C({p[4]},{p[5]})\) を頂点とする三角形 \(ABC\) を考える。"
+        ),
+    ),
+    (
+        "dice_sum",
+        closure_dice_sum,
+        grid_dice,
+        lambda n: (
+            rf"1 から 6 の目をもつさいころを {n} 個同時に投げ，"
+            r"出た目の和を \(S\) とする。"
+        ),
+    ),
 )
+
 
 
 CONSTRUCTION_DOMAIN: dict[str, str] = {
@@ -679,6 +989,9 @@ CONSTRUCTION_DOMAIN: dict[str, str] = {
     "lattice_path": "combinatorics",
     "digit_power": "number_theory",
     "triangle_centers": "plane_geometry",
+    "hyperbola_asymptote": "conic_geometry",
+    "incircle_excircle": "plane_geometry",
+    "dice_sum": "probability",
 }
 
 

@@ -451,6 +451,8 @@ SHARD_FAMILIES = (
     "traceback_regular_polygon", "traceback_cubic_tangent",
     "traceback_ellipse_tangent", "traceback_lattice_path",
     "traceback_digit_power", "traceback_triangle_centers",
+    "traceback_hyperbola_asymptote", "traceback_incircle_excircle",
+    "traceback_dice_sum",
 )
 
 FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {

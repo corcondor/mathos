@@ -5,7 +5,9 @@ name: MathOS autonomous generation
 # PC も Claude も不要。計算資源(GitHub Actions)を並列に使い切る。
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    # 研究ワークフローの定期実行を止めて、その枠をこちらへ回した。
+    # 同じ計算資源で、誰も読まないファイルではなく問題が増える。
+    - cron: "0 */3 * * *"
   workflow_dispatch:
     inputs:
       explore:
@@ -55,6 +57,9 @@ jobs:
           - traceback_lattice_path
           - traceback_digit_power
           - traceback_triangle_centers
+          - traceback_hyperbola_asymptote
+          - traceback_incircle_excircle
+          - traceback_dice_sum
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
