@@ -5,11 +5,11 @@
 
 ## 結果
 
-- 検証済み構造: **100**
-- 構造族: **98**
-- 幾何・代数・複素数系: **64**
+- 検証済み構造: **113**
+- 構造族: **111**
+- 幾何・代数・複素数系: **77**
 - 高校の語彙へ書き換えた問題: **4**
-- 同一構造の数値変種として除外: **70**（生成時点で潰しているため通常は 0）
+- 同一構造の数値変種として除外: **83**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
 
 ## 採用契約
@@ -79,6 +79,13 @@
 | `conic_geometry` | `traceback.hyperbola_asymptote.eccentricity_sq` | `hyperbola -> algebraic_identity` |
 | `conic_geometry` | `traceback.hyperbola_asymptote.focal_distance_difference` | `hyperbola -> distance_formula` |
 | `conic_geometry` | `traceback.hyperbola_asymptote.semi_latus_rectum` | `hyperbola -> distance_formula -> coordinate_geometry -> simultaneous_equations` |
+| `conic_geometry` | `traceback.parabola_focal_chord.chord_length` | `parabola -> hyperbola -> distance_formula` |
+| `conic_geometry` | `traceback.parabola_focal_chord.midpoint_to_directrix` | `parabola -> hyperbola -> distance_formula -> midpoint` |
+| `conic_geometry` | `traceback.parabola_focal_chord.min_chord_length` | `parabola -> hyperbola -> distance_formula -> extremum -> differentiation` |
+| `conic_geometry` | `traceback.parabola_focal_chord.parameter_product` | `parabola -> hyperbola -> distance_formula -> parameter_elimination` |
+| `conic_geometry` | `traceback.parabola_focal_chord.reciprocal_focal_radii_sum` | `parabola -> hyperbola -> distance_formula -> rational_function -> algebraic_identity` |
+| `conic_geometry` | `traceback.parabola_focal_chord.tangent_intersection_x` | `parabola -> tangent_line -> differentiation -> simultaneous_equations -> line_equation` |
+| `conic_geometry` | `traceback.parabola_focal_chord.tangent_slope_product` | `parabola -> tangent_line -> differentiation -> line_equation -> algebraic_identity` |
 | `convex_geometry` | `ultradeep.geometry_regular_polygon_minkowski_perimeter` | `roots_of_unity -> complex_plane -> regular_polygon -> de_moivre -> symmetry -> vector_addition -> convex_hull -> distance_formula -> sum_of_series` |
 | `differential_geometry` | `ultradeep.geometry_parabola_normal_envelope` | `parabola -> differentiation -> vector_addition -> normal_line -> parameter_elimination -> envelope -> extremum -> parametric_curve -> simultaneous_equations -> locus` |
 | `euclidean_geometry` | `ultradeep.geometry_orthocenter_locus_area` | `ellipse -> coordinate_geometry -> triangle_area -> inner_product -> line_equation -> triangle_center -> simultaneous_equations -> vector_addition -> parameter_elimination -> area_shoelace -> area_integral` |
@@ -105,6 +112,12 @@
 | `number_theory` | `traceback.digit_power.leading_digit` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.leading_one_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory_graph` | `layered.paley_triangle_count` | `congruence -> square_number -> counting -> combination` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.area` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule -> area_shoelace` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.circumradius_sq` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.cos_angle_a` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.diagonal_ac_sq` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.diagonal_product` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule -> algebraic_identity` |
+| `plane_geometry` | `traceback.cyclic_quadrilateral.semiperimeter` | `circle_equation -> trigonometric_ratio -> integer_arithmetic` |
 | `plane_geometry` | `traceback.incircle_excircle.contact_segment_longest` | `coordinate_geometry -> triangle_area -> triangle_center -> distance_formula` |
 | `plane_geometry` | `traceback.incircle_excircle.euler_OI_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> algebraic_identity` |
 | `plane_geometry` | `traceback.incircle_excircle.exradii_product` | `coordinate_geometry -> triangle_area -> triangle_center` |

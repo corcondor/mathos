@@ -60,6 +60,8 @@ jobs:
           - traceback_hyperbola_asymptote
           - traceback_incircle_excircle
           - traceback_dice_sum
+          - traceback_parabola_focal_chord
+          - traceback_cyclic_quadrilateral
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

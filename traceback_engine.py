@@ -892,6 +892,185 @@ def grid_dice() -> Iterable[int]:
 
 
 # ---------------------------------------------------------------------------
+# 構築 10: 放物線の焦点弦
+# ---------------------------------------------------------------------------
+def closure_parabola_focal_chord(
+    params: tuple[int, int, int],
+) -> list[DerivedNode]:
+    """放物線 y^2=4px の焦点弦という構築から、導ける量を列挙する。"""
+
+    p, num, den = params
+    t1 = sp.Rational(num, den)
+    if p <= 0 or t1 == 0:
+        return []
+    t2 = -1 / t1
+    A = (p * t1**2, 2 * p * t1)
+    B = (p * t2**2, 2 * p * t2)
+    focus = (p, 0)
+    r1 = sp.sqrt((A[0]-focus[0])**2 + (A[1]-focus[1])**2)
+    r2 = sp.sqrt((B[0]-focus[0])**2 + (B[1]-focus[1])**2)
+    x, y = sp.symbols("x y", real=True)
+    try:
+        T = sp.solve(
+            [t1*y - x - p*t1**2, t2*y - x - p*t2**2], [x, y], dict=True
+        )[0]
+    except (IndexError, NotImplementedError):
+        return []
+    base = f"放物線 y^2=4*{p}x の焦点を通る弦 AB"
+    nodes: list[DerivedNode] = []
+
+    def add(key, raw, question, hidden, morphisms, solution, scope):
+        value = _exact(raw)
+        if value is not None:
+            nodes.append(DerivedNode(
+                key, value, question, (base,), hidden, morphisms, solution, scope,
+            ))
+
+    add("parameter_product", t1 * t2,
+        r"\(A,B\) の媒介変数をそれぞれ \(t_1,t_2\) とするとき，\(t_1t_2\) の値を求めよ。",
+        ("焦点を通る条件",),
+        ("ParabolaObject", "FocalProperty", "ParameterElimination"),
+        r"\((pt^2,2pt)\) と置くと，2点と焦点が一直線上にある条件から \(t_1t_2=-1\)。",
+        ("放物線", "媒介変数", "共線条件"))
+
+    add("reciprocal_focal_radii_sum", 1/r1 + 1/r2,
+        r"\(\dfrac{1}{AF}+\dfrac{1}{BF}\) の値を求めよ。"
+        r"（この値が弦の取り方によらないことを確かめよ。）",
+        ("焦点距離 = 準線までの距離", "t_1t_2=-1"),
+        ("ParabolaObject", "FocalProperty", "SimplifyRational"),
+        r"準線の性質から \(AF=p(t_1^2+1)\)。\(t_1t_2=-1\) を使うと和は "
+        r"\(\frac{1}{p}\) となり，弦によらない。",
+        ("放物線", "焦点と準線", "式の整理"))
+
+    add("chord_length", r1 + r2,
+        r"この焦点弦の長さを求めよ。",
+        ("焦点距離の和",),
+        ("ParabolaObject", "FocalProperty", "EdgeLengthObservation"),
+        r"\(AB=AF+BF=p(t_1^2+t_2^2+2)\)。",
+        ("放物線", "2点間の距離"))
+
+    add("tangent_intersection_x", T[x],
+        r"\(A,B\) における2本の接線の交点の \(x\) 座標を求めよ。"
+        r"（この点がどんな直線上にあるかを述べよ。）",
+        ("接線 ty=x+pt^2", "t_1t_2=-1"),
+        ("ParabolaObject", "TangentLine", "LinearIntersection"),
+        r"接線を連立すると交点は \((pt_1t_2,\ p(t_1+t_2))\)。"
+        r"\(t_1t_2=-1\) より \(x=-p\)，すなわち交点は常に準線上にある。",
+        ("放物線", "接線", "準線"))
+
+    add("tangent_slope_product", (1/t1) * (1/t2),
+        r"\(A,B\) における2本の接線の傾きの積を求めよ。",
+        ("接線の傾きが 1/t であること",),
+        ("ParabolaObject", "TangentLine", "SlopeProductInvariant"),
+        r"接線の傾きは \(1/t\) なので積は \(\frac{1}{t_1t_2}=-1\)。"
+        r"つまり2接線は常に直交する。",
+        ("放物線", "接線", "垂直条件"))
+
+    add("min_chord_length", sp.Integer(4 * p),
+        r"焦点を通る弦の長さの最小値を求めよ。",
+        ("t^2+1/t^2 の最小値",),
+        ("ParabolaObject", "FocalProperty", "Minimum"),
+        r"\(AB=p(t^2+\frac1{t^2}+2)\)。相加相乗平均より \(t^2+\frac1{t^2}\ge2\) で "
+        r"最小 \(4p\)（通径）。",
+        ("放物線", "相加相乗平均", "最小値"))
+
+    add("midpoint_to_directrix", (A[0] + B[0]) / 2 + p,
+        r"弦 \(AB\) の中点から準線までの距離を求めよ。",
+        ("準線 x=-p", "中点の x 座標"),
+        ("ParabolaObject", "FocalProperty", "Midpoint"),
+        r"中点の \(x\) 座標に \(p\) を足す。これは \(AB/2\) に等しく，"
+        r"\(AB\) を直径とする円は準線に接する。",
+        ("放物線", "準線", "中点"))
+    return nodes
+
+
+def grid_parabola_focal_chord() -> Iterable[tuple[int, int, int]]:
+    return ((3, 2, 1), (1, 3, 1), (2, 1, 2), (5, 3, 2))
+
+
+# ---------------------------------------------------------------------------
+# 構築 11: 円に内接する四角形（ブラーマグプタとトレミー）
+# ---------------------------------------------------------------------------
+def closure_cyclic_quadrilateral(
+    params: tuple[int, int, int, int],
+) -> list[DerivedNode]:
+    """円に内接する四角形という構築から、導ける量を列挙する。"""
+
+    a, b, c, d = params
+    s = sp.Rational(a + b + c + d, 2)
+    area_sq = (s - a) * (s - b) * (s - c) * (s - d)
+    if area_sq <= 0:
+        return []
+    area = sp.sqrt(area_sq)
+    if not bool(area.is_rational):
+        return []
+    base = f"円に内接し，4辺の長さが順に {a}, {b}, {c}, {d} である四角形 ABCD"
+    nodes: list[DerivedNode] = []
+
+    def add(key, raw, question, hidden, morphisms, solution, scope):
+        value = _exact(raw)
+        if value is not None:
+            nodes.append(DerivedNode(
+                key, value, question, (base,), hidden, morphisms, solution, scope,
+            ))
+
+    add("area", area,
+        r"この四角形の面積を求めよ。",
+        ("対角の和が 180 度", "余弦定理を2つ立てて cos を消去"),
+        ("CyclicQuadrilateral", "InscribedAngle", "CosineRule", "ShoelaceArea"),
+        r"対角の和が \(180^\circ\) なので \(\cos C=-\cos A\)。"
+        r"対角線について余弦定理を2通りに立てて \(\cos A\) を消すと "
+        r"\(S=\sqrt{(s-a)(s-b)(s-c)(s-d)}\)。",
+        ("円周角", "余弦定理", "面積"))
+
+    add("diagonal_product", sp.Integer(a*c + b*d),
+        r"2本の対角線の長さの積を求めよ。",
+        ("トレミーの定理 AC・BD = AB・CD + BC・DA",),
+        ("CyclicQuadrilateral", "InscribedAngle", "PtolemyRelation"),
+        r"円に内接する四角形ではトレミーの定理が成り立ち，"
+        rf"\(AC\cdot BD=ac+bd={a*c+b*d}\)。",
+        ("円周角", "トレミーの定理"))
+
+    add("diagonal_ac_sq",
+        sp.Rational((a*c + b*d) * (a*d + b*c), (a*b + c*d)),
+        r"対角線 \(AC\) の長さの平方を求めよ。",
+        ("2つの三角形に余弦定理", "対角の cos が符号違い"),
+        ("CyclicQuadrilateral", "InscribedAngle", "CosineRule"),
+        r"\(\triangle ABC\) と \(\triangle ACD\) に余弦定理を立て，"
+        r"\(\cos B=-\cos D\) で消去する。",
+        ("円周角", "余弦定理"))
+
+    add("circumradius_sq",
+        (a*b + c*d) * (a*c + b*d) * (a*d + b*c) / (16 * area_sq),
+        r"外接円の半径の平方を求めよ。",
+        ("正弦定理", "面積の表示"),
+        ("CyclicQuadrilateral", "CircleParameter", "CosineRule"),
+        r"\(R=\frac{\sqrt{(ab+cd)(ac+bd)(ad+bc)}}{4S}\)。",
+        ("円周角", "正弦定理", "外接円"))
+
+    add("cos_angle_a",
+        sp.Rational(a**2 + d**2 - b**2 - c**2, 2 * (a*d + b*c)),
+        r"\(\angle A\) の余弦を求めよ。",
+        ("対角線 BD に余弦定理を2通り",),
+        ("CyclicQuadrilateral", "InscribedAngle", "CosineRule"),
+        r"対角線 \(BD\) について2つの三角形で余弦定理を立て，"
+        r"\(\cos C=-\cos A\) を使う。",
+        ("円周角", "余弦定理"))
+
+    add("semiperimeter", s,
+        r"この四角形の周の長さの半分を求めよ。",
+        (),
+        ("CyclicQuadrilateral", "ArithmeticObservation"),
+        r"4辺の和の半分。",
+        ("四角形",))
+    return nodes
+
+
+def grid_cyclic_quadrilateral() -> Iterable[tuple[int, int, int, int]]:
+    return ((4, 5, 7, 10), (25, 39, 52, 60), (2, 2, 3, 3), (5, 6, 6, 5))
+
+
+# ---------------------------------------------------------------------------
 # 切り出し: ノード → Problem
 # ---------------------------------------------------------------------------
 CONSTRUCTIONS: tuple[tuple[str, Callable[[Any], list[DerivedNode]], Callable[[], Iterable[Any]], Callable[[Any], str]], ...] = (
@@ -978,6 +1157,24 @@ CONSTRUCTIONS: tuple[tuple[str, Callable[[Any], list[DerivedNode]], Callable[[],
             r"出た目の和を \(S\) とする。"
         ),
     ),
+    (
+        "parabola_focal_chord",
+        closure_parabola_focal_chord,
+        grid_parabola_focal_chord,
+        lambda p: (
+            rf"放物線 \(y^2={4*p[0]}x\) の焦点を \(F\) とし，"
+            r"\(F\) を通る弦を \(AB\) とする。"
+        ),
+    ),
+    (
+        "cyclic_quadrilateral",
+        closure_cyclic_quadrilateral,
+        grid_cyclic_quadrilateral,
+        lambda q: (
+            rf"円に内接する四角形 \(ABCD\) があり，"
+            rf"\(AB={q[0]},\ BC={q[1]},\ CD={q[2]},\ DA={q[3]}\) である。"
+        ),
+    ),
 )
 
 
@@ -992,6 +1189,8 @@ CONSTRUCTION_DOMAIN: dict[str, str] = {
     "hyperbola_asymptote": "conic_geometry",
     "incircle_excircle": "plane_geometry",
     "dice_sum": "probability",
+    "parabola_focal_chord": "conic_geometry",
+    "cyclic_quadrilateral": "plane_geometry",
 }
 
 
@@ -1020,7 +1219,11 @@ def cut_problems() -> list[Problem]:
                     CONSTRUCTION_DOMAIN.get(cname, "geometry_algebra"),
                     "deduction_closure+traceback",
                     {"construction": cname, "param": param, "node": node.key,
-                     "hidden_intermediates": len(node.hidden), "depth": depth},
+                     "hidden_intermediates": len(node.hidden), "depth": depth,
+                     # 導出の跡そのもの。黒板に順番に書き出すために使う。
+                     "premises": list(node.premises),
+                     "hidden": list(node.hidden),
+                     "scope": list(node.scope)},
                     statement,
                     sp.latex(node.value),
                     sp.sstr(node.value),
