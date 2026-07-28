@@ -29,6 +29,10 @@ try:
         world_novelty,
     )
     from math_os_prototype.jukenmath_full_audit import canonical_surface, surface_ngrams
+    from math_os_prototype.difficulty_field import (
+        difficulty_band as _difficulty_band,
+        difficulty_score as _difficulty_score,
+    )
 except ImportError:  # pragma: no cover
     from construct_engine import synthesize as gen_construct
     from world_novelty_check import (
@@ -38,6 +42,10 @@ except ImportError:  # pragma: no cover
         world_novelty,
     )
     from jukenmath_full_audit import canonical_surface, surface_ngrams
+    from difficulty_field import (
+        difficulty_band as _difficulty_band,
+        difficulty_score as _difficulty_score,
+    )
 
 
 HERE = Path(__file__).resolve().parent
@@ -121,30 +129,6 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
         seen_stmt.add(skey)
         if max_new is not None and len(added) >= max_new:
             break
-
-    # difficulty は生成器によって形が違う。autonomous_loop 自身が作る記録は
-    # {"band": ..., "score": ...} の辞書だが、construct_engine が直接書き出す
-    # 記録は "A" のような文字列である。既存プールを読み直すと両方が混ざり、
-    # str に .get を呼んで CI が落ちていた。どちらの形も受ける。
-    def _difficulty_score(record: dict[str, Any]) -> float:
-        value = record.get("difficulty")
-        if isinstance(value, dict):
-            try:
-                return float(value.get("score", 0) or 0)
-            except (TypeError, ValueError):
-                return 0.0
-        if isinstance(value, str):
-            # A が最難。A→4, B→3, C→2, D→1
-            return {"A": 4.0, "B": 3.0, "C": 2.0, "D": 1.0}.get(value.strip().upper(), 0.0)
-        return 0.0
-
-    def _difficulty_band(record: dict[str, Any]) -> str:
-        value = record.get("difficulty")
-        if isinstance(value, dict):
-            return str(value.get("band", "?"))
-        if isinstance(value, str) and value.strip():
-            return value.strip()
-        return "?"
 
     # 5. 蓄積。1族が支配して水増しにならないよう上限を設け、難易度上位を残す。
     merged = existing + added

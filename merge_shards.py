@@ -7,9 +7,17 @@ from pathlib import Path
 
 try:
     from math_os_prototype.autonomous_loop import PER_FAMILY_CAP, POOL
+    from math_os_prototype.difficulty_field import (
+        difficulty_band as _difficulty_band,
+        difficulty_score as _difficulty_score,
+    )
     from math_os_prototype.jukenmath_full_audit import canonical_surface
 except ImportError:
     from autonomous_loop import PER_FAMILY_CAP, POOL
+    from difficulty_field import (
+        difficulty_band as _difficulty_band,
+        difficulty_score as _difficulty_score,
+    )
     from jukenmath_full_audit import canonical_surface
 
 
@@ -34,7 +42,7 @@ def merge(paths: list[Path]) -> dict:
             merged.append(p)
 
     by_family: dict[str, list[dict]] = defaultdict(list)
-    for r in sorted(merged, key=lambda r: -r.get("difficulty", {}).get("score", 0)):
+    for r in sorted(merged, key=lambda r: -_difficulty_score(r)):
         if len(by_family[r["family_id"]]) >= PER_FAMILY_CAP:
             continue
         by_family[r["family_id"]].append(r)
@@ -51,7 +59,7 @@ def merge(paths: list[Path]) -> dict:
             "total": len(out),
             "shards": len(paths),
             "family_counts": dict(Counter(r["family_id"] for r in out)),
-            "band_counts": dict(Counter(r.get("difficulty", {}).get("band", "?") for r in out)),
+            "band_counts": dict(Counter(_difficulty_band(r) for r in out)),
         },
         "problems": out,
     }
