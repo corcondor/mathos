@@ -121,6 +121,14 @@ jobs:
           python export_generation_report.py
           python build_entrance_pool.py
 
+      # PC を開いていなくても、作った問題がそのままサイトと Discord に届く。
+      # 鍵が未設定なら何もせず通過する。
+      - name: Sync the pool into Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python sync_supabase.py
+
       - name: Commit grown pool
         run: |
           git config user.name  "mathos-bot"
