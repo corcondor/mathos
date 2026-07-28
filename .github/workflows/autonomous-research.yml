@@ -20,7 +20,8 @@ concurrency:
 jobs:
   grow-research-atlas:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 探索1件あたり最長2分ほど。12件分と検証の余裕を見る。
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

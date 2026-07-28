@@ -122,12 +122,36 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
         if max_new is not None and len(added) >= max_new:
             break
 
+    # difficulty は生成器によって形が違う。autonomous_loop 自身が作る記録は
+    # {"band": ..., "score": ...} の辞書だが、construct_engine が直接書き出す
+    # 記録は "A" のような文字列である。既存プールを読み直すと両方が混ざり、
+    # str に .get を呼んで CI が落ちていた。どちらの形も受ける。
+    def _difficulty_score(record: dict[str, Any]) -> float:
+        value = record.get("difficulty")
+        if isinstance(value, dict):
+            try:
+                return float(value.get("score", 0) or 0)
+            except (TypeError, ValueError):
+                return 0.0
+        if isinstance(value, str):
+            # A が最難。A→4, B→3, C→2, D→1
+            return {"A": 4.0, "B": 3.0, "C": 2.0, "D": 1.0}.get(value.strip().upper(), 0.0)
+        return 0.0
+
+    def _difficulty_band(record: dict[str, Any]) -> str:
+        value = record.get("difficulty")
+        if isinstance(value, dict):
+            return str(value.get("band", "?"))
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+        return "?"
+
     # 5. 蓄積。1族が支配して水増しにならないよう上限を設け、難易度上位を残す。
     merged = existing + added
     from collections import Counter, defaultdict
 
     by_family: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for r in sorted(merged, key=lambda r: -r.get("difficulty", {}).get("score", 0)):
+    for r in sorted(merged, key=lambda r: -_difficulty_score(r)):
         if len(by_family[r["family_id"]]) >= PER_FAMILY_CAP:
             continue
         by_family[r["family_id"]].append(r)
@@ -152,7 +176,7 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
             "world_corpus_size": len(world),
             "family_counts": dict(Counter(r["family_id"] for r in interleaved)),
             "band_counts": dict(
-                Counter(r.get("difficulty", {}).get("band", "?") for r in interleaved)
+                Counter(_difficulty_band(r) for r in interleaved)
             ),
             "run_stats": stats,
         },

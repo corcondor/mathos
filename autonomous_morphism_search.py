@@ -342,6 +342,12 @@ def _distance_to_classification(edges: list[AtlasMorphism]) -> dict[str, int]:
     return distance
 
 
+# 1 回の search_chain が展開してよいノード数の上限。
+# 網羅探索は「導ける量を全部列挙する」という設計上どうしても広いので、
+# 見つからない深さで無限に粘らないための打ち切り点を持たせる。
+SEARCH_NODE_BUDGET = 400_000
+
+
 def search_chain(
     domain: SearchDomain,
     depth: int,
@@ -359,11 +365,20 @@ def search_chain(
         outgoing.setdefault(edge.source, []).append(edge)
     distance = _distance_to_classification(edges)
 
+    # 深さ優先探索は枝刈りを入れても組合せ爆発する。受理条件を満たす鎖が
+    # 存在しない深さでは全空間を掘り尽くすまで戻ってこないため、GitHub
+    # Actions の研究ジョブが毎回20分でタイムアウトしていた。
+    # 展開ノード数に予算を持たせ、尽きたら探索を打ち切る。
+    budget = [SEARCH_NODE_BUDGET]
+
     def walk(
         current: str,
         path: list[AtlasMorphism],
         counts: Counter[str],
     ) -> tuple[AtlasMorphism, ...] | None:
+        if budget[0] <= 0:
+            return None
+        budget[0] -= 1
         remaining = depth - len(path)
         if remaining == 0:
             return tuple(path) if current == "Classification" else None
@@ -391,6 +406,8 @@ def search_chain(
         return None
 
     for _ in range(attempts):
+        if budget[0] <= 0:
+            return None
         result = walk(domain.start_sort, [], Counter())
         if result is not None:
             distinct = {edge.operation_class for edge in result}
