@@ -1,9 +1,7 @@
 {
-  "generated_at": "2026-07-28T14:39:18.213360+00:00",
+  "generated_at": "2026-07-28T16:46:45.538701+00:00",
   "method": {
-    "name": "Object-construction engine",
-    "recipe": "[対象を構築] + [条件を課す] + [非自明を問う]",
-    "tools": "matrix power/eigen, quadratic residue, modular order, symbolic intersection"
+    "name": "MathOS autonomous pool (parallel shards merged)"
   },
   "problems": [
     {
@@ -3751,76 +3749,6 @@
     },
     {
       "accepted": true,
-      "answer_exact": "5",
-      "answer_tex": "5",
-      "candidate_id": "construct:layered.recurrence_period_observable:078",
-      "difficulty": "A",
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "LargestPrimeFactor"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "m": 5,
-        "obs": "max_prime",
-        "s": 1,
-        "t": 1
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。素因数分解して最大の素因数をとる。",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
-    },
-    {
-      "accepted": true,
-      "answer_exact": "8",
-      "answer_tex": "8",
-      "candidate_id": "construct:layered.recurrence_period_observable:079",
-      "difficulty": "A",
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "EulerTotient"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "m": 5,
-        "obs": "totient",
-        "s": 1,
-        "t": 1
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。\\(\\varphi(20)\\) を求める。",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
-    },
-    {
-      "accepted": true,
       "answer_exact": "26",
       "answer_tex": "26",
       "candidate_id": "construct:layered.paley_triangle_count:080",
@@ -4507,33 +4435,81 @@
         "independent_check": true,
         "method": "regular_polygon_formula_vs_all_vertex_sums_convex_hull"
       }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "5",
+      "answer_tex": "5",
+      "candidate_id": "construct:layered.recurrence_period_observable:078",
+      "difficulty": "A",
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "LargestPrimeFactor"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "m": 5,
+        "obs": "max_prime",
+        "s": 1,
+        "t": 1
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。素因数分解して最大の素因数をとる。",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "8",
+      "answer_tex": "8",
+      "candidate_id": "construct:layered.recurrence_period_observable:079",
+      "difficulty": "A",
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "EulerTotient"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "m": 5,
+        "obs": "totient",
+        "s": 1,
+        "t": 1
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。\\(\\varphi(20)\\) を求める。",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
     }
   ],
   "summary": {
-    "count": 98,
-    "domain_counts": {
-      "algebra": 3,
-      "algebraic_geometry_number_theory": 1,
-      "analytic_geometry": 1,
-      "combinatorics": 6,
-      "complex": 2,
-      "complex_algebra_number_theory": 1,
-      "complex_geometry": 9,
-      "conic_geometry": 20,
-      "convex_geometry": 1,
-      "differential_geometry": 1,
-      "euclidean_geometry": 1,
-      "geometry": 1,
-      "geometry_algebra": 6,
-      "geometry_analysis": 1,
-      "graph_combinatorics_number_theory": 1,
-      "number_theory": 10,
-      "number_theory_graph": 3,
-      "plane_geometry": 20,
-      "probability": 7,
-      "probability_linear_algebra_number_theory": 1,
-      "projective_geometry": 1,
-      "spectral_graph_number_theory": 1
+    "band_counts": {
+      "A": 98
     },
     "family_counts": {
       "construct.complex_affine_limit": 1,
@@ -4633,37 +4609,7 @@
       "ultradeep.paley_four_cycle_divisor_count": 1,
       "ultradeep.paley_spanning_tree_divisor_count": 1
     },
-    "tool_counts": {
-      "absorbing_markov_moments+linear_system+factorization": 1,
-      "cubic_discriminant+vandermonde_area+numeric_roots": 1,
-      "cyclotomic_polynomial+algebraic_norm+numeric_product": 1,
-      "deduction_closure+traceback": 67,
-      "dual_conic+tangent_intersection+linear_system": 1,
-      "fixed_point": 1,
-      "line_envelope+stationarity+numeric_shoelace": 1,
-      "linear_recurrence": 1,
-      "matrix_eigen": 1,
-      "matrix_mod_order": 1,
-      "matrix_mod_order+arith_function": 3,
-      "matrix_mod_order+legendre_symbol": 1,
-      "matrix_power": 1,
-      "minkowski_sum+support_faces+convex_hull": 1,
-      "normal_family+resultant+evolute": 1,
-      "orthocenter+linear_image+numeric_shoelace": 1,
-      "paley_spectrum+matrix_tree+exact_determinant": 1,
-      "polar_form": 1,
-      "quadratic_residue": 1,
-      "quadratic_residue+counting": 1,
-      "quadratic_residue+spectral+counting": 1,
-      "reciprocal_transform": 1,
-      "roots_of_unity+product+divisor_function": 1,
-      "roots_of_unity+shoelace": 1,
-      "roots_of_unity+subset_enumeration": 1,
-      "slope_product": 1,
-      "strongly_regular_graph+trace_four+factorization": 1,
-      "symbolic_intersection": 1,
-      "symbolic_intersection+iteration": 1,
-      "symbolic_intersection+iteration+limit": 1
-    }
+    "shards": 26,
+    "total": 98
   }
 }
