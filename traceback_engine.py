@@ -876,12 +876,7 @@ def closure_dice_sum(n: int) -> list[DerivedNode]:
         r"\(\omega\) は 1 の虚数3乗根。",
         ("確率", "複素数", "1の3乗根"))
 
-    add("total_outcomes", sp.Integer(total),
-        r"目の出方は全部で何通りか。",
-        (),
-        ("DiceGeneratingFunction", "SubsetCount"),
-        rf"\(6^{{{n}}}\)。",
-        ("場合の数",))
+    # 「目の出方は全部で何通りか」は 6^n を書くだけなので切り出さない。
     return nodes
 
 
@@ -1057,12 +1052,9 @@ def closure_cyclic_quadrilateral(
         r"\(\cos C=-\cos A\) を使う。",
         ("円周角", "余弦定理"))
 
-    add("semiperimeter", s,
-        r"この四角形の周の長さの半分を求めよ。",
-        (),
-        ("CyclicQuadrilateral", "ArithmeticObservation"),
-        r"4辺の和の半分。",
-        ("四角形",))
+    # 「周の長さの半分」は4辺を足して2で割るだけで、閉包のノードではあるが
+    # 問題にはならない。操作数と難易度の相関を測ったところ、操作数2の
+    # ノードは平均難易度 3.90 で他より明確に低かったので切り出さない。
     return nodes
 
 

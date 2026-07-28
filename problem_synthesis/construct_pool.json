@@ -1,7 +1,9 @@
 {
-  "generated_at": "2026-07-28T16:46:45.538701+00:00",
+  "generated_at": "2026-07-28T16:47:49.857296+00:00",
   "method": {
-    "name": "MathOS autonomous pool (parallel shards merged)"
+    "name": "Object-construction engine",
+    "recipe": "[対象を構築] + [条件を課す] + [非自明を問う]",
+    "tools": "matrix power/eigen, quadratic residue, modular order, symbolic intersection"
   },
   "problems": [
     {
@@ -2669,51 +2671,9 @@
     },
     {
       "accepted": true,
-      "answer_exact": "216",
-      "answer_tex": "216",
-      "candidate_id": "construct:traceback.dice_sum.total_outcomes:053",
-      "difficulty": "A",
-      "domain": "probability",
-      "family_id": "traceback.dice_sum.total_outcomes",
-      "lift_certificate": {
-        "morphism_chain": [
-          "DiceGeneratingFunction",
-          "SubsetCount"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "construction": "dice_sum",
-        "depth": 2,
-        "hidden": [],
-        "hidden_intermediates": 0,
-        "node": "total_outcomes",
-        "param": 3,
-        "premises": [
-          "3 個のさいころを同時に投げたときの出目の和"
-        ],
-        "scope": [
-          "場合の数"
-        ]
-      },
-      "solution_tex": "\\(6^{3}\\)。",
-      "statement_tex": "1 から 6 の目をもつさいころを 3 個同時に投げ，出た目の和を \\(S\\) とする。目の出方は全部で何通りか。",
-      "tool": "deduction_closure+traceback",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "deduction_closure_node_with_traceback"
-      }
-    },
-    {
-      "accepted": true,
       "answer_exact": "-1",
       "answer_tex": "-1",
-      "candidate_id": "construct:traceback.parabola_focal_chord.parameter_product:054",
+      "candidate_id": "construct:traceback.parabola_focal_chord.parameter_product:053",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.parameter_product",
@@ -2764,7 +2724,7 @@
       "accepted": true,
       "answer_exact": "1/3",
       "answer_tex": "\\frac{1}{3}",
-      "candidate_id": "construct:traceback.parabola_focal_chord.reciprocal_focal_radii_sum:055",
+      "candidate_id": "construct:traceback.parabola_focal_chord.reciprocal_focal_radii_sum:054",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.reciprocal_focal_radii_sum",
@@ -2816,7 +2776,7 @@
       "accepted": true,
       "answer_exact": "75/4",
       "answer_tex": "\\frac{75}{4}",
-      "candidate_id": "construct:traceback.parabola_focal_chord.chord_length:056",
+      "candidate_id": "construct:traceback.parabola_focal_chord.chord_length:055",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.chord_length",
@@ -2866,7 +2826,7 @@
       "accepted": true,
       "answer_exact": "-3",
       "answer_tex": "-3",
-      "candidate_id": "construct:traceback.parabola_focal_chord.tangent_intersection_x:057",
+      "candidate_id": "construct:traceback.parabola_focal_chord.tangent_intersection_x:056",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.tangent_intersection_x",
@@ -2918,7 +2878,7 @@
       "accepted": true,
       "answer_exact": "-1",
       "answer_tex": "-1",
-      "candidate_id": "construct:traceback.parabola_focal_chord.tangent_slope_product:058",
+      "candidate_id": "construct:traceback.parabola_focal_chord.tangent_slope_product:057",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.tangent_slope_product",
@@ -2969,7 +2929,7 @@
       "accepted": true,
       "answer_exact": "12",
       "answer_tex": "12",
-      "candidate_id": "construct:traceback.parabola_focal_chord.min_chord_length:059",
+      "candidate_id": "construct:traceback.parabola_focal_chord.min_chord_length:058",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.min_chord_length",
@@ -3020,7 +2980,7 @@
       "accepted": true,
       "answer_exact": "75/8",
       "answer_tex": "\\frac{75}{8}",
-      "candidate_id": "construct:traceback.parabola_focal_chord.midpoint_to_directrix:060",
+      "candidate_id": "construct:traceback.parabola_focal_chord.midpoint_to_directrix:059",
       "difficulty": "A",
       "domain": "conic_geometry",
       "family_id": "traceback.parabola_focal_chord.midpoint_to_directrix",
@@ -3072,7 +3032,7 @@
       "accepted": true,
       "answer_exact": "36",
       "answer_tex": "36",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.area:061",
+      "candidate_id": "construct:traceback.cyclic_quadrilateral.area:060",
       "difficulty": "A",
       "domain": "plane_geometry",
       "family_id": "traceback.cyclic_quadrilateral.area",
@@ -3126,7 +3086,7 @@
       "accepted": true,
       "answer_exact": "78",
       "answer_tex": "78",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.diagonal_product:062",
+      "candidate_id": "construct:traceback.cyclic_quadrilateral.diagonal_product:061",
       "difficulty": "A",
       "domain": "plane_geometry",
       "family_id": "traceback.cyclic_quadrilateral.diagonal_product",
@@ -3177,7 +3137,7 @@
       "accepted": true,
       "answer_exact": "65",
       "answer_tex": "65",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.diagonal_ac_sq:063",
+      "candidate_id": "construct:traceback.cyclic_quadrilateral.diagonal_ac_sq:062",
       "difficulty": "A",
       "domain": "plane_geometry",
       "family_id": "traceback.cyclic_quadrilateral.diagonal_ac_sq",
@@ -3229,7 +3189,7 @@
       "accepted": true,
       "answer_exact": "1625/64",
       "answer_tex": "\\frac{1625}{64}",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.circumradius_sq:064",
+      "candidate_id": "construct:traceback.cyclic_quadrilateral.circumradius_sq:063",
       "difficulty": "A",
       "domain": "plane_geometry",
       "family_id": "traceback.cyclic_quadrilateral.circumradius_sq",
@@ -3282,7 +3242,7 @@
       "accepted": true,
       "answer_exact": "7/25",
       "answer_tex": "\\frac{7}{25}",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.cos_angle_a:065",
+      "candidate_id": "construct:traceback.cyclic_quadrilateral.cos_angle_a:064",
       "difficulty": "A",
       "domain": "plane_geometry",
       "family_id": "traceback.cyclic_quadrilateral.cos_angle_a",
@@ -3331,56 +3291,9 @@
     },
     {
       "accepted": true,
-      "answer_exact": "13",
-      "answer_tex": "13",
-      "candidate_id": "construct:traceback.cyclic_quadrilateral.semiperimeter:066",
-      "difficulty": "A",
-      "domain": "plane_geometry",
-      "family_id": "traceback.cyclic_quadrilateral.semiperimeter",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CyclicQuadrilateral",
-          "ArithmeticObservation"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "construction": "cyclic_quadrilateral",
-        "depth": 2,
-        "hidden": [],
-        "hidden_intermediates": 0,
-        "node": "semiperimeter",
-        "param": [
-          4,
-          5,
-          7,
-          10
-        ],
-        "premises": [
-          "円に内接し，4辺の長さが順に 4, 5, 7, 10 である四角形 ABCD"
-        ],
-        "scope": [
-          "四角形"
-        ]
-      },
-      "solution_tex": "4辺の和の半分。",
-      "statement_tex": "円に内接する四角形 \\(ABCD\\) があり，\\(AB=4,\\ BC=5,\\ CD=7,\\ DA=10\\) である。この四角形の周の長さの半分を求めよ。",
-      "tool": "deduction_closure+traceback",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "deduction_closure_node_with_traceback"
-      }
-    },
-    {
-      "accepted": true,
       "answer_exact": "1, 3",
       "answer_tex": "1, 3",
-      "candidate_id": "construct:construct.mobius_fixed_points:067",
+      "candidate_id": "construct:construct.mobius_fixed_points:065",
       "difficulty": "A",
       "domain": "algebra",
       "family_id": "construct.mobius_fixed_points",
@@ -3416,7 +3329,7 @@
       "accepted": true,
       "answer_exact": "2",
       "answer_tex": "2",
-      "candidate_id": "construct:construct.mobius_iteration_period:068",
+      "candidate_id": "construct:construct.mobius_iteration_period:066",
       "difficulty": "A",
       "domain": "algebra",
       "family_id": "construct.mobius_iteration_period",
@@ -3452,7 +3365,7 @@
       "accepted": true,
       "answer_exact": "2",
       "answer_tex": "2",
-      "candidate_id": "construct:construct.paley_common_neighbors:069",
+      "candidate_id": "construct:construct.paley_common_neighbors:067",
       "difficulty": "A",
       "domain": "number_theory_graph",
       "family_id": "construct.paley_common_neighbors",
@@ -3484,7 +3397,7 @@
       "accepted": true,
       "answer_exact": "20",
       "answer_tex": "20",
-      "candidate_id": "construct:construct.linear_recurrence_mod_period:070",
+      "candidate_id": "construct:construct.linear_recurrence_mod_period:068",
       "difficulty": "A",
       "domain": "number_theory",
       "family_id": "construct.linear_recurrence_mod_period",
@@ -3518,7 +3431,7 @@
       "accepted": true,
       "answer_exact": "x*(28*x**2 - 9)",
       "answer_tex": "y=x \\left(28 x^{2} - 9\\right)",
-      "candidate_id": "construct:construct.cubic_tangent_midpoint_locus:071",
+      "candidate_id": "construct:construct.cubic_tangent_midpoint_locus:069",
       "difficulty": "A",
       "domain": "geometry_algebra",
       "family_id": "construct.cubic_tangent_midpoint_locus",
@@ -3550,7 +3463,7 @@
       "accepted": true,
       "answer_exact": "3",
       "answer_tex": "3",
-      "candidate_id": "construct:construct.complex_rotation_period:072",
+      "candidate_id": "construct:construct.complex_rotation_period:070",
       "difficulty": "A",
       "domain": "complex",
       "family_id": "construct.complex_rotation_period",
@@ -3583,7 +3496,7 @@
       "accepted": true,
       "answer_exact": "1/4",
       "answer_tex": "\\frac{1}{4}",
-      "candidate_id": "construct:construct.gambler_ruin_probability:073",
+      "candidate_id": "construct:construct.gambler_ruin_probability:071",
       "difficulty": "A",
       "domain": "probability",
       "family_id": "construct.gambler_ruin_probability",
@@ -3618,7 +3531,7 @@
       "accepted": true,
       "answer_exact": "(0, 1)",
       "answer_tex": "(0,\\ 1)",
-      "candidate_id": "construct:construct.parabola_right_angle_chord:074",
+      "candidate_id": "construct:construct.parabola_right_angle_chord:072",
       "difficulty": "A",
       "domain": "geometry",
       "family_id": "construct.parabola_right_angle_chord",
@@ -3650,7 +3563,7 @@
       "accepted": true,
       "answer_exact": "1/n",
       "answer_tex": "\\frac{1}{n}",
-      "candidate_id": "construct:construct.reciprocal_recurrence:075",
+      "candidate_id": "construct:construct.reciprocal_recurrence:073",
       "difficulty": "A",
       "domain": "algebra",
       "family_id": "construct.reciprocal_recurrence",
@@ -3683,7 +3596,7 @@
       "accepted": true,
       "answer_exact": "I",
       "answer_tex": "i",
-      "candidate_id": "construct:construct.complex_affine_limit:076",
+      "candidate_id": "construct:construct.complex_affine_limit:074",
       "difficulty": "A",
       "domain": "complex",
       "family_id": "construct.complex_affine_limit",
@@ -3716,7 +3629,7 @@
       "accepted": true,
       "answer_exact": "6",
       "answer_tex": "6",
-      "candidate_id": "construct:layered.recurrence_period_observable:077",
+      "candidate_id": "construct:layered.recurrence_period_observable:075",
       "difficulty": "A",
       "domain": "number_theory",
       "family_id": "layered.recurrence_period_observable",
@@ -3749,9 +3662,79 @@
     },
     {
       "accepted": true,
+      "answer_exact": "5",
+      "answer_tex": "5",
+      "candidate_id": "construct:layered.recurrence_period_observable:076",
+      "difficulty": "A",
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "LargestPrimeFactor"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "m": 5,
+        "obs": "max_prime",
+        "s": 1,
+        "t": 1
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。素因数分解して最大の素因数をとる。",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
+      "answer_exact": "8",
+      "answer_tex": "8",
+      "candidate_id": "construct:layered.recurrence_period_observable:077",
+      "difficulty": "A",
+      "domain": "number_theory",
+      "family_id": "layered.recurrence_period_observable",
+      "lift_certificate": {
+        "morphism_chain": [
+          "CompanionMatrix",
+          "ModularPeriod",
+          "EulerTotient"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.0
+      },
+      "parameters": {
+        "m": 5,
+        "obs": "totient",
+        "s": 1,
+        "t": 1
+      },
+      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。\\(\\varphi(20)\\) を求める。",
+      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
+      "tool": "matrix_mod_order+arith_function",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "modular_period_then_arithmetic_function"
+      }
+    },
+    {
+      "accepted": true,
       "answer_exact": "26",
       "answer_tex": "26",
-      "candidate_id": "construct:layered.paley_triangle_count:080",
+      "candidate_id": "construct:layered.paley_triangle_count:078",
       "difficulty": "A",
       "domain": "number_theory_graph",
       "family_id": "layered.paley_triangle_count",
@@ -3783,7 +3766,7 @@
       "accepted": true,
       "answer_exact": "3*sqrt(3)/4",
       "answer_tex": "\\frac{3 \\sqrt{3}}{4}",
-      "candidate_id": "construct:layered.rotation_orbit_hull_area:081",
+      "candidate_id": "construct:layered.rotation_orbit_hull_area:079",
       "difficulty": "A",
       "domain": "complex_geometry",
       "family_id": "layered.rotation_orbit_hull_area",
@@ -3815,7 +3798,7 @@
       "accepted": true,
       "answer_exact": "4*t",
       "answer_tex": "4 t",
-      "candidate_id": "construct:layered.cubic_tangent_iteration:082",
+      "candidate_id": "construct:layered.cubic_tangent_iteration:080",
       "difficulty": "A",
       "domain": "geometry_algebra",
       "family_id": "layered.cubic_tangent_iteration",
@@ -3849,7 +3832,7 @@
       "accepted": true,
       "answer_exact": "156",
       "answer_tex": "156",
-      "candidate_id": "construct:deep.paley_spectrum_triangles:083",
+      "candidate_id": "construct:deep.paley_spectrum_triangles:081",
       "difficulty": "A",
       "domain": "number_theory_graph",
       "family_id": "deep.paley_spectrum_triangles",
@@ -3886,7 +3869,7 @@
       "accepted": true,
       "answer_exact": "log(2)",
       "answer_tex": "\\log{\\left(2 \\right)}",
-      "candidate_id": "construct:deep.tangent_iteration_growth:084",
+      "candidate_id": "construct:deep.tangent_iteration_growth:082",
       "difficulty": "A",
       "domain": "geometry_analysis",
       "family_id": "deep.tangent_iteration_growth",
@@ -3923,7 +3906,7 @@
       "accepted": true,
       "answer_exact": "2",
       "answer_tex": "2",
-      "candidate_id": "construct:deep.rotation_diagonal_product_divisors:085",
+      "candidate_id": "construct:deep.rotation_diagonal_product_divisors:083",
       "difficulty": "A",
       "domain": "complex_geometry",
       "family_id": "deep.rotation_diagonal_product_divisors",
@@ -3960,7 +3943,7 @@
       "accepted": true,
       "answer_exact": "1",
       "answer_tex": "1",
-      "candidate_id": "construct:deep.recurrence_period_quadratic_character:086",
+      "candidate_id": "construct:deep.recurrence_period_quadratic_character:084",
       "difficulty": "A",
       "domain": "number_theory",
       "family_id": "deep.recurrence_period_quadratic_character",
@@ -3999,7 +3982,7 @@
       "accepted": true,
       "answer_exact": "1",
       "answer_tex": "1",
-      "candidate_id": "construct:deep.polygon_subset_centroid:087",
+      "candidate_id": "construct:deep.polygon_subset_centroid:085",
       "difficulty": "A",
       "domain": "complex_geometry",
       "family_id": "deep.polygon_subset_centroid",
@@ -4036,7 +4019,7 @@
       "accepted": true,
       "answer_exact": "2",
       "answer_tex": "2",
-      "candidate_id": "construct:ultradeep.paley_spanning_tree_divisor_count:088",
+      "candidate_id": "construct:ultradeep.paley_spanning_tree_divisor_count:086",
       "difficulty": "A",
       "domain": "spectral_graph_number_theory",
       "family_id": "ultradeep.paley_spanning_tree_divisor_count",
@@ -4077,7 +4060,7 @@
       "accepted": true,
       "answer_exact": "8",
       "answer_tex": "8",
-      "candidate_id": "construct:ultradeep.paley_four_cycle_divisor_count:089",
+      "candidate_id": "construct:ultradeep.paley_four_cycle_divisor_count:087",
       "difficulty": "A",
       "domain": "graph_combinatorics_number_theory",
       "family_id": "ultradeep.paley_four_cycle_divisor_count",
@@ -4116,7 +4099,7 @@
       "accepted": true,
       "answer_exact": "2",
       "answer_tex": "2",
-      "candidate_id": "construct:ultradeep.cyclotomic_distance_norm_divisor_count:090",
+      "candidate_id": "construct:ultradeep.cyclotomic_distance_norm_divisor_count:088",
       "difficulty": "A",
       "domain": "complex_algebra_number_theory",
       "family_id": "ultradeep.cyclotomic_distance_norm_divisor_count",
@@ -4157,7 +4140,7 @@
       "accepted": true,
       "answer_exact": "4",
       "answer_tex": "4",
-      "candidate_id": "construct:ultradeep.gambler_absorption_variance_divisor_count:091",
+      "candidate_id": "construct:ultradeep.gambler_absorption_variance_divisor_count:089",
       "difficulty": "A",
       "domain": "probability_linear_algebra_number_theory",
       "family_id": "ultradeep.gambler_absorption_variance_divisor_count",
@@ -4199,7 +4182,7 @@
       "accepted": true,
       "answer_exact": "14",
       "answer_tex": "14",
-      "candidate_id": "construct:ultradeep.cubic_root_triangle_discriminant_divisor_count:092",
+      "candidate_id": "construct:ultradeep.cubic_root_triangle_discriminant_divisor_count:090",
       "difficulty": "A",
       "domain": "algebraic_geometry_number_theory",
       "family_id": "ultradeep.cubic_root_triangle_discriminant_divisor_count",
@@ -4240,7 +4223,7 @@
       "accepted": true,
       "answer_exact": "3*pi/2",
       "answer_tex": "\\frac{3 \\pi}{2}",
-      "candidate_id": "construct:ultradeep.geometry_astroid_envelope_area:093",
+      "candidate_id": "construct:ultradeep.geometry_astroid_envelope_area:091",
       "difficulty": "A",
       "domain": "analytic_geometry",
       "family_id": "ultradeep.geometry_astroid_envelope_area",
@@ -4280,7 +4263,7 @@
       "accepted": true,
       "answer_exact": "4",
       "answer_tex": "\\frac{x^2}{4}+\\frac{y^2}{1}=4",
-      "candidate_id": "construct:ultradeep.geometry_ellipse_tangent_pair_locus:094",
+      "candidate_id": "construct:ultradeep.geometry_ellipse_tangent_pair_locus:092",
       "difficulty": "A",
       "domain": "projective_geometry",
       "family_id": "ultradeep.geometry_ellipse_tangent_pair_locus",
@@ -4321,7 +4304,7 @@
       "accepted": true,
       "answer_exact": "-27*x**2 + 4*y**3 - 24*y**2 + 48*y - 32",
       "answer_tex": "4(y-2)^3=27x^2",
-      "candidate_id": "construct:ultradeep.geometry_parabola_normal_envelope:095",
+      "candidate_id": "construct:ultradeep.geometry_parabola_normal_envelope:093",
       "difficulty": "A",
       "domain": "differential_geometry",
       "family_id": "ultradeep.geometry_parabola_normal_envelope",
@@ -4360,7 +4343,7 @@
       "accepted": true,
       "answer_exact": "8*pi",
       "answer_tex": "8 \\pi",
-      "candidate_id": "construct:ultradeep.geometry_orthocenter_locus_area:096",
+      "candidate_id": "construct:ultradeep.geometry_orthocenter_locus_area:094",
       "difficulty": "A",
       "domain": "euclidean_geometry",
       "family_id": "ultradeep.geometry_orthocenter_locus_area",
@@ -4400,7 +4383,7 @@
       "accepted": true,
       "answer_exact": "6*sqrt(3)",
       "answer_tex": "6 \\sqrt{3}",
-      "candidate_id": "construct:ultradeep.geometry_regular_polygon_minkowski_perimeter:097",
+      "candidate_id": "construct:ultradeep.geometry_regular_polygon_minkowski_perimeter:095",
       "difficulty": "A",
       "domain": "convex_geometry",
       "family_id": "ultradeep.geometry_regular_polygon_minkowski_perimeter",
@@ -4435,81 +4418,33 @@
         "independent_check": true,
         "method": "regular_polygon_formula_vs_all_vertex_sums_convex_hull"
       }
-    },
-    {
-      "accepted": true,
-      "answer_exact": "5",
-      "answer_tex": "5",
-      "candidate_id": "construct:layered.recurrence_period_observable:078",
-      "difficulty": "A",
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "LargestPrimeFactor"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "m": 5,
-        "obs": "max_prime",
-        "s": 1,
-        "t": 1
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。素因数分解して最大の素因数をとる。",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期の最大の素因数を求めよ。",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
-    },
-    {
-      "accepted": true,
-      "answer_exact": "8",
-      "answer_tex": "8",
-      "candidate_id": "construct:layered.recurrence_period_observable:079",
-      "difficulty": "A",
-      "domain": "number_theory",
-      "family_id": "layered.recurrence_period_observable",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CompanionMatrix",
-          "ModularPeriod",
-          "EulerTotient"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0
-      },
-      "parameters": {
-        "m": 5,
-        "obs": "totient",
-        "s": 1,
-        "t": 1
-      },
-      "solution_tex": "\\((a_{n+1},a_n)\\) は行列 \\(\\begin{pmatrix}1&1\\1&0\\end{pmatrix}\\) をかけて進むので，\\(\\bmod\\ 5\\) での位数が周期。周期は \\(20\\)。\\(\\varphi(20)\\) を求める。",
-      "statement_tex": "数列 \\((a_n)\\) を \\(a_0=0,\\ a_1=1,\\ a_{n+2}=a_{n+1}+a_n\\) で定める。\\((a_n)\\) を \\(\\bmod\\ 5\\) で見ると周期的になる。その周期を \\(T\\) とするとき，\\(1\\le k\\le T\\) で \\(\\gcd(k,T)=1\\) を満たす \\(k\\) の個数を求めよ。",
-      "tool": "matrix_mod_order+arith_function",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "modular_period_then_arithmetic_function"
-      }
     }
   ],
   "summary": {
-    "band_counts": {
-      "A": 98
+    "count": 96,
+    "domain_counts": {
+      "algebra": 3,
+      "algebraic_geometry_number_theory": 1,
+      "analytic_geometry": 1,
+      "combinatorics": 6,
+      "complex": 2,
+      "complex_algebra_number_theory": 1,
+      "complex_geometry": 9,
+      "conic_geometry": 20,
+      "convex_geometry": 1,
+      "differential_geometry": 1,
+      "euclidean_geometry": 1,
+      "geometry": 1,
+      "geometry_algebra": 6,
+      "geometry_analysis": 1,
+      "graph_combinatorics_number_theory": 1,
+      "number_theory": 10,
+      "number_theory_graph": 3,
+      "plane_geometry": 19,
+      "probability": 6,
+      "probability_linear_algebra_number_theory": 1,
+      "projective_geometry": 1,
+      "spectral_graph_number_theory": 1
     },
     "family_counts": {
       "construct.complex_affine_limit": 1,
@@ -4540,11 +4475,9 @@
       "traceback.cyclic_quadrilateral.cos_angle_a": 1,
       "traceback.cyclic_quadrilateral.diagonal_ac_sq": 1,
       "traceback.cyclic_quadrilateral.diagonal_product": 1,
-      "traceback.cyclic_quadrilateral.semiperimeter": 1,
       "traceback.dice_sum.modal_sum": 1,
       "traceback.dice_sum.modal_ways_divisor_count": 1,
       "traceback.dice_sum.prob_sum_divisible_by_3": 1,
-      "traceback.dice_sum.total_outcomes": 1,
       "traceback.dice_sum.variance_times_12": 1,
       "traceback.dice_sum.ways_for_modal_sum": 1,
       "traceback.digit_power.digit_count": 1,
@@ -4609,7 +4542,37 @@
       "ultradeep.paley_four_cycle_divisor_count": 1,
       "ultradeep.paley_spanning_tree_divisor_count": 1
     },
-    "shards": 26,
-    "total": 98
+    "tool_counts": {
+      "absorbing_markov_moments+linear_system+factorization": 1,
+      "cubic_discriminant+vandermonde_area+numeric_roots": 1,
+      "cyclotomic_polynomial+algebraic_norm+numeric_product": 1,
+      "deduction_closure+traceback": 65,
+      "dual_conic+tangent_intersection+linear_system": 1,
+      "fixed_point": 1,
+      "line_envelope+stationarity+numeric_shoelace": 1,
+      "linear_recurrence": 1,
+      "matrix_eigen": 1,
+      "matrix_mod_order": 1,
+      "matrix_mod_order+arith_function": 3,
+      "matrix_mod_order+legendre_symbol": 1,
+      "matrix_power": 1,
+      "minkowski_sum+support_faces+convex_hull": 1,
+      "normal_family+resultant+evolute": 1,
+      "orthocenter+linear_image+numeric_shoelace": 1,
+      "paley_spectrum+matrix_tree+exact_determinant": 1,
+      "polar_form": 1,
+      "quadratic_residue": 1,
+      "quadratic_residue+counting": 1,
+      "quadratic_residue+spectral+counting": 1,
+      "reciprocal_transform": 1,
+      "roots_of_unity+product+divisor_function": 1,
+      "roots_of_unity+shoelace": 1,
+      "roots_of_unity+subset_enumeration": 1,
+      "slope_product": 1,
+      "strongly_regular_graph+trace_four+factorization": 1,
+      "symbolic_intersection": 1,
+      "symbolic_intersection+iteration": 1,
+      "symbolic_intersection+iteration+limit": 1
+    }
   }
 }

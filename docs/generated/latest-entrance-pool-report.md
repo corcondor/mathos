@@ -5,11 +5,11 @@
 
 ## 結果
 
-- 検証済み構造: **113**
-- 構造族: **111**
-- 幾何・代数・複素数系: **77**
+- 検証済み構造: **101**
+- 構造族: **99**
+- 幾何・代数・複素数系: **73**
 - 高校の語彙へ書き換えた問題: **4**
-- 同一構造の数値変種として除外: **83**（生成時点で潰しているため通常は 0）
+- 同一構造の数値変種として除外: **71**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
 
 ## 採用契約
@@ -48,8 +48,6 @@
 | `combinatorics` | `traceback.lattice_path.catalan_divisor_count` | `counting -> recurrence -> combination -> symmetry -> prime_factorization -> divisor_counting` |
 | `combinatorics` | `traceback.lattice_path.catalan_paths` | `counting -> recurrence -> combination -> symmetry` |
 | `combinatorics` | `traceback.lattice_path.strictly_above_paths` | `counting -> recurrence -> combination -> symmetry` |
-| `combinatorics` | `traceback.lattice_path.through_center_paths` | `counting -> recurrence -> combination` |
-| `combinatorics` | `traceback.lattice_path.total_paths` | `counting -> recurrence -> combination` |
 | `combinatorics` | `traceback.lattice_path.total_paths_divisor_count` | `counting -> recurrence -> combination -> prime_factorization -> divisor_counting` |
 | `combinatorics_analysis` | `binomial.beta_integral_duality` | `polynomial_expansion -> combination -> definite_integral` |
 | `combinatorics_number_theory` | `binomial.roots_of_unity_filter_mod3` | `combination -> polynomial_expansion -> roots_of_unity -> sum_of_series -> trigonometric_identity` |
@@ -76,8 +74,6 @@
 | `conic_geometry` | `traceback.hyperbola_asymptote.asymptote_intersection_x` | `hyperbola -> tangent_line -> differentiation -> line_equation -> simultaneous_equations` |
 | `conic_geometry` | `traceback.hyperbola_asymptote.asymptote_triangle_area` | `hyperbola -> tangent_line -> differentiation -> line_equation -> area_shoelace` |
 | `conic_geometry` | `traceback.hyperbola_asymptote.director_circle_radius_sq` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation` |
-| `conic_geometry` | `traceback.hyperbola_asymptote.eccentricity_sq` | `hyperbola -> algebraic_identity` |
-| `conic_geometry` | `traceback.hyperbola_asymptote.focal_distance_difference` | `hyperbola -> distance_formula` |
 | `conic_geometry` | `traceback.hyperbola_asymptote.semi_latus_rectum` | `hyperbola -> distance_formula -> coordinate_geometry -> simultaneous_equations` |
 | `conic_geometry` | `traceback.parabola_focal_chord.chord_length` | `parabola -> hyperbola -> distance_formula` |
 | `conic_geometry` | `traceback.parabola_focal_chord.midpoint_to_directrix` | `parabola -> hyperbola -> distance_formula -> midpoint` |
@@ -106,10 +102,7 @@
 | `number_theory` | `layered.recurrence_period_observable` | `recurrence -> general_term -> congruence -> periodicity -> prime_factorization` |
 | `number_theory` | `layered.recurrence_period_observable` | `recurrence -> general_term -> congruence -> periodicity -> gcd_lcm -> counting` |
 | `number_theory` | `multiplicative.mobius_divisor_sum_totient_ratio` | `divisor_counting -> sum_of_series -> prime_factorization -> congruence` |
-| `number_theory` | `traceback.digit_power.digit_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.digit_increase_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
-| `number_theory` | `traceback.digit_power.digit_sum` | `geometric_sequence -> exponential -> integer_arithmetic` |
-| `number_theory` | `traceback.digit_power.leading_digit` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.leading_one_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory_graph` | `layered.paley_triangle_count` | `congruence -> square_number -> counting -> combination` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.area` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule -> area_shoelace` |
@@ -117,7 +110,6 @@
 | `plane_geometry` | `traceback.cyclic_quadrilateral.cos_angle_a` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.diagonal_ac_sq` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.diagonal_product` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule -> algebraic_identity` |
-| `plane_geometry` | `traceback.cyclic_quadrilateral.semiperimeter` | `circle_equation -> trigonometric_ratio -> integer_arithmetic` |
 | `plane_geometry` | `traceback.incircle_excircle.contact_segment_longest` | `coordinate_geometry -> triangle_area -> triangle_center -> distance_formula` |
 | `plane_geometry` | `traceback.incircle_excircle.euler_OI_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> algebraic_identity` |
 | `plane_geometry` | `traceback.incircle_excircle.exradii_product` | `coordinate_geometry -> triangle_area -> triangle_center` |
@@ -125,7 +117,6 @@
 | `plane_geometry` | `traceback.incircle_excircle.exradii_sum` | `coordinate_geometry -> triangle_area -> triangle_center -> circle_equation` |
 | `plane_geometry` | `traceback.incircle_excircle.exradius_opposite_longest` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center` |
 | `plane_geometry` | `traceback.triangle_centers.OH_dist_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> inner_product -> distance_formula` |
-| `plane_geometry` | `traceback.triangle_centers.area` | `coordinate_geometry -> triangle_area -> area_shoelace` |
 | `plane_geometry` | `traceback.triangle_centers.circumradius_sq` | `coordinate_geometry -> triangle_area -> circle_equation -> simultaneous_equations` |
 | `plane_geometry` | `traceback.triangle_centers.euler_line_slope` | `coordinate_geometry -> triangle_area -> circle_equation -> triangle_center -> inner_product -> line_equation` |
 | `plane_geometry` | `traceback.triangle_centers.incenter_x` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center` |
@@ -135,11 +126,8 @@
 | `probability` | `construct.gambler_ruin_probability` | `probability -> recurrence_probability -> recurrence -> simultaneous_equations -> geometric_sequence -> general_term` |
 | `probability` | `probability.left_to_right_maxima_expectation` | `probability -> expectation -> sum_of_series` |
 | `probability` | `probability.random_bridge_zero_count` | `counting -> combination -> expectation -> sum_of_series` |
-| `probability` | `traceback.dice_sum.modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `traceback.dice_sum.modal_ways_divisor_count` | `probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `traceback.dice_sum.prob_sum_divisible_by_3` | `probability -> polynomial_expansion -> counting -> roots_of_unity -> sum_of_series -> complex_plane` |
-| `probability` | `traceback.dice_sum.total_outcomes` | `probability -> polynomial_expansion -> counting -> combination` |
-| `probability` | `traceback.dice_sum.variance_times_12` | `probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `traceback.dice_sum.ways_for_modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
 | `probability_linear_algebra_number_theory` | `ultradeep.gambler_absorption_variance_divisor_count` | `counting -> recurrence -> recurrence_probability -> simultaneous_equations -> probability -> expectation -> conditional_probability -> variance -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `projective_geometry` | `ultradeep.geometry_ellipse_tangent_pair_locus` | `ellipse -> trigonometric_identity -> complex_plane -> parameter_elimination -> symmetry -> tangent_line -> line_equation -> simultaneous_equations -> de_moivre -> coordinate_geometry -> locus` |
