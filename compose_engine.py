@@ -49,7 +49,7 @@ class Target:
         closure: IntClosure,
         low: int,
         high: int,
-        preamble: Callable[[int], str],
+        preamble: Callable[[str], str],
         domain: str,
     ) -> None:
         self.name = name
@@ -75,24 +75,24 @@ TARGETS: tuple[Target, ...] = (
     ),
     Target(
         "lattice_path", tb.closure_lattice_path, 2, 20,
-        lambda n: (
-            r"格子点 \((0,0)\) から \((n,n)\) まで，"
+        lambda v: (
+            rf"格子点 \((0,0)\) から \(({v},{v})\) まで，"
             r"右または上に 1 ずつ進んで到達する最短経路を考える。"
         ),
         "combinatorics",
     ),
     Target(
         "dice_sum", tb.closure_dice_sum, 2, 10,
-        lambda n: (
-            r"1 から 6 の目をもつさいころを \(n\) 個同時に投げ，"
+        lambda v: (
+            rf"1 から 6 の目をもつさいころを \({v}\) 個同時に投げ，"
             r"出た目の和を \(S\) とする。"
         ),
         "probability",
     ),
     Target(
         "digit_power", tb.closure_digit_power, 5, 400,
-        lambda k: (
-            r"\(2^{n}\) を10進法で表す。"
+        lambda v: (
+            rf"\(2^{{{v}}}\) を10進法で表す。"
             r"必要ならば \(\log_{10}2=0.3010\ldots\) を用いてよい。"
         ),
         "number_theory",
@@ -104,8 +104,8 @@ TARGETS: tuple[Target, ...] = (
         "scaled_triangle_centers",
         lambda n: tb.closure_triangle_centers((0, 0, 14 * n, 0, 5 * n, 12 * n)),
         1, 9,
-        lambda n: (
-            r"座標平面上の3点 \(A(0,0)\), \(B(14n,0)\), \(C(5n,12n)\) を"
+        lambda v: (
+            rf"座標平面上の3点 \(A(0,0)\), \(B(14{v},0)\), \(C(5{v},12{v})\) を"
             r"頂点とする三角形 \(ABC\) を考える。"
         ),
         "plane_geometry",
@@ -114,8 +114,8 @@ TARGETS: tuple[Target, ...] = (
         "scaled_incircle_excircle",
         lambda n: tb.closure_incircle_excircle((0, 0, 14 * n, 0, 5 * n, 12 * n)),
         1, 9,
-        lambda n: (
-            r"座標平面上の3点 \(A(0,0)\), \(B(14n,0)\), \(C(5n,12n)\) を"
+        lambda v: (
+            rf"座標平面上の3点 \(A(0,0)\), \(B(14{v},0)\), \(C(5{v},12{v})\) を"
             r"頂点とする三角形 \(ABC\) の内接円と3つの傍接円を考える。"
         ),
         "plane_geometry",
@@ -201,11 +201,7 @@ def _depends_on_parameter(
     for other in (value + 1, value - 1, value + 2, value - 2):
         if not target.accepts(other):
             continue
-        try:
-            nodes = target.closure(other)
-        except Exception:
-            continue
-        for node in nodes:
+        for node in closure_of(target, other):
             if node.key != node_key:
                 continue
             try:
@@ -216,77 +212,167 @@ def _depends_on_parameter(
     return False
 
 
-_VALUE_CACHE: dict[tuple[str, str, int], Any] = {}
+_CLOSURE_CACHE: dict[tuple[str, int], list[tb.DerivedNode]] = {}
+
+
+def closure_of(target: Target, value: int) -> list[tb.DerivedNode]:
+    """閉包の計算は重い（正n角形は部分集合を 2^n 通り数える）。
+    合成では同じ (構築, 値) を何度も引くのでキャッシュする。"""
+    key = (target.name, value)
+    if key not in _CLOSURE_CACHE:
+        try:
+            _CLOSURE_CACHE[key] = target.closure(value)
+        except Exception:
+            _CLOSURE_CACHE[key] = []
+    return _CLOSURE_CACHE[key]
 
 
 def _cached_value(target: Target, node_key: str, value: int) -> Any:
-    key = (target.name, node_key, value)
-    if key not in _VALUE_CACHE:
-        _VALUE_CACHE[key] = None
-        for node in target.closure(value):
-            _VALUE_CACHE[(target.name, node.key, value)] = node.value
-    return _VALUE_CACHE.get(key)
+    for node in closure_of(target, value):
+        if node.key == node_key:
+            return node.value
+    return None
 
 
-def compose() -> list[Problem]:
-    problems: list[Problem] = []
-    seen: set[tuple[str, str, str, str]] = set()
+class Bridge:
+    """「ここまでで整数 n が定まった」という状態。
 
-    for source_name, _param, source_node, source_preamble in _int_sources():
-        definition = as_definition(source_node.question_ja)
+    合成はこの状態を持ち回して行う。段を重ねるほど連鎖が長くなり、
+    構造の数は段ごとに掛け算で増える。有限のグリッドを舐め尽くしても
+    止まらないのはこのためで、深さを 1 つ増やせば必ず新しい構造が出る。
+    """
+
+    def __init__(
+        self, text: str, value: int, chain: tuple[str, ...],
+        hidden: tuple[str, ...], scope: tuple[str, ...],
+        premises: tuple[str, ...], solution: str, trail: tuple[str, ...],
+    ) -> None:
+        self.text = text
+        self.value = value
+        self.chain = chain
+        self.hidden = hidden
+        self.scope = scope
+        self.premises = premises
+        self.solution = solution
+        self.trail = trail
+
+
+def _seed_bridges() -> list[Bridge]:
+    bridges: list[Bridge] = []
+    for source_name, _param, node, preamble in _int_sources():
+        definition = as_definition(node.question_ja)
         if definition is None:
             continue
-        value = int(source_node.value)
+        bridges.append(Bridge(
+            f"{preamble}{definition}",
+            int(node.value),
+            tuple(node.morphisms),
+            tuple(node.hidden),
+            tuple(node.scope),
+            tuple(node.premises),
+            f"{node.solution_ja}（この値は \\({int(node.value)}\\)）。",
+            (f"{source_name}.{node.key}",),
+        ))
+    return bridges
 
+
+def _extend(bridges: list[Bridge], limit: int) -> list[Bridge]:
+    """各 bridge を 1 段だけ伸ばす。整数を返すノードだけが次の橋になる。"""
+    out: list[Bridge] = []
+    seen: set[tuple[str, ...]] = set()
+    for bridge in bridges:
         for target in TARGETS:
-            if source_name == target.name:
-                continue  # 同じ構築へ戻すのは意味がない
+            if not target.accepts(bridge.value):
+                continue
+            for node in closure_of(target, bridge.value):
+                if not getattr(node.value, "is_Integer", False):
+                    continue
+                if _leaks_bridge(node, bridge.value):
+                    continue
+                if not _depends_on_parameter(target, node.key, bridge.value):
+                    continue
+                definition = as_definition(node.question_ja)
+                if definition is None:
+                    continue
+                trail = bridge.trail + (f"{target.name}.{node.key}",)
+                if trail in seen:
+                    continue
+                seen.add(trail)
+                out.append(Bridge(
+                    f"{bridge.text}{target.preamble(bridge.value)}{definition}",
+                    int(node.value),
+                    bridge.chain + tuple(node.morphisms),
+                    bridge.hidden + tuple(node.hidden),
+                    bridge.scope + tuple(node.scope),
+                    bridge.premises + tuple(node.premises),
+                    f"{bridge.solution}次に {node.solution_ja}"
+                    f"（この値は \\({int(node.value)}\\)）。",
+                    trail,
+                ))
+                if len(out) >= limit:
+                    return out
+    return out
+
+
+def compose(depth: int = 2, limit_per_round: int = 4000) -> list[Problem]:
+    """深さ depth の合成をすべて作る。depth=2 が「A のあと B」。"""
+    problems: list[Problem] = []
+    seen: set[tuple[str, ...]] = set()
+
+    bridges = _seed_bridges()
+    for round_index in range(depth - 1):
+        # 最終段は問題として切り出すので、途中段だけ伸ばす
+        if round_index > 0:
+            bridges = _extend(bridges, limit_per_round)
+            if not bridges:
+                break
+        problems.extend(_cut(bridges, seen))
+    return problems
+
+
+def _cut(bridges: list[Bridge], seen: set[tuple[str, ...]]) -> list[Problem]:
+    problems: list[Problem] = []
+    for bridge in bridges:
+        value = bridge.value
+        for target in TARGETS:
             if not target.accepts(value):
                 continue
-            try:
-                nodes = target.closure(value)
-            except Exception:
-                continue
-            for node in nodes:
-                # 対象側の設問文に n の値がそのまま書かれていると、
-                # 前半（n を求める部分）が読むだけで解けてしまう。
-                # 例:「2^n を10進法で表す … 2^37 は何桁か」
+            if target.name in bridge.trail[-1]:
+                continue  # 直前と同じ構築へ戻すのは意味がない
+            for node in closure_of(target, value):
+                # 設問文に橋渡しの値が書かれていると、前半を読むだけで
+                # 後半へ進めてしまい合成した意味がなくなる
                 if _leaks_bridge(node, value):
                     continue
+                # 後半の答えが n に依存しない組み合わせも意味がない
                 if not _depends_on_parameter(target, node.key, value):
                     continue
-                signature = (source_name, source_node.key, target.name, node.key)
-                if signature in seen:
+                trail = bridge.trail + (f"{target.name}.{node.key}",)
+                if trail in seen:
                     continue
-                seen.add(signature)
+                seen.add(trail)
 
                 statement = (
-                    f"{source_preamble}{definition}"
-                    f"{target.preamble(value)}{node.question_ja}"
+                    f"{bridge.text}{target.preamble(value)}{node.question_ja}"
                 )
-                chain = tuple(source_node.morphisms) + tuple(node.morphisms)
-                hidden = tuple(source_node.hidden) + tuple(node.hidden)
+                chain = bridge.chain + tuple(node.morphisms)
+                hidden = bridge.hidden + tuple(node.hidden)
                 solution = (
-                    f"まず {definition.rstrip('。')}。{source_node.solution_ja}"
-                    f"（この値は \\({value}\\)）。"
-                    f"次に {node.solution_ja}"
+                    f"{bridge.solution}最後に {node.solution_ja}"
                 )
                 problems.append(Problem(
-                    f"compose.{source_name}.{source_node.key}"
-                    f"__{target.name}.{node.key}",
+                    "compose." + "__".join(trail),
                     target.domain,
                     "closure_composition",
                     {
-                        "source": source_name,
-                        "source_node": source_node.key,
-                        "target": target.name,
-                        "target_node": node.key,
+                        "trail": list(trail),
+                        "stages": len(trail),
                         "bridge_value": value,
                         "depth": len(chain),
                         "hidden_intermediates": len(hidden),
-                        "premises": list(source_node.premises) + list(node.premises),
+                        "premises": list(bridge.premises) + list(node.premises),
                         "hidden": list(hidden),
-                        "scope": list(source_node.scope) + list(node.scope),
+                        "scope": list(bridge.scope) + list(node.scope),
                     },
                     statement,
                     sp.latex(node.value),
@@ -299,8 +385,20 @@ def compose() -> list[Problem]:
     return problems
 
 
-def synthesize() -> dict[str, Any]:
-    problems = compose()
+def synthesize(depth: int = 2) -> dict[str, Any]:
+    """既定は深さ 2。
+
+    深さ 3 は構造数も難易度スコアも大きく増える（2192構造・中央値19.68、
+    手作り問題の中央値を 85% が超える）が、実物を読むと採れない。
+      * 同じ n を二度定義してしまい問題文が破綻する
+      * 3 つの無関係な計算を数値で繋いだだけで、1 つの着想がない
+    これは「難しい」のではなく「計算が面倒」なだけである。
+
+    重要なのは、難易度スコアが長さを報酬にしているせいで、
+    この水増しを高く評価してしまうこと。つまり自分の指標を
+    自分の生成器が騙せる。深さで難易度を稼ぐ道は採らない。
+    """
+    problems = compose(depth=depth)
     from collections import Counter
     records = [
         {

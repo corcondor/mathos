@@ -34,6 +34,11 @@ DEFAULT_REPORT = (
 # 配信に出す最低限の手数。操作数と難易度の実測から決めた閾値。
 MIN_MORPHISMS = 3
 
+# 難易度の下限。過去問 28,074 問の 90% 点が 8.38 なので、
+# 「過去問の上位1割より難しい」を最低ラインにする。
+# これを下回るものは、作れても配信しない。
+MIN_DIFFICULTY = 8.4
+
 
 def _structure_key(problem: dict[str, Any]) -> str:
     lift = problem.get("lift_certificate") or {}
@@ -101,6 +106,40 @@ def _compose_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _novelty_checker():
+    """過去問コーパスに対して実際に類似度を計算する検査を返す。
+
+    生成器は novelty を True と 0.0 で直書きしていた（3つとも）。
+    つまり「過去問に出たことがあるか」は一度も測られていなかった。
+    ここで 28,000 問のコーパスと突き合わせて本当に測る。
+    """
+    try:
+        from math_os_prototype.world_novelty_check import (
+            load_jukenmath_hashes, load_world_corpus, surface_ngrams, world_novelty,
+        )
+    except ImportError:  # pragma: no cover
+        from world_novelty_check import (
+            load_jukenmath_hashes, load_world_corpus, surface_ngrams, world_novelty,
+        )
+    world = load_world_corpus()
+    grams = [(row["source"], surface_ngrams(row["statement"])) for row in world]
+    hashes = load_jukenmath_hashes()
+
+    def check(statement: str) -> dict[str, Any]:
+        return world_novelty(statement, grams, hashes)
+
+    check.corpus_size = len(grams)  # type: ignore[attr-defined]
+    return check
+
+
+def _difficulty_score(problem: dict[str, Any]) -> float:
+    try:
+        from math_os_prototype.world_novelty_check import difficulty
+    except ImportError:  # pragma: no cover
+        from world_novelty_check import difficulty
+    return float(difficulty(problem).get("score", 0.0))
+
+
 def build_pool(
     construct_path: Path = DEFAULT_CONSTRUCT,
 ) -> dict[str, Any]:
@@ -118,6 +157,7 @@ def build_pool(
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
     source_counts = Counter()
+    novelty_check = _novelty_checker()
     for source, records in sources:
         for problem in records:
             if not _verified(problem):
@@ -135,6 +175,19 @@ def build_pool(
             if certificate is None:
                 rejected["scope_lowering"] += 1
                 continue
+
+            # 実際に過去問コーパスと突き合わせる
+            statement = str(problem.get("statement_tex") or "")
+            novelty = novelty_check(statement)
+            if not novelty["world_novel"]:
+                rejected["seen_in_past_exams"] += 1
+                continue
+
+            # 易しい問題は残さない。難しさの下限はここで切る。
+            score = _difficulty_score(problem)
+            if score < MIN_DIFFICULTY:
+                rejected["too_easy"] += 1
+                continue
             key = _structure_key(problem)
             if key in retained:
                 rejected["same_structure_variant"] += 1
@@ -147,6 +200,15 @@ def build_pool(
                 record["statement_tex_original"] = problem.get("statement_tex")
             record["curriculum_certificate"] = certificate
             record["structure_key"] = key
+            # 直書きの 0.0 を、実測した類似度で上書きする
+            record["novelty"] = {
+                "corpus_novel": True,
+                "maximum_surface_jaccard": novelty["max_surface_jaccard"],
+                "closest_source": novelty["closest_source"],
+                "reference_corpus_size": novelty_check.corpus_size,
+                "measured": True,
+            }
+            record["difficulty_score"] = score
             record["source_generator"] = source
             retained[key] = record
             source_counts[source] += 1
