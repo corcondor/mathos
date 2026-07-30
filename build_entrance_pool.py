@@ -86,6 +86,21 @@ def _traceback_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _compose_report() -> dict[str, Any]:
+    """構築の合成（構築Aの導出値を構築Bのパラメータへ渡す）。"""
+    try:
+        from math_os_prototype.compose_engine import synthesize as synthesize_compose
+    except ImportError:  # pragma: no cover
+        try:
+            from compose_engine import synthesize as synthesize_compose
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize_compose()
+    except Exception:
+        return {"problems": []}
+
+
 def build_pool(
     construct_path: Path = DEFAULT_CONSTRUCT,
 ) -> dict[str, Any]:
@@ -98,6 +113,7 @@ def build_pool(
         ),
         ("geometry_fusion", _records(synthesize_geometry())),
         ("traceback_closure", _records(_traceback_report())),
+        ("closure_composition", _records(_compose_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
