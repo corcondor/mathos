@@ -5,9 +5,9 @@
 
 ## 結果
 
-- 検証済み構造: **564**
-- 構造族: **562**
-- 幾何・代数・複素数系: **376**
+- 検証済み構造: **574**
+- 構造族: **572**
+- 幾何・代数・複素数系: **381**
 - 高校の語彙へ書き換えた問題: **4**
 - 同一構造の数値変種として除外: **81**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
@@ -174,6 +174,11 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `complex` | `construct.complex_rotation_period` | `roots_of_unity -> de_moivre -> periodicity` |
 | `complex_algebra_number_theory` | `ultradeep.cyclotomic_distance_norm_divisor_count` | `roots_of_unity -> gcd_lcm -> counting -> distance_formula -> polynomial_factorization -> remainder_theorem -> polynomial_expansion -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `complex_geometry` | `complex_geometry.reciprocal_root_polygon_area` | `complex_plane -> roots_of_unity -> symmetry -> counting -> convex_hull -> area_shoelace -> extremum -> differentiation` |
+| `complex_geometry` | `compose.dice_sum.modal_sum__regular_polygon.area` | `probability -> polynomial_expansion -> counting -> combination -> regular_polygon -> triangle_area -> coordinate_geometry -> sum_of_series` |
+| `complex_geometry` | `compose.dice_sum.modal_sum__regular_polygon.centroid_zero_subsets` | `probability -> polynomial_expansion -> counting -> combination -> regular_polygon -> roots_of_unity -> sum_of_series -> symmetry` |
+| `complex_geometry` | `compose.dice_sum.modal_sum__regular_polygon.diagonal_count` | `probability -> polynomial_expansion -> counting -> combination -> regular_polygon` |
+| `complex_geometry` | `compose.dice_sum.modal_sum__regular_polygon.distance_product_divisors` | `probability -> polynomial_expansion -> counting -> combination -> roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting` |
+| `complex_geometry` | `compose.dice_sum.modal_sum__regular_polygon.sum_sq_pairwise` | `probability -> polynomial_expansion -> counting -> combination -> regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series` |
 | `complex_geometry` | `compose.dice_sum.modal_ways_divisor_count__regular_polygon.area` | `probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting -> regular_polygon -> triangle_area -> coordinate_geometry -> sum_of_series` |
 | `complex_geometry` | `compose.dice_sum.modal_ways_divisor_count__regular_polygon.centroid_zero_subsets` | `probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting -> regular_polygon -> roots_of_unity -> sum_of_series -> symmetry` |
 | `complex_geometry` | `compose.dice_sum.modal_ways_divisor_count__regular_polygon.diagonal_count` | `probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting -> regular_polygon` |
@@ -532,6 +537,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `plane_geometry` | `traceback.triangle_centers.inradius` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center` |
 | `plane_geometry` | `traceback.triangle_centers.nine_point_radius_sq` | `coordinate_geometry -> triangle_area -> midpoint -> circle_equation` |
 | `plane_geometry` | `traceback.triangle_centers.orthocenter_x` | `coordinate_geometry -> triangle_area -> triangle_center -> inner_product -> simultaneous_equations` |
+| `probability` | `compose.digit_power.digit_count__dice_sum.modal_sum` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.digit_power.digit_count__dice_sum.modal_ways_divisor_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.digit_power.digit_count__dice_sum.variance_times_12` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.digit_power.digit_count__dice_sum.ways_for_modal_sum` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic -> probability -> polynomial_expansion -> counting -> combination` |
@@ -547,6 +553,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `probability` | `compose.hyperbola_asymptote.asymptote_intersection_x__dice_sum.modal_ways_divisor_count` | `hyperbola -> tangent_line -> differentiation -> line_equation -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.hyperbola_asymptote.asymptote_intersection_x__dice_sum.variance_times_12` | `hyperbola -> tangent_line -> differentiation -> line_equation -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.hyperbola_asymptote.asymptote_intersection_x__dice_sum.ways_for_modal_sum` | `hyperbola -> tangent_line -> differentiation -> line_equation -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `compose.hyperbola_asymptote.director_circle_radius_sq__dice_sum.modal_sum` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.hyperbola_asymptote.director_circle_radius_sq__dice_sum.modal_ways_divisor_count` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.hyperbola_asymptote.director_circle_radius_sq__dice_sum.variance_times_12` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.hyperbola_asymptote.director_circle_radius_sq__dice_sum.ways_for_modal_sum` | `hyperbola -> tangent_line -> differentiation -> inner_product -> circle_equation -> probability -> polynomial_expansion -> counting -> combination` |
@@ -568,9 +575,11 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `probability` | `compose.regular_polygon.distance_product_divisors__dice_sum.modal_sum` | `roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.regular_polygon.distance_product_divisors__dice_sum.variance_times_12` | `roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.regular_polygon.distance_product_divisors__dice_sum.ways_for_modal_sum` | `roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting -> probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `compose.regular_polygon.sum_sq_pairwise__dice_sum.modal_sum` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.regular_polygon.sum_sq_pairwise__dice_sum.modal_ways_divisor_count` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.regular_polygon.sum_sq_pairwise__dice_sum.variance_times_12` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.regular_polygon.sum_sq_pairwise__dice_sum.ways_for_modal_sum` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series -> probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `compose.regular_polygon.vertex_distance_product__dice_sum.modal_sum` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.regular_polygon.vertex_distance_product__dice_sum.modal_ways_divisor_count` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.regular_polygon.vertex_distance_product__dice_sum.variance_times_12` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.regular_polygon.vertex_distance_product__dice_sum.ways_for_modal_sum` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> probability -> polynomial_expansion -> counting -> combination` |
@@ -582,6 +591,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `probability` | `compose.triangle_centers.inradius__dice_sum.modal_ways_divisor_count` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.triangle_centers.inradius__dice_sum.variance_times_12` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.triangle_centers.inradius__dice_sum.ways_for_modal_sum` | `coordinate_geometry -> triangle_area -> distance_formula -> triangle_center -> probability -> polynomial_expansion -> counting -> combination` |
+| `probability` | `compose.triangle_centers.orthocenter_x__dice_sum.modal_sum` | `coordinate_geometry -> triangle_area -> triangle_center -> inner_product -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> combination` |
 | `probability` | `compose.triangle_centers.orthocenter_x__dice_sum.modal_ways_divisor_count` | `coordinate_geometry -> triangle_area -> triangle_center -> inner_product -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> combination -> prime_factorization -> divisor_counting` |
 | `probability` | `compose.triangle_centers.orthocenter_x__dice_sum.variance_times_12` | `coordinate_geometry -> triangle_area -> triangle_center -> inner_product -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `compose.triangle_centers.orthocenter_x__dice_sum.ways_for_modal_sum` | `coordinate_geometry -> triangle_area -> triangle_center -> inner_product -> simultaneous_equations -> probability -> polynomial_expansion -> counting -> combination` |
