@@ -836,12 +836,16 @@ def closure_dice_sum(n: int) -> list[DerivedNode]:
                 key, value, question, (base,), hidden, morphisms, solution, scope,
             ))
 
-    add("modal_sum", sp.Integer(modal_sum),
-        r"和として最も起こりやすい値を求めよ。",
-        ("分布の対称性",),
-        ("DiceGeneratingFunction", "ModalOutcome"),
-        rf"分布は \(\frac{{7n}}{{2}}\) について対称なので中央の値が最頻。",
-        ("確率", "場合の数"))
+    # n が奇数なら中心 7n/2 の両隣が同率の最頻値になる。合成器は
+    # DerivedNode の値を単一整数として次の構築へ渡すため、一意な場合だけ
+    # modal_sum ノードを公開する。これで集合値を整数として誤接続しない。
+    if peak.is_integer:
+        add("modal_sum", sp.Integer(modal_sum),
+            r"和として最も起こりやすい値を求めよ。",
+            ("分布の対称性", "最頻値の一意性"),
+            ("DiceGeneratingFunction", "ModalOutcome"),
+            rf"分布は \(\frac{{7n}}{{2}}\) について対称で，この整数が唯一の最頻値。",
+            ("確率", "場合の数"))
 
     add("ways_for_modal_sum", modal_ways,
         rf"和が {modal_sum} となる目の出方は何通りか。",

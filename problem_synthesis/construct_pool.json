@@ -2436,8 +2436,8 @@
     },
     {
       "accepted": true,
-      "answer_exact": "10",
-      "answer_tex": "10",
+      "answer_exact": "14",
+      "answer_tex": "14",
       "candidate_id": "construct:traceback.dice_sum.modal_sum:048",
       "difficulty": "A",
       "domain": "probability",
@@ -2457,21 +2457,22 @@
         "construction": "dice_sum",
         "depth": 3,
         "hidden": [
-          "分布の対称性"
+          "分布の対称性",
+          "最頻値の一意性"
         ],
-        "hidden_intermediates": 1,
+        "hidden_intermediates": 2,
         "node": "modal_sum",
-        "param": 3,
+        "param": 4,
         "premises": [
-          "3 個のさいころを同時に投げたときの出目の和"
+          "4 個のさいころを同時に投げたときの出目の和"
         ],
         "scope": [
           "確率",
           "場合の数"
         ]
       },
-      "solution_tex": "分布は \\(\\frac{7n}{2}\\) について対称なので中央の値が最頻。",
-      "statement_tex": "1 から 6 の目をもつさいころを 3 個同時に投げ，出た目の和を \\(S\\) とする。和として最も起こりやすい値を求めよ。",
+      "solution_tex": "分布は \\(\\frac{7n}{2}\\) について対称で，この整数が唯一の最頻値。",
+      "statement_tex": "1 から 6 の目をもつさいころを 4 個同時に投げ，出た目の和を \\(S\\) とする。和として最も起こりやすい値を求めよ。",
       "tool": "deduction_closure+traceback",
       "verification": {
         "exact_backend": true,
