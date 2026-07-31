@@ -106,6 +106,21 @@ def _compose_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _relation_report() -> dict[str, Any]:
+    """厳密な関係証明書を持つ最大最小・不等式問題。"""
+    try:
+        from math_os_prototype.relation_engine import synthesize as synthesize_relation
+    except ImportError:  # pragma: no cover
+        try:
+            from relation_engine import synthesize as synthesize_relation
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize_relation()
+    except Exception:
+        return {"problems": []}
+
+
 def _novelty_checker():
     """過去問コーパスに対して実際に類似度を計算する検査を返す。
 
@@ -153,6 +168,7 @@ def build_pool(
         ("geometry_fusion", _records(synthesize_geometry())),
         ("traceback_closure", _records(_traceback_report())),
         ("closure_composition", _records(_compose_report())),
+        ("relation_closure", _records(_relation_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
@@ -325,12 +341,13 @@ def main() -> int:
     args = parser.parse_args()
     report = build_pool(args.construct)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True),
-        encoding="utf-8",
-    )
+    with args.output.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(
+            json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True)
+        )
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(render_report(report), encoding="utf-8")
+    with args.report.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(render_report(report))
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     return 0
 
