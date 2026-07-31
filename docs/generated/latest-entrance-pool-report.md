@@ -5,13 +5,13 @@
 
 ## 結果
 
-- 検証済み構造: **567**
-- 構造族: **565**
-- 幾何・代数・複素数系: **376**
+- 検証済み構造: **570**
+- 構造族: **568**
+- 幾何・代数・複素数系: **379**
 - 高校の語彙へ書き換えた問題: **4**
 - 同一構造の数値変種として除外: **81**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
-- 旧難易度8.4未満（注釈のみ・除外しない）: **182**
+- 旧難易度8.4未満（注釈のみ・除外しない）: **185**
 - 射が3個未満（注釈のみ・除外しない）: **20**
 
 難易度指標は人手判断に対する AUC が 0.086 だったため、
@@ -289,6 +289,9 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `geometry_algebra` | `traceback.cubic_tangent.midpoint_locus` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations -> midpoint -> locus -> parameter_elimination` |
 | `geometry_algebra` | `traceback.cubic_tangent.reintersection_x` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations` |
 | `geometry_analysis` | `deep.tangent_iteration_growth` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations -> geometric_sequence -> recurrence -> general_term -> limit -> logarithm` |
+| `geometry_analysis` | `passage_region.quadratic_interval_area` | `parametric_curve -> quadratic_range -> inequality -> quadratic_extremum -> area_integral -> definite_integral` |
+| `geometry_analysis` | `passage_region.quadratic_interval_image` | `parametric_curve -> quadratic_range -> inequality -> quadratic_extremum` |
+| `geometry_analysis` | `passage_region.quadratic_stationary_boundary` | `parametric_curve -> quadratic_range -> differentiation -> parameter_elimination -> inequality` |
 | `graph_combinatorics_number_theory` | `ultradeep.paley_four_cycle_divisor_count` | `congruence -> integer_arithmetic -> square_number -> counting -> combination -> regular_polygon -> symmetry -> prime_factorization -> divisor_counting` |
 | `number_theory` | `construct.linear_recurrence_mod_period` | `recurrence -> general_term -> congruence -> periodicity` |
 | `number_theory` | `deep.recurrence_period_quadratic_character` | `recurrence -> general_term -> congruence -> periodicity -> prime_factorization -> square_number` |

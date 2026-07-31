@@ -120,6 +120,25 @@ def _relation_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _passage_region_report() -> dict[str, Any]:
+    """存在量化した二次曲線族の通過領域・面積・境界観測。"""
+    try:
+        from math_os_prototype.passage_region_closure import (
+            synthesize as synthesize_passage_region,
+        )
+    except ImportError:  # pragma: no cover
+        try:
+            from passage_region_closure import (
+                synthesize as synthesize_passage_region,
+            )
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize_passage_region()
+    except Exception:
+        return {"problems": []}
+
+
 def _novelty_checker():
     """過去問コーパスに対して実際に類似度を計算する検査を返す。
 
@@ -192,6 +211,7 @@ def build_pool(
         ("traceback_closure", _records(_traceback_report())),
         ("closure_composition", _records(_compose_report())),
         ("relation_closure", _records(_relation_report())),
+        ("passage_region_closure", _records(_passage_region_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()

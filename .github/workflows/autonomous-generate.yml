@@ -117,6 +117,7 @@ jobs:
         run: >-
           python -m unittest
           test_relation_engine
+          test_passage_region_closure
           test_difficulty_reference
           test_pool_quality_policy
 

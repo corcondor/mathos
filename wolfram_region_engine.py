@@ -6,8 +6,8 @@ SymPy には量化子消去が無いため、これまで通過領域は「数�
 
     「曲線族が通過する領域を求めよ」（＝領域そのものを答えさせる）
 
-という、京大が好む型の問題を機械生成できる。Wolfram が計算し、独立検証として
-数値サンプリング（領域内外の点が Reduce の結果と一致するか）を行う。
+という、京大が好む型の問題を機械生成できる。Wolfram が計算し、独立に導いた
+二次関数の区間像と Reduce の結果が全実数上で同値かを再びWolframで証明する。
 
 wolframscript が無い環境（GitHub Actions など）では 0 問を返す。
 """
@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import random
 import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -24,8 +23,13 @@ from pathlib import Path
 from typing import Any, Iterable
 
 try:
+    from math_os_prototype.passage_region_closure import (
+        ConcaveQuadraticSweep,
+        x,
+    )
     from math_os_prototype.tool_adapters import WolframAdapter
 except ImportError:  # pragma: no cover
+    from passage_region_closure import ConcaveQuadraticSweep, x
     from tool_adapters import WolframAdapter
 
 
@@ -65,26 +69,63 @@ class RegionProblem:
     independent_check: bool
 
 
-def _sample_check(a: int, lo: int, hi: int, region_expr: str) -> bool:
-    """独立検証: 乱択した (x,y) が『ある t で y=a t x - t^2』を満たすかを直接
-    数値判定し、Wolfram の領域と食い違わないかを見る。"""
-    import numpy as np
+def _piecewise_to_wolfram(expression: Any) -> str:
+    from sympy.printing.mathematica import mathematica_code
 
-    ts = np.linspace(lo, hi, 4000)
-    ok = 0
-    trials = 0
-    for _ in range(150):
-        x = random.uniform(-2.0, 3.0)
-        y = random.uniform(-4.0, 4.0)
-        vals = a * ts * x - ts**2
-        inside_numeric = bool(vals.min() - 1e-9 <= y <= vals.max() + 1e-9)
-        # 数値で内部と判定された点は、必ず領域の記述に現れる区間内にあるはず。
-        # ここでは「数値判定が破綻していない」ことだけを確認する（Reduce の
-        # 文字列を再パースして評価するのは危険なので行わない）。
-        trials += 1
-        if inside_numeric or not inside_numeric:
-            ok += 1
-    return trials > 0 and ok == trials
+    if not getattr(expression, "is_Piecewise", False):
+        return mathematica_code(expression)
+    branches: list[str] = []
+    default = "Indeterminate"
+    for value, condition in expression.args:
+        value_code = mathematica_code(value)
+        if condition is True or str(condition) == "True":
+            default = value_code
+        else:
+            branches.append(
+                "{" + value_code + ", " + mathematica_code(condition) + "}"
+            )
+    return "Piecewise[{" + ", ".join(branches) + "}, " + default + "]"
+
+
+def _exact_equivalence_check(
+    a: int,
+    lo: int,
+    hi: int,
+    adapter: WolframAdapter,
+) -> bool:
+    """Compare Wolfram Reduce with an independently derived quadratic-range theorem."""
+
+    import sympy as sp
+
+    sweep = ConcaveQuadraticSweep(
+        q=sp.Rational(1),
+        b_slope=sp.Rational(a),
+        b_intercept=sp.Rational(0),
+        vertical_shift=sp.Integer(0),
+        t_low=sp.Rational(lo),
+        t_high=sp.Rational(hi),
+        x_low=sp.Rational(-2),
+        x_high=sp.Rational(3),
+    )
+    certificate = sweep.certificate()
+    if not (
+        certificate["exact_identity_check"]
+        and certificate["independent_exact_slice_check"]
+    ):
+        return False
+    lower = _piecewise_to_wolfram(sweep.lower_bound)
+    upper = _piecewise_to_wolfram(sweep.upper_bound)
+    quantified = (
+        f"Reduce[Exists[t, {lo}<=t<={hi} && y == {a} t x - t^2], "
+        "{x,y}, Reals]"
+    )
+    expected = f"({lower} <= y && y <= {upper})"
+    code = (
+        f"FullSimplify[Equivalent[{quantified}, {expected}], "
+        "Element[{x,y}, Reals]] // InputForm"
+    )
+    result = adapter.execute_code(code, label="independent_region_equivalence")
+    return (getattr(result, "stdout", "") or "").strip() == "True"
 
 
 def build_passage_region(params: dict[str, Any], adapter: WolframAdapter) -> RegionProblem | None:
@@ -99,7 +140,7 @@ def build_passage_region(params: dict[str, Any], adapter: WolframAdapter) -> Reg
     answer_tex = _to_tex(out)
     if len(answer_tex) > 900:
         return None
-    ok = _sample_check(a, lo, hi, out)
+    ok = _exact_equivalence_check(a, lo, hi, adapter)
     return RegionProblem(
         family_id="wolfram.passage_region_exact",
         parameters=params,
@@ -161,7 +202,10 @@ def synthesize() -> dict[str, Any]:
                 "verification": {
                     "exact_backend": True,
                     "independent_check": True,
-                    "method": "wolfram_reduce_quantifier_elimination_plus_numeric_sampling",
+                    "method": (
+                        "wolfram_reduce_quantifier_elimination_plus_independent_"
+                        "quadratic_range_equivalence"
+                    ),
                 },
                 "novelty": {"corpus_novel": True, "maximum_surface_jaccard": 0.0},
                 "parameters": p.parameters,
