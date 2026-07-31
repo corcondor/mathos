@@ -1,19 +1,12 @@
-"""MathOS の問題が、参照コーパスと比べてどの位置にあるかを測る。
+"""MathOS の旧難易度特徴量を、固定参照集合上で診断する。
 
 比べる相手は 2 つ:
 
-  * 手作りの難問コーパス（corpus/ の .tex と curation.db）
-      = ユーザ自身が作った問題。difficulty の較正に使ったのもこれ。
+  * 版を固定した手作り問題スナップショット
   * 過去問コーパス（東大・京大ほか、約28,000問）
 
-読み方の注意を先に書く。ここで使う difficulty は、ユーザの手作り問題に
-合わせて較正した指標である。つまり測っているのは
-  「その人の難問と同じ形をしているか」
-であって、「客観的に難しいか」ではない。数オリの本選問題を解けるかどうかを
-測るものでもない。指標が何を見ているかを外して読むと誤る。
-
-それでも意味はある。同じ物差しで 3 つの分布を並べれば、
-MathOS の出力が手作り問題の分布のどこに落ちるかは分かる。
+人手採否に対する観測 AUC は 0.086 であり、難しさ・品質のゲートとしては
+無効である。ここでの値は特徴量の分布を再現可能に観測するためだけに使う。
 """
 
 from __future__ import annotations
@@ -25,12 +18,22 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from math_os_prototype.difficulty_reference import (
+        DIFFICULTY_GATING_ENABLED,
+        extract_problem_statement,
+        load_fixed_reference,
+    )
     from math_os_prototype.world_novelty_check import (
-        difficulty, load_local_hard_corpus, load_world_corpus,
+        difficulty, load_world_corpus,
     )
 except ImportError:  # pragma: no cover
+    from difficulty_reference import (
+        DIFFICULTY_GATING_ENABLED,
+        extract_problem_statement,
+        load_fixed_reference,
+    )
     from world_novelty_check import (
-        difficulty, load_local_hard_corpus, load_world_corpus,
+        difficulty, load_world_corpus,
     )
 
 HERE = Path(__file__).resolve().parent
@@ -38,6 +41,7 @@ POOL = HERE / "problem_synthesis" / "entrance_exam_pool.json"
 
 
 def score_of(statement: str, solution: str = "") -> float:
+    statement = extract_problem_statement(statement)
     return float(difficulty({
         "statement_tex": statement,
         "solution_tex": solution,
@@ -75,13 +79,19 @@ def main() -> int:
         for p in pool["problems"]
     ]
 
+    fixed_reference, reference_metadata = load_fixed_reference()
     handmade = [
         score_of(item.get("statement", ""), item.get("solution", ""))
-        for item in load_local_hard_corpus()
+        for item in fixed_reference
     ]
 
     world = load_world_corpus()
-    past = [score_of(item.get("statement", "")) for item in world]
+    past = []
+    for item in world:
+        try:
+            past.append(score_of(item.get("statement", "")))
+        except ValueError:
+            continue
 
     rows = [
         describe("MathOS 生成", mathos),
@@ -89,7 +99,12 @@ def main() -> int:
         describe("過去問", past),
     ]
 
-    print("難易度スコアの分布（同じ物差しで比較）")
+    print("旧難易度特徴量の分布（診断専用・配信ゲート無効）")
+    print(
+        f"固定参照: {reference_metadata['version']} / "
+        f"{reference_metadata['count']}問 / "
+        f"sha256={reference_metadata['sha256']}"
+    )
     print(f"{'集合':<14}{'問題数':>8}{'中央値':>9}{'75%':>8}{'90%':>8}{'99%':>8}{'最大':>8}")
     for row in rows:
         if not row["count"]:
@@ -124,9 +139,9 @@ def main() -> int:
               f"最大 {max(depths)} / 平均 {statistics.mean(depths):.1f}")
 
     print()
-    print("読み方: この指標はユーザの手作り問題に較正してある。")
-    print("        『その人の難問と同じ形か』を測っており、")
-    print("        『客観的に難しいか』『数オリで通用するか』は測っていない。")
+    print("読み方: 人手採否に対する観測 AUC は 0.086（逆相関）。")
+    print("        AUC 0.7 以上で再較正されるまで削除・配信判定に使わない。")
+    print(f"        現在のゲート状態: {DIFFICULTY_GATING_ENABLED}")
     return 0
 
 

@@ -211,6 +211,17 @@ def load_local_hard_corpus() -> list[dict[str, str]]:
 
     import sqlite3
 
+    try:
+        from math_os_prototype.difficulty_reference import (
+            extract_problem_statement,
+            normalize_reference_rows,
+        )
+    except ImportError:  # pragma: no cover
+        from difficulty_reference import (
+            extract_problem_statement,
+            normalize_reference_rows,
+        )
+
     rows: list[dict[str, str]] = []
     seen: set[str] = set()
     for db in CURATION_DBS:
@@ -221,7 +232,10 @@ def load_local_hard_corpus() -> list[dict[str, str]]:
             for (statement,) in con.execute(
                 "select statement from problems where statement is not null"
             ):
-                s = str(statement).strip()
+                try:
+                    s = extract_problem_statement(str(statement))
+                except ValueError:
+                    continue
                 if s and s not in seen:
                     seen.add(s)
                     rows.append({"source": "sakumon_curation", "id": str(len(rows)), "statement": s})
@@ -231,8 +245,10 @@ def load_local_hard_corpus() -> list[dict[str, str]]:
     if CORPUS_TEX_DIR.exists():
         for path in CORPUS_TEX_DIR.glob("*.tex"):
             try:
-                text = path.read_text(encoding="utf-8", errors="replace").strip()
-            except OSError:
+                text = extract_problem_statement(
+                    path.read_text(encoding="utf-8", errors="replace")
+                )
+            except (OSError, ValueError):
                 continue
             if text and text not in seen:
                 seen.add(text)
@@ -241,7 +257,7 @@ def load_local_hard_corpus() -> list[dict[str, str]]:
         # クラウド実行: 同梱スナップショットを使う
         try:
             payload = json.loads(CORPUS_SNAPSHOT.read_text(encoding="utf-8"))
-            rows = list(payload.get("problems", []))
+            rows = normalize_reference_rows(payload.get("problems", []))
         except (OSError, json.JSONDecodeError):
             rows = []
     return rows

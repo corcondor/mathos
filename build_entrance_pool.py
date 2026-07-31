@@ -31,13 +31,12 @@ DEFAULT_REPORT = (
     HERE / "docs" / "generated" / "latest-entrance-pool-report.md"
 )
 
-# 配信に出す最低限の手数。操作数と難易度の実測から決めた閾値。
-MIN_MORPHISMS = 3
-
-# 難易度の下限。過去問 28,074 問の 90% 点が 8.38 なので、
-# 「過去問の上位1割より難しい」を最低ラインにする。
-# これを下回るものは、作れても配信しない。
-MIN_DIFFICULTY = 8.4
+# 旧指標を再現するための注釈値。人手判断に対する AUC が 0.086 で
+# 逆相関だったため、配信可否のゲートには使わない。
+LEGACY_MIN_MORPHISMS = 3
+LEGACY_MIN_DIFFICULTY = 8.4
+MINIMUM_GATING_AUC = 0.7
+OBSERVED_HUMAN_AUC = 0.086
 
 
 def _structure_key(problem: dict[str, Any]) -> str:
@@ -155,6 +154,30 @@ def _difficulty_score(problem: dict[str, Any]) -> float:
     return float(difficulty(problem).get("score", 0.0))
 
 
+def _quality_annotations(
+    problem: dict[str, Any],
+    legacy_score: float,
+) -> dict[str, Any]:
+    lift = problem.get("lift_certificate") or {}
+    morphism_count = len(lift.get("morphism_chain") or [])
+    return {
+        "policy": "annotation_only",
+        "human_calibrated": False,
+        "observed_human_auc": OBSERVED_HUMAN_AUC,
+        "minimum_auc_for_gating": MINIMUM_GATING_AUC,
+        "legacy_difficulty_score": legacy_score,
+        "legacy_difficulty_threshold": LEGACY_MIN_DIFFICULTY,
+        "below_legacy_difficulty_threshold": (
+            legacy_score < LEGACY_MIN_DIFFICULTY
+        ),
+        "morphism_count": morphism_count,
+        "legacy_morphism_threshold": LEGACY_MIN_MORPHISMS,
+        "below_legacy_morphism_threshold": (
+            morphism_count < LEGACY_MIN_MORPHISMS
+        ),
+    }
+
+
 def build_pool(
     construct_path: Path = DEFAULT_CONSTRUCT,
 ) -> dict[str, Any]:
@@ -172,20 +195,13 @@ def build_pool(
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
+    quality_flags = Counter()
     source_counts = Counter()
     novelty_check = _novelty_checker()
     for source, records in sources:
         for problem in records:
             if not _verified(problem):
                 rejected["verification"] += 1
-                continue
-            # 操作数（射の連鎖の長さ）が短すぎるものは配信しない。
-            # 113問で測ったところ、射の数と難易度スコアの相関は +0.469 で、
-            # 操作数 2 のノードは平均難易度 3.90（他は 5〜14）だった。
-            # 手数が少ない問題は実際に易しい。
-            lift = problem.get("lift_certificate") or {}
-            if len(lift.get("morphism_chain") or []) < MIN_MORPHISMS:
-                rejected["too_few_operations"] += 1
                 continue
             certificate = certify_entrance_scope(problem)
             if certificate is None:
@@ -199,11 +215,12 @@ def build_pool(
                 rejected["seen_in_past_exams"] += 1
                 continue
 
-            # 易しい問題は残さない。難しさの下限はここで切る。
             score = _difficulty_score(problem)
-            if score < MIN_DIFFICULTY:
-                rejected["too_easy"] += 1
-                continue
+            annotations = _quality_annotations(problem, score)
+            if annotations["below_legacy_difficulty_threshold"]:
+                quality_flags["below_legacy_difficulty_threshold"] += 1
+            if annotations["below_legacy_morphism_threshold"]:
+                quality_flags["below_legacy_morphism_threshold"] += 1
             key = _structure_key(problem)
             if key in retained:
                 rejected["same_structure_variant"] += 1
@@ -225,6 +242,7 @@ def build_pool(
                 "measured": True,
             }
             record["difficulty_score"] = score
+            record["quality_annotations"] = annotations
             record["source_generator"] = source
             retained[key] = record
             source_counts[source] += 1
@@ -258,6 +276,9 @@ def build_pool(
                 "query_signature"
             ),
             "numeric_variants_count_as_new": False,
+            "difficulty_policy": (
+                "annotation_only_until_human_rating_auc_reaches_0.7"
+            ),
         },
         "summary": {
             "total_instances": len(problems),
@@ -273,6 +294,7 @@ def build_pool(
             ),
             "source_counts": dict(source_counts),
             "rejected": dict(rejected),
+            "quality_flags": dict(quality_flags),
         },
         "problems": problems,
     }
@@ -298,6 +320,14 @@ def render_report(report: dict[str, Any]) -> str:
         "（生成時点で潰しているため通常は 0）",
         f"- 高校の語彙へ還元できず除外: "
         f"**{summary['rejected'].get('scope_lowering', 0)}**",
+        f"- 旧難易度8.4未満（注釈のみ・除外しない）: "
+        f"**{summary.get('quality_flags', {}).get('below_legacy_difficulty_threshold', 0)}**",
+        f"- 射が3個未満（注釈のみ・除外しない）: "
+        f"**{summary.get('quality_flags', {}).get('below_legacy_morphism_threshold', 0)}**",
+        "",
+        "難易度指標は人手判断に対する AUC が 0.086 だったため、",
+        "AUC 0.7 以上で再較正されるまでは配信可否に使わない。",
+        "厳密検証・高校範囲への還元・新規性・構造重複だけを採否条件とする。",
         "",
         "## 採用契約",
         "",

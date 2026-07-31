@@ -113,8 +113,12 @@ jobs:
       - name: Install deps
         run: pip install sympy numpy scipy mpmath
 
-      - name: Verify exact relation closure
-        run: python -m unittest test_relation_engine
+      - name: Verify relation closure and non-gating quality policy
+        run: >-
+          python -m unittest
+          test_relation_engine
+          test_difficulty_reference
+          test_pool_quality_policy
 
       - uses: actions/download-artifact@v4
         with:
