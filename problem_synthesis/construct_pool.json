@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T16:50:22.056312+00:00",
+  "generated_at": "2026-07-31T19:26:29.287614+00:00",
   "method": {
     "name": "MathOS autonomous pool (parallel shards merged)"
   },
@@ -4349,6 +4349,39 @@
     },
     {
       "accepted": true,
+      "answer_tex": "14",
+      "candidate_id": "construct:traceback.dice_sum.modal_sum:004",
+      "difficulty": {
+        "band": "D_textbook",
+        "condition": 0,
+        "construct": 1,
+        "score": 3.82
+      },
+      "domain": "probability",
+      "family_id": "traceback.dice_sum.modal_sum",
+      "lift_certificate": {
+        "morphism_chain": [
+          "DiceGeneratingFunction",
+          "ModalOutcome"
+        ],
+        "type_checked": true
+      },
+      "novelty": {
+        "closest_source": "sakumon_curation",
+        "corpus_novel": true,
+        "maximum_surface_jaccard": 0.1053
+      },
+      "solution_tex": "分布は \\(\\frac{7n}{2}\\) について対称で，この整数が唯一の最頻値。",
+      "statement_tex": "1 から 6 の目をもつさいころを 4 個同時に投げ，出た目の和を \\(S\\) とする。和として最も起こりやすい値を求めよ。",
+      "tool": "deduction_closure+traceback",
+      "verification": {
+        "exact_backend": true,
+        "independent_check": true,
+        "method": "deduction_closure_node_with_traceback"
+      }
+    },
+    {
+      "accepted": true,
       "answer_exact": "5",
       "answer_tex": "5",
       "candidate_id": "construct:layered.recurrence_period_observable:076",
@@ -4420,7 +4453,8 @@
   ],
   "summary": {
     "band_counts": {
-      "A": 96
+      "A": 96,
+      "D_textbook": 1
     },
     "family_counts": {
       "construct.complex_affine_limit": 1,
@@ -4451,7 +4485,7 @@
       "traceback.cyclic_quadrilateral.cos_angle_a": 1,
       "traceback.cyclic_quadrilateral.diagonal_ac_sq": 1,
       "traceback.cyclic_quadrilateral.diagonal_product": 1,
-      "traceback.dice_sum.modal_sum": 1,
+      "traceback.dice_sum.modal_sum": 2,
       "traceback.dice_sum.modal_ways_divisor_count": 1,
       "traceback.dice_sum.prob_sum_divisible_by_3": 1,
       "traceback.dice_sum.variance_times_12": 1,
@@ -4519,6 +4553,6 @@
       "ultradeep.paley_spanning_tree_divisor_count": 1
     },
     "shards": 26,
-    "total": 96
+    "total": 97
   }
 }
