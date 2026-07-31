@@ -5,9 +5,9 @@
 
 ## 結果
 
-- 検証済み構造: **452**
-- 構造族: **450**
-- 幾何・代数・複素数系: **308**
+- 検証済み構造: **448**
+- 構造族: **446**
+- 幾何・代数・複素数系: **304**
 - 高校の語彙へ書き換えた問題: **2**
 - 同一構造の数値変種として除外: **14**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
@@ -40,8 +40,6 @@
 | `algebraic_geometry` | `algebraic_geometry.cubic_discriminant_triangle_area` | `polynomial_factorization -> parabola -> coordinate_geometry -> area_shoelace -> quadratic_discriminant -> extremum -> differentiation` |
 | `algebraic_geometry` | `algebraic_geometry.even_quartic_parabola_hull_area` | `polynomial_factorization -> parabola -> coordinate_geometry -> convex_hull -> area_shoelace -> extremum -> differentiation` |
 | `algebraic_geometry_number_theory` | `ultradeep.cubic_root_triangle_discriminant_divisor_count` | `polynomial_expansion -> vieta_relations -> differentiation -> extremum -> quadratic_discriminant -> parabola -> coordinate_geometry -> triangle_area -> polynomial_factorization -> algebraic_identity -> area_shoelace -> integer_arithmetic -> prime_factorization -> divisor_counting` |
-| `analytic_geometry` | `relation.ellipse.tangent_intercept_area_minimum` | `ellipse -> parametric_curve -> coordinate_geometry -> tangent_line -> differentiation -> line_equation -> area_shoelace -> simultaneous_equations -> algebraic_identity -> polynomial_factorization -> inequality -> extremum` |
-| `analytic_geometry` | `relation.parabola.focal_chord_minimum` | `parabola -> parametric_curve -> coordinate_geometry -> line_equation -> distance_formula -> rational_function -> algebraic_identity -> polynomial_factorization -> inequality -> extremum -> differentiation` |
 | `analytic_geometry` | `ultradeep.geometry_astroid_envelope_area` | `circle_equation -> ellipse -> coordinate_geometry -> line_equation -> parameter_elimination -> envelope -> differentiation -> parametric_curve -> area_integral -> definite_integral` |
 | `combinatorics` | `compose.dice_sum.modal_sum__lattice_path.catalan_divisor_count` | `probability -> polynomial_expansion -> counting -> combination -> recurrence -> symmetry -> prime_factorization -> divisor_counting` |
 | `combinatorics` | `compose.dice_sum.modal_sum__lattice_path.strictly_above_paths` | `probability -> polynomial_expansion -> counting -> combination -> recurrence -> symmetry` |
@@ -203,8 +201,6 @@
 | `complex_geometry` | `layered.rotation_orbit_hull_area` | `roots_of_unity -> de_moivre -> symmetry -> regular_polygon -> area_shoelace` |
 | `complex_geometry` | `traceback.regular_polygon.distance_product_divisors` | `roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting` |
 | `complex_geometry` | `traceback.regular_polygon.sum_sq_pairwise` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series` |
-| `complex_geometry_combinatorics` | `relation.regular_polygon.distance_product_vs_diagonals` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> counting -> combination -> simultaneous_equations -> algebraic_identity -> inequality` |
-| `euclidean_geometry` | `relation.triangle.sixty_degree_side_bound` | `sine_cosine_rule -> trigonometric_identity -> simultaneous_equations -> algebraic_identity -> polynomial_factorization -> inequality` |
 | `euclidean_geometry` | `ultradeep.geometry_orthocenter_locus_area` | `ellipse -> coordinate_geometry -> triangle_area -> inner_product -> line_equation -> triangle_center -> simultaneous_equations -> vector_addition -> parameter_elimination -> area_shoelace -> area_integral` |
 | `geometry` | `passage_region.line_family_sweep` | `line_equation -> parameter_elimination -> quadratic_range -> area_integral` |
 | `geometry_algebra` | `construct.cubic_tangent_midpoint_locus` | `tangent_line -> differentiation -> vieta_relations -> midpoint -> locus -> parameter_elimination` |
