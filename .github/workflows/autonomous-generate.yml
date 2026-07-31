@@ -117,7 +117,10 @@ jobs:
         run: >-
           python -m unittest
           test_relation_engine
+          test_iterated_relation_closure
           test_passage_region_closure
+          test_wolfram_region_engine
+          test_world_novelty_index
           test_difficulty_reference
           test_pool_quality_policy
 

@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import json
 import importlib.util
+import os
+import signal
 import shutil
 import subprocess
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -22,6 +25,7 @@ class ToolExecution:
     stderr: str | None = None
     error: str | None = None
     executable_path: str | None = None
+    elapsed_seconds: float | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -51,7 +55,7 @@ class SymPyAdapter:
 class WolframAdapter:
     name = "wolfram"
 
-    def __init__(self, executable: str | None = None, timeout_seconds: int = 30):
+    def __init__(self, executable: str | None = None, timeout_seconds: int = 120):
         self.executable = executable or find_wolfram_executable()
         self.timeout_seconds = timeout_seconds
 
@@ -63,6 +67,7 @@ class WolframAdapter:
             "tool": self.name,
             "available": self.is_available(),
             "executable_path": self.executable,
+            "timeout_seconds": self.timeout_seconds,
         }
 
     def execute_geometry(self, problem: Any) -> ToolExecution:
@@ -80,24 +85,44 @@ class WolframAdapter:
                 error="wolframscript was not found on PATH or in known Wolfram install folders.",
             )
 
+        started = time.monotonic()
+        creationflags = (
+            subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
+        )
         try:
-            completed = subprocess.run(
+            process = subprocess.Popen(
                 command,
-                check=False,
-                capture_output=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
                 text=True,
-                timeout=self.timeout_seconds,
+                creationflags=creationflags,
+                start_new_session=os.name != "nt",
             )
+            stdout, stderr = process.communicate(timeout=self.timeout_seconds)
         except subprocess.TimeoutExpired as exc:
+            if os.name == "nt":
+                subprocess.run(
+                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+            else:  # pragma: no cover - exercised by GitHub Actions if available
+                os.killpg(process.pid, signal.SIGKILL)
+            try:
+                stdout, stderr = process.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                stdout, stderr = exc.stdout or "", exc.stderr or ""
             return ToolExecution(
                 tool=self.name,
                 available=True,
                 executable_path=self.executable,
                 command=command,
                 status="timeout",
-                stdout=exc.stdout,
-                stderr=exc.stderr,
+                stdout=(stdout or None),
+                stderr=(stderr or None),
                 error=f"wolframscript timed out after {self.timeout_seconds}s",
+                elapsed_seconds=round(time.monotonic() - started, 3),
             )
         except OSError as exc:
             return ToolExecution(
@@ -107,21 +132,27 @@ class WolframAdapter:
                 command=command,
                 status="failed",
                 error=str(exc),
+                elapsed_seconds=round(time.monotonic() - started, 3),
             )
 
-        status = "executed" if completed.returncode == 0 else "failed"
-        stdout = completed.stdout.strip()
-        stderr = completed.stderr.strip()
+        status = "executed" if process.returncode == 0 else "failed"
+        stdout = stdout.strip()
+        stderr = stderr.strip()
         return ToolExecution(
             tool=self.name,
             available=True,
             executable_path=self.executable,
             command=command,
             status=status,
-            result={"label": label, "wolfram_inputform": stdout} if completed.returncode == 0 else None,
+            result={"label": label, "wolfram_inputform": stdout}
+            if process.returncode == 0
+            else None,
             stdout=stdout or None,
             stderr=stderr or None,
-            error=None if completed.returncode == 0 else f"wolframscript exited with code {completed.returncode}",
+            error=None
+            if process.returncode == 0
+            else f"wolframscript exited with code {process.returncode}",
+            elapsed_seconds=round(time.monotonic() - started, 3),
         )
 
 
@@ -161,7 +192,7 @@ class LeanAdapter:
 
 
 class ToolRegistry:
-    def __init__(self, wolfram_timeout_seconds: int = 30):
+    def __init__(self, wolfram_timeout_seconds: int = 120):
         self.sympy = SymPyAdapter()
         self.wolfram = WolframAdapter(timeout_seconds=wolfram_timeout_seconds)
         self.z3 = PythonPackageAdapter("z3", "z3")

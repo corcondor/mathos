@@ -28,9 +28,10 @@ import argparse
 import json
 import os
 import re
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Sequence
 
 try:
     from math_os_prototype.jukenmath_full_audit import (
@@ -318,20 +319,81 @@ def load_jukenmath_hashes() -> set[str]:
     return hashes
 
 
+@dataclass(frozen=True)
+class SurfaceNgramIndex:
+    """Exact Jaccard search using an inverted 3-gram index.
+
+    Documents with no shared n-gram have Jaccard score zero, so they cannot
+    improve a positive maximum.  The index only removes those provably
+    irrelevant comparisons; it does not approximate the score.
+    """
+
+    sources: tuple[str, ...]
+    grams: tuple[frozenset[str], ...]
+    postings: dict[str, tuple[int, ...]]
+
+    @classmethod
+    def build(
+        cls,
+        rows: Sequence[tuple[str, frozenset[str]]],
+    ) -> "SurfaceNgramIndex":
+        postings: dict[str, list[int]] = defaultdict(list)
+        sources: list[str] = []
+        grams: list[frozenset[str]] = []
+        for document_id, (source, tokens) in enumerate(rows):
+            sources.append(source)
+            grams.append(tokens)
+            for token in tokens:
+                postings[token].append(document_id)
+        return cls(
+            sources=tuple(sources),
+            grams=tuple(grams),
+            postings={
+                token: tuple(document_ids)
+                for token, document_ids in postings.items()
+            },
+        )
+
+    def maximum_jaccard(
+        self,
+        query: frozenset[str],
+    ) -> tuple[float, str | None]:
+        intersections: Counter[int] = Counter()
+        for token in query:
+            intersections.update(self.postings.get(token, ()))
+        best = 0.0
+        best_source: str | None = None
+        for document_id in sorted(intersections):
+            intersection = intersections[document_id]
+            denominator = (
+                len(query) + len(self.grams[document_id]) - intersection
+            )
+            score = intersection / denominator if denominator else 1.0
+            if score > best:
+                best = score
+                best_source = self.sources[document_id]
+        return best, best_source
+
+
 def world_novelty(
     statement: str,
-    world_grams: list[tuple[str, frozenset[str]]],
+    world_grams: (
+        Sequence[tuple[str, frozenset[str]]] | SurfaceNgramIndex
+    ),
     juken_hashes: set[str],
 ) -> dict[str, Any]:
     from hashlib import sha256
 
     grams = surface_ngrams(statement)
-    best = 0.0
-    best_src = None
-    for src, other in world_grams:
-        score = jaccard(grams, other)
-        if score > best:
-            best, best_src = score, src
+    if isinstance(world_grams, SurfaceNgramIndex):
+        best, best_src = world_grams.maximum_jaccard(grams)
+    else:
+        best = 0.0
+        best_src = None
+        for src, other in world_grams:
+            score = jaccard(grams, other)
+            if score > best:
+                best, best_src = score, src
     digest = sha256(canonical_surface(statement).encode("utf-8")).hexdigest()
     exact_juken = digest in juken_hashes
     return {
@@ -344,7 +406,9 @@ def world_novelty(
 
 def assess_pool(problems: Iterable[dict[str, Any]]) -> dict[str, Any]:
     world = load_world_corpus()
-    world_grams = [(r["source"], surface_ngrams(r["statement"])) for r in world]
+    world_grams = SurfaceNgramIndex.build(
+        [(r["source"], surface_ngrams(r["statement"])) for r in world]
+    )
     juken_hashes = load_jukenmath_hashes()
     results = []
     for p in problems:

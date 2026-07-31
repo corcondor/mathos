@@ -5,13 +5,13 @@
 
 ## 結果
 
-- 検証済み構造: **570**
-- 構造族: **568**
-- 幾何・代数・複素数系: **379**
+- 検証済み構造: **574**
+- 構造族: **572**
+- 幾何・代数・複素数系: **381**
 - 高校の語彙へ書き換えた問題: **4**
 - 同一構造の数値変種として除外: **81**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
-- 旧難易度8.4未満（注釈のみ・除外しない）: **185**
+- 旧難易度8.4未満（注釈のみ・除外しない）: **188**
 - 射が3個未満（注釈のみ・除外しない）: **20**
 
 難易度指標は人手判断に対する AUC が 0.086 だったため、
@@ -44,6 +44,8 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `algebra` | `construct.mobius_fixed_points` | `rational_function -> function_composition -> quadratic_equation -> simultaneous_equations` |
 | `algebra` | `construct.reciprocal_recurrence` | `recurrence -> algebraic_identity -> general_term` |
 | `algebra` | `polynomial.interpolation_harmonic_observable` | `polynomial_factorization -> simultaneous_equations -> roots_of_unity -> sum_of_series -> differentiation -> remainder_theorem` |
+| `algebra` | `relation.polynomial_root_set.affine_image` | `vieta_relations -> polynomial_factorization -> function_composition -> simultaneous_equations -> polynomial_expansion` |
+| `algebra` | `relation.polynomial_root_set.reciprocal_image` | `vieta_relations -> polynomial_factorization -> rational_function -> simultaneous_equations -> polynomial_expansion` |
 | `algebra` | `series.telescoping_triple_partial_fraction` | `rational_function -> algebraic_identity -> sum_of_series` |
 | `algebra_inequality` | `relation.constrained_symmetric.cube_reciprocal_minimum` | `inequality -> algebraic_identity -> simultaneous_equations -> differentiation -> extremum` |
 | `algebra_inequality` | `relation.constrained_symmetric.cube_reciprocal_prove_bound` | `inequality -> algebraic_identity -> simultaneous_equations -> polynomial_factorization` |
@@ -608,6 +610,8 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `real_analysis` | `asymptotic.recurrence_square_increment` | `square_number -> integer_arithmetic -> limit -> differentiation -> sequence -> quadratic_equation -> inequality` |
 | `real_analysis` | `fusion.trig_absolute_value_integral` | `trigonometric_identity -> trigonometric_equation -> inequality -> definite_integral` |
 | `real_analysis` | `fusion.trig_floor_integral` | `trigonometric_equation -> inequality -> counting -> definite_integral` |
+| `sequence` | `relation.sequence.affine_fixed_point_coordinate` | `recurrence -> function_composition -> simultaneous_equations -> geometric_sequence -> general_term -> inequality -> mathematical_induction` |
+| `sequence_analysis` | `relation.iteration.error_squaring_coordinate` | `recurrence -> polynomial_expansion -> algebraic_identity -> exponential -> general_term -> limit` |
 | `trigonometry` | `relation.triangle_angles.cos_sum_maximum` | `trigonometric_identity -> extremum -> differentiation` |
 | `trigonometry` | `relation.triangle_angles.sin_product_maximum` | `trigonometric_identity -> extremum -> differentiation` |
 | `trigonometry` | `relation.triangle_angles.sin_sum_maximum` | `trigonometric_identity -> extremum -> differentiation` |

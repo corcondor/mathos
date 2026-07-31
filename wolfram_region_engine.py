@@ -65,6 +65,7 @@ class RegionProblem:
     solution_tex: str
     wolfram_input: str
     wolfram_output: str
+    counterexample_set: str
     verified: bool
     independent_check: bool
 
@@ -87,13 +88,13 @@ def _piecewise_to_wolfram(expression: Any) -> str:
     return "Piecewise[{" + ", ".join(branches) + "}, " + default + "]"
 
 
-def _exact_equivalence_check(
+def _verified_reduce(
     a: int,
     lo: int,
     hi: int,
     adapter: WolframAdapter,
-) -> bool:
-    """Compare Wolfram Reduce with an independently derived quadratic-range theorem."""
+) -> tuple[str, str, bool, str]:
+    """Compute the region and compare it with the independent range theorem once."""
 
     import sympy as sp
 
@@ -112,7 +113,7 @@ def _exact_equivalence_check(
         certificate["exact_identity_check"]
         and certificate["independent_exact_slice_check"]
     ):
-        return False
+        return "", "", False, ""
     lower = _piecewise_to_wolfram(sweep.lower_bound)
     upper = _piecewise_to_wolfram(sweep.upper_bound)
     quantified = (
@@ -121,26 +122,51 @@ def _exact_equivalence_check(
     )
     expected = f"({lower} <= y && y <= {upper})"
     code = (
-        f"FullSimplify[Equivalent[{quantified}, {expected}], "
-        "Element[{x,y}, Reals]] // InputForm"
+        "Module[{region, expected, counterexample},"
+        f"region={quantified};"
+        f"expected={expected};"
+        "counterexample=Reduce[Xor[region,expected],{x,y},Reals];"
+        'Print["MATHOS_REGION="<>ToString[InputForm[region]]];'
+        'Print["MATHOS_COUNTEREXAMPLE="<>ToString[InputForm[counterexample]]];'
+        'Print["MATHOS_EQUIVALENT="<>ToString[TrueQ[counterexample===False]]]'
+        "]"
     )
-    result = adapter.execute_code(code, label="independent_region_equivalence")
-    return (getattr(result, "stdout", "") or "").strip() == "True"
+    result = adapter.execute_code(code, label="verified_region_reduce")
+    output = (getattr(result, "stdout", "") or "").strip()
+    region_match = re.search(
+        r"MATHOS_REGION=(.*?)\r?\nMATHOS_COUNTEREXAMPLE=",
+        output,
+        flags=re.DOTALL,
+    )
+    counterexample_match = re.search(
+        r"MATHOS_COUNTEREXAMPLE=(.*?)\r?\nMATHOS_EQUIVALENT=",
+        output,
+        flags=re.DOTALL,
+    )
+    equivalent = "MATHOS_EQUIVALENT=True" in output
+    region = region_match.group(1).strip() if region_match else ""
+    counterexample = (
+        counterexample_match.group(1).strip()
+        if counterexample_match
+        else ""
+    )
+    return region, counterexample, equivalent, code
 
 
 def build_passage_region(params: dict[str, Any], adapter: WolframAdapter) -> RegionProblem | None:
     a, lo, hi = params["a"], params["lo"], params["hi"]
-    code = (
-        f"Reduce[Exists[t, t>={lo} && t<={hi}, y == {a} t x - t^2], {{x,y}}, Reals] // InputForm"
-    )
-    result = adapter.execute_code(code, label="reduce_region")
-    out = (getattr(result, "stdout", "") or "").strip()
-    if not out or "$Failed" in out or out.startswith("Reduce["):
+    out, counterexample, ok, code = _verified_reduce(a, lo, hi, adapter)
+    if (
+        not out
+        or "$Failed" in out
+        or out.startswith("Reduce[")
+        or not ok
+        or counterexample != "False"
+    ):
         return None
     answer_tex = _to_tex(out)
     if len(answer_tex) > 900:
         return None
-    ok = _exact_equivalence_check(a, lo, hi, adapter)
     return RegionProblem(
         family_id="wolfram.passage_region_exact",
         parameters=params,
@@ -150,14 +176,15 @@ def build_passage_region(params: dict[str, Any], adapter: WolframAdapter) -> Reg
         ),
         answer_tex=answer_tex,
         solution_tex=(
-            rf"\(x\) を固定すると \(y={a}tx-t^2\) は \(t\) の上に凸な二次関数。"
+            rf"\(x\) を固定すると \(y={a}tx-t^2\) は \(t\) の上に凹な二次関数。"
             rf"頂点 \(t={a}x/2\) が区間 \([{lo},{hi}]\) の内か外かで最大値が変わり，"
             r"最小値は端点でとる。場合分けして \(y\) の動く範囲を書けば領域が定まる"
             r"（高校：二次関数の最大最小＋存在条件）。"
         ),
         wolfram_input=code,
         wolfram_output=out,
-        verified=True,
+        counterexample_set=counterexample,
+        verified=ok,
         independent_check=ok,
     )
 
@@ -209,7 +236,11 @@ def synthesize() -> dict[str, Any]:
                 },
                 "novelty": {"corpus_novel": True, "maximum_surface_jaccard": 0.0},
                 "parameters": p.parameters,
-                "wolfram": {"input": p.wolfram_input, "output": p.wolfram_output},
+                "wolfram": {
+                    "input": p.wolfram_input,
+                    "output": p.wolfram_output,
+                    "counterexample_set": p.counterexample_set,
+                },
             }
         )
     return {

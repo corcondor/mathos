@@ -139,6 +139,25 @@ def _passage_region_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _iterated_relation_report() -> dict[str, Any]:
+    """関数列・反復・多項式根集合へ関係閉包を拡張する。"""
+    try:
+        from math_os_prototype.iterated_relation_closure import (
+            synthesize as synthesize_iterated_relations,
+        )
+    except ImportError:  # pragma: no cover
+        try:
+            from iterated_relation_closure import (
+                synthesize as synthesize_iterated_relations,
+            )
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize_iterated_relations()
+    except Exception:
+        return {"problems": []}
+
+
 def _novelty_checker():
     """過去問コーパスに対して実際に類似度を計算する検査を返す。
 
@@ -148,18 +167,27 @@ def _novelty_checker():
     """
     try:
         from math_os_prototype.world_novelty_check import (
-            load_jukenmath_hashes, load_world_corpus, surface_ngrams, world_novelty,
+            SurfaceNgramIndex,
+            load_jukenmath_hashes,
+            load_world_corpus,
+            surface_ngrams,
+            world_novelty,
         )
     except ImportError:  # pragma: no cover
         from world_novelty_check import (
-            load_jukenmath_hashes, load_world_corpus, surface_ngrams, world_novelty,
+            SurfaceNgramIndex,
+            load_jukenmath_hashes,
+            load_world_corpus,
+            surface_ngrams,
+            world_novelty,
         )
     world = load_world_corpus()
     grams = [(row["source"], surface_ngrams(row["statement"])) for row in world]
+    index = SurfaceNgramIndex.build(grams)
     hashes = load_jukenmath_hashes()
 
     def check(statement: str) -> dict[str, Any]:
-        return world_novelty(statement, grams, hashes)
+        return world_novelty(statement, index, hashes)
 
     check.corpus_size = len(grams)  # type: ignore[attr-defined]
     return check
@@ -212,6 +240,7 @@ def build_pool(
         ("closure_composition", _records(_compose_report())),
         ("relation_closure", _records(_relation_report())),
         ("passage_region_closure", _records(_passage_region_report())),
+        ("iterated_relation_closure", _records(_iterated_relation_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
