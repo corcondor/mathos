@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T09:16:56.123504+00:00",
+  "generated_at": "2026-07-31T11:34:02.863912+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "name": "MathOS Japanese entrance-mathematics structural pool",
@@ -69,7 +69,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1388,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 5,
@@ -160,7 +160,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.2317,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "p": 1,
@@ -304,7 +304,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "invariant": "P_m(0)=H_m",
@@ -464,7 +464,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1707,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": false,
@@ -577,7 +577,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1721,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -710,7 +710,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.191,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "mechanism": "partial fraction then telescoping cancellation",
@@ -878,7 +878,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1368,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1013,7 +1013,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1027,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1144,11 +1144,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1509,
+        "maximum_surface_jaccard": 0.1417,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1279,11 +1279,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1339,
+        "maximum_surface_jaccard": 0.1119,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1418,7 +1418,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1416,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1554,7 +1554,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1103,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1690,7 +1690,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1351,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1825,7 +1825,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1045,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -1960,7 +1960,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1552,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -2095,7 +2095,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1223,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -2230,7 +2230,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1316,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -2361,11 +2361,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.109,
+        "maximum_surface_jaccard": 0.1056,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "constrained_symmetric",
@@ -2559,7 +2559,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1328,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "observation": "Vandermonde area",
@@ -2758,7 +2758,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0959,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "c",
@@ -2973,7 +2973,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1361,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 2,
@@ -3137,11 +3137,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1265,
+        "maximum_surface_jaccard": 0.0945,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "intercept a with b=4/a",
@@ -3318,7 +3318,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1026,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "constraint_skeleton": [
@@ -3477,11 +3477,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0842,
+        "maximum_surface_jaccard": 0.0822,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "constraint_skeleton": [
@@ -3661,7 +3661,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.123,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 2,
@@ -3783,7 +3783,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1024,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -3917,7 +3917,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.065,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -4050,7 +4050,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.062,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -4172,7 +4172,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0688,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -4312,7 +4312,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.109,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -4472,7 +4472,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1084,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -4626,7 +4626,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0852,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -4779,7 +4779,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0818,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -4921,7 +4921,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0926,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -5079,7 +5079,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1154,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -5224,7 +5224,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.118,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -5360,7 +5360,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0703,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -5495,7 +5495,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0662,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -5619,7 +5619,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.076,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -5761,7 +5761,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.125,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -5914,7 +5914,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0977,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6059,7 +6059,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0714,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6203,7 +6203,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.068,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6336,7 +6336,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0746,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6487,7 +6487,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1024,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6641,7 +6641,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1019,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6785,7 +6785,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0704,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -6928,7 +6928,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0667,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -7060,7 +7060,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0754,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -7210,7 +7210,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1071,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -7373,7 +7373,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0914,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -7527,7 +7527,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0705,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -7680,7 +7680,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0672,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -7818,11 +7818,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0686,
+        "maximum_surface_jaccard": 0.0644,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -7982,7 +7982,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0966,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -8144,7 +8144,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0904,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -8298,7 +8298,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0703,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -8451,7 +8451,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.066,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -8593,7 +8593,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0756,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -8753,7 +8753,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0958,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -8915,7 +8915,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -9068,7 +9068,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0683,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -9220,7 +9220,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0651,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -9361,7 +9361,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0661,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -9520,7 +9520,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0879,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -9663,7 +9663,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0889,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -9795,7 +9795,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0628,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -9926,7 +9926,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0598,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -10042,11 +10042,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0651,
+        "maximum_surface_jaccard": 0.0649,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -10184,7 +10184,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0941,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -10336,7 +10336,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0856,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -10479,7 +10479,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0738,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -10621,7 +10621,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0703,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -10752,7 +10752,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0675,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -10901,7 +10901,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0904,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -11053,7 +11053,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0899,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 14,
@@ -11196,7 +11196,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0766,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 14,
@@ -11338,7 +11338,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0729,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 14,
@@ -11465,11 +11465,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.078,
+        "maximum_surface_jaccard": 0.067,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 14,
@@ -11618,7 +11618,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0952,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 14,
@@ -11771,7 +11771,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1212,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -11916,7 +11916,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0856,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -12060,7 +12060,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0812,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -12193,7 +12193,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0823,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -12344,7 +12344,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.129,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -12497,7 +12497,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1156,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -12640,7 +12640,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0995,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -12782,7 +12782,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0939,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -12913,7 +12913,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.107,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13062,7 +13062,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1217,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13230,7 +13230,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0963,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13393,7 +13393,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0858,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13555,7 +13555,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0816,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13706,7 +13706,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0845,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -13873,7 +13873,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.101,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -14028,7 +14028,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1005,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -14173,7 +14173,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0872,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -14317,7 +14317,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0826,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -14450,7 +14450,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0914,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -14601,7 +14601,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1055,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -14761,7 +14761,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0991,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -14913,7 +14913,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.086,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -15064,7 +15064,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0815,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -15204,7 +15204,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.09,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -15362,7 +15362,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.104,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -15516,7 +15516,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0914,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -15660,7 +15660,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0779,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -15803,7 +15803,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0741,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -15935,7 +15935,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0679,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -16085,7 +16085,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.097,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -16238,7 +16238,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0936,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -16377,11 +16377,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0804,
+        "maximum_surface_jaccard": 0.0789,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -16519,11 +16519,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0763,
+        "maximum_surface_jaccard": 0.075,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -16650,11 +16650,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0857,
+        "maximum_surface_jaccard": 0.0764,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -16803,7 +16803,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0994,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -16957,7 +16957,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.092,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -17104,7 +17104,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0783,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -17250,7 +17250,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0744,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -17385,7 +17385,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0682,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -17538,7 +17538,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0976,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -17687,7 +17687,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.043,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "grid size n",
@@ -17836,7 +17836,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0672,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -17942,7 +17942,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0391,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -18047,7 +18047,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0366,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -18141,7 +18141,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.045,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -18234,7 +18234,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0291,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -18346,7 +18346,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0734,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "lattice_path",
@@ -18479,11 +18479,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.2935,
+        "maximum_surface_jaccard": 0.1955,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "duality": "alternating finite sum <-> beta integral",
@@ -18676,11 +18676,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1524,
+        "maximum_surface_jaccard": 0.0952,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "binomial upper index n",
@@ -18868,7 +18868,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.172,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bi": 1,
@@ -18955,7 +18955,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1538,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "k": 3,
@@ -19121,7 +19121,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 2,
@@ -19282,11 +19282,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.087,
+        "maximum_surface_jaccard": 0.0807,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameters": [
@@ -19459,7 +19459,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1337,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -19599,7 +19599,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1045,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -19729,7 +19729,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.118,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -19878,7 +19878,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1034,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -20013,7 +20013,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1154,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 10,
@@ -20165,7 +20165,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1264,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -20325,7 +20325,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1005,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -20475,7 +20475,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1117,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -20642,7 +20642,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1014,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -20776,7 +20776,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1429,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -20918,7 +20918,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1137,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -21050,7 +21050,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1277,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -21198,7 +21198,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1132,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -21333,7 +21333,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.125,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -21474,7 +21474,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1204,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -21625,7 +21625,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0988,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -21766,7 +21766,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1081,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -21923,7 +21923,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0992,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22067,7 +22067,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1062,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22209,7 +22209,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.125,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22359,7 +22359,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1021,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22499,7 +22499,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1121,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22655,7 +22655,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1026,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22798,7 +22798,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1101,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -22949,7 +22949,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1257,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -23109,7 +23109,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -23259,7 +23259,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1117,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -23426,7 +23426,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0995,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -23579,7 +23579,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1095,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -23729,7 +23729,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1429,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -23889,7 +23889,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.122,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -24039,7 +24039,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1374,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -24206,7 +24206,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1214,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -24359,7 +24359,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1344,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -24509,7 +24509,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1218,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -24668,7 +24668,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0973,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -24817,7 +24817,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1084,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -24983,7 +24983,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0965,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -25135,7 +25135,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1068,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -25266,7 +25266,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1297,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -25404,7 +25404,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1028,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -25532,7 +25532,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1152,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -25676,7 +25676,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1043,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -25806,7 +25806,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.114,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -25944,7 +25944,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1371,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -26093,7 +26093,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1106,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -26232,7 +26232,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1232,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -26387,7 +26387,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -26528,7 +26528,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1208,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -26680,7 +26680,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1162,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -26840,7 +26840,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0933,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -26991,7 +26991,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1034,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -27159,7 +27159,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0959,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -27315,7 +27315,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.101,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -27458,7 +27458,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1607,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -27609,7 +27609,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1269,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -27750,7 +27750,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1437,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -27907,7 +27907,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1269,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -28050,7 +28050,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1404,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 12,
@@ -28189,7 +28189,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1459,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -28339,7 +28339,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1168,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -28479,7 +28479,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1309,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -28635,7 +28635,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1163,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -28777,7 +28777,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1282,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -28916,7 +28916,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1492,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -29065,7 +29065,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.119,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -29204,7 +29204,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1337,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -29359,7 +29359,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1185,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -29500,7 +29500,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1459,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -29653,7 +29653,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1168,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -29796,7 +29796,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1309,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -29956,7 +29956,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1163,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -30102,7 +30102,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1282,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -30261,7 +30261,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1098,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "n": 3
@@ -30394,7 +30394,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1098,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "n": 3
@@ -30479,11 +30479,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1281,
+        "maximum_surface_jaccard": 0.1146,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "k": 3
@@ -30571,7 +30571,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1587,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -30683,7 +30683,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1161,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -30785,7 +30785,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1364,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -30904,7 +30904,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1146,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -31009,7 +31009,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1324,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -31119,7 +31119,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1268,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "regular_polygon",
@@ -31273,11 +31273,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.119,
+        "maximum_surface_jaccard": 0.1067,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "constraint_skeleton": [
@@ -31387,11 +31387,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0896,
+        "maximum_surface_jaccard": 0.0889,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -31504,11 +31504,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0896,
+        "maximum_surface_jaccard": 0.0889,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -31615,11 +31615,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0863,
+        "maximum_surface_jaccard": 0.0857,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -31737,7 +31737,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0915,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -31850,11 +31850,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0822,
+        "maximum_surface_jaccard": 0.0816,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -31960,11 +31960,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0952,
+        "maximum_surface_jaccard": 0.0945,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "ellipse_tangent",
@@ -32068,11 +32068,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1078,
+        "maximum_surface_jaccard": 0.0656,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32186,11 +32186,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1081,
+        "maximum_surface_jaccard": 0.0687,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32303,11 +32303,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0887,
+        "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32420,11 +32420,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094,
+        "maximum_surface_jaccard": 0.0584,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32518,11 +32518,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.125,
+        "maximum_surface_jaccard": 0.0741,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32614,11 +32614,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1048,
+        "maximum_surface_jaccard": 0.0726,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32721,11 +32721,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.11,
+        "maximum_surface_jaccard": 0.0667,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "hyperbola_asymptote",
@@ -32830,7 +32830,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1081,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -32935,7 +32935,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1032,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33044,7 +33044,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1398,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33150,7 +33150,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.125,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33258,7 +33258,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1148,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33367,7 +33367,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1167,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33476,7 +33476,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1146,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "parabola_focal_chord",
@@ -33653,7 +33653,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0847,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "R": 1,
@@ -33810,11 +33810,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0968,
+        "maximum_surface_jaccard": 0.0818,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 1
@@ -33930,11 +33930,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1158,
+        "maximum_surface_jaccard": 0.1,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "constraint_skeleton": [
@@ -34110,11 +34110,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0995,
+        "maximum_surface_jaccard": 0.0882,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 2,
@@ -34202,7 +34202,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1151,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "c": 1
@@ -34291,7 +34291,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.094,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "T": 1,
@@ -34381,7 +34381,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0857,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "T": 1,
@@ -34474,7 +34474,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1163,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "coeff": -9
@@ -34574,7 +34574,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0762,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "coeff": -5,
@@ -34683,7 +34683,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0758,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cubic_tangent",
@@ -34818,7 +34818,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1328,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cubic_tangent",
@@ -34944,7 +34944,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0778,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cubic_tangent",
@@ -35057,7 +35057,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.086,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cubic_tangent",
@@ -35210,7 +35210,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1475,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "coeff": -9
@@ -35333,7 +35333,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -35450,11 +35450,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0576,
+        "maximum_surface_jaccard": 0.0574,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -35575,7 +35575,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0728,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -35754,7 +35754,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1176,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "p": 13
@@ -35843,7 +35843,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1768,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "m": 5,
@@ -35981,7 +35981,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1689,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "p": 7,
@@ -36075,7 +36075,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1649,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "m": 5,
@@ -36167,7 +36167,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1658,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "m": 5,
@@ -36261,7 +36261,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1422,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "m": 5,
@@ -36384,11 +36384,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.2288,
+        "maximum_surface_jaccard": 0.1143,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "integer n",
@@ -36609,11 +36609,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.08,
+        "maximum_surface_jaccard": 0.0478,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "digit_power",
@@ -36712,11 +36712,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.098,
+        "maximum_surface_jaccard": 0.0816,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "digit_power",
@@ -36806,11 +36806,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0769,
+        "maximum_surface_jaccard": 0.0616,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "digit_power",
@@ -36900,11 +36900,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0775,
+        "maximum_surface_jaccard": 0.062,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "digit_power",
@@ -37003,11 +37003,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1042,
+        "maximum_surface_jaccard": 0.087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "digit_power",
@@ -37115,7 +37115,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0845,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "p": 13
@@ -37246,7 +37246,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -37409,7 +37409,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1056,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -37562,7 +37562,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.105,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -37724,7 +37724,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1065,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -37868,7 +37868,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1091,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -38019,7 +38019,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1078,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -38172,7 +38172,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1071,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -38325,7 +38325,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1098,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -38479,7 +38479,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1071,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -38609,11 +38609,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0887,
+        "maximum_surface_jaccard": 0.0808,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -38752,11 +38752,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0879,
+        "maximum_surface_jaccard": 0.0851,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -38885,11 +38885,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1034,
+        "maximum_surface_jaccard": 0.087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39017,11 +39017,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1021,
+        "maximum_surface_jaccard": 0.0856,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39150,11 +39150,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1034,
+        "maximum_surface_jaccard": 0.087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39283,11 +39283,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1059,
+        "maximum_surface_jaccard": 0.0847,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39429,7 +39429,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0904,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39553,7 +39553,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.095,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39680,11 +39680,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0929,
+        "maximum_surface_jaccard": 0.0914,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39817,7 +39817,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0909,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -39946,11 +39946,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991,
+        "maximum_surface_jaccard": 0.093,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -40082,7 +40082,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0874,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -40217,7 +40217,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0909,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -40355,11 +40355,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0804,
+        "maximum_surface_jaccard": 0.079,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -40511,7 +40511,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0815,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -40649,11 +40649,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0949,
+        "maximum_surface_jaccard": 0.0813,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -40804,7 +40804,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0844,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -40937,7 +40937,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0857,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -41077,7 +41077,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.085,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -41219,7 +41219,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0847,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -41357,11 +41357,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0885,
+        "maximum_surface_jaccard": 0.0861,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -41504,7 +41504,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0847,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -41635,11 +41635,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0873,
+        "maximum_surface_jaccard": 0.0811,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -41778,11 +41778,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0864,
+        "maximum_surface_jaccard": 0.0839,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -41911,11 +41911,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1017,
+        "maximum_surface_jaccard": 0.0851,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42043,11 +42043,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1004,
+        "maximum_surface_jaccard": 0.0842,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42176,11 +42176,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1017,
+        "maximum_surface_jaccard": 0.0851,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42309,11 +42309,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1042,
+        "maximum_surface_jaccard": 0.0836,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42455,7 +42455,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0873,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42579,7 +42579,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0929,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42706,11 +42706,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0913,
+        "maximum_surface_jaccard": 0.0879,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42843,7 +42843,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0876,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -42972,11 +42972,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0973,
+        "maximum_surface_jaccard": 0.0889,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -43108,7 +43108,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0854,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -43243,7 +43243,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0876,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -43385,7 +43385,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0796,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -43536,7 +43536,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -43673,11 +43673,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094,
+        "maximum_surface_jaccard": 0.0829,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -43827,7 +43827,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0878,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -43959,7 +43959,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0896,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -44098,7 +44098,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0887,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -44239,7 +44239,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0882,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -44380,7 +44380,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.09,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -44522,7 +44522,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0882,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -44670,11 +44670,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1093,
+        "maximum_surface_jaccard": 0.0766,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -44831,11 +44831,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1092,
+        "maximum_surface_jaccard": 0.0804,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -44982,11 +44982,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1255,
+        "maximum_surface_jaccard": 0.0821,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45132,11 +45132,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1239,
+        "maximum_surface_jaccard": 0.0808,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45283,11 +45283,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1255,
+        "maximum_surface_jaccard": 0.0821,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45434,11 +45434,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1277,
+        "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45594,11 +45594,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0957,
+        "maximum_surface_jaccard": 0.0856,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45740,7 +45740,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1056,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -45884,11 +45884,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1161,
+        "maximum_surface_jaccard": 0.0865,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -46035,11 +46035,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991,
+        "maximum_surface_jaccard": 0.0894,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -46186,11 +46186,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1227,
+        "maximum_surface_jaccard": 0.0879,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -46336,11 +46336,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1026,
+        "maximum_surface_jaccard": 0.0829,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -46488,11 +46488,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0991,
+        "maximum_surface_jaccard": 0.0894,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -46638,11 +46638,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1111,
+        "maximum_surface_jaccard": 0.0712,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -46797,11 +46797,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.112,
+        "maximum_surface_jaccard": 0.0735,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -46947,11 +46947,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1234,
+        "maximum_surface_jaccard": 0.0755,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47096,11 +47096,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1218,
+        "maximum_surface_jaccard": 0.0746,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47245,11 +47245,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1234,
+        "maximum_surface_jaccard": 0.0755,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47395,11 +47395,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.125,
+        "maximum_surface_jaccard": 0.0778,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47552,11 +47552,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0944,
+        "maximum_surface_jaccard": 0.0785,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47697,7 +47697,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0968,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47840,11 +47840,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1111,
+        "maximum_surface_jaccard": 0.0806,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -47990,11 +47990,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094,
+        "maximum_surface_jaccard": 0.0781,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -48140,11 +48140,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1156,
+        "maximum_surface_jaccard": 0.0802,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -48288,11 +48288,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0979,
+        "maximum_surface_jaccard": 0.0773,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -48439,11 +48439,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.094,
+        "maximum_surface_jaccard": 0.0781,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -48570,11 +48570,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1088,
+        "maximum_surface_jaccard": 0.0746,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -48709,11 +48709,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1082,
+        "maximum_surface_jaccard": 0.0781,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -48838,11 +48838,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1239,
+        "maximum_surface_jaccard": 0.0789,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -48966,11 +48966,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1223,
+        "maximum_surface_jaccard": 0.0777,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49095,11 +49095,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1239,
+        "maximum_surface_jaccard": 0.0789,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49223,11 +49223,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1261,
+        "maximum_surface_jaccard": 0.0811,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49360,11 +49360,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0897,
+        "maximum_surface_jaccard": 0.0838,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49484,7 +49484,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1034,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49607,11 +49607,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1096,
+        "maximum_surface_jaccard": 0.0838,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49735,11 +49735,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0893,
+        "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49863,11 +49863,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1163,
+        "maximum_surface_jaccard": 0.0852,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -49991,11 +49991,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0961,
+        "maximum_surface_jaccard": 0.0802,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -50122,11 +50122,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0893,
+        "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -50259,11 +50259,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1066,
+        "maximum_surface_jaccard": 0.0854,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -50406,11 +50406,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1005,
+        "maximum_surface_jaccard": 0.0795,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -50542,11 +50542,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1188,
+        "maximum_surface_jaccard": 0.0814,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -50687,11 +50687,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0846,
+        "maximum_surface_jaccard": 0.0788,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -50820,7 +50820,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -50952,11 +50952,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1026,
+        "maximum_surface_jaccard": 0.0802,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -51088,11 +51088,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.085,
+        "maximum_surface_jaccard": 0.0793,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -51224,11 +51224,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1047,
+        "maximum_surface_jaccard": 0.0823,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -51362,11 +51362,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.085,
+        "maximum_surface_jaccard": 0.0793,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -51519,7 +51519,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0905,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -51683,7 +51683,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0952,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -51833,11 +51833,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0975,
+        "maximum_surface_jaccard": 0.0973,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -51986,11 +51986,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0962,
+        "maximum_surface_jaccard": 0.0957,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52140,11 +52140,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0975,
+        "maximum_surface_jaccard": 0.0973,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52294,11 +52294,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1,
+        "maximum_surface_jaccard": 0.0947,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52461,7 +52461,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0955,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52606,7 +52606,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0977,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52758,7 +52758,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0966,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -52912,7 +52912,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.096,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -53066,7 +53066,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0983,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -53219,7 +53219,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0924,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -53375,7 +53375,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.096,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -53514,11 +53514,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1134,
+        "maximum_surface_jaccard": 0.0909,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -53666,11 +53666,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1135,
+        "maximum_surface_jaccard": 0.0957,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -53809,11 +53809,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1306,
+        "maximum_surface_jaccard": 0.0978,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -53951,11 +53951,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1289,
+        "maximum_surface_jaccard": 0.0963,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54094,11 +54094,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1306,
+        "maximum_surface_jaccard": 0.0978,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54236,11 +54236,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1327,
+        "maximum_surface_jaccard": 0.0952,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54391,7 +54391,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1017,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54525,7 +54525,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1235,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54662,11 +54662,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1204,
+        "maximum_surface_jaccard": 0.1029,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54808,7 +54808,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1029,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -54946,11 +54946,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1274,
+        "maximum_surface_jaccard": 0.1047,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -55088,11 +55088,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1067,
+        "maximum_surface_jaccard": 0.0989,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -55237,7 +55237,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1029,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -55378,7 +55378,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1274,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -55526,7 +55526,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1337,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -55664,7 +55664,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1337,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -55811,7 +55811,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1421,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -55940,7 +55940,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.15,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -56076,7 +56076,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1436,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -56214,7 +56214,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1429,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -56352,7 +56352,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1459,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -56491,7 +56491,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1429,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -56642,7 +56642,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1037,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -56803,7 +56803,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1082,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -56950,11 +56950,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1107,
+        "maximum_surface_jaccard": 0.1101,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57100,11 +57100,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1095,
+        "maximum_surface_jaccard": 0.1087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57251,11 +57251,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1107,
+        "maximum_surface_jaccard": 0.1101,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57402,11 +57402,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1131,
+        "maximum_surface_jaccard": 0.1082,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57566,7 +57566,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1142,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57708,7 +57708,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1274,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -57857,7 +57857,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1152,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -58008,7 +58008,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1147,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -58159,7 +58159,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1168,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -58309,7 +58309,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -58462,7 +58462,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1147,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 1,
@@ -58621,7 +58621,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.105,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -58791,7 +58791,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1096,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -58946,11 +58946,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1136,
+        "maximum_surface_jaccard": 0.1092,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59118,7 +59118,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1152,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59269,7 +59269,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1274,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59427,7 +59427,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1152,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59586,7 +59586,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1147,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59745,7 +59745,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1168,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -59906,7 +59906,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1147,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -60049,7 +60049,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1126,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60201,7 +60201,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1202,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60343,7 +60343,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1202,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60484,7 +60484,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1185,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60626,7 +60626,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1202,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60763,11 +60763,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1216,
+        "maximum_surface_jaccard": 0.1179,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -60917,7 +60917,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1276,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61050,7 +61050,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1399,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61190,7 +61190,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1269,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61331,7 +61331,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1256,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61472,7 +61472,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1282,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61613,7 +61613,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.122,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61757,7 +61757,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1256,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -61905,7 +61905,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62064,7 +62064,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1163,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62208,11 +62208,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1192,
+        "maximum_surface_jaccard": 0.1152,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62369,7 +62369,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1232,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62509,7 +62509,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1364,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62656,7 +62656,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1232,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62804,7 +62804,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1225,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -62952,7 +62952,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.125,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -63102,7 +63102,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1225,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -63237,11 +63237,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.101,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -63385,11 +63385,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.101,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -63522,11 +63522,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1224,
+        "maximum_surface_jaccard": 0.0789,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -63672,7 +63672,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0828,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -63802,7 +63802,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -63935,11 +63935,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1027,
+        "maximum_surface_jaccard": 0.0839,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -64076,7 +64076,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0902,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -64209,11 +64209,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1111,
+        "maximum_surface_jaccard": 0.0863,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -64352,7 +64352,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0882,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -64486,11 +64486,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1212,
+        "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -64633,11 +64633,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.127,
+        "maximum_surface_jaccard": 0.0845,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -64769,11 +64769,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.129,
+        "maximum_surface_jaccard": 0.0863,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -64914,11 +64914,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1105,
+        "maximum_surface_jaccard": 0.0857,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65043,11 +65043,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.113,
+        "maximum_surface_jaccard": 0.1128,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65179,11 +65179,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.12,
+        "maximum_surface_jaccard": 0.096,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65315,11 +65315,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1117,
+        "maximum_surface_jaccard": 0.087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65451,11 +65451,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1183,
+        "maximum_surface_jaccard": 0.0938,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65589,11 +65589,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1111,
+        "maximum_surface_jaccard": 0.0863,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -65729,11 +65729,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1014,
+        "maximum_surface_jaccard": 0.0805,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -65880,11 +65880,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.101,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66021,11 +66021,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1204,
+        "maximum_surface_jaccard": 0.0822,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66161,11 +66161,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1186,
+        "maximum_surface_jaccard": 0.0805,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66302,11 +66302,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1204,
+        "maximum_surface_jaccard": 0.0822,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66443,11 +66443,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1231,
+        "maximum_surface_jaccard": 0.0795,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66596,7 +66596,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0839,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66729,7 +66729,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1095,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -66864,11 +66864,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1033,
+        "maximum_surface_jaccard": 0.0845,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -67009,7 +67009,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0889,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -67146,11 +67146,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1111,
+        "maximum_surface_jaccard": 0.0863,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -67287,11 +67287,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0876,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -67432,7 +67432,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0909,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -67553,7 +67553,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1149,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cyclic_quadrilateral",
@@ -67660,7 +67660,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.106,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cyclic_quadrilateral",
@@ -67768,7 +67768,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0976,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cyclic_quadrilateral",
@@ -67874,7 +67874,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0818,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cyclic_quadrilateral",
@@ -67984,7 +67984,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "cyclic_quadrilateral",
@@ -68091,7 +68091,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.097,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68207,11 +68207,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0882,
+        "maximum_surface_jaccard": 0.0794,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68317,11 +68317,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1,
+        "maximum_surface_jaccard": 0.0794,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68426,11 +68426,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0982,
+        "maximum_surface_jaccard": 0.0775,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68536,11 +68536,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1,
+        "maximum_surface_jaccard": 0.0794,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68646,11 +68646,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1056,
+        "maximum_surface_jaccard": 0.0781,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "incircle_excircle",
@@ -68765,11 +68765,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0882,
+        "maximum_surface_jaccard": 0.0794,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -68866,11 +68866,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1383,
+        "maximum_surface_jaccard": 0.1053,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -68973,11 +68973,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1083,
+        "maximum_surface_jaccard": 0.0806,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69093,11 +69093,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0865,
+        "maximum_surface_jaccard": 0.0781,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69203,11 +69203,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0891,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69313,11 +69313,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1176,
+        "maximum_surface_jaccard": 0.0826,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69422,11 +69422,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0898,
+        "maximum_surface_jaccard": 0.0758,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69534,11 +69534,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0891,
+        "maximum_surface_jaccard": 0.08,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_centers",
@@ -69664,7 +69664,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1154,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -69808,7 +69808,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1358,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -69935,7 +69935,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1118,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -70070,7 +70070,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0881,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -70204,7 +70204,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1036,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -70357,7 +70357,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1106,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -70493,7 +70493,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1005,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -70637,7 +70637,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0816,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -70772,7 +70772,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1087,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -70924,7 +70924,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.117,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -71059,7 +71059,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1056,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -71202,7 +71202,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0865,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -71346,7 +71346,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0833,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -71508,7 +71508,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1034,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -71653,7 +71653,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0793,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -71802,11 +71802,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0714,
+        "maximum_surface_jaccard": 0.0664,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -71948,7 +71948,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0747,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -72109,7 +72109,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0944,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -72253,7 +72253,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0706,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -72405,7 +72405,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0649,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 7,
@@ -72529,7 +72529,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0802,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -72669,7 +72669,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1012,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -72792,7 +72792,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0759,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -72919,11 +72919,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0679,
+        "maximum_surface_jaccard": 0.0588,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -73056,7 +73056,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0909,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -73207,7 +73207,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0991,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -73341,7 +73341,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0874,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -73483,7 +73483,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0684,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -73626,7 +73626,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1145,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -73787,7 +73787,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1065,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -73934,7 +73934,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1111,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -74088,7 +74088,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0888,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 8,
@@ -74223,7 +74223,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1371,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -74356,7 +74356,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1345,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -74498,7 +74498,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.113,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -74649,7 +74649,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1068,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -74802,7 +74802,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.104,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -74964,7 +74964,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0865,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 2,
@@ -75100,7 +75100,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1196,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -75253,7 +75253,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1082,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -75389,7 +75389,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1167,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -75533,7 +75533,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0963,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 9,
@@ -75674,7 +75674,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.117,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -75834,7 +75834,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1055,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -75977,7 +75977,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1141,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -76128,7 +76128,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0942,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 3,
@@ -76263,7 +76263,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0798,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -76415,7 +76415,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.105,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -76550,7 +76550,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0785,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -76693,7 +76693,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0714,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 6,
@@ -76823,11 +76823,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0962,
+        "maximum_surface_jaccard": 0.0818,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -76978,7 +76978,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.103,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -77108,11 +77108,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0985,
+        "maximum_surface_jaccard": 0.083,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -77250,11 +77250,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0861,
+        "maximum_surface_jaccard": 0.0723,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 4,
@@ -77389,7 +77389,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0798,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -77544,7 +77544,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1006,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -77682,7 +77682,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0755,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -77828,7 +77828,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0682,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "bridge_value": 5,
@@ -77943,7 +77943,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0809,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "N": 4,
@@ -78063,11 +78063,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0769,
+        "maximum_surface_jaccard": 0.069,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "permutation length n",
@@ -78286,11 +78286,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0838,
+        "maximum_surface_jaccard": 0.0826,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "observable": "number of returns to zero",
@@ -78410,7 +78410,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1053,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "dice_sum",
@@ -78524,7 +78524,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1386,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "dice_sum",
@@ -78631,7 +78631,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0957,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "dice_sum",
@@ -78728,7 +78728,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0989,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "dice_sum",
@@ -78833,7 +78833,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.0612,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "dice_sum",
@@ -79021,11 +79021,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0875,
+        "maximum_surface_jaccard": 0.0769,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "N": 4,
@@ -79184,7 +79184,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1419,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 2,
@@ -79307,11 +79307,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "mathnet",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.2558,
+        "maximum_surface_jaccard": 0.229,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "boundary exponent n",
@@ -79468,7 +79468,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.25,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "invariant": "value is independent of n",
@@ -79648,11 +79648,11 @@
         }
       ],
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.3036,
+        "maximum_surface_jaccard": 0.2874,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "phase_diagram": {
         "parameter": "coefficient in a_(n+1)=a_n+c/a_n",
@@ -79769,11 +79769,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1974,
+        "maximum_surface_jaccard": 0.1772,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "k": 2
@@ -79861,7 +79861,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1515,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "a": 0,
@@ -79975,7 +79975,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1492,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -80107,7 +80107,7 @@
         "corpus_novel": true,
         "maximum_surface_jaccard": 0.1395,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "quality_annotations": {
         "below_legacy_difficulty_threshold": true,
@@ -80213,11 +80213,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1544,
+        "maximum_surface_jaccard": 0.1261,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_angles",
@@ -80335,11 +80335,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1429,
+        "maximum_surface_jaccard": 0.1386,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_angles",
@@ -80457,11 +80457,11 @@
         "type_checked": true
       },
       "novelty": {
-        "closest_source": "selfauthored",
+        "closest_source": "sakumon_curation",
         "corpus_novel": true,
-        "maximum_surface_jaccard": 0.1538,
+        "maximum_surface_jaccard": 0.1373,
         "measured": true,
-        "reference_corpus_size": 28074
+        "reference_corpus_size": 176
       },
       "parameters": {
         "construction": "triangle_angles",
