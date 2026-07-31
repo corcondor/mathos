@@ -148,12 +148,37 @@ jobs:
                   docs/generated/latest-research-candidates.md
           if git diff --cached --quiet; then
             echo "no new problems this run"
-          else
-            TOTAL=$(python -c "import json;print(json.load(open('problem_synthesis/construct_pool.json',encoding='utf-8'))['summary']['total'])")
-            git commit -m "autonomous(parallel): pool now ${TOTAL} problems"
-            git pull --rebase --autostash origin master || true
-            git push
+            exit 0
           fi
+          TOTAL=$(python -c "import json;print(json.load(open('problem_synthesis/construct_pool.json',encoding='utf-8'))['summary']['total'])")
+
+          # ここで扱うのは全部「生成物」なので、人の変更と混ぜて rebase する
+          # 意味がない。以前は rebase が衝突して中断し、detached HEAD のまま
+          # push して exit 128 で落ちていた。
+          # remote に合わせてから生成物を置き直す方式にする。衝突しない。
+          mkdir -p /tmp/outputs
+          cp problem_synthesis/construct_pool.json \
+             problem_synthesis/entrance_exam_pool.json \
+             problem_synthesis/unresolved_candidates.json /tmp/outputs/ 2>/dev/null || true
+          cp docs/generated/latest-*.md /tmp/outputs/ 2>/dev/null || true
+
+          git rebase --abort 2>/dev/null || true
+          git fetch origin master
+          git reset --hard origin/master
+
+          cp /tmp/outputs/construct_pool.json \
+             /tmp/outputs/entrance_exam_pool.json \
+             /tmp/outputs/unresolved_candidates.json problem_synthesis/ 2>/dev/null || true
+          cp /tmp/outputs/latest-*.md docs/generated/ 2>/dev/null || true
+
+          git add problem_synthesis docs/generated
+          if git diff --cached --quiet; then
+            echo "remote already has these outputs"
+            exit 0
+          fi
+          git commit -m "autonomous(parallel): pool now ${TOTAL} problems"
+          # 明示的な refspec を使う。detached でも確実に master へ入る。
+          git push origin HEAD:master
 
       - uses: actions/upload-artifact@v4
         if: always()
