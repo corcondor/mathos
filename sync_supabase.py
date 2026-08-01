@@ -19,13 +19,16 @@ import json
 import os
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_POOL = HERE / "problem_synthesis" / "entrance_exam_pool.json"
-SOURCE_TAG = "mathos_entrance_pool"
+SOURCE_TAG = "mathos_discord_entrance_v2"
+LEGACY_SOURCE_TAG = "mathos_entrance_pool"
+ARCHIVE_TAG = "mathos_discord_archive"
 BATCH_SIZE = 100
 
 
@@ -136,6 +139,84 @@ def upsert(url: str, key: str, rows: list[dict[str, Any]]) -> int:
     return sent
 
 
+def fetch_active_ids(
+    url: str,
+    key: str,
+    source_tag: str = SOURCE_TAG,
+) -> set[str]:
+    """Read the currently active MathOS rows without exposing credentials."""
+    ids: set[str] = set()
+    offset = 0
+    while True:
+        endpoint = (
+            f"{url.rstrip('/')}/rest/v1/problems"
+            f"?select=id&source_file=eq.{source_tag}"
+            f"&limit=1000&offset={offset}"
+        )
+        request = urllib.request.Request(
+            endpoint,
+            headers={
+                "apikey": key,
+                "Authorization": f"Bearer {key}",
+            },
+        )
+        with urllib.request.urlopen(request, timeout=120) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+        batch = {
+            str(item["id"])
+            for item in payload
+            if isinstance(item, dict) and item.get("id")
+        }
+        ids.update(batch)
+        if len(payload) < 1000:
+            break
+        offset += len(payload)
+    return ids
+
+
+def stale_active_ids(existing: set[str], rows: list[dict[str, Any]]) -> list[str]:
+    target = {str(row["id"]) for row in rows if row.get("id")}
+    return sorted(existing - target)
+
+
+def archive_stale(
+    url: str,
+    key: str,
+    stale: list[str],
+    *,
+    source_tag: str = SOURCE_TAG,
+) -> int:
+    """Preserve ratings while removing superseded rows from active delivery."""
+    archived = 0
+    for start in range(0, len(stale), BATCH_SIZE):
+        chunk = stale[start:start + BATCH_SIZE]
+        encoded_ids = ",".join(urllib.parse.quote(item, safe="-") for item in chunk)
+        endpoint = (
+            f"{url.rstrip('/')}/rest/v1/problems"
+            f"?source_file=eq.{source_tag}&id=in.({encoded_ids})"
+        )
+        request = urllib.request.Request(
+            endpoint,
+            data=json.dumps({"source_file": ARCHIVE_TAG}).encode("utf-8"),
+            method="PATCH",
+            headers={
+                "apikey": key,
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            },
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=120) as response:
+                response.read()
+        except urllib.error.HTTPError as error:
+            body = error.read().decode("utf-8", "replace")[:400]
+            print(f"旧問題の履歴化に失敗しました: {error.code} {body}")
+            raise SystemExit(1)
+        archived += len(chunk)
+    return archived
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pool", type=Path, default=DEFAULT_POOL)
@@ -157,8 +238,21 @@ def main() -> int:
         print("同期する問題がありません。")
         return 0
 
+    existing = fetch_active_ids(url, key)
+    legacy = fetch_active_ids(url, key, LEGACY_SOURCE_TAG)
+    stale = stale_active_ids(existing, rows)
     sent = upsert(url, key, rows)
-    print(f"Supabase へ {sent} 問を同期しました（source_file={SOURCE_TAG}）。")
+    archived = archive_stale(url, key, stale)
+    archived += archive_stale(
+        url,
+        key,
+        sorted(legacy),
+        source_tag=LEGACY_SOURCE_TAG,
+    )
+    print(
+        f"Supabase へ {sent} 問を同期し、旧 {archived} 問を履歴化しました"
+        f"（source_file={SOURCE_TAG}）。"
+    )
     return 0
 
 

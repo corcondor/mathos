@@ -126,6 +126,7 @@ jobs:
           test_morphology_path_synthesis
           test_motif_guided_synthesis
           test_pool_quality_policy
+          test_sync_supabase
 
       - uses: actions/download-artifact@v4
         with:
