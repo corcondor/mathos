@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T10:47:24.071600+00:00",
+  "generated_at": "2026-08-01T13:16:12.416753+00:00",
   "method": {
     "name": "MathOS autonomous pool (parallel shards merged)"
   },
@@ -4552,7 +4552,7 @@
       "ultradeep.paley_four_cycle_divisor_count": 1,
       "ultradeep.paley_spanning_tree_divisor_count": 1
     },
-    "shards": 26,
+    "shards": 25,
     "total": 97
   }
 }
