@@ -5,14 +5,15 @@
 
 ## 結果
 
-- 検証済み構造: **139**
-- 構造族: **137**
-- 幾何・代数・複素数系: **99**
-- 高校の語彙へ書き換えた問題: **4**
-- 同一構造の数値変種として除外: **82**（生成時点で潰しているため通常は 0）
-- 高校の語彙へ還元できず除外: **10**
+- 検証済み構造: **121**
+- 構造族: **119**
+- 幾何・代数・複素数系: **85**
+- 高校の語彙へ書き換えた問題: **2**
+- 同一構造の数値変種として除外: **78**（生成時点で潰しているため通常は 0）
+- 高校の語彙へ還元できず除外: **6**
 - 制約が合流しない2段合成として除外: **0**
-- 旧難易度8.4未満（注釈のみ・除外しない）: **171**
+- 複合分野なのに型付き経路がなく保留: **26**
+- 旧難易度8.4未満（注釈のみ・除外しない）: **157**
 - 射が3個未満（注釈のみ・除外しない）: **21**
 
 難易度指標は人手判断に対する AUC が 0.086 だったため、
@@ -23,6 +24,8 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 
 ```text
 型付き数学対象
+  -> モルフォロジー・アトラス上の隣接射
+  -> 解法射列との整列 + 証明DAGの条件合流
   -> 射の合成
   -> 厳密backend計算
   -> 独立検算
@@ -62,7 +65,6 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `algebra_inequality` | `relation.constrained_symmetric.weighted_prove_bound` | `inequality -> algebraic_identity -> simultaneous_equations -> polynomial_factorization` |
 | `algebraic_geometry` | `algebraic_geometry.cubic_discriminant_triangle_area` | `polynomial_factorization -> parabola -> coordinate_geometry -> area_shoelace -> quadratic_discriminant -> extremum -> differentiation` |
 | `algebraic_geometry` | `algebraic_geometry.even_quartic_parabola_hull_area` | `polynomial_factorization -> parabola -> coordinate_geometry -> convex_hull -> area_shoelace -> extremum -> differentiation` |
-| `algebraic_geometry_number_theory` | `ultradeep.cubic_root_triangle_discriminant_divisor_count` | `polynomial_expansion -> vieta_relations -> differentiation -> extremum -> quadratic_discriminant -> parabola -> coordinate_geometry -> triangle_area -> polynomial_factorization -> algebraic_identity -> area_shoelace -> integer_arithmetic -> prime_factorization -> divisor_counting` |
 | `analytic_geometry` | `conic_duality.tangent_intercept_centroid_minimum` | `tangent_line -> parameter_elimination -> line_equation -> coordinate_geometry -> midpoint -> complex_modulus -> distance_formula -> extremum -> differentiation` |
 | `analytic_geometry` | `relation.ellipse.tangent_intercept_area_minimum` | `ellipse -> parametric_curve -> coordinate_geometry -> tangent_line -> differentiation -> line_equation -> area_shoelace -> simultaneous_equations -> algebraic_identity -> polynomial_factorization -> inequality -> extremum` |
 | `analytic_geometry` | `relation.parabola.focal_chord_minimum` | `parabola -> parametric_curve -> coordinate_geometry -> line_equation -> distance_formula -> rational_function -> algebraic_identity -> polynomial_factorization -> inequality -> extremum -> differentiation` |
@@ -74,11 +76,8 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `combinatorics` | `traceback.lattice_path.through_center_paths` | `counting -> recurrence -> combination` |
 | `combinatorics` | `traceback.lattice_path.total_paths` | `counting -> recurrence -> combination` |
 | `combinatorics` | `traceback.lattice_path.total_paths_divisor_count` | `counting -> recurrence -> combination -> prime_factorization -> divisor_counting` |
-| `combinatorics_analysis` | `binomial.beta_integral_duality` | `polynomial_expansion -> combination -> definite_integral` |
-| `combinatorics_number_theory` | `binomial.roots_of_unity_filter_mod3` | `combination -> polynomial_expansion -> roots_of_unity -> sum_of_series -> trigonometric_identity` |
 | `complex` | `construct.complex_affine_limit` | `recurrence -> algebraic_identity -> geometric_sequence -> limit -> complex_plane` |
 | `complex` | `construct.complex_rotation_period` | `roots_of_unity -> de_moivre -> periodicity` |
-| `complex_algebra_number_theory` | `ultradeep.cyclotomic_distance_norm_divisor_count` | `roots_of_unity -> gcd_lcm -> counting -> distance_formula -> polynomial_factorization -> remainder_theorem -> polynomial_expansion -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `complex_geometry` | `complex_geometry.reciprocal_root_polygon_area` | `complex_plane -> roots_of_unity -> symmetry -> counting -> convex_hull -> area_shoelace -> extremum -> differentiation` |
 | `complex_geometry` | `deep.polygon_subset_centroid` | `roots_of_unity -> regular_polygon -> combination -> coordinate_geometry -> midpoint -> sum_of_series -> polynomial_factorization -> symmetry -> counting` |
 | `complex_geometry` | `deep.rotation_diagonal_product_divisors` | `roots_of_unity -> regular_polygon -> distance_formula -> polynomial_factorization -> limit -> integer_arithmetic -> prime_factorization -> divisor_counting` |
@@ -89,7 +88,6 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `complex_geometry` | `traceback.regular_polygon.distance_product_divisors` | `roots_of_unity -> polynomial_factorization -> distance_formula -> integer_arithmetic -> prime_factorization -> divisor_counting` |
 | `complex_geometry` | `traceback.regular_polygon.sum_sq_pairwise` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series` |
 | `complex_geometry` | `traceback.regular_polygon.vertex_distance_product` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula` |
-| `complex_geometry_combinatorics` | `relation.regular_polygon.distance_product_vs_diagonals` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> counting -> combination -> simultaneous_equations -> algebraic_identity -> inequality` |
 | `complex_geometry_combinatorics_probability` | `morphology.cyclic_configuration_character_count` | `regular_polygon -> roots_of_unity -> complex_plane -> symmetry -> congruence -> periodicity -> sum_of_series -> polynomial_expansion -> counting -> combination -> probability -> expectation` |
 | `conic_geometry` | `traceback.ellipse_tangent.center_to_polar_dist_sq` | `ellipse -> line_equation -> tangent_line -> coordinate_geometry -> simultaneous_equations` |
 | `conic_geometry` | `traceback.ellipse_tangent.chord_length_sq` | `ellipse -> tangent_line -> differentiation -> line_equation -> distance_formula` |
@@ -118,17 +116,6 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `geometry` | `construct.parabola_right_angle_chord` | `inner_product -> line_equation -> algebraic_identity -> simultaneous_equations` |
 | `geometry` | `passage_region.line_family_sweep` | `line_equation -> parameter_elimination -> quadratic_range -> area_integral` |
 | `geometry` | `passage_region.parabola_family_sweep` | `parabola -> parameter_elimination -> quadratic_range -> area_integral` |
-| `geometry_algebra` | `construct.cubic_tangent_midpoint_locus` | `tangent_line -> differentiation -> vieta_relations -> midpoint -> locus -> parameter_elimination` |
-| `geometry_algebra` | `layered.cubic_tangent_iteration` | `tangent_line -> differentiation -> vieta_relations -> geometric_sequence -> recurrence -> general_term` |
-| `geometry_algebra` | `traceback.cubic_tangent.iterate_x_n` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> geometric_sequence -> recurrence -> general_term` |
-| `geometry_algebra` | `traceback.cubic_tangent.log_growth_limit` | `differentiation -> coordinate_geometry -> tangent_line -> geometric_sequence -> recurrence -> general_term -> limit -> logarithm` |
-| `geometry_algebra` | `traceback.cubic_tangent.midpoint_locus` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations -> midpoint -> locus -> parameter_elimination` |
-| `geometry_algebra` | `traceback.cubic_tangent.reintersection_x` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations` |
-| `geometry_analysis` | `deep.tangent_iteration_growth` | `differentiation -> coordinate_geometry -> tangent_line -> vieta_relations -> simultaneous_equations -> geometric_sequence -> recurrence -> general_term -> limit -> logarithm` |
-| `geometry_analysis` | `passage_region.quadratic_interval_area` | `parametric_curve -> quadratic_range -> inequality -> quadratic_extremum -> area_integral -> definite_integral` |
-| `geometry_analysis` | `passage_region.quadratic_interval_image` | `parametric_curve -> quadratic_range -> inequality -> quadratic_extremum` |
-| `geometry_analysis` | `passage_region.quadratic_stationary_boundary` | `parametric_curve -> quadratic_range -> differentiation -> parameter_elimination -> inequality` |
-| `graph_combinatorics_number_theory` | `ultradeep.paley_four_cycle_divisor_count` | `congruence -> integer_arithmetic -> square_number -> counting -> combination -> regular_polygon -> symmetry -> prime_factorization -> divisor_counting` |
 | `number_theory` | `construct.linear_recurrence_mod_period` | `recurrence -> general_term -> congruence -> periodicity` |
 | `number_theory` | `deep.recurrence_period_quadratic_character` | `recurrence -> general_term -> congruence -> periodicity -> prime_factorization -> square_number` |
 | `number_theory` | `layered.recurrence_period_observable` | `recurrence -> general_term -> congruence -> periodicity -> prime_factorization -> divisor_counting` |
@@ -140,7 +127,6 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `number_theory` | `traceback.digit_power.digit_sum` | `geometric_sequence -> exponential -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.leading_digit` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
 | `number_theory` | `traceback.digit_power.leading_one_count` | `geometric_sequence -> exponential -> logarithm -> integer_arithmetic` |
-| `number_theory_graph` | `layered.paley_triangle_count` | `congruence -> square_number -> counting -> combination` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.area` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule -> area_shoelace` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.circumradius_sq` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
 | `plane_geometry` | `traceback.cyclic_quadrilateral.cos_angle_a` | `circle_equation -> trigonometric_ratio -> sine_cosine_rule` |
@@ -169,7 +155,6 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `probability` | `traceback.dice_sum.variance_times_12` | `probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `traceback.dice_sum.ways_for_modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
 | `probability_algebra_analysis` | `motif.quadratic_root_lattice_limit` | `counting -> probability -> integer_arithmetic -> quadratic_discriminant -> inequality -> coordinate_geometry -> limit -> definite_integral -> area_integral -> quadratic_equation -> algebraic_identity -> sum_of_series` |
-| `probability_linear_algebra_number_theory` | `ultradeep.gambler_absorption_variance_divisor_count` | `counting -> recurrence -> recurrence_probability -> simultaneous_equations -> probability -> expectation -> conditional_probability -> variance -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `projective_geometry` | `ultradeep.geometry_ellipse_tangent_pair_locus` | `ellipse -> trigonometric_identity -> complex_plane -> parameter_elimination -> symmetry -> tangent_line -> line_equation -> simultaneous_equations -> de_moivre -> coordinate_geometry -> locus` |
 | `real_analysis` | `analysis.boundary_layer_integral_limit` | `definite_integral -> area_integral -> algebraic_identity -> limit -> inequality` |
 | `real_analysis` | `analysis.reflection_symmetric_integral` | `definite_integral -> symmetry -> vector_addition -> area_integral` |

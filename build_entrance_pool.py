@@ -42,6 +42,65 @@ LEGACY_MIN_DIFFICULTY = 8.4
 MINIMUM_GATING_AUC = 0.7
 OBSERVED_HUMAN_AUC = 0.086
 
+# Atomic chart labels used by generated domain metadata. A domain that can be
+# segmented into two or more of these labels is a declared cross-domain
+# construction and therefore needs an explicit morphology certificate.
+DOMAIN_ATOMS = frozenset(
+    {
+        "algebra",
+        "algebra_inequality",
+        "algebraic_geometry",
+        "analysis",
+        "analytic_geometry",
+        "combinatorics",
+        "complex",
+        "complex_geometry",
+        "conic_geometry",
+        "convex_geometry",
+        "differential_geometry",
+        "euclidean_geometry",
+        "geometry",
+        "graph",
+        "graph_combinatorics",
+        "linear_algebra",
+        "number_theory",
+        "plane_geometry",
+        "probability",
+        "projective_geometry",
+        "real_analysis",
+        "sequence",
+        "sequence_analysis",
+        "trigonometry",
+    }
+)
+
+
+def _domain_components(domain: str) -> list[str]:
+    """Return the smallest exact segmentation into established chart names."""
+    tokens = tuple(part for part in str(domain).split("_") if part)
+    atom_tokens = {
+        atom: tuple(atom.split("_"))
+        for atom in DOMAIN_ATOMS
+    }
+    memo: dict[int, list[str] | None] = {}
+
+    def segment(index: int) -> list[str] | None:
+        if index == len(tokens):
+            return []
+        if index in memo:
+            return memo[index]
+        candidates: list[list[str]] = []
+        for atom, parts in atom_tokens.items():
+            if tokens[index:index + len(parts)] != parts:
+                continue
+            suffix = segment(index + len(parts))
+            if suffix is not None:
+                candidates.append([atom, *suffix])
+        memo[index] = min(candidates, key=len) if candidates else None
+        return memo[index]
+
+    return segment(0) or [str(domain)]
+
 
 def _structure_key(problem: dict[str, Any]) -> str:
     lift = problem.get("lift_certificate") or {}
@@ -298,6 +357,10 @@ def build_pool(
             if morphology_path and not morphology_certificate["valid"]:
                 rejected["invalid_morphology_path"] += 1
                 continue
+            domain_components = _domain_components(str(problem.get("domain") or ""))
+            if len(domain_components) >= 2 and not morphology_certificate["valid"]:
+                rejected["composite_domain_without_morphology_path"] += 1
+                continue
             # A scalar passed from one unrelated block to another is not a hard
             # mathematical interaction. Keep it out of the deployed pool until
             # the candidate carries a DAG where independent constraints merge.
@@ -356,6 +419,7 @@ def build_pool(
                 if proof_graph_certificate["interaction_verified"]
                 else "verified_standard"
             )
+            record["domain_components"] = domain_components
             record["source_generator"] = source
             retained[key] = record
             source_counts[source] += 1
@@ -442,6 +506,8 @@ def render_report(report: dict[str, Any]) -> str:
         f"**{summary['rejected'].get('scope_lowering', 0)}**",
         f"- 制約が合流しない2段合成として除外: "
         f"**{summary['rejected'].get('non_interacting_composition', 0)}**",
+        f"- 複合分野なのに型付き経路がなく保留: "
+        f"**{summary['rejected'].get('composite_domain_without_morphology_path', 0)}**",
         f"- 旧難易度8.4未満（注釈のみ・除外しない）: "
         f"**{summary.get('quality_flags', {}).get('below_legacy_difficulty_threshold', 0)}**",
         f"- 射が3個未満（注釈のみ・除外しない）: "
@@ -455,6 +521,8 @@ def render_report(report: dict[str, Any]) -> str:
         "",
         "```text",
         "型付き数学対象",
+        "  -> モルフォロジー・アトラス上の隣接射",
+        "  -> 解法射列との整列 + 証明DAGの条件合流",
         "  -> 射の合成",
         "  -> 厳密backend計算",
         "  -> 独立検算",
