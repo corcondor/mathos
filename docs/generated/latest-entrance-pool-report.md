@@ -5,17 +5,17 @@
 
 ## 結果
 
-- 検証済み構造: **32**
-- 構造族: **32**
-- 幾何・代数・複素数系: **23**
-- 高校の語彙へ書き換えた問題: **3**
+- 検証済み構造: **30**
+- 構造族: **30**
+- 幾何・代数・複素数系: **21**
+- 高校の語彙へ書き換えた問題: **1**
 - 同一構造の数値変種として除外: **7**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **6**
 - 制約が合流しない2段合成として除外: **0**
 - 複合分野なのに型付き経路がなく保留: **26**
 - 経路はあるが条件が合流する証明DAGがなく保留: **0**
 - 配信目的と合わず除外（サイコロ・ギャンブラー）: **27**
-- スキップ票により公開プールから除外: **140**
+- スキップ票により公開プールから除外: **142**
 - 旧難易度8.4未満（注釈のみ・除外しない）: **135**
 - 射が3個未満（注釈のみ・除外しない）: **16**
 
@@ -61,9 +61,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `complex_geometry_algebra_combinatorics` | `morphology.unit_roots_antipodal_compatibility_count` | `regular_polygon -> complex_plane -> roots_of_unity -> vieta_relations -> algebraic_identity -> polynomial_factorization -> counting -> combination -> symmetry` |
 | `complex_geometry_combinatorics_probability` | `morphology.cyclic_configuration_character_count` | `regular_polygon -> roots_of_unity -> complex_plane -> symmetry -> congruence -> periodicity -> sum_of_series -> polynomial_expansion -> counting -> combination -> probability -> expectation` |
 | `conic_geometry` | `traceback.parabola_focal_chord.parameter_product` | `parabola -> hyperbola -> distance_formula -> parameter_elimination` |
-| `convex_geometry` | `ultradeep.geometry_convex_polygon_disk_sweep_area` | `convex_hull -> coordinate_geometry -> locus -> circle_equation -> vector_addition -> area_integral -> distance_formula -> regular_polygon -> trigonometric_identity` |
 | `convex_geometry` | `ultradeep.geometry_triangle_displacement_locus_area` | `coordinate_geometry -> triangle_area -> vector_addition -> locus -> convex_hull -> symmetry -> area_shoelace -> area_integral` |
-| `convex_geometry` | `ultradeep.spatial_cube_ball_sweep_volume` | `polyhedron -> solid_coordinate_geometry -> sphere -> locus -> volume -> solid_vector -> counting -> definite_integral -> algebraic_identity` |
 | `differential_geometry` | `ultradeep.geometry_parabola_normal_envelope` | `parabola -> differentiation -> vector_addition -> normal_line -> parameter_elimination -> envelope -> extremum -> parametric_curve -> simultaneous_equations -> locus` |
 | `euclidean_geometry` | `relation.triangle.sixty_degree_side_bound` | `sine_cosine_rule -> trigonometric_identity -> simultaneous_equations -> algebraic_identity -> polynomial_factorization -> inequality` |
 | `euclidean_geometry` | `ultradeep.spatial_cube_diagonal_section_maximum` | `polyhedron -> solid_coordinate_geometry -> solid_vector -> inner_product -> solid_section -> inequality -> volume -> definite_integral -> counting -> algebraic_identity -> quadratic_extremum -> symmetry -> extremum` |

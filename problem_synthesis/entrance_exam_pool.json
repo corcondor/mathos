@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T19:15:03.444848+00:00",
+  "generated_at": "2026-08-01T21:54:16.666890+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "hard_problem_policy": "proof DAG with converging constraints required; flat scalar bridge compositions are excluded",
@@ -2804,211 +2804,6 @@
     },
     {
       "accepted": true,
-      "answer_exact": "A + r*L + pi*r**2",
-      "answer_tex": "A+rL+\\pi r^2",
-      "candidate_id": "construct:ultradeep.geometry_convex_polygon_disk_sweep_area:002",
-      "conceptual_bridge": {
-        "bridge_morphism": "PassageUnion -> MinkowskiAddition",
-        "edge_ablation": {
-          "ExteriorAngleSum": "without the 2*pi angle invariant the sector contribution is undetermined",
-          "MinkowskiAddition": "without translation addition edge strips and vertex sectors are disconnected",
-          "PassageUnion": "without taking the union there is no swept region"
-        },
-        "latent_object": "parallel body P+B_r",
-        "necessary": true,
-        "surface_object": "disk whose center moves over a convex polygon",
-        "transported_invariant": "edge lengths and total exterior angle"
-      },
-      "curriculum_certificate": {
-        "abstract_morphism_chain": [
-          "ConvexPolygon",
-          "MovingCenter",
-          "DiskTranslation",
-          "PassageUnion",
-          "MinkowskiAddition",
-          "ParallelBody",
-          "EdgeStripDecomposition",
-          "ExteriorAngleSum",
-          "SectorAreaMerge",
-          "AreaObservation"
-        ],
-        "lowering_by_morphism": [
-          {
-            "morphism": "ConvexPolygon",
-            "primitives": [
-              "convex_hull",
-              "coordinate_geometry"
-            ]
-          },
-          {
-            "morphism": "MovingCenter",
-            "primitives": [
-              "locus",
-              "coordinate_geometry"
-            ]
-          },
-          {
-            "morphism": "DiskTranslation",
-            "primitives": [
-              "circle_equation",
-              "vector_addition"
-            ]
-          },
-          {
-            "morphism": "PassageUnion",
-            "primitives": [
-              "locus",
-              "area_integral"
-            ]
-          },
-          {
-            "morphism": "MinkowskiAddition",
-            "primitives": [
-              "vector_addition",
-              "convex_hull"
-            ]
-          },
-          {
-            "morphism": "ParallelBody",
-            "primitives": [
-              "vector_addition",
-              "convex_hull"
-            ]
-          },
-          {
-            "morphism": "EdgeStripDecomposition",
-            "primitives": [
-              "area_integral",
-              "distance_formula"
-            ]
-          },
-          {
-            "morphism": "ExteriorAngleSum",
-            "primitives": [
-              "regular_polygon",
-              "trigonometric_identity"
-            ]
-          },
-          {
-            "morphism": "SectorAreaMerge",
-            "primitives": [
-              "circle_equation",
-              "area_integral"
-            ]
-          },
-          {
-            "morphism": "AreaObservation",
-            "primitives": [
-              "area_integral"
-            ]
-          }
-        ],
-        "lowering_chain": [
-          "convex_hull",
-          "coordinate_geometry",
-          "locus",
-          "circle_equation",
-          "vector_addition",
-          "area_integral",
-          "distance_formula",
-          "regular_polygon",
-          "trigonometric_identity"
-        ],
-        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
-        "solution_tex_lowered": "通過領域は多角形 \\(P\\) と半径 \\(r\\) の円板との図形である。元の \\(P\\) に加え、各辺の外側に面積 \\(r\\ell_i\\) の長方形ができる。各頂点にできる扇形の中心角の和は \\(2\\pi\\) なので、その面積の和は\\(\\pi r^2\\)。したがって \\(A+r\\sum_i\\ell_i+\\pi r^2=A+rL+\\pi r^2\\) である。",
-        "statement_tex_lowered": "面積 \\(A\\)、周長 \\(L\\) の凸多角形 \\(P\\) 上を、半径 \\(r\\) の円板の中心が自由に動く。この円板が通過する領域の面積を \\(A,L,r\\) で表せ。",
-        "surface_rewritten": true,
-        "type_checked": true,
-        "uses_only_school_level_primitives": true
-      },
-      "difficulty": {
-        "band": "D_textbook",
-        "condition": 0,
-        "construct": 0,
-        "score": 5.58
-      },
-      "difficulty_score": 5.58,
-      "domain": "convex_geometry",
-      "domain_components": [
-        "convex_geometry"
-      ],
-      "family_id": "ultradeep.geometry_convex_polygon_disk_sweep_area",
-      "lift_certificate": {
-        "morphism_chain": [
-          "ConvexPolygon",
-          "MovingCenter",
-          "DiskTranslation",
-          "PassageUnion",
-          "MinkowskiAddition",
-          "ParallelBody",
-          "EdgeStripDecomposition",
-          "ExteriorAngleSum",
-          "SectorAreaMerge",
-          "AreaObservation"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "closest_source": "sakumon_curation",
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0775,
-        "measured": true,
-        "reference_corpus_size": 176
-      },
-      "parameters": {
-        "symbolic": [
-          "A",
-          "L",
-          "r"
-        ],
-        "verification_rectangle": [
-          3,
-          2,
-          1
-        ]
-      },
-      "proof_graph_certificate": {
-        "edge_count": 0,
-        "interaction_verified": false,
-        "merge_count": 0,
-        "node_count": 0,
-        "present": false,
-        "reason": "proof_graph_missing",
-        "valid_dag": false
-      },
-      "quality_annotations": {
-        "below_legacy_difficulty_threshold": true,
-        "below_legacy_morphism_threshold": false,
-        "human_calibrated": false,
-        "legacy_difficulty_score": 5.58,
-        "legacy_difficulty_threshold": 8.4,
-        "legacy_morphism_threshold": 3,
-        "minimum_auc_for_gating": 0.7,
-        "morphism_count": 10,
-        "observed_human_auc": 0.086,
-        "policy": "annotation_only"
-      },
-      "research_tier": "verified_standard",
-      "solution_tex": "通過領域は多角形 \\(P\\) と半径 \\(r\\) の円板との図形である。元の \\(P\\) に加え、各辺の外側に面積 \\(r\\ell_i\\) の長方形ができる。各頂点にできる扇形の中心角の和は \\(2\\pi\\) なので、その面積の和は\\(\\pi r^2\\)。したがって \\(A+r\\sum_i\\ell_i+\\pi r^2=A+rL+\\pi r^2\\) である。",
-      "source_generator": "construct_atlas",
-      "statement_tex": "面積 \\(A\\)、周長 \\(L\\) の凸多角形 \\(P\\) 上を、半径 \\(r\\) の円板の中心が自由に動く。この円板が通過する領域の面積を \\(A,L,r\\) で表せ。",
-      "statement_tex_original": "面積 \\(A\\)、周長 \\(L\\) の凸多角形 \\(P\\) 上を、半径 \\(r\\) の円板の中心が自由に動く。この円板が通過する領域の面積を \\(A,L,r\\) で表せ。",
-      "structure_key": "26d99cc06645f5bc15c5b94faa7c42fa43931acf72f82579f75108167a7ca5de",
-      "surface_contract": {
-        "missing": [],
-        "published": [],
-        "required": [],
-        "valid": true
-      },
-      "tool": "minkowski_sum+parallel_body+numeric_hull",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "polygon_parallel_body_decomposition_vs_sampled_minkowski_hull"
-      }
-    },
-    {
-      "accepted": true,
       "answer_exact": "6*S",
       "answer_tex": "6S",
       "candidate_id": "construct:ultradeep.geometry_triangle_displacement_locus_area:001",
@@ -3200,210 +2995,6 @@
         "exact_backend": true,
         "independent_check": true,
         "method": "symbolic_difference_body_identity_vs_numeric_convex_hull"
-      }
-    },
-    {
-      "accepted": true,
-      "answer_exact": "a**3 + 6*a**2*r + 3*pi*a*r**2 + 4*pi*r**3/3",
-      "answer_tex": "a^3+6a^2r+3\\pi ar^2+\\frac{4\\pi}{3}r^3",
-      "candidate_id": "construct:ultradeep.spatial_cube_ball_sweep_volume:002",
-      "conceptual_bridge": {
-        "bridge_morphism": "SpatialPassageUnion -> ThreeDimensionalMinkowskiAddition",
-        "edge_ablation": {
-          "FaceEdgeVertexStratification": "without boundary strata the rounded regions overlap or are omitted",
-          "QuarterCylinderEdgeContribution": "without edge curvature the quadratic term is undetermined",
-          "SphericalOctantVertexContribution": "without vertex solid angles the cubic term is undetermined"
-        },
-        "latent_object": "three-dimensional parallel body of the cube",
-        "necessary": true,
-        "surface_object": "sphere whose center moves through a cube",
-        "transported_invariant": "face, edge, and vertex boundary measures"
-      },
-      "curriculum_certificate": {
-        "abstract_morphism_chain": [
-          "CubeConfiguration",
-          "MovingSphereCenter",
-          "SpatialPassageUnion",
-          "ThreeDimensionalMinkowskiAddition",
-          "FaceEdgeVertexStratification",
-          "FacePrismContribution",
-          "QuarterCylinderEdgeContribution",
-          "SphericalOctantVertexContribution",
-          "DisjointBoundaryLayerMerge",
-          "VolumeObservation"
-        ],
-        "lowering_by_morphism": [
-          {
-            "morphism": "CubeConfiguration",
-            "primitives": [
-              "polyhedron",
-              "solid_coordinate_geometry"
-            ]
-          },
-          {
-            "morphism": "MovingSphereCenter",
-            "primitives": [
-              "sphere",
-              "solid_coordinate_geometry"
-            ]
-          },
-          {
-            "morphism": "SpatialPassageUnion",
-            "primitives": [
-              "sphere",
-              "locus",
-              "volume"
-            ]
-          },
-          {
-            "morphism": "ThreeDimensionalMinkowskiAddition",
-            "primitives": [
-              "solid_vector",
-              "polyhedron"
-            ]
-          },
-          {
-            "morphism": "FaceEdgeVertexStratification",
-            "primitives": [
-              "polyhedron",
-              "counting"
-            ]
-          },
-          {
-            "morphism": "FacePrismContribution",
-            "primitives": [
-              "polyhedron",
-              "volume"
-            ]
-          },
-          {
-            "morphism": "QuarterCylinderEdgeContribution",
-            "primitives": [
-              "definite_integral",
-              "volume"
-            ]
-          },
-          {
-            "morphism": "SphericalOctantVertexContribution",
-            "primitives": [
-              "sphere",
-              "volume"
-            ]
-          },
-          {
-            "morphism": "DisjointBoundaryLayerMerge",
-            "primitives": [
-              "volume",
-              "algebraic_identity"
-            ]
-          },
-          {
-            "morphism": "VolumeObservation",
-            "primitives": [
-              "volume"
-            ]
-          }
-        ],
-        "lowering_chain": [
-          "polyhedron",
-          "solid_coordinate_geometry",
-          "sphere",
-          "locus",
-          "volume",
-          "solid_vector",
-          "counting",
-          "definite_integral",
-          "algebraic_identity"
-        ],
-        "scope": "jp_upper_secondary_math_IA_IIB_IIIC",
-        "solution_tex_lowered": "通過領域は立方体と半径 \\(r\\) の球との図形である。元の立方体に、6面から生じる厚さ \\(r\\) の角柱、12辺から生じる四分円柱、8頂点から生じる球の八分体を加える。それぞれの体積は \\(a^3,6a^2r,12\\cdot\\frac14\\pi r^2a,8\\cdot\\frac18\\frac43\\pi r^3\\)。合計して答を得る。",
-        "statement_tex_lowered": "一辺 \\(a\\) の立方体の内部または表面を、半径 \\(r\\) の球の中心が自由に動く。この球が通過する空間領域の体積を求めよ。",
-        "surface_rewritten": true,
-        "type_checked": true,
-        "uses_only_school_level_primitives": true
-      },
-      "difficulty": {
-        "band": "D_textbook",
-        "condition": 0,
-        "construct": 0,
-        "score": 5.14
-      },
-      "difficulty_score": 5.14,
-      "domain": "convex_geometry",
-      "domain_components": [
-        "convex_geometry"
-      ],
-      "family_id": "ultradeep.spatial_cube_ball_sweep_volume",
-      "lift_certificate": {
-        "morphism_chain": [
-          "CubeConfiguration",
-          "MovingSphereCenter",
-          "SpatialPassageUnion",
-          "ThreeDimensionalMinkowskiAddition",
-          "FaceEdgeVertexStratification",
-          "FacePrismContribution",
-          "QuarterCylinderEdgeContribution",
-          "SphericalOctantVertexContribution",
-          "DisjointBoundaryLayerMerge",
-          "VolumeObservation"
-        ],
-        "type_checked": true
-      },
-      "novelty": {
-        "closest_source": "sakumon_curation",
-        "corpus_novel": true,
-        "maximum_surface_jaccard": 0.0687,
-        "measured": true,
-        "reference_corpus_size": 176
-      },
-      "parameters": {
-        "symbolic": [
-          "a",
-          "r"
-        ],
-        "verification": [
-          1,
-          1
-        ]
-      },
-      "proof_graph_certificate": {
-        "edge_count": 0,
-        "interaction_verified": false,
-        "merge_count": 0,
-        "node_count": 0,
-        "present": false,
-        "reason": "proof_graph_missing",
-        "valid_dag": false
-      },
-      "quality_annotations": {
-        "below_legacy_difficulty_threshold": true,
-        "below_legacy_morphism_threshold": false,
-        "human_calibrated": false,
-        "legacy_difficulty_score": 5.14,
-        "legacy_difficulty_threshold": 8.4,
-        "legacy_morphism_threshold": 3,
-        "minimum_auc_for_gating": 0.7,
-        "morphism_count": 10,
-        "observed_human_auc": 0.086,
-        "policy": "annotation_only"
-      },
-      "research_tier": "verified_standard",
-      "solution_tex": "通過領域は立方体と半径 \\(r\\) の球との図形である。元の立方体に、6面から生じる厚さ \\(r\\) の角柱、12辺から生じる四分円柱、8頂点から生じる球の八分体を加える。それぞれの体積は \\(a^3,6a^2r,12\\cdot\\frac14\\pi r^2a,8\\cdot\\frac18\\frac43\\pi r^3\\)。合計して答を得る。",
-      "source_generator": "construct_atlas",
-      "statement_tex": "一辺 \\(a\\) の立方体の内部または表面を、半径 \\(r\\) の球の中心が自由に動く。この球が通過する空間領域の体積を求めよ。",
-      "statement_tex_original": "一辺 \\(a\\) の立方体の内部または表面を、半径 \\(r\\) の球の中心が自由に動く。この球が通過する空間領域の体積を求めよ。",
-      "structure_key": "4a22bc1802f9ac9112fc2e58de79d44ff9a52067dd9e3e0f666abd0492f4d694",
-      "surface_contract": {
-        "missing": [],
-        "published": [],
-        "required": [],
-        "valid": true
-      },
-      "tool": "spatial_minkowski_sum+boundary_strata+sampled_convex_hull_3d",
-      "verification": {
-        "exact_backend": true,
-        "independent_check": true,
-        "method": "boundary_stratum_decomposition_vs_sampled_sphere_minkowski_hull"
       }
     },
     {
@@ -6600,9 +6191,9 @@
   "summary": {
     "audience_feedback": {
       "policy": "remove_from_active_delivery_preserve_vote_history",
-      "rejected_structure_keys_loaded": 187
+      "rejected_structure_keys_loaded": 189
     },
-    "certified_structures": 32,
+    "certified_structures": 30,
     "disabled_generators": {
       "closure_composition": "scalar_bridge_bypasses_morphology_graph",
       "traceback_dice_sum": "audience_rejected_repetitive_construction"
@@ -6616,7 +6207,7 @@
       "complex_geometry_algebra_combinatorics": 1,
       "complex_geometry_combinatorics_probability": 1,
       "conic_geometry": 1,
-      "convex_geometry": 3,
+      "convex_geometry": 1,
       "differential_geometry": 1,
       "euclidean_geometry": 3,
       "geometry": 1,
@@ -6629,7 +6220,7 @@
       "sequence_analysis": 1,
       "trigonometry": 2
     },
-    "families": 32,
+    "families": 30,
     "family_counts": {
       "algebraic_geometry.cubic_discriminant_triangle_area": 1,
       "algebraic_geometry.even_quartic_parabola_hull_area": 1,
@@ -6657,20 +6248,18 @@
       "traceback.digit_power.leading_one_count": 1,
       "traceback.parabola_focal_chord.parameter_product": 1,
       "ultradeep.geometry_astroid_envelope_area": 1,
-      "ultradeep.geometry_convex_polygon_disk_sweep_area": 1,
       "ultradeep.geometry_parabola_normal_envelope": 1,
       "ultradeep.geometry_triangle_displacement_locus_area": 1,
-      "ultradeep.spatial_cube_ball_sweep_volume": 1,
       "ultradeep.spatial_cube_diagonal_section_maximum": 1,
       "ultradeep.spatial_tetrahedron_displacement_locus_volume": 1
     },
-    "geometry_algebra_structures": 23,
+    "geometry_algebra_structures": 21,
     "quality_flags": {
       "below_legacy_difficulty_threshold": 135,
       "below_legacy_morphism_threshold": 16
     },
     "rejected": {
-      "audience_skipped": 140,
+      "audience_skipped": 142,
       "composite_domain_without_morphology_path": 26,
       "delivery_topic:dice_sum": 11,
       "delivery_topic:ellipse_tangent": 15,
@@ -6679,7 +6268,7 @@
       "scope_lowering": 6
     },
     "source_counts": {
-      "construct_atlas": 11,
+      "construct_atlas": 9,
       "geometry_fusion": 1,
       "iterated_relation_closure": 3,
       "relation_closure": 5,
@@ -6688,7 +6277,7 @@
       "typed_morphology_geometry": 2,
       "typed_morphology_path": 1
     },
-    "surface_rewritten": 3,
-    "total_instances": 32
+    "surface_rewritten": 1,
+    "total_instances": 30
   }
 }
