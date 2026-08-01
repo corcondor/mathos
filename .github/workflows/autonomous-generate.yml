@@ -122,6 +122,9 @@ jobs:
           test_wolfram_region_engine
           test_world_novelty_index
           test_difficulty_reference
+          test_morphology_graph
+          test_morphology_path_synthesis
+          test_motif_guided_synthesis
           test_pool_quality_policy
 
       - uses: actions/download-artifact@v4
@@ -137,6 +140,7 @@ jobs:
             --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
           python export_generation_report.py
+          python export_morphology_atlas.py
           python build_entrance_pool.py
 
       # PC を開いていなくても、作った問題がそのままサイトと Discord に届く。
@@ -156,6 +160,7 @@ jobs:
                   problem_synthesis/unresolved_candidates.json \
                   docs/generated/latest-generation-report.md \
                   docs/generated/latest-entrance-pool-report.md \
+                  docs/generated/latest-morphology-atlas.md \
                   docs/generated/latest-research-candidates.md
           if git diff --cached --quiet; then
             echo "no new problems this run"

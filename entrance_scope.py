@@ -443,6 +443,18 @@ MORPHISM_LOWERING: dict[str, tuple[str, ...]] = {
     "RegionLimit": ("limit", "definite_integral"),
     "RootDifference": ("quadratic_equation", "algebraic_identity"),
     "RestrictedAverage": ("counting", "sum_of_series", "limit"),
+    # --- モルフォロジー・アトラスの隣接射 ---
+    "CoefficientInstantiation": ("integer_arithmetic", "counting"),
+    "DiscriminantFilter": ("quadratic_discriminant", "inequality"),
+    "ScalingLimit": ("coordinate_geometry", "limit"),
+    "RegionMeasure": ("area_integral",),
+    "RestrictedMoment": ("definite_integral", "probability"),
+    "CyclicOrbit": ("roots_of_unity", "symmetry"),
+    "OrbitResidues": ("congruence", "periodicity"),
+    "FiniteFourierTransform": ("roots_of_unity", "sum_of_series"),
+    "CoefficientEncoding": ("polynomial_expansion", "sum_of_series"),
+    "CoefficientClass": ("counting", "combination"),
+    "UniformMeasure": ("probability", "counting"),
     "ZeroIndicators": ("counting",),
     # --- 高校の語彙に還元できない射（範囲外）---
     # 行列式・スペクトル・フーリエは、答案として高校の一手に分解できない。

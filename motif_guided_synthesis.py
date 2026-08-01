@@ -10,13 +10,33 @@ import sympy as sp
 
 try:
     from math_os_prototype.category_semantics import compile_typed_semantic_graph
+    from math_os_prototype.morphology_graph import certify_morphology_path
     from math_os_prototype.proof_graph import certify_proof_graph
 except ImportError:  # pragma: no cover
     from category_semantics import compile_typed_semantic_graph
+    from morphology_graph import certify_morphology_path
     from proof_graph import certify_proof_graph
 
 
 MORPHISM_CHAIN = [
+    "UniformLatticePair",
+    "CoefficientInstantiation",
+    "QuadraticDiscriminant",
+    "DiscriminantFilter",
+    "LatticeRescaling",
+    "ScalingLimit",
+    "RegionLimit",
+    "RegionMeasure",
+    "AreaObservation",
+    "RootDifference",
+    "RestrictedMoment",
+    "RestrictedAverage",
+]
+
+# Operations expected to be recoverable directly from the Japanese/TeX
+# surface. Atlas-edge morphisms above are checked separately against the
+# explicit morphology path; they need not occur as literal surface words.
+SURFACE_MORPHISM_CHAIN = [
     "UniformLatticePair",
     "QuadraticDiscriminant",
     "LatticeRescaling",
@@ -24,6 +44,15 @@ MORPHISM_CHAIN = [
     "AreaObservation",
     "RootDifference",
     "RestrictedAverage",
+]
+
+MORPHOLOGY_PATH = [
+    "QuadraticCoefficientFamily",
+    "CoefficientLattice",
+    "DiscriminantFeasibleLattice",
+    "SemialgebraicRegion",
+    "MeasureObservable",
+    "ConditionalMomentObservable",
 ]
 
 
@@ -89,10 +118,10 @@ def _semantic_chain_check(statement: str, solution: str) -> dict[str, Any]:
         for graph in (statement_graph, solution_graph)
         for item in graph.morphisms
     }
-    missing = [name for name in MORPHISM_CHAIN if name not in observed]
+    missing = [name for name in SURFACE_MORPHISM_CHAIN if name not in observed]
     return {
         "passed": not missing and statement_graph.status == "type_checked",
-        "expected": MORPHISM_CHAIN,
+        "expected": SURFACE_MORPHISM_CHAIN,
         "observed": sorted(observed),
         "missing": missing,
         "statement_status": statement_graph.status,
@@ -105,6 +134,10 @@ def synthesize() -> dict[str, Any]:
     finite = _finite_check()
     proof_graph = _proof_graph()
     certificate = certify_proof_graph(proof_graph)
+    morphology_certificate = certify_morphology_path(
+        MORPHOLOGY_PATH,
+        morphism_chain=MORPHISM_CHAIN,
+    )
     exact_ok = area == sp.Rational(1, 12) and average == sp.Rational(1, 2)
     independent_ok = (
         abs(finite["proportion"] - 1 / 12) < 5e-4
@@ -152,6 +185,7 @@ M_n=\frac1{|S_n|}\sum_{(a,b)\in S_n}
             exact_ok
             and independent_ok
             and certificate["interaction_verified"]
+            and morphology_certificate["valid"]
             and semantic_check["passed"]
         ),
         "answer_exact": ["1/12", "1/2"],
@@ -174,6 +208,8 @@ M_n=\frac1{|S_n|}\sum_{(a,b)\in S_n}
         "novelty": {"corpus_novel": True, "provisional": True},
         "proof_graph": proof_graph,
         "proof_graph_certificate": certificate,
+        "morphology_path": MORPHOLOGY_PATH,
+        "morphology_certificate": morphology_certificate,
         "solution_tex": solution,
         "statement_tex": statement,
         "verification": {

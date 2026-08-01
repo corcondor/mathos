@@ -18,11 +18,13 @@ try:
     from math_os_prototype.geometry_fusion_synthesis import (
         synthesize as synthesize_geometry,
     )
+    from math_os_prototype.morphology_graph import certify_morphology_path
     from math_os_prototype.proof_graph import certify_proof_graph
 except ImportError:  # pragma: no cover - direct script execution
     from continuous_problem_generation import build_batch_report
     from entrance_scope import certify_entrance_scope
     from geometry_fusion_synthesis import synthesize as synthesize_geometry
+    from morphology_graph import certify_morphology_path
     from proof_graph import certify_proof_graph
 
 
@@ -93,18 +95,18 @@ def _traceback_report() -> dict[str, Any]:
 
 
 def _compose_report() -> dict[str, Any]:
-    """構築の合成（構築Aの導出値を構築Bのパラメータへ渡す）。"""
-    try:
-        from math_os_prototype.compose_engine import synthesize as synthesize_compose
-    except ImportError:  # pragma: no cover
-        try:
-            from compose_engine import synthesize as synthesize_compose
-        except ImportError:
-            return {"problems": []}
-    try:
-        return synthesize_compose()
-    except Exception:
-        return {"problems": []}
+    """The legacy scalar-bridge generator is intentionally disabled.
+
+    It connected closures whenever an integer happened to fit the next
+    parameter range. That bypassed the morphology atlas and produced 50/50
+    human rejections. New cross-domain synthesis must enter through an
+    explicit ``morphology_path`` and an interacting proof DAG.
+    """
+    return {
+        "problems": [],
+        "disabled": True,
+        "reason": "scalar_bridge_bypasses_morphology_graph",
+    }
 
 
 def _relation_report() -> dict[str, Any]:
@@ -167,6 +169,21 @@ def _motif_guided_report() -> dict[str, Any]:
     except ImportError:  # pragma: no cover
         try:
             from motif_guided_synthesis import synthesize
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize()
+    except Exception:
+        return {"problems": []}
+
+
+def _morphology_path_report() -> dict[str, Any]:
+    """Problems whose cross-domain steps are adjacent typed atlas edges."""
+    try:
+        from math_os_prototype.morphology_path_synthesis import synthesize
+    except ImportError:  # pragma: no cover
+        try:
+            from morphology_path_synthesis import synthesize
         except ImportError:
             return {"problems": []}
     try:
@@ -259,6 +276,7 @@ def build_pool(
         ("passage_region_closure", _records(_passage_region_report())),
         ("iterated_relation_closure", _records(_iterated_relation_report())),
         ("selfauthored_motif_guided", _records(_motif_guided_report())),
+        ("typed_morphology_path", _records(_morphology_path_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
@@ -271,12 +289,25 @@ def build_pool(
                 rejected["verification"] += 1
                 continue
             proof_graph_certificate = certify_proof_graph(problem.get("proof_graph"))
+            morphology_path = problem.get("morphology_path")
+            lift = problem.get("lift_certificate") or {}
+            morphology_certificate = certify_morphology_path(
+                morphology_path,
+                morphism_chain=lift.get("morphism_chain"),
+            )
+            if morphology_path and not morphology_certificate["valid"]:
+                rejected["invalid_morphology_path"] += 1
+                continue
             # A scalar passed from one unrelated block to another is not a hard
             # mathematical interaction. Keep it out of the deployed pool until
             # the candidate carries a DAG where independent constraints merge.
-            if source == "closure_composition" and not proof_graph_certificate["interaction_verified"]:
-                rejected["non_interacting_composition"] += 1
-                continue
+            if source == "closure_composition":
+                if not morphology_certificate["valid"]:
+                    rejected["composition_without_morphology_path"] += 1
+                    continue
+                if not proof_graph_certificate["interaction_verified"]:
+                    rejected["non_interacting_composition"] += 1
+                    continue
             certificate = certify_entrance_scope(problem)
             if certificate is None:
                 rejected["scope_lowering"] += 1
@@ -318,6 +349,8 @@ def build_pool(
             record["difficulty_score"] = score
             record["quality_annotations"] = annotations
             record["proof_graph_certificate"] = proof_graph_certificate
+            if morphology_path:
+                record["morphology_certificate"] = morphology_certificate
             record["research_tier"] = (
                 "interaction_verified"
                 if proof_graph_certificate["interaction_verified"]
@@ -379,6 +412,9 @@ def build_pool(
             "source_counts": dict(source_counts),
             "rejected": dict(rejected),
             "quality_flags": dict(quality_flags),
+            "disabled_generators": {
+                "closure_composition": "scalar_bridge_bypasses_morphology_graph",
+            },
         },
         "problems": problems,
     }

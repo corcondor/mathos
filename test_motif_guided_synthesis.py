@@ -22,6 +22,9 @@ class MotifGuidedSynthesisTest(unittest.TestCase):
         self.assertTrue(problem["verification"]["semantic_chain_check"]["passed"])
         self.assertEqual(problem["verification"]["semantic_chain_check"]["missing"], [])
         self.assertTrue(certify_proof_graph(problem["proof_graph"])["interaction_verified"])
+        self.assertTrue(problem["morphology_certificate"]["valid"])
+        self.assertTrue(problem["morphology_certificate"]["morphism_chain_aligned"])
+        self.assertEqual(problem["morphology_certificate"]["edge_count"], 5)
         self.assertIn(r"\[", problem["statement_tex"])
         self.assertNotIn("\n[\n", problem["statement_tex"])
 

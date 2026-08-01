@@ -5,13 +5,13 @@
 
 ## 結果
 
-- 検証済み構造: **138**
-- 構造族: **136**
-- 幾何・代数・複素数系: **98**
+- 検証済み構造: **139**
+- 構造族: **137**
+- 幾何・代数・複素数系: **99**
 - 高校の語彙へ書き換えた問題: **4**
 - 同一構造の数値変種として除外: **82**（生成時点で潰しているため通常は 0）
 - 高校の語彙へ還元できず除外: **10**
-- 制約が合流しない2段合成として除外: **427**
+- 制約が合流しない2段合成として除外: **0**
 - 旧難易度8.4未満（注釈のみ・除外しない）: **171**
 - 射が3個未満（注釈のみ・除外しない）: **21**
 
@@ -90,6 +90,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `complex_geometry` | `traceback.regular_polygon.sum_sq_pairwise` | `regular_polygon -> vector_addition -> roots_of_unity -> distance_formula -> sum_of_series` |
 | `complex_geometry` | `traceback.regular_polygon.vertex_distance_product` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula` |
 | `complex_geometry_combinatorics` | `relation.regular_polygon.distance_product_vs_diagonals` | `roots_of_unity -> polynomial_factorization -> limit -> distance_formula -> counting -> combination -> simultaneous_equations -> algebraic_identity -> inequality` |
+| `complex_geometry_combinatorics_probability` | `morphology.cyclic_configuration_character_count` | `regular_polygon -> roots_of_unity -> complex_plane -> symmetry -> congruence -> periodicity -> sum_of_series -> polynomial_expansion -> counting -> combination -> probability -> expectation` |
 | `conic_geometry` | `traceback.ellipse_tangent.center_to_polar_dist_sq` | `ellipse -> line_equation -> tangent_line -> coordinate_geometry -> simultaneous_equations` |
 | `conic_geometry` | `traceback.ellipse_tangent.chord_length_sq` | `ellipse -> tangent_line -> differentiation -> line_equation -> distance_formula` |
 | `conic_geometry` | `traceback.ellipse_tangent.chord_midpoint_x` | `ellipse -> tangent_line -> differentiation -> midpoint -> locus -> parameter_elimination` |
@@ -167,7 +168,7 @@ AUC 0.7 以上で再較正されるまでは配信可否に使わない。
 | `probability` | `traceback.dice_sum.prob_sum_divisible_by_3` | `probability -> polynomial_expansion -> counting -> roots_of_unity -> sum_of_series -> complex_plane` |
 | `probability` | `traceback.dice_sum.variance_times_12` | `probability -> polynomial_expansion -> counting -> variance -> expectation` |
 | `probability` | `traceback.dice_sum.ways_for_modal_sum` | `probability -> polynomial_expansion -> counting -> combination` |
-| `probability_algebra_analysis` | `motif.quadratic_root_lattice_limit` | `counting -> probability -> quadratic_discriminant -> coordinate_geometry -> limit -> definite_integral -> area_integral -> quadratic_equation -> algebraic_identity -> sum_of_series` |
+| `probability_algebra_analysis` | `motif.quadratic_root_lattice_limit` | `counting -> probability -> integer_arithmetic -> quadratic_discriminant -> inequality -> coordinate_geometry -> limit -> definite_integral -> area_integral -> quadratic_equation -> algebraic_identity -> sum_of_series` |
 | `probability_linear_algebra_number_theory` | `ultradeep.gambler_absorption_variance_divisor_count` | `counting -> recurrence -> recurrence_probability -> simultaneous_equations -> probability -> expectation -> conditional_probability -> variance -> integer_arithmetic -> algebraic_identity -> prime_factorization -> divisor_counting` |
 | `projective_geometry` | `ultradeep.geometry_ellipse_tangent_pair_locus` | `ellipse -> trigonometric_identity -> complex_plane -> parameter_elimination -> symmetry -> tangent_line -> line_equation -> simultaneous_equations -> de_moivre -> coordinate_geometry -> locus` |
 | `real_analysis` | `analysis.boundary_layer_integral_limit` | `definite_integral -> area_integral -> algebraic_identity -> limit -> inequality` |
