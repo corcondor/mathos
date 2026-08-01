@@ -5,17 +5,20 @@
 
 ## スナップショット
 
-- 生成日時: `2026-08-01 19:11:08 +0000`
-- 検証済み問題インスタンス: **97問**
-- 構造族: **94族**
-- 深層族: **15問 / 15族**
-- うち10射以上の超深層族: **10問 / 10族**
+- 生成日時: `2026-08-01 19:14:37 +0000`
+- 検証済み問題インスタンス: **102問**
+- 構造族: **99族**
+- 深層族: **20問 / 20族**
+- うち10射以上の超深層族: **15問 / 15族**
 - 世界コーパス: **未記録問**
 
 | 難易度帯 | 問題数 |
 |---|---:|
-| `A` | 96 |
-| `D_textbook` | 1 |
+| `A` | 31 |
+| `A_olympiad` | 1 |
+| `B_hard_university` | 10 |
+| `C_standard_university` | 26 |
+| `D_textbook` | 34 |
 
 ここで問題インスタンス数は、同じ構造族のパラメータ違いを含む。
 創造性・構造多様性はインスタンス数ではなく構造族数と射列で評価する。
@@ -44,10 +47,10 @@
 
 | ゲート | 通過 |
 |---|---:|
-| backend計算 | 97/97 |
-| 独立検証 | 97/97 |
-| LiftCertificate型検査 | 97/97 |
-| コーパス新規性 | 97/97 |
+| backend計算 | 102/102 |
+| 独立検証 | 102/102 |
+| LiftCertificate型検査 | 102/102 |
+| コーパス新規性 | 102/102 |
 
 ## 深層族の生成例
 
@@ -140,10 +143,10 @@
 
 ### `deep.tangent_iteration_growth`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `B_hard_university` / score `11.00`
 - backend: `symbolic_intersection+iteration+limit`
 - 独立検証: `tangent_iteration_ratio_then_log_limit`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.1475`
 - 射: `CubicCurve → TangentLine → Reintersection → RootSumRelation → GeometricIteration → GeneralTerm → GrowthRate → LogarithmicLimit`
 
 **問題**
@@ -161,10 +164,10 @@
 
 ### `ultradeep.cubic_root_triangle_discriminant_divisor_count`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `B_hard_university` / score `13.82`
 - backend: `cubic_discriminant+vandermonde_area+numeric_roots`
 - 独立検証: `symbolic_discriminant_identity_vs_numeric_root_triangle_area`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.1361`
 - 射: `CubicPolynomial → ThreeRealRootSet → ParabolaEmbedding → TriangleConstruction → VandermondeDeterminant → AreaSquare → PolynomialDiscriminant → IntegerNormalization → PrimeFactorization → DivisorCount → ArithmeticObservation`
 
 **問題**
@@ -182,10 +185,10 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 
 ### `ultradeep.cyclotomic_distance_norm_divisor_count`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `A_olympiad` / score `14.87`
 - backend: `cyclotomic_polynomial+algebraic_norm+numeric_product`
 - 独立検証: `cyclotomic_evaluation_vs_numeric_primitive_root_product`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.1111`
 - 射: `RootOfUnity → CoprimeIndexFilter → PrimitiveRootSet → DistanceMultiset → DistanceProduct → CyclotomicPolynomial → PolynomialEvaluation → AlgebraicNorm → IntegerInvariant → PrimeFactorization → DivisorCount`
 
 **問題**
@@ -224,10 +227,10 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 
 ### `ultradeep.geometry_astroid_envelope_area`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `B_hard_university` / score `8.86`
 - backend: `line_envelope+stationarity+numeric_shoelace`
 - 独立検証: `symbolic_envelope_conditions_vs_numeric_shoelace`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.123`
 - 射: `CircleParameter → AxisEndpointPair → JoiningLine → LineFamily → EnvelopeStationarity → ParameterElimination → AstroidIdentification → ClosedCurveOrientation → GreenAreaMorphism → AreaObservation`
 
 **問題**
@@ -240,6 +243,27 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 <summary>検証済み解法記録</summary>
 
 直線族を \(F=\frac{x}{2\cos\theta}+\frac{y}{2\sin\theta}-1=0\) とする。\(F=F_\theta=0\) から \(x=2\cos^3\theta,\ y=2\sin^3\theta\)。したがって包絡線はアステロイドであり，Greenの公式より \(\frac12\oint(x\,dy-y\,dx)=\frac{3 \pi}{2}\)。
+
+</details>
+
+### `ultradeep.geometry_convex_polygon_disk_sweep_area`
+
+- 難易度: `D_textbook` / score `5.58`
+- backend: `minkowski_sum+parallel_body+numeric_hull`
+- 独立検証: `polygon_parallel_body_decomposition_vs_sampled_minkowski_hull`
+- 最大表層類似度: `0.0775`
+- 射: `ConvexPolygon → MovingCenter → DiskTranslation → PassageUnion → MinkowskiAddition → ParallelBody → EdgeStripDecomposition → ExteriorAngleSum → SectorAreaMerge → AreaObservation`
+
+**問題**
+
+面積 \(A\)、周長 \(L\) の凸多角形 \(P\) 上を、半径 \(r\) の円板の中心が自由に動く。この円板が通過する領域の面積を \(A,L,r\) で表せ。
+
+**答**: A+rL+\pi r^2
+
+<details>
+<summary>検証済み解法記録</summary>
+
+通過領域は多角形 \(P\) と半径 \(r\) の円板とのMinkowski和である。元の \(P\) に加え、各辺の外側に面積 \(r\ell_i\) の長方形ができる。各頂点にできる扇形の中心角の和は \(2\pi\) なので、その面積の和は\(\pi r^2\)。したがって \(A+r\sum_i\ell_i+\pi r^2=A+rL+\pi r^2\) である。
 
 </details>
 
@@ -266,10 +290,10 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 
 ### `ultradeep.geometry_orthocenter_locus_area`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `B_hard_university` / score `12.08`
 - backend: `orthocenter+linear_image+numeric_shoelace`
 - 独立検証: `altitude_coordinate_formula_vs_numeric_locus_shoelace`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.0882`
 - 射: `EllipseObject → MajorAxisVertexPair → MovingTriangle → AltitudeConstraint → OrthocenterIntersection → CoordinateSolve → LinearImageRecognition → ImageEllipse → DeterminantAreaScaling → AreaObservation`
 
 **問題**
@@ -287,10 +311,10 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 
 ### `ultradeep.geometry_parabola_normal_envelope`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `D_textbook` / score `2.19`
 - backend: `normal_family+resultant+evolute`
 - 独立検証: `symbolic_resultant_identity_vs_parametric_substitution`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.0818`
 - 射: `ParabolaObject → TangentVector → NormalDirection → NormalLine → NormalLineFamily → EnvelopeStationarity → StationaryParameterSolve → EvoluteParametrization → ResultantElimination → ImplicitCurveObservation`
 
 **問題**
@@ -308,10 +332,10 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 
 ### `ultradeep.geometry_regular_polygon_minkowski_perimeter`
 
-- 難易度: `A` / score `0.00`
+- 難易度: `C_standard_university` / score `7.41`
 - backend: `minkowski_sum+support_faces+convex_hull`
 - 独立検証: `regular_polygon_formula_vs_all_vertex_sums_convex_hull`
-- 最大表層類似度: `0.0`
+- 最大表層類似度: `0.0847`
 - 射: `RootOfUnityChart → RegularPolygon → HalfStepRotation → SecondRegularPolygon → MinkowskiAddition → SupportDirectionMerge → VertexSumHull → RegularDoublePolygon → EdgeLengthObservation → PerimeterObservation`
 
 **問題**
@@ -324,6 +348,27 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 <summary>検証済み解法記録</summary>
 
 両多角形の辺の法線方向は交互に現れるため，\(P+Q\) は正 \(6\)角形になる。隣接頂点間の距離は \(2\cdot 1\sin\frac{\pi}{3}\)。したがって周長は \(6\cdot2\cdot 1\sin\frac{\pi}{3}=6 \sqrt{3}\)。
+
+</details>
+
+### `ultradeep.geometry_triangle_displacement_locus_area`
+
+- 難易度: `B_hard_university` / score `9.47`
+- backend: `difference_body+convex_hull+shoelace`
+- 独立検証: `symbolic_difference_body_identity_vs_numeric_convex_hull`
+- 最大表層類似度: `0.0752`
+- 射: `TriangleConfiguration → IndependentPointPair → DisplacementMap → DifferenceBody → VertexDifferenceSet → ConvexHull → CentralSymmetry → HexagonRecognition → AffineNormalization → AreaObservation`
+
+**問題**
+
+面積が \(S\) である三角形 \(T\) の内部または周上を2点 \(P,Q\) が独立に動く。ベクトル \(\overrightarrow{PQ}\) を、その成分を座標とする平面上の点とみなすとき、この点の通過領域の面積を \(S\) で表せ。
+
+**答**: 6S
+
+<details>
+<summary>検証済み解法記録</summary>
+
+三角形を \(A=(0,0),B=\mathbf b,C=\mathbf c\) とおく。変位全体は \(T-T=\{Q-P\mid P,Q\in T\}\) であり、その頂点は \(\pm\mathbf b,\pm\mathbf c,\pm(\mathbf b-\mathbf c)\) の6点である。この中心対称六角形を3本の対角線で分けるか靴紐公式を用いると、面積は \(6[ABC]=6S\) となる。
 
 </details>
 
@@ -366,6 +411,69 @@ Vandermonde 行列式から \(4S^2\) は三次式の判別式に等しい。判�
 <summary>検証済み解法記録</summary>
 
 Paley グラフの隣接行列の非自明固有値は \(\frac{-1\pm\sqrt{5}}2\)（各重複度 \(2\)）。次数 \(2\) のラプラシアンの非零固有値の積を Kirchhoff の定理で\(5\) で割ると \(\tau=5^{1}\left(\frac{5-1}4\right)^{2}=5\)。したがって約数の個数は \(2\)。
+
+</details>
+
+### `ultradeep.spatial_cube_ball_sweep_volume`
+
+- 難易度: `D_textbook` / score `5.14`
+- backend: `spatial_minkowski_sum+boundary_strata+sampled_convex_hull_3d`
+- 独立検証: `boundary_stratum_decomposition_vs_sampled_sphere_minkowski_hull`
+- 最大表層類似度: `0.0687`
+- 射: `CubeConfiguration → MovingSphereCenter → SpatialPassageUnion → ThreeDimensionalMinkowskiAddition → FaceEdgeVertexStratification → FacePrismContribution → QuarterCylinderEdgeContribution → SphericalOctantVertexContribution → DisjointBoundaryLayerMerge → VolumeObservation`
+
+**問題**
+
+一辺 \(a\) の立方体の内部または表面を、半径 \(r\) の球の中心が自由に動く。この球が通過する空間領域の体積を求めよ。
+
+**答**: a^3+6a^2r+3\pi ar^2+\frac{4\pi}{3}r^3
+
+<details>
+<summary>検証済み解法記録</summary>
+
+通過領域は立方体と半径 \(r\) の球とのMinkowski和である。元の立方体に、6面から生じる厚さ \(r\) の角柱、12辺から生じる四分円柱、8頂点から生じる球の八分体を加える。それぞれの体積は \(a^3,6a^2r,12\cdot\frac14\pi r^2a,8\cdot\frac18\frac43\pi r^3\)。合計して答を得る。
+
+</details>
+
+### `ultradeep.spatial_cube_diagonal_section_maximum`
+
+- 難易度: `D_textbook` / score `8.72`
+- backend: `slice_volume_derivative+inclusion_exclusion+numeric_section_hull`
+- 独立検証: `inclusion_exclusion_derivative_vs_edge_intersection_polygon_area`
+- 最大表層類似度: `0.0544`
+- 射: `CubeConfiguration → BodyDiagonalDirection → ParallelPlaneFamily → SublevelSolid → SliceVolumeCorrespondence → CoordinateSimplexVolume → ThreeCornerExclusion → InclusionExclusion → PiecewiseQuadraticSectionArea → CentralSymmetryReduction → ExtremumObservation`
+
+**問題**
+
+一辺 \(a\) の立方体を、3辺を座標軸に平行になるように \(0\le x,y,z\le a\) と置く。平面 \(x+y+z=t\) で切った断面の面積が最大となる \(t\) と、その最大面積を求めよ。
+
+**答**: t=\frac{3a}{2},\qquad \frac{3\sqrt3}{4}a^2
+
+<details>
+<summary>検証済み解法記録</summary>
+
+\(F(t)\) を立方体内で \(x+y+z\le t\) を満たす部分の体積とする。断面に垂直な移動距離は \(dt/\sqrt3\) なので断面積は \(\sqrt3F'(t)\)。対称性から \(0\le t\le3a/2\) だけ見ればよい。\(0\le t\le a\) では \(F=t^3/6\)、\(a\le t\le3a/2\) では包除原理により \(F=\{t^3-3(t-a)^3\}/6\)。後者の断面積は \(\frac{\sqrt3}{2}\{t^2-3(t-a)^2\}\) で、\(t=3a/2\) まで増加する。よって中央の正六角形断面で最大値 \(3\sqrt3a^2/4\) をとる。
+
+</details>
+
+### `ultradeep.spatial_tetrahedron_displacement_locus_volume`
+
+- 難易度: `D_textbook` / score `12.08`
+- backend: `difference_body+orthant_decomposition+numeric_convex_hull_3d`
+- 独立検証: `orthant_simplex_volume_identity_vs_scipy_convex_hull_3d`
+- 最大表層類似度: `0.0364`
+- 射: `TetrahedronConfiguration → IndependentPointPair → SpatialDisplacementMap → ThreeDimensionalDifferenceBody → AffineSimplexNormalization → CoordinateSignPartition → PositiveNegativeMassConstraints → OrthantSimplexDecomposition → BinomialVolumeMerge → AffineVolumeScaling → VolumeObservation`
+
+**問題**
+
+体積が \(V\) である四面体 \(T\) の内部または表面を2点 \(P,Q\) が独立に動く。ベクトル \(\overrightarrow{PQ}\) の3成分を空間内の点の座標とみなすとき、この点の通過領域の体積を \(V\) で表せ。
+
+**答**: 20V
+
+<details>
+<summary>検証済み解法記録</summary>
+
+アフィン変換で \(T=\{(x,y,z)\mid x,y,z\ge0,\ x+y+z\le1\}\) としてよい。変位 \(u=Q-P\) 全体は、正の成分の和と負の成分の絶対値の和がともに1以下となる領域である。符号が正の座標を \(k\) 個指定した部分の体積は \(1/(k!(3-k)!)\)。したがって全体の体積は \(\sum_{k=0}^3\binom3k/(k!(3-k)!)=10/3\)。標準四面体の体積は \(1/6\) なので比は20であり、一般の四面体でもアフィン変換で同じ比が保たれる。よって答は \(20V\)。
 
 </details>
 
