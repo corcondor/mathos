@@ -244,6 +244,7 @@ def add_core_sorts(sort_map: dict[str, SemanticSort]) -> None:
         SemanticSort("Event", "primitive", theory="transition_system"),
         SemanticSort("Number", "primitive", theory="arithmetic"),
         SemanticSort("Real", "primitive", parent="Number", theory="real_closed_fields"),
+        SemanticSort("Complex", "primitive", parent="Number", theory="complex_algebra"),
         SemanticSort("Integer", "primitive", parent="Number", theory="integer_arithmetic"),
         SemanticSort("Natural", "subsort", parent="Integer", theory="integer_arithmetic"),
         SemanticSort("Bool", "primitive", theory="logic"),
@@ -614,11 +615,212 @@ def lift_math_morphism_library(
     lift_state_event_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_probability_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_algebra_morphisms(normalized, object_map, morphisms, constraints, queries)
+    lift_representation_change_morphisms(normalized, object_map, morphisms)
     lift_growth_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_combinatorics_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_function_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_vector_geometry_morphisms(normalized, object_map, morphisms, constraints, queries)
     lift_calculus_morphisms(normalized, object_map, morphisms, constraints, queries)
+
+
+def lift_representation_change_morphisms(
+    text: str,
+    object_map: dict[str, SemanticObject],
+    morphisms: list[SemanticMorphism],
+) -> None:
+    """Expose proof-level changes of representation as reusable typed arrows."""
+    specs = [
+        (
+            "PolynomialTranslation",
+            ("x=y-", "x = y -", "x=y+", "x = y +", "平行移動"),
+            ["Polynomial", "Real"],
+            "Polynomial",
+            "coordinate_change",
+            "p(x) -> p(y-h)",
+            "translation is an automorphism of the polynomial ring",
+        ),
+        (
+            "Differentiation",
+            ("導関数", "微分", "'(x)", "'(y)", "' (x)", "' (y)"),
+            ["Function"],
+            "Function",
+            "functorial_operator",
+            "f -> D(f)",
+            "D is linear and satisfies the Leibniz rule",
+        ),
+        (
+            "MonotonicityTest",
+            ("単調増加", "単調減少", "monotonic", "increasing", "decreasing"),
+            ["Function", "Region1"],
+            "Prop",
+            "order_certificate",
+            "Sign(D(f)) -> Monotone(f)",
+            "a derivative with fixed sign certifies monotonicity on an interval",
+        ),
+        (
+            "Discriminant",
+            ("判別式", "discriminant"),
+            ["Polynomial"],
+            "Real",
+            "invariant",
+            "p -> discriminant(p)",
+            "the discriminant is invariant under root permutation",
+        ),
+        (
+            "CoefficientComparison",
+            ("係数比較", "係数を比較", "comparing coefficients", "coefficient comparison"),
+            ["Polynomial", "Polynomial"],
+            "Prop",
+            "extensionality",
+            "p=q -> coefficients(p)=coefficients(q)",
+            "polynomials are equal iff all corresponding coefficients are equal",
+        ),
+        (
+            "ComplexConjugation",
+            ("共役", "conjugate"),
+            ["Complex"],
+            "Complex",
+            "involution",
+            "z -> conjugate(z)",
+            "conjugate(conjugate(z)) = z",
+        ),
+        (
+            "CaseSplit",
+            ("場合分け", "case 1", "case 2", "(i)", "(ii)"),
+            ["Prop"],
+            "Proof",
+            "logical_eliminator",
+            "P or not P -> proof by cases",
+            "case branches must be exhaustive and each branch prove the goal",
+        ),
+    ]
+    for name, markers, domain, codomain, kind, expression, law in specs:
+        if not any(marker in text for marker in markers):
+            continue
+        morphisms.append(
+            SemanticMorphism(
+                name=name,
+                domain=domain,
+                codomain=codomain,
+                kind=kind,
+                expression=expression,
+                law=law,
+                source="math_morphism_library.representation_change",
+            )
+        )
+
+    derived_specs = [
+        (
+            "UniformLatticePair",
+            bool(
+                re.search(r"\([a-z],[a-z]\).*?\\in.*?\\{1,2,\\ldots,[a-z]\\}\^2", text, re.DOTALL)
+                or ("格子点" in text and "1,2,\\ldots" in text)
+            ),
+            ["Natural"],
+            "Object",
+            "finite_sampling",
+            "n -> {(a,b) | 1<=a,b<=n}",
+            "the finite coefficient grid carries the uniform counting measure",
+        ),
+        (
+            "QuadraticDiscriminant",
+            bool(
+                ("判別式" in text or "discriminant" in text or "実数解" in text)
+                and re.search(r"[a-z]\^2.*?[a-z].*?=", text, re.DOTALL)
+            ),
+            ["Polynomial"],
+            "Real",
+            "invariant",
+            "p -> discriminant(p)",
+            "a real quadratic has a real root iff its discriminant is nonnegative",
+        ),
+        (
+            "LatticeRescaling",
+            bool(
+                "格子点" in text
+                and len(re.findall(r"[a-z]\s*=\s*[a-z]\s*/\s*[a-z]", text)) >= 2
+            ),
+            ["Object"],
+            "Point2",
+            "coordinate_change",
+            "(a,b) -> (a/n,b/n)",
+            "uniform lattice rescaling sends normalized sums to Riemann sums",
+        ),
+        (
+            "RegionLimit",
+            "リーマン和" in text or "riemann sum" in text,
+            ["Object"],
+            "Region2",
+            "limit_passage",
+            "finite grids -> limiting region",
+            "normalized lattice sums converge to integrals when the boundary has area zero",
+        ),
+        (
+            "AreaObservation",
+            bool(("領域" in text or "region" in text) and ("\\int" in text or "\\iint" in text)),
+            ["Region2"],
+            "Real",
+            "measure",
+            "D -> area(D)",
+            "area is the integral of the indicator of the region",
+        ),
+        (
+            "RootDifference",
+            "二解の差" in text or "difference of the two roots" in text,
+            ["Polynomial"],
+            "Real",
+            "root_observable",
+            "p -> |alpha-beta|",
+            "for a monic quadratic, the absolute root difference is the square root of the discriminant",
+        ),
+        (
+            "RestrictedAverage",
+            bool(
+                ("平均" in text or "average" in text or re.search(r"\bm_[a-z0-9]+", text))
+                and "\\sum" in text
+            ),
+            ["Object", "Function"],
+            "Real",
+            "finite_observable",
+            "(S,f) -> sum_{x in S} f(x)/|S|",
+            "restricted average is the normalized finite sum over the admissible set",
+        ),
+    ]
+    for name, detected, domain, codomain, kind, expression, law in derived_specs:
+        if not detected:
+            continue
+        morphisms.append(
+            SemanticMorphism(
+                name=name,
+                domain=domain,
+                codomain=codomain,
+                kind=kind,
+                expression=expression,
+                law=law,
+                source="math_morphism_library.representation_change",
+            )
+        )
+        if name == "UniformLatticePair":
+            object_map.setdefault(
+                "coefficient_grid",
+                SemanticObject("coefficient_grid", "Object", "finite_grid", source="math_morphism_library.representation_change"),
+            )
+        if name in {"QuadraticDiscriminant", "RootDifference"}:
+            object_map.setdefault(
+                "poly",
+                SemanticObject("poly", "Polynomial", "quadratic_family", source="math_morphism_library.representation_change"),
+            )
+        if name in {"RegionLimit", "AreaObservation"}:
+            object_map.setdefault(
+                "D",
+                SemanticObject("D", "Region2", "limiting_region", source="math_morphism_library.representation_change"),
+            )
+
+    if any(item.name in {"PolynomialTranslation", "Discriminant", "CoefficientComparison"} for item in morphisms):
+        object_map.setdefault(
+            "poly",
+            SemanticObject("poly", "Polynomial", "representation_carrier", source="math_morphism_library.representation_change"),
+        )
 
 
 def lift_sequence_morphisms(
@@ -2058,6 +2260,8 @@ def role_to_morphism_kind(role: str) -> str:
 def infer_theory_from_sort(name: str) -> str | None:
     if name in {"Real", "Point2", "Curve2", "Region2"}:
         return "real_closed_fields"
+    if name == "Complex" or "Complex" in name:
+        return "complex_algebra"
     if name in {"Integer", "Natural"}:
         return "integer_arithmetic"
     if name in {"Probability", "ProbabilitySpace"}:

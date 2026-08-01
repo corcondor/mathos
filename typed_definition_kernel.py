@@ -68,6 +68,7 @@ class TypedDefinitionIR:
 CORE_SORTS: tuple[SortSpec, ...] = (
     SortSpec("Bool", "primitive", "truth values"),
     SortSpec("Real", "primitive", "complete ordered field"),
+    SortSpec("Complex", "primitive", "algebraic closure of Real"),
     SortSpec("Integer", "primitive", "discrete ordered ring"),
     SortSpec("Natural", "subsort", "{n in Integer | n >= 0}"),
     SortSpec("Point2", "alias", "Vector(Real, 2)"),
@@ -799,6 +800,8 @@ def infer_typed_declarations(structure: StructuralIR, definitions: list[Definiti
     declarations: list[dict[str, str]] = []
     curve_expr = extract_curve_expression(structure)
     polygon_n = infer_polygon_arity(structure.normalized_text)
+    function_symbols = infer_function_symbols(structure.source_text, set(structure.variables))
+    complex_symbols = infer_complex_symbols(structure.source_text, set(structure.variables))
     if curve_expr:
         declarations.append({"name": "C", "type": "Curve2"})
     if polygon_n is not None:
@@ -811,10 +814,51 @@ def infer_typed_declarations(structure: StructuralIR, definitions: list[Definiti
         if variable in {item["name"] for item in declarations}:
             continue
         var_type = "Real"
-        if any(variable in constraint.variables and constraint.kind in {"integer", "positive_integer", "nonnegative_integer"} for constraint in structure.constraints):
+        if variable in function_symbols:
+            var_type = "Function(Real, Real)"
+        elif variable in complex_symbols:
+            var_type = complex_symbols[variable]
+        elif any(variable in constraint.variables and constraint.kind in {"integer", "positive_integer", "nonnegative_integer"} for constraint in structure.constraints):
             var_type = "Integer"
         declarations.append({"name": variable, "type": var_type})
     return declarations
+
+
+KNOWN_FUNCTION_NAMES = {
+    "sin", "cos", "tan", "cot", "sec", "csc", "log", "ln", "exp", "sqrt",
+    "arg", "max", "min", "lim", "det", "gcd", "lcm", "Re", "Im",
+}
+
+
+def infer_function_symbols(source_text: str, variables: set[str]) -> set[str]:
+    """Infer first-class functions from application syntax, independently of phrasing."""
+    symbols: set[str] = set()
+    pattern = re.compile(r"(?<![\\A-Za-z0-9_])([A-Za-z][A-Za-z0-9_]*)\s*(?:\\left\s*)?\(")
+    for match in pattern.finditer(source_text):
+        symbol = match.group(1)
+        if symbol in variables and symbol not in KNOWN_FUNCTION_NAMES:
+            symbols.add(symbol)
+    return symbols
+
+
+def infer_complex_symbols(source_text: str, variables: set[str]) -> dict[str, str]:
+    """Type definitions containing the imaginary unit in an explicit complex context."""
+    if not any(marker in source_text.lower() for marker in ("複素数", "複素平面", "complex")):
+        return {}
+
+    inferred: dict[str, str] = {}
+    assignment = re.compile(
+        r"(?P<lhs>[A-Za-z](?:_\{?[A-Za-z0-9]+\}?)?)\s*=\s*(?P<rhs>[^$\\\r\n]+)"
+    )
+    imaginary_unit = re.compile(r"(?<![A-Za-z])i(?![A-Za-z])")
+    for match in assignment.finditer(source_text):
+        if not imaginary_unit.search(match.group("rhs")):
+            continue
+        symbol = match.group("lhs").replace("{", "").replace("}", "")
+        if symbol not in variables:
+            continue
+        inferred[symbol] = "Sequence(Complex)" if "_" in symbol else "Complex"
+    return inferred
 
 
 def infer_terms(structure: StructuralIR, definitions: list[DefinitionEntry]) -> list[dict[str, Any]]:

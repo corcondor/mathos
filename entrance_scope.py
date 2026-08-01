@@ -437,6 +437,12 @@ MORPHISM_LOWERING: dict[str, tuple[str, ...]] = {
     "DivisorIncidence": ("divisibility", "counting"),
     "MultiplicativeAssembly": ("prime_factorization", "divisor_counting"),
     "Discriminant": ("quadratic_discriminant",),
+    "QuadraticDiscriminant": ("quadratic_discriminant",),
+    "UniformLatticePair": ("counting", "probability"),
+    "LatticeRescaling": ("coordinate_geometry", "limit"),
+    "RegionLimit": ("limit", "definite_integral"),
+    "RootDifference": ("quadratic_equation", "algebraic_identity"),
+    "RestrictedAverage": ("counting", "sum_of_series", "limit"),
     "ZeroIndicators": ("counting",),
     # --- 高校の語彙に還元できない射（範囲外）---
     # 行列式・スペクトル・フーリエは、答案として高校の一手に分解できない。

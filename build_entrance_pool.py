@@ -18,10 +18,12 @@ try:
     from math_os_prototype.geometry_fusion_synthesis import (
         synthesize as synthesize_geometry,
     )
+    from math_os_prototype.proof_graph import certify_proof_graph
 except ImportError:  # pragma: no cover - direct script execution
     from continuous_problem_generation import build_batch_report
     from entrance_scope import certify_entrance_scope
     from geometry_fusion_synthesis import synthesize as synthesize_geometry
+    from proof_graph import certify_proof_graph
 
 
 HERE = Path(__file__).resolve().parent
@@ -158,6 +160,21 @@ def _iterated_relation_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _motif_guided_report() -> dict[str, Any]:
+    """自作解答から抽出した証明モチーフを分岐・合流DAGとして再構成する。"""
+    try:
+        from math_os_prototype.motif_guided_synthesis import synthesize
+    except ImportError:  # pragma: no cover
+        try:
+            from motif_guided_synthesis import synthesize
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize()
+    except Exception:
+        return {"problems": []}
+
+
 def _novelty_checker():
     """過去問コーパスに対して実際に類似度を計算する検査を返す。
 
@@ -241,6 +258,7 @@ def build_pool(
         ("relation_closure", _records(_relation_report())),
         ("passage_region_closure", _records(_passage_region_report())),
         ("iterated_relation_closure", _records(_iterated_relation_report())),
+        ("selfauthored_motif_guided", _records(_motif_guided_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
@@ -251,6 +269,13 @@ def build_pool(
         for problem in records:
             if not _verified(problem):
                 rejected["verification"] += 1
+                continue
+            proof_graph_certificate = certify_proof_graph(problem.get("proof_graph"))
+            # A scalar passed from one unrelated block to another is not a hard
+            # mathematical interaction. Keep it out of the deployed pool until
+            # the candidate carries a DAG where independent constraints merge.
+            if source == "closure_composition" and not proof_graph_certificate["interaction_verified"]:
+                rejected["non_interacting_composition"] += 1
                 continue
             certificate = certify_entrance_scope(problem)
             if certificate is None:
@@ -292,6 +317,12 @@ def build_pool(
             }
             record["difficulty_score"] = score
             record["quality_annotations"] = annotations
+            record["proof_graph_certificate"] = proof_graph_certificate
+            record["research_tier"] = (
+                "interaction_verified"
+                if proof_graph_certificate["interaction_verified"]
+                else "verified_standard"
+            )
             record["source_generator"] = source
             retained[key] = record
             source_counts[source] += 1
@@ -327,6 +358,10 @@ def build_pool(
             "numeric_variants_count_as_new": False,
             "difficulty_policy": (
                 "annotation_only_until_human_rating_auc_reaches_0.7"
+            ),
+            "hard_problem_policy": (
+                "proof DAG with converging constraints required; flat scalar "
+                "bridge compositions are excluded"
             ),
         },
         "summary": {
@@ -369,6 +404,8 @@ def render_report(report: dict[str, Any]) -> str:
         "（生成時点で潰しているため通常は 0）",
         f"- 高校の語彙へ還元できず除外: "
         f"**{summary['rejected'].get('scope_lowering', 0)}**",
+        f"- 制約が合流しない2段合成として除外: "
+        f"**{summary['rejected'].get('non_interacting_composition', 0)}**",
         f"- 旧難易度8.4未満（注釈のみ・除外しない）: "
         f"**{summary.get('quality_flags', {}).get('below_legacy_difficulty_threshold', 0)}**",
         f"- 射が3個未満（注釈のみ・除外しない）: "

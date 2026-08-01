@@ -491,6 +491,46 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertIsNotNone(ir.case_frames)
         self.assertIn("Satisfies", [frame["relation"] for frame in ir.case_frames["frames"]])
 
+    def test_typed_declarations_infer_function_application(self):
+        ir = compile_typed_definition_ir(
+            r"関数 $f(x),g(x)$ が $\int_0^1 f(x)g(x)dx=1$ を満たすとき一組求めよ。"
+        )
+        declarations = {item["name"]: item["type"] for item in ir.declarations}
+        self.assertEqual(declarations["f"], "Function(Real, Real)")
+        self.assertEqual(declarations["g"], "Function(Real, Real)")
+        self.assertEqual(declarations["x"], "Real")
+
+    def test_typed_declarations_infer_complex_sequence_from_definition(self):
+        text = r"$n$を正の整数とする。複素数平面上の点 $z_n=n+i$ を考える。"
+        ir = compile_typed_definition_ir(text)
+        declarations = {item["name"]: item["type"] for item in ir.declarations}
+        self.assertEqual(declarations["n"], "Integer")
+        self.assertEqual(declarations["z_n"], "Sequence(Complex)")
+
+        graph = compile_typed_semantic_graph(text, typed_definition_ir=ir.to_dict())
+        objects = {item.name: item.sort for item in graph.objects}
+        self.assertEqual(objects["z_n"], "Sequence(Complex)")
+        self.assertTrue(any(item.name == "Complex" for item in graph.sorts))
+
+    def test_proof_representation_changes_compile_as_typed_morphisms(self):
+        text = (
+            r"$x=y-a/3$ とおく。$g'(y)$ の符号から単調増加を示す。"
+            r"判別式を調べ、共役な根を得る。係数比較により条件を求める。"
+        )
+        graph = compile_typed_semantic_graph(text)
+        names = {item.name for item in graph.morphisms}
+        self.assertTrue(
+            {
+                "PolynomialTranslation",
+                "Differentiation",
+                "MonotonicityTest",
+                "Discriminant",
+                "ComplexConjugation",
+                "CoefficientComparison",
+            }
+            <= names
+        )
+
     def test_typed_definition_kernel_generalizes_regular_polygon(self):
         ir = compile_typed_definition_ir(
             r"$\text{曲線 }$y=x^3−2x"
