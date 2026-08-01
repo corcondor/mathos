@@ -41,6 +41,7 @@ LEGACY_MIN_MORPHISMS = 3
 LEGACY_MIN_DIFFICULTY = 8.4
 MINIMUM_GATING_AUC = 0.7
 OBSERVED_HUMAN_AUC = 0.086
+DELIVERY_TOPIC_EXCLUSIONS = frozenset({"dice_sum", "gambler_ruin"})
 
 # Atomic chart labels used by generated domain metadata. A domain that can be
 # segmented into two or more of these labels is a declared cross-domain
@@ -130,6 +131,43 @@ def _verified(problem: dict[str, Any]) -> bool:
         and lift.get("type_checked")
         and novelty.get("corpus_novel")
     )
+
+
+def _delivery_topic(problem: dict[str, Any]) -> str | None:
+    """Return an audience-curation topic without affecting mathematical IR."""
+    family = str(problem.get("family_id") or "")
+    if family.startswith("traceback.dice_sum."):
+        return "dice_sum"
+    parameters = problem.get("parameters") or {}
+    if str(parameters.get("construction") or "") == "dice_sum":
+        return "dice_sum"
+    method = str((problem.get("verification") or {}).get("method") or "")
+    if "gambler_ruin" in method or "gambler_absorption" in method:
+        return "gambler_ruin"
+    return None
+
+
+def _morphology_contract(
+    problem: dict[str, Any],
+) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
+    """Apply the path, ordered-chain, precondition, and proof-DAG contract."""
+    proof_certificate = certify_proof_graph(problem.get("proof_graph"))
+    path = problem.get("morphology_path")
+    lift = problem.get("lift_certificate") or {}
+    morphology_certificate = certify_morphology_path(
+        path,
+        morphism_chain=lift.get("morphism_chain"),
+        established_conditions=problem.get("morphology_conditions"),
+    )
+    if path and not morphology_certificate["valid"]:
+        return "invalid_morphology_path", morphology_certificate, proof_certificate
+    if path and not proof_certificate["interaction_verified"]:
+        return (
+            "morphology_without_interacting_proof",
+            morphology_certificate,
+            proof_certificate,
+        )
+    return None, morphology_certificate, proof_certificate
 
 
 def _records(payload: dict[str, Any]) -> Iterable[dict[str, Any]]:
@@ -251,6 +289,21 @@ def _morphology_path_report() -> dict[str, Any]:
         return {"problems": []}
 
 
+def _morphology_geometry_report() -> dict[str, Any]:
+    """Geometry candidates built by two distinct typed morphology paths."""
+    try:
+        from math_os_prototype.morphology_geometry_synthesis import synthesize
+    except ImportError:  # pragma: no cover
+        try:
+            from morphology_geometry_synthesis import synthesize
+        except ImportError:
+            return {"problems": []}
+    try:
+        return synthesize()
+    except Exception:
+        return {"problems": []}
+
+
 def _novelty_checker():
     """過去問コーパスに対して実際に類似度を計算する検査を返す。
 
@@ -336,6 +389,7 @@ def build_pool(
         ("iterated_relation_closure", _records(_iterated_relation_report())),
         ("selfauthored_motif_guided", _records(_motif_guided_report())),
         ("typed_morphology_path", _records(_morphology_path_report())),
+        ("typed_morphology_geometry", _records(_morphology_geometry_report())),
     )
     retained: dict[str, dict[str, Any]] = {}
     rejected = Counter()
@@ -344,18 +398,19 @@ def build_pool(
     novelty_check = _novelty_checker()
     for source, records in sources:
         for problem in records:
+            delivery_topic = _delivery_topic(problem)
+            if delivery_topic in DELIVERY_TOPIC_EXCLUSIONS:
+                rejected[f"delivery_topic:{delivery_topic}"] += 1
+                continue
             if not _verified(problem):
                 rejected["verification"] += 1
                 continue
-            proof_graph_certificate = certify_proof_graph(problem.get("proof_graph"))
             morphology_path = problem.get("morphology_path")
-            lift = problem.get("lift_certificate") or {}
-            morphology_certificate = certify_morphology_path(
-                morphology_path,
-                morphism_chain=lift.get("morphism_chain"),
+            morphology_reason, morphology_certificate, proof_graph_certificate = (
+                _morphology_contract(problem)
             )
-            if morphology_path and not morphology_certificate["valid"]:
-                rejected["invalid_morphology_path"] += 1
+            if morphology_reason:
+                rejected[morphology_reason] += 1
                 continue
             domain_components = _domain_components(str(problem.get("domain") or ""))
             if len(domain_components) >= 2 and not morphology_certificate["valid"]:
@@ -478,6 +533,7 @@ def build_pool(
             "quality_flags": dict(quality_flags),
             "disabled_generators": {
                 "closure_composition": "scalar_bridge_bypasses_morphology_graph",
+                "traceback_dice_sum": "audience_rejected_repetitive_construction",
             },
         },
         "problems": problems,
@@ -508,6 +564,10 @@ def render_report(report: dict[str, Any]) -> str:
         f"**{summary['rejected'].get('non_interacting_composition', 0)}**",
         f"- 複合分野なのに型付き経路がなく保留: "
         f"**{summary['rejected'].get('composite_domain_without_morphology_path', 0)}**",
+        f"- 経路はあるが条件が合流する証明DAGがなく保留: "
+        f"**{summary['rejected'].get('morphology_without_interacting_proof', 0)}**",
+        f"- 配信目的と合わず除外（サイコロ・ギャンブラー）: "
+        f"**{sum(value for key, value in summary['rejected'].items() if key.startswith('delivery_topic:'))}**",
         f"- 旧難易度8.4未満（注釈のみ・除外しない）: "
         f"**{summary.get('quality_flags', {}).get('below_legacy_difficulty_threshold', 0)}**",
         f"- 射が3個未満（注釈のみ・除外しない）: "

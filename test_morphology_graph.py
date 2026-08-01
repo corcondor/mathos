@@ -66,6 +66,29 @@ class MorphologyGraphTest(unittest.TestCase):
         self.assertFalse(certificate["valid"])
         self.assertEqual(certificate["reason"], "morphism_chain_misaligned")
 
+    def test_conditional_shortcut_requires_proved_conditions(self) -> None:
+        path = [
+            "SymmetricInvariant",
+            "AntipodalOrbitStructure",
+            "CombinatorialClass",
+        ]
+        rejected = certify_morphology_path(
+            path,
+            morphism_chain=["AntipodalFactorization", "CompatibilityClass"],
+        )
+        self.assertFalse(rejected["valid"])
+        self.assertEqual(rejected["reason"], "edge_precondition_unproved")
+        accepted = certify_morphology_path(
+            path,
+            morphism_chain=["AntipodalFactorization", "CompatibilityClass"],
+            established_conditions=[
+                "unit_roots",
+                "four_distinct_roots",
+                "vanishing_odd_coefficients",
+            ],
+        )
+        self.assertTrue(accepted["valid"])
+
 
 if __name__ == "__main__":
     unittest.main()

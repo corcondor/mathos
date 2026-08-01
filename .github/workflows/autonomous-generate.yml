@@ -59,7 +59,6 @@ jobs:
           - traceback_triangle_centers
           - traceback_hyperbola_asymptote
           - traceback_incircle_excircle
-          - traceback_dice_sum
           - traceback_parabola_focal_chord
           - traceback_cyclic_quadrilateral
     steps:
@@ -123,9 +122,11 @@ jobs:
           test_world_novelty_index
           test_difficulty_reference
           test_morphology_graph
+          test_morphology_geometry_synthesis
           test_morphology_path_synthesis
           test_motif_guided_synthesis
           test_pool_quality_policy
+          test_delivery_curation
           test_sync_supabase
 
       - uses: actions/download-artifact@v4

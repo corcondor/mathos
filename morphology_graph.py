@@ -27,6 +27,7 @@ class MorphologyEdge:
     target: str
     transport: tuple[str, ...]
     description: str
+    requires: tuple[str, ...] = ()
 
 
 def _node(name: str, theory: str, description: str) -> MorphologyNode:
@@ -39,8 +40,9 @@ def _edge(
     target: str,
     transport: tuple[str, ...],
     description: str,
+    requires: tuple[str, ...] = (),
 ) -> MorphologyEdge:
-    return MorphologyEdge(name, source, target, transport, description)
+    return MorphologyEdge(name, source, target, transport, description, requires)
 
 
 NODES: tuple[MorphologyNode, ...] = (
@@ -53,6 +55,10 @@ NODES: tuple[MorphologyNode, ...] = (
     _node("DiscriminantFeasibleLattice", "algebraic_geometry", "grid filtered by root existence"),
     _node("RootConfiguration", "algebra", "roots with multiplicity and symmetry"),
     _node("SymmetricInvariant", "invariant_theory", "symmetric polynomial data"),
+    _node("LocusFamily", "analytic_geometry", "locus reconstructed from invariant coordinates"),
+    _node("GeometricObservable", "geometry_analysis", "locus and extremal geometric quantity"),
+    _node("AntipodalOrbitStructure", "complex_geometry", "root set quotiented into opposite pairs"),
+    _node("CardinalityObservable", "combinatorics", "cardinality of a constrained finite class"),
     _node("SemialgebraicRegion", "real_algebraic_geometry", "region cut out by inequalities"),
     _node("MeasureObservable", "analysis", "area or measure of a feasible set"),
     _node("ConditionalMomentObservable", "probability_analysis", "moment restricted to a feasible set"),
@@ -76,6 +82,11 @@ EDGES: tuple[MorphologyEdge, ...] = (
     _edge("ComplexRootEncoding", "ComplexConfiguration", "RootConfiguration", ("point_set", "multiplicity", "cyclic_order"), "view complex points as roots"),
     _edge("RootExtraction", "PolynomialFamily", "RootConfiguration", ("solution_set", "multiplicity"), "pass from coefficients to the root configuration"),
     _edge("InvariantQuotient", "RootConfiguration", "SymmetricInvariant", ("symmetry_orbit", "multiplicity"), "take symmetric invariants of roots"),
+    _edge("InvariantLocus", "SymmetricInvariant", "LocusFamily", ("elementary_symmetric_values", "parameter"), "reconstruct a geometric locus from root invariants"),
+    _edge("ExtremalObservation", "LocusFamily", "GeometricObservable", ("locus", "feasible_parameter", "objective"), "observe a locus together with an extremal quantity"),
+    _edge("AntipodalFactorization", "SymmetricInvariant", "AntipodalOrbitStructure", ("root_set", "even_polynomial", "cyclic_order"), "factor a centrally symmetric unit-root set into opposite pairs", ("unit_roots", "four_distinct_roots", "vanishing_odd_coefficients")),
+    _edge("CompatibilityClass", "AntipodalOrbitStructure", "CombinatorialClass", ("opposite_pairs", "compatibility_relation"), "form the class of compatible selections of opposite pairs"),
+    _edge("CardinalityObservation", "CombinatorialClass", "CardinalityObservable", ("class_membership", "cardinality"), "count the same constrained class"),
     _edge("CoefficientInstantiation", "QuadraticCoefficientFamily", "CoefficientLattice", ("coefficients", "discriminant"), "instantiate coefficients on a finite grid"),
     _edge("DiscriminantFilter", "CoefficientLattice", "DiscriminantFeasibleLattice", ("coefficients", "real_root_existence"), "retain exactly the real-root coefficient pairs"),
     _edge("ScalingLimit", "DiscriminantFeasibleLattice", "SemialgebraicRegion", ("membership", "boundary", "density"), "rescale the grid while preserving the feasibility inequality"),
@@ -97,17 +108,25 @@ NODE_BY_NAME = {node.name: node for node in NODES}
 EDGE_BY_PAIR = {(edge.source, edge.target): edge for edge in EDGES}
 
 
-def shortest_path(source: str, target: str) -> list[str] | None:
+def shortest_path(
+    source: str,
+    target: str,
+    *,
+    established_conditions: Any = None,
+) -> list[str] | None:
     """Return the shortest directed morphology path between two charts."""
     if source not in NODE_BY_NAME or target not in NODE_BY_NAME:
         return None
     queue = deque([(source, [source])])
     seen = {source}
+    conditions = {str(item) for item in (established_conditions or [])}
     while queue:
         current, path = queue.popleft()
         if current == target:
             return path
         for edge in EDGES:
+            if not set(edge.requires).issubset(conditions):
+                continue
             if edge.source == current and edge.target not in seen:
                 seen.add(edge.target)
                 queue.append((edge.target, path + [edge.target]))
@@ -118,6 +137,7 @@ def certify_morphology_path(
     path: Any,
     *,
     morphism_chain: Any = None,
+    established_conditions: Any = None,
 ) -> dict[str, Any]:
     """Certify that a candidate moves only through adjacent typed charts."""
     if not isinstance(path, (list, tuple)) or len(path) < 2:
@@ -141,6 +161,7 @@ def certify_morphology_path(
         }
 
     edges: list[MorphologyEdge] = []
+    conditions = {str(item) for item in (established_conditions or [])}
     for source, target in zip(names, names[1:]):
         edge = EDGE_BY_PAIR.get((source, target))
         if edge is None:
@@ -158,6 +179,17 @@ def certify_morphology_path(
                 "valid": False,
                 "reason": "empty_semantic_transport",
                 "edge": edge.name,
+                "edge_count": len(edges),
+                "theory_transitions": 0,
+            }
+        missing_conditions = sorted(set(edge.requires) - conditions)
+        if missing_conditions:
+            return {
+                "present": True,
+                "valid": False,
+                "reason": "edge_precondition_unproved",
+                "edge": edge.name,
+                "missing_conditions": missing_conditions,
                 "edge_count": len(edges),
                 "theory_transitions": 0,
             }
@@ -185,7 +217,11 @@ def certify_morphology_path(
 
     theories = [NODE_BY_NAME[name].theory for name in names]
     transitions = sum(a != b for a, b in zip(theories, theories[1:]))
-    shortest = shortest_path(names[0], names[-1])
+    shortest = shortest_path(
+        names[0],
+        names[-1],
+        established_conditions=conditions,
+    )
     shortest_edges = len(shortest) - 1 if shortest else None
     return {
         "present": True,
@@ -201,6 +237,8 @@ def certify_morphology_path(
         "shortest_edge_count": shortest_edges,
         "detour": len(edges) - shortest_edges if shortest_edges is not None else None,
         "transported_invariants": sorted({item for edge in edges for item in edge.transport}),
+        "established_conditions": sorted(conditions),
+        "required_conditions": sorted({item for edge in edges for item in edge.requires}),
     }
 
 

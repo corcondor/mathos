@@ -455,6 +455,16 @@ MORPHISM_LOWERING: dict[str, tuple[str, ...]] = {
     "CoefficientEncoding": ("polynomial_expansion", "sum_of_series"),
     "CoefficientClass": ("counting", "combination"),
     "UniformMeasure": ("probability", "counting"),
+    "CoordinateRealization": ("coordinate_geometry", "distance_formula"),
+    "EquationEncoding": ("simultaneous_equations", "polynomial_expansion"),
+    "RootExtraction": ("quadratic_equation", "vieta_relations"),
+    "InvariantQuotient": ("vieta_relations", "algebraic_identity"),
+    "ComplexRootEncoding": ("complex_plane", "roots_of_unity"),
+    "InvariantLocus": ("coordinate_geometry", "parameter_elimination"),
+    "ExtremalObservation": ("locus", "extremum", "differentiation"),
+    "AntipodalFactorization": ("roots_of_unity", "polynomial_factorization"),
+    "CompatibilityClass": ("counting", "combination", "symmetry"),
+    "CardinalityObservation": ("counting",),
     "ZeroIndicators": ("counting",),
     # --- 高校の語彙に還元できない射（範囲外）---
     # 行列式・スペクトル・フーリエは、答案として高校の一手に分解できない。

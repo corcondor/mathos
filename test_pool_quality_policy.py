@@ -5,13 +5,40 @@ import unittest
 try:
     from math_os_prototype.build_entrance_pool import (
         _domain_components,
+        _morphology_contract,
         _quality_annotations,
     )
 except ImportError:  # pragma: no cover
-    from build_entrance_pool import _domain_components, _quality_annotations
+    from build_entrance_pool import (
+        _domain_components,
+        _morphology_contract,
+        _quality_annotations,
+    )
 
 
 class PoolQualityPolicyTest(unittest.TestCase):
+    def test_valid_path_without_interacting_proof_is_rejected(self) -> None:
+        problem = {
+            "morphology_path": [
+                "EuclideanConfiguration",
+                "CoordinateConfiguration",
+            ],
+            "lift_certificate": {
+                "morphism_chain": ["CoordinateRealization"],
+            },
+            "proof_graph": {
+                "nodes": [
+                    {"id": "only", "kind": "object"},
+                    {"id": "answer", "kind": "query"},
+                ],
+                "edges": [{"source": "only", "target": "answer"}],
+            },
+        }
+        reason, morphology, proof = _morphology_contract(problem)
+        self.assertTrue(morphology["valid"])
+        self.assertFalse(proof["interaction_verified"])
+        self.assertEqual(reason, "morphology_without_interacting_proof")
+
     def test_composite_domains_are_detected_without_family_names(self) -> None:
         self.assertEqual(_domain_components("complex_geometry"), ["complex_geometry"])
         self.assertEqual(
