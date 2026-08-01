@@ -273,26 +273,65 @@ def _ellipse_rational_points(a: int, b: int, limit: int = 40) -> list[tuple[sp.E
     return pts
 
 
-def closure_ellipse_tangent(params: tuple[int, int, int, int]) -> list[DerivedNode]:
-    """楕円と外部点からの2接線という構築から、導ける量を列挙する。"""
-
+def _ellipse_tangent_configuration(
+    params: tuple[int, int, int, int],
+) -> tuple[tuple[sp.Expr, sp.Expr], tuple[sp.Expr, sp.Expr], tuple[sp.Expr, sp.Expr]] | None:
+    """Return the two contact points and their tangent intersection."""
     a, b, i1, i2 = params
     pts = _ellipse_rational_points(a, b)
     if len(pts) <= max(i1, i2) or i1 == i2:
-        return []
+        return None
     x, y = sp.symbols("x y", real=True)
-    T1 = pts[i1]
-    T2 = (pts[i2][0], -pts[i2][1])
-    if T1 == T2:
-        return []
-    sol = sp.solve(
-        [T1[0] * x / a**2 + T1[1] * y / b**2 - 1,
-         T2[0] * x / a**2 + T2[1] * y / b**2 - 1],
-        [x, y], dict=True,
+    t1 = pts[i1]
+    t2 = (pts[i2][0], -pts[i2][1])
+    if t1 == t2:
+        return None
+    solutions = sp.solve(
+        [
+            t1[0] * x / a**2 + t1[1] * y / b**2 - 1,
+            t2[0] * x / a**2 + t2[1] * y / b**2 - 1,
+        ],
+        [x, y],
+        dict=True,
     )
-    if not sol:
+    if not solutions:
+        return None
+    point = (solutions[0][x], solutions[0][y])
+    return t1, t2, point
+
+
+def _ellipse_tangent_preamble(
+    params: tuple[int, int, int, int],
+    node_key: str,
+) -> str:
+    """Render exactly the surface facts required by the selected observation."""
+    a, b, _, _ = params
+    ellipse = rf"楕円 \(E:\dfrac{{x^2}}{{{a**2}}}+\dfrac{{y^2}}{{{b**2}}}=1\)"
+    if node_key == "monge_radius_sq":
+        return (
+            ellipse
+            + r" の外部の点 \(P\) から \(E\) に2本の接線を引き，"
+            + r"接点を \(T_1,T_2\) とする。"
+        )
+    configuration = _ellipse_tangent_configuration(params)
+    if configuration is None:
+        return ellipse
+    _, _, point = configuration
+    return (
+        ellipse
+        + rf" の外部の点 \(P\left({sp.latex(point[0])},{sp.latex(point[1])}\right)\) から "
+        + r"\(E\) に2本の接線を引き，接点を \(T_1,T_2\) とする。"
+    )
+
+
+def closure_ellipse_tangent(params: tuple[int, int, int, int]) -> list[DerivedNode]:
+    """楕円と外部点からの2接線という構築から、導ける量を列挙する。"""
+
+    a, b, _, _ = params
+    configuration = _ellipse_tangent_configuration(params)
+    if configuration is None:
         return []
-    P = (sol[0][x], sol[0][y])
+    T1, T2, P = configuration
     base = f"楕円 x^2/{a}^2+y^2/{b}^2=1 と，そこから引いた2本の接線の交点 P"
     nodes: list[DerivedNode] = []
 
@@ -1208,7 +1247,12 @@ def cut_problems() -> list[Problem]:
                 if (cname, node.key) in seen:
                     continue
                 seen.add((cname, node.key))
-                statement = preamble(param) + node.question_ja
+                surface_preamble = (
+                    _ellipse_tangent_preamble(param, node.key)
+                    if cname == "ellipse_tangent"
+                    else preamble(param)
+                )
+                statement = surface_preamble + node.question_ja
                 depth = len(node.morphisms) + len(node.hidden)
                 out.append(Problem(
                     f"traceback.{cname}.{node.key}",
@@ -1216,6 +1260,16 @@ def cut_problems() -> list[Problem]:
                     "deduction_closure+traceback",
                     {"construction": cname, "param": param, "node": node.key,
                      "hidden_intermediates": len(node.hidden), "depth": depth,
+                     "required_surface_bindings": (
+                         ["external_point_coordinate"]
+                         if cname == "ellipse_tangent" and node.key != "monge_radius_sq"
+                         else []
+                     ),
+                     "surface_bindings": (
+                         ["external_point_coordinate"]
+                         if cname == "ellipse_tangent" and node.key != "monge_radius_sq"
+                         else []
+                     ),
                      # 導出の跡そのもの。黒板に順番に書き出すために使う。
                      "premises": list(node.premises),
                      "hidden": list(node.hidden),

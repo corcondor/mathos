@@ -23,6 +23,24 @@ class DeliveryCurationTest(unittest.TestCase):
         problem = {"verification": {"method": "gambler_ruin_boundary_recurrence"}}
         self.assertEqual(_delivery_topic(problem), "gambler_ruin")
 
+    def test_ellipse_tangent_calculation_is_held_for_repair(self) -> None:
+        self.assertEqual(
+            _delivery_topic({"parameters": {"construction": "ellipse_tangent"}}),
+            "ellipse_tangent",
+        )
+        self.assertEqual(
+            _delivery_topic({"family_id": "traceback.ellipse_tangent.chord_length"}),
+            "ellipse_tangent",
+        )
+        self.assertEqual(
+            _delivery_topic({"family_id": "ultradeep.geometry_ellipse_tangent_pair_locus"}),
+            "ellipse_tangent",
+        )
+        self.assertEqual(
+            _delivery_topic({"statement_tex": "楕円上の点を動かす。"}),
+            "ellipse_tangent",
+        )
+
     def test_general_probability_is_not_excluded(self) -> None:
         problem = {"verification": {"method": "exact_subset_enumeration"}}
         self.assertIsNone(_delivery_topic(problem))

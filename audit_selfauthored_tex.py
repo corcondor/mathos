@@ -46,6 +46,105 @@ META_MORPHISMS = {
     "Satisfies", "Find", "Prove", "Decide", "Equation", "SetComprehension",
 }
 
+# These are design-level lenses, not problem families.  They describe why a
+# construction is interesting across domains and are intentionally many-to-many.
+DESIGN_LENSES: tuple[dict[str, Any], ...] = (
+    {
+        "id": "moving_configuration_to_global_region",
+        "label": "動く配置から大域的な領域・軌跡を取り出す",
+        "surface": ("通過領域", "軌跡", "動くとき", "自由に動か", "滑ることなく", "正射影"),
+        "morphisms": ("Locus", "Image", "Projection", "Area"),
+        "theory": ("配置空間", "包絡線", "Minkowski和", "実代数幾何"),
+    },
+    {
+        "id": "discrete_continuous_bridge",
+        "label": "離散対象を連続量・図形へ移す",
+        "surface": ("格子点", "素数", "整数", "自然数", "床", "小数部分", "回帰直線"),
+        "co_surface": ("面積", "体積", "角", "曲線", "円", "極限", "相関"),
+        "morphisms": ("ModResidue", "Lattice", "Regression", "Limit", "Integral"),
+        "theory": ("数論幾何", "格子点幾何", "漸近解析", "測度への極限"),
+    },
+    {
+        "id": "symmetry_to_dimension_reduction",
+        "label": "対称性を商にして自由度を落とす",
+        "surface": ("正三角形", "正方形", "正六角形", "正十二面体", "正$n$角形", "正 \\(n\\) 角形", "置換", "相異なる3点"),
+        "morphisms": ("Symmetric", "Permutation", "Rotation", "RegularPolygon"),
+        "theory": ("群作用", "対称式", "軌道空間", "不変量論"),
+    },
+    {
+        "id": "representation_change",
+        "label": "同じ対象を別表現へ移して可解化する",
+        "surface": ("複素数平面", "根", "変換", "折り返", "回転", "積分方程式", "回帰直線"),
+        "morphisms": ("Coordinate", "Complex", "Root", "Image", "Differentiation", "Polynomial"),
+        "theory": ("座標化", "複素表示", "Vieta写像", "微分による方程式化"),
+    },
+    {
+        "id": "iteration_and_fixed_structure",
+        "label": "反復から固定点・極限構造を抽出する",
+        "surface": ("不動点", "反復", "漸化式", "数列", "関数列", "f_{n+1}", "a_{n+1}", "x_{n+2}"),
+        "morphisms": ("Recurrence", "Iteration", "FixedPoint", "Limit"),
+        "theory": ("離散力学系", "縮小写像", "スペクトル", "安定性"),
+    },
+    {
+        "id": "arithmetic_rigidity",
+        "label": "連続的な候補を整数・素数条件で剛直化する",
+        "surface": ("素数", "整数", "自然数", "格子点", "有理数", "無理数", "約数", "gcd", "\\gcd"),
+        "morphisms": ("Divides", "GCD", "ModResidue", "Diophantine"),
+        "theory": ("合同式", "Diophantine方程式", "代数的整数", "局所障害"),
+    },
+    {
+        "id": "boundary_extremum",
+        "label": "可動範囲の境界を特定して極値・測度を得る",
+        "surface": ("最大値", "最小値", "値域", "存在範囲", "通過領域", "囲まれた領域", "面積"),
+        "morphisms": ("Maximum", "Minimum", "Range", "Boundary", "Area"),
+        "theory": ("凸解析", "境界パラメータ化", "半代数的消去", "変分"),
+    },
+    {
+        "id": "asymptotic_renormalization",
+        "label": "発散・退化を尺度変更して有限な構造として観測する",
+        "surface": ("lim", "\\lim", "極限", "n\\to\\infty", "theta \\to 0", "\\theta \\to 0"),
+        "morphisms": ("Limit", "Scaling", "Normalization"),
+        "theory": ("漸近解析", "スケーリング極限", "局所線形化"),
+    },
+    {
+        "id": "inverse_existence_design",
+        "label": "答を計算せず、条件を満たす対象の存在・分類を問う",
+        "surface": ("存在するか", "存在しない", "すべて求めよ", "全て求めよ", "必要十分条件", "示せ"),
+        "morphisms": ("Exists", "Classify", "Prove"),
+        "theory": ("構成問題", "反証", "分類", "存在障害"),
+    },
+)
+
+
+def analyze_design_lenses(statement: str, graph: dict[str, Any]) -> list[dict[str, Any]]:
+    """Return auditable cross-domain design evidence for one statement."""
+    morphisms = morphism_names(graph)
+    lowered = statement.lower()
+    out: list[dict[str, Any]] = []
+    for lens in DESIGN_LENSES:
+        surface_hits = [term for term in lens.get("surface", ()) if term.lower() in lowered]
+        co_terms = lens.get("co_surface", ())
+        co_hits = [term for term in co_terms if term.lower() in lowered]
+        morphism_hits = [
+            name for name in morphisms
+            if any(token.lower() in name.lower() for token in lens.get("morphisms", ()))
+        ]
+        if co_terms and surface_hits and not co_hits and not morphism_hits:
+            continue
+        if not surface_hits and not morphism_hits:
+            continue
+        out.append({
+            "id": lens["id"],
+            "label": lens["label"],
+            "surface_evidence": surface_hits,
+            "semantic_evidence": morphism_hits,
+            "theoretical_background": list(lens["theory"]),
+            "evidence_level": "semantic+surface" if surface_hits and morphism_hits else (
+                "semantic" if morphism_hits else "surface"
+            ),
+        })
+    return out
+
 
 def extract_answer_sections(text: str) -> dict[int, str]:
     matches = list(ANSWER_HEADING.finditer(text))
@@ -251,6 +350,7 @@ def build_audit(path: Path) -> dict[str, Any]:
         answer_tex = answers.get(block.ordinal)
         answer_graph = build_answer_graph(answer_tex, graph) if answer_tex else None
         semantic_delta = answer_semantic_delta(answer_tex, graph) if answer_tex else None
+        design_lenses = analyze_design_lenses(block.statement_tex, graph)
         records.append({
             "ordinal": block.ordinal,
             "label": block.label,
@@ -259,6 +359,7 @@ def build_audit(path: Path) -> dict[str, Any]:
             "syntax_ir": structure,
             "domain_ir": domain_ir,
             "semantic_graph": graph,
+            "design_lenses": design_lenses,
             "answer": {
                 "available": bool(answer_tex),
                 "answer_tex": answer_tex,
@@ -273,6 +374,9 @@ def build_audit(path: Path) -> dict[str, Any]:
         name
         for record in records
         for name in ((record["answer"].get("semantic_delta") or {}).get("latent_morphisms") or [])
+    )
+    design_lens_counts = Counter(
+        lens["id"] for record in records for lens in record["design_lenses"]
     )
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -297,6 +401,7 @@ def build_audit(path: Path) -> dict[str, Any]:
             "answer_merge_nodes": sum(graph["metrics"]["merge_nodes"] for graph in answer_graphs),
             "latent_morphism_occurrences": sum(latent_morphisms.values()),
             "latent_morphism_counts": dict(latent_morphisms.most_common()),
+            "design_lens_counts": dict(design_lens_counts.most_common()),
         },
         "records": records,
     }
@@ -320,6 +425,7 @@ def build_public_summary(audit: dict[str, Any]) -> dict[str, Any]:
             "queries": graph.get("queries", []),
             "lift_certificates": graph.get("lift_certificates", []),
             "warnings": graph.get("warnings", []),
+            "design_lenses": record.get("design_lenses", []),
             "answer_available": bool(answer_graph),
             "answer_graph": answer_graph,
             "answer_semantic_delta": semantic_delta,
@@ -353,10 +459,22 @@ def render_report(audit: dict[str, Any]) -> str:
         "",
         ", ".join(f"`{name}` × {count}" for name, count in summary["latent_morphism_counts"].items()) or "抽出なし",
         "",
+        "## 作問構想の横断レンズ",
+        "",
+        "これは完成解法のfamily分類ではなく、問題文と意味グラフから得た横断的な構想証拠である。",
+        "解答未収録の問題では理論背景は仮説であり、証明済みとは扱わない。",
+        "",
+        "| lens | problems |",
+        "|---|---:|",
+        *[
+            f"| `{name}` | {count} |"
+            for name, count in summary["design_lens_counts"].items()
+        ],
+        "",
         "## 問題別",
         "",
-        "| # | label | status | objects | morphisms | constraints | query | lift | answer units / edges / merges |",
-        "|---:|---|---|---:|---:|---:|---:|---:|---:|",
+        "| # | label | design lenses | status | objects | morphisms | constraints | query | lift | answer units / edges / merges |",
+        "|---:|---|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for record in audit["records"]:
         graph = record["semantic_graph"]
@@ -367,7 +485,9 @@ def render_report(audit: dict[str, Any]) -> str:
             if metrics else "-"
         )
         lines.append(
-            f"| {record['ordinal']} | {record['label']} | {graph['status']} | "
+            f"| {record['ordinal']} | {record['label']} | "
+            f"{', '.join(lens['id'] for lens in record.get('design_lenses', [])) or '-'} | "
+            f"{graph['status']} | "
             f"{len(graph['objects'])} | {len(graph['morphisms'])} | {len(graph['constraints'])} | "
             f"{len(graph['queries'])} | {len(graph['lift_certificates'])} | {answer_cell} |"
         )
@@ -392,14 +512,19 @@ def main() -> None:
     args = parser.parse_args()
     audit = build_audit(args.input)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(audit, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(render_report(audit), encoding="utf-8")
+    args.report.write_text(render_report(audit), encoding="utf-8", newline="\n")
     if args.public_output:
         args.public_output.parent.mkdir(parents=True, exist_ok=True)
         args.public_output.write_text(
             json.dumps(build_public_summary(audit), ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
+            newline="\n",
         )
     print(json.dumps(audit["summary"], ensure_ascii=False, indent=2))
 

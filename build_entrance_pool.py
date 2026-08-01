@@ -34,6 +34,9 @@ DEFAULT_OUTPUT = HERE / "problem_synthesis" / "entrance_exam_pool.json"
 DEFAULT_REPORT = (
     HERE / "docs" / "generated" / "latest-entrance-pool-report.md"
 )
+DEFAULT_SELECTION_FEEDBACK = (
+    HERE / "problem_synthesis" / "selection_feedback_snapshot.json"
+)
 
 # 旧指標を再現するための注釈値。人手判断に対する AUC が 0.086 で
 # 逆相関だったため、配信可否のゲートには使わない。
@@ -41,7 +44,9 @@ LEGACY_MIN_MORPHISMS = 3
 LEGACY_MIN_DIFFICULTY = 8.4
 MINIMUM_GATING_AUC = 0.7
 OBSERVED_HUMAN_AUC = 0.086
-DELIVERY_TOPIC_EXCLUSIONS = frozenset({"dice_sum", "gambler_ruin"})
+DELIVERY_TOPIC_EXCLUSIONS = frozenset(
+    {"dice_sum", "gambler_ruin", "ellipse_tangent"}
+)
 
 # Atomic chart labels used by generated domain metadata. A domain that can be
 # segmented into two or more of these labels is a declared cross-domain
@@ -120,6 +125,18 @@ def _structure_key(problem: dict[str, Any]) -> str:
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
+def _audience_rejected_structure_keys(feedback_path: Path | None) -> set[str]:
+    """Load explicit skip votes without exposing surface text to generation."""
+    if feedback_path is None or not feedback_path.exists():
+        return set()
+    feedback = json.loads(feedback_path.read_text(encoding="utf-8"))
+    return {
+        str(item["structure_key"])
+        for item in feedback.get("structures", [])
+        if item.get("label") == "rejected" and item.get("structure_key")
+    }
+
+
 def _verified(problem: dict[str, Any]) -> bool:
     verification = problem.get("verification") or {}
     lift = problem.get("lift_certificate") or {}
@@ -133,12 +150,33 @@ def _verified(problem: dict[str, Any]) -> bool:
     )
 
 
+def _surface_contract(problem: dict[str, Any]) -> dict[str, Any]:
+    """Check that every backend-dependent input is published in the statement IR."""
+    parameters = problem.get("parameters") or {}
+    required = {str(item) for item in parameters.get("required_surface_bindings") or []}
+    published = {str(item) for item in parameters.get("surface_bindings") or []}
+    missing = sorted(required - published)
+    return {
+        "valid": not missing,
+        "required": sorted(required),
+        "published": sorted(published),
+        "missing": missing,
+    }
+
+
 def _delivery_topic(problem: dict[str, Any]) -> str | None:
     """Return an audience-curation topic without affecting mathematical IR."""
     family = str(problem.get("family_id") or "")
+    statement = str(problem.get("statement_tex") or "")
+    if "ellipse" in family.lower() or "楕円" in statement:
+        return "ellipse_tangent"
     if family.startswith("traceback.dice_sum."):
         return "dice_sum"
     parameters = problem.get("parameters") or {}
+    if str(parameters.get("construction") or "") == "ellipse_tangent":
+        return "ellipse_tangent"
+    if family.startswith("traceback.ellipse_tangent."):
+        return "ellipse_tangent"
     if str(parameters.get("construction") or "") == "dice_sum":
         return "dice_sum"
     method = str((problem.get("verification") or {}).get("method") or "")
@@ -373,6 +411,7 @@ def _quality_annotations(
 
 def build_pool(
     construct_path: Path = DEFAULT_CONSTRUCT,
+    feedback_path: Path | None = DEFAULT_SELECTION_FEEDBACK,
 ) -> dict[str, Any]:
     construct = json.loads(construct_path.read_text(encoding="utf-8"))
     sources = (
@@ -396,6 +435,7 @@ def build_pool(
     quality_flags = Counter()
     source_counts = Counter()
     novelty_check = _novelty_checker()
+    audience_rejected = _audience_rejected_structure_keys(feedback_path)
     for source, records in sources:
         for problem in records:
             delivery_topic = _delivery_topic(problem)
@@ -404,6 +444,10 @@ def build_pool(
                 continue
             if not _verified(problem):
                 rejected["verification"] += 1
+                continue
+            surface_contract = _surface_contract(problem)
+            if not surface_contract["valid"]:
+                rejected["surface_binding_missing"] += 1
                 continue
             morphology_path = problem.get("morphology_path")
             morphology_reason, morphology_certificate, proof_graph_certificate = (
@@ -445,6 +489,9 @@ def build_pool(
             if annotations["below_legacy_morphism_threshold"]:
                 quality_flags["below_legacy_morphism_threshold"] += 1
             key = _structure_key(problem)
+            if key in audience_rejected:
+                rejected["audience_skipped"] += 1
+                continue
             if key in retained:
                 rejected["same_structure_variant"] += 1
                 continue
@@ -467,6 +514,7 @@ def build_pool(
             record["difficulty_score"] = score
             record["quality_annotations"] = annotations
             record["proof_graph_certificate"] = proof_graph_certificate
+            record["surface_contract"] = surface_contract
             if morphology_path:
                 record["morphology_certificate"] = morphology_certificate
             record["research_tier"] = (
@@ -535,6 +583,10 @@ def build_pool(
                 "closure_composition": "scalar_bridge_bypasses_morphology_graph",
                 "traceback_dice_sum": "audience_rejected_repetitive_construction",
             },
+            "audience_feedback": {
+                "rejected_structure_keys_loaded": len(audience_rejected),
+                "policy": "remove_from_active_delivery_preserve_vote_history",
+            },
         },
         "problems": problems,
     }
@@ -568,6 +620,8 @@ def render_report(report: dict[str, Any]) -> str:
         f"**{summary['rejected'].get('morphology_without_interacting_proof', 0)}**",
         f"- 配信目的と合わず除外（サイコロ・ギャンブラー）: "
         f"**{sum(value for key, value in summary['rejected'].items() if key.startswith('delivery_topic:'))}**",
+        f"- スキップ票により公開プールから除外: "
+        f"**{summary['rejected'].get('audience_skipped', 0)}**",
         f"- 旧難易度8.4未満（注釈のみ・除外しない）: "
         f"**{summary.get('quality_flags', {}).get('below_legacy_difficulty_threshold', 0)}**",
         f"- 射が3個未満（注釈のみ・除外しない）: "
@@ -618,8 +672,14 @@ def main() -> int:
     parser.add_argument("--construct", type=Path, default=DEFAULT_CONSTRUCT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument(
+        "--feedback",
+        type=Path,
+        default=DEFAULT_SELECTION_FEEDBACK,
+        help="構造署名単位の選択・スキップ投票スナップショット",
+    )
     args = parser.parse_args()
-    report = build_pool(args.construct)
+    report = build_pool(args.construct, args.feedback)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write(

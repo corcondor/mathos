@@ -8,8 +8,8 @@ GitHub Actions の cron から定期的に呼ばれ、1 回の実行で
   4. 難易度を評価して記録（役割: 評価 grader）
   5. 既存プールに **蓄積** して書き戻す（置き換えではない）
 
-を行う。プールは実行のたびに育つ。同じ問題は (family, answer) と正規化
-問題文で重複排除されるので、何度回しても水増しにならない。
+を行う。プールは実行のたびに育つ。同じ構造は family・射列・制約骨格・問いの型で、
+同じ表面は正規化問題文で重複排除する。数値や答だけの変更では水増ししない。
 """
 
 from __future__ import annotations
@@ -65,16 +65,37 @@ def load_pool(path: Path = POOL) -> dict[str, Any]:
     return {"problems": []}
 
 
+def _load_generation_base(out_path: Path | None) -> dict[str, Any]:
+    """A shard explores independently; only the shared run accumulates POOL."""
+    if out_path is None:
+        return load_pool(POOL)
+    if out_path.exists():
+        return load_pool(out_path)
+    return {"problems": []}
+
+
+def _structure_signature(problem: dict[str, Any]) -> tuple[str, tuple[str, ...], tuple[str, ...], str]:
+    """Identify mathematical structure independently of coefficients and answer."""
+    lift = problem.get("lift_certificate") or {}
+    return (
+        str(problem.get("family_id") or ""),
+        tuple(str(item) for item in lift.get("morphism_chain") or ()),
+        tuple(str(item) for item in lift.get("constraint_skeleton") or ()),
+        str(lift.get("query_signature") or ""),
+    )
+
+
 def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = None,
              only_family: str | None = None, out_path: Path | None = None) -> dict[str, Any]:
     target = out_path or POOL
-    pool = load_pool(target if target.exists() else POOL)
+    pool = _load_generation_base(out_path)
     existing = pool.get("problems", [])
     seen_answer = {
         (p.get("family_id"), canonical_surface(str(p.get("answer_tex", ""))))
         for p in existing
     }
     seen_stmt = {canonical_surface(str(p.get("statement_tex", ""))) for p in existing}
+    seen_structure = {_structure_signature(p) for p in existing}
 
     # 1. 合成
     generated = gen_construct(explore=explore, seed=seed, only_family=only_family)["problems"]
@@ -85,7 +106,13 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
     juken = load_jukenmath_hashes()
 
     added: list[dict[str, Any]] = []
-    stats = {"generated": len(generated), "dup": 0, "not_novel": 0, "unverified": 0}
+    stats = {
+        "generated": len(generated),
+        "dup": 0,
+        "structure_dup": 0,
+        "not_novel": 0,
+        "unverified": 0,
+    }
 
     for p in generated:
         # 2. 検証（ツールが通していないものは捨てる）
@@ -95,6 +122,10 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
             continue
         akey = (p["family_id"], canonical_surface(p["answer_tex"]))
         skey = canonical_surface(p["statement_tex"])
+        structure_key = _structure_signature(p)
+        if structure_key in seen_structure:
+            stats["structure_dup"] += 1
+            continue
         if akey in seen_answer or skey in seen_stmt:
             stats["dup"] += 1
             continue
@@ -115,9 +146,15 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
             },
             "statement_tex": p["statement_tex"],
             "answer_tex": p["answer_tex"],
+            "answer_exact": p.get("answer_exact"),
             "solution_tex": p["solution_tex"],
             "lift_certificate": p["lift_certificate"],
             "verification": p["verification"],
+            "parameters": p.get("parameters", {}),
+            **({"proof_graph": p["proof_graph"]} if p.get("proof_graph") else {}),
+            **({"morphology_path": p["morphology_path"]} if p.get("morphology_path") else {}),
+            **({"morphology_conditions": p["morphology_conditions"]} if p.get("morphology_conditions") else {}),
+            **({"conceptual_bridge": p["conceptual_bridge"]} if p.get("conceptual_bridge") else {}),
             "novelty": {
                 "corpus_novel": True,
                 "maximum_surface_jaccard": nov["max_surface_jaccard"],
@@ -127,6 +164,7 @@ def run_once(max_new: int | None = None, explore: int = 0, seed: int | None = No
         added.append(record)
         seen_answer.add(akey)
         seen_stmt.add(skey)
+        seen_structure.add(structure_key)
         if max_new is not None and len(added) >= max_new:
             break
 

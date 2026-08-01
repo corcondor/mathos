@@ -36,24 +36,19 @@ jobs:
       max-parallel: 20
       matrix:
         family:
-          - mobius
-          - linear_recurrence
           - cubic_tangent
-          - complex_rotation
           - parabola
-          - reciprocal
           - complex_affine
           - ultradeep_cyclotomic_norm
           - ultradeep_cubic_triangle
           - geometry_astroid
-          - geometry_ellipse_tangent_pair
           - geometry_parabola_evolute
           - geometry_orthocenter_locus
           - geometry_minkowski_polygon
+          - geometry_spatial
           # トレースバック方式: 1構築の演繹閉包を丸ごと切り出すシャード
           - traceback_regular_polygon
           - traceback_cubic_tangent
-          - traceback_ellipse_tangent
           - traceback_lattice_path
           - traceback_digit_power
           - traceback_triangle_centers
@@ -112,6 +107,12 @@ jobs:
       - name: Install deps
         run: pip install sympy numpy scipy mpmath
 
+      - name: Refresh audience skip snapshot
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python refresh_selection_feedback.py
+
       - name: Verify relation closure and non-gating quality policy
         run: >-
           python -m unittest
@@ -127,6 +128,10 @@ jobs:
           test_motif_guided_synthesis
           test_pool_quality_policy
           test_delivery_curation
+          test_traceback_surface_contract
+          test_autonomous_shard_isolation
+          test_geometry_deep_families
+          test_audience_skip_filter
           test_sync_supabase
 
       - uses: actions/download-artifact@v4
@@ -139,7 +144,7 @@ jobs:
           ls -la shards || true
           # 既存プールも入力に含めて蓄積する
           python merge_shards.py \
-            --inputs problem_synthesis/construct_pool.json shards/shard_*.json \
+            --inputs shards/shard_*.json problem_synthesis/construct_pool.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
           python export_generation_report.py
           python export_morphology_atlas.py

@@ -42,6 +42,70 @@ class Problem:
     method: str
 
 
+CONCEPTUAL_BRIDGE_CERTIFICATES: dict[str, dict[str, Any]] = {
+    "ultradeep.geometry_triangle_displacement_locus_area": {
+        "surface_object": "triangle with two independently moving points",
+        "latent_object": "difference body T-T",
+        "transported_invariant": "affine area ratio",
+        "bridge_morphism": "DisplacementMap -> DifferenceBody",
+        "edge_ablation": {
+            "IndependentPointPair": "without independence the full difference body is not obtained",
+            "DisplacementMap": "without vector displacement there is no locus in the target plane",
+            "ConvexHull": "without convex closure the six extremal differences do not determine the region",
+        },
+        "necessary": True,
+    },
+    "ultradeep.geometry_convex_polygon_disk_sweep_area": {
+        "surface_object": "disk whose center moves over a convex polygon",
+        "latent_object": "parallel body P+B_r",
+        "transported_invariant": "edge lengths and total exterior angle",
+        "bridge_morphism": "PassageUnion -> MinkowskiAddition",
+        "edge_ablation": {
+            "PassageUnion": "without taking the union there is no swept region",
+            "MinkowskiAddition": "without translation addition edge strips and vertex sectors are disconnected",
+            "ExteriorAngleSum": "without the 2*pi angle invariant the sector contribution is undetermined",
+        },
+        "necessary": True,
+    },
+    "ultradeep.spatial_tetrahedron_displacement_locus_volume": {
+        "surface_object": "two independently moving points in a tetrahedron",
+        "latent_object": "three-dimensional difference body T-T",
+        "transported_invariant": "affine volume ratio",
+        "bridge_morphism": "SpatialDisplacementMap -> ThreeDimensionalDifferenceBody",
+        "edge_ablation": {
+            "IndependentPointPair": "without independence the full displacement body is not obtained",
+            "CoordinateSignPartition": "without sign chambers the spatial volume cannot be decomposed",
+            "AffineVolumeScaling": "without affine invariance the unit-simplex result does not transfer",
+        },
+        "necessary": True,
+    },
+    "ultradeep.spatial_cube_diagonal_section_maximum": {
+        "surface_object": "parallel cross-sections of a cube",
+        "latent_object": "derivative of a three-variable sublevel-set volume",
+        "transported_invariant": "slice area times normal displacement equals volume increment",
+        "bridge_morphism": "SublevelSolid -> SliceVolumeCorrespondence",
+        "edge_ablation": {
+            "SliceVolumeCorrespondence": "without it the three-dimensional section is not reduced to a scalar function",
+            "InclusionExclusion": "without corner overlap correction the middle section has the wrong area",
+            "CentralSymmetryReduction": "without symmetry both halves require separate analysis",
+        },
+        "necessary": True,
+    },
+    "ultradeep.spatial_cube_ball_sweep_volume": {
+        "surface_object": "sphere whose center moves through a cube",
+        "latent_object": "three-dimensional parallel body of the cube",
+        "transported_invariant": "face, edge, and vertex boundary measures",
+        "bridge_morphism": "SpatialPassageUnion -> ThreeDimensionalMinkowskiAddition",
+        "edge_ablation": {
+            "FaceEdgeVertexStratification": "without boundary strata the rounded regions overlap or are omitted",
+            "QuarterCylinderEdgeContribution": "without edge curvature the quadratic term is undetermined",
+            "SphericalOctantVertexContribution": "without vertex solid angles the cubic term is undetermined",
+        },
+        "necessary": True,
+    },
+}
+
+
 # ---------------------------------------------------------------------------
 # F1  メビウス反復 (関数×行列)  —  ツール: 2×2行列のべき/固有値
 #     f=(ax+b)/(cx+d) を n 回合成。問い: 周期 / 不動点 / 導関数の極限。
@@ -445,7 +509,7 @@ SHARD_FAMILIES = (
     "ultradeep_cubic_triangle",
     "geometry_astroid", "geometry_ellipse_tangent_pair",
     "geometry_parabola_evolute", "geometry_orthocenter_locus",
-    "geometry_minkowski_polygon",
+    "geometry_minkowski_polygon", "geometry_spatial",
     # トレースバック方式の構築（演繹閉包を切り出す）。
     # 構築 1 つが 1 シャードで、そのノード数だけ問題が出る。
     "traceback_regular_polygon", "traceback_cubic_tangent",
@@ -524,7 +588,18 @@ FIXED_SHARD_FAMILY_IDS: dict[str, frozenset[str]] = {
         {"ultradeep.geometry_orthocenter_locus_area"}
     ),
     "geometry_minkowski_polygon": frozenset(
-        {"ultradeep.geometry_regular_polygon_minkowski_perimeter"}
+        {
+            "ultradeep.geometry_regular_polygon_minkowski_perimeter",
+            "ultradeep.geometry_triangle_displacement_locus_area",
+            "ultradeep.geometry_convex_polygon_disk_sweep_area",
+        }
+    ),
+    "geometry_spatial": frozenset(
+        {
+            "ultradeep.spatial_tetrahedron_displacement_locus_volume",
+            "ultradeep.spatial_cube_diagonal_section_maximum",
+            "ultradeep.spatial_cube_ball_sweep_volume",
+        }
     ),
 }
 
@@ -579,7 +654,18 @@ FIXED_SHARD_BUILDER_NAMES: dict[str, frozenset[str]] = {
         {"_geometry_orthocenter_locus"}
     ),
     "geometry_minkowski_polygon": frozenset(
-        {"_geometry_minkowski_polygon"}
+        {
+            "_geometry_minkowski_polygon",
+            "_geometry_triangle_displacement_locus",
+            "_geometry_polygon_disk_sweep",
+        }
+    ),
+    "geometry_spatial": frozenset(
+        {
+            "_geometry_tetrahedron_displacement_locus",
+            "_geometry_cube_diagonal_section_maximum",
+            "_geometry_cube_ball_sweep",
+        }
     ),
 }
 
@@ -785,6 +871,11 @@ def synthesize(explore: int = 0, seed: int | None = None,
             "verification": {"exact_backend": p.verified, "independent_check": p.independent_check, "method": p.method},
             "novelty": {"corpus_novel": True, "maximum_surface_jaccard": 0.0},
             "parameters": p.parameters,
+            **(
+                {"conceptual_bridge": CONCEPTUAL_BRIDGE_CERTIFICATES[p.family_id]}
+                if p.family_id in CONCEPTUAL_BRIDGE_CERTIFICATES
+                else {}
+            ),
         }
         for i, p in enumerate(problems)
     ]

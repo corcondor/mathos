@@ -364,6 +364,319 @@ def _grid_geometry_minkowski() -> Iterable[dict[str, Any]]:
             yield {"n": n, "R": radius}
 
 
+def _geometry_triangle_displacement_locus(params: dict[str, Any]) -> Problem | None:
+    """A triangle's difference body, surfaced as a moving-vector locus."""
+    a, u, v = 4, 1, 3
+    triangle = [(0.0, 0.0), (float(a), 0.0), (float(u), float(v))]
+    difference_hull = _convex_hull(
+        [(qx - px, qy - py) for px, py in triangle for qx, qy in triangle]
+    )
+    triangle_area = _shoelace_area(triangle)
+    locus_area = _shoelace_area(difference_hull)
+    if len(difference_hull) != 6 or abs(locus_area - 6 * triangle_area) > 1e-10:
+        return None
+
+    return Problem(
+        "ultradeep.geometry_triangle_displacement_locus_area",
+        "convex_geometry",
+        "difference_body+convex_hull+shoelace",
+        {"symbolic_area": "S", "verification_triangle": [a, u, v]},
+        r"面積が \(S\) である三角形 \(T\) の内部または周上を2点 \(P,Q\) が"
+        r"独立に動く。ベクトル \(\overrightarrow{PQ}\) を、その成分を座標とする"
+        r"平面上の点とみなすとき、この点の通過領域の面積を \(S\) で表せ。",
+        r"6S",
+        "6*S",
+        r"三角形を \(A=(0,0),B=\mathbf b,C=\mathbf c\) とおく。変位全体は "
+        r"\(T-T=\{Q-P\mid P,Q\in T\}\) であり、その頂点は "
+        r"\(\pm\mathbf b,\pm\mathbf c,\pm(\mathbf b-\mathbf c)\) の6点である。"
+        r"この中心対称六角形を3本の対角線で分けるか靴紐公式を用いると、"
+        r"面積は \(6[ABC]=6S\) となる。",
+        (
+            "TriangleConfiguration",
+            "IndependentPointPair",
+            "DisplacementMap",
+            "DifferenceBody",
+            "VertexDifferenceSet",
+            "ConvexHull",
+            "CentralSymmetry",
+            "HexagonRecognition",
+            "AffineNormalization",
+            "AreaObservation",
+        ),
+        True,
+        True,
+        "symbolic_difference_body_identity_vs_numeric_convex_hull",
+    )
+
+
+def _grid_geometry_triangle_displacement() -> Iterable[dict[str, Any]]:
+    yield {"symbolic": True}
+
+
+def _geometry_polygon_disk_sweep(params: dict[str, Any]) -> Problem | None:
+    """Steiner's polygon formula, surfaced as a disk passage region."""
+    width, height, radius = 3.0, 2.0, 1.0
+    polygon = [(0.0, 0.0), (width, 0.0), (width, height), (0.0, height)]
+    samples = 1024
+    circle = [
+        (radius * math.cos(2 * math.pi * index / samples),
+         radius * math.sin(2 * math.pi * index / samples))
+        for index in range(samples)
+    ]
+    hull = _convex_hull(
+        [(px + cx, py + cy) for px, py in polygon for cx, cy in circle]
+    )
+    numeric_area = _shoelace_area(hull)
+    expected = width * height + radius * 2 * (width + height) + math.pi * radius**2
+    if abs(numeric_area - expected) > 3e-5:
+        return None
+
+    return Problem(
+        "ultradeep.geometry_convex_polygon_disk_sweep_area",
+        "convex_geometry",
+        "minkowski_sum+parallel_body+numeric_hull",
+        {"symbolic": ["A", "L", "r"], "verification_rectangle": [3, 2, 1]},
+        r"面積 \(A\)、周長 \(L\) の凸多角形 \(P\) 上を、半径 \(r\) の円板の"
+        r"中心が自由に動く。この円板が通過する領域の面積を \(A,L,r\) で表せ。",
+        r"A+rL+\pi r^2",
+        "A + r*L + pi*r**2",
+        r"通過領域は多角形 \(P\) と半径 \(r\) の円板とのMinkowski和である。"
+        r"元の \(P\) に加え、各辺の外側に面積 \(r\ell_i\) の長方形ができる。"
+        r"各頂点にできる扇形の中心角の和は \(2\pi\) なので、その面積の和は"
+        r"\(\pi r^2\)。したがって \(A+r\sum_i\ell_i+\pi r^2"
+        r"=A+rL+\pi r^2\) である。",
+        (
+            "ConvexPolygon",
+            "MovingCenter",
+            "DiskTranslation",
+            "PassageUnion",
+            "MinkowskiAddition",
+            "ParallelBody",
+            "EdgeStripDecomposition",
+            "ExteriorAngleSum",
+            "SectorAreaMerge",
+            "AreaObservation",
+        ),
+        True,
+        True,
+        "polygon_parallel_body_decomposition_vs_sampled_minkowski_hull",
+    )
+
+
+def _grid_geometry_polygon_disk_sweep() -> Iterable[dict[str, Any]]:
+    yield {"symbolic": True}
+
+
+def _geometry_tetrahedron_displacement_locus(
+    params: dict[str, Any],
+) -> Problem | None:
+    """The three-dimensional difference body of a tetrahedron."""
+    try:
+        import numpy as np
+        from scipy.spatial import ConvexHull
+    except ImportError:  # pragma: no cover - CI installs scipy
+        return None
+
+    vertices = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+        ]
+    )
+    differences = np.array([q - p for p in vertices for q in vertices])
+    locus_volume = float(ConvexHull(differences).volume)
+    tetrahedron_volume = 1.0 / 6.0
+    if abs(locus_volume / tetrahedron_volume - 20.0) > 1e-9:
+        return None
+
+    return Problem(
+        "ultradeep.spatial_tetrahedron_displacement_locus_volume",
+        "euclidean_geometry",
+        "difference_body+orthant_decomposition+numeric_convex_hull_3d",
+        {"symbolic_volume": "V", "verification_simplex": "unit"},
+        r"体積が \(V\) である四面体 \(T\) の内部または表面を2点 \(P,Q\) が"
+        r"独立に動く。ベクトル \(\overrightarrow{PQ}\) の3成分を空間内の点の"
+        r"座標とみなすとき、この点の通過領域の体積を \(V\) で表せ。",
+        r"20V",
+        "20*V",
+        r"アフィン変換で \(T=\{(x,y,z)\mid x,y,z\ge0,\ x+y+z\le1\}\) "
+        r"としてよい。変位 \(u=Q-P\) 全体は、正の成分の和と負の成分の"
+        r"絶対値の和がともに1以下となる領域である。符号が正の座標を \(k\) 個"
+        r"指定した部分の体積は \(1/(k!(3-k)!)\)。したがって全体の体積は "
+        r"\(\sum_{k=0}^3\binom3k/(k!(3-k)!)=10/3\)。標準四面体の体積は"
+        r" \(1/6\) なので比は20であり、一般の四面体でもアフィン変換で"
+        r"同じ比が保たれる。よって答は \(20V\)。",
+        (
+            "TetrahedronConfiguration",
+            "IndependentPointPair",
+            "SpatialDisplacementMap",
+            "ThreeDimensionalDifferenceBody",
+            "AffineSimplexNormalization",
+            "CoordinateSignPartition",
+            "PositiveNegativeMassConstraints",
+            "OrthantSimplexDecomposition",
+            "BinomialVolumeMerge",
+            "AffineVolumeScaling",
+            "VolumeObservation",
+        ),
+        True,
+        True,
+        "orthant_simplex_volume_identity_vs_scipy_convex_hull_3d",
+    )
+
+
+def _grid_geometry_tetrahedron_displacement() -> Iterable[dict[str, Any]]:
+    yield {"symbolic": True}
+
+
+def _cube_section_area(t: float) -> float:
+    """Area of [0,1]^3 cut by x+y+z=t, computed from edge intersections."""
+    cube = [
+        (float(x), float(y), float(z))
+        for x in (0, 1)
+        for y in (0, 1)
+        for z in (0, 1)
+    ]
+    points: list[tuple[float, float, float]] = []
+    for left_index, left in enumerate(cube):
+        for right in cube[left_index + 1:]:
+            if sum(a != b for a, b in zip(left, right)) != 1:
+                continue
+            left_level, right_level = sum(left), sum(right)
+            if (left_level - t) * (right_level - t) > 0:
+                continue
+            if abs(right_level - left_level) < 1e-12:
+                continue
+            ratio = (t - left_level) / (right_level - left_level)
+            if -1e-12 <= ratio <= 1 + 1e-12:
+                points.append(tuple(a + ratio * (b - a) for a, b in zip(left, right)))
+    unique = list(dict.fromkeys(tuple(round(value, 12) for value in p) for p in points))
+    u = (1 / math.sqrt(2), -1 / math.sqrt(2), 0.0)
+    v = (1 / math.sqrt(6), 1 / math.sqrt(6), -2 / math.sqrt(6))
+    projected = [
+        (
+            sum(point[index] * u[index] for index in range(3)),
+            sum(point[index] * v[index] for index in range(3)),
+        )
+        for point in unique
+    ]
+    return _shoelace_area(_convex_hull(projected)) if len(projected) >= 3 else 0.0
+
+
+def _geometry_cube_diagonal_section_maximum(
+    params: dict[str, Any],
+) -> Problem | None:
+    sample_levels = [index / 100 for index in range(1, 300)]
+    sampled_areas = [_cube_section_area(level) for level in sample_levels]
+    maximum_index = max(range(len(sampled_areas)), key=sampled_areas.__getitem__)
+    if abs(sample_levels[maximum_index] - 1.5) > 1e-12:
+        return None
+    if abs(sampled_areas[maximum_index] - 3 * math.sqrt(3) / 4) > 1e-9:
+        return None
+
+    return Problem(
+        "ultradeep.spatial_cube_diagonal_section_maximum",
+        "euclidean_geometry",
+        "slice_volume_derivative+inclusion_exclusion+numeric_section_hull",
+        {"symbolic_side": "a", "verification_side": 1},
+        r"一辺 \(a\) の立方体を、3辺を座標軸に平行になるように "
+        r"\(0\le x,y,z\le a\) と置く。平面 \(x+y+z=t\) で切った断面の"
+        r"面積が最大となる \(t\) と、その最大面積を求めよ。",
+        r"t=\frac{3a}{2},\qquad \frac{3\sqrt3}{4}a^2",
+        "t=3*a/2; area=3*sqrt(3)*a**2/4",
+        r"\(F(t)\) を立方体内で \(x+y+z\le t\) を満たす部分の体積とする。"
+        r"断面に垂直な移動距離は \(dt/\sqrt3\) なので断面積は "
+        r"\(\sqrt3F'(t)\)。対称性から \(0\le t\le3a/2\) だけ見ればよい。"
+        r"\(0\le t\le a\) では \(F=t^3/6\)、\(a\le t\le3a/2\) では"
+        r"包除原理により \(F=\{t^3-3(t-a)^3\}/6\)。後者の断面積は "
+        r"\(\frac{\sqrt3}{2}\{t^2-3(t-a)^2\}\) で、\(t=3a/2\) まで"
+        r"増加する。よって中央の正六角形断面で最大値 "
+        r"\(3\sqrt3a^2/4\) をとる。",
+        (
+            "CubeConfiguration",
+            "BodyDiagonalDirection",
+            "ParallelPlaneFamily",
+            "SublevelSolid",
+            "SliceVolumeCorrespondence",
+            "CoordinateSimplexVolume",
+            "ThreeCornerExclusion",
+            "InclusionExclusion",
+            "PiecewiseQuadraticSectionArea",
+            "CentralSymmetryReduction",
+            "ExtremumObservation",
+        ),
+        True,
+        True,
+        "inclusion_exclusion_derivative_vs_edge_intersection_polygon_area",
+    )
+
+
+def _grid_geometry_cube_diagonal_section() -> Iterable[dict[str, Any]]:
+    yield {"symbolic": True}
+
+
+def _geometry_cube_ball_sweep(params: dict[str, Any]) -> Problem | None:
+    try:
+        import numpy as np
+        from scipy.spatial import ConvexHull
+    except ImportError:  # pragma: no cover - CI installs scipy
+        return None
+
+    samples = 4096
+    sphere = []
+    golden_angle = math.pi * (3 - math.sqrt(5))
+    for index in range(samples):
+        z = 1 - 2 * (index + 0.5) / samples
+        radius = math.sqrt(max(0.0, 1 - z * z))
+        angle = index * golden_angle
+        sphere.append((radius * math.cos(angle), radius * math.sin(angle), z))
+    cube = [(x, y, z) for x in (0.0, 1.0) for y in (0.0, 1.0) for z in (0.0, 1.0)]
+    sums = np.array(
+        [[x + u, y + v, z + w] for x, y, z in cube for u, v, w in sphere]
+    )
+    numeric_volume = float(ConvexHull(sums).volume)
+    exact_unit_volume = 7 + 13 * math.pi / 3
+    if abs(numeric_volume - exact_unit_volume) > 0.02:
+        return None
+
+    return Problem(
+        "ultradeep.spatial_cube_ball_sweep_volume",
+        "convex_geometry",
+        "spatial_minkowski_sum+boundary_strata+sampled_convex_hull_3d",
+        {"symbolic": ["a", "r"], "verification": [1, 1]},
+        r"一辺 \(a\) の立方体の内部または表面を、半径 \(r\) の球の中心が"
+        r"自由に動く。この球が通過する空間領域の体積を求めよ。",
+        r"a^3+6a^2r+3\pi ar^2+\frac{4\pi}{3}r^3",
+        "a**3 + 6*a**2*r + 3*pi*a*r**2 + 4*pi*r**3/3",
+        r"通過領域は立方体と半径 \(r\) の球とのMinkowski和である。元の"
+        r"立方体に、6面から生じる厚さ \(r\) の角柱、12辺から生じる"
+        r"四分円柱、8頂点から生じる球の八分体を加える。それぞれの体積は"
+        r" \(a^3,6a^2r,12\cdot\frac14\pi r^2a,"
+        r"8\cdot\frac18\frac43\pi r^3\)。合計して答を得る。",
+        (
+            "CubeConfiguration",
+            "MovingSphereCenter",
+            "SpatialPassageUnion",
+            "ThreeDimensionalMinkowskiAddition",
+            "FaceEdgeVertexStratification",
+            "FacePrismContribution",
+            "QuarterCylinderEdgeContribution",
+            "SphericalOctantVertexContribution",
+            "DisjointBoundaryLayerMerge",
+            "VolumeObservation",
+        ),
+        True,
+        True,
+        "boundary_stratum_decomposition_vs_sampled_sphere_minkowski_hull",
+    )
+
+
+def _grid_geometry_cube_ball_sweep() -> Iterable[dict[str, Any]]:
+    yield {"symbolic": True}
+
+
 GEOMETRY_DEEP_FAMILIES: tuple[
     tuple[
         Callable[[dict[str, Any]], Problem | None],
@@ -376,4 +689,9 @@ GEOMETRY_DEEP_FAMILIES: tuple[
     (_geometry_parabola_normal_envelope, _grid_geometry_parabola_normal),
     (_geometry_orthocenter_locus, _grid_geometry_orthocenter),
     (_geometry_minkowski_polygon, _grid_geometry_minkowski),
+    (_geometry_triangle_displacement_locus, _grid_geometry_triangle_displacement),
+    (_geometry_polygon_disk_sweep, _grid_geometry_polygon_disk_sweep),
+    (_geometry_tetrahedron_displacement_locus, _grid_geometry_tetrahedron_displacement),
+    (_geometry_cube_diagonal_section_maximum, _grid_geometry_cube_diagonal_section),
+    (_geometry_cube_ball_sweep, _grid_geometry_cube_ball_sweep),
 )
