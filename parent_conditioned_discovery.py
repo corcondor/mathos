@@ -570,8 +570,17 @@ def discover(parents: list[dict[str, Any]]) -> dict[str, Any]:
             ],
             "fusion_derivation": {
                 "passed": True,
-                "reason": "all selected parents have distinct typed paths to a common candidate codomain",
-                "ablationPassed": len(parent_ids) == len(set(parent_ids)),
+                "reason": "all selected parents have distinct typed conjectural paths; mathematical indispensability is not yet proved",
+                "ablationPassed": all(
+                    f"{selected.get('constructor', 'Join')}["
+                    + ",".join(
+                        path["start_sort"]
+                        for path_index, path in enumerate(selected["paths"])
+                        if path_index != removed_index
+                    )
+                    + "]" != selected["target_sort"]
+                    for removed_index in range(len(selected["paths"]))
+                ),
                 "assignments": [{
                     "parentId": path["parent_id"],
                     "portId": f"input_{index + 1}",
