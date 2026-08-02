@@ -1,0 +1,32 @@
+name: MathOS parent-conditioned discovery
+
+on:
+  repository_dispatch:
+    types: [generate-problem]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: parent-discovery-${{ github.event.client_payload.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install symbolic backends
+        run: pip install sympy numpy scipy mpmath
+      - name: Verify parent-conditioned discovery
+        run: python -m unittest test_parent_conditioned_discovery
+      - name: Discover structure from the selected parents
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          JOB_ID: ${{ github.event.client_payload.job_id }}
+        run: python -B parent_conditioned_discovery.py
