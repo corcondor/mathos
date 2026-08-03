@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T19:28:14.775860+00:00",
+  "generated_at": "2026-08-03T22:07:46.516225+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "hard_problem_policy": "proof DAG with converging constraints required; flat scalar bridge compositions are excluded",
