@@ -421,10 +421,25 @@ def extract_gsm8k_answer(answer: str) -> str | None:
 
 
 def extract_boxed_answer(solution: str) -> str | None:
-    match = re.search(r"\\boxed\{([^{}]+)\}", solution)
-    if match:
-        return normalize_answer(match.group(1))
-    return None
+    marker = r"\boxed{"
+    answers: list[str] = []
+    cursor = 0
+    while True:
+        start = solution.find(marker, cursor)
+        if start < 0:
+            break
+        index = start + len(marker)
+        depth = 1
+        while index < len(solution) and depth:
+            if solution[index] == "{" and (index == 0 or solution[index - 1] != "\\"):
+                depth += 1
+            elif solution[index] == "}" and (index == 0 or solution[index - 1] != "\\"):
+                depth -= 1
+            index += 1
+        if depth == 0:
+            answers.append(solution[start + len(marker):index - 1])
+        cursor = max(index, start + len(marker))
+    return normalize_answer(answers[-1]) if answers else None
 
 
 def normalize_asdiv_prompt(text: str) -> str:
