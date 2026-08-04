@@ -9,6 +9,7 @@ The runner deliberately separates three metrics:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import multiprocessing as mp
 import queue
@@ -54,6 +55,7 @@ class PublicBenchmarkCase:
     index: int
     problem: str
     expected: str | None
+    level: str | None = None
 
 
 @dataclass
@@ -70,6 +72,31 @@ class PublicBenchmarkRecord:
     exact_match: bool | None
     error: str | None
     problem_preview: str
+    case_id: str
+    problem_hash: str
+    evaluation_partition: str
+    level: str | None
+
+
+def problem_hash(case: PublicBenchmarkCase) -> str:
+    payload = json.dumps(
+        [case.benchmark, case.subset, case.index, case.problem, case.expected],
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def case_identity(case: PublicBenchmarkCase) -> tuple[str, str, str]:
+    digest = problem_hash(case)
+    bucket = int(digest[:8], 16) % 100
+    partition = "dev" if bucket < 20 else "calibration" if bucket < 30 else "held_out"
+    return f"{case.benchmark}:{case.subset}:{case.index}", digest, partition
+
+
+def benchmark_manifest(cases: list[PublicBenchmarkCase]) -> str:
+    joined = "\n".join(problem_hash(case) for case in cases)
+    return hashlib.sha256(joined.encode("ascii")).hexdigest()
 
 
 def fetch_hf_rows(dataset: str, config: str, split: str, length: int, offset: int = 0) -> list[dict[str, Any]]:
@@ -149,6 +176,7 @@ def load_math_cases(per_config: int) -> list[PublicBenchmarkCase]:
                     index=index,
                     problem=row["problem"],
                     expected=extract_boxed_answer(row.get("solution", "")),
+                    level=str(row.get("level")) if row.get("level") is not None else None,
                 )
             )
     return cases
@@ -252,6 +280,7 @@ def run_public_benchmark(
     external_tools: bool = False,
     allow_surface_morphisms: bool = False,
     case_timeout: float | None = None,
+    workers: int = 1,
 ) -> dict[str, Any]:
     cases: list[PublicBenchmarkCase] = []
     if gsm8k:
@@ -269,10 +298,20 @@ def run_public_benchmark(
     if mawps:
         cases.extend(load_mawps_cases(mawps))
 
-    records: list[PublicBenchmarkRecord] = []
-    for case in cases:
-        if case_timeout and case_timeout > 0:
-            records.append(
+    started = time.perf_counter()
+    worker_count = max(1, int(workers))
+    if case_timeout and case_timeout > 0:
+        if worker_count > 1:
+            records = run_cases_with_persistent_workers(
+                cases,
+                live_retrieval=live_retrieval,
+                external_tools=external_tools,
+                allow_surface_morphisms=allow_surface_morphisms,
+                timeout=case_timeout,
+                workers=worker_count,
+            )
+        else:
+            records = [
                 run_case_with_timeout(
                     case,
                     live_retrieval=live_retrieval,
@@ -280,17 +319,32 @@ def run_public_benchmark(
                     allow_surface_morphisms=allow_surface_morphisms,
                     timeout=case_timeout,
                 )
+                for case in cases
+            ]
+    else:
+        # In-process solver state is not assumed to be thread-safe.
+        records = [
+            run_case(
+                case,
+                live_retrieval=live_retrieval,
+                external_tools=external_tools,
+                allow_surface_morphisms=allow_surface_morphisms,
             )
-        else:
-            records.append(
-                run_case(
-                    case,
-                    live_retrieval=live_retrieval,
-                    external_tools=external_tools,
-                    allow_surface_morphisms=allow_surface_morphisms,
-                )
-            )
-    return summarize(records)
+            for case in cases
+        ]
+    result = summarize(records)
+    result["protocol"] = {
+        "schema": 2,
+        "manifest_sha256": benchmark_manifest(cases),
+        "partition_rule": "sha256(case) mod 100: dev=0..19, calibration=20..29, held_out=30..99",
+        "case_timeout_seconds": case_timeout,
+        "workers": worker_count,
+        "live_retrieval": live_retrieval,
+        "external_tools": external_tools,
+        "allow_surface_morphisms": allow_surface_morphisms,
+        "elapsed_seconds": round(time.perf_counter() - started, 3),
+    }
+    return result
 
 
 def run_case(
@@ -300,6 +354,7 @@ def run_case(
     external_tools: bool = False,
     allow_surface_morphisms: bool = False,
 ) -> PublicBenchmarkRecord:
+    case_id, digest, partition = case_identity(case)
     try:
         typed_ir = compile_typed_definition_ir(case.problem)
         result = run_reasoning_pipeline(
@@ -324,6 +379,10 @@ def run_case(
             exact_match=match,
             error=None,
             problem_preview=case.problem[:220],
+            case_id=case_id,
+            problem_hash=digest,
+            evaluation_partition=partition,
+            level=case.level,
         )
     except Exception as exc:
         return error_record(case, str(exc))
@@ -371,7 +430,139 @@ def _case_worker(
     result_queue.put(asdict(record))
 
 
+def _persistent_case_worker(
+    slot: int,
+    input_queue: mp.Queue,
+    output_queue: mp.Queue,
+    live_retrieval: bool,
+    external_tools: bool,
+    allow_surface_morphisms: bool,
+) -> None:
+    output_queue.put(("ready", slot, None, None))
+    while True:
+        payload = input_queue.get()
+        if payload is None:
+            return
+        position, case = payload
+        record = run_case(
+            case,
+            live_retrieval=live_retrieval,
+            external_tools=external_tools,
+            allow_surface_morphisms=allow_surface_morphisms,
+        )
+        output_queue.put(("result", slot, position, asdict(record)))
+
+
+def run_cases_with_persistent_workers(
+    cases: list[PublicBenchmarkCase],
+    *,
+    live_retrieval: bool,
+    external_tools: bool,
+    allow_surface_morphisms: bool,
+    timeout: float,
+    workers: int,
+) -> list[PublicBenchmarkRecord]:
+    """Run isolated reusable workers and replace only a worker that times out."""
+    if not cases:
+        return []
+    context = mp.get_context("spawn")
+    output_queue = context.Queue()
+    slots: dict[int, dict[str, Any]] = {}
+    results: list[PublicBenchmarkRecord | None] = [None] * len(cases)
+    next_position = 0
+    completed = 0
+
+    def start_worker(slot: int) -> None:
+        input_queue = context.Queue(maxsize=1)
+        process = context.Process(
+            target=_persistent_case_worker,
+            args=(
+                slot,
+                input_queue,
+                output_queue,
+                live_retrieval,
+                external_tools,
+                allow_surface_morphisms,
+            ),
+        )
+        process.start()
+        slots[slot] = {
+            "process": process,
+            "queue": input_queue,
+            "ready": False,
+            "position": None,
+            "started": None,
+        }
+
+    def stop_worker(slot: int, *, force: bool = False) -> None:
+        state = slots[slot]
+        process: mp.Process = state["process"]
+        if process.is_alive() and not force:
+            state["queue"].put(None)
+            process.join(2)
+        if process.is_alive():
+            process.terminate()
+            process.join(2)
+        state["queue"].close()
+
+    def assign(slot: int) -> None:
+        nonlocal next_position
+        state = slots[slot]
+        if not state["ready"] or state["position"] is not None or next_position >= len(cases):
+            return
+        position = next_position
+        next_position += 1
+        state["position"] = position
+        state["started"] = time.monotonic()
+        state["queue"].put((position, cases[position]))
+
+    for slot in range(min(workers, len(cases))):
+        start_worker(slot)
+
+    try:
+        while completed < len(cases):
+            try:
+                kind, slot, position, payload = output_queue.get(timeout=0.05)
+            except queue.Empty:
+                kind = None
+            if kind == "ready":
+                slots[slot]["ready"] = True
+                assign(slot)
+            elif kind == "result" and position is not None:
+                if results[position] is None:
+                    results[position] = PublicBenchmarkRecord(**payload)
+                    completed += 1
+                slots[slot]["position"] = None
+                slots[slot]["started"] = None
+                assign(slot)
+
+            now = time.monotonic()
+            for slot, state in list(slots.items()):
+                position = state["position"]
+                started = state["started"]
+                process: mp.Process = state["process"]
+                timed_out = position is not None and started is not None and now - started > timeout
+                died = state["ready"] and not process.is_alive() and position is not None
+                if not timed_out and not died:
+                    continue
+                if results[position] is None:
+                    reason = f"case_timeout_after_{timeout:g}s" if timed_out else "case_worker_exited"
+                    verification = "timeout" if timed_out else "error"
+                    results[position] = error_record(cases[position], reason, verification=verification)
+                    completed += 1
+                stop_worker(slot, force=True)
+                if next_position < len(cases):
+                    start_worker(slot)
+    finally:
+        for slot in list(slots):
+            stop_worker(slot)
+        output_queue.close()
+
+    return [record for record in results if record is not None]
+
+
 def error_record(case: PublicBenchmarkCase, error: str, *, verification: str = "error") -> PublicBenchmarkRecord:
+    case_id, digest, partition = case_identity(case)
     return PublicBenchmarkRecord(
         benchmark=case.benchmark,
         subset=case.subset,
@@ -385,6 +576,10 @@ def error_record(case: PublicBenchmarkCase, error: str, *, verification: str = "
         exact_match=False if case.expected is not None else None,
         error=error,
         problem_preview=case.problem[:220],
+        case_id=case_id,
+        problem_hash=digest,
+        evaluation_partition=partition,
+        level=case.level,
     )
 
 
@@ -394,13 +589,36 @@ def summarize(records: list[PublicBenchmarkRecord]) -> dict[str, Any]:
     answered = sum(bool(record.answer) for record in records)
     comparable = [record for record in records if record.expected is not None]
     exact = sum(record.exact_match is True for record in comparable)
+    answered_comparable = [record for record in comparable if bool(record.answer)]
+    wrong = sum(record.exact_match is False for record in answered_comparable)
+    abstained = sum(not bool(record.answer) for record in comparable)
+    timeouts = sum(record.verification == "timeout" for record in records)
     by_benchmark: dict[str, dict[str, int]] = {}
     for record in records:
-        bucket = by_benchmark.setdefault(record.benchmark, {"total": 0, "typed_ok": 0, "answered": 0, "exact": 0})
+        bucket = by_benchmark.setdefault(record.benchmark, {
+            "total": 0, "typed_ok": 0, "answered": 0, "exact": 0,
+            "wrong": 0, "abstained": 0, "timeouts": 0,
+        })
         bucket["total"] += 1
         bucket["typed_ok"] += int(record.typed_status == "type_checked")
         bucket["answered"] += int(bool(record.answer))
         bucket["exact"] += int(record.exact_match is True)
+        bucket["wrong"] += int(bool(record.answer) and record.exact_match is False)
+        bucket["abstained"] += int(not bool(record.answer))
+        bucket["timeouts"] += int(record.verification == "timeout")
+    failure_intents: dict[str, int] = {}
+    for record in records:
+        if record.exact_match is True:
+            continue
+        key = f"{record.typed_status}|{record.intent}|{record.verification}"
+        failure_intents[key] = failure_intents.get(key, 0) + 1
+    by_partition: dict[str, dict[str, int]] = {}
+    for record in records:
+        bucket = by_partition.setdefault(record.evaluation_partition, {"total": 0, "answered": 0, "exact": 0, "wrong": 0})
+        bucket["total"] += 1
+        bucket["answered"] += int(bool(record.answer))
+        bucket["exact"] += int(record.exact_match is True)
+        bucket["wrong"] += int(bool(record.answer) and record.exact_match is False)
     return {
         "total": total,
         "typed_kernel_ok": typed_ok,
@@ -410,7 +628,13 @@ def summarize(records: list[PublicBenchmarkRecord]) -> dict[str, Any]:
         "comparable": len(comparable),
         "exact_match": exact,
         "exact_match_rate": exact / len(comparable) if comparable else 0.0,
+        "answer_precision": exact / len(answered_comparable) if answered_comparable else 0.0,
+        "wrong": wrong,
+        "abstained": abstained,
+        "timeouts": timeouts,
         "by_benchmark": by_benchmark,
+        "by_partition": by_partition,
+        "top_failure_stages": dict(sorted(failure_intents.items(), key=lambda item: (-item[1], item[0]))[:30]),
         "records": [asdict(record) for record in records],
     }
 
@@ -531,6 +755,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="Enable direct surface-morphism adapters as an ablation, not as the cold MathOS path.",
     )
     parser.add_argument("--case-timeout", type=float, default=None, help="Optional per-problem timeout in seconds.")
+    parser.add_argument("--workers", type=int, default=1, help="Concurrent killable case controllers (requires --case-timeout).")
     parser.add_argument("--output", type=Path, default=Path("math_os_prototype/public_benchmark_results.json"))
     return parser
 
@@ -549,6 +774,7 @@ def main() -> int:
         external_tools=args.external_tools,
         allow_surface_morphisms=args.allow_surface_morphisms,
         case_timeout=args.case_timeout,
+        workers=args.workers,
     )
     write_outputs(result, args.output)
     print(json.dumps({key: value for key, value in result.items() if key != "records"}, ensure_ascii=False, indent=2))
