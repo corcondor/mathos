@@ -325,6 +325,10 @@ def extract_operations(text: str, relations: list[str]) -> list[StructuralOperat
         add("correlation", "")
     if contains_any(lower, ("期待値", "expectation")):
         add("expectation", "")
+    if re.search(r"\bsum of\b", lower) or "総和" in lower or "和を求め" in lower:
+        add("aggregate", extract_last_expression(text) or latest_relation(relations), operation="sum")
+    if re.search(r"\bproduct of\b", lower) or "総積" in lower or "積を求め" in lower:
+        add("aggregate", extract_last_expression(text) or latest_relation(relations), operation="product")
 
     return dedupe_operations(operations)
 
@@ -450,7 +454,15 @@ def normalize_math_symbols(text: str) -> str:
 
 
 def contains_any(text: str, needles: tuple[str, ...]) -> bool:
-    return any(needle.lower() in text for needle in needles)
+    lower = text.lower()
+    for needle in needles:
+        lowered = needle.lower()
+        if re.fullmatch(r"[a-z]+", lowered):
+            if re.search(rf"(?<![a-z]){re.escape(lowered)}(?![a-z])", lower):
+                return True
+        elif lowered in lower:
+            return True
+    return False
 
 
 def unique_preserve_order(items: list[str] | Any) -> list[str]:

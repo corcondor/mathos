@@ -447,6 +447,7 @@ def run_reasoning_pipeline(
         typed_definition_ir=typed_definition_ir.to_dict(),
         formal_ir=formal_ir.to_dict(),
         arithmetic_problem=ir.givens.get("arithmetic_problem") if isinstance(ir.givens, dict) else None,
+        symbolic_query_ir=ir.givens.get("symbolic_query") if isinstance(ir.givens, dict) else None,
     )
     semantic_answer = extract_answer(ir) or search_dict.get("answer")
     verifier_gate = run_verifier_gate(semantic_graph, answer=str(semantic_answer) if semantic_answer is not None else None)
@@ -571,6 +572,14 @@ def is_safe_tool_call(call: ToolCall, ir: MathIR, domain_ir: DomainIR, problem: 
         return domain_ir.domain == "algebra" and (
             ("solve " in text and " for " in text)
             or ("解け" in text and "=" in text)
+        )
+    if name == "sympy.semantic_query":
+        payload = ir.givens.get("symbolic_query") if isinstance(ir.givens, dict) else None
+        return (
+            domain_ir.domain in {"algebra", "inequalities", "prealgebra", "unknown"}
+            and isinstance(payload, dict)
+            and bool(payload.get("query_operator"))
+            and bool(payload.get("target"))
         )
     return False
 

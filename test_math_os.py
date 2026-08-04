@@ -399,6 +399,64 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(target_sum["answer"], "8")
         self.assertEqual(earlier["answer"], "7")
 
+    def test_quantity_reasoner_composes_a_typed_rate_chain(self):
+        result = solve_quantity_reasoning_problem(
+            "A classroom has a whiteboard shared by 4 teachers. "
+            "Each teacher has 2 lessons per day. The whiteboard is cleaned "
+            "3 times per lesson. How many times is it cleaned in a day?"
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result.answer_exact, "24")
+        self.assertEqual(result.semantic_model["best_candidate_kind"], "typed_rate_chain")
+        self.assertIn("(Rate lesson teacher)", result.semantic_model["best_sequent"])
+        self.assertIn("(Rate time lesson)", result.semantic_model["best_sequent"])
+
+    def test_quantity_reasoner_merges_parallel_rate_branches_before_observation(self):
+        per_basket = solve_quantity_reasoning_problem(
+            "There are 65 baskets of peaches. Each basket has 7 red peaches and 3 green peaches. "
+            "How many peaches are in each basket?"
+        )
+        total = solve_quantity_reasoning_problem(
+            "There are 11 baskets of peaches. Each basket has 10 red peaches and 18 green peaches. "
+            "How many peaches are in the baskets altogether?"
+        )
+        self.assertEqual(per_basket.answer_exact, "10")
+        self.assertEqual(total.answer_exact, "308")
+        self.assertIn("parallel_rate_merge", per_basket.candidates[0]["checks"])
+
+    def test_quantity_reasoner_composes_affine_relations_without_name_or_number_templates(self):
+        first = solve_quantity_reasoning_problem(
+            "Amy made 20 more friends than Lily. Lily made 50 friends. "
+            "How many friends do Lily and Amy have together?"
+        )
+        changed = solve_quantity_reasoning_problem(
+            "Nora made 7 more friends than Mei. Mei made 12 friends. "
+            "How many friends do Mei and Nora have together?"
+        )
+        self.assertEqual(first.answer_exact, "120")
+        self.assertEqual(changed.answer_exact, "31")
+        self.assertEqual(first.semantic_model["best_candidate_kind"], "affine_entity_relation")
+
+    def test_quantity_reasoner_composes_fractional_allocation_and_conservation(self):
+        first = solve_quantity_reasoning_problem(
+            "Two girls each got 1/6 of the 24 liters of water. Then a boy got 6 liters. "
+            "How many liters were left?"
+        )
+        changed = solve_quantity_reasoning_problem(
+            "Three teams each received 1/8 of the 40 boxes. Then a club took 5 boxes. "
+            "How many boxes were left?"
+        )
+        self.assertEqual(first.answer_exact, "10")
+        self.assertEqual(changed.answer_exact, "20")
+        self.assertEqual(first.semantic_model["best_candidate_kind"], "fractional_each_allocation")
+
+    def test_quantity_reasoner_does_not_treat_dimensions_or_percent_as_counts(self):
+        result = solve_quantity_reasoning_problem(
+            "Lumber prices rose 50%. There are ten 2 x 4 x 10 boards costing $10 each "
+            "and five 4 x 4 x 10 boards costing $16 each. How much profit is made?"
+        )
+        self.assertIsNone(result)
+
     def test_quantity_reasoner_handles_unit_price_and_group_inversion(self):
         unit_price = solve_request_payload(
             {
@@ -1228,6 +1286,56 @@ class MathOsPrototypeTest(unittest.TestCase):
         ir = compiler.compile("solve x^2 - 5*x + 6 = 0 for x")
         ToolExecutor().execute(ir)
         self.assertEqual(ir.tool_calls[0].result["solutions"], ["2", "3"])
+
+    def test_symbolic_query_ir_preserves_query_operator(self):
+        cases = [
+            ("Expand $(3x^2+2x)(x^2-5)$.", "expand", "3*x**4 + 2*x**3 - 15*x**2 - 10*x"),
+            ("Factor $5x^2-45$.", "factor", "5*(x - 3)*(x + 3)"),
+            ("If $(3x+1)(x-2)=7$, find the sum of the possible values of $x$.", "root_sum", "5/3"),
+            ("What value of $x$ gives the minimum value of $2x^2-20x+1$?", "argmin", "5"),
+            ("Given that $-6$ is a solution to $x^2+bx-42=0$, what is the value of $b$?", "solve", "-1"),
+            ("If $r$ and $s$ are the roots of $3x^2-7x+2=0$, find $(r-2)(s-2)$.", "symmetric_root_expression", "0"),
+        ]
+        for problem, operator, expected in cases:
+            with self.subTest(operator=operator):
+                ir = run_pipeline(problem)
+                self.assertEqual(ir.intent, f"symbolic_query_{operator}")
+                self.assertEqual(ir.tool_calls[0].result["query_operator"], operator)
+                self.assertEqual(ir.tool_calls[0].result["answer_exact"], expected)
+
+    def test_symbolic_query_ir_lifts_to_typed_semantic_graph(self):
+        result = solve_request_payload(
+            {
+                "problem": "For what values of $x$ is $x^2-5x-4 \\le 10$? Express the answer in interval notation.",
+                "full_pipeline": True,
+            }
+        )
+        self.assertEqual(result["answer"], "Interval(-2, 7)")
+        graph = result["data"]["semantic_graph"]
+        self.assertTrue(any(item["name"] == "solve_inequality" for item in graph["morphisms"]))
+        self.assertTrue(any(item["kind"] == "solve_inequality" and item["sort"] == "Set" for item in graph["queries"]))
+
+    def test_symbolic_query_expands_chained_inequality_as_constraint_intersection(self):
+        result = solve_request_payload(
+            {
+                "problem": "For what real values of $u$ is $-5<u^4+5u^2<24$ satisfied? Express the answer in interval notation.",
+                "full_pipeline": True,
+            }
+        )
+        self.assertEqual(result["answer"], "Interval.open(-sqrt(3), sqrt(3))")
+        symbolic_ir = result["data"]["parser"]["givens"]["symbolic_query"]
+        self.assertEqual(symbolic_ir["constraints"], ["-5<u**4+5*u**2", "u**4+5*u**2<24"])
+
+    def test_generic_equation_solver_cannot_answer_an_unreached_aggregate_query(self):
+        result = solve_request_payload(
+            {
+                "problem": "The roots of $z^6+z^4+z^2+1=0$ are vertices of a convex polygon. Find the sum of the squares of its side lengths.",
+                "full_pipeline": True,
+            }
+        )
+        self.assertIsNone(result["answer"])
+        operations = result["data"]["structural_ir"]["operations"]
+        self.assertTrue(any(item["kind"] == "aggregate" for item in operations))
 
 
 if __name__ == "__main__":

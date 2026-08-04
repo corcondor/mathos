@@ -21,6 +21,7 @@ try:
     from math_os_prototype.geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from math_os_prototype.geometry_nl import convert_geometry_nl
     from math_os_prototype.latex_frontend import looks_like_latex, parse_latex_problem
+    from math_os_prototype.symbolic_query import compile_symbolic_query, execute_symbolic_query
     from math_os_prototype.tool_adapters import ToolRegistry
 except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
@@ -29,6 +30,7 @@ except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from geometry_nl import convert_geometry_nl
     from latex_frontend import looks_like_latex, parse_latex_problem
+    from symbolic_query import compile_symbolic_query, execute_symbolic_query
     from tool_adapters import ToolRegistry
 
 try:
@@ -232,6 +234,31 @@ class ProblemCompiler:
                     ToolCall(
                         "arithmetic.nl",
                         arithmetic_problem.expression,
+                        executable=True,
+                    )
+                ],
+            )
+
+        symbolic_query = compile_symbolic_query(text)
+        if symbolic_query is not None:
+            payload = symbolic_query.to_dict()
+            return MathIR(
+                problem=text,
+                route="symbolic_algebra",
+                intent=f"symbolic_query_{symbolic_query.query_operator}",
+                symbols=symbolic_query.variables,
+                givens={"symbolic_query": payload},
+                goal=f"Execute the typed query operator {symbolic_query.query_operator} over parsed constraints.",
+                plan=[
+                    "Parse TeX math spans separately from prose.",
+                    "Build Constraint + QueryOperator + OutputSort IR.",
+                    "Execute the query operator with exact symbolic arithmetic.",
+                    "Return the result with its query provenance.",
+                ],
+                tool_calls=[
+                    ToolCall(
+                        "sympy.semantic_query",
+                        f"{symbolic_query.query_operator}({symbolic_query.target})",
                         executable=True,
                     )
                 ],
@@ -607,6 +634,8 @@ class ToolExecutor:
                     call.result = run_minkowski_sum(ir.givens["polygon_a"], ir.givens["polygon_b"])
                 elif call.name == "sympy.solve":
                     call.result = run_sympy_solve(ir.givens["equation"], ir.givens["variable"])
+                elif call.name == "sympy.semantic_query":
+                    call.result = execute_symbolic_query(ir.givens["symbolic_query"])
                 elif call.name == "sympy.diff":
                     call.result = run_sympy_diff(ir.givens["expression"], ir.givens["variable"])
                 elif call.name == "sympy.polynomial_remainder":

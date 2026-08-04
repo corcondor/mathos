@@ -56,7 +56,7 @@ NUMBER_WORD_RE = (
     r"nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|"
     r"half|third|quarter|dozen)\b"
 )
-NUMBER_RE = rf"(?<![a-z])\$?\d+(?:\.\d+)?(?![a-z])|{NUMBER_WORD_RE}"
+NUMBER_RE = rf"(?<![a-z])\$?\d+/\d+(?![a-z])|(?<![a-z])\$?\d+(?:\.\d+)?(?![a-z])|{NUMBER_WORD_RE}"
 
 NEGATIVE_VERBS = {
     "delete",
@@ -178,6 +178,7 @@ class Quantity:
     role: str
     sentence_index: int
     text: str
+    denominator: str | None = None
 
     def to_dict(self) -> dict[str, str | int | None]:
         payload = asdict(self)
@@ -245,9 +246,10 @@ def extract_quantities(text: str) -> list[Quantity]:
     sentences = split_sentences(text)
     quantities: list[Quantity] = []
     next_id = 0
+    latest_concrete_object: str | None = None
     for sentence_index, sentence in enumerate(sentences):
         number_matches = list(re.finditer(rf"(?P<number>{NUMBER_RE})", sentence))
-        previous_concrete_object: str | None = None
+        previous_concrete_object = latest_concrete_object
         for number_index, match in enumerate(number_matches):
             number_text = match.group("number")
             if is_referential_one(sentence, match.start(), number_text):
@@ -258,10 +260,33 @@ def extract_quantities(text: str) -> list[Quantity]:
             tail_end = number_matches[number_index + 1].start() if number_index + 1 < len(number_matches) else len(sentence)
             tail = sentence[match.end() : tail_end]
             unit, obj = ("dollar", "dollar") if number_text.startswith("$") else parse_unit_object(tail)
-            if obj in PLACE_OBJECTS and previous_concrete_object is not None:
+            if (obj in PLACE_OBJECTS or obj == "quantity") and previous_concrete_object is not None:
                 unit = previous_concrete_object
                 obj = previous_concrete_object
             role = infer_role(sentence, match.start())
+            coordinated_denominator: str | None = None
+            if (
+                role == "state"
+                and quantities
+                and quantities[-1].sentence_index == sentence_index
+                and quantities[-1].role in {"rate", "per_unit"}
+                and re.search(r"\band\b", sentence[number_matches[number_index - 1].end() : match.start()])
+            ):
+                role = "per_unit"
+                coordinated_denominator = quantities[-1].denominator
+            if "/" in number_text:
+                unit, obj, role = "scalar", "scalar", "scale"
+            elif sentence[match.end() :].lstrip().startswith("%"):
+                unit, obj, role = "percent", "percent", "scale"
+            elif is_dimension_component(sentence, match.start(), match.end()):
+                unit, obj, role = "dimension", "dimension", "dimension"
+            denominator = coordinated_denominator or infer_surface_denominator(
+                sentence,
+                match.start(),
+                match.end(),
+                number_text,
+                previous_concrete_object,
+            ) if role in {"rate", "per_unit"} else None
             owner = infer_owner(sentence, match.start())
             time = infer_time(sentence, match.start())
             quantities.append(
@@ -276,10 +301,13 @@ def extract_quantities(text: str) -> list[Quantity]:
                     role=role,
                     sentence_index=sentence_index,
                     text=sentence.strip(),
+                    denominator=denominator,
                 )
             )
             if obj not in META_OBJECTS | PRONOUN_OBJECTS | PLACE_OBJECTS:
                 previous_concrete_object = obj
+                if obj not in {"dimension", "percent", "scalar"}:
+                    latest_concrete_object = obj
             next_id += 1
     return quantities
 
@@ -287,6 +315,11 @@ def extract_quantities(text: str) -> list[Quantity]:
 def build_equation_candidates(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
     candidates: list[EquationCandidate] = []
     builders = (
+        candidate_affine_entity_relation,
+        candidate_fractional_each_allocation,
+        candidate_comparison_difference,
+        candidate_conservation_initial,
+        candidate_rate_chain,
         candidate_complement_count_times_unit,
         candidate_complement_count,
         candidate_previous_period_difference,
@@ -328,6 +361,293 @@ def build_equation_candidates(text: str, quantities: list[Quantity]) -> list[Equ
     for builder in builders:
         candidates.extend(builder(text, quantities))
     return sorted(candidates, key=lambda item: item.confidence, reverse=True)
+
+
+def candidate_comparison_difference(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
+    if not any(marker in text for marker in ("how many fewer", "how much less", "how many more", "how much more")):
+        return []
+    if any(marker in text for marker in ("split", "two groups", "second group", "second pile")):
+        return []
+    target = query_object(text)
+    if not target:
+        return []
+    relevant = [
+        quantity for quantity in quantities
+        if equivalent_object(quantity.obj, target)
+        and quantity.role in {"state", "initial", "total", "gain"}
+    ]
+    if len(relevant) != 2:
+        return []
+    left, right = relevant
+    value = abs(left.value - right.value)
+    return [
+        EquationCandidate(
+            kind="comparison_difference",
+            expression=f"abs({format_fraction(left.value)}-{format_fraction(right.value)})",
+            value=value,
+            evidence_ids=[left.id, right.id],
+            target_object=target,
+            confidence=0.94,
+            checks=["same_indexed_sort", "comparison_query", "absolute_difference"],
+        )
+    ]
+
+
+def candidate_conservation_initial(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
+    if not is_initial_query(text):
+        return []
+    target = query_object(text)
+    relevant = [
+        quantity for quantity in quantities
+        if target and equivalent_object(quantity.obj, target)
+    ]
+    losses = [quantity for quantity in relevant if quantity.role == "loss"]
+    gains = [quantity for quantity in relevant if quantity.role == "gain"]
+    finals = [
+        quantity for quantity in relevant
+        if quantity.role in {"state", "total"} and any(marker in quantity.text for marker in ("now", "left", "remain"))
+    ]
+    if not finals:
+        finals = [quantity for quantity in relevant if quantity.role in {"state", "total"}]
+    if len(finals) != 1 or (not losses and not gains):
+        return []
+    final = finals[-1]
+    loss = sum((item.value for item in losses), Fraction(0))
+    gain = sum((item.value for item in gains), Fraction(0))
+    value = final.value + loss - gain
+    if value < 0:
+        return []
+    return [
+        EquationCandidate(
+            kind="conservation_initial",
+            expression=f"{format_fraction(final.value)}+{format_fraction(loss)}-{format_fraction(gain)}",
+            value=value,
+            evidence_ids=[final.id, *[item.id for item in losses], *[item.id for item in gains]],
+            target_object=target,
+            confidence=0.95,
+            checks=["initial_query", "state_conservation", "all_transfers_consumed"],
+        )
+    ]
+
+
+def candidate_affine_entity_relation(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
+    """Solve a named affine relation and optionally fold the named values."""
+
+    direct = re.search(
+        rf"\b(?P<left>[a-z]+)\s+(?:has|had|made|earns?|gets?|owns?)\s+"
+        rf"(?P<delta>{NUMBER_RE})\s+more\s+[a-z-]+(?:\s+[a-z-]+)?\s+than\s+(?P<right>[a-z]+)\b",
+        text,
+    )
+    scaled = re.search(
+        rf"\b(?P<left>[a-z]+)\s+(?:has|had|made|earns?|gets?|owns?)\s+"
+        rf"(?P<delta>{NUMBER_RE})\s+more\s+than\s+"
+        rf"(?P<scale>twice|double|three\s+times|four\s+times)?\s*(?:the\s+)?(?:money|amount|number)?\s*"
+        rf"(?P<right>[a-z]+)\s+(?:has|had|made|earns?|gets?|owns?)",
+        text,
+    )
+    relation = scaled or direct
+    if not relation:
+        return []
+    left = relation.group("left")
+    right = relation.group("right")
+    delta = parse_number(relation.group("delta"))
+    if delta is None:
+        return []
+    scale_surface = relation.groupdict().get("scale") or ""
+    scale = {"twice": 2, "double": 2, "three times": 3, "four times": 4}.get(scale_surface, 1)
+    fact = re.search(
+        rf"\b{re.escape(right)}\s+(?:has|had|made|earns?|gets?|owns?)\s+(?P<base>{NUMBER_RE})\b",
+        text,
+    )
+    if not fact:
+        return []
+    base = parse_number(fact.group("base"))
+    if base is None:
+        return []
+    left_value = scale * base + delta
+    query_tail = text[text.rfind("how ") :] if "how " in text else text
+    aggregate = "together" in query_tail or "in total" in query_tail or "altogether" in query_tail
+    value = left_value + base if aggregate and left in query_tail and right in query_tail else left_value
+    evidence = [
+        quantity.id
+        for quantity in quantities
+        if quantity.value in {delta, base}
+    ]
+    expression = f"({scale}*{format_fraction(base)}+{format_fraction(delta)})"
+    if value != left_value:
+        expression = f"{expression}+{format_fraction(base)}"
+    return [
+        EquationCandidate(
+            kind="affine_entity_relation",
+            expression=expression,
+            value=value,
+            evidence_ids=evidence,
+            target_object=query_object(text),
+            confidence=0.93,
+            checks=["affine_relation", "named_entity_binding", "query_fold" if aggregate else "query_projection"],
+        )
+    ]
+
+
+def candidate_fractional_each_allocation(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
+    """Compose scalar action, repeated allocation, and conservation."""
+
+    if not any(marker in text for marker in ("left", "remaining", "remain")):
+        return []
+    allocation = re.search(
+        rf"(?P<count>{NUMBER_RE})\s+(?P<agent>[a-z-]+)\s+each\s+"
+        rf"(?:got|received|took|used)\s+(?P<fraction>\d+/\d+)\s+of\s+(?:the\s+)?"
+        rf"(?P<total>{NUMBER_RE})\s+(?P<object>[a-z-]+)",
+        text,
+    )
+    if not allocation:
+        return []
+    count = parse_number(allocation.group("count"))
+    fraction = parse_number(allocation.group("fraction"))
+    total = parse_number(allocation.group("total"))
+    if count is None or fraction is None or total is None:
+        return []
+    target = query_object(text)
+    obj = normalize_object(allocation.group("object"))
+    if target and not equivalent_object(target, obj):
+        return []
+    extra_values: list[Fraction] = []
+    suffix = text[allocation.end() :]
+    for match in re.finditer(
+        rf"\b(?:got|received|took|used)\s+(?P<value>{NUMBER_RE})\s+(?P<object>[a-z-]+)",
+        suffix,
+    ):
+        if equivalent_object(match.group("object"), obj):
+            parsed = parse_number(match.group("value"))
+            if parsed is not None:
+                extra_values.append(parsed)
+    repeated = count * fraction * total
+    value = total - repeated - sum(extra_values, Fraction(0))
+    if value < 0:
+        return []
+    evidence_values = {count, fraction, total, *extra_values}
+    evidence = [quantity.id for quantity in quantities if quantity.value in evidence_values]
+    extra_expression = "".join(f"-{format_fraction(item)}" for item in extra_values)
+    return [
+        EquationCandidate(
+            kind="fractional_each_allocation",
+            expression=(
+                f"{format_fraction(total)}-{format_fraction(count)}*"
+                f"{format_fraction(fraction)}*{format_fraction(total)}{extra_expression}"
+            ),
+            value=value,
+            evidence_ids=evidence,
+            target_object=target or obj,
+            confidence=0.94,
+            checks=["scalar_action", "each_scope", "conservation", "query_sort_reached"],
+        )
+    ]
+
+
+def candidate_rate_chain(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
+    """Compose and merge Count(A), Rate(B/A) terms as a typed DAG."""
+
+    if any(
+        marker in text
+        for marker in (
+            "didn't", "did not", "forgot", "except", "all but", "left over", "remaining",
+            "gave away", "sold", "lost", "deleted", "more than", "less than", "%", "percent",
+            "half", "quarter", "fraction", "steal", "used up",
+        )
+    ):
+        return []
+    target = query_object(text)
+    if not target:
+        return []
+    starts = [
+        quantity
+        for quantity in quantities
+        if quantity.role in {"state", "initial", "total", "gain"}
+        and quantity.obj not in {"quantity", "dimension", "percent", "scalar"}
+    ]
+    atomic_rates: list[tuple[Quantity, str]] = []
+    for quantity in quantities:
+        if quantity.role not in {"rate", "per_unit"} or quantity.obj in {"quantity", "dimension", "percent", "scalar"}:
+            continue
+        denominator = rate_denominator(quantity)
+        if denominator:
+            atomic_rates.append((quantity, denominator))
+        elif re.search(r"\beach\b", quantity.text):
+            atomic_rates.extend((quantity, start.obj) for start in starts if start.sentence_index <= quantity.sentence_index)
+    grouped: dict[tuple[str, str], list[Quantity]] = {}
+    for rate, denominator in atomic_rates:
+        grouped.setdefault((normalize_object(rate.obj), normalize_object(denominator)), []).append(rate)
+    rates: list[tuple[str, str, Fraction, list[int], list[str]]] = []
+    for (output_obj, denominator), group in grouped.items():
+        unique = list({item.id: item for item in group}.values())
+        # Parallel arrows with the same type must merge before composition;
+        # returning one branch alone cannot prove an aggregate query.
+        value = sum((item.value for item in unique), Fraction(0))
+        rates.append(
+            (
+                output_obj,
+                denominator,
+                value,
+                [item.id for item in unique],
+                [format_fraction(item.value) for item in unique],
+            )
+        )
+    candidates: list[EquationCandidate] = []
+    query_start = max(text.rfind("how many"), text.rfind("how much"))
+    query_clause = text[query_start:] if query_start >= 0 else ""
+    each_query = re.search(r"\b(?:in|on|for)\s+each\s+(?P<den>[a-z-]+)", query_clause)
+    if each_query:
+        query_denominator = normalize_object(each_query.group("den"))
+        for output_obj, denominator, value, evidence, factors in rates:
+            if equivalent_object(output_obj, target) and equivalent_object(denominator, query_denominator):
+                candidates.append(
+                    EquationCandidate(
+                        kind="typed_rate_chain",
+                        expression="+".join(factors),
+                        value=value,
+                        evidence_ids=evidence,
+                        target_object=target,
+                        confidence=0.99,
+                        checks=["parallel_rate_merge", "query_denominator_fixed", "query_sort_reached"],
+                    )
+                )
+    frontier: list[tuple[str, Fraction, list[int], list[str]]] = [
+        (quantity.obj, quantity.value, [quantity.id], [format_fraction(quantity.value)])
+        for quantity in starts
+    ]
+    seen: set[tuple[str, tuple[int, ...]]] = set()
+    while frontier:
+        current_obj, value, evidence, factors = frontier.pop(0)
+        state_key = (current_obj, tuple(sorted(evidence)))
+        if state_key in seen:
+            continue
+        seen.add(state_key)
+        if equivalent_object(current_obj, target) and len(evidence) >= 2:
+            candidates.append(
+                EquationCandidate(
+                    kind="typed_rate_chain",
+                    expression="*".join(factors),
+                    value=value,
+                    evidence_ids=evidence,
+                    target_object=target,
+                    confidence=min(0.97, 0.87 + 0.03 * len(evidence)),
+                    checks=["typed_rate_composition", "denominator_cancelled", "query_sort_reached"],
+                )
+            )
+        if len(evidence) >= 6:
+            continue
+        for output_obj, denominator, rate_value, rate_ids, rate_factors in rates:
+            if set(rate_ids) & set(evidence) or not equivalent_object(current_obj, denominator):
+                continue
+            frontier.append(
+                (
+                    output_obj,
+                    value * rate_value,
+                    [*evidence, *rate_ids],
+                    [*factors, f"({'+'.join(rate_factors)})" if len(rate_factors) > 1 else rate_factors[0]],
+                )
+            )
+    return candidates
 
 
 def candidate_complement_count_times_unit(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:
@@ -1632,6 +1952,22 @@ def verify_candidate(text: str, quantities: list[Quantity], candidate: EquationC
         return False
     if candidate.kind == "selected_sum" and not candidate.target_object:
         return False
+    if candidate.kind == "selected_object_sum" and any(
+        marker in text for marker in ("twice", "half", "fewer", "more than", "less than", " each ", " per ")
+    ):
+        return False
+    if candidate.kind == "unit_count_product" and any(
+        marker in text for marker in (" left", "rest", "remaining", "equal in cost", "more than", "less than")
+    ):
+        return False
+    if candidate.kind == "state_update" and is_initial_query(text):
+        return False
+    if candidate.kind == "same_object_state_difference" and any(marker in text for marker in ("each album", "each group", "split", "sorted")):
+        return False
+    if candidate.kind == "count_sum_times_common_unit" and any(
+        marker in text for marker in ("%", "percent", "half", "quarter", "change", "additional", "per pound")
+    ):
+        return False
     if candidate.kind in {"state_update", "unit_count_product"} and any(quantity.obj in META_OBJECTS for quantity in evidence_quantities(quantities, candidate)):
         return False
     if candidate.kind == "difference_last_two" and "more" not in text and "difference" not in text:
@@ -1651,7 +1987,7 @@ def normalize_text(text: str) -> str:
 
 
 def split_sentences(text: str) -> list[str]:
-    return [part.strip() for part in re.split(r"(?<=[.?!])\s+|(?<=\.)", text) if part.strip()]
+    return [part.strip() for part in re.split(r"(?<=[.?!])\s+", text) if part.strip()]
 
 
 def parse_number(value: str) -> Fraction | None:
@@ -1664,6 +2000,9 @@ def parse_number(value: str) -> Fraction | None:
         return Fraction(1, 3)
     if value == "quarter":
         return Fraction(1, 4)
+    if re.fullmatch(r"\d+/\d+", value):
+        numerator, denominator = value.split("/", 1)
+        return Fraction(int(numerator), int(denominator)) if int(denominator) else None
     if re.fullmatch(r"\d+(?:\.\d+)?", value):
         return Fraction(value)
     if value in NUMBER_WORDS:
@@ -1678,10 +2017,18 @@ def parse_number(value: str) -> Fraction | None:
 def parse_unit_object(tail: str) -> tuple[str, str]:
     if " more " in f" {tail} " and any(verb in tail for verb in (" bought", " added", " gave", " got", " received")):
         return "count", "quantity"
+    pronoun = re.match(r"\s+of\s+(them|it|one|ones)\b", tail)
+    if pronoun:
+        return "count", pronoun.group(1)
+    local = re.split(
+        r"\b(?:per|for each|in each|on each|each|how|than|that|which|who|and|of|while|if|when|then|but|after|before|earlier|later|ago|to|from|at|in|on|for|with|by)\b",
+        tail,
+        maxsplit=1,
+    )[0]
     clean = re.sub(
         r"\b(?:old|new|more|total|left|right|same|each|per|a|an|the|of|his|her|their|from|to|on|in|at|for|with|giant|stuffed|equal|small|returning)\b",
         " ",
-        tail,
+        local,
     )
     words = [
         word
@@ -1690,7 +2037,7 @@ def parse_unit_object(tail: str) -> tuple[str, str]:
     ]
     if not words:
         return "count", "quantity"
-    obj = normalize_object(words[0])
+    obj = normalize_object(words[-1])
     return obj, obj
 
 
@@ -1698,6 +2045,10 @@ def infer_role(sentence: str, number_start: int) -> str:
     before = sentence[:number_start].lower()
     after = sentence[number_start:].lower()
     recent = before[-90:]
+    if re.search(r"\b(?:were|was|are|is)\s+(?:used|picked|sold|taken|deleted|eaten)\b", after[:90]):
+        return "loss"
+    if re.search(r"\beach\s+[a-z-]+(?:\s+[a-z-]+){0,3}\s+(?:has|have|gets|got|uses|makes|earns|takes)\s*$", recent):
+        return "per_unit"
     if any(marker in recent for marker in (" has ", " had ", " have ")) and re.search(r"\band\b.{0,35}\beach\b", after[:80]):
         return "state"
     if (" per " in after[:40] or " each" in after[:50] or " in one " in after[:50]) and "of them" not in after[:35]:
@@ -1738,10 +2089,67 @@ def infer_role(sentence: str, number_start: int) -> str:
 
 
 def is_referential_one(sentence: str, number_start: int, number_text: str) -> bool:
-    if number_text.lower() != "one":
-        return False
     before = sentence[:number_start].lower()
-    return bool(re.search(r"\beach\s+$", before[-12:]))
+    after = sentence[number_start + len(number_text) :].lower()
+    if number_text.lower() == "one":
+        return bool(re.search(r"\beach\s+$", before[-12:]))
+    if number_text.lower() == "third":
+        return bool(re.search(r"\bthe\s+$", before[-8:]) and re.match(r"\s+[a-z-]+", after))
+    return False
+
+
+def is_dimension_component(sentence: str, start: int, end: int) -> bool:
+    left = sentence[max(0, start - 8) : start]
+    right = sentence[end : end + 8]
+    return bool(re.search(r"(?:\d\s*[x×]\s*)$", left) or re.match(r"\s*[x×]\s*\d", right))
+
+
+def rate_denominator(quantity: Quantity) -> str | None:
+    if quantity.denominator:
+        return normalize_object(quantity.denominator)
+    text = quantity.text.lower()
+    surface = re.escape(quantity.surface.lower().removeprefix("$"))
+    each_before = re.search(rf"\beach\s+(?P<den>[a-z-]+).{{0,60}}?\b{surface}\b", text)
+    if each_before:
+        return normalize_object(each_before.group("den"))
+    local_value = re.search(rf"\b{surface}\b(?P<tail>.{{0,80}})", text)
+    if local_value:
+        per_after = re.search(
+            r"\b(?:per|for each|in each|on each)(?:\s+of)?(?:\s+(?:the\s+)?\d+)?\s+"
+            r"(?P<den>[a-z-]+(?:\s+[a-z-]+)?)(?=\s+(?:who|that|which|how|if|when)|[.,?!]|$)",
+            local_value.group("tail"),
+        )
+        if per_after:
+            return normalize_object(per_after.group("den").split()[-1])
+    return None
+
+
+def infer_surface_denominator(
+    sentence: str,
+    start: int,
+    end: int,
+    surface: str,
+    previous_object: str | None,
+) -> str | None:
+    before = sentence[:start].lower()
+    after = sentence[end:].lower()
+    each_subject = re.search(
+        r"\beach\s+(?P<den>[a-z-]+)(?:\s+[a-z-]+){0,3}\s+"
+        r"(?:has|have|gets|got|uses|makes|earns|takes)\s*$",
+        before,
+    )
+    if each_subject:
+        return normalize_object(each_subject.group("den"))
+    explicit = re.search(
+        r"\b(?:per|for each|in each|on each)(?:\s+of)?(?:\s+(?:the\s+)?\d+)?\s+"
+        r"(?P<den>[a-z-]+(?:\s+[a-z-]+)?)(?=\s+(?:who|that|which|how|if|when)|[.,?!]|$)",
+        after[:100],
+    )
+    if explicit:
+        return normalize_object(explicit.group("den").split()[-1])
+    if re.search(r"\beach\b", after[:80]) and previous_object:
+        return normalize_object(previous_object)
+    return None
 
 
 def is_initial_query(text: str) -> bool:
@@ -1803,8 +2211,9 @@ def infer_time(sentence: str, number_start: int | None = None) -> str | None:
 
 def query_object(text: str) -> str | None:
     patterns = (
+        r"how many more (?P<object>[a-z-]+(?:\s+(?:of\s+)?[a-z-]+){0,2}?) (?:did|does|do|will|would|are|is|were|was)",
+        r"how many (?P<object>[a-z-]+(?:\s+(?:of\s+)?[a-z-]+){0,2}?) (?:did|does|do|will|would|are|is|were|was|needed|need)",
         r"how many more (?P<object>[a-z]+)",
-        r"how many (?P<object>[a-z]+) (?:did|does|do|will|would)",
         r"how many (?P<object>[a-z]+)",
         r"how much (?P<object>money|water|cost|distance|area|time)",
         r"how much (?P<object>[a-z]+)",
@@ -1813,10 +2222,18 @@ def query_object(text: str) -> str | None:
     for pattern in patterns:
         match = re.search(pattern, text)
         if match:
-            obj = normalize_object(match.group("object"))
+            obj = normalize_query_phrase(match.group("object"))
             if obj not in QUERY_STOP_WORDS:
                 return obj
     return None
+
+
+def normalize_query_phrase(value: str) -> str:
+    words = re.findall(r"[a-z-]+", value.lower())
+    if not words:
+        return ""
+    head = words[0] if "of" in words else words[-1]
+    return normalize_object(head)
 
 
 def comparison_labels(text: str) -> tuple[str, str] | None:
@@ -1956,6 +2373,9 @@ def equivalent_object(left: str | None, right: str | None) -> bool:
 def normalize_object(value: str) -> str:
     value = value.lower().strip()
     value = re.sub(r"[^a-z]", "", value)
+    irregular = {"children": "child", "people": "person", "men": "man", "women": "woman"}
+    if value in irregular:
+        return irregular[value]
     if value.endswith("ses") and len(value) > 4:
         value = value[:-2]
     elif value.endswith("ies"):

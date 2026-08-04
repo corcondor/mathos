@@ -77,6 +77,9 @@ def extract_answer_from_pipeline_data(data: dict[str, Any]) -> str | None:
     verifier_gate = data.get("verifier_gate") or {}
     if verifier_gate.get("status") == "rejected" or verifier_gate.get("rejection"):
         return None
+    semantic_query_answer = extract_named_tool_answer(data, "sympy.semantic_query")
+    if semantic_query_answer:
+        return semantic_query_answer
     semantic_answer = extract_semantic_backend_answer(data)
     if semantic_answer:
         return semantic_answer
@@ -85,14 +88,55 @@ def extract_answer_from_pipeline_data(data: dict[str, Any]) -> str | None:
         return dedicated_answer
     math_search = data.get("math_search", {})
     search_answer = math_search.get("answer")
-    if math_search.get("status") == "solved_generic" and search_answer:
+    search_compatible = generic_search_matches_query(data)
+    if math_search.get("status") == "solved_generic" and search_answer and search_compatible:
         return str(search_answer)
     tool_answer = extract_tool_answer(data, prefer_dedicated=False)
     if tool_answer:
         return tool_answer
-    if search_answer:
+    if search_answer and search_compatible:
         return str(search_answer)
     return None
+
+
+def extract_named_tool_answer(data: dict[str, Any], tool_name: str) -> str | None:
+    execution = data.get("tool_execution", {})
+    for call in execution.get("tool_calls", []):
+        if call.get("name") != tool_name or call.get("status") != "executed":
+            continue
+        result = call.get("result")
+        if isinstance(result, dict) and result.get("answer_exact") is not None:
+            return str(result["answer_exact"])
+    return None
+
+
+def generic_search_matches_query(data: dict[str, Any]) -> bool:
+    structure = data.get("structural_ir") or {}
+    operation_kinds = {
+        str(item.get("kind") or "")
+        for item in structure.get("operations", [])
+        if isinstance(item, dict)
+    }
+    actions = {
+        str(item.get("name") or "")
+        for item in (data.get("math_search") or {}).get("actions", [])
+        if isinstance(item, dict) and item.get("status") == "executed"
+    }
+    unresolved_observations = operation_kinds & {
+        "aggregate",
+        "measure",
+        "optimize",
+        "limit",
+        "integral",
+        "expectation",
+        "correlation",
+        "locus",
+        "envelope",
+        "passing_region",
+    }
+    if unresolved_observations and actions <= {"generic_sympy_solve", "generic_sympy_system_solve", "generic_wolfram_experiment"}:
+        return False
+    return True
 
 
 def extract_semantic_backend_answer(data: dict[str, Any]) -> str | None:

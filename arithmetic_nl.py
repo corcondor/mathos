@@ -3132,6 +3132,10 @@ def detect_simple_all_sum(text: str) -> ArithmeticNLProblem | None:
         return None
     if any(phrase in text for phrase in ("left", "more", "each", "per ", "how many days", "how many trays")):
         return None
+    if any(phrase in text for phrase in ("twice", "half", "third", "quarter", "%", "percent", " than ")):
+        return None
+    if re.search(r"\d+\s*/\s*\d+", text):
+        return None
     quantities = extract_numbers(text)
     if len(quantities) < 2:
         return None

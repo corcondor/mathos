@@ -21,7 +21,10 @@ from fractions import Fraction
 from typing import Any
 
 
-MONEY_OBJECTS = {"cent", "cents", "dollar", "dollars", "money", "price", "cost", "pay"}
+MONEY_OBJECTS = {
+    "cent", "cents", "dollar", "dollars", "money", "price", "cost", "pay",
+    "profit", "earning", "earnings", "revenue", "income", "wage", "salary",
+}
 TIME_OBJECTS = {"day", "days", "hour", "hours", "minute", "minutes", "week", "weeks", "month", "months"}
 PRONOUN_OBJECTS = {"it", "one", "ones", "them", "rest", "quantity"}
 SCALAR_OBJECTS = {"count", "number", "total", "quantity"}
@@ -51,6 +54,7 @@ PRODUCT_KINDS = {
     "remaining_count_times_rate",
     "sum_per_units_times_count",
     "unit_count_product",
+    "typed_rate_chain",
 }
 DIVISION_KINDS = {
     "nested_container_division",
@@ -191,7 +195,7 @@ def sort_for_quantity(quantity: Any, resolved_object: str) -> SemanticSort:
     text = getattr(quantity, "text", "")
     if role in {"per_unit", "rate"}:
         output = object_sort_name(resolved_object)
-        per = infer_rate_denominator(text, getattr(quantity, "time", None))
+        per = getattr(quantity, "denominator", None) or infer_rate_denominator_for_quantity(quantity)
         return SemanticSort("Rate", output, per)
     if resolved_object in MONEY_OBJECTS:
         return SemanticSort("Money", "money")
@@ -243,10 +247,43 @@ def build_obligations(candidate: Any, evidence_terms: list[SemanticTerm], output
 def reject_reason(candidate: Any, evidence_terms: list[SemanticTerm], output_sort: SemanticSort) -> str | None:
     kind = getattr(candidate, "kind", "")
     if kind in PRODUCT_KINDS:
-        if not any(term.sort.base == "Rate" for term in evidence_terms):
+        rate_terms = [term for term in evidence_terms if term.sort.base == "Rate"]
+        fixed_query_denominator = "query_denominator_fixed" in getattr(candidate, "checks", [])
+        if not rate_terms:
             return "product-like candidate has no rate/per-unit evidence"
-        if not any(term.sort.base in {"Count", "Scalar", "Time"} for term in evidence_terms):
+        if not fixed_query_denominator and not any(term.sort.base in {"Count", "Scalar", "Time"} for term in evidence_terms):
             return "product-like candidate has no multiplier evidence"
+        if any(not term.sort.per for term in rate_terms):
+            return "rate term has no typed denominator"
+        if kind == "unit_count_product":
+            multiplier_objects = {
+                term.sort.obj
+                for term in evidence_terms
+                if term.sort.base in {"Count", "Time"} and term.sort.obj
+            }
+            denominators = {term.sort.per for term in rate_terms if term.sort.per}
+            if multiplier_objects and denominators and multiplier_objects.isdisjoint(denominators):
+                return "product multiplier does not cancel the rate denominator"
+        if kind == "typed_rate_chain":
+            available = {
+                term.sort.obj
+                for term in evidence_terms
+                if term.sort.base in {"Count", "Scalar", "Time"} and term.sort.obj
+            }
+            if fixed_query_denominator:
+                available.update(term.sort.per for term in rate_terms if term.sort.per)
+            remaining = list(rate_terms)
+            while remaining:
+                progressed = False
+                for term in list(remaining):
+                    if term.sort.per in available:
+                        available.add(term.sort.obj)
+                        remaining.remove(term)
+                        progressed = True
+                if not progressed:
+                    return "rate chain contains a denominator that cannot be cancelled"
+            if output_sort.obj and output_sort.obj not in available:
+                return "rate chain does not reach the requested output sort"
     if kind in DIVISION_KINDS:
         if not evidence_terms:
             return "division-like candidate has no evidence"
@@ -268,8 +305,9 @@ def build_sequent(evidence_terms: list[SemanticTerm], candidate: Any, output_sor
 
 def query_object(text: str) -> str | None:
     patterns = (
+        r"how many more (?P<object>[a-z-]+(?:\s+(?:of\s+)?[a-z-]+){0,2}?) (?:did|does|do|will|would|are|is|were|was)",
+        r"how many (?P<object>[a-z-]+(?:\s+(?:of\s+)?[a-z-]+){0,2}?) (?:did|does|do|will|would|are|is|were|was|needed|need)",
         r"how many more (?P<object>[a-z-]+)",
-        r"how many (?P<object>[a-z-]+) (?:did|does|do|will|would|are|is|were|was|needed|need)",
         r"how many (?P<object>[a-z-]+)",
         r"how much (?P<object>money|water|cost|distance|area|time)",
         r"how much (?P<object>[a-z-]+)",
@@ -277,7 +315,8 @@ def query_object(text: str) -> str | None:
     for pattern in patterns:
         match = re.search(pattern, text)
         if match:
-            obj = normalize_object(match.group("object"))
+            words = re.findall(r"[a-z-]+", match.group("object").lower())
+            obj = normalize_object(words[0] if "of" in words else words[-1])
             if obj not in {"do", "does", "many", "more", "much", "will", "would"}:
                 return obj
     return None
@@ -300,6 +339,29 @@ def infer_rate_denominator(text: str, time_value: str | None) -> str | None:
     if time_value:
         return object_sort_name(normalize_object(time_value))
     return None
+
+
+def infer_rate_denominator_for_quantity(quantity: Any) -> str | None:
+    text = str(getattr(quantity, "text", "")).lower()
+    surface = re.escape(str(getattr(quantity, "surface", "")).lower().removeprefix("$"))
+    if surface:
+        each_subject = re.search(
+            rf"\beach\s+(?P<object>[a-z-]+)(?:\s+[a-z-]+){{0,3}}\s+"
+            rf"(?:has|have|gets|got|uses|makes|earns|takes)\s+{surface}\b",
+            text,
+        )
+        if each_subject:
+            return object_sort_name(normalize_object(each_subject.group("object")))
+        value_tail = re.search(rf"\b{surface}\b(?P<tail>.{{0,80}})", text)
+        if value_tail:
+            per_after = re.search(
+                r"\b(?:per|for each|in each|on each)(?:\s+of)?(?:\s+(?:the\s+)?\d+)?\s+"
+                r"(?P<object>[a-z-]+(?:\s+[a-z-]+)?)(?=\s+(?:who|that|which|how|if|when)|[.,?!]|$)",
+                value_tail.group("tail"),
+            )
+            if per_after:
+                return object_sort_name(normalize_object(per_after.group("object").split()[-1]))
+    return infer_rate_denominator(text, getattr(quantity, "time", None))
 
 
 def first_target_container(text: str) -> str | None:
@@ -341,6 +403,9 @@ def normalize_time(value: str) -> str:
 def normalize_object(value: str | None) -> str:
     value = (value or "").lower().strip()
     value = re.sub(r"[^a-z]", "", value)
+    irregular = {"children": "child", "people": "person", "men": "man", "women": "woman"}
+    if value in irregular:
+        return irregular[value]
     if value.endswith("ses") and len(value) > 4:
         value = value[:-2]
     elif value.endswith("ies"):

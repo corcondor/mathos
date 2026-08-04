@@ -48,6 +48,19 @@ class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
         self.assertIn(first[2], {"dev", "calibration", "held_out"})
         self.assertEqual(benchmark_manifest([case]), benchmark_manifest([case]))
 
+    def test_partition_does_not_depend_on_the_hidden_answer(self):
+        left = PublicBenchmarkCase("MATH", "algebra", 7, "Solve $x+1=2$.", "1")
+        right = PublicBenchmarkCase("MATH", "algebra", 7, "Solve $x+1=2$.", "999")
+        self.assertEqual(case_identity(left), case_identity(right))
+
+    def test_interval_answers_are_compared_as_sets(self):
+        self.assertTrue(
+            answers_match(
+                "Union(Interval.open(-oo, -7), Interval.open(1, 2))",
+                r"(-\infty,-7) \cup (1,2)",
+            )
+        )
+
     def test_summary_separates_wrong_answers_from_abstentions(self):
         def record(index, answer, exact, verification="verified"):
             return PublicBenchmarkRecord(

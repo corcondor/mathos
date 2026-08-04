@@ -176,6 +176,7 @@ def compile_typed_semantic_graph(
     typed_definition_ir: dict[str, Any] | None = None,
     formal_ir: dict[str, Any] | None = None,
     arithmetic_problem: dict[str, Any] | None = None,
+    symbolic_query_ir: dict[str, Any] | None = None,
 ) -> TypedSemanticGraph:
     structure = structural_ir or analyze_structure(text).to_dict()
     semantic_text = str(structure.get("normalized_text") or text)
@@ -194,6 +195,7 @@ def compile_typed_semantic_graph(
     lift_structural_ir(structure, sort_map, object_map, constraints)
     lift_formal_ir(formal, constraints, queries)
     lift_quantity_chart(semantic_text, arithmetic_problem, sort_map, object_map, morphisms, constraints, queries)
+    lift_symbolic_query_ir(symbolic_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_math_morphism_library(text, sort_map, object_map, morphisms, constraints, queries)
 
     if not queries:
@@ -257,6 +259,8 @@ def add_core_sorts(sort_map: dict[str, SemanticSort]) -> None:
         SemanticSort("Region1", "alias", parent="Object", theory="real_closed_fields"),
         SemanticSort("Region2", "alias", parent="Object", theory="measure_theory"),
         SemanticSort("Polynomial", "structure", parent="Function", theory="polynomial_ring"),
+        SemanticSort("Expression", "structure", parent="Object", theory="symbolic_algebra"),
+        SemanticSort("Set", "type_constructor", parent="Object", theory="set_theory"),
         SemanticSort("Interval", "structure", parent="Object", theory="order_topology"),
         SemanticSort("Probability", "measure", parent="Real", theory="probability"),
         SemanticSort("ProbabilitySpace", "structure", parent="Object", theory="probability"),
@@ -275,6 +279,66 @@ def add_core_sorts(sort_map: dict[str, SemanticSort]) -> None:
         SemanticSort("Modulus", "subsort", parent="Natural", theory="number_theory"),
     ):
         sort_map.setdefault(sort.name, sort)
+
+
+def lift_symbolic_query_ir(
+    payload: dict[str, Any] | None,
+    sort_map: dict[str, SemanticSort],
+    object_map: dict[str, SemanticObject],
+    morphisms: list[SemanticMorphism],
+    constraints: list[Constraint],
+    queries: list[SemanticQuery],
+) -> None:
+    if not payload:
+        return
+    target = str(payload.get("target") or "")
+    operator = str(payload.get("query_operator") or "")
+    output_sort = str(payload.get("output_sort") or "Unknown")
+    if not target or not operator:
+        return
+    # The explicit Constraint + QueryOperator IR is authoritative. Earlier
+    # lexical/formal guesses are retained elsewhere in the trace, but must not
+    # compete as answer-producing queries.
+    queries.clear()
+    sort_map.setdefault(output_sort, SemanticSort(output_sort, parent="Object", theory="symbolic_algebra"))
+    object_map.setdefault(
+        "symbolic_target",
+        SemanticObject(
+            name="symbolic_target",
+            sort="Expression",
+            role="query_input",
+            expression=target,
+            source="symbolic_query_ir",
+        ),
+    )
+    for expression in payload.get("constraints", []) or []:
+        constraints.append(
+            Constraint(
+                kind="symbolic_relation",
+                expression=str(expression),
+                objects=["symbolic_target"],
+                source="symbolic_query_ir.constraint",
+            )
+        )
+    morphisms.append(
+        SemanticMorphism(
+            name=operator,
+            domain=["Expression"],
+            codomain=output_sort,
+            kind="query_operator",
+            expression=f"{operator}({target})",
+            law="exact symbolic backend contract",
+            source="symbolic_query_ir",
+        )
+    )
+    queries.append(
+        SemanticQuery(
+            kind=operator,
+            target="symbolic_target",
+            sort=output_sort,
+            expression=target,
+        )
+    )
 
 
 def lift_typed_definition_ir(

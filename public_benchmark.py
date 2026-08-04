@@ -80,7 +80,7 @@ class PublicBenchmarkRecord:
 
 def problem_hash(case: PublicBenchmarkCase) -> str:
     payload = json.dumps(
-        [case.benchmark, case.subset, case.index, case.problem, case.expected],
+        [case.benchmark, case.subset, case.index, case.problem],
         ensure_ascii=False,
         separators=(",", ":"),
     )
@@ -281,6 +281,7 @@ def run_public_benchmark(
     allow_surface_morphisms: bool = False,
     case_timeout: float | None = None,
     workers: int = 1,
+    evaluation_partition: str | None = None,
 ) -> dict[str, Any]:
     cases: list[PublicBenchmarkCase] = []
     if gsm8k:
@@ -297,6 +298,12 @@ def run_public_benchmark(
         cases.extend(load_multiarith_cases(multiarith))
     if mawps:
         cases.extend(load_mawps_cases(mawps))
+
+    source_manifest = benchmark_manifest(cases)
+    if evaluation_partition is not None:
+        if evaluation_partition not in {"dev", "calibration", "held_out"}:
+            raise ValueError(f"unknown evaluation partition: {evaluation_partition}")
+        cases = [case for case in cases if case_identity(case)[2] == evaluation_partition]
 
     started = time.perf_counter()
     worker_count = max(1, int(workers))
@@ -335,7 +342,9 @@ def run_public_benchmark(
     result = summarize(records)
     result["protocol"] = {
         "schema": 2,
-        "manifest_sha256": benchmark_manifest(cases),
+        "manifest_sha256": source_manifest,
+        "evaluated_manifest_sha256": benchmark_manifest(cases),
+        "evaluation_partition": evaluation_partition or "all",
         "partition_rule": "sha256(case) mod 100: dev=0..19, calibration=20..29, held_out=30..99",
         "case_timeout_seconds": case_timeout,
         "workers": worker_count,
@@ -686,6 +695,10 @@ def answers_match(answer: str | None, expected: str | None) -> bool:
         return True
     if sp is None:
         return False
+    answer_set = parse_interval_set(answer)
+    expected_set = parse_interval_set(expected)
+    if answer_set is not None and expected_set is not None:
+        return answer_set == expected_set
     try:
         a = sp.sympify(clean_for_sympy(answer_norm))
         b = sp.sympify(clean_for_sympy(expected_norm))
@@ -700,14 +713,61 @@ def normalize_answer(value: str | None) -> str | None:
     raw = str(value).strip()
     value = raw
     value = value.strip("$ ")
-    value = value.replace(",", "")
-    if "," in raw and re.fullmatch(r"[-\d\s]+", value):
-        value = re.sub(r"\s+", "", value)
+    value = re.sub(r"(?<=\d),(?=\d{3}(?:\D|$))", "", value)
     value = value.replace("\\%", "%")
     value = value.replace("Бу", "sqrt")
     value = re.sub(r"^\\boxed\{(.+)\}$", r"\1", value)
     value = re.sub(r"^\([A-E]\)\s*", "", value)
     return value.strip()
+
+
+def parse_interval_set(value: str | None) -> Any | None:
+    if value is None or sp is None:
+        return None
+    source = str(value).strip().strip("$ ")
+    source = re.sub(r"^[A-Za-z]\s*(?:\\in|in|∈)\s*", "", source)
+    source = source.replace("\\infty", "oo").replace("∞", "oo")
+    source = re.sub(r"\\sqrt\{([^{}]+)\}", r"sqrt(\1)", source)
+    source = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"(\1)/(\2)", source)
+    source = source.replace("\\cup", " U ").replace("∪", " U ")
+    if source.startswith(("Interval", "Union", "FiniteSet")):
+        try:
+            return sp.sympify(source, locals={"Interval": sp.Interval, "Union": sp.Union, "FiniteSet": sp.FiniteSet, "oo": sp.oo})
+        except Exception:
+            return None
+    parts = [part.strip() for part in re.split(r"\s+U\s+", source)]
+    intervals: list[Any] = []
+    for part in parts:
+        if len(part) < 3 or part[0] not in "([" or part[-1] not in ")]":
+            return None
+        split_at = top_level_comma(part[1:-1])
+        if split_at is None:
+            return None
+        left_bracket, right_bracket = part[0], part[-1]
+        lower_text = part[1:-1][:split_at].strip()
+        upper_text = part[1:-1][split_at + 1 :].strip()
+        lower_text = lower_text.replace("-oo", "-oo")
+        try:
+            lower = sp.sympify(lower_text, locals={"oo": sp.oo})
+            upper = sp.sympify(upper_text, locals={"oo": sp.oo})
+        except Exception:
+            return None
+        intervals.append(
+            sp.Interval(lower, upper, left_open=left_bracket == "(", right_open=right_bracket == ")")
+        )
+    return sp.Union(*intervals) if intervals else None
+
+
+def top_level_comma(source: str) -> int | None:
+    depth = 0
+    for index, char in enumerate(source):
+        if char in "([{":
+            depth += 1
+        elif char in ")]}":
+            depth -= 1
+        elif char == "," and depth == 0:
+            return index
+    return None
 
 
 def clean_for_sympy(value: str) -> str:
@@ -756,6 +816,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--case-timeout", type=float, default=None, help="Optional per-problem timeout in seconds.")
     parser.add_argument("--workers", type=int, default=1, help="Concurrent killable case controllers (requires --case-timeout).")
+    parser.add_argument("--evaluation-partition", choices=("dev", "calibration", "held_out"), default=None)
     parser.add_argument("--output", type=Path, default=Path("math_os_prototype/public_benchmark_results.json"))
     return parser
 
@@ -775,6 +836,7 @@ def main() -> int:
         allow_surface_morphisms=args.allow_surface_morphisms,
         case_timeout=args.case_timeout,
         workers=args.workers,
+        evaluation_partition=args.evaluation_partition,
     )
     write_outputs(result, args.output)
     print(json.dumps({key: value for key, value in result.items() if key != "records"}, ensure_ascii=False, indent=2))
