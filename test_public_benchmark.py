@@ -1,9 +1,9 @@
 import unittest
 
 try:
-    from math_os_prototype.public_benchmark import extract_boxed_answer
+    from math_os_prototype.public_benchmark import answers_match, extract_boxed_answer
 except ImportError:
-    from public_benchmark import extract_boxed_answer
+    from public_benchmark import answers_match, extract_boxed_answer
 
 
 class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
@@ -18,6 +18,9 @@ class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
             extract_boxed_answer(r"candidate \boxed{1}; final \boxed{2+\sqrt{3}}"),
             r"2+\sqrt{3}",
         )
+
+    def test_dfrac_and_plain_rational_are_mathematically_equal(self):
+        self.assertTrue(answers_match("9/7", r"\dfrac{9}{7}"))
 
 
 if __name__ == "__main__":

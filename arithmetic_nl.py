@@ -20,8 +20,10 @@ except ImportError:  # pragma: no cover
 
 try:
     from math_os_prototype.quantity_reasoner import solve_quantity_reasoning_problem
+    from math_os_prototype.typed_operator_reasoner import solve_typed_operator_problem
 except ImportError:  # Allows direct script execution.
     from quantity_reasoner import solve_quantity_reasoning_problem
+    from typed_operator_reasoner import solve_typed_operator_problem
 
 
 NUMBER_WORDS = {
@@ -73,6 +75,26 @@ class ArithmeticNLProblem:
 
 
 def detect_arithmetic_nl_problem(text: str, *, allow_surface_morphisms: bool = False) -> ArithmeticNLProblem | None:
+    typed_operator = solve_typed_operator_problem(text)
+    if typed_operator is not None:
+        compatible_intents = {
+            "PercentScaleDifference": "percent_difference",
+        }
+        return ArithmeticNLProblem(
+            intent=compatible_intents.get(
+                typed_operator.operator,
+                f"typed_operator.{typed_operator.operator}",
+            ),
+            expression=typed_operator.constraint,
+            answer_exact=typed_operator.answer_exact,
+            explanation="; ".join(typed_operator.certificate),
+            metadata={
+                "operator": typed_operator.operator,
+                "input_sorts": typed_operator.input_sorts,
+                "output_sort": typed_operator.output_sort,
+                "certificate": typed_operator.certificate,
+            },
+        )
     normalized = normalize_text(text)
     solvers = (
         detect_percent_difference,

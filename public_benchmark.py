@@ -489,6 +489,7 @@ def normalize_answer(value: str | None) -> str | None:
 def clean_for_sympy(value: str) -> str:
     value = value.replace("–", "-").replace("−", "-")
     value = value.replace("^", "**")
+    value = value.replace("\\dfrac", "\\frac")
     value = value.replace("\\frac", "frac")
     value = re.sub(r"frac\{([^{}]+)\}\{([^{}]+)\}", r"(\1)/(\2)", value)
     value = re.sub(r"frac(-?\d+)(-?\d+)", r"(\1)/(\2)", value)
