@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import multiprocessing as mp
+import queue
 import re
 import time
 from collections import Counter, defaultdict
@@ -56,12 +58,55 @@ class BenchmarkRecord:
 
 
 def extract_tex_problems(path: Path) -> list[TexProblem]:
+    if path.suffix.lower() == ".pdf":
+        return extract_numbered_pdf_problems(path)
     text = path.read_text(encoding="utf-8", errors="replace")
     problems = extract_itembox_problems(text, path.name)
     exercise_problems = extract_exercise_problems(text, path.name)
     if exercise_problems:
         problems.extend(exercise_problems)
     return sorted(problems, key=lambda item: (item.line, item.index))
+
+
+def extract_numbered_pdf_problems(path: Path) -> list[TexProblem]:
+    """Extract a contest's numbered problem section without using its answers."""
+    try:
+        import fitz
+    except ImportError as exc:  # pragma: no cover - environment dependent
+        raise RuntimeError("PyMuPDF is required to benchmark PDF problem sets") from exc
+    document = fitz.open(path)
+    text = "\n".join(page.get_text() for page in document)
+    exam_headings = list(re.finditer(r"(?m)^\s*([１２３４５６７８９])\s*\n\s*[（(]\s*\d+\s*点\s*[）)]", text))
+    if exam_headings:
+        numeral = {char: index for index, char in enumerate("０１２３４５６７８９")}
+        problems: list[TexProblem] = []
+        for position, match in enumerate(exam_headings):
+            end = exam_headings[position + 1].start() if position + 1 < len(exam_headings) else len(text)
+            body = re.sub(r"\s+", " ", text[match.end():end]).strip()
+            index = numeral[match.group(1)]
+            problems.append(TexProblem(
+                source=path.name, title=f"問題{index}", index=index, text=body,
+                line=line_number(text, match.start()),
+            ))
+        return problems
+    # Contest appendices often restart numbering after an explicit terminator.
+    main = re.split(r"(?m)^\s*以上\s*$", text, maxsplit=1)[0]
+    matches = list(re.finditer(r"(?m)^\s*(1[0-9]|[1-9])\.\s+", main))
+    problems: list[TexProblem] = []
+    for position, match in enumerate(matches):
+        end = matches[position + 1].start() if position + 1 < len(matches) else len(main)
+        body = re.sub(r"\s+", " ", main[match.end():end]).strip()
+        if not is_meaningful_problem(body):
+            continue
+        index = int(match.group(1))
+        problems.append(TexProblem(
+            source=path.name,
+            title=f"問題{index}",
+            index=index,
+            text=body,
+            line=line_number(main, match.start()),
+        ))
+    return problems
 
 
 def extract_itembox_problems(text: str, source: str) -> list[TexProblem]:
@@ -75,7 +120,7 @@ def extract_itembox_problems(text: str, source: str) -> list[TexProblem]:
         if "問題" not in title:
             continue
         body = strip_answer_tail(match.group("body"))
-        problem_text = clean_tex(body)
+        problem_text = prepare_tex_problem_text(body)
         if not is_meaningful_problem(problem_text):
             continue
         problems.append(
@@ -99,7 +144,7 @@ def extract_exercise_problems(text: str, source: str) -> list[TexProblem]:
         end = matches[index].start() if index < len(matches) else len(text)
         segment = strip_answer_tail(text[start:end])
         problem_text = extract_fbox_payload(segment) or segment
-        problem_text = clean_tex(problem_text)
+        problem_text = prepare_tex_problem_text(problem_text)
         if not is_meaningful_problem(problem_text):
             continue
         problems.append(
@@ -194,6 +239,20 @@ def clean_tex(text: str) -> str:
     return text.strip()
 
 
+def prepare_tex_problem_text(text: str) -> str:
+    """Remove document layout while preserving TeX mathematical syntax."""
+    text = re.sub(r"(?<!\\)%.*", "", text)
+    text = re.sub(r"\\(?:vspace|vskip|hspace)\*?\{[^}]*\}", " ", text)
+    text = re.sub(r"\\(?:noindent|displaystyle|baselineskip|bfseries|large|Huge)\b", " ", text)
+    text = re.sub(r"\\(?:begin|end)\{(?:center|flushleft|flushright|minipage|enumerate|itemize)\}(?:\{[^}]*\})?", "\n", text)
+    text = re.sub(r"\\(?:textbf|mathrm|mathbf|mathcal)\{([^{}]*)\}", r"\1", text)
+    text = text.replace(r"\par", "\n")
+    # Keep \\ inside aligned equations and matrices; the LaTeX frontend owns it.
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n\s*\n+", "\n", text)
+    return text.strip()
+
+
 def replace_simple_frac(text: str) -> str:
     pattern = re.compile(r"\\frac\s*\{([^{}]+)\}\s*\{([^{}]+)\}")
     previous = None
@@ -234,6 +293,7 @@ def run_tex_benchmark(
     external_tools: bool = False,
     live_retrieval: bool = False,
     allow_specialized: bool = False,
+    case_timeout: float | None = None,
 ) -> dict[str, Any]:
     problems: list[TexProblem] = []
     for path in paths:
@@ -241,70 +301,105 @@ def run_tex_benchmark(
     if limit is not None:
         problems = problems[:limit]
 
-    records: list[BenchmarkRecord] = []
-    for problem in problems:
-        start = time.perf_counter()
-        try:
-            result = run_reasoning_pipeline(
-                problem.text,
-                external_tools=external_tools,
-                live_retrieval=live_retrieval,
-                allow_specialized=allow_specialized,
-            )
-            elapsed = time.perf_counter() - start
-            answer = extract_answer_from_pipeline_dict(json.loads(result.to_json()))
-            warning = "; ".join(result.verification.get("warnings", [])) or None
-            strategy = result.strategies[0]["name"] if result.strategies else "none"
-            status = classify_status(
-                result.verification["status"],
-                answer,
-                result.domain_ir["domain"],
-                result.parser["intent"],
-                strategy,
-                problem.text,
-            )
-            records.append(
-                BenchmarkRecord(
-                    source=problem.source,
-                    title=problem.title,
-                    index=problem.index,
-                    line=problem.line,
-                    domain=result.domain_ir["domain"],
-                    domain_confidence=float(result.domain_ir["confidence"]),
-                    route=result.parser["route"],
-                    intent=result.parser["intent"],
-                    strategy=strategy,
-                    verification=result.verification["status"],
-                    answer=answer,
-                    status=status,
-                    warning=warning,
-                    elapsed_seconds=round(elapsed, 4),
-                    text_preview=problem.text[:240],
-                )
-            )
-        except Exception as exc:
-            elapsed = time.perf_counter() - start
-            records.append(
-                BenchmarkRecord(
-                    source=problem.source,
-                    title=problem.title,
-                    index=problem.index,
-                    line=problem.line,
-                    domain="error",
-                    domain_confidence=0.0,
-                    route="error",
-                    intent="error",
-                    strategy="error",
-                    verification="failed",
-                    answer=None,
-                    status="error",
-                    warning=str(exc),
-                    elapsed_seconds=round(elapsed, 4),
-                    text_preview=problem.text[:240],
-                )
-            )
+    records = [
+        run_tex_problem_with_timeout(
+            problem,
+            external_tools=external_tools,
+            live_retrieval=live_retrieval,
+            allow_specialized=allow_specialized,
+            timeout=case_timeout,
+        )
+        for problem in problems
+    ]
 
     return summarize_records(records, len(problems))
+
+
+def run_tex_problem(
+    problem: TexProblem,
+    *,
+    external_tools: bool,
+    live_retrieval: bool,
+    allow_specialized: bool,
+) -> BenchmarkRecord:
+    start = time.perf_counter()
+    try:
+        result = run_reasoning_pipeline(
+            problem.text,
+            external_tools=external_tools,
+            live_retrieval=live_retrieval,
+            allow_specialized=allow_specialized,
+        )
+        elapsed = time.perf_counter() - start
+        answer = extract_answer_from_pipeline_dict(json.loads(result.to_json()))
+        warning = "; ".join(result.verification.get("warnings", [])) or None
+        strategy = result.strategies[0]["name"] if result.strategies else "none"
+        status = classify_status(
+            result.verification["status"], answer, result.domain_ir["domain"],
+            result.parser["intent"], strategy, problem.text,
+        )
+        return BenchmarkRecord(
+            source=problem.source, title=problem.title, index=problem.index, line=problem.line,
+            domain=result.domain_ir["domain"], domain_confidence=float(result.domain_ir["confidence"]),
+            route=result.parser["route"], intent=result.parser["intent"], strategy=strategy,
+            verification=result.verification["status"], answer=answer, status=status, warning=warning,
+            elapsed_seconds=round(elapsed, 4), text_preview=problem.text[:240],
+        )
+    except Exception as exc:
+        return tex_error_record(problem, str(exc), time.perf_counter() - start)
+
+
+def tex_error_record(problem: TexProblem, warning: str, elapsed: float, *, verification: str = "failed") -> BenchmarkRecord:
+    return BenchmarkRecord(
+        source=problem.source, title=problem.title, index=problem.index, line=problem.line,
+        domain="error", domain_confidence=0.0, route="error", intent="error", strategy="error",
+        verification=verification, answer=None, status="timeout" if verification == "timeout" else "error",
+        warning=warning, elapsed_seconds=round(elapsed, 4), text_preview=problem.text[:240],
+    )
+
+
+def run_tex_problem_with_timeout(
+    problem: TexProblem,
+    *,
+    external_tools: bool,
+    live_retrieval: bool,
+    allow_specialized: bool,
+    timeout: float | None,
+) -> BenchmarkRecord:
+    if timeout is None or timeout <= 0:
+        return run_tex_problem(
+            problem, external_tools=external_tools, live_retrieval=live_retrieval,
+            allow_specialized=allow_specialized,
+        )
+    started = time.perf_counter()
+    result_queue: mp.Queue = mp.Queue(maxsize=1)
+    process = mp.Process(
+        target=_tex_problem_worker,
+        args=(problem, external_tools, live_retrieval, allow_specialized, result_queue),
+    )
+    process.start()
+    process.join(timeout)
+    if process.is_alive():
+        process.terminate()
+        process.join(2)
+        return tex_error_record(problem, f"case_timeout_after_{timeout:g}s", time.perf_counter() - started, verification="timeout")
+    try:
+        return BenchmarkRecord(**result_queue.get_nowait())
+    except queue.Empty:
+        return tex_error_record(problem, "case_worker_returned_no_record", time.perf_counter() - started)
+
+
+def _tex_problem_worker(
+    problem: TexProblem,
+    external_tools: bool,
+    live_retrieval: bool,
+    allow_specialized: bool,
+    result_queue: mp.Queue,
+) -> None:
+    result_queue.put(asdict(run_tex_problem(
+        problem, external_tools=external_tools, live_retrieval=live_retrieval,
+        allow_specialized=allow_specialized,
+    )))
 
 
 def extract_answer_from_pipeline_dict(data: dict[str, Any]) -> str | None:
@@ -389,6 +484,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--external-tools", action="store_true")
     parser.add_argument("--live-retrieval", action="store_true")
+    parser.add_argument("--case-timeout", type=float, default=None)
     parser.add_argument(
         "--allow-specialized",
         action="store_true",
@@ -406,6 +502,7 @@ def main() -> int:
         external_tools=args.external_tools,
         live_retrieval=args.live_retrieval,
         allow_specialized=args.allow_specialized,
+        case_timeout=args.case_timeout,
     )
     write_outputs(result, args.output)
     print(json.dumps({k: v for k, v in result.items() if k != "records"}, ensure_ascii=False, indent=2))

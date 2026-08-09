@@ -205,6 +205,12 @@ def normalize_latex_text(text: str) -> str:
 def normalize_latex_math(expr: str) -> str:
     expr = expr.strip()
     expr = normalize_unicode_math_symbols(expr)
+    expr = re.sub(r"\\begin\{(?:aligned|align\*?|gathered|cases)\}", " ", expr)
+    expr = re.sub(r"\\end\{(?:aligned|align\*?|gathered|cases)\}", " ", expr)
+    expr = expr.replace("&", "")
+    # Preserve display rows as mathematical statement separators.  The
+    # symbolic lowering stage consumes these as a constraint conjunction.
+    expr = expr.replace(r"\\", ";")
     expr = expr.replace(r"\left", "").replace(r"\right", "")
     expr = expr.replace(r"\,", "").replace(r"\;", "").replace(r"\!", "")
     expr = expr.replace(r"\ ", " ")

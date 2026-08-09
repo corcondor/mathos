@@ -760,6 +760,14 @@ def answers_match(answer: str | None, expected: str | None) -> bool:
     expected_norm = normalize_answer(expected)
     if answer_norm == expected_norm:
         return True
+    answer_vector = parse_vector_answer(answer_norm)
+    expected_vector = parse_vector_answer(expected_norm)
+    if answer_vector is not None and expected_vector is not None:
+        return answer_vector == expected_vector
+    answer_labels = parse_label_set(answer_norm)
+    expected_labels = parse_label_set(expected_norm)
+    if answer_labels is not None and expected_labels is not None:
+        return answer_labels == expected_labels
     if sp is None:
         return False
     answer_set = parse_interval_set(answer)
@@ -780,12 +788,44 @@ def normalize_answer(value: str | None) -> str | None:
     raw = str(value).strip()
     value = raw
     value = value.strip("$ ")
+    value = re.sub(r"\\[!,;:]", "", value)
     value = re.sub(r"(?<=\d),(?=\d{3}(?:\D|$))", "", value)
     value = value.replace("\\%", "%")
     value = value.replace("Бу", "sqrt")
     value = re.sub(r"^\\boxed\{(.+)\}$", r"\1", value)
     value = re.sub(r"^\([A-E]\)\s*", "", value)
     return value.strip()
+
+
+def parse_vector_answer(value: str | None) -> tuple[Any, ...] | None:
+    if value is None or sp is None:
+        return None
+    source = str(value).strip()
+    matrix_match = re.fullmatch(r"Matrix\(\[([^\]]+)\]\)", source)
+    if matrix_match:
+        entries = matrix_match.group(1).split(",")
+    else:
+        latex_match = re.fullmatch(
+            r"\\begin\{(?:p|b)?matrix\}(.*?)\\end\{(?:p|b)?matrix\}",
+            source,
+            flags=re.DOTALL,
+        )
+        if not latex_match:
+            return None
+        entries = re.split(r"\\\\", latex_match.group(1))
+    try:
+        return tuple(sp.simplify(sp.sympify(clean_for_sympy(item.strip()))) for item in entries if item.strip())
+    except Exception:
+        return None
+
+
+def parse_label_set(value: str | None) -> frozenset[str] | None:
+    if value is None:
+        return None
+    source = re.sub(r"^\\text\{(.*)\}$", r"\1", str(value).strip())
+    if not re.fullmatch(r"[A-Z](?:\s*,\s*[A-Z])+", source):
+        return None
+    return frozenset(re.findall(r"[A-Z]", source))
 
 
 def parse_interval_set(value: str | None) -> Any | None:
@@ -850,6 +890,7 @@ def clean_for_sympy(value: str) -> str:
     value = value.replace("Бу", "sqrt")
     value = re.sub(r"sqrt\s*([0-9]+)", r"sqrt(\1)", value)
     value = value.replace("\\pi", "pi")
+    value = re.sub(r"\bi\b", "I", value)
     value = re.sub(r"(?<=\d)(?=\()", "*", value)
     value = re.sub(r"(?<=\d)(?=[abcxyz])", "*", value)
     value = re.sub(r"(?<=[abcxyz])(?=[abcxyz])", "*", value)

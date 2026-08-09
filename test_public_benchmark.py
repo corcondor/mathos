@@ -83,6 +83,11 @@ class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
             )
         )
 
+    def test_vector_and_complex_answers_use_mathematical_equivalence(self):
+        self.assertTrue(answers_match("Matrix([6, 3, 0])", r"\begin{pmatrix} 6 \\ 3 \\ 0 \end{pmatrix}"))
+        self.assertTrue(answers_match("I", "i"))
+        self.assertTrue(answers_match("B, E, G", r"\text{B, E, G}"))
+
     def test_summary_separates_wrong_answers_from_abstentions(self):
         def record(index, answer, exact, verification="verified"):
             return PublicBenchmarkRecord(

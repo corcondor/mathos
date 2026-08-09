@@ -164,6 +164,10 @@ CONTAINER_OBJECTS = {
     "wardrobe",
 }
 PLACE_OBJECTS = {"museum", "park", "zoo", "school", "store", "palace", "class", "room"}
+MEASURE_UNITS = {
+    "cup", "tablespoon", "teaspoon", "liter", "milliliter", "gallon", "quart",
+    "gram", "kilogram", "ounce", "pound", "inch", "foot", "yard", "meter", "mile",
+}
 
 
 @dataclass(frozen=True)
@@ -238,8 +242,44 @@ def solve_quantity_reasoning_problem(text: str) -> QuantityReasoningResult | Non
             "best_sequent": (best.logic or {}).get("sequent"),
             "output_sort": (best.logic or {}).get("output_sort"),
             "obligations": (best.logic or {}).get("obligations", []),
+            "execution_certificate": build_execution_certificate(quantities, best),
         },
     )
+
+
+def build_execution_certificate(quantities: list[Quantity], candidate: EquationCandidate) -> dict[str, object]:
+    """Promote only algebraically explicit semantic laws to execution.
+
+    A type-correct candidate is not yet a proof that it models every event in
+    the story.  These laws have an invertible/conservative equation whose
+    operands are all named by evidence; broad sum/product guesses remain IR
+    candidates but are not executable.
+    """
+    laws = {
+        "initial_from_final_and_gain": "final = initial + gain",
+        "initial_from_final_and_loss": "final = initial - loss",
+        "complement_count": "selected + complement = total",
+        "complement_count_times_unit": "value = (total - excluded) * unit_rate",
+        "fractional_each_allocation": "allocated = count * fraction_per_item",
+        "per_unit_count_difference": "difference = unit_rate * count_delta",
+        "per_unit_category_difference": "difference = count * rate_delta",
+        "selected_sum": "total = sum(selected typed quantities)",
+        "sum_per_units_times_count": "total = count * sum(compatible rates)",
+        "target_total_divided_by_group_count": "unit = target_total / group_count",
+        "time_category_difference": "difference = rate * time_delta",
+        "two_group_difference": "difference = group_2 - group_1",
+    }
+    law = laws.get(candidate.kind)
+    evidence = evidence_quantities(quantities, candidate)
+    logic_status = (candidate.logic or {}).get("status")
+    complete = bool(law and evidence and len(evidence) == len(set(candidate.evidence_ids)) and logic_status == "accepted")
+    return {
+        "status": "proved" if complete else "incomplete",
+        "law": law,
+        "evidence_ids": list(candidate.evidence_ids),
+        "checks": list(candidate.checks),
+        "reason": None if complete else "no complete conservation/cancellation proof for this candidate",
+    }
 
 
 def extract_quantities(text: str) -> list[Quantity]:
@@ -2020,6 +2060,15 @@ def parse_unit_object(tail: str) -> tuple[str, str]:
     pronoun = re.match(r"\s+of\s+(them|it|one|ones)\b", tail)
     if pronoun:
         return "count", pronoun.group(1)
+    measured_object = re.match(
+        r"\s*(?P<unit>[a-z]+(?:-[a-z]+)?)\s+of\s+(?:the\s+)?(?P<object>[a-z]+(?:-[a-z]+)?)\b",
+        tail,
+    )
+    if measured_object:
+        unit = normalize_object(measured_object.group("unit"))
+        obj = normalize_object(measured_object.group("object"))
+        if unit in MEASURE_UNITS:
+            return unit, obj
     local = re.split(
         r"\b(?:per|for each|in each|on each|each|how|than|that|which|who|and|of|while|if|when|then|but|after|before|earlier|later|ago|to|from|at|in|on|for|with|by)\b",
         tail,
@@ -2232,7 +2281,10 @@ def normalize_query_phrase(value: str) -> str:
     words = re.findall(r"[a-z-]+", value.lower())
     if not words:
         return ""
-    head = words[0] if "of" in words else words[-1]
+    if "of" in words and words.index("of") + 1 < len(words):
+        head = words[words.index("of") + 1]
+    else:
+        head = words[-1]
     return normalize_object(head)
 
 

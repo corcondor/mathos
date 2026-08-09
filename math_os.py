@@ -23,6 +23,7 @@ try:
     from math_os_prototype.geometry_nl import convert_geometry_nl
     from math_os_prototype.latex_frontend import looks_like_latex, parse_latex_problem
     from math_os_prototype.symbolic_query import compile_symbolic_query, execute_symbolic_query
+    from math_os_prototype.vector_query import compile_vector_query, execute_vector_query
     from math_os_prototype.tool_adapters import ToolRegistry
 except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
@@ -33,6 +34,7 @@ except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from geometry_nl import convert_geometry_nl
     from latex_frontend import looks_like_latex, parse_latex_problem
     from symbolic_query import compile_symbolic_query, execute_symbolic_query
+    from vector_query import compile_vector_query, execute_vector_query
     from tool_adapters import ToolRegistry
 
 try:
@@ -257,6 +259,25 @@ class ProblemCompiler:
                     "Verify the requested polygon area by the shoelace determinant.",
                 ],
                 tool_calls=[ToolCall("geometry.asymptote_exact", "execute typed coordinate construction", executable=True)],
+            )
+
+        vector_query = compile_vector_query(text)
+        if vector_query is not None:
+            payload = vector_query.to_dict()
+            return MathIR(
+                problem=text,
+                route="linear_algebra",
+                intent=f"vector_query_{vector_query.operator}",
+                symbols=sorted(vector_query.vectors),
+                givens={"vector_query": payload},
+                goal=f"Execute the typed vector observation {vector_query.operator}.",
+                plan=[
+                    "Parse vector declarations and affine constraints with explicit sorts.",
+                    "Type-check vector, scalar, and cross-product operations.",
+                    "Execute the resulting exact linear-algebra constraint system.",
+                    "Re-verify the result against the source constraints.",
+                ],
+                tool_calls=[ToolCall("sympy.vector_query", vector_query.operator, executable=True)],
             )
 
         symbolic_query = compile_symbolic_query(text)
@@ -656,6 +677,8 @@ class ToolExecutor:
                     call.result = run_sympy_solve(ir.givens["equation"], ir.givens["variable"])
                 elif call.name == "sympy.semantic_query":
                     call.result = execute_symbolic_query(ir.givens["symbolic_query"])
+                elif call.name == "sympy.vector_query":
+                    call.result = execute_vector_query(ir.givens["vector_query"])
                 elif call.name == "sympy.diff":
                     call.result = run_sympy_diff(ir.givens["expression"], ir.givens["variable"])
                 elif call.name == "sympy.polynomial_remainder":

@@ -177,6 +177,7 @@ def compile_typed_semantic_graph(
     formal_ir: dict[str, Any] | None = None,
     arithmetic_problem: dict[str, Any] | None = None,
     symbolic_query_ir: dict[str, Any] | None = None,
+    vector_query_ir: dict[str, Any] | None = None,
 ) -> TypedSemanticGraph:
     structure = structural_ir or analyze_structure(text).to_dict()
     semantic_text = str(structure.get("normalized_text") or text)
@@ -196,6 +197,7 @@ def compile_typed_semantic_graph(
     lift_formal_ir(formal, constraints, queries)
     lift_quantity_chart(semantic_text, arithmetic_problem, sort_map, object_map, morphisms, constraints, queries)
     lift_symbolic_query_ir(symbolic_query_ir, sort_map, object_map, morphisms, constraints, queries)
+    lift_vector_query_ir(vector_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_math_morphism_library(text, sort_map, object_map, morphisms, constraints, queries)
 
     if not queries:
@@ -337,6 +339,105 @@ def lift_symbolic_query_ir(
             target="symbolic_target",
             sort=output_sort,
             expression=target,
+        )
+    )
+
+
+def lift_vector_query_ir(
+    payload: dict[str, Any] | None,
+    sort_map: dict[str, SemanticSort],
+    object_map: dict[str, SemanticObject],
+    morphisms: list[SemanticMorphism],
+    constraints: list[Constraint],
+    queries: list[SemanticQuery],
+) -> None:
+    """Lift an executable vector observation into the shared semantic graph."""
+    if not payload:
+        return
+    operator = str(payload.get("operator") or "")
+    output_sort = str(payload.get("output_sort") or "Vector")
+    if not operator:
+        return
+
+    queries.clear()
+    sort_map.setdefault(output_sort, SemanticSort(output_sort, parent="Object", theory="linear_algebra"))
+    declared: list[str] = []
+    for name, entries in sorted((payload.get("vectors") or {}).items()):
+        object_name = f"vector_{name}"
+        declared.append(object_name)
+        object_map[object_name] = SemanticObject(
+            name=object_name,
+            sort="Vector",
+            role="declared_vector",
+            expression=str(entries),
+            source="vector_query_ir",
+        )
+
+    parameters = payload.get("parameters") or {}
+    if operator == "intersect_affine_subspaces":
+        for side in ("left", "right"):
+            if side not in parameters:
+                continue
+            object_name = f"affine_{side}"
+            declared.append(object_name)
+            object_map[object_name] = SemanticObject(
+                name=object_name,
+                sort="Set",
+                role="affine_subspace",
+                expression=str(parameters[side]),
+                source="vector_query_ir",
+            )
+        constraints.append(
+            Constraint(
+                kind="vector_equality",
+                expression="affine_left(parameter) = affine_right(parameter)",
+                objects=declared,
+                source="vector_query_ir.constraint",
+            )
+        )
+    elif operator == "select_direction_vectors":
+        constraints.append(
+            Constraint(
+                kind="direction_equivalence",
+                expression=f"dy/dx = {parameters.get('slope')}",
+                objects=declared,
+                source="vector_query_ir.constraint",
+            )
+        )
+    else:
+        constraints.append(
+            Constraint(
+                kind="typed_vector_term",
+                expression=str(payload.get("target") or ""),
+                objects=declared,
+                source="vector_query_ir.constraint",
+            )
+        )
+
+    morphisms.append(
+        SemanticMorphism(
+            name=operator,
+            domain=[object_map[name].sort for name in declared],
+            codomain=output_sort,
+            kind="query_operator",
+            expression=str(payload.get("target") or parameters),
+            law="exact linear-algebra backend contract with substitution verification",
+            source="vector_query_ir",
+        )
+    )
+    object_map["vector_observation"] = SemanticObject(
+        name="vector_observation",
+        sort=output_sort,
+        role="query_output",
+        expression=str(payload.get("target") or parameters),
+        source="vector_query_ir",
+    )
+    queries.append(
+        SemanticQuery(
+            kind=operator,
+            target="vector_observation",
+            sort=output_sort,
+            expression=str(payload.get("target") or parameters),
         )
     )
 

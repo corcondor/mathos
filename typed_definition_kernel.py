@@ -151,6 +151,38 @@ LEXICON: tuple[DefinitionEntry, ...] = (
         "real_closed_fields",
     ),
     DefinitionEntry(
+        "EdgeLength",
+        ("辺の長さ", "三辺", "edge length", "side length"),
+        "definition",
+        "(Fin(n)->Point2) x Fin(n) -> Real",
+        "EdgeLength(P,i) := dist(P(i), P((i+1) mod n))",
+        "real_closed_fields",
+    ),
+    DefinitionEntry(
+        "Circumradius",
+        ("外接円半径", "外接円の半径", "circumradius"),
+        "definition",
+        "(Fin(n)->Point2) -> Real",
+        "Circumradius(P) := the nonnegative r for which exists O, forall i, dist(P(i),O)=r",
+        "real_closed_fields",
+    ),
+    DefinitionEntry(
+        "Inradius",
+        ("内接円半径", "内接円の半径", "inradius"),
+        "definition",
+        "(Fin(n)->Point2) -> Real",
+        "Inradius(P) := the nonnegative distance from the incenter to every supporting edge",
+        "real_closed_fields",
+    ),
+    DefinitionEntry(
+        "Irrational",
+        ("無理数", "irrational"),
+        "definition",
+        "Real -> Prop",
+        "Irrational(x) := not exists p q:Integer, q != 0 and x = p/q",
+        "number_theory",
+    ),
+    DefinitionEntry(
         "Centroid",
         ("重心", "centroid"),
         "definition",
@@ -261,6 +293,30 @@ LEXICON: tuple[DefinitionEntry, ...] = (
         "Sort",
         "Sequence(T) := Natural -> T",
         "discrete_math",
+    ),
+    DefinitionEntry(
+        "LinearRecurrence",
+        ("線形漸化式", "漸化式", "linear recurrence", "recurrence"),
+        "definition",
+        "Sequence(Real) x Natural x Vector -> Prop",
+        "LinearRecurrence(x,k,c) := forall n, x(n+k)=Sum(i in Fin(k), c(i)*x(n+i))",
+        "discrete_math",
+    ),
+    DefinitionEntry(
+        "Floor",
+        ("床関数", "\\lfloor", "floor"),
+        "definition",
+        "Real -> Integer",
+        "Floor(x) := the unique z:Integer such that z <= x < z+1",
+        "integer_arithmetic",
+    ),
+    DefinitionEntry(
+        "QuadraticCurve",
+        ("二次曲線", "双曲線", "楕円", "放物線", "conic", "hyperbola", "ellipse", "parabola"),
+        "definition",
+        "SymmetricMatrix(3) -> Curve2",
+        "QuadraticCurve(Q) := {p:Point2 | Homogeneous(p)^T Q Homogeneous(p)=0}",
+        "real_closed_fields",
     ),
     DefinitionEntry(
         "Graph",
@@ -664,7 +720,7 @@ def compile_typed_definition_ir(text: str) -> TypedDefinitionIR:
     declarations = infer_typed_declarations(structure, definitions)
     terms = infer_terms(structure, definitions)
     predicates = infer_predicates(structure, definitions, case_frame_ir.to_dict())
-    query = infer_typed_query(structure, definitions, predicates)
+    query = infer_typed_query(structure, definitions, predicates, case_frame_ir.to_dict())
     logic = build_logic(structure, declarations, predicates, query)
     backend_obligations = infer_backend_obligations(definitions, query, logic)
     warnings = infer_warnings(structure, definitions, query)
@@ -925,6 +981,26 @@ def infer_predicates(
                 "uses": ["Curve2"],
             }
         )
+    if polygon_n is not None and "EdgeLength" in canonical and "Prime" in canonical:
+        normalized = structure.normalized_text.replace(" ", "")
+        if ("三辺" in normalized or "辺の長さ" in normalized) and "素数" in normalized:
+            predicates.append(
+                {
+                    "kind": "constraint",
+                    "formula": f"forall i:Fin({polygon_n}), Prime(EdgeLength(P,i))",
+                    "uses": ["Forall", "Prime", "EdgeLength"],
+                }
+            )
+    if polygon_n is not None and {"Circumradius", "Inradius", "Prime"} <= canonical:
+        normalized = structure.normalized_text.replace(" ", "")
+        if "外接円半径と内接円半径の積" in normalized and "素数" in normalized:
+            predicates.append(
+                {
+                    "kind": "constraint",
+                    "formula": "Prime(Circumradius(P) * Inradius(P))",
+                    "uses": ["Prime", "Circumradius", "Inradius"],
+                }
+            )
     if curve_expr and polygon_n is not None:
         predicates.append(
             {
@@ -971,6 +1047,7 @@ def infer_typed_query(
     structure: StructuralIR,
     definitions: list[DefinitionEntry],
     predicates: list[dict[str, Any]],
+    case_frames: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     canonical = {item.canonical for item in definitions}
     polygon_n = infer_polygon_arity(structure.normalized_text)
@@ -984,7 +1061,23 @@ def infer_typed_query(
             "definition_driven": True,
         }
     if "Prove" in canonical:
-        return {"kind": "prove", "target": "goal", "target_type": "Proof", "definition_driven": True}
+        surface_goal = next(
+            (
+                frame.get("slots", {}).get("goal", "")
+                for frame in (case_frames or {}).get("frames", [])
+                if frame.get("relation") == "Prove"
+            ),
+            "",
+        )
+        typed_goal = typed_goal_from_surface(surface_goal, canonical, polygon_n)
+        return {
+            "kind": "prove",
+            "target": "proposition",
+            "target_type": "Proof",
+            "expression": typed_goal,
+            "surface_goal": surface_goal,
+            "definition_driven": typed_goal != "UnknownProposition",
+        }
     if "Decide" in canonical:
         return {"kind": "decide", "target": "proposition", "target_type": "Bool", "definition_driven": True}
     if "Limit" in canonical:
@@ -1072,6 +1165,14 @@ def infer_typed_query(
             "definition_driven": True,
         }
     if "Find" in canonical:
+        if polygon_n is not None and contains_any(structure.normalized_text, ("全て求め", "すべて求め", "find all")):
+            return {
+                "kind": "enumerate",
+                "target": "P",
+                "target_type": f"Set(Fin({polygon_n})->Point2)",
+                "expression": "{P | all constraints}",
+                "definition_driven": True,
+            }
         observation = next(
             (
                 operation
@@ -1113,6 +1214,21 @@ def infer_typed_query(
             "definition_driven": True,
         }
     return {"kind": "unknown", "target": "", "target_type": "Unknown", "definition_driven": False}
+
+
+def typed_goal_from_surface(surface_goal: str, canonical: set[str], polygon_n: int | str | None) -> str:
+    compact = surface_goal.replace(" ", "")
+    if (
+        polygon_n is not None
+        and {"Circumradius", "Irrational"} <= canonical
+        and "外接円半径" in compact
+        and "無理数" in compact
+    ):
+        return "Irrational(Circumradius(P))"
+    if surface_goal:
+        escaped = surface_goal.replace('"', '\\"')
+        return f'SurfaceProposition("{escaped}")'
+    return "UnknownProposition"
 
 
 def build_logic(

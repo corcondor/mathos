@@ -25,6 +25,7 @@ from math_os_prototype.retriever import HybridRetriever, QueryBuilder
 from math_os_prototype.solution_step_parser import SolutionStepParser
 from math_os_prototype.step_verifier import StepVerifier
 from math_os_prototype.structural_parser import analyze_structure
+from math_os_prototype.symbolic_query import compile_symbolic_query, execute_symbolic_query
 from math_os_prototype.theory_atlas import canonical_graph_signature, compare_lift_structures
 from math_os_prototype.tool_adapters import ToolRegistry, wolfram_code_for_geometry
 from math_os_prototype.typed_definition_kernel import LEXICON, compile_typed_definition_ir
@@ -981,6 +982,45 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(integral_result["answer"], "1/3")
         self.assertEqual(factor_result["answer"], "(x + 1)**2")
 
+    def test_factorization_proof_clause_is_not_an_imperative_factor_query(self):
+        problem = r"""
+        $f(x)-1=2^{p-1}(x-1)\{P(x)\}^2$ と因数分解できることを示せ。
+        さらに $|P'(\alpha)|$ を $p$ のみで表せ。
+        """
+        self.assertIsNone(compile_symbolic_query(problem))
+
+    def test_defined_expression_with_unbound_coefficients_is_rejected(self):
+        problem = r"""
+        $S=g(S)$ とし、
+        $g(S)=C_0+C_1/S+C_2/S^2+C_3/S^3+C_4/S^4$
+        の定数項 $C_0$ の値を求めよ。
+        """
+        compiled = compile_symbolic_query(problem)
+        self.assertIsNotNone(compiled)
+        with self.assertRaisesRegex(ValueError, "unbound symbols"):
+            execute_symbolic_query(compiled.to_dict())
+
+    def test_prime_triangle_goal_is_retained_as_typed_constraints(self):
+        compiled = compile_typed_definition_ir(
+            "三辺が全て素数である三角形の外接円半径は無理数であることを示せ。"
+        )
+        definitions = {entry["canonical"] for entry in compiled.definitions_used}
+        formulas = {entry["formula"] for entry in compiled.predicates}
+        self.assertTrue({"EdgeLength", "Circumradius", "Irrational", "Prime"} <= definitions)
+        self.assertIn("forall i:Fin(3), Prime(EdgeLength(P,i))", formulas)
+        self.assertEqual(compiled.query["expression"], "Irrational(Circumradius(P))")
+        self.assertNotIn("(query prove goal)", compiled.logic)
+
+    def test_integer_geometry_search_enumerates_the_typed_shape(self):
+        compiled = compile_typed_definition_ir(
+            "三辺の長さが素数で、外接円半径と内接円半径の積も素数となる整数三角形を全て求めよ。"
+        )
+        formulas = {entry["formula"] for entry in compiled.predicates}
+        self.assertIn("forall i:Fin(3), Prime(EdgeLength(P,i))", formulas)
+        self.assertIn("Prime(Circumradius(P) * Inradius(P))", formulas)
+        self.assertEqual(compiled.query["kind"], "enumerate")
+        self.assertEqual(compiled.query["target"], "P")
+
     def test_generic_linear_system_derivative_and_dice_probability(self):
         system_result = solve_request_payload(
             {"problem": r"連立方程式 $x+y=5$, $x-y=1$ を解け。", "full_pipeline": True}
@@ -1408,6 +1448,96 @@ class MathOsPrototypeTest(unittest.TestCase):
                 self.assertEqual(ir.tool_calls[0].result["query_operator"], operator)
                 self.assertEqual(ir.tool_calls[0].result["answer_exact"], expected)
 
+    def test_symbolic_query_executes_closed_term_with_certificate(self):
+        ir = run_pipeline(r"Evaluate $i^5+i^{-25}+i^{45}$.")
+        self.assertEqual(ir.intent, "symbolic_query_evaluate_expression")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "I")
+        self.assertEqual(
+            ir.givens["symbolic_query"]["lowering_certificate"]["kind"],
+            "closed_term_evaluation",
+        )
+
+    def test_closed_term_evaluator_requires_query_term_dependency(self):
+        ir = run_pipeline("Two sides of a triangle are each $8$ units long. What is the greatest possible perimeter?")
+        self.assertNotEqual(ir.intent, "symbolic_query_evaluate_expression")
+
+    def test_symbolic_query_solves_constraint_system_then_observes_target(self):
+        problem = r"""Determine $x^2+y^2$ if
+        \[\begin{aligned}x+y&=3\\x-y&=1\end{aligned}\]"""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_solve_system_evaluate")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "5")
+        self.assertEqual(ir.tool_calls[0].result["constraint_count"], 2)
+
+    def test_constraint_system_accepts_nonunique_states_with_unique_observation(self):
+        problem = r"""Determine $x^2+y^2$ if
+        \[\begin{aligned}x^2&=4\\y^2&=9\end{aligned}\]"""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_solve_system_evaluate")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "13")
+
+    def test_closed_order_projection_is_a_typed_observation(self):
+        floor_ir = run_pipeline(r"What is the greatest integer less than or equal to $\frac{3^{100}+2^{100}}{3^{96}+2^{96}}$?")
+        ceiling_ir = run_pipeline(r"Find the least integer greater than or equal to $\frac{17}{5}$.")
+        self.assertEqual(floor_ir.intent, "symbolic_query_floor_value")
+        self.assertEqual(floor_ir.tool_calls[0].result["answer_exact"], "80")
+        self.assertEqual(ceiling_ir.tool_calls[0].result["answer_exact"], "4")
+
+    def test_closed_term_projections_are_numeric_morphisms(self):
+        nearest = run_pipeline(r"What is the nearest integer to $(5+2\sqrt7)^4$?")
+        root = run_pipeline(r"What is the positive square root of the product $10 \times 15 \times 24$?")
+        digit = run_pipeline(r"What is the units digit of $1!+3!+5!+7!$?")
+        changed = run_pipeline(r"What is the positive square root of the product $6 \times 24$?")
+        self.assertEqual(nearest.tool_calls[0].result["answer_exact"], "11218")
+        self.assertEqual(root.tool_calls[0].result["answer_exact"], "60")
+        self.assertEqual(digit.tool_calls[0].result["answer_exact"], "7")
+        self.assertEqual(changed.tool_calls[0].result["answer_exact"], "12")
+
+    def test_vector_query_uses_typed_cross_product_not_scalar_multiplication(self):
+        problem = r"""Given $\mathbf{a} = \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix},$
+        $\mathbf{b} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix},$ and
+        $\mathbf{c} = \begin{pmatrix} 1 \\ -2 \\ -3 \end{pmatrix},$ compute
+        \[(\mathbf{a} \times \mathbf{b}) \times \mathbf{c} -
+        \mathbf{a} \times (\mathbf{b} \times \mathbf{c}).\]"""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "vector_query_evaluate_vector_expression")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "Matrix([6, 3, 0])")
+
+    def test_vector_query_intersects_affine_constraints(self):
+        problem = r"""A plane is parameterized by
+        \[\mathbf{v}=\begin{pmatrix}1\\6\\7\end{pmatrix}
+        +t\begin{pmatrix}2\\-1\\-1\end{pmatrix}
+        +s\begin{pmatrix}2\\-3\\-5\end{pmatrix},\]
+        and a line is parameterized by
+        \[\mathbf{w}=\begin{pmatrix}7\\4\\1\end{pmatrix}
+        +u\begin{pmatrix}3\\0\\-1\end{pmatrix}.\]
+        Find the intersection of the plane and line."""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "vector_query_intersect_affine_subspaces")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "Matrix([1, 4, 3])")
+
+    def test_vector_query_selects_direction_equivalence_classes(self):
+        problem = r"""A line has slope $\frac{2}{5}$. Which direction vectors are possible?
+        (A) $\begin{pmatrix}2\\5\end{pmatrix}$
+        (B) $\begin{pmatrix}5\\2\end{pmatrix}$
+        (C) $\begin{pmatrix}0\\0\end{pmatrix}$
+        (E) $\begin{pmatrix}-5\\-2\end{pmatrix}$
+        (G) $\begin{pmatrix}40\\16\end{pmatrix}$"""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "vector_query_select_direction_vectors")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "B, E, G")
+
+    def test_vector_query_lifts_executable_constraints_to_semantic_graph(self):
+        problem = r"""Given $\mathbf{a} = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$ and
+        $\mathbf{b} = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$, compute
+        \[\mathbf{a} \times \mathbf{b}.\]"""
+        result = solve_request_payload({"problem": problem, "full_pipeline": True})
+        self.assertEqual(result["answer"], "Matrix([0, 0, 1])")
+        graph = result["data"]["semantic_graph"]
+        self.assertTrue(any(item["kind"] == "typed_vector_term" for item in graph["constraints"]))
+        self.assertTrue(any(item["name"] == "evaluate_vector_expression" for item in graph["morphisms"]))
+        self.assertTrue(any(item["sort"] == "Vector" for item in graph["queries"]))
+
     def test_symbolic_query_ir_lifts_to_typed_semantic_graph(self):
         result = solve_request_payload(
             {
@@ -1430,6 +1560,31 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(result["answer"], "Interval.open(-sqrt(3), sqrt(3))")
         symbolic_ir = result["data"]["parser"]["givens"]["symbolic_query"]
         self.assertEqual(symbolic_ir["constraints"], ["-5<u**4+5*u**2", "u**4+5*u**2<24"])
+
+    def test_structural_interval_requires_token_and_explicit_delimiters(self):
+        prose = analyze_structure("A shop sells mini cupcakes in boxes, and asks how many remain.")
+        self.assertFalse(any(item.kind == "interval" for item in prose.constraints))
+
+        interval = analyze_structure("Find x in [0, 1].")
+        constraints = [item.expression for item in interval.constraints if item.kind == "interval"]
+        self.assertEqual(constraints, ["x in [0, 1]"])
+
+    def test_quantity_execution_requires_conservation_certificate(self):
+        result = solve_quantity_reasoning_problem(
+            "Tera had some mango. Becky gave him 7 more. Now Tera has 31 mango. How many mango did Tera have initially?"
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result.semantic_model["execution_certificate"]["status"], "proved")
+        self.assertEqual(result.semantic_model["execution_certificate"]["law"], "final = initial + gain")
+
+    def test_quantity_semantics_separates_measure_unit_from_measured_object(self):
+        result = solve_quantity_reasoning_problem(
+            "The recipe calls for 7 cups of sugar and 10 cups of flour. She already put in 4 cups of sugar. How many more cups of sugar are needed?"
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result.answer_exact, "3")
+        objects = [item["obj"] for item in result.quantities]
+        self.assertEqual(objects, ["sugar", "flour", "sugar"])
 
     def test_generic_equation_solver_cannot_answer_an_unreached_aggregate_query(self):
         result = solve_request_payload(

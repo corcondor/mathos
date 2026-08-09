@@ -37,6 +37,7 @@ class SymbolicQueryIR:
     definitions: dict[str, dict[str, str]] = field(default_factory=dict)
     substitutions: dict[str, str] = field(default_factory=dict)
     parameters: dict[str, Any] = field(default_factory=dict)
+    lowering_certificate: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -44,7 +45,7 @@ class SymbolicQueryIR:
 
 def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
     parsed = parse_latex_problem(text)
-    segments = [clean_math_segment(item) for item in parsed.math_segments]
+    segments = [clean_math_segment(part) for item in parsed.math_segments for part in split_math_statements(item)]
     segments = [item for item in segments if item]
     lower = parsed.normalized_text.lower()
     definitions = extract_function_definitions(segments)
@@ -61,7 +62,10 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
         target = last_expression(expressions)
         return build_ir(constraints, expressions, "expand", target, variables, "Expression", definitions)
     factor_request = bool(re.search(r"(?:^|[.!?]\s*)factor(?:\s+the)?\s+(?:following\s+)?(?:expression|polynomial)?", lower))
-    if factor_request or "因数分解" in lower:
+    japanese_factor_request = bool(
+        re.search(r"因数分解\s*(?:せよ|しなさい|してください|すること)", lower)
+    ) and not bool(re.search(r"因数分解\s*できることを\s*(?:示せ|証明)", lower))
+    if factor_request or japanese_factor_request:
         target = last_expression(expressions)
         return build_ir(constraints, expressions, "factor", target, variables, "Expression", definitions)
     if contains_word(lower, "simplify") or "簡単" in lower:
@@ -90,8 +94,70 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
     equation = next((item for item in constraints if equation_operator(item)), "")
     inequalities = [item for item in constraints if inequality_operator(item)]
     inequality = inequalities[0] if inequalities else ""
-    if sum(1 for item in constraints if equation_operator(item)) > 1:
+    equations = [item for item in constraints if equation_operator(item)]
+    if len(equations) > 1:
+        target = expression_requested_by_query(lower, expressions)
+        if target and query_requests_value(lower):
+            compiled = build_ir(
+                constraints,
+                expressions,
+                "solve_system_evaluate",
+                target,
+                sorted(extract_symbols(equations)),
+                "Scalar",
+                definitions,
+            )
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    lowering_certificate={
+                        "kind": "constraint_system_observation",
+                        "constraint_count": len(equations),
+                        "observation": "evaluate target under the unique satisfying assignment",
+                    },
+                )
         return None
+
+    rounding_operator = None
+    if "greatest integer less than or equal" in lower or "floor" in lower or "床関数" in lower:
+        rounding_operator = "floor_value"
+    elif "least integer greater than or equal" in lower or "ceiling" in lower or "天井関数" in lower:
+        rounding_operator = "ceiling_value"
+    if not constraints and rounding_operator and expressions:
+        target = expressions[-1]
+        if is_closed_scalar_term(target):
+            compiled = build_ir(constraints, expressions, rounding_operator, target, [], "Integer", definitions)
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    lowering_certificate={
+                        "kind": "ordered_integer_projection",
+                        "constraint_count": 0,
+                        "observation": rounding_operator,
+                    },
+                )
+
+    closed_projection: tuple[str, str] | None = None
+    if "nearest integer" in lower or "最も近い整数" in lower:
+        closed_projection = ("nearest_integer_value", "Integer")
+    elif "positive square root" in lower or "正の平方根" in lower:
+        closed_projection = ("positive_square_root", "Real")
+    elif "units digit" in lower or "ones digit" in lower or "一の位" in lower:
+        closed_projection = ("units_digit", "Integer")
+    if not constraints and closed_projection and expressions:
+        target = expressions[-1]
+        if is_closed_scalar_term(target):
+            operator, output_sort = closed_projection
+            compiled = build_ir(constraints, expressions, operator, target, [], output_sort, definitions)
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    lowering_certificate={
+                        "kind": "closed_term_projection",
+                        "constraint_count": 0,
+                        "observation": operator,
+                    },
+                )
     query_variable = infer_query_variable(lower, variables, equation or inequality)
 
     named_roots = extract_named_roots(lower)
@@ -160,7 +226,45 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
             compiled,
             substitutions=extract_known_solution_substitution(lower, expressions, equation, query_variable),
         )
+    non_scalar_observations = (
+        "area", "volume", "radius", "locus", "envelope", "limit", "integral",
+        "remainder", "probability", "correlation", "prove", "show that",
+        "面積", "体積", "半径", "軌跡", "包絡線", "極限", "積分", "余り", "確率", "相関", "証明", "示せ",
+    )
+    if (
+        not constraints
+        and expressions
+        and directly_requests_closed_term(lower, expression_requested_by_query(lower, expressions))
+        and not any(marker in lower for marker in non_scalar_observations)
+    ):
+        target = expression_requested_by_query(lower, expressions)
+        if target and is_closed_scalar_term(target):
+            return replace(
+                build_ir(constraints, expressions, "evaluate_expression", target, [], "Scalar", definitions),
+                lowering_certificate={
+                    "kind": "closed_term_evaluation",
+                    "constraint_count": 0,
+                    "observation": "normalize and evaluate a closed mathematical term",
+                },
+            )
     return None
+
+
+def directly_requests_closed_term(text: str, target: str) -> bool:
+    """Require a syntactic dependency from the query operator to its term.
+
+    A closed number appearing in a word problem is data, not automatically the
+    requested observation. This elaboration gate prevents a generic CAS
+    evaluator from answering an unrelated number found in the statement.
+    """
+    if not target:
+        return False
+    escaped = re.escape(target)
+    boundary = r"(?=\s|[.!?]|$)"
+    english = rf"(?:evaluate|compute|calculate)(?:\s+the)?(?:\s+value\s+of)?\s+{escaped}{boundary}"
+    value_question = rf"what\s+is\s+the\s+value\s+of\s+{escaped}{boundary}"
+    japanese = rf"{escaped}\s*(?:を)?\s*計算"
+    return bool(re.search(english, text) or re.search(value_question, text) or re.search(japanese, text))
 
 
 def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
@@ -177,9 +281,57 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
             "factor": sp.factor,
             "simplify": sp.simplify,
         }[operator](expression)
+    elif operator == "evaluate_expression":
+        expression = parse_expression(ir.target, locals_map)
+        if expression.free_symbols:
+            raise ValueError("closed-term evaluation contains unbound symbols")
+        result = sp.simplify(expression)
+    elif operator in {"floor_value", "ceiling_value", "nearest_integer_value", "positive_square_root", "units_digit"}:
+        expression = parse_expression(ir.target, locals_map)
+        if expression.free_symbols:
+            raise ValueError("integer projection contains unbound symbols")
+        if operator == "floor_value":
+            result = sp.floor(expression)
+        elif operator == "ceiling_value":
+            result = sp.ceiling(expression)
+        elif operator == "nearest_integer_value":
+            result = sp.floor(expression + sp.Rational(1, 2))
+        elif operator == "positive_square_root":
+            result = sp.sqrt(expression)
+        else:
+            if expression.is_integer is not True:
+                raise ValueError("units-digit projection requires an integer term")
+            result = sp.Mod(expression, 10)
+    elif operator == "solve_system_evaluate":
+        equations = [parse_relation(item, locals_map) for item in ir.constraints if equation_operator(item)]
+        variables = sorted(
+            set().union(*(equation.free_symbols for equation in equations)),
+            key=lambda item: item.name,
+        )
+        target = parse_expression(ir.target, locals_map)
+        if not target.free_symbols <= set(variables):
+            raise ValueError("target contains symbols not declared by the constraint system")
+        solutions = sp.solve(equations, variables, dict=True)
+        if not solutions:
+            raise ValueError("constraint system has no finite symbolic solutions")
+        observed: list[sp.Expr] = []
+        for assignment in solutions:
+            if any(variable not in assignment for variable in target.free_symbols):
+                raise ValueError("constraint system leaves the requested observation underdetermined")
+            if not all(sp.simplify(equation.lhs.subs(assignment) - equation.rhs.subs(assignment)) == 0 for equation in equations):
+                raise ValueError("backend assignment failed constraint re-verification")
+            value = sp.simplify(target.subs(assignment))
+            if value.free_symbols:
+                raise ValueError("observed value still contains unbound symbols")
+            observed.append(value)
+        result = observed[0]
+        if any(sp.simplify(value - result) != 0 for value in observed[1:]):
+            raise ValueError("constraint system does not determine a unique observation")
     elif operator == "evaluate_defined_expression":
         result = evaluate_defined_expression(ir.target, ir.definitions, locals_map)
         result = sp.expand(result)
+        if result.free_symbols:
+            raise ValueError("defined-expression observation contains unbound symbols")
     elif operator in {"root_sum", "root_product", "root_square_product"}:
         polynomial = polynomial_from_equation(ir.target, variable, locals_map)
         degree = polynomial.degree()
@@ -340,12 +492,38 @@ def extract_function_definitions(segments: list[str]) -> dict[str, dict[str, str
 def sympy_locals(ir: SymbolicQueryIR) -> dict[str, Any]:
     names = extract_symbols([*ir.constraints, *ir.expressions, ir.target]) | set(ir.variables)
     locals_map: dict[str, Any] = {name: sp.Symbol(name, real=True) for name in names if name not in ir.definitions}
-    locals_map.update({"sqrt": sp.sqrt, "sin": sp.sin, "cos": sp.cos, "tan": sp.tan, "log": sp.log, "exp": sp.exp, "I": sp.I, "i": sp.I})
+    locals_map.update({"sqrt": sp.sqrt, "sin": sp.sin, "cos": sp.cos, "tan": sp.tan, "log": sp.log, "exp": sp.exp, "I": sp.I, "i": sp.I, "pi": sp.pi})
     return locals_map
 
 
 def clean_math_segment(source: str) -> str:
     return source.strip().strip(".,;:?")
+
+
+def split_math_statements(source: str) -> list[str]:
+    return [part.strip() for part in re.split(r"\s*;\s*", source) if part.strip()]
+
+
+def expression_requested_by_query(lower: str, expressions: list[str]) -> str:
+    if not expressions:
+        return ""
+    # Display order is significant: in ``Determine T if C1,...,Cn`` the
+    # observation precedes the constraints, while in ``compute T`` it is the
+    # last (and usually only) non-relational span.
+    if any(marker in lower for marker in ("determine", "求め", "値")):
+        return expressions[0]
+    return expressions[-1]
+
+
+def is_closed_scalar_term(source: str) -> bool:
+    names = extract_symbols([source])
+    if names - {"i"}:
+        return False
+    try:
+        expression = parse_expression(source, {"i": sp.I, "I": sp.I, "pi": sp.pi})
+    except Exception:
+        return False
+    return not expression.free_symbols and not isinstance(expression, (sp.MatrixBase, sp.Set))
 
 
 def extract_symbols(sources: list[str]) -> set[str]:
@@ -399,7 +577,10 @@ def contains_word(text: str, word: str) -> bool:
 
 
 def query_requests_value(text: str) -> bool:
-    return any(phrase in text for phrase in ("find", "what is", "evaluate", "value", "求め", "計算"))
+    return any(
+        phrase in text
+        for phrase in ("find", "what is", "evaluate", "compute", "calculate", "determine", "value", "求め", "計算")
+    )
 
 
 def query_requests_solution(text: str) -> bool:

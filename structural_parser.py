@@ -271,13 +271,21 @@ def extract_constraints(text: str, relations: list[str], variables: list[str]) -
         kind = "equation" if "=" in relation and not any(op in relation for op in ("<", ">")) else "inequality"
         constraints.append(StructuralConstraint(kind=kind, expression=relation, variables=relation_vars))
 
-    interval_pattern = r"([A-Za-z])\s*(?:in|∈)\s*\[?\(?\s*([^,\]]+)\s*,\s*([^) \]]+)\s*\]?\)?"
+    # ``in`` must be a token and an interval must have explicit delimiters.
+    # The old optional-delimiter pattern read prose fragments such as
+    # ``m in mini cupcakes`` as a mathematical interval constraint.
+    interval_pattern = (
+        r"(?<![A-Za-z])([A-Za-z])\s*(?:\bin\b|∈)\s*"
+        r"([\[(])\s*([^,\]]+)\s*,\s*([^\])]+)\s*([\])])"
+    )
     for match in re.finditer(interval_pattern, lower):
         var = match.group(1)
+        left = match.group(2)
+        right = match.group(5)
         constraints.append(
             StructuralConstraint(
                 kind="interval",
-                expression=f"{var} in [{match.group(2)}, {match.group(3)}]",
+                expression=f"{var} in {left}{match.group(3).strip()}, {match.group(4).strip()}{right}",
                 variables=[var],
             )
         )

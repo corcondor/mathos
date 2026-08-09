@@ -448,6 +448,7 @@ def run_reasoning_pipeline(
         formal_ir=formal_ir.to_dict(),
         arithmetic_problem=ir.givens.get("arithmetic_problem") if isinstance(ir.givens, dict) else None,
         symbolic_query_ir=ir.givens.get("symbolic_query") if isinstance(ir.givens, dict) else None,
+        vector_query_ir=ir.givens.get("vector_query") if isinstance(ir.givens, dict) else None,
     )
     semantic_answer = extract_answer(ir) or search_dict.get("answer")
     verifier_gate = run_verifier_gate(semantic_graph, answer=str(semantic_answer) if semantic_answer is not None else None)
@@ -557,6 +558,9 @@ def is_safe_tool_call(call: ToolCall, ir: MathIR, domain_ir: DomainIR, problem: 
         return True
     if name == "geometry.asymptote_exact":
         return True
+    if name == "sympy.vector_query":
+        payload = ir.givens.get("vector_query") if isinstance(ir.givens, dict) else None
+        return isinstance(payload, dict) and bool(payload.get("operator")) and bool(payload.get("lowering_certificate"))
     if name in {
         "container.square_in_equilateral_triangle",
         "geometry.dsl",
