@@ -55,6 +55,7 @@ PERSON_WORDS = {"adult", "boy", "child", "friend", "girl", "kid", "people", "per
 QUERY_STOP = {
     "did", "do", "does", "had", "has", "have", "he", "her", "him", "is", "it",
     "she", "they", "will", "would", "you", "now", "there", "altogether", "total",
+    "are", "was", "were", "riding", "before", "after",
 }
 
 
@@ -112,7 +113,7 @@ def _local_object(text: str, end: int) -> tuple[str | None, str | None]:
     denominator_match = re.search(r"\b(?:per|every|for each|on each|in each)\s+(?:an?\s+|the\s+)?([a-z-]+)", tail)
     denominator = canonical_unit(denominator_match.group(1)) if denominator_match else None
     local = re.split(
-        r"\b(?:per|every|for each|on each|in each|each|than|that|which|who|and|while|if|when|then|but|after|before|to|from|at|in|on|for|with|by)\b",
+        r"\b(?:per|every|for each|on each|in each|each|than|that|which|who|and|while|if|when|then|but|after|before|to|from|at|in|on|for|with|by|got|came|joined|left|went|were|was|are|is)\b",
         tail,
         maxsplit=1,
     )[0]
@@ -277,6 +278,24 @@ def solve_dimensional_arithmetic(text: str) -> DimensionalSynthesisResult | None
     if "\\" in text:
         return None
     quantities = extract_typed_quantities(text)
+    numeric_matches = [
+        match
+        for match in re.finditer(NUMBER_RE, text.lower())
+        if parse_number(match.group(0)) is not None
+    ]
+    quantity_starts = {quantity.start for quantity in quantities}
+    quantity_values = {quantity.value for quantity in quantities}
+    question_start = max(text.rfind("."), text.rfind("?", 0, max(0, len(text) - 1)), text.rfind("!")) + 1
+    # A dimensional program is complete only if every numeric premise became a
+    # typed leaf.  Otherwise a unique value can still be obtained by silently
+    # dropping an event, which is not a proof of the story problem.
+    for match in numeric_matches:
+        if match.start() in quantity_starts:
+            continue
+        value = parse_number(match.group(0))
+        if match.start() >= question_start and value in quantity_values:
+            continue
+        return None
     # Four leaves already cover 15 binary tree shapes with typed operators.
     # Larger stories must first be decomposed into event constraints; blindly
     # enumerating all arithmetic trees would be exponential and is rejected.

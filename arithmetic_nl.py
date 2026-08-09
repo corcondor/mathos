@@ -19,11 +19,13 @@ except ImportError:  # pragma: no cover
     sp = None
 
 try:
+    from math_os_prototype.affine_relation_synthesis import solve_affine_relation_problem
     from math_os_prototype.dimensional_synthesis import solve_dimensional_arithmetic
     from math_os_prototype.quantity_reasoner import solve_quantity_reasoning_problem
     from math_os_prototype.state_event_synthesis import solve_state_event_arithmetic
     from math_os_prototype.typed_operator_reasoner import solve_typed_operator_problem
 except ImportError:  # Allows direct script execution.
+    from affine_relation_synthesis import solve_affine_relation_problem
     from dimensional_synthesis import solve_dimensional_arithmetic
     from quantity_reasoner import solve_quantity_reasoning_problem
     from state_event_synthesis import solve_state_event_arithmetic
@@ -99,6 +101,9 @@ def detect_arithmetic_nl_problem(text: str, *, allow_surface_morphisms: bool = F
                 "certificate": typed_operator.certificate,
             },
         )
+    affine = detect_affine_relation_synthesis(text)
+    if affine is not None:
+        return affine
     normalized = normalize_text(text)
     solvers = (
         detect_percent_difference,
@@ -151,6 +156,23 @@ def detect_dimensional_synthesis(text: str) -> ArithmeticNLProblem | None:
         explanation="; ".join(result.certificate),
         metadata={
             "target_dimension": result.target_dimension,
+            "certificate": list(result.certificate),
+        },
+    )
+
+
+def detect_affine_relation_synthesis(text: str) -> ArithmeticNLProblem | None:
+    result = solve_affine_relation_problem(text)
+    if result is None:
+        return None
+    return ArithmeticNLProblem(
+        intent=f"typed_affine_relation.{result.relation_kind}",
+        expression=result.expression,
+        answer_exact=result.answer_exact,
+        explanation="; ".join(result.certificate),
+        metadata={
+            "query_variable": result.query_variable,
+            "equations": list(result.equations),
             "certificate": list(result.certificate),
         },
     )
