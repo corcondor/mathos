@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T12:43:06.814181+00:00",
+  "generated_at": "2026-08-09T13:19:58.986484+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "hard_problem_policy": "proof DAG with converging constraints required; flat scalar bridge compositions are excluded",
@@ -6261,7 +6261,7 @@
     "rejected": {
       "audience_skipped": 142,
       "composite_domain_without_morphology_path": 26,
-      "delivery_topic:dice_sum": 11,
+      "delivery_topic:dice_sum": 10,
       "delivery_topic:ellipse_tangent": 15,
       "delivery_topic:gambler_ruin": 1,
       "same_structure_variant": 7,

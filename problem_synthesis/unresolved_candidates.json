@@ -1,8 +1,8 @@
 {
   "autonomous_search": {
-    "added": 2,
+    "added": 12,
     "atlas_morphisms": 92,
-    "attempts": 3,
+    "attempts": 27,
     "base_maximum_nearest_similarity": 0.82,
     "depth_ceiling": 17,
     "depth_floor": 14,
@@ -11,14 +11,14 @@
       "convex_body": 18,
       "markov_dynamics": 17,
       "plane_curve": 17,
-      "polynomial": 18,
-      "triangle_dynamics": 18
+      "polynomial": 17,
+      "triangle_dynamics": 17
     },
     "domains": 6,
-    "epoch": 10,
+    "epoch": 9,
     "quotient": "typed operation classes + type aliases + numeric erasure + commuting-block normalization",
-    "requested": 2,
-    "seed": 195804611048569,
+    "requested": 12,
+    "seed": 193263169616124,
     "similarity_rule": "max(0.55, 0.82 - 0.015 * (depth - 10))"
   },
   "candidates": [
@@ -8432,180 +8432,25 @@
         "error": null,
         "passed": true
       }
-    },
-    {
-      "answer_status": "unresolved_by_mathos",
-      "answer_tex": null,
-      "candidate_id": "atlas:78fa12675ce5b635",
-      "constraint_skeleton": [
-        "square_free",
-        "monic_normalization",
-        "degree_at_least_three"
-      ],
-      "effective_morphism_count": 15,
-      "falsification_attempts": [
-        "not executed: backend-specific bounded counterexample search is scheduled"
-      ],
-      "family_id": "research.autonomous.polynomial.78fa12675c",
-      "hardness": {
-        "reasons": [
-          "type-directed multi-functor composition",
-          "global classification with exceptional strata"
-        ],
-        "score": 19
-      },
-      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
-      "known_problem_screen": {
-        "corpus": {
-          "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
-          "exact_jukenmath_collision": false,
-          "maximum_surface_jaccard": 0.0938,
-          "method": "minhash64_conservative",
-          "passed": true,
-          "rejection_threshold": 0.45,
-          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
-        },
-        "matches": [],
-        "passed": true,
-        "scope": "local marker list; not a literature proof of novelty"
-      },
-      "morphism_chain": [
-        "ReciprocalPolynomial",
-        "DerivativeRenormalization",
-        "ShiftConjugacy",
-        "CriticalValuePolynomial",
-        "RootMultiset",
-        "PolynomialReconstruction",
-        "GraeffeTransform",
-        "ReciprocalPolynomial",
-        "ShiftConjugacy",
-        "RootMultiset",
-        "PowerMomentSequence",
-        "HankelConstruction",
-        "MinorSequence",
-        "RecurrenceExtraction",
-        "RecurrenceOrderQuery"
-      ],
-      "morphism_count": 15,
-      "not_claimed_human_open": true,
-      "origin": "autonomous_atlas_search",
-      "proof_attempts": [
-        "not executed: a backend contract has not yet been synthesized"
-      ],
-      "query_type": "recurrence_order_drop",
-      "quotient_signature": "Polynomial|ReciprocalPolynomial/DerivativeRenormalization/ShiftConjugacy/CriticalValuePolynomial/RootMultiset/PolynomialReconstruction/GraeffeTransform/ReciprocalPolynomial/ShiftConjugacy/RootMultiset/PowerMomentSequence/HankelConstruction/MinorSequence/RecurrenceExtraction/RecurrenceOrderQuery|Classification|degree_at_least_three,monic_normalization,square_free",
-      "search_trace": {
-        "domain": "polynomial",
-        "epoch": 10,
-        "nearest_prior_structural_similarity": 0.4444,
-        "seed": 195804611048569,
-        "similarity_limit": 0.745,
-        "target_depth": 15
-      },
-      "statement_tex": "\\(\\mathcal X_0\\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 根を逆数へ移す相反多項式をとる，(2) 導関数をモニックに再正規化する，(3) 根の重心を0へ移す平行移動共役を施す，(4) 臨界値を根にもつ消去多項式を作る，(5) 重複度付き根配置へ移す，(6) 根配置からモニック多項式を再構成する，(7) 根を二乗するGraeffe変換を施す，(8) 根を逆数へ移す相反多項式をとる，(9) 根の重心を0へ移す平行移動共役を施す，(10) 重複度付き根配置へ移す，(11) 根の冪和モーメント列を作る，(12) モーメントからHankel行列族を作る，(13) 主小行列式列をとる，(14) 満たす最小線形漸化式を抽出する。最後に、漸化式の最小次数が低下する係数条件を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
-      "structural_signature": "Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:GraeffeTransform:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PowerMomentSequence:MomentSequence -> MomentSequence:HankelConstruction:HankelMatrix -> HankelMatrix:MinorSequence:DeterminantSequence -> DeterminantSequence:RecurrenceExtraction:RecurrenceData -> RecurrenceData:RecurrenceOrderQuery:Classification",
-      "title": "多項式変換と算術観測（ReciprocalPolynomial・DerivativeRenormalization・MinorSequence・RecurrenceExtraction）",
-      "typecheck": {
-        "error": null,
-        "passed": true
-      }
-    },
-    {
-      "answer_status": "unresolved_by_mathos",
-      "answer_tex": null,
-      "candidate_id": "atlas:28093045ec53b98f",
-      "constraint_skeleton": [
-        "nondegenerate",
-        "acute_when_pedal_is_used",
-        "mod_similarity"
-      ],
-      "effective_morphism_count": 14,
-      "falsification_attempts": [
-        "not executed: backend-specific bounded counterexample search is scheduled"
-      ],
-      "family_id": "research.autonomous.triangle_dynamics.28093045ec",
-      "hardness": {
-        "reasons": [
-          "type-directed multi-functor composition",
-          "global classification with exceptional strata"
-        ],
-        "score": 17
-      },
-      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
-      "known_problem_screen": {
-        "corpus": {
-          "closest_source": "sakumon_curation",
-          "corpus_size": 28074,
-          "exact_jukenmath_collision": false,
-          "maximum_surface_jaccard": 0.0625,
-          "method": "minhash64_conservative",
-          "passed": true,
-          "rejection_threshold": 0.45,
-          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
-        },
-        "matches": [],
-        "passed": true,
-        "scope": "local marker list; not a literature proof of novelty"
-      },
-      "morphism_chain": [
-        "OrthicTransform",
-        "IncenterMark",
-        "PedalProjection",
-        "TriangleFormation",
-        "CentroidMark",
-        "PedalProjection",
-        "TriangleFormation",
-        "OrthicTransform",
-        "SimilarityNormalization",
-        "ModuliProjection",
-        "InducedIteration",
-        "OrbitCompactification",
-        "LimitSetExtraction",
-        "TriangleDynamicsQuery"
-      ],
-      "morphism_count": 14,
-      "not_claimed_human_open": true,
-      "origin": "autonomous_atlas_search",
-      "proof_attempts": [
-        "not executed: a backend contract has not yet been synthesized"
-      ],
-      "query_type": "triangle_moduli_dynamics",
-      "quotient_signature": "Triangle|MetricTriangleEndofunctor/MetricCenterMark/PedalProjection/TriangleFormation/AffineCenterMark/PedalProjection/TriangleFormation/MetricTriangleEndofunctor/SimilarityNormalization/ModuliProjection/InducedIteration/OrbitCompactification/LimitSetExtraction/TriangleDynamicsQuery|Classification|acute_when_pedal_is_used,mod_similarity,nondegenerate",
-      "search_trace": {
-        "domain": "triangle_dynamics",
-        "epoch": 10,
-        "nearest_prior_structural_similarity": 0.4444,
-        "seed": 195804611048569,
-        "similarity_limit": 0.76,
-        "target_depth": 14
-      },
-      "statement_tex": "\\(\\mathcal X_0\\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 垂足三角形へ移す，(2) 内心を標識点として付加する，(3) 標識点から三辺への垂足三点をとる，(4) 三点を頂点とする向き付き三角形を作る，(5) 重心を標識点として付加する，(6) 標識点から三辺への垂足三点をとる，(7) 三点を頂点とする向き付き三角形を作る，(8) 垂足三角形へ移す，(9) 重心・面積・向きを固定して相似正規化する，(10) 相似類のモジュライ点へ射影する，(11) ここまでの合成が誘導する写像を反復する，(12) 退化三角形を境界として軌道をコンパクト化する，(13) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
-      "structural_signature": "Triangle:OrthicTransform:Triangle -> Triangle:IncenterMark:MarkedTriangle -> MarkedTriangle:PedalProjection:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:CentroidMark:MarkedTriangle -> MarkedTriangle:PedalProjection:PointTriple -> PointTriple:TriangleFormation:Triangle -> Triangle:OrthicTransform:Triangle -> Triangle:SimilarityNormalization:NormalizedTriangle -> NormalizedTriangle:ModuliProjection:TriangleModuli -> TriangleModuli:InducedIteration:ModuliOrbit -> ModuliOrbit:OrbitCompactification:CompactOrbit -> CompactOrbit:LimitSetExtraction:DynamicalData -> DynamicalData:TriangleDynamicsQuery:Classification",
-      "title": "三角形変換の合成力学（OrthicTransform・IncenterMark・OrbitCompactification・LimitSetExtraction）",
-      "typecheck": {
-        "error": null,
-        "passed": true
-      }
     }
   ],
-  "generated_at": "2026-08-09T13:16:37.808327+00:00",
+  "generated_at": "2026-07-26T19:43:54.667764+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
     "unresolved_by_mathos": "MathOS has not proved or refuted the candidate. This is not a claim that the problem is open to humanity."
   },
   "summary": {
-    "added_by_autonomous_search": 2,
-    "autonomous_candidates": 105,
+    "added_by_autonomous_search": 12,
+    "autonomous_candidates": 103,
     "current_depth_floor": 14,
     "current_runtime_corpus_size": 176,
     "parameter_variants": 0,
     "reference_corpus_size": 28074,
     "reference_corpus_size_max": 28074,
     "rejected": 0,
-    "retained": 117,
+    "retained": 115,
     "unique_query_types": 23,
-    "unique_structural_signatures": 117
+    "unique_structural_signatures": 115
   }
 }
