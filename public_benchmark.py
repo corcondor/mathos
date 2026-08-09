@@ -18,6 +18,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import Counter
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -76,6 +77,35 @@ class PublicBenchmarkRecord:
     problem_hash: str
     evaluation_partition: str
     level: str | None
+    failure_layer: str = "unknown"
+    semantic_morphism_count: int = 0
+    backend_obligation_count: int = 0
+    planned_tool_count: int = 0
+    executable_tool_count: int = 0
+    executed_tool_count: int = 0
+
+
+def classify_failure_layer(
+    *,
+    typed_status: str,
+    answer: str | None,
+    exact_match: bool | None,
+    tool_calls: list[dict[str, Any]],
+) -> str:
+    """Locate the first observable pipeline layer that blocks a correct answer."""
+    if exact_match is True:
+        return "solved"
+    if typed_status != "type_checked":
+        return "elaboration_or_type_gap"
+    if not answer:
+        if not tool_calls:
+            return "strategy_or_morphism_gap"
+        if not any(bool(call.get("executable")) for call in tool_calls):
+            return "morphism_to_backend_gap"
+        if any(call.get("error") for call in tool_calls):
+            return "backend_execution_gap"
+        return "answer_extraction_or_abstention"
+    return "semantic_or_strategy_error"
 
 
 def problem_hash(case: PublicBenchmarkCase) -> str:
@@ -375,6 +405,11 @@ def run_case(
         data = json.loads(result.to_json())
         answer = extract_answer_from_pipeline_data(data)
         match = answers_match(answer, case.expected) if case.expected is not None else None
+        tool_calls = list((data.get("tool_execution") or {}).get("tool_calls") or [])
+        semantic_morphisms = list((data.get("semantic_graph") or {}).get("morphisms") or [])
+        backend_obligations = list(
+            (data.get("typed_definition_ir") or {}).get("backend_obligations") or []
+        )
         return PublicBenchmarkRecord(
             benchmark=case.benchmark,
             subset=case.subset,
@@ -392,6 +427,22 @@ def run_case(
             problem_hash=digest,
             evaluation_partition=partition,
             level=case.level,
+            failure_layer=classify_failure_layer(
+                typed_status=typed_ir.status,
+                answer=answer,
+                exact_match=match,
+                tool_calls=tool_calls,
+            ),
+            semantic_morphism_count=len(semantic_morphisms),
+            backend_obligation_count=len(backend_obligations),
+            planned_tool_count=len(tool_calls),
+            executable_tool_count=sum(
+                bool(call.get("executable")) for call in tool_calls
+            ),
+            executed_tool_count=sum(
+                call.get("result") is not None and not call.get("error")
+                for call in tool_calls
+            ),
         )
     except Exception as exc:
         return error_record(case, str(exc))
@@ -616,11 +667,13 @@ def summarize(records: list[PublicBenchmarkRecord]) -> dict[str, Any]:
         bucket["abstained"] += int(not bool(record.answer))
         bucket["timeouts"] += int(record.verification == "timeout")
     failure_intents: dict[str, int] = {}
+    failure_layers: Counter[str] = Counter()
     for record in records:
         if record.exact_match is True:
             continue
         key = f"{record.typed_status}|{record.intent}|{record.verification}"
         failure_intents[key] = failure_intents.get(key, 0) + 1
+        failure_layers[record.failure_layer] += 1
     by_partition: dict[str, dict[str, int]] = {}
     for record in records:
         bucket = by_partition.setdefault(record.evaluation_partition, {"total": 0, "answered": 0, "exact": 0, "wrong": 0})
@@ -641,6 +694,20 @@ def summarize(records: list[PublicBenchmarkRecord]) -> dict[str, Any]:
         "wrong": wrong,
         "abstained": abstained,
         "timeouts": timeouts,
+        "failure_layers": dict(failure_layers.most_common()),
+        "coverage": {
+            "semantic_morphisms_total": sum(
+                record.semantic_morphism_count for record in records
+            ),
+            "backend_obligations_total": sum(
+                record.backend_obligation_count for record in records
+            ),
+            "planned_tool_calls": sum(record.planned_tool_count for record in records),
+            "executable_tool_calls": sum(
+                record.executable_tool_count for record in records
+            ),
+            "executed_tool_calls": sum(record.executed_tool_count for record in records),
+        },
         "by_benchmark": by_benchmark,
         "by_partition": by_partition,
         "top_failure_stages": dict(sorted(failure_intents.items(), key=lambda item: (-item[1], item[0]))[:30]),

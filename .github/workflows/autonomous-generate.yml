@@ -144,15 +144,30 @@ jobs:
           ls -la shards || true
           # 既存プールも入力に含めて蓄積する
           python merge_shards.py \
-            --inputs shards/shard_*.json problem_synthesis/construct_pool.json \
+            --inputs shards/shard_*.json \
+            --base problem_synthesis/construct_pool.json \
             --output problem_synthesis/construct_pool.json | tee merge_summary.json
           python export_generation_report.py
           python export_morphology_atlas.py
           python build_entrance_pool.py
 
+      - name: Detect semantic pool changes
+        id: pool_changes
+        shell: bash
+        run: |
+          if git diff --quiet -- \
+            problem_synthesis/construct_pool.json \
+            problem_synthesis/entrance_exam_pool.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No structural pool change; skip database synchronization."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       # PC を開いていなくても、作った問題がそのままサイトと Discord に届く。
       # 鍵が未設定なら何もせず通過する。
       - name: Sync the pool into Supabase
+        if: steps.pool_changes.outputs.changed == 'true'
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

@@ -7,6 +7,7 @@ try:
         answers_match,
         benchmark_manifest,
         case_identity,
+        classify_failure_layer,
         extract_boxed_answer,
         run_cases_with_persistent_workers,
         summarize,
@@ -18,6 +19,7 @@ except ImportError:
         answers_match,
         benchmark_manifest,
         case_identity,
+        classify_failure_layer,
         extract_boxed_answer,
         run_cases_with_persistent_workers,
         summarize,
@@ -25,6 +27,26 @@ except ImportError:
 
 
 class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
+    def test_failure_layer_distinguishes_missing_backend_from_missing_plan(self):
+        self.assertEqual(
+            classify_failure_layer(
+                typed_status="type_checked",
+                answer=None,
+                exact_match=False,
+                tool_calls=[],
+            ),
+            "strategy_or_morphism_gap",
+        )
+        self.assertEqual(
+            classify_failure_layer(
+                typed_status="type_checked",
+                answer=None,
+                exact_match=False,
+                tool_calls=[{"name": "lean.check", "executable": False}],
+            ),
+            "morphism_to_backend_gap",
+        )
+
     def test_extracts_nested_latex_from_boxed_answer(self):
         self.assertEqual(
             extract_boxed_answer(r"work \boxed{\frac{10}{11}} end"),

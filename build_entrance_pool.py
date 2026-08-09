@@ -680,6 +680,22 @@ def main() -> int:
     )
     args = parser.parse_args()
     report = build_pool(args.construct, args.feedback)
+    if args.output.exists():
+        try:
+            previous = json.loads(args.output.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            previous = None
+        if previous is not None:
+            current_semantic = {
+                key: value for key, value in report.items() if key != "generated_at"
+            }
+            previous_semantic = {
+                key: value for key, value in previous.items() if key != "generated_at"
+            }
+            if current_semantic == previous_semantic:
+                report["generated_at"] = previous.get(
+                    "generated_at", report["generated_at"]
+                )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write(
