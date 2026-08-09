@@ -287,8 +287,9 @@ def solve_polynomial_extremum(expression: sp.Expr, variable: sp.Symbol, operator
 
 def polynomial_from_equation(source: str, variable: sp.Symbol, locals_map: dict[str, Any]) -> sp.Poly:
     relation = parse_relation(source, locals_map)
-    expression = relation.lhs - relation.rhs
-    return sp.Poly(sp.expand(expression), variable)
+    expression = sp.together(relation.lhs - relation.rhs)
+    numerator, _ = expression.as_numer_denom()
+    return sp.Poly(sp.expand(numerator), variable)
 
 
 def parse_relation(source: str, locals_map: dict[str, Any]) -> Any:
@@ -414,7 +415,10 @@ def query_requests_solution_set(text: str) -> bool:
 def root_aggregate_query(text: str) -> tuple[str, str] | None:
     if re.search(r"product of (?:the )?squares of (?:the )?(?:solutions|roots)", text):
         return "root_square_product", "Scalar"
-    if re.search(r"sum of (?:all )?(?:the )?(?:solutions|roots|possible values)", text):
+    if re.search(
+        r"sum of (?:all )?(?:the )?(?:(?:real|complex|distinct|possible)\s+)*(?:solutions|roots|values)",
+        text,
+    ):
         return "root_sum", "Scalar"
     if re.search(r"product of (?:all )?(?:the )?(?:solutions|roots)", text):
         return "root_product", "Scalar"

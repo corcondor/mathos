@@ -16,6 +16,7 @@ from typing import Any
 
 try:
     from math_os_prototype.arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
+    from math_os_prototype.asymptote_geometry import detect_asymptote_geometry_problem, solve_asymptote_geometry_problem
     from math_os_prototype.container_geometry import detect_container_problem, solve_container_problem
     from math_os_prototype.field_adapters import detect_specialized_problem, solve_specialized_problem
     from math_os_prototype.geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
@@ -25,6 +26,7 @@ try:
     from math_os_prototype.tool_adapters import ToolRegistry
 except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
+    from asymptote_geometry import detect_asymptote_geometry_problem, solve_asymptote_geometry_problem
     from container_geometry import detect_container_problem, solve_container_problem
     from field_adapters import detect_specialized_problem, solve_specialized_problem
     from geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
@@ -237,6 +239,24 @@ class ProblemCompiler:
                         executable=True,
                     )
                 ],
+            )
+
+        asymptote_problem = detect_asymptote_geometry_problem(text)
+        if asymptote_problem is not None:
+            return MathIR(
+                problem=text,
+                route="geometry_symbolic",
+                intent="asymptote_coordinate_area",
+                symbols=list(asymptote_problem.polygon),
+                givens={"asymptote_geometry": asymptote_problem.to_dict()},
+                goal="Evaluate the embedded coordinate construction and its requested area.",
+                plan=[
+                    "Parse the embedded Asymptote coordinate program.",
+                    "Evaluate point constructions and line intersections exactly.",
+                    "Apply any stated regular-polygon side-length scale.",
+                    "Verify the requested polygon area by the shoelace determinant.",
+                ],
+                tool_calls=[ToolCall("geometry.asymptote_exact", "execute typed coordinate construction", executable=True)],
             )
 
         symbolic_query = compile_symbolic_query(text)
@@ -653,6 +673,8 @@ class ToolExecutor:
                     call.result = solve_container_problem_from_ir(ir)
                 elif call.name == "geometry.constraint_ir":
                     call.result = build_geometry_constraint_ir(ir.givens)
+                elif call.name == "geometry.asymptote_exact":
+                    call.result = solve_asymptote_geometry_problem(ir.givens["asymptote_geometry"])
                 elif call.name == "arithmetic.nl":
                     payload = ir.givens["arithmetic_problem"]
                     call.result = solve_arithmetic_nl_problem_from_ir(payload)

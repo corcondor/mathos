@@ -297,6 +297,13 @@ def extract_operations(text: str, relations: list[str]) -> list[StructuralOperat
         add("solve_all", latest_relation(relations), scope="all")
     elif contains_any(lower, ("求めよ", "求める", "解け", "find", "solve")):
         add("compute_or_solve", latest_relation(relations))
+
+    # Mathematical interrogatives are observation operators, not word-problem
+    # templates. Keeping this vocabulary finite types the requested output
+    # without making assumptions about the solution law.
+    interrogative = extract_interrogative_operation(text)
+    if interrogative is not None:
+        add(interrogative.kind, interrogative.target, **interrogative.qualifiers)
     if contains_any(lower, ("因数分解", "factor")):
         add("factor", extract_last_expression(text) or latest_relation(relations))
     if contains_any(lower, ("簡単", "simplify")):
@@ -331,6 +338,42 @@ def extract_operations(text: str, relations: list[str]) -> list[StructuralOperat
         add("aggregate", extract_last_expression(text) or latest_relation(relations), operation="product")
 
     return dedupe_operations(operations)
+
+
+def extract_interrogative_operation(text: str) -> StructuralOperation | None:
+    """Map a surface question form to a typed observation operation."""
+    normalized = normalize_spacing(text)
+    lower = normalized.lower()
+    forms: tuple[tuple[str, str, str], ...] = (
+        (r"\bhow many\b", "query_count", "Integer"),
+        (r"\bwhat percentage\b", "query_measure", "Real"),
+        (r"\bhow (?:much|far|long)\b", "query_measure", "Real"),
+        (r"\bhow big\b", "query_measure", "Real"),
+        (
+            r"\bwhat\s+(?:speed|distance|time|length|area|volume|price|cost|profit|value|number|angle)\b",
+            "query_measure",
+            "Real",
+        ),
+        (r"\bwhich\b", "query_select", "Set"),
+        (r"\benter\b", "query_classify", "Fin"),
+        (r"\b(?:evaluate|calculate|determine)\b", "query_compute", "Real"),
+        (r"\bwhat(?:'s|\s+(?:is|are|was|were))\b", "query_compute", "Real"),
+    )
+    for pattern, kind, target_type in forms:
+        match = re.search(pattern, lower)
+        if match is None:
+            continue
+        target = normalized[match.end() :]
+        target = re.split(r"[?？]", target, maxsplit=1)[0]
+        target = target.strip(" \t\r\n,.:;\"'")
+        if kind == "query_compute":
+            target = extract_last_expression(normalized) or target
+        return StructuralOperation(
+            kind=kind,
+            target=target or "requested_value",
+            qualifiers={"target_type": target_type, "surface_form": match.group(0)},
+        )
+    return None
 
 
 def extract_quantities(text: str) -> list[str]:

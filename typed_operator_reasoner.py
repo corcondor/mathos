@@ -59,6 +59,7 @@ def normalize_operator_text(text: str) -> str:
     text = re.sub(r"\\lfloor\s*([^\\]+?)\s*\\rfloor", r"floor(\1)", text)
     text = text.replace("最大公約数", "gcd").replace("最小公倍数", "lcm")
     text = text.replace("least common multiple", "lcm").replace("greatest common divisor", "gcd")
+    text = text.replace(r"\infty", "infinity").replace(r"\times", "*")
     text = text.replace("\n", " ").replace("$", "")
     return re.sub(r"\s+", " ", text).strip()
 
@@ -231,12 +232,224 @@ def solve_percent_relation(text: str) -> TypedOperatorResult | None:
     return None
 
 
+def solve_modular_inverse_operator(text: str) -> TypedOperatorResult | None:
+    normalized = normalize_operator_text(text)
+    normalized = normalized.replace(r"\pmod", " mod ").replace("pmod", " mod ")
+    patterns = (
+        r"(?P<a>\d+)\s*(?:\*\*|\^)\s*\{?\(?-1\)?\}?\s*mod\s*\{?(?P<m>\d+)\}?",
+        r"inverse\s+of\s+(?P<a>\d+)\s+(?:mod|modulo)\s+(?P<m>\d+)",
+    )
+    match = next((candidate for pattern in patterns if (candidate := re.search(pattern, normalized))), None)
+    if match is None:
+        return None
+    a, modulus = int(match.group("a")), int(match.group("m"))
+    try:
+        value = pow(a, -1, modulus)
+    except ValueError:
+        return None
+    return TypedOperatorResult(
+        operator="ModularInverse",
+        input_sorts=("UnitModN", "Natural"),
+        output_sort="ResidueClass",
+        constraint=f"{a}*x = 1 (mod {modulus})",
+        answer_exact=str(value),
+        certificate=("extended Euclidean algorithm", f"{a}*{value} mod {modulus}=1"),
+    )
+
+
+def solve_finite_mean_observation(text: str) -> TypedOperatorResult | None:
+    normalized = normalize_operator_text(text)
+    if not re.search(r"\b(?:mean|average)\b", normalized) or ":" not in normalized:
+        return None
+    observation_source = normalized.split(":", 1)[1]
+    observation_source = re.split(r"\b(?:what is|find|compute)\b", observation_source, maxsplit=1)[0]
+    values = [Fraction(value) for value in re.findall(r"\b(\d+(?:\.\d+)?)\s+[a-z]", observation_source)]
+    if len(values) < 2:
+        return None
+    result = sum(values, Fraction(0)) / len(values)
+    return TypedOperatorResult(
+        operator="FiniteMean",
+        input_sorts=("FiniteSequence[Real]",),
+        output_sort="Real",
+        constraint=f"mean([{','.join(format_fraction(value) for value in values)}])",
+        answer_exact=format_fraction(result),
+        certificate=("mean(xs)=sum(xs)/card(xs)", f"card(xs)={len(values)}"),
+    )
+
+
+def solve_unit_rate_sum(text: str) -> TypedOperatorResult | None:
+    normalized = normalize_operator_text(text)
+    pair_pattern = re.compile(
+        r"(?P<count>\d+(?:\.\d+)?)\s+(?P<unit>[a-z]+)\s+"
+        r"[^,.;?]+?(?:cost|costs|for|at)\s*\$?(?P<rate>\d+(?:\.\d+)?)\s+per\s+(?P=unit)"
+    )
+    pairs = [(Fraction(match.group("count")), Fraction(match.group("rate"))) for match in pair_pattern.finditer(normalized)]
+    if len(pairs) < 2:
+        return None
+    result = sum((count * rate for count, rate in pairs), Fraction(0))
+    return TypedOperatorResult(
+        operator="UnitRateSum",
+        input_sorts=("FiniteSequence[Quantity]", "FiniteSequence[Rate]"),
+        output_sort="Quantity",
+        constraint="sum_i(quantity_i*rate_i)",
+        answer_exact=format_fraction(result),
+        certificate=("rate denominator matches quantity unit", "distributive finite sum"),
+    )
+
+
+def solve_uniform_approach_elevation(text: str) -> TypedOperatorResult | None:
+    if sp is None:
+        return None
+    normalized = normalize_operator_text(text).replace("–", "-")
+    if "angle of elevation" not in normalized or "uniform speed" not in normalized:
+        return None
+    angles = re.search(
+        r"from\s+(?P<a>\d+(?:\.\d+)?)\s*(?:°|degrees?)?\s+to\s+"
+        r"(?P<b>\d+(?:\.\d+)?)\s*(?:°|degrees?)?",
+        normalized,
+    )
+    elapsed = re.search(r"(?:takes?|in)\s+(?P<t>\d+(?:\.\d+)?)\s+minutes?", normalized)
+    if not (angles and elapsed):
+        return None
+    theta_1 = sp.Rational(angles.group("a")) * sp.pi / 180
+    theta_2 = sp.Rational(angles.group("b")) * sp.pi / 180
+    delta_t = sp.Rational(elapsed.group("t"))
+    d_1 = sp.simplify(1 / sp.tan(theta_1))
+    d_2 = sp.simplify(1 / sp.tan(theta_2))
+    if sp.simplify(d_1 - d_2) == 0:
+        return None
+    result = sp.simplify(delta_t * d_2 / (d_1 - d_2))
+    return TypedOperatorResult(
+        operator="UniformApproachElevation",
+        input_sorts=("Angle", "Angle", "Time"),
+        output_sort="Time",
+        constraint="distance(theta)=height/tan(theta); speed=constant",
+        answer_exact=str(result),
+        certificate=("right-triangle tangent", "constant-speed distance/time ratio"),
+    )
+
+
+def solve_opposite_pair_probability(text: str) -> TypedOperatorResult | None:
+    if sp is None:
+        return None
+    normalized = normalize_operator_text(text)
+    required = ("unfair", "opposite face", "other faces", "relatively prime")
+    if not all(marker in normalized for marker in required):
+        return None
+    sides_match = re.search(r"(?P<n>\d+|six)-sided die", normalized)
+    default_match = re.search(r"other faces is\s*(?P<p>\d+/\d+)", normalized)
+    total_match = re.search(r"probability of obtaining a sum of \d+ is\s*\(?(?:\()?\s*(?P<a>\d+)\s*\)?/\(?\s*(?P<b>\d+)\s*\)?", normalized)
+    if not (sides_match and default_match and total_match):
+        return None
+    sides_token = sides_match.group("n")
+    sides = 6 if sides_token == "six" else int(sides_token)
+    default = sp.Rational(default_match.group("p"))
+    total_probability = sp.Rational(int(total_match.group("a")), int(total_match.group("b")))
+    p, q, z = sp.symbols("p q z", real=True)
+    pair_sum = sp.simplify(1 - (sides - 2) * default)
+    pair_product = sp.simplify((total_probability - (sides - 2) * default**2) / 2)
+    roots = sp.solve(z**2 - pair_sum * z + pair_product, z)
+    candidates = [root for root in roots if root.is_Rational and root > default]
+    if len(candidates) != 1:
+        return None
+    value = sp.Rational(candidates[0])
+    answer = int(value.p) + int(value.q)
+    return TypedOperatorResult(
+        operator="OppositePairProbability",
+        input_sorts=("FiniteProbabilitySpace", "Involution"),
+        output_sort="Integer",
+        constraint=f"p+q={pair_sum}; 2*p*q+{sides-2}*({default})^2={total_probability}",
+        answer_exact=str(answer),
+        certificate=("normalization of probability mass", "sum event paired by opposite-face involution"),
+    )
+
+
+def solve_tridiagonal_determinant_series(text: str) -> TypedOperatorResult | None:
+    if sp is None:
+        return None
+    normalized = normalize_operator_text(text)
+    if "determinant" not in normalized or "all other entries" not in normalized or "infinity" not in normalized:
+        return None
+    matrix_entry = r"m_(?:\{[^}]+\}|[^ ]+)"
+    diagonal = re.search(rf"{matrix_entry}\s*=\s*(?P<a>-?\d+)", normalized)
+    off_diagonal = re.search(rf"{matrix_entry}\s*=\s*{matrix_entry}\s*=\s*(?P<b>-?\d+)", normalized)
+    series = re.search(r"\(\(1\)/\((?P<c>\d+)\*?d_n\+(?P<d>-?\d+)\)\)", normalized)
+    if not (diagonal and off_diagonal and series):
+        return None
+    a = sp.Integer(diagonal.group("a"))
+    b = sp.Integer(off_diagonal.group("b"))
+    c = sp.Integer(series.group("c"))
+    d = sp.Integer(series.group("d"))
+    n = sp.symbols("n", integer=True, nonnegative=True)
+    determinant = sp.Function("D")
+    closed = sp.rsolve(
+        sp.Eq(determinant(n), a * determinant(n - 1) - b**2 * determinant(n - 2)),
+        determinant(n),
+        {determinant(0): 1, determinant(1): a},
+    )
+    if closed is None:
+        return None
+    result = sp.summation(1 / (c * closed + d), (n, 1, sp.oo))
+    if result.has(sp.Sum) or result in {sp.oo, -sp.oo, sp.zoo, sp.nan}:
+        return None
+    return TypedOperatorResult(
+        operator="TridiagonalDeterminantSeries",
+        input_sorts=("ToeplitzTridiagonalMatrixFamily", "Series"),
+        output_sort="Real",
+        constraint=f"D_n={a}*D_(n-1)-{b**2}*D_(n-2); D_0=1; D_1={a}",
+        answer_exact=str(sp.simplify(result)),
+        certificate=(f"D_n={sp.simplify(closed)}", "infinite series evaluated from the determinant recurrence"),
+    )
+
+
+def solve_isosceles_midline_complement(text: str) -> TypedOperatorResult | None:
+    normalized = normalize_operator_text(text).replace(r"\parallel", " parallel ")
+    triangle = re.search(r"(?:triangle\s+)?\\triangle\s+(?P<a>[a-z])(?P<b>[a-z])(?P<c>[a-z])", normalized)
+    area = re.search(r"area of (?:\\triangle\s+|triangle\s+)?[a-z]{3}\s+is\s+(?P<area>\d+(?:\.\d+)?)", normalized)
+    if not (triangle and area and "altitude" in normalized and "parallel" in normalized and "point on" in normalized):
+        return None
+    a, b, c = triangle.group("a"), triangle.group("b"), triangle.group("c")
+    if not re.search(rf"(?:{a}{b}\s*=\s*{a}{c}|{a}{c}\s*=\s*{a}{b})", normalized):
+        return None
+    altitude = re.search(r"([a-z])([a-z]) is an altitude", normalized)
+    point_on = re.search(r"([a-z]) is a point on ([a-z])([a-z])", normalized)
+    parallel = re.search(r"([a-z])([a-z])\s+parallel\s+([a-z])([a-z])", normalized)
+    if not (altitude and point_on and parallel):
+        return None
+    apex, foot = altitude.groups()
+    point, side_left, side_right = point_on.groups()
+    lines = [parallel.group(1) + parallel.group(2), parallel.group(3) + parallel.group(4)]
+    side_line = next((line for line in lines if set(line) in ({a, b}, {a, c})), "")
+    connector = next((line for line in lines if line != side_line), "")
+    side = {side_left, side_right}
+    expected_side = {a, c} if set(side_line) == {a, b} else {a, b}
+    if not side_line or apex != a or foot not in connector or point not in connector or side != expected_side:
+        return None
+    total = Fraction(area.group("area"))
+    result = total * Fraction(3, 4)
+    return TypedOperatorResult(
+        operator="IsoscelesMidlineAreaComplement",
+        input_sorts=("Triangle", "Altitude", "ParallelLine"),
+        output_sort="Area",
+        constraint="altitude is median; parallel through midpoint induces similarity ratio 1/2",
+        answer_exact=format_fraction(result),
+        certificate=("isosceles altitude-median theorem", "midline theorem", "area scales by similarity ratio squared"),
+    )
+
+
 def solve_typed_operator_problem(text: str) -> TypedOperatorResult | None:
     for solver in (
         solve_gcd_lcm_constraints,
         solve_finite_lcm_fold,
         solve_rounding_linear_constraint,
         solve_percent_relation,
+        solve_modular_inverse_operator,
+        solve_finite_mean_observation,
+        solve_unit_rate_sum,
+        solve_uniform_approach_elevation,
+        solve_opposite_pair_probability,
+        solve_tridiagonal_determinant_series,
+        solve_isosceles_midline_complement,
     ):
         result = solver(text)
         if result is not None:

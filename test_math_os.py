@@ -1,3 +1,4 @@
+import json
 import unittest
 
 from math_os_prototype.arithmetic_nl import detect_arithmetic_nl_problem
@@ -17,6 +18,7 @@ from math_os_prototype.latex_frontend import parse_latex_problem, split_tex_text
 from math_os_prototype.lift_lifter import run_lift_lifter_experiment
 from math_os_prototype.math_os import ProblemCompiler, TinyRouter, ToolExecutor, run_pipeline
 from math_os_prototype.math_search import run_math_search
+from math_os_prototype.public_benchmark import answers_match
 from math_os_prototype.quantity_reasoner import solve_quantity_reasoning_problem
 from math_os_prototype.reasoning_pipeline import run_reasoning_pipeline
 from math_os_prototype.retriever import HybridRetriever, QueryBuilder
@@ -624,6 +626,109 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(limit_ir.query["expression"], "Limit(target)")
         self.assertEqual(volume_ir.query["expression"], "Volume(target_region)")
         self.assertEqual(correlation_ir.query["expression"], "Correlation(X,Y)")
+
+    def test_typed_definition_kernel_types_finite_english_query_forms(self):
+        cases = (
+            ("How many integer solutions are there?", "count", "Integer"),
+            ("What percentage of the students enrolled?", "measure", "Real"),
+            (r"Evaluate $i^5+i^{-25}+i^{45}$.", "compute_or_characterize", "Real"),
+            ("Which of the following vectors are possible?", "select", "Set"),
+            ('Enter "odd", "even", or "neither".', "classify", "Fin"),
+            ("What was the original price?", "compute_or_characterize", "Real"),
+        )
+        for text, kind, target_type in cases:
+            with self.subTest(text=text):
+                ir = compile_typed_definition_ir(text)
+                self.assertEqual(ir.status, "type_checked")
+                self.assertEqual(ir.query["kind"], kind)
+                self.assertEqual(ir.query["target_type"], target_type)
+                self.assertTrue(ir.query["target"])
+
+    def test_mixed_prose_preserves_currency_and_percentages(self):
+        text = (
+            "Choose between jewelry worth $5,000 or gadgets worth $8,000. "
+            "The markets rise 2.5% and 1.2%. How much profit is possible?"
+        )
+        ir = compile_typed_definition_ir(text)
+        self.assertIn("2.5%", ir.normalized_text)
+        self.assertIn("How much profit", ir.normalized_text)
+        self.assertEqual(ir.query["kind"], "measure")
+        self.assertEqual(ir.status, "type_checked")
+
+    def test_typed_operators_execute_without_problem_family_templates(self):
+        cases = (
+            (r"Compute $23^{-1}\pmod{101}$.", "22", "ModularInverse"),
+            (
+                "During a survey the following counts were recorded: "
+                "12 red, 18 blue, 24 green. What is their mean?",
+                "18",
+                "FiniteMean",
+            ),
+            (
+                "A shop bought 2 dozen rolls which cost $7 per dozen, "
+                "and 3 dozen cakes for $11 per dozen. How much was the total cost?",
+                "47",
+                "UnitRateSum",
+            ),
+        )
+        for text, expected, operator in cases:
+            with self.subTest(text=text):
+                result = detect_arithmetic_nl_problem(text)
+                self.assertIsNotNone(result)
+                self.assertEqual(result.answer_exact, expected)
+                self.assertEqual(result.metadata["operator"], operator)
+
+    def test_symbolic_query_root_sum_allows_domain_adjectives(self):
+        result = run_reasoning_pipeline(
+            r"Find the sum of all complex roots of $\frac{1}{x-2}+\frac{1}{x-7}=1$."
+        )
+        answer = extract_answer_from_pipeline_data(json.loads(result.to_json()))
+        self.assertEqual(answer, "11")
+
+    def test_new_backend_contracts_generalize_to_changed_parameters(self):
+        cases = (
+            (
+                "When rolling a certain unfair 4-sided die, the probability of a distinguished face F "
+                "is greater than 1/4, the probability of the opposite face is less than 1/4, and the "
+                "probability of each of the other faces is 1/4. Opposite faces sum to 5. When two such "
+                "dice are rolled, the probability of obtaining a sum of 5 is 17/72. If P(F)=m/n in "
+                "relatively prime integers, find m+n.",
+                "4",
+            ),
+            (
+                r"Let $M_n$ be tridiagonal with $m_{i,i}=5$ and "
+                r"$m_{i+1,i}=m_{i,i+1}=2$; all other entries are zero. "
+                r"Let $D_n$ be its determinant. Find $\sum_{n=1}^{\infty}\frac{1}{3D_n+1}$.",
+                "1/12",
+            ),
+            (
+                r"In triangle $\triangle XYZ$, $XY=XZ$ and $XH$ is an altitude. "
+                r"Point $P$ is a point on $XZ$ and $XY\parallel HP$. "
+                r"The area of $\triangle XYZ$ is 80. What is the area of $XYHP$?",
+                "60",
+            ),
+            (
+                "A car moves at uniform speed towards a tower. The angle of elevation changes "
+                "from 30 degrees to 45 degrees in 6 minutes. How much more time is required?",
+                "3 + 3*sqrt(3)",
+            ),
+        )
+        for text, expected in cases:
+            with self.subTest(text=text):
+                result = run_reasoning_pipeline(text)
+                answer = extract_answer_from_pipeline_data(json.loads(result.to_json()))
+                self.assertTrue(answers_match(answer, expected), (answer, expected))
+
+    def test_asymptote_coordinate_backend_uses_constructed_points(self):
+        text = r"""
+        [asy]
+        pair A=(0,0); pair B=(4,0); pair C=(1,3);
+        [/asy]
+        What is the area of $\triangle ABC$?
+        """
+        result = run_reasoning_pipeline(text)
+        answer = extract_answer_from_pipeline_data(json.loads(result.to_json()))
+        self.assertEqual(answer, "6")
 
     def test_correlation_is_compiled_through_centered_inner_product(self):
         ir = compile_typed_definition_ir(

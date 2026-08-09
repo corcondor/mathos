@@ -555,6 +555,8 @@ def is_safe_tool_call(call: ToolCall, ir: MathIR, domain_ir: DomainIR, problem: 
         return True
     if name == "geometry.constraint_ir":
         return True
+    if name == "geometry.asymptote_exact":
+        return True
     if name in {
         "container.square_in_equilateral_triangle",
         "geometry.dsl",

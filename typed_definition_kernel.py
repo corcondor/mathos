@@ -711,7 +711,19 @@ def definitions_for_structure(structure: StructuralIR) -> list[DefinitionEntry]:
         canonical_needed.update({"Region2", "Area"})
     if "prove" in operation_kinds:
         canonical_needed.add("Prove")
-    if "compute_or_solve" in operation_kinds or "solve_all" in operation_kinds or "表せ" in structure.normalized_text:
+    query_operation_kinds = {
+        "compute_or_solve",
+        "solve_all",
+        "query_count",
+        "query_measure",
+        "query_select",
+        "query_classify",
+        "query_compute",
+        "factor",
+        "simplify",
+        "expand",
+    }
+    if operation_kinds & query_operation_kinds or "表せ" in structure.normalized_text:
         canonical_needed.add("Find")
     if any(item.kind in {"integer", "positive_integer", "nonnegative_integer"} for item in structure.constraints):
         canonical_needed.add("Integer")
@@ -1060,7 +1072,46 @@ def infer_typed_query(
             "definition_driven": True,
         }
     if "Find" in canonical:
-        return {"kind": "compute_or_characterize", "target": "unknown", "target_type": "Unknown", "definition_driven": True}
+        observation = next(
+            (
+                operation
+                for operation in reversed(structure.operations)
+                if operation.kind
+                in {
+                    "compute_or_solve",
+                    "solve_all",
+                    "query_count",
+                    "query_measure",
+                    "query_select",
+                    "query_classify",
+                    "query_compute",
+                    "factor",
+                    "simplify",
+                    "expand",
+                }
+            ),
+            None,
+        )
+        if observation is not None:
+            query_kind = {
+                "solve_all": "enumerate",
+                "query_count": "count",
+                "query_measure": "measure",
+                "query_select": "select",
+                "query_classify": "classify",
+            }.get(observation.kind, "compute_or_characterize")
+            return {
+                "kind": query_kind,
+                "target": observation.target or "requested_value",
+                "target_type": observation.qualifiers.get("target_type", "Real"),
+                "definition_driven": True,
+            }
+        return {
+            "kind": "compute_or_characterize",
+            "target": "requested_value",
+            "target_type": "Real",
+            "definition_driven": True,
+        }
     return {"kind": "unknown", "target": "", "target_type": "Unknown", "definition_driven": False}
 
 

@@ -64,11 +64,16 @@ def looks_like_latex(source: str) -> bool:
         r"\documentclass",
         r"\item",
     )
-    return any(marker in source for marker in markers) or bool(re.search(r"\$[^$]+\$", source))
+    # A dollar amount such as ``$5,000 ... $8,000`` is prose, not a TeX math
+    # span. Remove currency markers before looking for paired math delimiters.
+    non_currency_source = re.sub(r"\$(?=\d[\d,]*(?:\.\d+)?(?:\b|\s|[.,]))", "", source)
+    return any(marker in source for marker in markers) or bool(re.search(r"\$[^$]+\$", non_currency_source))
 
 
 def parse_latex_problem(source: str) -> LatexProblem:
-    without_comments = strip_comments(source)
+    # Percent signs are comments in a TeX document, but percentages in mixed
+    # prose (often alongside inline math) are data and must survive scanning.
+    without_comments = strip_comments(source) if is_tex_document(source) else source
     body = extract_document_body(without_comments)
     math_segments: list[str] = []
 
@@ -82,6 +87,13 @@ def parse_latex_problem(source: str) -> LatexProblem:
         "Math delimiters were scanned by a deterministic TeX input scanner.",
     ]
     return LatexProblem(source, body, normalized_text, math_segments, notes)
+
+
+def is_tex_document(source: str) -> bool:
+    return any(
+        marker in source
+        for marker in (r"\documentclass", r"\usepackage", r"\begin{document}", r"\end{document}")
+    )
 
 
 def split_tex_text_math(source: str) -> tuple[str, list[TexMathSpan]]:
