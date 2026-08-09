@@ -427,6 +427,14 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(total.answer_exact, "308")
         self.assertIn("parallel_rate_merge", per_basket.candidates[0]["checks"])
 
+    def test_quantity_reasoner_rejects_partial_rate_program_without_query_certificate(self):
+        result = solve_quantity_reasoning_problem(
+            "Judy teaches 5 dance classes every weekday and 8 classes on Saturday. "
+            "Each class has 15 students and she charges $15 per student. "
+            "How much money does she make in one week?"
+        )
+        self.assertIsNone(result)
+
     def test_quantity_reasoner_composes_affine_relations_without_name_or_number_templates(self):
         first = solve_quantity_reasoning_problem(
             "Amy made 20 more friends than Lily. Lily made 50 friends. "

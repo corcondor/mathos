@@ -28,11 +28,74 @@ class AffineRelationSynthesisTests(unittest.TestCase):
             "unknown_state",
         )
 
+    def test_unknown_state_with_omitted_loss_object(self) -> None:
+        self.assert_answer(
+            "Roger had some lychee. Gordon took 38 from him. Now Roger has 84 lychee. How many lychee Roger had primitively?",
+            "122",
+            "unknown_state_clause_elaboration",
+        )
+
+    def test_unknown_state_with_omitted_gain_object(self) -> None:
+        self.assert_answer(
+            "Wanda had some papaya. Linda gave him 8 more. Now Wanda has 44 papaya. How many papaya did Wanda have in the first?",
+            "36",
+            "unknown_state_clause_elaboration",
+        )
+
+    def test_unknown_state_production_then_sale(self) -> None:
+        self.assert_answer(
+            "Baker made some cakes. He sold 145 of them. If he still has 72 cakes left. How many cakes did Baker make?",
+            "217",
+            "unknown_state_clause_elaboration",
+        )
+
     def test_partition_and_difference_system(self) -> None:
         self.assert_answer(
             "A team played 22 games. They won 8 more than they lost. How many did they win?",
             "15",
             "partition_comparison",
+        )
+
+    def test_category_neutral_total_difference_partition(self) -> None:
+        self.assert_answer(
+            "Gretchen has 110 coins. There are 30 more gold coins than silver coins. How many gold coins does Gretchen have?",
+            "70",
+            "total_difference_partition",
+        )
+
+    def test_ratio_total_projects_requested_part(self) -> None:
+        self.assert_answer(
+            "The ratio of dogs to cats at the pound is 4:3. How many dogs were at the pound if a total of 280 dogs and cats were at the pound?",
+            "160",
+            "ratio_part",
+        )
+
+    def test_ratio_known_part_projects_other_part(self) -> None:
+        self.assert_answer(
+            "The ratio of red sweets to green sweets is 3:4. If the bag contains 120 green sweets, how many red sweets are there?",
+            "90",
+            "ratio_part",
+        )
+
+    def test_ratio_surface_and_number_perturbation(self) -> None:
+        self.assert_answer(
+            "The ratio of red tokens to blue tokens is 5:2. A box contains 98 tokens in total. How many red tokens are there?",
+            "70",
+            "ratio_part",
+        )
+
+    def test_scalar_ratio_reduction(self) -> None:
+        self.assert_answer(
+            "The length of a ribbon was originally 30 cm. It was reduced in the ratio 5:3. What is its length now?",
+            "18",
+            "ratio_scale",
+        )
+
+    def test_ratio_share_then_owner_event(self) -> None:
+        self.assert_answer(
+            "Gerald and Julia divided $100 in the ratio 3:2. If Gerald spent $10 on a book, how much money did he have left?",
+            "50",
+            "ratio_part_after_event",
         )
 
     def test_inverse_discount(self) -> None:

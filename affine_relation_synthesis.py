@@ -142,6 +142,9 @@ def solve_unknown_state(text: str) -> AffineRelationResult | None:
     source = text.lower()
     if " some " not in f" {source} " or any(token in source for token in ("%", "percent", "more than", "less than", "fewer than", "half", "third", "quarter")):
         return None
+    clause_result = solve_unknown_state_clauses(source)
+    if clause_result is not None:
+        return clause_result
     quantities = extract_typed_quantities(text)
     target = infer_target_dimension(text, quantities)
     if target is None:
@@ -180,6 +183,56 @@ def solve_unknown_state(text: str) -> AffineRelationResult | None:
     return None
 
 
+def solve_unknown_state_clauses(source: str) -> AffineRelationResult | None:
+    """Elaborate an omitted initial state when every numeric clause is typed.
+
+    Object anaphora may be omitted (``took 8 from him``), so this lift uses
+    event polarity and the unique final-state observation.  It rejects unless
+    every numeral is consumed by exactly one clause role.
+    """
+    question = re.split(r"(?<=[.?!])\s+", source)[-1]
+    if not re.search(
+        r"\b(?:initially|originally|before|at first|in the beginning|in the first|primitively|incipiently)\b|"
+        r"\bhow\s+many\b[^?]*\b(?:did|had)\b[^?]*\b(?:make|have|had)\b",
+        question,
+    ):
+        return None
+    observations: list[Fraction] = []
+    events: list[tuple[int, Fraction]] = []
+    for match in re.finditer(rf"(?P<number>{NUMBER_RE})", source):
+        value = parse_number(match.group("number"))
+        if value is None:
+            continue
+        left, right = _sentence_bounds(source, match.start())
+        sentence = source[left:right]
+        local_before = source[left:match.start()]
+        local_after = source[match.end():right]
+        if re.search(r"\b(?:now|still|currently|afterwards)\b[^.?!]*\b(?:has|have|had|there (?:are|were))\b", sentence) or re.search(
+            r"\b(?:has|have|had)\b[^.?!]*\b(?:left|remaining)\b", sentence
+        ):
+            observations.append(value)
+            continue
+        if re.search(r"\b(?:sold|spent|lost|used|gave away|removed|ate)\b", local_before) or re.search(
+            r"\btook\b[^.?!]*\bfrom\s+(?:him|her|them)\b", sentence
+        ):
+            events.append((-1, value))
+            continue
+        if re.search(r"\b(?:gave\s+(?:him|her|them)|received|got|added|found|bought)\b", local_before + local_after[:18]):
+            events.append((1, value))
+            continue
+        return None
+    if len(observations) != 1 or not events:
+        return None
+    query = "unknown"
+    initial = observations[0] - sum((sign * value for sign, value in events), Fraction(0))
+    return _result(
+        "unknown_state_clause_elaboration",
+        query,
+        [AffineEquation({query: Fraction(1)}, initial)],
+        "final - signed events",
+    )
+
+
 def solve_partition_comparison(text: str) -> AffineRelationResult | None:
     source = text.lower()
     relation = re.search(
@@ -215,6 +268,178 @@ def solve_partition_comparison(text: str) -> AffineRelationResult | None:
         AffineEquation({a: Fraction(1), b: Fraction(-1)}, signed_difference),
     ]
     return _result("partition_comparison", query, equations, "solve(total, difference)")
+
+
+def solve_total_difference_relation(text: str) -> AffineRelationResult | None:
+    """Solve an exhaustive two-part partition from its total and difference.
+
+    This is the category-neutral form of the won/lost law.  The category names
+    are variables; only the additive partition and signed comparison matter.
+    """
+    source = text.lower().replace(",", " ")
+    relation = re.search(
+        rf"\b(?P<difference>{NUMBER_RE})\s+(?P<order>more|fewer|less)\s+"
+        r"(?P<a>[a-z]+)\s+(?P<head>[a-z]+)\s+than\s+"
+        r"(?P<b>[a-z]+)\s+(?P=head)\b",
+        source,
+    )
+    if relation is None:
+        return None
+    difference = parse_number(relation.group("difference"))
+    if difference is None:
+        return None
+    a = _normalize_variable(relation.group("a"))
+    b = _normalize_variable(relation.group("b"))
+    if a == b or a in {"more", "fewer", "less", "he", "she", "they", "it"} or b in {"more", "fewer", "less", "he", "she", "they", "it"}:
+        return None
+
+    prefix = source[: relation.start()]
+    total_matches = list(re.finditer(
+        rf"\b(?:has|have|contains?|total(?:\s+number)?(?:\s+of)?|combined|altogether)\D{{0,28}}"
+        rf"(?P<total>{NUMBER_RE})\s+(?P<object>[a-z]+)",
+        prefix,
+    ))
+    if not total_matches:
+        return None
+    total = parse_number(total_matches[-1].group("total"))
+    if total is None:
+        return None
+
+    question = re.split(r"(?<=[.?!])\s+", source)[-1]
+    query_match = re.search(r"\bhow\s+many\s+(?P<query>[a-z]+)(?:\s+[a-z]+)?\b", question)
+    if query_match is None:
+        return None
+    query_word = _normalize_variable(query_match.group("query"))
+    query = a if query_word == a else b if query_word == b else None
+    if query is None:
+        return None
+    signed = difference if relation.group("order") == "more" else -difference
+    equations = [
+        AffineEquation({a: Fraction(1), b: Fraction(1)}, total),
+        AffineEquation({a: Fraction(1), b: Fraction(-1)}, signed),
+    ]
+    return _result("total_difference_partition", query, equations, "solve exhaustive two-part total and difference")
+
+
+def solve_ratio_relation(text: str) -> AffineRelationResult | None:
+    """Lower a two-part ratio and one independent observation to affine IR."""
+    source = text.lower().replace(",", " ")
+    ratio_match = re.search(r"(?P<left>\d+)\s*:\s*(?P<right>\d+)", source)
+    if ratio_match is None:
+        return None
+    left_ratio = Fraction(int(ratio_match.group("left")))
+    right_ratio = Fraction(int(ratio_match.group("right")))
+    if left_ratio <= 0 or right_ratio <= 0:
+        return None
+
+    # Scalar reduction is the same ratio morphism without named parts.
+    if re.search(r"\breduced\s+in\s+the\s+ratio\b|\breduced\s+in\s+ratio\b", source):
+        values = []
+        for match in re.finditer(rf"(?P<number>{NUMBER_RE})", source):
+            if ratio_match.start() <= match.start() < ratio_match.end():
+                continue
+            value = parse_number(match.group("number"))
+            if value is not None:
+                values.append(value)
+        if len(values) != 1:
+            return None
+        return _result(
+            "ratio_scale",
+            "answer",
+            [AffineEquation({"answer": left_ratio}, values[0] * right_ratio)],
+            "old:new = left:right",
+        )
+
+    labels: tuple[str, str] | None = None
+    before_ratio = source[: ratio_match.start()]
+    named = re.search(
+        r"ratio\s+(?:of\s+)?(?P<a>[a-z]+)(?:\s+[a-z]+)?\s+(?:to|and)\s+"
+        r"(?P<b>[a-z]+)(?:\s+[a-z]+)?(?:\s+(?:at|in|on)\s+(?:the\s+)?[a-z]+(?:\s+[a-z]+)?)?"
+        r"\s+(?:is|was|of)\s*$",
+        before_ratio,
+    )
+    if named:
+        labels = (_normalize_variable(named.group("a")), _normalize_variable(named.group("b")))
+    if labels is None:
+        divided = re.search(
+            r"\b(?P<a>[a-z]+)\s+and\s+(?P<b>[a-z]+)\s+divided\b",
+            before_ratio,
+        )
+        if divided:
+            labels = (_normalize_variable(divided.group("a")), _normalize_variable(divided.group("b")))
+    if labels is None or labels[0] == labels[1]:
+        return None
+    a, b = labels
+    equations = [AffineEquation({a: right_ratio, b: -left_ratio}, Fraction(0))]
+
+    numeric: list[tuple[int, int, Fraction]] = []
+    for match in re.finditer(rf"(?P<number>{NUMBER_RE})", source):
+        if ratio_match.start() <= match.start() < ratio_match.end():
+            continue
+        value = parse_number(match.group("number"))
+        if value is not None:
+            numeric.append((match.start(), match.end(), value))
+
+    total_value: Fraction | None = None
+    for position, _, value in numeric:
+        context = source[max(0, position - 55) : position + 45]
+        if re.search(r"\b(?:total|combined|altogether|divided)\b", context):
+            total_value = value
+            break
+    known_label: str | None = None
+    known_value: Fraction | None = None
+    for _, end, value in numeric:
+        tail = source[end : end + 38]
+        if re.match(rf"\s+(?:[a-z]+\s+)?{re.escape(a)}s?\b", tail):
+            known_label, known_value = a, value
+        elif re.match(rf"\s+(?:[a-z]+\s+)?{re.escape(b)}s?\b", tail):
+            known_label, known_value = b, value
+    if total_value is not None:
+        equations.append(AffineEquation({a: Fraction(1), b: Fraction(1)}, total_value))
+    elif known_label is not None and known_value is not None:
+        equations.append(AffineEquation({known_label: Fraction(1)}, known_value))
+    else:
+        return None
+
+    question = re.split(r"(?<=[.?!])\s+", source)[-1]
+    if re.search(r"\bhow\s+many\s+more\b|\bdifference\b", question):
+        query = "answer"
+        equations.append(AffineEquation({query: Fraction(1), b: Fraction(-1), a: Fraction(1)}, Fraction(0)))
+        return _result("ratio_difference", query, equations, "solve ratio scale and observe part difference")
+    event_label: str | None = None
+    adjustment = Fraction(0)
+    for label in (a, b):
+        subject_event = re.search(
+            rf"\b{re.escape(label)}\b[^.?!]{{0,18}}?\b(?:spent|used|lost|gave)\s+\$?(?P<amount>{NUMBER_RE})",
+            source,
+        )
+        if subject_event:
+            parsed = parse_number(subject_event.group("amount"))
+            if parsed is not None:
+                event_label, adjustment = label, -parsed
+                break
+
+    query_match = re.search(r"\bhow\s+many\s+(?P<label>[a-z]+)", question)
+    query_word = _normalize_variable(query_match.group("label")) if query_match else None
+    query = a if query_word == a else b if query_word == b else event_label
+    if query is None:
+        return None
+    solution = solve_affine_system(equations)
+    if solution is None or query not in solution:
+        return None
+    event = re.search(
+        rf"(?P<amount>{NUMBER_RE})\s+{re.escape(query)}s?\s+(?:alight|leave|left|spent|used)",
+        source,
+    )
+    if event and not adjustment:
+        parsed = parse_number(event.group("amount"))
+        if parsed is not None:
+            adjustment = -parsed
+    if adjustment:
+        answer = "answer"
+        equations.append(AffineEquation({answer: Fraction(1), query: Fraction(-1)}, adjustment))
+        return _result("ratio_part_after_event", answer, equations, "solve ratio part then apply typed event")
+    return _result("ratio_part", query, equations, "solve ratio scale and project requested part")
 
 
 def _normalize_variable(name: str) -> str:
@@ -593,7 +818,9 @@ def solve_percentage_relation(text: str) -> AffineRelationResult | None:
 def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
     for solver in (
         solve_unknown_state,
+        solve_total_difference_relation,
         solve_partition_comparison,
+        solve_ratio_relation,
         solve_weighted_comparison_total,
         solve_multiplier_offset_relation,
         solve_multisort_comparison,

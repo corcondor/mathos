@@ -196,7 +196,7 @@ def detect_quantity_reasoning(text: str) -> ArithmeticNLProblem | None:
     if result is None:
         return None
     return ArithmeticNLProblem(
-        intent="quantity_reasoning",
+        intent=f"quantity_reasoning.{(result.semantic_model or {}).get('best_candidate_kind', 'unknown')}",
         expression=result.expression,
         answer_exact=result.answer_exact,
         explanation=result.explanation,
@@ -3187,7 +3187,19 @@ def detect_simple_all_sum(text: str) -> ArithmeticNLProblem | None:
         return None
     if not any(phrase in text for phrase in ("altogether", "in all", "total", "how many animals", "how many pairs of shoes")):
         return None
-    if any(phrase in text for phrase in ("left", "more", "each", "per ", "how many days", "how many trays")):
+    if any(phrase in text for phrase in (
+        "left", "more", "each", "every ", "per ",
+        "before it breaks",
+        "how many days", "how many trays",
+    )):
+        return None
+    if re.search(
+        r"\b(?:fewer|less|ratio|average|difference|some|remaining)\b|"
+        r"\b(?:times\s+as|times\s+the|times\s+what)\b|"
+        r"\bthe\s+rest\s+(?:are|were|is|was|has|had)\b|"
+        r"\bhow\s+(?:many|much)\b[^.?!]*\blast\b",
+        text,
+    ):
         return None
     if any(phrase in text for phrase in ("twice", "half", "third", "quarter", "%", "percent", " than ")):
         return None

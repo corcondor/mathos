@@ -217,6 +217,29 @@ class QuantityReasoningResult:
     semantic_model: dict[str, object] | None = None
 
 
+QUERY_CERTIFICATE_CHECKS = {
+    "comparison_query",
+    "difference_query",
+    "initial_query",
+    "per_unit_left_category",
+    "per_unit_right_category",
+    "query_denominator_fixed",
+    "query_fold",
+    "query_projection",
+    "query_sort_reached",
+    "remaining_query",
+    "same_object",
+    "selected_time_or_category_sum",
+    "split_into_equal_groups",
+    "target_object_match",
+    "target_object_selected_sum",
+    "target_total",
+    "time_labels_match",
+    "time_query",
+    "two_group_partition",
+}
+
+
 def solve_quantity_reasoning_problem(text: str) -> QuantityReasoningResult | None:
     normalized = normalize_text(text)
     if "answer choices" in normalized:
@@ -228,7 +251,10 @@ def solve_quantity_reasoning_problem(text: str) -> QuantityReasoningResult | Non
     verified = [candidate for candidate in candidates if verify_candidate(normalized, quantities, candidate)]
     if not verified:
         return None
-    best = max(verified, key=lambda item: (item.confidence, len(item.evidence_ids), -abs(float(item.value))))
+    executable = [candidate for candidate in verified if candidate_execution_ready(quantities, candidate)]
+    if not executable:
+        return None
+    best = max(executable, key=lambda item: (item.confidence, len(item.evidence_ids), -abs(float(item.value))))
     if best.confidence < 0.72:
         return None
     return QuantityReasoningResult(
@@ -243,8 +269,24 @@ def solve_quantity_reasoning_problem(text: str) -> QuantityReasoningResult | Non
             "output_sort": (best.logic or {}).get("output_sort"),
             "obligations": (best.logic or {}).get("obligations", []),
             "execution_certificate": build_execution_certificate(quantities, best),
+            "evidence_coverage": len(set(best.evidence_ids)) / len(quantities) if quantities else 0.0,
         },
     )
+
+
+def candidate_execution_ready(quantities: list[Quantity], candidate: EquationCandidate) -> bool:
+    """Require a proof that no premise was silently dropped.
+
+    A candidate may execute when its algebraic law is proved, when all numeric
+    premises are consumed, or when the query morphism explicitly certifies a
+    projection that makes the unused premises irrelevant.
+    """
+    certificate = build_execution_certificate(quantities, candidate)
+    if certificate["status"] == "proved":
+        return True
+    if quantities and len(set(candidate.evidence_ids)) == len(quantities):
+        return True
+    return bool(set(candidate.checks) & QUERY_CERTIFICATE_CHECKS)
 
 
 def build_execution_certificate(quantities: list[Quantity], candidate: EquationCandidate) -> dict[str, object]:
