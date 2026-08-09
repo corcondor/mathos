@@ -132,6 +132,10 @@ class WorkerOlympiadRecord:
     exhausted: bool
     goal_count: int
     first_goal_morphisms: list[str]
+    lowering_status: str
+    execution_status: str | None
+    answer: str | None
+    exact_match: bool | None
     elapsed_seconds: float
     error: str | None
     problem_preview: str
@@ -355,6 +359,18 @@ def evaluate_worker_cases(
         atlas = atlases[index % len(atlases)]
         analysis = output.get("language_analysis") or {}
         first_goal = output.get("first_goal") or {}
+        execution = output.get("execution") or {}
+        certificate = execution.get("certificate") or {}
+        execution_answer = (
+            str(certificate.get("value"))
+            if certificate.get("status") == "proved" and certificate.get("value") is not None
+            else None
+        )
+        exact = (
+            answers_match(execution_answer, case.expected)
+            if execution_answer is not None and case.expected is not None
+            else None
+        )
         records.append(
             WorkerOlympiadRecord(
                 corpus_id_hash=hashlib.sha256(case.corpus_id.encode("utf-8")).hexdigest()[:16],
@@ -381,6 +397,10 @@ def evaluate_worker_cases(
                     for step in first_goal.get("steps") or []
                     if step.get("morphism")
                 ],
+                lowering_status=str(execution.get("status") or "not_lowered"),
+                execution_status=(str(certificate.get("status")) if certificate.get("status") else None),
+                answer=execution_answer,
+                exact_match=exact,
                 elapsed_seconds=round(elapsed, 4),
                 error=None,
                 problem_preview=case.problem[:320],
@@ -396,6 +416,9 @@ def summarize_worker(records: list[WorkerOlympiadRecord]) -> dict[str, Any]:
         statuses = Counter(record.status for record in subset)
         resolved = sum(record.status != "query_unresolved" for record in subset)
         reached = statuses["goal_reached"]
+        lowered = sum(record.lowering_status == "lowered" for record in subset)
+        executed = sum(record.execution_status == "proved" for record in subset)
+        exact = sum(record.exact_match is True for record in subset)
         per_atlas[atlas] = {
             "atlas_size": max((record.atlas_size for record in subset), default=0),
             "total": len(subset),
@@ -403,6 +426,12 @@ def summarize_worker(records: list[WorkerOlympiadRecord]) -> dict[str, Any]:
             "goal_reached": reached,
             "query_resolution_rate": resolved / len(subset) if subset else 0.0,
             "goal_reach_rate": reached / len(subset) if subset else 0.0,
+            "lowered": lowered,
+            "executed": executed,
+            "exact": exact,
+            "lowering_rate": lowered / len(subset) if subset else 0.0,
+            "execution_rate": executed / len(subset) if subset else 0.0,
+            "exact_rate": exact / len(subset) if subset else 0.0,
             "statuses": dict(statuses),
             "states_explored": sum(record.states_explored for record in subset),
         }
@@ -417,7 +446,9 @@ def summarize_worker(records: list[WorkerOlympiadRecord]) -> dict[str, Any]:
         "engine": "authoritative-typescript-worker",
         "metric_scope": {
             "goal_reached": "typed reachability only; this is not an exact solve",
-            "exact_score": "requires backend execution and answer verification",
+            "lowered": "typed constraints were converted to concrete backend inputs",
+            "executed": "the backend returned a proof certificate and value",
+            "exact": "the executed value matched evaluation-only gold",
         },
         "data_contract": {
             "worker_input": ["problem_markdown"],
@@ -510,13 +541,14 @@ def write_worker_outputs(result: dict[str, Any], output: Path) -> None:
         "",
         "This report measures typed goal reachability. It does not call a reached goal an exact solve.",
         "",
-        "| atlas | rules | total | query resolved | goal reached | reach rate |",
-        "|---|---:|---:|---:|---:|---:|",
+        "| atlas | rules | total | query resolved | goal reached | lowered | executed | exact |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for atlas, metrics in result["reachability"].items():
         lines.append(
             f"| {atlas} | {metrics['atlas_size']} | {metrics['total']} | "
-            f"{metrics['query_resolved']} | {metrics['goal_reached']} | {metrics['goal_reach_rate']:.2%} |"
+            f"{metrics['query_resolved']} | {metrics['goal_reached']} | {metrics['lowered']} | "
+            f"{metrics['executed']} | {metrics['exact']} |"
         )
     if result.get("comparison"):
         lines.extend(["", f"Unified - core reach delta: {result['comparison']['goal_reached_delta']}"])

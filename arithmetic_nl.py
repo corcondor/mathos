@@ -19,10 +19,14 @@ except ImportError:  # pragma: no cover
     sp = None
 
 try:
+    from math_os_prototype.dimensional_synthesis import solve_dimensional_arithmetic
     from math_os_prototype.quantity_reasoner import solve_quantity_reasoning_problem
+    from math_os_prototype.state_event_synthesis import solve_state_event_arithmetic
     from math_os_prototype.typed_operator_reasoner import solve_typed_operator_problem
 except ImportError:  # Allows direct script execution.
+    from dimensional_synthesis import solve_dimensional_arithmetic
     from quantity_reasoner import solve_quantity_reasoning_problem
+    from state_event_synthesis import solve_state_event_arithmetic
     from typed_operator_reasoner import solve_typed_operator_problem
 
 
@@ -123,6 +127,8 @@ def detect_arithmetic_nl_problem(text: str, *, allow_surface_morphisms: bool = F
         detect_feed_final_meal_remainder,
         detect_out_and_back_remaining_distance,
         detect_exponential_even_odd_function,
+        detect_state_event_synthesis,
+        detect_dimensional_synthesis,
         detect_quantity_reasoning,
     )
     if allow_surface_morphisms:
@@ -132,6 +138,35 @@ def detect_arithmetic_nl_problem(text: str, *, allow_surface_morphisms: bool = F
         if result is not None:
             return result
     return None
+
+
+def detect_dimensional_synthesis(text: str) -> ArithmeticNLProblem | None:
+    result = solve_dimensional_arithmetic(text)
+    if result is None:
+        return None
+    return ArithmeticNLProblem(
+        intent="typed_dimensional_synthesis",
+        expression=result.expression,
+        answer_exact=result.answer_exact,
+        explanation="; ".join(result.certificate),
+        metadata={
+            "target_dimension": result.target_dimension,
+            "certificate": list(result.certificate),
+        },
+    )
+
+
+def detect_state_event_synthesis(text: str) -> ArithmeticNLProblem | None:
+    result = solve_state_event_arithmetic(text)
+    if result is None:
+        return None
+    return ArithmeticNLProblem(
+        intent="typed_state_event_synthesis",
+        expression=result.expression,
+        answer_exact=result.answer_exact,
+        explanation="; ".join(result.certificate),
+        metadata={"state_sort": result.state_sort, "certificate": list(result.certificate)},
+    )
 
 
 def detect_quantity_reasoning(text: str) -> ArithmeticNLProblem | None:
