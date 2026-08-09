@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T13:32:11.550879+00:00",
+  "generated_at": "2026-08-09T15:29:07.376101+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "hard_problem_policy": "proof DAG with converging constraints required; flat scalar bridge compositions are excluded",
@@ -294,7 +294,7 @@
           "Evaluation"
         ],
         "note": "This is an independent parser observation. Acceptance uses the declared generation certificate and backend verification.",
-        "query_signature": "compute:Evaluation:v0",
+        "query_signature": "compute:Evaluation:v0*(v1)=#/v1*(v1",
         "status": "observed",
         "type_checked": true,
         "warnings": []
