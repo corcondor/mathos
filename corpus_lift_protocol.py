@@ -55,6 +55,7 @@ except ImportError:  # Allows direct script execution.
 
 
 DEFAULT_OUTPUT = Path("math_os_prototype/corpus_lift_protocol.json")
+FROZEN_SELF_AUTHORED_STEMS = {"全問題", "zenmondai", "all_problems_selfauthored"}
 
 
 @dataclass(frozen=True)
@@ -120,9 +121,23 @@ def convert_public_cases(cases: list[PublicBenchmarkCase]) -> list[CorpusCase]:
     ]
 
 
-def load_tex_cases(paths: list[Path], *, limit_per_file: int | None = None) -> list[CorpusCase]:
+def is_frozen_selfauthored_source(path: Path) -> bool:
+    return path.stem.strip().lower() in FROZEN_SELF_AUTHORED_STEMS
+
+
+def load_tex_cases(
+    paths: list[Path],
+    *,
+    limit_per_file: int | None = None,
+    allow_frozen_final_eval: bool = False,
+) -> list[CorpusCase]:
     cases: list[CorpusCase] = []
     for path in paths:
+        if is_frozen_selfauthored_source(path) and not allow_frozen_final_eval:
+            raise ValueError(
+                f"{path.name} is frozen for final validation and cannot be used in development; "
+                "pass allow_frozen_final_eval=True only for the final run"
+            )
         problems = extract_tex_problems(path)
         if limit_per_file is not None:
             problems = problems[:limit_per_file]
@@ -405,6 +420,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--mawps", type=int, default=0)
     parser.add_argument("--tex", nargs="*", type=Path, default=[])
     parser.add_argument("--tex-limit-per-file", type=int, default=None)
+    parser.add_argument("--allow-frozen-final-eval", action="store_true")
     parser.add_argument("--max-cases", type=int, default=None)
     parser.add_argument("--case-timeout", type=float, default=None)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
@@ -415,7 +431,13 @@ def main() -> int:
     args = build_arg_parser().parse_args()
     cases = load_public_cases(args)
     if args.tex:
-        cases.extend(load_tex_cases(args.tex, limit_per_file=args.tex_limit_per_file))
+        cases.extend(
+            load_tex_cases(
+                args.tex,
+                limit_per_file=args.tex_limit_per_file,
+                allow_frozen_final_eval=args.allow_frozen_final_eval,
+            )
+        )
     result = run_corpus_lift_protocol(cases, case_timeout=args.case_timeout, max_cases=args.max_cases)
     write_outputs(result, args.output)
     print(json.dumps({"counts": result["counts"], "rates": result["rates"]}, ensure_ascii=False, indent=2))
