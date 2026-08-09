@@ -80,6 +80,9 @@ def extract_answer_from_pipeline_data(data: dict[str, Any]) -> str | None:
     semantic_query_answer = extract_named_tool_answer(data, "sympy.semantic_query")
     if semantic_query_answer:
         return semantic_query_answer
+    matrix_query_answer = extract_named_tool_answer(data, "sympy.matrix_semantic_query")
+    if matrix_query_answer:
+        return matrix_query_answer
     semantic_answer = extract_semantic_backend_answer(data)
     if semantic_answer:
         return semantic_answer

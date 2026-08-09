@@ -22,6 +22,7 @@ try:
     from math_os_prototype.geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from math_os_prototype.geometry_nl import convert_geometry_nl
     from math_os_prototype.latex_frontend import looks_like_latex, parse_latex_problem
+    from math_os_prototype.matrix_semantic_query import compile_matrix_semantic_query, execute_matrix_semantic_query
     from math_os_prototype.symbolic_query import compile_symbolic_query, execute_symbolic_query
     from math_os_prototype.vector_query import compile_vector_query, execute_vector_query
     from math_os_prototype.tool_adapters import ToolRegistry
@@ -33,6 +34,7 @@ except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from geometry_nl import convert_geometry_nl
     from latex_frontend import looks_like_latex, parse_latex_problem
+    from matrix_semantic_query import compile_matrix_semantic_query, execute_matrix_semantic_query
     from symbolic_query import compile_symbolic_query, execute_symbolic_query
     from vector_query import compile_vector_query, execute_vector_query
     from tool_adapters import ToolRegistry
@@ -278,6 +280,31 @@ class ProblemCompiler:
                     "Re-verify the result against the source constraints.",
                 ],
                 tool_calls=[ToolCall("sympy.vector_query", vector_query.operator, executable=True)],
+            )
+
+        matrix_query = compile_matrix_semantic_query(text)
+        if matrix_query is not None:
+            payload = matrix_query.to_dict()
+            return MathIR(
+                problem=text,
+                route="matrix_geometry",
+                intent=f"matrix_semantic_{matrix_query.query_operator}",
+                symbols=matrix_query.variables,
+                givens={"matrix_semantic_query": payload},
+                goal=f"Execute {matrix_query.query_operator} in the typed chart {matrix_query.chart}.",
+                plan=[
+                    "Elaborate polynomial, point, root, or conic objects from TeX.",
+                    "Lower them to an evaluation matrix or homogeneous quadratic form.",
+                    "Execute the requested observation with exact matrix algebra.",
+                    "Recheck the source incidence, determinant, and domain constraints.",
+                ],
+                tool_calls=[
+                    ToolCall(
+                        "sympy.matrix_semantic_query",
+                        f"{matrix_query.query_operator}({matrix_query.representation['kind']})",
+                        executable=True,
+                    )
+                ],
             )
 
         symbolic_query = compile_symbolic_query(text)
@@ -679,6 +706,8 @@ class ToolExecutor:
                     call.result = execute_symbolic_query(ir.givens["symbolic_query"])
                 elif call.name == "sympy.vector_query":
                     call.result = execute_vector_query(ir.givens["vector_query"])
+                elif call.name == "sympy.matrix_semantic_query":
+                    call.result = execute_matrix_semantic_query(ir.givens["matrix_semantic_query"])
                 elif call.name == "sympy.diff":
                     call.result = run_sympy_diff(ir.givens["expression"], ir.givens["variable"])
                 elif call.name == "sympy.polynomial_remainder":

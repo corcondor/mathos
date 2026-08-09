@@ -62,6 +62,9 @@ class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
     def test_dfrac_and_plain_rational_are_mathematically_equal(self):
         self.assertTrue(answers_match("9/7", r"\dfrac{9}{7}"))
 
+    def test_radical_coefficient_is_compared_mathematically(self):
+        self.assertTrue(answers_match("-3*sqrt(5) - 5", r"-3 \sqrt{5} - 5"))
+
     def test_manifest_and_partition_are_stable(self):
         case = PublicBenchmarkCase("MATH", "algebra", 7, "Solve $x+1=2$.", "1")
         first = case_identity(case)

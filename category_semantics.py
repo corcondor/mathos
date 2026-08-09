@@ -178,6 +178,7 @@ def compile_typed_semantic_graph(
     arithmetic_problem: dict[str, Any] | None = None,
     symbolic_query_ir: dict[str, Any] | None = None,
     vector_query_ir: dict[str, Any] | None = None,
+    matrix_query_ir: dict[str, Any] | None = None,
 ) -> TypedSemanticGraph:
     structure = structural_ir or analyze_structure(text).to_dict()
     semantic_text = str(structure.get("normalized_text") or text)
@@ -198,6 +199,7 @@ def compile_typed_semantic_graph(
     lift_quantity_chart(semantic_text, arithmetic_problem, sort_map, object_map, morphisms, constraints, queries)
     lift_symbolic_query_ir(symbolic_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_vector_query_ir(vector_query_ir, sort_map, object_map, morphisms, constraints, queries)
+    lift_matrix_query_ir(matrix_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_math_morphism_library(text, sort_map, object_map, morphisms, constraints, queries)
 
     if not queries:
@@ -438,6 +440,64 @@ def lift_vector_query_ir(
             target="vector_observation",
             sort=output_sort,
             expression=str(payload.get("target") or parameters),
+        )
+    )
+
+
+def lift_matrix_query_ir(
+    payload: dict[str, Any] | None,
+    sort_map: dict[str, SemanticSort],
+    object_map: dict[str, SemanticObject],
+    morphisms: list[SemanticMorphism],
+    constraints: list[Constraint],
+    queries: list[SemanticQuery],
+) -> None:
+    """Lift a typed matrix chart and its observation contract into the kernel."""
+    if not payload:
+        return
+    operator = str(payload.get("query_operator") or "")
+    target = str(payload.get("target") or "")
+    output_sort = str(payload.get("output_sort") or "Object")
+    chart = str(payload.get("chart") or "matrix_chart")
+    representation = payload.get("representation") or {}
+    if not operator or not target:
+        return
+
+    queries.clear()
+    sort_map.setdefault(output_sort, SemanticSort(output_sort, parent="Object", theory="linear_algebra"))
+    object_map["matrix_chart"] = SemanticObject(
+        name="matrix_chart",
+        sort="Matrix",
+        role=chart,
+        expression=str(representation),
+        source="matrix_query_ir",
+    )
+    for name, expression in sorted((payload.get("source_objects") or {}).items()):
+        constraints.append(
+            Constraint(
+                kind="matrix_chart_constraint",
+                expression=f"{name} = {expression}",
+                objects=["matrix_chart"],
+                source="matrix_query_ir.constraint",
+            )
+        )
+    morphisms.append(
+        SemanticMorphism(
+            name=operator,
+            domain=["Matrix"],
+            codomain=output_sort,
+            kind="query_operator",
+            expression=f"{operator}({chart})",
+            law="typed matrix chart executor contract",
+            source="matrix_query_ir",
+        )
+    )
+    queries.append(
+        SemanticQuery(
+            kind=operator,
+            target="matrix_chart",
+            sort=output_sort,
+            expression=target,
         )
     )
 

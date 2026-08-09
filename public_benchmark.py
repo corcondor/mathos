@@ -886,6 +886,7 @@ def clean_for_sympy(value: str) -> str:
     value = re.sub(r"frac(-?\d+)(-?\d+)", r"(\1)/(\2)", value)
     value = value.replace("\\sqrt", "sqrt")
     value = re.sub(r"sqrt\{([^{}]+)\}", r"sqrt(\1)", value)
+    value = re.sub(r"(?<=\d)\s*(?=sqrt\()", "*", value)
     value = value.replace("√", "sqrt")
     value = value.replace("Бу", "sqrt")
     value = re.sub(r"sqrt\s*([0-9]+)", r"sqrt(\1)", value)
