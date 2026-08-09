@@ -155,9 +155,31 @@ jobs:
         id: pool_changes
         shell: bash
         run: |
-          if git diff --quiet -- \
-            problem_synthesis/construct_pool.json \
-            problem_synthesis/entrance_exam_pool.json; then
+          CHANGED=$(python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          merge = json.loads(Path("merge_summary.json").read_text(encoding="utf-8"))
+
+          def semantic(payload):
+              return {key: value for key, value in payload.items() if key != "generated_at"}
+
+          current = json.loads(
+              Path("problem_synthesis/entrance_exam_pool.json").read_text(encoding="utf-8")
+          )
+          previous = json.loads(
+              subprocess.check_output(
+                  ["git", "show", "HEAD:problem_synthesis/entrance_exam_pool.json"],
+                  text=True,
+                  encoding="utf-8",
+              )
+          )
+          changed = bool(merge.get("semantic_change")) or semantic(current) != semantic(previous)
+          print("true" if changed else "false")
+          PY
+          )
+          if [[ "$CHANGED" == "false" ]]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No structural pool change; skip database synchronization."
           else
