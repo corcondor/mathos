@@ -291,6 +291,77 @@ class AffineRelationSynthesisTests(unittest.TestCase):
         self.assertIsNotNone(changed)
         self.assertEqual("720", changed.answer_exact)
 
+    def test_elliptical_comparison_clauses_compile_to_affine_edges(self) -> None:
+        self.assert_answer(
+            "A chest was filled with gems. There were 175 diamonds, 35 fewer "
+            "rubies than diamonds, and twice the number of emeralds than the "
+            "rubies. How many of the gems were there in the chest?",
+            "595",
+            "clause_affine_graph_total",
+        )
+
+    def test_clause_graph_alpha_renaming_and_number_perturbation(self) -> None:
+        self.assert_answer(
+            "A box contains objects. There were 90 circles, 12 fewer squares "
+            "than circles, and three times the number of triangles than squares. "
+            "How many of the objects were in the box?",
+            "402",
+            "clause_affine_graph_total",
+        )
+
+    def test_clause_graph_keeps_subject_separate_from_measure_unit(self) -> None:
+        self.assert_answer(
+            "The grasshopper and the frog had a jumping contest. The grasshopper "
+            "jumped 35 inches. The grasshopper jumped 4 inches farther than the "
+            "frog. How much did they jump altogether?",
+            "66",
+            "clause_affine_graph_total",
+        )
+
+    def test_clause_graph_uses_person_subject_not_counted_object(self) -> None:
+        self.assert_answer(
+            "Amy made 20 more friends than Lily. If Lily made 50 friends, how "
+            "many friends do Lily and Amy have together?",
+            "120",
+            "clause_affine_graph_total",
+        )
+
+    def test_clause_graph_rejects_unlowered_rate_in_query_sentence(self) -> None:
+        self.assertIsNone(solve_affine_relation_problem(
+            "There are twice as many boys as girls. If there are 60 girls and "
+            "5 students to every teacher, how many teachers are there?"
+        ))
+
+    def test_clause_graph_subject_scale_chain(self) -> None:
+        self.assert_answer(
+            "Cody eats three times as many cookies as Amir eats. If Amir eats "
+            "5 cookies, how many cookies do both of them eat together?",
+            "20",
+            "clause_affine_graph_total",
+        )
+        self.assert_answer(
+            "Caroline is three times older than Ben. Ben is two times older than "
+            "Chris. If Chris is 4, how old is Caroline?",
+            "24",
+            "clause_affine_graph",
+        )
+
+    def test_clause_graph_subject_offset_and_scale_total(self) -> None:
+        self.assert_answer(
+            "Jada makes twice as many clay dishes as Rory, while Rory makes 20 "
+            "more clay dishes than Kora. If Kora made 20 dishes, how many clay "
+            "dishes do they all make together?",
+            "140",
+            "clause_affine_graph_total",
+        )
+
+    def test_clause_graph_does_not_collapse_distinct_time_states(self) -> None:
+        self.assertIsNone(solve_affine_relation_problem(
+            "On Monday Kylie collects 5 more shells than Robert, who collects 20 "
+            "shells. On Tuesday Kylie collects 2 times as many shells as on "
+            "Monday. How many shells does Kylie collect on Tuesday?"
+        ))
+
 
 if __name__ == "__main__":
     unittest.main()

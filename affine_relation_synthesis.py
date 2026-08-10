@@ -1262,6 +1262,195 @@ def solve_mixed_affine_fact_graph(text: str) -> AffineRelationResult | None:
     return None
 
 
+def solve_clause_affine_graph(text: str) -> AffineRelationResult | None:
+    """Compile elliptical comparison clauses to one rational affine graph.
+
+    This is deliberately a clause grammar, not a problem-family recognizer.
+    English permits a relation such as ``ruby = diamond - 35`` to surface as
+    either ``rubies are 35 fewer than diamonds`` or the elliptical noun phrase
+    ``35 fewer rubies than diamonds``.  Both forms elaborate to the same edge.
+    Concrete nouns are alpha-renamed vertices and never affect execution.
+    """
+    source = re.sub(r"\s+", " ", text.lower().replace("’", "'")).strip()
+    if "\\" in source or "%" in source:
+        return None
+
+    ignored = {
+        "amount", "number", "total", "many", "much", "more", "fewer", "less",
+        "there", "they", "them", "each", "one", "ones", "time", "times",
+        "he", "him", "his", "she", "her", "hers", "it", "its", "who", "which",
+        "the", "a", "an",
+    }
+
+    def vertex(value: str) -> str | None:
+        words = re.findall(r"[a-z]+", value.lower())
+        if not words:
+            return None
+        name = _normalize_variable(words[-1])
+        return name if name not in ignored and len(name) > 1 else None
+
+    equations: list[AffineEquation] = []
+    variables: set[str] = set()
+    occupied: list[tuple[int, int]] = []
+    consumed_numeric_starts: set[int] = set()
+
+    def overlaps(span: tuple[int, int]) -> bool:
+        return any(max(span[0], left) < min(span[1], right) for left, right in occupied)
+
+    def edge(a_text: str, b_text: str, factor: Fraction, offset: Fraction, span: tuple[int, int]) -> None:
+        a, b = vertex(a_text), vertex(b_text)
+        if a is None or b is None or a == b:
+            return
+        variables.update((a, b))
+        equations.append(AffineEquation({a: Fraction(1), b: -factor}, offset))
+        occupied.append(span)
+
+    factor_words = (
+        r"twice|thrice|three\s+times|four\s+times|five\s+times|"
+        rf"(?:{NUMBER_RE})\s+times"
+    )
+
+    # ``35 fewer rubies than diamonds`` and its non-elliptical counterpart.
+    comparative_patterns = (
+        re.compile(
+            rf"\b(?:the\s+)?(?P<a>[a-z]+)\s+"
+            r"(?:is|was|made|makes|eats?|collects?|jumped|weighs?|measures?|costs?|scored|found|killed|sold|has|had)\s+"
+            rf"(?P<d>{NUMBER_RE})\s+(?:[a-z]+\s+)?"
+            r"(?P<order>more|fewer|less|farther|longer|shorter)\b"
+            r"[^.?!,;]{0,20}?\bthan\s+(?:the\s+)?(?P<b>[a-z]+)\b"
+        ),
+        re.compile(
+            rf"\b(?P<d>{NUMBER_RE})\s+(?P<order>more|fewer|less)\s+"
+            r"(?P<a>[a-z]+)(?:\s+[a-z]+){0,2}?\s+than\s+(?:the\s+)?(?P<b>[a-z]+)\b"
+        ),
+        re.compile(
+            rf"\b(?P<a>[a-z]+)\b[^.?!,;]{{0,28}}?\b(?P<d>{NUMBER_RE})\s+"
+            r"(?:[a-z]+\s+)?(?P<order>more|fewer|less|farther|longer|shorter)\b"
+            r"[^.?!,;]{0,20}?\bthan\s+(?:the\s+)?(?P<b>[a-z]+)\b"
+        ),
+    )
+    for pattern in comparative_patterns:
+        for match in pattern.finditer(source):
+            if overlaps(match.span()):
+                continue
+            difference = parse_number(match.group("d"))
+            if difference is None:
+                continue
+            consumed_numeric_starts.add(match.start("d"))
+            offset = difference if match.group("order") in {"more", "farther", "longer"} else -difference
+            edge(match.group("a"), match.group("b"), Fraction(1), offset, match.span())
+
+    # ``twice the number of emeralds than rubies`` is an elliptical scale edge.
+    leading_factor = re.compile(
+        rf"\b(?P<f>{factor_words})\s+(?:as\s+many\s+|the\s+number\s+of\s+)?"
+        r"(?P<a>[a-z]+)\b[^.?!,;]{0,18}?\b(?:as|than)\s+(?:the\s+)?(?P<b>[a-z]+)\b"
+    )
+    subject_factor = re.compile(
+        rf"\b(?P<a>[a-z]+)\b[^.?!,;]{{0,24}}?\b(?P<f>{factor_words})\s+"
+        r"(?:as\s+many\s+|the\s+number\s+of\s+)?(?:[a-z]+\s+){0,2}?"
+        r"(?:as|than)\s+(?:the\s+)?(?P<b>[a-z]+)\b"
+    )
+    semantic_subject_factor = re.compile(
+        rf"\b(?P<a>[a-z]+)\s+(?:is|was|has|had|makes?|eats?|collects?|owns?|runs?|works?)\s+"
+        rf"(?P<f>{factor_words})\s+"
+        r"(?:(?:as\s+(?:many|much)(?:\s+[a-z]+){0,3}?\s+as)|"
+        r"(?:(?:older|younger|longer|shorter|larger|smaller|faster|slower)\s+than))\s+"
+        r"(?:the\s+)?(?P<b>[a-z]+)\b"
+    )
+
+    def factor_value(raw: str) -> Fraction | None:
+        normalized = re.sub(r"\s+", " ", raw.strip())
+        named = {
+            "twice": Fraction(2), "thrice": Fraction(3),
+            "three times": Fraction(3), "four times": Fraction(4),
+            "five times": Fraction(5),
+        }
+        if normalized in named:
+            return named[normalized]
+        return parse_number(re.sub(r"\s+times$", "", normalized))
+
+    for pattern in (semantic_subject_factor, leading_factor, subject_factor):
+        for match in pattern.finditer(source):
+            if overlaps(match.span()):
+                continue
+            factor = factor_value(match.group("f"))
+            if factor is not None:
+                numeric = re.search(NUMBER_RE, match.group("f"))
+                if numeric:
+                    consumed_numeric_starts.add(match.start("f") + numeric.start())
+                edge(match.group("a"), match.group("b"), factor, Fraction(0), match.span())
+
+    if not equations or len(variables) < 2:
+        return None
+
+    # Ground only existing graph vertices.  Numerals outside a vertex clause
+    # cannot silently enter the system.
+    for name in sorted(variables):
+        forms = {name, name + "s"}
+        if name.endswith("y"):
+            forms.add(name[:-1] + "ies")
+        alternation = "|".join(map(re.escape, sorted(forms, key=len, reverse=True)))
+        patterns = (
+            re.compile(rf"\b(?P<v>{NUMBER_RE})\s+(?:[a-z]+\s+){{0,2}}?(?:{alternation})\b"),
+            re.compile(rf"\b(?:{alternation})\b[^.?!,;]{{0,18}}?\b(?:is|are|has|have|had)\s+\$?(?P<v>{NUMBER_RE})\b"),
+            re.compile(
+                rf"\b(?:{alternation})\b\s+"
+                r"(?:made|makes|eats?|collects?|jumped|weighs?|measures?|costs?|scored|found|killed|sold|owns?|has|had|is|was)"
+                rf"\s+\$?(?P<v>{NUMBER_RE})\b"
+            ),
+        )
+        for pattern in patterns:
+            for match in pattern.finditer(source):
+                if overlaps(match.span()):
+                    continue
+                value = parse_number(match.group("v"))
+                if value is not None:
+                    consumed_numeric_starts.add(match.start("v"))
+                    equations.append(AffineEquation({name: Fraction(1)}, value))
+                    break
+            else:
+                continue
+            break
+
+    question = next(
+        (part for part in reversed(re.split(r"(?<=[.?!])\s+", source)) if re.search(r"\b(?:how|what)\b", part)),
+        "",
+    )
+    if not question:
+        return None
+    if len({name for name in (
+        "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
+    ) if name in source}) > 1:
+        return None
+    question_word = re.search(r"\b(?:how|what)\b", question)
+    if question_word is None:
+        return None
+    question_start = source.rfind(question) + question_word.start()
+    query_text = source[question_start:]
+    premise_numbers = {
+        match.start() for match in re.finditer(NUMBER_RE, source[:question_start])
+        if parse_number(match.group(0)) is not None
+    }
+    if premise_numbers - consumed_numeric_starts:
+        return None
+    explicitly_mentioned = [
+        name for name in variables if re.search(rf"\b{re.escape(name)}(?:s|ies)?\b", query_text)
+    ]
+    if re.search(r"\b(?:total|together|combined|altogether|in all)\b|\bhow many of the\b", query_text):
+        query = "answer"
+        equations.append(AffineEquation(
+            {query: Fraction(1), **{name: Fraction(-1) for name in variables}},
+            Fraction(0),
+        ))
+        return _result("clause_affine_graph_total", query, equations, "observe coproduct of solved vertices")
+    if len(explicitly_mentioned) == 1:
+        return _result(
+            "clause_affine_graph", explicitly_mentioned[0], equations,
+            "project requested vertex from the solved affine graph",
+        )
+    return None
+
+
 def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
     for solver in (
         solve_periodic_affine_flow,
@@ -1275,6 +1464,7 @@ def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
         solve_multisort_comparison,
         solve_mixed_affine_fact_graph,
         solve_comparison_chain,
+        solve_clause_affine_graph,
         solve_percentage_relation,
     ):
         result = solver(text)

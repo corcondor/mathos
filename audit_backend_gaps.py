@@ -18,15 +18,18 @@ from typing import Any
 
 CONTRACTS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("finite_domain_filter_observe", (
-        "how many", "number of", "probability", "random", "ways", "arrange",
-        "choose", "select", "integers", "factors", "digits", "remainder",
+        "probability", "random", "ways", "arrange", "choose", "select",
+        "integers", "factors", "digits", "remainder",
         "divisible", "congruence", "modulo", "least positive integer",
     )),
-    ("affine_system_eliminate_observe", (
-        "percent", "%", "ratio", "more than", "less than", "fewer than",
-        "per ", "each ", "remaining", "left", "total", "altogether",
-        "average", "rate", "cost", "paid", "distance", "time",
+    ("percent_affine_state_observe", ("percent", "%", "discount", "markup")),
+    ("comparison_affine_graph_observe", (
+        "ratio", "more than", "less than", "fewer than", "twice as",
+        "times as", "difference",
     )),
+    ("typed_rate_graph_contract_observe", ("per ", "each ", "rate")),
+    ("state_event_flow_observe", ("remaining", "left", "received", "sold", "spent")),
+    ("aggregate_coproduct_observe", ("total", "altogether", "combined", "average")),
     ("matrix_vector_transform_observe", (
         "matrix", "vector", "projection", "determinant", "coordinates",
         "linear transformation", "dot product",

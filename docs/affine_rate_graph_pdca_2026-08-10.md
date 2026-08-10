@@ -52,7 +52,7 @@ that became incorrect.  The four additional wrong answers are newly answered
 cases, so precision improved but the verifier still needs stronger semantic
 gates.
 
-## Remaining contract gaps
+## Remaining contract gaps (superseded audit)
 
 The post-change unresolved audit contains 2,734 cases.  The largest
 `morphism_to_backend_gap` groups are:
@@ -65,8 +65,11 @@ The post-change unresolved audit contains 2,734 cases.  The largest
 6. matrix-vector observation: 15;
 7. calculus observation: 4.
 
-This iteration closes a reusable subset of the largest group; it does not mean
-that all affine or high-school mathematics problems are connected.
+This first contract audit was too coarse.  In particular, generic observation
+phrases such as `how many` and `total` caused heterogeneous unresolved problems
+to be counted as affine.  The corrected audit and follow-up clause compiler are
+recorded in `docs/clause_affine_graph_pdca_2026-08-10.md`.  The figure 1,258
+must not be used as an estimate of executable affine work.
 
 ## Verification
 
