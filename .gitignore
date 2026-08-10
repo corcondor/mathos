@@ -7,6 +7,7 @@ __pycache__/
 *.aux
 *.log
 *.jsonl
+!domain_benchmark.jsonl
 *.weights.json
 ui/
 x_analysis/
@@ -20,4 +21,3 @@ more_public_*.json
 public_benchmark_*.json
 tex_benchmark_results*.json
 x_*.json
-domain_benchmark.jsonl
