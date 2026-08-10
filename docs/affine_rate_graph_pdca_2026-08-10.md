@@ -38,26 +38,26 @@ morphisms disabled.
 
 | Metric | Before | After | Delta |
 |---|---:|---:|---:|
-| Exact | 816 | 838 | +22 |
-| Exact rate | 22.8316% | 23.4471% | +0.6155 points |
-| Answered | 1,171 | 1,197 | +26 |
-| Answer precision | 69.6840% | 70.0084% | +0.3244 points |
+| Exact | 816 | 840 | +24 |
+| Exact rate | 22.8316% | 23.5031% | +0.6715 points |
+| Answered | 1,171 | 1,199 | +28 |
+| Answer precision | 69.6840% | 70.0584% | +0.3744 points |
 | Wrong | 355 | 359 | +4 |
 | Held-out exact | 572 | 584 | +12 |
-| Morphism-to-backend gap | 2,209 | 2,180 | -29 |
+| Morphism-to-backend gap | 2,209 | 2,179 | -30 |
 | Correct-to-wrong regressions | 0 | 0 | 0 |
 
-Case-level comparison found 22 newly correct cases and no prior correct case
+Case-level comparison found 24 newly correct cases and no prior correct case
 that became incorrect.  The four additional wrong answers are newly answered
 cases, so precision improved but the verifier still needs stronger semantic
 gates.
 
 ## Remaining contract gaps
 
-The post-change unresolved audit contains 2,736 cases.  The largest
+The post-change unresolved audit contains 2,734 cases.  The largest
 `morphism_to_backend_gap` groups are:
 
-1. affine system / elimination / observation: 1,259;
+1. affine system / elimination / observation: 1,258;
 2. finite-domain filtering and observation: 476;
 3. new typed-semantic lowering required: 221;
 4. geometric constraints / invariants / measure: 121;
@@ -70,12 +70,11 @@ that all affine or high-school mathematics problems are connected.
 
 ## Verification
 
-- Focused affine/rate tests: 45/45.
+- Focused affine/rate tests: 48/48.
 - Full suite: 48 modules passed in the parallel 180-second run; two heavy
   modules hit that local timeout, then both passed separately (4/4 and 5/5).
-- Total discovered tests: 438, with no assertion failures.
+- Total discovered tests: 441, with no assertion failures.
 - Benchmark artifact:
-  `artifacts/public_benchmark_frozen_3574_after_affine_rate_graph_v2_20260810.json`.
+  `artifacts/public_benchmark_frozen_3574_after_periodic_affine_v3_20260810.json`.
 - Gap audit artifact:
-  `artifacts/backend_gap_contract_audit_after_affine_rate_20260810.json`.
-
+  `artifacts/backend_gap_contract_audit_after_periodic_affine_v3_20260810.json`.

@@ -267,6 +267,30 @@ class AffineRelationSynthesisTests(unittest.TestCase):
             "sold 10 cats. How many cats do they have left?"
         ))
 
+    def test_periodic_translation_recovers_initial_state(self) -> None:
+        self.assert_answer(
+            "Mark was unwell for 3 months, during which he lost 10 pounds per month. "
+            "If his final weight was 70 pounds, what was his initial weight?",
+            "100",
+            "periodic_affine_flow_inverse",
+        )
+
+    def test_periodic_translation_converts_years_to_months(self) -> None:
+        self.assert_answer(
+            "Katina has $3000 in her account. She removes $100 from the account every "
+            "month. How much money will be remaining after 2 years?",
+            "600",
+            "periodic_affine_flow_forward",
+        )
+
+    def test_periodic_translation_number_perturbation(self) -> None:
+        changed = solve_affine_relation_problem(
+            "Katina has $3600 in her account. She removes $120 every month. "
+            "How much money will be remaining after 2 years?"
+        )
+        self.assertIsNotNone(changed)
+        self.assertEqual("720", changed.answer_exact)
+
 
 if __name__ == "__main__":
     unittest.main()

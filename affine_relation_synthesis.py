@@ -231,6 +231,93 @@ def solve_affine_state_transition(text: str) -> AffineRelationResult | None:
     return None
 
 
+def _period_count(value: Fraction, duration_unit: str, rate_period: str) -> Fraction | None:
+    unit = duration_unit.rstrip("s")
+    period = rate_period.rstrip("s")
+    if unit == period:
+        return value
+    conversions = {
+        ("year", "month"): Fraction(12),
+        ("week", "day"): Fraction(7),
+        ("day", "hour"): Fraction(24),
+        ("hour", "minute"): Fraction(60),
+        ("minute", "second"): Fraction(60),
+    }
+    factor = conversions.get((unit, period))
+    return value * factor if factor is not None else None
+
+
+def solve_periodic_affine_flow(text: str) -> AffineRelationResult | None:
+    """Execute or invert a constant translation repeated over time."""
+    source = re.sub(r"\s+", " ", text.lower().replace("’", "'")).strip()
+    if "\\" in source or "%" in source:
+        return None
+    rate_match = re.search(
+        rf"\b(?P<verb>los(?:e|es|t)|remov(?:e|es|ed)|spend(?:s|t)?|uses?|"
+        rf"gain(?:s|ed)?|earn(?:s|ed)?|receiv(?:e|es|ed)|add(?:s|ed)?)\b"
+        rf"[^.?!]{{0,22}}?\$?(?P<rate>{NUMBER_RE})(?:\s+(?P<unit>[a-z]+))?"
+        rf"[^.?!]{{0,28}}?\b(?:per|every)\s+(?P<period>day|week|month|year)\b",
+        source,
+    )
+    if rate_match is None:
+        return None
+    rate = parse_number(rate_match.group("rate"))
+    if rate is None:
+        return None
+    duration_matches = list(re.finditer(
+        rf"\b(?:for|after|within|during)\s+(?P<n>{NUMBER_RE})\s+"
+        r"(?P<unit>days?|weeks?|months?|years?)\b",
+        source,
+    ))
+    if len(duration_matches) != 1:
+        return None
+    duration = parse_number(duration_matches[0].group("n"))
+    if duration is None:
+        return None
+    steps = _period_count(duration, duration_matches[0].group("unit"), rate_match.group("period"))
+    if steps is None:
+        return None
+    loss = rate_match.group("verb").startswith(("los", "remov", "spend", "use"))
+    delta = (-rate if loss else rate) * steps
+
+    initial_match = re.search(
+        rf"\b(?:has|had|starts? with|began with)\s+\$?(?P<v>{NUMBER_RE})\b",
+        source[: rate_match.start()],
+    )
+    final_match = re.search(
+        rf"\b(?:final\s+(?:weight|amount|balance)|ending\s+(?:weight|amount|balance))\s+"
+        rf"(?:was|is)\s+\$?(?P<v>{NUMBER_RE})\b|"
+        rf"\b(?:now|finally)\s+(?:has|have|weighs?)\s+\$?(?P<v2>{NUMBER_RE})\b",
+        source,
+    )
+    initial = parse_number(initial_match.group("v")) if initial_match else None
+    final_text = final_match.group("v") or final_match.group("v2") if final_match else None
+    final = parse_number(final_text) if final_text else None
+    question = next(
+        (part for part in reversed(re.split(r"(?<=[.?!])\s+", source)) if re.search(r"\b(?:how|what)\b", part)),
+        "",
+    )
+    asks_initial = bool(re.search(r"\b(?:initial|original|at first|start(?:ing)?)\b", question))
+    if asks_initial and final is not None:
+        return _result(
+            "periodic_affine_flow_inverse",
+            "initial",
+            [AffineEquation({"initial": Fraction(1)}, final - delta)],
+            "final - period_count*translation",
+        )
+    if initial is not None and re.search(r"\b(?:remaining|remain|left|balance|have|has|weigh)\b", question):
+        value = initial + delta
+        if value < 0:
+            return None
+        return _result(
+            "periodic_affine_flow_forward",
+            "final",
+            [AffineEquation({"final": Fraction(1)}, value)],
+            "initial + period_count*translation",
+        )
+    return None
+
+
 def _lemma(word: str) -> str:
     return {"win": "won", "wins": "won", "lose": "lost", "loses": "lost"}.get(word, word)
 
@@ -1177,6 +1264,7 @@ def solve_mixed_affine_fact_graph(text: str) -> AffineRelationResult | None:
 
 def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
     for solver in (
+        solve_periodic_affine_flow,
         solve_affine_state_transition,
         solve_unknown_state,
         solve_total_difference_relation,
