@@ -768,6 +768,10 @@ def answers_match(answer: str | None, expected: str | None) -> bool:
     expected_labels = parse_label_set(expected_norm)
     if answer_labels is not None and expected_labels is not None:
         return answer_labels == expected_labels
+    answer_scalar_set = parse_scalar_set_answer(answer_norm)
+    expected_scalar_set = parse_scalar_set_answer(expected_norm)
+    if answer_scalar_set is not None and expected_scalar_set is not None:
+        return answer_scalar_set == expected_scalar_set
     if sp is None:
         return False
     answer_set = parse_interval_set(answer)
@@ -828,6 +832,23 @@ def parse_label_set(value: str | None) -> frozenset[str] | None:
     return frozenset(re.findall(r"[A-Z]", source))
 
 
+def parse_scalar_set_answer(value: str | None) -> frozenset[Any] | None:
+    if value is None or sp is None:
+        return None
+    source = str(value).strip()
+    if source.startswith("[") and source.endswith("]"):
+        source = source[1:-1]
+    elif "," not in source:
+        return None
+    entries = [item.strip().strip("'\"") for item in source.split(",")]
+    if len(entries) < 2 or any(not item for item in entries):
+        return None
+    try:
+        return frozenset(sp.simplify(sp.sympify(clean_for_sympy(item))) for item in entries)
+    except Exception:
+        return None
+
+
 def parse_interval_set(value: str | None) -> Any | None:
     if value is None or sp is None:
         return None
@@ -859,9 +880,12 @@ def parse_interval_set(value: str | None) -> Any | None:
             upper = sp.sympify(upper_text, locals={"oo": sp.oo})
         except Exception:
             return None
-        intervals.append(
-            sp.Interval(lower, upper, left_open=left_bracket == "(", right_open=right_bracket == ")")
-        )
+        try:
+            intervals.append(
+                sp.Interval(lower, upper, left_open=left_bracket == "(", right_open=right_bracket == ")")
+            )
+        except Exception:
+            return None
     return sp.Union(*intervals) if intervals else None
 
 
@@ -891,6 +915,7 @@ def clean_for_sympy(value: str) -> str:
     value = value.replace("Бу", "sqrt")
     value = re.sub(r"sqrt\s*([0-9]+)", r"sqrt(\1)", value)
     value = value.replace("\\pi", "pi")
+    value = re.sub(r"(?<=\d)\s*(?=pi\b)", "*", value)
     value = re.sub(r"\bi\b", "I", value)
     value = re.sub(r"(?<=\d)(?=\()", "*", value)
     value = re.sub(r"(?<=\d)(?=[abcxyz])", "*", value)

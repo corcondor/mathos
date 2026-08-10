@@ -49,14 +49,49 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
     segments = [item for item in segments if item]
     lower = parsed.normalized_text.lower()
     definitions = extract_function_definitions(segments)
+    definitions.update(extract_piecewise_function_definitions(parsed.math_segments))
     constraints = [
         relation
         for item in segments
         if relation_operator(item)
         for relation in expand_chained_relation(item)
     ]
+    constraints = expand_tuple_equalities(constraints)
     expressions = [item for item in segments if not relation_operator(item)]
     variables = sorted(extract_symbols(segments) - set(definitions))
+
+    inverse_proportion = extract_inverse_proportion_observation(lower)
+    if inverse_proportion is not None:
+        return replace(
+            build_ir(constraints, expressions, "inverse_proportion", inverse_proportion["query"], variables, "Scalar", definitions),
+            parameters=inverse_proportion,
+            lowering_certificate={"kind": "multiplicative_invariant", "observation": inverse_proportion["query"]},
+        )
+
+    binary_operator = extract_binary_operator_definition(segments)
+    binary_target = next((item for item in reversed(expressions) if "astop" in item), "")
+    if binary_operator and binary_target and query_requests_value(lower):
+        return replace(
+            build_ir(constraints, expressions, "evaluate_binary_operator", binary_target, variables, "Scalar", definitions),
+            parameters=binary_operator,
+            lowering_certificate={"kind": "binary_operator_application", "observation": binary_target},
+        )
+
+    inverse_target = requested_inverse_function(lower, definitions)
+    if inverse_target:
+        return replace(
+            build_ir(constraints, expressions, "invert_defined_function", inverse_target, variables, "Function", definitions),
+            lowering_certificate={"kind": "function_inverse", "observation": inverse_target},
+        )
+
+    finite_inverse_target = next((item for item in reversed(expressions) if "**(-1)" in item), "")
+    finite_graph = extract_finite_function_graph(constraints)
+    if finite_inverse_target and finite_graph and query_requests_value(lower):
+        return replace(
+            build_ir(constraints, expressions, "evaluate_finite_function_expression", finite_inverse_target, [], "Scalar", definitions),
+            parameters={"finite_function_graph": finite_graph},
+            lowering_certificate={"kind": "finite_function_graph", "observation": finite_inverse_target},
+        )
 
     if contains_word(lower, "expand") or "展開" in lower:
         target = last_expression(expressions)
@@ -95,6 +130,37 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
     inequalities = [item for item in constraints if inequality_operator(item)]
     inequality = inequalities[0] if inequalities else ""
     equations = [item for item in constraints if equation_operator(item)]
+    constraints, equations = instantiate_coordinate_constraints(lower, constraints, equations)
+    equation = next((item for item in equations if equation_operator(item)), "")
+    common_root_target = expression_requested_by_query(lower, expressions)
+    if len(equations) >= 2 and "root in common" in lower and common_root_target:
+        shared_symbols = set.intersection(*(extract_symbols([item]) for item in equations))
+        root_candidates = shared_symbols - extract_symbols([common_root_target])
+        if len(root_candidates) == 1:
+            root_variable = next(iter(root_candidates))
+            parameter_variables = sorted(set().union(*(extract_symbols([item]) for item in equations)) - {root_variable})
+            compiled = build_ir(
+                constraints,
+                expressions,
+                "common_polynomial_root_projection",
+                common_root_target,
+                [root_variable, *parameter_variables],
+                "Set",
+                definitions,
+            )
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    parameters={
+                        "root_variable": root_variable,
+                        "parameter_variables": parameter_variables,
+                    },
+                    lowering_certificate={
+                        "kind": "resultant_projection",
+                        "constraint_count": len(equations),
+                        "observation": common_root_target,
+                    },
+                )
     if len(equations) > 1:
         target = expression_requested_by_query(lower, expressions)
         if target and query_requests_value(lower):
@@ -117,6 +183,61 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
                     },
                 )
         return None
+
+    observed_target = expression_requested_by_query(lower, expressions)
+    if (
+        equation
+        and "complex number" in lower
+        and observed_target
+        and re.fullmatch(r"\|\s*[A-Za-z]\s*\|", observed_target)
+    ):
+        complex_variable = re.search(r"[A-Za-z]", observed_target).group(0)
+        compiled = build_ir(
+            constraints,
+            expressions,
+            "complex_root_moduli",
+            equation,
+            [complex_variable],
+            "Set",
+            definitions,
+        )
+        if compiled is not None:
+            return replace(
+                compiled,
+                parameters={"complex_variable": complex_variable},
+                lowering_certificate={
+                    "kind": "complex_root_observation",
+                    "observation": f"Abs({complex_variable})",
+                },
+            )
+    if (
+        equation
+        and observed_target
+        and query_requests_value(lower)
+        and root_aggregate_query(lower) is None
+        and not re.fullmatch(r"[A-Za-z]", observed_target)
+    ):
+        equation_symbols = extract_symbols([equation])
+        target_symbols = extract_symbols([observed_target])
+        if target_symbols and target_symbols <= equation_symbols and not query_requests_solution_set(lower):
+            compiled = build_ir(
+                constraints,
+                expressions,
+                "solve_constraints_evaluate",
+                observed_target,
+                sorted(equation_symbols),
+                "Scalar",
+                definitions,
+            )
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    lowering_certificate={
+                        "kind": "constraint_observation",
+                        "constraint_count": len(equations),
+                        "observation": observed_target,
+                    },
+                )
 
     rounding_operator = None
     if "greatest integer less than or equal" in lower or "floor" in lower or "床関数" in lower:
@@ -182,11 +303,45 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
         if compiled is not None:
             return replace(compiled, parameters={"equation": equation, "root_symbols": named_roots})
 
+    root_ratio = extract_root_ratio(lower)
+    if equation and root_ratio is not None:
+        query_parameter = infer_query_variable(lower, variables, equation)
+        polynomial_variables = sorted(extract_symbols([equation]) - {query_parameter})
+        if polynomial_variables:
+            compiled = build_ir(
+                constraints,
+                expressions,
+                "root_ratio_parameter_extreme",
+                query_parameter,
+                polynomial_variables,
+                "Scalar",
+                definitions,
+            )
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    parameters={
+                        "equation": equation,
+                        "ratio": str(root_ratio),
+                        "query_parameter": query_parameter,
+                        "selection": "maximum" if any(marker in lower for marker in ("largest", "greatest", "maximum")) else "minimum",
+                    },
+                    lowering_certificate={"kind": "vieta_root_ratio", "observation": query_parameter},
+                )
+
     qualified_root_subset = any(
         marker in lower for marker in ("positive real", "negative real", "real part", "imaginary part", "inside", "outside")
     )
+    asks_for_root_count = bool(
+        re.search(r"how many\s+(?:different\s+|distinct\s+|real\s+)?(?:values|solutions|roots)", lower)
+        or re.search(r"number of\s+(?:different\s+|distinct\s+|real\s+)?(?:values|solutions|roots)", lower)
+    )
+    if equation and asks_for_root_count:
+        return build_ir(constraints, expressions, "count_solutions", equation, [query_variable], "Integer", definitions)
     if equation and root_aggregate_query(lower) and not qualified_root_subset:
         operator, output_sort = root_aggregate_query(lower)
+        if inequalities and re.search(r"\b(?:sin|cos|tan)\b", equation):
+            operator = f"{operator}_on_domain"
         return build_ir(constraints, expressions, operator, equation, [query_variable], output_sort, definitions)
 
     extremum_expression = expression_for_extremum(lower, expressions)
@@ -219,7 +374,12 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
         marker in lower for marker in ("asymptote", "radius", "area", "volume", "distance", "remainder", "|z|", "modulus")
     )
     if equation and query_requests_solution(lower) and not excluded_solve_observation:
-        compiled = build_ir(constraints, expressions, "solve", equation, [query_variable], "Set", definitions)
+        solve_operator = "solve"
+        if any(marker in lower for marker in ("smallest value", "least value", "minimum solution")):
+            solve_operator = "solve_minimum"
+        elif any(marker in lower for marker in ("largest value", "greatest value", "maximum solution")):
+            solve_operator = "solve_maximum"
+        compiled = build_ir(constraints, expressions, solve_operator, equation, [query_variable], "Set", definitions)
         if compiled is None:
             return None
         return replace(
@@ -302,7 +462,7 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
             if expression.is_integer is not True:
                 raise ValueError("units-digit projection requires an integer term")
             result = sp.Mod(expression, 10)
-    elif operator == "solve_system_evaluate":
+    elif operator in {"solve_system_evaluate", "solve_constraints_evaluate"}:
         equations = [parse_relation(item, locals_map) for item in ir.constraints if equation_operator(item)]
         variables = sorted(
             set().union(*(equation.free_symbols for equation in equations)),
@@ -316,8 +476,6 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
             raise ValueError("constraint system has no finite symbolic solutions")
         observed: list[sp.Expr] = []
         for assignment in solutions:
-            if any(variable not in assignment for variable in target.free_symbols):
-                raise ValueError("constraint system leaves the requested observation underdetermined")
             if not all(sp.simplify(equation.lhs.subs(assignment) - equation.rhs.subs(assignment)) == 0 for equation in equations):
                 raise ValueError("backend assignment failed constraint re-verification")
             value = sp.simplify(target.subs(assignment))
@@ -332,14 +490,82 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
         result = sp.expand(result)
         if result.free_symbols:
             raise ValueError("defined-expression observation contains unbound symbols")
-    elif operator in {"root_sum", "root_product", "root_square_product"}:
-        polynomial = polynomial_from_equation(ir.target, variable, locals_map)
-        degree = polynomial.degree()
-        if operator == "root_sum":
-            result = -polynomial.all_coeffs()[1] / polynomial.all_coeffs()[0]
+    elif operator == "invert_defined_function":
+        definition = ir.definitions.get(ir.target)
+        if not definition or "expression" not in definition:
+            raise ValueError("inverse query has no executable function definition")
+        input_symbol = locals_map.setdefault(definition["variable"], sp.Symbol(definition["variable"], real=True))
+        output_symbol = sp.Symbol("__output", real=True)
+        body = expand_defined_body(ir.target, ir.definitions, locals_map)
+        solutions = sp.solve(sp.Eq(output_symbol, body), input_symbol)
+        if len(solutions) != 1:
+            raise ValueError("function definition does not have a unique symbolic inverse")
+        result = sp.simplify(solutions[0].subs(output_symbol, input_symbol))
+        if not verify_function_inverse(body, result, input_symbol):
+            raise ValueError("inverse failed composition verification")
+    elif operator == "evaluate_finite_function_expression":
+        result = evaluate_finite_function_expression(
+            ir.target,
+            {str(name): {str(key): str(value) for key, value in mapping.items()} for name, mapping in ir.parameters["finite_function_graph"].items()},
+        )
+    elif operator == "evaluate_binary_operator":
+        result = evaluate_binary_operator(ir.target, ir.parameters, locals_map)
+    elif operator == "inverse_proportion":
+        first_left = sp.Rational(ir.parameters["first_left"])
+        first_right = sp.Rational(ir.parameters["first_right"])
+        second_known = sp.Rational(ir.parameters["second_known"])
+        result = sp.simplify(first_left * first_right / second_known)
+        if sp.simplify(result * second_known - first_left * first_right) != 0:
+            raise ValueError("multiplicative invariant failed re-verification")
+    elif operator == "root_ratio_parameter_extreme":
+        result = solve_root_ratio_parameter(ir, locals_map)
+    elif operator == "common_polynomial_root_projection":
+        result = solve_common_polynomial_root_projection(ir, locals_map)
+    elif operator == "complex_root_moduli":
+        result = solve_complex_root_moduli(ir, locals_map)
+    elif operator in {"root_sum_on_domain", "root_product_on_domain", "root_square_product_on_domain"}:
+        relation = parse_relation(ir.target, locals_map)
+        domain = sp.S.Reals
+        for constraint in ir.constraints:
+            if inequality_operator(constraint) and variable.name in extract_symbols([constraint]):
+                domain = sp.Intersection(
+                    domain,
+                    sp.solve_univariate_inequality(
+                        parse_relation(constraint, locals_map),
+                        variable,
+                        relational=False,
+                    ),
+                )
+        solutions = sp.solveset(relation, variable, domain=domain)
+        if not isinstance(solutions, sp.FiniteSet):
+            raise ValueError("domain-restricted aggregate has no certified finite solution set")
+        if not solutions:
+            raise ValueError("domain-restricted aggregate has no solutions")
+        values = list(solutions)
+        if operator == "root_sum_on_domain":
+            result = sp.simplify(sum(values))
         else:
-            root_product = (-1) ** degree * polynomial.all_coeffs()[-1] / polynomial.all_coeffs()[0]
-            result = root_product if operator == "root_product" else sp.expand(root_product**2)
+            product = sp.prod(values)
+            result = sp.simplify(product if operator == "root_product_on_domain" else product**2)
+    elif operator in {"root_sum", "root_product", "root_square_product"}:
+        try:
+            polynomial = polynomial_from_equation(ir.target, variable, locals_map)
+            degree = polynomial.degree()
+            if operator == "root_sum":
+                result = -polynomial.all_coeffs()[1] / polynomial.all_coeffs()[0]
+            else:
+                root_product = (-1) ** degree * polynomial.all_coeffs()[-1] / polynomial.all_coeffs()[0]
+                result = root_product if operator == "root_product" else sp.expand(root_product**2)
+        except (sp.PolynomialError, TypeError, ValueError):
+            relation = parse_relation(ir.target, locals_map)
+            solutions = sp.solve(relation, variable)
+            if not solutions or any(solution.free_symbols for solution in solutions):
+                raise ValueError("root aggregate has no finite closed solution set")
+            if operator == "root_sum":
+                result = sp.simplify(sum(solutions))
+            else:
+                product = sp.prod(solutions)
+                result = sp.simplify(product if operator == "root_product" else product**2)
     elif operator == "symmetric_root_expression":
         equation = str(ir.parameters.get("equation") or "")
         root_names = [str(item) for item in ir.parameters.get("root_symbols", [])]
@@ -358,17 +584,38 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
             for index, (generator, _) in enumerate(mapping, start=1)
         }
         result = sp.simplify(symmetric.subs(substitutions))
-    elif operator == "solve":
+    elif operator in {"solve", "solve_minimum", "solve_maximum"}:
         relation = parse_relation(ir.target, locals_map)
+        if isinstance(relation, sp.Equality) and relation.has(sp.factorial):
+            reduced = sp.combsimp(relation.lhs - relation.rhs)
+            quotient = sp.simplify(reduced / sp.factorial(variable))
+            relation = sp.Eq(quotient if quotient.has(variable) else reduced, 0)
         for name, value in ir.substitutions.items():
             symbol = locals_map.setdefault(name, sp.Symbol(name, real=True))
             relation = relation.subs(symbol, parse_expression(value, locals_map))
         solutions = sp.solve(relation, variable)
+        if not solutions:
+            raise ValueError("equation solver returned an uncertified empty solution set")
         if any(getattr(solution, "free_symbols", set()) for solution in solutions):
             raise ValueError("solution still contains an unbound symbol")
+        if operator in {"solve_minimum", "solve_maximum"}:
+            real_solutions = [solution for solution in solutions if solution.is_real is not False]
+            if not real_solutions:
+                raise ValueError("ordered solution query has no real solutions")
+            ordered = sorted(real_solutions, key=lambda item: float(sp.N(item, 30)))
+            return result_payload(ir, ordered[0] if operator == "solve_minimum" else ordered[-1], expression=ir.target)
         if len(solutions) == 1:
             return result_payload(ir, solutions[0], expression=ir.target)
         return result_payload(ir, solutions, expression=ir.target)
+    elif operator == "count_solutions":
+        relation = parse_relation(ir.target, locals_map)
+        solutions = sp.solveset(relation, variable, domain=sp.S.Reals)
+        if not isinstance(solutions, sp.FiniteSet):
+            raise ValueError("solution-count query has no certified finite real solution set")
+        for solution in solutions:
+            if sp.simplify(relation.lhs.subs(variable, solution) - relation.rhs.subs(variable, solution)) != 0:
+                raise ValueError("counted solution failed substitution verification")
+        result = sp.Integer(len(solutions))
     elif operator == "solve_inequality":
         relation_sources = [item for item in ir.constraints if inequality_operator(item)]
         if not relation_sources:
@@ -454,6 +701,9 @@ def parse_relation(source: str, locals_map: dict[str, Any]) -> Any:
 
 def parse_expression(source: str, locals_map: dict[str, Any]) -> sp.Expr:
     cleaned = re.sub(r"\b(?:If|Let|Find|Solve|What|For)\b.*?(?=[A-Za-z0-9_(])", "", source).strip(" .,?:")
+    cleaned = normalize_absolute_values(cleaned)
+    cleaned = normalize_factorials(cleaned)
+    cleaned = cleaned.replace("[", "(").replace("]", ")")
     return parse_expr(
         cleaned,
         local_dict=locals_map,
@@ -469,19 +719,43 @@ def evaluate_defined_expression(
 ) -> sp.Expr:
     expanded = source
     for name, definition in definitions.items():
-        pattern = rf"\b{re.escape(name)}\*?\(([^()]*)\)"
-        while re.search(pattern, expanded):
-            match = re.search(pattern, expanded)
-            assert match is not None
-            argument = parse_expression(match.group(1), locals_map)
-            formal = locals_map.setdefault(definition["variable"], sp.Symbol(definition["variable"]))
-            body = parse_expression(definition["expression"], locals_map).subs(formal, argument)
-            expanded = expanded[: match.start()] + f"({sp.sstr(body)})" + expanded[match.end() :]
+        if "branches" in definition and function_call_present(expanded, name):
+            return evaluate_piecewise_call(expanded, name, definition, locals_map)
+    for _ in range(len(definitions) + 2):
+        changed = False
+        for name, definition in definitions.items():
+            if "expression" not in definition:
+                continue
+            pattern = rf"\b{re.escape(name)}\*?\(([^()]*)\)"
+            while re.search(pattern, expanded):
+                match = re.search(pattern, expanded)
+                assert match is not None
+                argument = parse_expression(match.group(1), locals_map)
+                formal = locals_map.setdefault(definition["variable"], sp.Symbol(definition["variable"]))
+                body = parse_expression(definition["expression"], locals_map).subs(formal, argument)
+                expanded = expanded[: match.start()] + f"({sp.sstr(body)})" + expanded[match.end() :]
+                expanded = re.sub(r"\(\(([^()]*)\)\)", r"(\1)", expanded)
+                changed = True
+        if not changed:
+            break
     return parse_expression(expanded, locals_map)
 
 
-def extract_function_definitions(segments: list[str]) -> dict[str, dict[str, str]]:
-    definitions: dict[str, dict[str, str]] = {}
+def expand_defined_body(name: str, definitions: dict[str, dict[str, Any]], locals_map: dict[str, Any]) -> sp.Expr:
+    definition = definitions[name]
+    body = definition["expression"]
+    for nested_name in definitions:
+        if nested_name != name and function_call_present(body, nested_name):
+            body = sp.sstr(evaluate_defined_expression(body, definitions, locals_map))
+    return parse_expression(body, locals_map)
+
+
+def verify_function_inverse(body: sp.Expr, inverse: sp.Expr, variable: sp.Symbol) -> bool:
+    return sp.simplify(body.subs(variable, inverse) - variable) == 0
+
+
+def extract_function_definitions(segments: list[str]) -> dict[str, dict[str, Any]]:
+    definitions: dict[str, dict[str, Any]] = {}
     for segment in segments:
         match = re.fullmatch(r"\s*([A-Za-z])\*?\(([A-Za-z])\)\s*=\s*(.+)", segment)
         if match:
@@ -489,10 +763,300 @@ def extract_function_definitions(segments: list[str]) -> dict[str, dict[str, str
     return definitions
 
 
+def extract_piecewise_function_definitions(math_segments: list[str]) -> dict[str, dict[str, Any]]:
+    definitions: dict[str, dict[str, Any]] = {}
+    for segment in math_segments:
+        parts = split_math_statements(segment)
+        if len(parts) < 2:
+            continue
+        head = re.fullmatch(r"\s*([A-Za-z])\*?\(([A-Za-z])\)\s*=\s*(.+?)\s+if\s+(.+)", parts[0])
+        if not head:
+            continue
+        branches: list[dict[str, str]] = [{"expression": head.group(3), "condition": head.group(4)}]
+        for part in parts[1:]:
+            branch = re.fullmatch(r"\s*(.+?)\s+if\s+(.+)", part)
+            if branch:
+                branches.append({"expression": branch.group(1), "condition": branch.group(2)})
+        if len(branches) == len(parts):
+            definitions[head.group(1)] = {"variable": head.group(2), "branches": branches}
+    return definitions
+
+
+def extract_binary_operator_definition(segments: list[str]) -> dict[str, Any] | None:
+    for segment in segments:
+        match = re.fullmatch(r"\s*([A-Za-z])\s+astop\s+([A-Za-z])\s*=\s*(.+)", segment)
+        if match:
+            return {
+                "operator": "astop",
+                "left_variable": match.group(1),
+                "right_variable": match.group(2),
+                "expression": match.group(3),
+            }
+    return None
+
+
+def expand_tuple_equalities(constraints: list[str]) -> list[str]:
+    expanded: list[str] = []
+    for constraint in constraints:
+        match = re.fullmatch(r"\s*\(([^()]*)\)\s*=\s*\(([^()]*)\)\s*", constraint)
+        if not match:
+            expanded.append(constraint)
+            continue
+        left = [item.strip() for item in match.group(1).split(",")]
+        right = [item.strip() for item in match.group(2).split(",")]
+        if len(left) == len(right) and len(left) > 1:
+            expanded.extend(f"{a}={b}" for a, b in zip(left, right))
+        else:
+            expanded.append(constraint)
+    return expanded
+
+
+def extract_inverse_proportion_observation(text: str) -> dict[str, str] | None:
+    relation = re.search(r"\b([a-z])\s+and\s+([a-z])\s+are\s+inversely\s+proportional", text)
+    if not relation:
+        return None
+    left_name, right_name = relation.groups()
+    first = re.search(
+        rf"\b{left_name}\s*=\s*(-?\d+(?:/\d+)?)\s+when\s+{right_name}\s*=\s*(-?\d+(?:/\d+)?)",
+        text,
+    )
+    query = re.search(
+        rf"(?:value\s+of\s+|find\s+)({left_name}|{right_name})\s+when\s+({left_name}|{right_name})\s*=\s*(-?\d+(?:/\d+)?)",
+        text,
+    )
+    if not first or not query or query.group(1) == query.group(2):
+        return None
+    return {
+        "left": left_name,
+        "right": right_name,
+        "first_left": first.group(1),
+        "first_right": first.group(2),
+        "query": query.group(1),
+        "second_known_name": query.group(2),
+        "second_known": query.group(3),
+    }
+
+
+def extract_root_ratio(text: str) -> sp.Rational | None:
+    match = re.search(
+        r"(?:solutions|roots).*?ratio\s+(?:of\s+)?(\d+(?:/\d+)?)\s+to\s+(\d+(?:/\d+)?)",
+        text,
+    )
+    if not match:
+        return None
+    right = sp.Rational(match.group(2))
+    if right == 0:
+        return None
+    return sp.Rational(match.group(1)) / right
+
+
+def solve_root_ratio_parameter(ir: SymbolicQueryIR, locals_map: dict[str, Any]) -> sp.Expr:
+    root_variable = locals_map.setdefault(ir.variables[0], sp.Symbol(ir.variables[0], real=True))
+    query_name = str(ir.parameters["query_parameter"])
+    query_parameter = locals_map.setdefault(query_name, sp.Symbol(query_name, real=True))
+    polynomial = polynomial_from_equation(str(ir.parameters["equation"]), root_variable, locals_map)
+    if polynomial.degree() != 2:
+        raise ValueError("root-ratio observation currently requires a quadratic relation")
+    leading, linear, constant = polynomial.all_coeffs()
+    ratio = sp.Rational(ir.parameters["ratio"])
+    scale = sp.Symbol("__root_scale", real=True)
+    scale_values = sp.solve(sp.Eq(ratio * scale**2, constant / leading), scale)
+    candidates: list[sp.Expr] = []
+    for scale_value in scale_values:
+        parameter_values = sp.solve(
+            sp.Eq(-(linear / leading), (ratio + 1) * scale_value),
+            query_parameter,
+        )
+        candidates.extend(sp.simplify(value) for value in parameter_values if not value.free_symbols)
+    if not candidates:
+        raise ValueError("root ratio does not determine a finite parameter set")
+    ordered = sorted(candidates, key=lambda item: float(sp.N(item, 30)))
+    result = ordered[-1] if ir.parameters.get("selection") == "maximum" else ordered[0]
+    return result
+
+
+def solve_common_polynomial_root_projection(
+    ir: SymbolicQueryIR,
+    locals_map: dict[str, Any],
+) -> list[sp.Expr]:
+    root_name = str(ir.parameters["root_variable"])
+    root = locals_map.setdefault(root_name, sp.Symbol(root_name))
+    parameter_names = [str(item) for item in ir.parameters["parameter_variables"]]
+    parameters = [locals_map.setdefault(name, sp.Symbol(name, real=True)) for name in parameter_names]
+    equations = [parse_relation(item, locals_map) for item in ir.constraints if equation_operator(item)]
+    if len(equations) < 2 or not parameters:
+        raise ValueError("common-root projection requires two polynomial constraints and parameters")
+    first = sp.Poly(sp.together(equations[0].lhs - equations[0].rhs), root)
+    second = sp.Poly(sp.together(equations[1].lhs - equations[1].rhs), root)
+    resultant = sp.factor(sp.resultant(first.as_expr(), second.as_expr(), root))
+    if resultant == 0:
+        raise ValueError("common-root constraints are algebraically dependent")
+    target = parse_expression(ir.target, locals_map)
+    factors = [factor for factor, _ in sp.factor_list(resultant)[1]]
+    observed: set[sp.Expr] = set()
+    for factor in factors:
+        factor = sp.expand(factor)
+        for parameter in parameters:
+            for substitution in sp.solve(sp.Eq(factor, 0), parameter):
+                value = sp.simplify(target.subs(parameter, substitution))
+                if not value.free_symbols:
+                    observed.add(value)
+        polynomial = sp.Poly(factor, *parameters)
+        if polynomial.total_degree() == 2:
+            stationary = sp.solve(
+                [sp.diff(factor, parameter) for parameter in parameters],
+                parameters,
+                dict=True,
+            )
+            hessian = sp.hessian(factor, parameters)
+            if hessian.is_positive_definite is True:
+                for assignment in stationary:
+                    if set(assignment) == set(parameters) and sp.simplify(factor.subs(assignment)) == 0:
+                        value = sp.simplify(target.subs(assignment))
+                        if not value.free_symbols:
+                            observed.add(value)
+    if not observed:
+        raise ValueError("resultant factors do not determine a finite target projection")
+    return sorted(observed, key=sp.default_sort_key)
+
+
+def solve_complex_root_moduli(ir: SymbolicQueryIR, locals_map: dict[str, Any]) -> list[sp.Expr]:
+    name = str(ir.parameters["complex_variable"])
+    variable = sp.Symbol(name)
+    complex_locals = {**locals_map, name: variable}
+    relation = parse_relation(ir.target, complex_locals)
+    roots = sp.solve(relation, variable)
+    if not roots or any(root.free_symbols for root in roots):
+        raise ValueError("complex polynomial has no certified finite root set")
+    for root in roots:
+        if sp.simplify(relation.lhs.subs(variable, root) - relation.rhs.subs(variable, root)) != 0:
+            raise ValueError("complex root failed substitution verification")
+    moduli = {sp.simplify(sp.Abs(root)) for root in roots}
+    if any(value.free_symbols for value in moduli):
+        raise ValueError("complex modulus projection is not closed")
+    return sorted(moduli, key=sp.default_sort_key)
+
+
+def requested_inverse_function(text: str, definitions: dict[str, dict[str, Any]]) -> str | None:
+    match = re.search(r"inverse\s+of\s+([a-z])(?:\s*\(|\b)", text)
+    if match and match.group(1) in definitions:
+        return match.group(1)
+    return None
+
+
+def extract_finite_function_graph(constraints: list[str]) -> dict[str, dict[str, str]]:
+    graphs: dict[str, dict[str, str]] = {}
+    for constraint in constraints:
+        match = re.fullmatch(
+            r"\s*([A-Za-z])\*?\(([+-]?\d+(?:/\d+)?)\)\s*=\s*([+-]?\d+(?:/\d+)?)\s*",
+            constraint,
+        )
+        if match:
+            graphs.setdefault(match.group(1), {})[match.group(2)] = match.group(3)
+    return graphs
+
+
+def instantiate_coordinate_constraints(
+    text: str,
+    constraints: list[str],
+    equations: list[str],
+) -> tuple[list[str], list[str]]:
+    point = re.search(r"point\s*\(\s*([a-z])\s*,\s*([a-z])\s*\)\s+lies\s+on\s+the\s+line", text)
+    if not point:
+        return constraints, equations
+    coordinate_equation = next(
+        (item for item in equations if {"x", "y"} <= extract_symbols([item])),
+        None,
+    )
+    if coordinate_equation is None:
+        return constraints, equations
+    x_name, y_name = point.groups()
+    instantiated = re.sub(r"\bx\b", x_name, coordinate_equation)
+    instantiated = re.sub(r"\by\b", y_name, instantiated)
+    updated = [instantiated if item == coordinate_equation else item for item in constraints]
+    return updated, [item for item in updated if equation_operator(item)]
+
+
+def normalize_absolute_values(source: str) -> str:
+    previous = None
+    while previous != source:
+        previous = source
+        source = re.sub(r"\|([^|]+)\|", r"Abs(\1)", source)
+    return source
+
+
+def normalize_factorials(source: str) -> str:
+    previous = None
+    while source != previous:
+        previous = source
+        source = re.sub(r"(\([^()]+\)|[A-Za-z]|\d+)\s*!(?!\s*=)", r"factorial(\1)", source)
+    return source
+
+
+def evaluate_piecewise_call(
+    source: str,
+    name: str,
+    definition: dict[str, Any],
+    locals_map: dict[str, Any],
+) -> sp.Expr:
+    match = re.fullmatch(rf"\s*{re.escape(name)}\*?\((.+)\)\s*", source)
+    if not match:
+        raise ValueError("piecewise function query is not a direct application")
+    argument = parse_expression(match.group(1), locals_map)
+    variable = locals_map.setdefault(definition["variable"], sp.Symbol(definition["variable"], real=True))
+    for branch in definition["branches"]:
+        condition = parse_relation(branch["condition"], locals_map)
+        truth = sp.simplify(condition.subs(variable, argument))
+        if truth is sp.true or truth is True:
+            return parse_expression(branch["expression"], locals_map).subs(variable, argument)
+    raise ValueError("piecewise function argument satisfies no branch")
+
+
+def evaluate_finite_function_expression(source: str, graphs: dict[str, dict[str, str]]) -> sp.Expr:
+    compact = re.sub(r"\s+", "", source)
+
+    def evaluate(term: str) -> str:
+        direct = re.fullmatch(r"([A-Za-z])\*?\((.+)\)", term)
+        inverse = re.fullmatch(r"([A-Za-z])\*\*\(-1\)\*\((.+)\)", term)
+        match = inverse or direct
+        if not match:
+            return sp.sstr(sp.sympify(term))
+        name, argument_source = match.groups()
+        argument = evaluate(argument_source)
+        graph = graphs.get(name)
+        if not graph:
+            raise ValueError(f"finite function {name} has no graph")
+        if inverse:
+            preimages = [key for key, value in graph.items() if sp.simplify(sp.sympify(value) - sp.sympify(argument)) == 0]
+            if len(preimages) != 1:
+                raise ValueError("finite inverse is not uniquely defined at the requested value")
+            return preimages[0]
+        if argument not in graph:
+            raise ValueError("finite function is undefined at the requested value")
+        return graph[argument]
+
+    return sp.sympify(evaluate(compact))
+
+
+def evaluate_binary_operator(source: str, parameters: dict[str, Any], locals_map: dict[str, Any]) -> sp.Expr:
+    match = re.fullmatch(r"\s*(.+?)\s+astop\s+(.+?)\s*", source)
+    if not match:
+        raise ValueError("binary operator query has no application")
+    left = parse_expression(match.group(1), locals_map)
+    right = parse_expression(match.group(2), locals_map)
+    left_symbol = locals_map.setdefault(parameters["left_variable"], sp.Symbol(parameters["left_variable"]))
+    right_symbol = locals_map.setdefault(parameters["right_variable"], sp.Symbol(parameters["right_variable"]))
+    body = parse_expression(parameters["expression"], locals_map)
+    result = sp.simplify(body.subs({left_symbol: left, right_symbol: right}))
+    if result.free_symbols:
+        raise ValueError("binary operator application contains unbound symbols")
+    return result
+
+
 def sympy_locals(ir: SymbolicQueryIR) -> dict[str, Any]:
     names = extract_symbols([*ir.constraints, *ir.expressions, ir.target]) | set(ir.variables)
     locals_map: dict[str, Any] = {name: sp.Symbol(name, real=True) for name in names if name not in ir.definitions}
-    locals_map.update({"sqrt": sp.sqrt, "sin": sp.sin, "cos": sp.cos, "tan": sp.tan, "log": sp.log, "exp": sp.exp, "I": sp.I, "i": sp.I, "pi": sp.pi})
+    locals_map.update({"sqrt": sp.sqrt, "sin": sp.sin, "cos": sp.cos, "tan": sp.tan, "log": sp.log, "exp": sp.exp, "factorial": sp.factorial, "I": sp.I, "i": sp.I, "pi": sp.pi})
     return locals_map
 
 
@@ -584,13 +1148,18 @@ def query_requests_value(text: str) -> bool:
 
 
 def query_requests_solution(text: str) -> bool:
-    return any(phrase in text for phrase in ("solve", "possible values", "solutions", "value of", "values of", "解け")) or (
+    return any(phrase in text for phrase in ("solve", "possible values", "solutions", "value of", "values of", "解け")) or bool(
+        re.search(r"\bfind\s+[a-z]\b", text)
+    ) or (
         "方程式" in text and "求め" in text
     )
 
 
 def query_requests_solution_set(text: str) -> bool:
-    return any(phrase in text for phrase in ("what values", "for what", "interval notation", "all real", "範囲", "すべて"))
+    return any(
+        phrase in text
+        for phrase in ("what values", "for what", "interval notation", "all possible", "all real", "範囲", "すべて")
+    )
 
 
 def root_aggregate_query(text: str) -> tuple[str, str] | None:

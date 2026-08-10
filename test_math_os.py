@@ -1477,6 +1477,110 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(ir.tool_calls[0].result["answer_exact"], "5")
         self.assertEqual(ir.tool_calls[0].result["constraint_count"], 2)
 
+    def test_symbolic_query_executes_composed_function_inverse(self):
+        problem = r"Let $f(x)=7x+5$ and $g(x)=x-1$. If $h(x)=f(g(x))$, what is the inverse of $h(x)$?"
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_invert_defined_function")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "x/7 + 2/7")
+
+    def test_symbolic_query_executes_piecewise_function(self):
+        problem = r"""Let $f(x)=\begin{cases}3x+5 &\text{if }x<-3, \\
+        7-4x &\text{if }x\ge -3.\end{cases}$ Find $f(-10)$."""
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_evaluate_defined_expression")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "-25")
+
+    def test_symbolic_query_executes_finite_function_inverse_composition(self):
+        problem = r"Given $f(1)=2$, $f(4)=3$, and $f(7)=4$, find $f^{-1}(f^{-1}(3))$."
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_evaluate_finite_function_expression")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "7")
+
+    def test_symbolic_query_observes_invariant_of_underdetermined_constraint(self):
+        problem = r"What is $\frac{a+11b}{a-b}$ if $\frac{4a+3b}{a-2b}=5$?"
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_solve_constraints_evaluate")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "2")
+
+    def test_symbolic_query_executes_absolute_value_aggregate(self):
+        ir = run_pipeline(r"Find the sum of all values of $x$ such that $|x-1|=7$.")
+        self.assertEqual(ir.intent, "symbolic_query_root_sum")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "2")
+
+    def test_symbolic_query_selects_ordered_solution_after_solving(self):
+        ir = run_pipeline(r"What is the smallest value of $x$ such that $|5x-1|=|3x+2|$?")
+        self.assertEqual(ir.intent, "symbolic_query_solve_minimum")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "-1/8")
+
+    def test_latex_operator_normalization_preserves_executable_meaning(self):
+        division = run_pipeline(r"Solve $(17^6-17^5)\div16=17^x$ for $x$.")
+        mixed = run_pipeline(r"Solve for $w$: $\frac{1\frac16}w=\frac{42}3$.")
+        custom = run_pipeline(r"If $a\ast b=2a+5b-ab$, find $3\ast10$.")
+        self.assertEqual(division.tool_calls[0].result["answer_exact"], "5")
+        self.assertEqual(mixed.tool_calls[0].result["answer_exact"], "1/12")
+        self.assertEqual(custom.tool_calls[0].result["answer_exact"], "26")
+
+    def test_tuple_equality_lowers_to_component_constraints(self):
+        ir = run_pipeline(r"If $(x,y)=(3,9)$, what is $y^2-3xy+8$?")
+        self.assertEqual(ir.givens["symbolic_query"]["constraints"], ["x=3", "y=9"])
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "8")
+
+    def test_nth_root_lowers_to_rational_power(self):
+        ir = run_pipeline(r"If $a=8$, find $\left(16\sqrt[3]{a^2}\right)^{\frac13}$.")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "4")
+
+    def test_inverse_proportion_uses_multiplicative_invariant(self):
+        problem = r"If $j$ and $k$ are inversely proportional and $j=16$ when $k=21$, find $j$ when $k=14$."
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_inverse_proportion")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "24")
+
+    def test_root_ratio_lowers_through_vieta_relations(self):
+        problem = r"The two roots of $x^2+bx+48=0$ are in the ratio of 3 to 1. Find the largest value of $b$."
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_root_ratio_parameter_extreme")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "16")
+
+    def test_factorial_equation_uses_recurrence_normalization(self):
+        ir = run_pipeline(r"Find $n$ satisfying $2(n+1)!+6n!=3(n+1)!$.")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "5")
+
+    def test_common_root_projection_uses_resultant_and_real_quadratic_zero_set(self):
+        problem = (
+            r"Let $a,b$ be real and suppose $x^2+ax+b=0$ and $ax^2+bx+1=0$ "
+            r"have a root in common. Find all possible values of $a+b$."
+        )
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_common_polynomial_root_projection")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], ["-1", "2"])
+
+    def test_complex_root_moduli_projects_all_complex_roots(self):
+        problem = r"Let $z$ be a complex number such that $z^5+z^4+2z^3+z^2+z=0$. Find all possible values of $|z|$."
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_complex_root_moduli")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], ["0", "1"])
+
+    def test_trigonometric_root_sum_respects_interval_constraints(self):
+        problem = r"Find the sum of the solutions to $2\sin^3x-3\sin x=-\frac32\sin 2x$ in $0\le x\le2\pi$."
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "symbolic_query_root_sum_on_domain")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "5*pi")
+
+    def test_public_benchmark_compares_finite_scalar_sets_and_pi_products(self):
+        from math_os_prototype.public_benchmark import answers_match
+
+        self.assertTrue(answers_match("['-1', '2']", "-1,2"))
+        self.assertTrue(answers_match("['0', '1']", "0,1"))
+        self.assertTrue(answers_match("5*pi", r"5 \pi"))
+
+    def test_solution_count_is_an_observation_not_a_root_list(self):
+        complex_distance = run_pipeline(r"For how many real values of $c$ do we have $|3-ci|=7$?")
+        polynomial = run_pipeline(r"For how many different values of $x$ does $x^5=x^4+72x^3$?")
+        self.assertEqual(complex_distance.intent, "symbolic_query_count_solutions")
+        self.assertEqual(complex_distance.tool_calls[0].result["answer_exact"], "2")
+        self.assertEqual(polynomial.intent, "symbolic_query_count_solutions")
+        self.assertEqual(polynomial.tool_calls[0].result["answer_exact"], "3")
+
     def test_constraint_system_accepts_nonunique_states_with_unique_observation(self):
         problem = r"""Determine $x^2+y^2$ if
         \[\begin{aligned}x^2&=4\\y^2&=9\end{aligned}\]"""

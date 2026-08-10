@@ -82,7 +82,11 @@ def detect_specialized_problem(text: str) -> SpecializedProblem | None:
 
 
 def detect_factorial_weeks_problem(normalized: str, source: str) -> SpecializedProblem | None:
-    if "週間" not in normalized or "秒" not in normalized or "n!" not in normalized:
+    if (
+        "週間" not in normalized
+        or "秒" not in normalized
+        or not any(notation in normalized for notation in ("n!", "factorial(n)"))
+    ):
         return None
     ir = NumberTheoryIR(
         kind="factorial_divisibility",

@@ -11,7 +11,7 @@ import re
 from dataclasses import asdict, dataclass
 
 
-KNOWN_FUNCTIONS = {"sin", "cos", "tan", "exp", "log", "sqrt"}
+KNOWN_FUNCTIONS = {"sin", "cos", "tan", "exp", "log", "sqrt", "factorial"}
 LATEX_FUNCTIONS = {
     r"\sin": "sin",
     r"\cos": "cos",
@@ -222,10 +222,16 @@ def normalize_latex_math(expr: str) -> str:
         expr = expr.replace(latex, plain)
     for name, plain in GREEK_NAMES.items():
         expr = expr.replace(f"\\{name}", plain)
+    # At this point ``\\neq`` is still a LaTeX command, so a literal ``!``
+    # can only denote factorial notation.  Lowering it here avoids confusing
+    # ``n!=3`` (factorial followed by equality) with the ``!=`` relation.
+    expr = normalize_factorials(expr)
     replacements = {
         r"\int": "integral",
         r"\cdot": "*",
         r"\times": "*",
+        r"\div": "/",
+        r"\ast": " astop ",
         r"\to": " to ",
         r"\infty": "infinity",
         r"\lim": "limit",
@@ -272,6 +278,21 @@ def normalize_mathbb(expr: str) -> str:
 
 def normalize_fractions(expr: str) -> str:
     for command in (r"\dfrac", r"\tfrac", r"\frac"):
+        mixed_braced = re.compile(
+            rf"(?<![A-Za-z0-9.])(\d+)\s*{re.escape(command)}\s*\{{([^{{}}]+)\}}\s*\{{([^{{}}]+)\}}"
+        )
+        expr = mixed_braced.sub(
+            lambda match: (
+                f"({match.group(1)}+(({normalize_latex_math(match.group(2))})/"
+                f"({normalize_latex_math(match.group(3))})))"
+            ),
+            expr,
+        )
+        mixed_compact = re.compile(rf"(?<![A-Za-z0-9.])(\d+)\s*{re.escape(command)}\s*(\d)\s*(\d)")
+        expr = mixed_compact.sub(
+            lambda match: f"({match.group(1)}+(({match.group(2)})/({match.group(3)})))",
+            expr,
+        )
         compact_pattern = re.compile(rf"{re.escape(command)}\s*([A-Za-z0-9])\s*([A-Za-z0-9])")
         expr = compact_pattern.sub(
             lambda match: f"(({normalize_latex_math(match.group(1))})/({normalize_latex_math(match.group(2))}))",
@@ -284,9 +305,13 @@ def normalize_fractions(expr: str) -> str:
                 break
             numerator, first_end = read_braced(expr, first_start)
             second_start = skip_spaces(expr, first_end)
-            if second_start >= len(expr) or expr[second_start] != "{":
+            if second_start >= len(expr):
                 break
-            denominator, second_end = read_braced(expr, second_start)
+            if expr[second_start] == "{":
+                denominator, second_end = read_braced(expr, second_start)
+            else:
+                denominator = expr[second_start]
+                second_end = second_start + 1
             replacement = f"(({normalize_latex_math(numerator)})/({normalize_latex_math(denominator)}))"
             expr = expr[:start] + replacement + expr[second_end:]
     return expr
@@ -299,6 +324,13 @@ def normalize_sqrt(expr: str) -> str:
         arg_start = skip_spaces(expr, start + len(command))
         if arg_start >= len(expr):
             break
+        root_degree = "2"
+        if expr[arg_start] == "[":
+            degree_end = expr.find("]", arg_start + 1)
+            if degree_end < 0:
+                break
+            root_degree = expr[arg_start + 1:degree_end].strip()
+            arg_start = skip_spaces(expr, degree_end + 1)
         if expr[arg_start] == "{":
             arg, arg_end = read_braced(expr, arg_start)
         else:
@@ -307,7 +339,12 @@ def normalize_sqrt(expr: str) -> str:
                 break
             arg = match.group(0)
             arg_end = arg_start + len(arg)
-        replacement = f"sqrt({normalize_latex_math(arg)})"
+        normalized_arg = normalize_latex_math(arg)
+        replacement = (
+            f"sqrt({normalized_arg})"
+            if root_degree == "2"
+            else f"(({normalized_arg})**(1/({normalize_latex_math(root_degree)})))"
+        )
         expr = expr[:start] + replacement + expr[arg_end:]
     return expr
 
@@ -315,6 +352,14 @@ def normalize_sqrt(expr: str) -> str:
 def normalize_powers(expr: str) -> str:
     expr = re.sub(r"\^\{([^{}]+)\}", lambda match: f"**({normalize_latex_math(match.group(1))})", expr)
     expr = re.sub(r"\^([A-Za-z0-9]+)", r"**\1", expr)
+    return expr
+
+
+def normalize_factorials(expr: str) -> str:
+    previous = None
+    while expr != previous:
+        previous = expr
+        expr = re.sub(r"(?<!!)(\([^()]+\)|[A-Za-z]|\d+)\s*!(?!!)", r"factorial(\1)", expr)
     return expr
 
 
@@ -352,9 +397,31 @@ def insert_implicit_multiplication(expr: str) -> str:
 def split_compact_variables(expr: str) -> str:
     def replace(match: re.Match[str]) -> str:
         word = match.group(0)
-        if word in KNOWN_FUNCTIONS or word in GREEK_NAMES.values():
+        syntax_words = {
+            "and",
+            "as",
+            "astop",
+            "for",
+            "if",
+            "in",
+            "is",
+            "lim",
+            "max",
+            "min",
+            "mod",
+            "not",
+            "of",
+            "or",
+            "to",
+        }
+        if (
+            word in KNOWN_FUNCTIONS
+            or word in GREEK_NAMES.values()
+            or word in syntax_words
+            or (len(word) == 2 and word.startswith("d"))
+        ):
             return word
-        if len(word) <= 4 and all(char in {"x", "y", "t", "a", "b", "c", "s", "u", "v", "r"} for char in word):
+        if len(word) <= 4 and word.isalpha() and word.islower():
             return "*".join(word)
         return word
 
