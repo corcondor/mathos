@@ -91,6 +91,15 @@ class PublicBenchmarkAnswerExtractionTests(unittest.TestCase):
         self.assertTrue(answers_match("I", "i"))
         self.assertTrue(answers_match("B, E, G", r"\text{B, E, G}"))
 
+    def test_coordinate_tuples_are_ordered_and_ignore_latex_spacing(self):
+        self.assertTrue(answers_match("(3/4, 5)", r"\left(\frac34,5\right)"))
+        self.assertTrue(answers_match("(-13, -16, -18)", "(-13,-16,-18)"))
+        self.assertFalse(answers_match("(2, 1)", "(1, 2)"))
+
+    def test_equations_are_compared_as_constraints(self):
+        self.assertTrue(answers_match("y = -1/4", r"y=-\frac{1}{4}"))
+        self.assertTrue(answers_match("2*x-2=0", "x=1"))
+
     def test_summary_separates_wrong_answers_from_abstentions(self):
         def record(index, answer, exact, verification="verified"):
             return PublicBenchmarkRecord(

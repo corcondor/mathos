@@ -764,6 +764,15 @@ def answers_match(answer: str | None, expected: str | None) -> bool:
     expected_vector = parse_vector_answer(expected_norm)
     if answer_vector is not None and expected_vector is not None:
         return answer_vector == expected_vector
+    answer_tuple = parse_coordinate_tuple(answer_norm)
+    expected_tuple = parse_coordinate_tuple(expected_norm)
+    if answer_tuple is not None and expected_tuple is not None:
+        return answer_tuple == expected_tuple
+    answer_equation = parse_equation_answer(answer_norm)
+    expected_equation = parse_equation_answer(expected_norm)
+    if answer_equation is not None and expected_equation is not None:
+        if canonical_polynomial_constraint(answer_equation) == canonical_polynomial_constraint(expected_equation):
+            return True
     answer_labels = parse_label_set(answer_norm)
     expected_labels = parse_label_set(expected_norm)
     if answer_labels is not None and expected_labels is not None:
@@ -821,6 +830,42 @@ def parse_vector_answer(value: str | None) -> tuple[Any, ...] | None:
         return tuple(sp.simplify(sp.sympify(clean_for_sympy(item.strip()))) for item in entries if item.strip())
     except Exception:
         return None
+
+
+def parse_coordinate_tuple(value: str | None) -> tuple[Any, ...] | None:
+    if value is None or sp is None:
+        return None
+    source = str(value).strip().replace(r"\left", "").replace(r"\right", "")
+    if not (source.startswith("(") and source.endswith(")")):
+        return None
+    entries = [item.strip() for item in source[1:-1].split(",")]
+    if len(entries) < 2 or any(not item for item in entries):
+        return None
+    try:
+        return tuple(sp.simplify(sp.sympify(clean_for_sympy(item))) for item in entries)
+    except Exception:
+        return None
+
+
+def parse_equation_answer(value: str | None) -> Any | None:
+    if value is None or sp is None:
+        return None
+    source = str(value).strip().replace(r"\left", "").replace(r"\right", "")
+    if source.count("=") != 1:
+        return None
+    left, right = source.split("=", 1)
+    try:
+        return sp.expand(sp.sympify(clean_for_sympy(left)) - sp.sympify(clean_for_sympy(right)))
+    except Exception:
+        return None
+
+
+def canonical_polynomial_constraint(expression: Any) -> Any:
+    symbols = sorted(expression.free_symbols, key=lambda item: item.name)
+    try:
+        return sp.Poly(expression, *symbols).monic().as_expr()
+    except Exception:
+        return sp.simplify(expression)
 
 
 def parse_label_set(value: str | None) -> frozenset[str] | None:

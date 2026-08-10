@@ -61,6 +61,38 @@ def compile_matrix_semantic_query(text: str) -> MatrixSemanticQueryIR | None:
     query_target = infer_query_target(lower, segments)
 
     points = extract_points(segments)
+    coordinate_tuples = extract_coordinate_tuples(segments)
+    equations = [item for item in segments if "=" in item]
+
+    if "reflection" in lower and "plane" in lower and coordinate_tuples and equations:
+        point = coordinate_tuples[0]
+        plane = next((item for item in equations if len(tuple_symbols(item)) >= 2), "")
+        if plane and len(point) == len(tuple_symbols(plane)):
+            variables = sorted(tuple_symbols(plane))
+            return build_ir(
+                chart="affine_euclidean_space",
+                operator="reflect_point_across_hyperplane",
+                objects={"point": point, "hyperplane": plane, "coordinate_variables": variables},
+                target="reflected_point",
+                variables=variables,
+                output_sort=f"Point{len(variables)}",
+                representation="normal_projection_matrix",
+            )
+
+    if "point of intersection" in lower and "line" in lower and len(equations) >= 2:
+        line = next((item for item in equations if item.count("=") >= 2), "")
+        hyperplane = next((item for item in equations if item != line and item.count("=") == 1), "")
+        variables = sorted(tuple_symbols(line) & tuple_symbols(hyperplane))
+        if line and hyperplane and len(variables) >= 2:
+            return build_ir(
+                chart="affine_euclidean_space",
+                operator="line_hyperplane_intersection",
+                objects={"line": line, "hyperplane": hyperplane, "coordinate_variables": variables},
+                target="intersection_point",
+                variables=variables,
+                output_sort=f"Point{len(variables)}",
+                representation="affine_parameter_elimination",
+            )
     if polynomial and len(points) >= 2 and any(word in lower for word in ("contains the points", "passes through", "通る", "通過")):
         target = select_observation_expression(segments, polynomial, points)
         if target:
@@ -88,6 +120,86 @@ def compile_matrix_semantic_query(text: str) -> MatrixSemanticQueryIR | None:
             )
 
     conic = equation or polynomial
+    if conic and is_planar_quadratic_equation(conic) and "center" in lower:
+        return build_ir(
+            chart="homogeneous_quadratic_form",
+            operator="quadratic_form_center",
+            objects={"equation": conic, "coordinate_variables": ["x", "y"]},
+            target="center",
+            variables=["x", "y"],
+            output_sort="Point2",
+            representation="symmetric_conic_matrix",
+        )
+
+    if (
+        conic
+        and is_planar_quadratic_equation(conic)
+        and asks_origin_conic_distance(lower)
+        and select_graph_equation(segments) != conic
+    ):
+        return build_ir(
+            chart="quadratic_constraint",
+            operator="constrained_point_distance_extremum",
+            objects={
+                "equation": conic,
+                "coordinate_variables": ["x", "y"],
+                "point": ["0", "0"],
+                "direction": "minimum",
+                "return_squared": "squared distance" in lower,
+            },
+            target="distance_from_origin",
+            variables=["x", "y"],
+            output_sort="NonnegativeReal",
+            representation="lagrange_quadratic_form",
+        )
+
+    if conic and is_planar_quadratic_equation(conic) and "ellipse" in lower and coordinate_tuples and any(
+        marker in lower for marker in ("maximum length", "maximum distance", "longest")
+    ):
+        return build_ir(
+            chart="quadratic_constraint",
+            operator="constrained_point_distance_extremum",
+            objects={
+                "equation": conic,
+                "coordinate_variables": ["x", "y"],
+                "point": coordinate_tuples[0],
+                "direction": "maximum",
+                "return_squared": bool(re.search(r"\bd\s*\*\*\s*2\b|squared", lower)),
+            },
+            target="extreme_point_distance",
+            variables=["x", "y"],
+            output_sort="NonnegativeReal",
+            representation="lagrange_quadratic_form",
+        )
+
+    graph_equation = select_graph_equation(segments)
+    if graph_equation and "parabola" in lower and "directrix" in lower:
+        return build_ir(
+            chart="parabola_affine_chart",
+            operator="axis_aligned_parabola_directrix",
+            objects={"equation": graph_equation},
+            target="directrix",
+            variables=["x", "y"],
+            output_sort="AffineHyperplane",
+            representation="vertex_focal_parameter",
+        )
+
+    sphere_equation = next((item for item in equations if len(tuple_symbols(item)) >= 2), "")
+    if sphere_equation and any(marker in lower for marker in ("sphere", "球")) and any(
+        marker in lower for marker in ("center", "radius", "中心", "半径")
+    ):
+        target = "center" if any(marker in lower for marker in ("center", "中心")) else "radius"
+        variables = sorted(tuple_symbols(sphere_equation))
+        return build_ir(
+            chart="euclidean_quadric",
+            operator="sphere_center_or_radius",
+            objects={"equation": sphere_equation, "coordinate_variables": variables, "observation": target},
+            target=target,
+            variables=variables,
+            output_sort=f"Point{len(variables)}" if target == "center" else "PositiveReal",
+            representation="isotropic_quadratic_form",
+        )
+
     coordinate_extremum = infer_coordinate_extremum(lower)
     if conic and coordinate_extremum is not None and is_planar_quadratic_equation(conic):
         coordinate, direction = coordinate_extremum
@@ -111,7 +223,6 @@ def compile_matrix_semantic_query(text: str) -> MatrixSemanticQueryIR | None:
             representation="symmetric_conic_matrix",
         )
 
-    graph_equation = select_graph_equation(segments)
     if graph_equation and asks_origin_graph_distance(lower):
         squared = bool(re.search(r"(?:find|compute).*?\b[a-z]\s*\*\*\s*2\b", lower)) or "squared distance" in lower
         return build_ir(
@@ -229,6 +340,18 @@ def execute_matrix_semantic_query(payload: dict[str, Any]) -> dict[str, Any]:
         answer, witness = execute_rational_integer_parameters(ir)
     elif operator == "prime_root_coefficient_projection":
         answer, witness = execute_prime_root_projection(ir)
+    elif operator == "quadratic_form_center":
+        answer, witness = execute_quadratic_form_center(ir)
+    elif operator == "constrained_point_distance_extremum":
+        answer, witness = execute_constrained_point_distance_extremum(ir)
+    elif operator == "axis_aligned_parabola_directrix":
+        answer, witness = execute_axis_aligned_parabola_directrix(ir)
+    elif operator == "line_hyperplane_intersection":
+        answer, witness = execute_line_hyperplane_intersection(ir)
+    elif operator == "reflect_point_across_hyperplane":
+        answer, witness = execute_reflect_point_across_hyperplane(ir)
+    elif operator == "sphere_center_or_radius":
+        answer, witness = execute_sphere_center_or_radius(ir)
     else:
         raise ValueError(f"unsupported matrix semantic operator: {operator}")
     result = {
@@ -471,6 +594,201 @@ def execute_prime_root_projection(ir: MatrixSemanticQueryIR) -> tuple[sp.Expr | 
     return answer, {"vieta_map": {"sum": sp.sstr(sum_expr), "product": sp.sstr(product_expr)}, "witness_count": len(assignments)}
 
 
+def execute_quadratic_form_center(ir: MatrixSemanticQueryIR) -> tuple[tuple[sp.Expr, ...], dict[str, Any]]:
+    expression = parse_equation_expression(ir.source_objects["equation"])
+    variables = [symbol(name) for name in ir.source_objects["coordinate_variables"]]
+    q, linear, constant = quadratic_form_parts(expression, variables)
+    if q.det() == 0:
+        raise ValueError("quadratic form has no unique affine center")
+    center = sp.simplify(-q.inv() * linear / 2)
+    if any(sp.simplify(sp.diff(expression, variable).subs(dict(zip(variables, center)))) != 0 for variable in variables):
+        raise ValueError("quadratic-form center failed stationary-gradient verification")
+    return tuple(center), {
+        "quadratic_matrix": matrix_strings(q),
+        "linear": [sp.sstr(item) for item in linear],
+        "constant": sp.sstr(constant),
+        "center": [sp.sstr(item) for item in center],
+    }
+
+
+def execute_constrained_point_distance_extremum(ir: MatrixSemanticQueryIR) -> tuple[sp.Expr, dict[str, Any]]:
+    expression = parse_equation_expression(ir.source_objects["equation"])
+    variables = [symbol(name) for name in ir.source_objects["coordinate_variables"]]
+    point = sp.Matrix([parse_math(item) for item in ir.source_objects["point"]])
+    vector = sp.Matrix(variables)
+    objective = sp.expand(((vector - point).T * (vector - point))[0])
+    multiplier = sp.Symbol("__lambda", real=True)
+    stationarity = [
+        sp.Eq(sp.diff(objective, variable), multiplier * sp.diff(expression, variable))
+        for variable in variables
+    ]
+    solutions = sp.solve([sp.Eq(expression, 0), *stationarity], [*variables, multiplier], dict=True)
+    candidates: list[tuple[sp.Expr, dict[sp.Symbol, sp.Expr]]] = []
+    for assignment in solutions:
+        if not all(variable in assignment for variable in variables):
+            continue
+        coordinates = [sp.simplify(assignment[variable]) for variable in variables]
+        if any(value.is_real is False or value.free_symbols for value in coordinates):
+            continue
+        if sp.simplify(expression.subs(assignment)) != 0:
+            continue
+        candidates.append((sp.simplify(objective.subs(assignment)), assignment))
+    if not candidates:
+        raise ValueError("quadratic constraint has no certified real stationary distance")
+    direction = ir.source_objects["direction"]
+    if direction == "maximum":
+        q, _, _ = quadratic_form_parts(expression, variables)
+        if not (q.is_positive_definite or q.is_negative_definite):
+            raise ValueError("maximum distance requires a compact definite quadric")
+    selected = min(candidates, key=lambda item: float(sp.N(item[0], 30))) if direction == "minimum" else max(
+        candidates, key=lambda item: float(sp.N(item[0], 30))
+    )
+    squared, assignment = selected
+    answer = squared if ir.source_objects.get("return_squared") else sp.sqrt(squared)
+    return sp.simplify(answer), {
+        "metric_matrix": matrix_strings(sp.eye(len(variables))),
+        "constraint": sp.sstr(expression),
+        "objective": sp.sstr(objective),
+        "direction": direction,
+        "stationary_count": len(candidates),
+        "extremizer": [sp.sstr(assignment[variable]) for variable in variables],
+        "squared_distance": sp.sstr(squared),
+    }
+
+
+def execute_axis_aligned_parabola_directrix(ir: MatrixSemanticQueryIR) -> tuple[str, dict[str, Any]]:
+    source = ir.source_objects["equation"]
+    left, right = source.split("=", 1)
+    lhs, rhs = parse_math(left), parse_math(right)
+    x, y = symbol("x"), symbol("y")
+    if lhs == y and y not in rhs.free_symbols:
+        dependent, independent, graph = y, x, rhs
+    elif rhs == y and y not in lhs.free_symbols:
+        dependent, independent, graph = y, x, lhs
+    elif lhs == x and x not in rhs.free_symbols:
+        dependent, independent, graph = x, y, rhs
+    elif rhs == x and x not in lhs.free_symbols:
+        dependent, independent, graph = x, y, lhs
+    else:
+        raise ValueError("directrix backend requires an axis-aligned explicit parabola")
+    polynomial = sp.Poly(graph, independent)
+    if polynomial.degree() != 2:
+        raise ValueError("directrix backend requires a quadratic graph")
+    a, b, c = polynomial.all_coeffs()
+    if a == 0:
+        raise ValueError("parabola has zero quadratic coefficient")
+    vertex_axis = sp.simplify(-b / (2 * a))
+    vertex_value = sp.simplify(graph.subs(independent, vertex_axis))
+    focal_parameter = sp.simplify(1 / (4 * a))
+    directrix_value = sp.simplify(vertex_value - focal_parameter)
+    answer = f"{dependent.name} = {sp.sstr(directrix_value)}"
+    return answer, {
+        "vertex": [sp.sstr(vertex_axis), sp.sstr(vertex_value)] if dependent == y else [sp.sstr(vertex_value), sp.sstr(vertex_axis)],
+        "focal_parameter": sp.sstr(focal_parameter),
+        "directrix": answer,
+    }
+
+
+def execute_line_hyperplane_intersection(ir: MatrixSemanticQueryIR) -> tuple[tuple[sp.Expr, ...], dict[str, Any]]:
+    variables = [symbol(name) for name in ir.source_objects["coordinate_variables"]]
+    parts = [parse_math(item) for item in ir.source_objects["line"].split("=")]
+    if len(parts) != len(variables):
+        raise ValueError("symmetric line chart does not match the ambient dimension")
+    parameter = sp.Symbol("__t", real=True)
+    parameterization: dict[sp.Symbol, sp.Expr] = {}
+    for part in parts:
+        names = part.free_symbols & set(variables)
+        if len(names) != 1:
+            raise ValueError("each symmetric-line coordinate must contain one variable")
+        variable = next(iter(names))
+        solved = sp.solve(sp.Eq(part, parameter), variable)
+        if len(solved) != 1:
+            raise ValueError("line coordinate is not affine in its variable")
+        parameterization[variable] = sp.simplify(solved[0])
+    if set(parameterization) != set(variables):
+        raise ValueError("line parameterization does not cover every coordinate")
+    hyperplane = parse_equation_expression(ir.source_objects["hyperplane"])
+    parameter_values = sp.solve(sp.Eq(hyperplane.subs(parameterization), 0), parameter)
+    if len(parameter_values) != 1:
+        raise ValueError("line and hyperplane do not have a unique intersection")
+    value = parameter_values[0]
+    point = tuple(sp.simplify(parameterization[variable].subs(parameter, value)) for variable in variables)
+    assignment = dict(zip(variables, point))
+    if sp.simplify(hyperplane.subs(assignment)) != 0:
+        raise ValueError("affine intersection failed hyperplane verification")
+    ratios = [sp.simplify(part.subs(assignment)) for part in parts]
+    if any(sp.simplify(item - ratios[0]) != 0 for item in ratios[1:]):
+        raise ValueError("affine intersection failed line verification")
+    return point, {
+        "ambient_dimension": len(variables),
+        "parameter": sp.sstr(value),
+        "parameterization": {variable.name: sp.sstr(parameterization[variable]) for variable in variables},
+        "intersection": [sp.sstr(item) for item in point],
+    }
+
+
+def execute_reflect_point_across_hyperplane(ir: MatrixSemanticQueryIR) -> tuple[tuple[sp.Expr, ...], dict[str, Any]]:
+    variables = [symbol(name) for name in ir.source_objects["coordinate_variables"]]
+    point = sp.Matrix([parse_math(item) for item in ir.source_objects["point"]])
+    hyperplane = parse_equation_expression(ir.source_objects["hyperplane"])
+    normal = sp.Matrix([sp.diff(hyperplane, variable) for variable in variables])
+    if any(entry.free_symbols for entry in normal) or normal.dot(normal) == 0:
+        raise ValueError("reflection requires an affine hyperplane with a constant nonzero normal")
+    residual = sp.simplify(hyperplane.subs(dict(zip(variables, point))))
+    reflected = sp.simplify(point - 2 * residual / normal.dot(normal) * normal)
+    midpoint = sp.simplify((point + reflected) / 2)
+    if sp.simplify(hyperplane.subs(dict(zip(variables, midpoint)))) != 0:
+        raise ValueError("reflection midpoint is not on the hyperplane")
+    displacement = sp.simplify(reflected - point)
+    if len(variables) == 3 and sp.simplify(displacement.cross(normal)) != sp.zeros(3, 1):
+        raise ValueError("reflection displacement is not normal to the plane")
+    return tuple(reflected), {
+        "ambient_dimension": len(variables),
+        "normal": [sp.sstr(item) for item in normal],
+        "signed_residual": sp.sstr(residual),
+        "projection_matrix": matrix_strings(sp.eye(len(variables)) - 2 * normal * normal.T / normal.dot(normal)),
+        "reflected_point": [sp.sstr(item) for item in reflected],
+    }
+
+
+def execute_sphere_center_or_radius(ir: MatrixSemanticQueryIR) -> tuple[Any, dict[str, Any]]:
+    expression = parse_equation_expression(ir.source_objects["equation"])
+    variables = [symbol(name) for name in ir.source_objects["coordinate_variables"]]
+    q, linear, constant = quadratic_form_parts(expression, variables)
+    scale = q[0, 0]
+    if scale == 0 or q != scale * sp.eye(len(variables)):
+        raise ValueError("quadric is not an isotropic Euclidean sphere")
+    center = sp.simplify(-q.inv() * linear / 2)
+    radius_squared = sp.simplify((center.T * q * center)[0] / scale - constant / scale)
+    if radius_squared.is_positive is not True:
+        raise ValueError("sphere radius is not certified positive")
+    observation = ir.source_objects["observation"]
+    answer: Any = tuple(center) if observation == "center" else sp.sqrt(radius_squared)
+    witness = {
+        "ambient_dimension": len(variables),
+        "quadratic_matrix": matrix_strings(q),
+        "center": [sp.sstr(item) for item in center],
+        "radius_squared": sp.sstr(radius_squared),
+    }
+    return answer, witness
+
+
+def quadratic_form_parts(
+    expression: sp.Expr,
+    variables: list[sp.Symbol],
+) -> tuple[sp.Matrix, sp.Matrix, sp.Expr]:
+    zero = {variable: 0 for variable in variables}
+    q = sp.hessian(expression, variables) / 2
+    if any(entry.free_symbols & set(variables) for entry in q):
+        raise ValueError("constraint is not quadratic in the coordinate variables")
+    linear = sp.Matrix([sp.diff(expression, variable).subs(zero) for variable in variables])
+    constant = sp.simplify(expression.subs(zero))
+    reconstructed = sp.expand((sp.Matrix(variables).T * q * sp.Matrix(variables))[0] + linear.dot(sp.Matrix(variables)) + constant)
+    if sp.simplify(expression - reconstructed) != 0:
+        raise ValueError("quadratic-form decomposition failed reconstruction")
+    return q, linear, constant
+
+
 def clean_segment(source: str) -> str:
     source = source.strip().strip(" ,.;:")
     source = re.sub(r"\b([A-Za-z])x(?=(?:\*\*|\b))", r"\1*x", source)
@@ -566,6 +884,13 @@ def asks_origin_graph_distance(lower: str) -> bool:
     ) and any(marker in lower for marker in ("smallest", "minimum", "最小"))
 
 
+def asks_origin_conic_distance(lower: str) -> bool:
+    mentions_origin = "origin" in lower or "原点" in lower
+    mentions_distance = any(marker in lower for marker in ("distance", "距離"))
+    asks_minimum = any(marker in lower for marker in ("shortest", "smallest", "minimum", "最短", "最小"))
+    return mentions_origin and mentions_distance and asks_minimum
+
+
 def infer_integer_range(lower: str) -> tuple[int, int] | None:
     match = re.search(r"between\s+(\d+)\s+and\s+(\d+)\s+inclusive", lower)
     if not match:
@@ -583,6 +908,30 @@ def extract_points(segments: list[str]) -> list[tuple[str, str]]:
         if match:
             points.append((match.group(1), match.group(2)))
     return points
+
+
+def extract_coordinate_tuples(segments: list[str]) -> list[list[str]]:
+    """Extract coordinate tuples without assigning any geometric role to them."""
+    tuples: list[list[str]] = []
+    for item in segments:
+        for match in re.finditer(r"\(\s*([^()]+(?:\s*,\s*[^()]+)+)\s*\)", item):
+            coordinates = [part.strip() for part in match.group(1).split(",")]
+            if len(coordinates) < 2:
+                continue
+            try:
+                if all(not parse_math(part).free_symbols for part in coordinates):
+                    tuples.append(coordinates)
+            except Exception:
+                continue
+    return tuples
+
+
+def tuple_symbols(source: str) -> set[str]:
+    """Return coordinate symbols that occur as algebraic variables in a chart."""
+    try:
+        return {item.name for item in parse_equation_expression(source).free_symbols if item.name in {"x", "y", "z", "w"}}
+    except Exception:
+        return set(re.findall(r"\b[xyzw]\b", source))
 
 
 def looks_like_point(source: str) -> bool:

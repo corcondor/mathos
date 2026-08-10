@@ -179,6 +179,7 @@ def compile_typed_semantic_graph(
     symbolic_query_ir: dict[str, Any] | None = None,
     vector_query_ir: dict[str, Any] | None = None,
     matrix_query_ir: dict[str, Any] | None = None,
+    discrete_query_ir: dict[str, Any] | None = None,
 ) -> TypedSemanticGraph:
     structure = structural_ir or analyze_structure(text).to_dict()
     semantic_text = str(structure.get("normalized_text") or text)
@@ -200,6 +201,7 @@ def compile_typed_semantic_graph(
     lift_symbolic_query_ir(symbolic_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_vector_query_ir(vector_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_matrix_query_ir(matrix_query_ir, sort_map, object_map, morphisms, constraints, queries)
+    lift_discrete_query_ir(discrete_query_ir, sort_map, object_map, morphisms, constraints, queries)
     lift_math_morphism_library(text, sort_map, object_map, morphisms, constraints, queries)
 
     if not queries:
@@ -341,6 +343,61 @@ def lift_symbolic_query_ir(
             target="symbolic_target",
             sort=output_sort,
             expression=target,
+        )
+    )
+
+
+def lift_discrete_query_ir(
+    payload: dict[str, Any] | None,
+    sort_map: dict[str, SemanticSort],
+    object_map: dict[str, SemanticObject],
+    morphisms: list[SemanticMorphism],
+    constraints: list[Constraint],
+    queries: list[SemanticQuery],
+) -> None:
+    """Lift finite-domain and congruence queries into the shared graph."""
+    if not payload:
+        return
+    operator = str(payload.get("operator") or "")
+    output_sort = str(payload.get("output_sort") or "Natural")
+    domain = payload.get("domain") or {}
+    if not operator or not isinstance(domain, dict):
+        return
+    queries.clear()
+    sort_map.setdefault(output_sort, SemanticSort(output_sort, parent="Number", theory="discrete_math"))
+    object_map["discrete_domain"] = SemanticObject(
+        name="discrete_domain",
+        sort="Set",
+        role="finite_or_congruence_domain",
+        expression=str(domain),
+        source="discrete_constraint_query_ir",
+    )
+    for index, predicate in enumerate(payload.get("predicates") or []):
+        constraints.append(
+            Constraint(
+                kind="finite_predicate",
+                expression=str(predicate),
+                objects=["discrete_domain"],
+                source=f"discrete_constraint_query_ir.predicate[{index}]",
+            )
+        )
+    morphisms.append(
+        SemanticMorphism(
+            name=operator,
+            domain=["Set"],
+            codomain=output_sort,
+            kind="query_operator",
+            expression=f"{operator}({domain})",
+            law="finite enumeration or modular arithmetic with witness rechecking",
+            source="discrete_constraint_query_ir",
+        )
+    )
+    queries.append(
+        SemanticQuery(
+            kind=operator,
+            target="discrete_domain",
+            sort=output_sort,
+            expression=str(payload.get("observation") or "cardinality"),
         )
     )
 

@@ -18,6 +18,7 @@ try:
     from math_os_prototype.arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
     from math_os_prototype.asymptote_geometry import detect_asymptote_geometry_problem, solve_asymptote_geometry_problem
     from math_os_prototype.container_geometry import detect_container_problem, solve_container_problem
+    from math_os_prototype.discrete_constraint_query import compile_discrete_constraint_query, execute_discrete_constraint_query
     from math_os_prototype.field_adapters import detect_specialized_problem, solve_specialized_problem
     from math_os_prototype.geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from math_os_prototype.geometry_nl import convert_geometry_nl
@@ -30,6 +31,7 @@ except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from arithmetic_nl import detect_arithmetic_nl_problem, solve_arithmetic_nl_problem
     from asymptote_geometry import detect_asymptote_geometry_problem, solve_asymptote_geometry_problem
     from container_geometry import detect_container_problem, solve_container_problem
+    from discrete_constraint_query import compile_discrete_constraint_query, execute_discrete_constraint_query
     from field_adapters import detect_specialized_problem, solve_specialized_problem
     from geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from geometry_nl import convert_geometry_nl
@@ -261,6 +263,25 @@ class ProblemCompiler:
                     "Verify the requested polygon area by the shoelace determinant.",
                 ],
                 tool_calls=[ToolCall("geometry.asymptote_exact", "execute typed coordinate construction", executable=True)],
+            )
+
+        discrete_query = compile_discrete_constraint_query(text)
+        if discrete_query is not None:
+            payload = discrete_query.to_dict()
+            return MathIR(
+                problem=text,
+                route="discrete_mathematics",
+                intent=f"discrete_constraint_{discrete_query.operator}",
+                symbols=[],
+                givens={"discrete_constraint_query": payload},
+                goal=f"Execute the typed discrete observation {discrete_query.observation}.",
+                plan=[
+                    "Elaborate a finite domain or congruence-class domain.",
+                    "Compile textual conditions to typed predicates.",
+                    "Execute exact modular arithmetic or finite-set enumeration.",
+                    "Recheck every accepted member against the source predicates.",
+                ],
+                tool_calls=[ToolCall("sympy.discrete_constraint_query", discrete_query.operator, executable=True)],
             )
 
         vector_query = compile_vector_query(text)
@@ -708,6 +729,8 @@ class ToolExecutor:
                     call.result = execute_vector_query(ir.givens["vector_query"])
                 elif call.name == "sympy.matrix_semantic_query":
                     call.result = execute_matrix_semantic_query(ir.givens["matrix_semantic_query"])
+                elif call.name == "sympy.discrete_constraint_query":
+                    call.result = execute_discrete_constraint_query(ir.givens["discrete_constraint_query"])
                 elif call.name == "sympy.diff":
                     call.result = run_sympy_diff(ir.givens["expression"], ir.givens["variable"])
                 elif call.name == "sympy.polynomial_remainder":

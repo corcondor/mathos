@@ -67,11 +67,13 @@ def _nearest_marker(before: str, after: str) -> str | None:
         for match in re.finditer(rf"\b{re.escape(marker)}\b", before):
             matches.append((match.end(), marker))
     if matches:
-        return max(matches)[1]
+        return max(matches, key=lambda item: item[0])[1]
+    following: list[tuple[int, str]] = []
     for marker in GAIN | LOSS:
-        if re.search(rf"\b{re.escape(marker)}\b", after[:35]):
-            return marker
-    return None
+        match = re.search(rf"\b{re.escape(marker)}\b", after[:35])
+        if match:
+            following.append((match.start(), marker))
+    return min(following, key=lambda item: item[0])[1] if following else None
 
 
 def _event_sign(marker: str) -> int:

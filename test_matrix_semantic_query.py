@@ -125,6 +125,46 @@ class MatrixSemanticQueryTests(unittest.TestCase):
             self.assertTrue(certificate["verified"])
             self.assertTrue(path.exists())
 
+    def test_indefinite_quadratic_form_center(self) -> None:
+        result = self.execute("Find the center of the hyperbola $4x^2-6x+2=y^2-10y$.")
+        self.assertEqual(result["answer_exact"], "(3/4, 5)")
+        self.assertEqual(result["query_operator"], "quadratic_form_center")
+
+    def test_indefinite_quadratic_distance_minimum(self) -> None:
+        result = self.execute(
+            "Find the shortest distance from the origin to the hyperbola $x^2+8xy+7y^2=225$."
+        )
+        self.assertEqual(result["answer_exact"], "5")
+
+    def test_ellipse_distance_extremum_from_external_point(self) -> None:
+        result = self.execute(
+            "The point $P=(-1,0)$ lies on the ellipse $4x^2+y^2=4$. Let $Q$ be another point "
+            "on this ellipse, and let $d$ be the maximum length of $PQ$. Find $d^2$."
+        )
+        self.assertEqual(result["answer_exact"], "16/3")
+
+    def test_parabola_directrix_uses_focal_parameter(self) -> None:
+        result = self.execute("Find the equation of the directrix of the parabola $y=x^2$.")
+        self.assertEqual(result["answer_exact"], "y = -1/4")
+
+    def test_line_hyperplane_intersection_in_three_dimensions(self) -> None:
+        result = self.execute(
+            r"Find the point of intersection of the line "
+            r"$\frac{x-2}{3}=\frac{y+1}{4}=\frac{z-2}{12}$ and the plane $x-y+z=5$."
+        )
+        self.assertEqual(result["answer_exact"], "(2, -1, 2)")
+        self.assertEqual(result["matrix_witness"]["ambient_dimension"], 3)
+
+    def test_hyperplane_reflection_in_three_dimensions(self) -> None:
+        result = self.execute("Find the reflection of the point $(11,16,22)$ across the plane $3x+4y+5z=7$.")
+        self.assertEqual(result["answer_exact"], "(-13, -16, -18)")
+        self.assertEqual(result["matrix_witness"]["ambient_dimension"], 3)
+
+    def test_isotropic_quadric_radius_is_dimension_generic(self) -> None:
+        result = self.execute("Find the radius of the sphere $w^2+x^2+y^2+z^2-2w+4x-6y+8z=5$.")
+        self.assertEqual(result["answer_exact"], "sqrt(35)")
+        self.assertEqual(result["matrix_witness"]["ambient_dimension"], 4)
+
 
 if __name__ == "__main__":
     unittest.main()

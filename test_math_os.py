@@ -71,6 +71,16 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertTrue(result["ok"])
         self.assertEqual(result["answer"], "45")
 
+    def test_state_event_backend_preserves_loss_and_gain_signs(self):
+        problem = (
+            "A waiter had 12 customers. While 15 customers left he got 14 new customers. "
+            "How many customers does he still have?"
+        )
+        for _ in range(3):
+            result = solve_request_payload({"problem": problem, "full_pipeline": True})
+            self.assertTrue(result["ok"])
+            self.assertEqual(result["answer"], "11")
+
     def test_arithmetic_nl_handles_math_benchmark_syntax(self):
         asymptote = solve_request_payload(
             {
