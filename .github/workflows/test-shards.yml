@@ -13,12 +13,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: math_os_prototype
     strategy:
       fail-fast: false
       matrix:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: math_os_prototype
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -35,26 +40,31 @@ jobs:
         if: always()
         with:
           name: test-shard-${{ matrix.shard }}
-          path: artifacts/test_shards/shard-${{ matrix.shard }}.json
+          path: math_os_prototype/artifacts/test_shards/shard-${{ matrix.shard }}.json
           if-no-files-found: error
 
   aggregate:
     if: always()
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: math_os_prototype
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: math_os_prototype
       - uses: actions/download-artifact@v4
         with:
           path: artifacts/downloaded-test-shards
       - name: Merge complete-suite report
         run: >-
           python -B run_test_shards.py
-          --merge-root artifacts/downloaded-test-shards
+          --merge-root ../artifacts/downloaded-test-shards
           --report artifacts/test_shards/all.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: complete-test-report
-          path: artifacts/test_shards/all.json
+          path: math_os_prototype/artifacts/test_shards/all.json
           if-no-files-found: error
