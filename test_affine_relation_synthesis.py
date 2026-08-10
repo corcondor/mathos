@@ -209,6 +209,64 @@ class AffineRelationSynthesisTests(unittest.TestCase):
             "multisort_comparison",
         )
 
+    def test_fractional_state_actions_share_one_affine_backend(self) -> None:
+        self.assert_answer(
+            "A seller had some cards. She sold a third of them, sold 2 more, and sold half of what was left. She has 5 cards left. How many did she start with?",
+            "18",
+            "affine_state_transition_inverse",
+        )
+
+    def test_partition_actions_can_observe_percentage(self) -> None:
+        self.assert_answer(
+            "A class of 40 students has 20% enrolled in art. Then 25% of the remaining students enrolled in music, and the rest chose science. What percentage chose science?",
+            "60",
+            "affine_state_transition_percentage",
+        )
+
+    def test_numeric_perturbation_preserves_state_operator(self) -> None:
+        first = solve_affine_relation_problem(
+            "A 1000-piece puzzle had a quarter placed, then a third of the remaining pieces were placed. How many pieces are left?"
+        )
+        changed = solve_affine_relation_problem(
+            "A 1200-piece puzzle had a quarter placed, then a third of the remaining pieces were placed. How many pieces are left?"
+        )
+        self.assertIsNotNone(first)
+        self.assertIsNotNone(changed)
+        self.assertEqual(first.relation_kind, changed.relation_kind)
+        self.assertEqual("500", first.answer_exact)
+        self.assertEqual("600", changed.answer_exact)
+
+    def test_percentage_offset_and_scale_share_one_fact_graph(self) -> None:
+        self.assert_answer(
+            "Shondra has 7 fewer plants than Toni. Toni has 60% more plants than "
+            "Frederick. Frederick has 10 plants. How many plants does Shondra have?",
+            "9",
+            "mixed_affine_fact_graph",
+        )
+
+    def test_percentage_and_multiplier_chain(self) -> None:
+        self.assert_answer(
+            "Mitchel went down the slide 30 times. Anne went down the slide 30% less "
+            "than Mitchel and Robert went down 4 times as much as Anne. "
+            "How many times did Robert go down the slide?",
+            "84",
+            "mixed_affine_fact_graph",
+        )
+
+    def test_mixed_fact_graph_number_perturbation(self) -> None:
+        changed = solve_affine_relation_problem(
+            "Shondra has 9 fewer plants than Toni. Toni has 50% more plants than "
+            "Frederick. Frederick has 20 plants. How many plants does Shondra have?"
+        )
+        self.assertIsNotNone(changed)
+        self.assertEqual("21", changed.answer_exact)
+
+    def test_state_transition_does_not_drop_a_sibling_initial_category(self) -> None:
+        self.assertIsNone(solve_affine_relation_problem(
+            "A pet store had 13 siamese cats and 5 house cats. During a sale they "
+            "sold 10 cats. How many cats do they have left?"
+        ))
+
 
 if __name__ == "__main__":
     unittest.main()

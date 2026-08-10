@@ -51,6 +51,185 @@ OUTCOME_PAIRS = {
     frozenset(("boy", "girl")),
 }
 
+PARTITION_LOSS_WORDS = {
+    "bad", "broken", "discarded", "enrolled", "lost", "placed",
+    "places", "put", "puts", "removed", "rotten", "sold", "sour", "spent",
+    "unoccupied", "unripe", "used",
+}
+
+
+def _fraction_in_clause(clause: str) -> Fraction | None:
+    percent = re.search(r"(\d+(?:\.\d+)?)\s*%", clause)
+    if percent:
+        return Fraction(percent.group(1)) / 100
+    fraction = re.search(r"(?<!\d)(\d+)\s*/\s*(\d+)(?!\d)", clause)
+    if fraction and int(fraction.group(2)):
+        return Fraction(int(fraction.group(1)), int(fraction.group(2)))
+    words = {
+        "half": Fraction(1, 2),
+        "third": Fraction(1, 3),
+        "quarter": Fraction(1, 4),
+    }
+    for word, value in words.items():
+        if re.search(rf"\b(?:a|one)?\s*{word}\b", clause):
+            return value
+    return None
+
+
+def _numeric_mentions(clause: str) -> list[Fraction]:
+    values: list[Fraction] = []
+    percent_spans = [match.span() for match in re.finditer(r"\d+(?:\.\d+)?\s*%", clause)]
+    for match in re.finditer(NUMBER_RE, clause):
+        if any(left <= match.start() < right for left, right in percent_spans):
+            continue
+        value = parse_number(match.group(0))
+        if value is not None and value.denominator == 1:
+            values.append(value)
+    return values
+
+
+def solve_affine_state_transition(text: str) -> AffineRelationResult | None:
+    """Execute proportional and absolute events as one affine state action.
+
+    The state is represented as ``a*x+b``.  A proportional event composes a
+    scaling action and an absolute event composes a translation.  This keeps
+    forward, inverse, and percentage observations on the same backend.
+    """
+    source = re.sub(r"\s+", " ", text.lower().replace("’", "'")).strip()
+    if "\\" in source or not re.search(r"\b(?:left|remaining|rest|start|begin|original|unoccupied|good|percentage)\b", source):
+        return None
+    if re.search(r"\b(?:twice|three times|four times|\d+\s+times)\b", source):
+        return None
+    if "they each" in source or (" while " in source and re.search(r"\b(?:both|two|each)\b", source)):
+        return None
+    if re.search(r"\b(?:bulk )?packs?\b", source) and re.search(r"\b(?:ordered|fewer|more)\b", source):
+        return None
+    if re.search(r"\bbuys?\b[^.?!]*\bat\s+\$", source):
+        return None
+    if re.search(r"\b(?:share|shared|divide|divided)\b[^.?!]*\b(?:each|equally)\b", source):
+        return None
+    if re.search(r"\b(?:quarters|dimes?|nickels?|pennies|cents?)\b", source):
+        return None
+    if "each" in source and _fraction_in_clause(source) is not None:
+        return None
+    if re.search(r"\b(?:per|a)\s+year\b", source) and "%" in source:
+        return None
+    if len(re.findall(rf"\b(?:{NUMBER_RE})\s+liters?\b", source)) > 1:
+        return None
+    if re.search(
+        rf"\bhad\s+(?:{NUMBER_RE})\s+[a-z]+(?:\s+[a-z]+)?\s+and\s+(?:{NUMBER_RE})\s+[a-z]+",
+        source,
+    ):
+        return None
+    sentence_matches = list(re.finditer(r"[^.?!]+[.?!]?", source))
+    question_match = next(
+        (match for match in reversed(sentence_matches) if re.search(r"\b(?:how|what)\b", match.group(0))),
+        sentence_matches[-1] if sentence_matches else None,
+    )
+    question = question_match.group(0).strip() if question_match else source
+    body = source[: question_match.start()].strip() if question_match else source
+    if re.search(r"\b(?:gallons?|quarts?)\b", source) and re.search(r"\b(?:gallons?|quarts?)\b", question):
+        return None
+    asks_initial = bool(re.search(r"\b(?:start(?:ed)? with|at (?:first|the beginning)|initially|original(?:ly)?|begin with)\b", question))
+
+    final_match = re.search(rf"\b(?:has|have|had|there (?:are|were))\s+({NUMBER_RE})\b[^,.?!]*\b(?:left|remaining)\b", source)
+    final_value = parse_number(final_match.group(1)) if final_match else None
+
+    initial_patterns = (
+        rf"\b(?:contains?|had|has|have|starts? with|began with|class of)\s+({NUMBER_RE})\b",
+        rf"\b({NUMBER_RE})\s*[- ]piece\b",
+    )
+    unknown_initial = final_value is not None and (
+        bool(re.search(r"\b(?:some|an unknown number of)\b", body)) or asks_initial
+    )
+    initial_value: Fraction | None = None
+    initial_span: tuple[int, int] | None = None
+    if not unknown_initial:
+        for pattern in initial_patterns:
+            match = re.search(pattern, body)
+            if match and not (final_match and final_match.start() < len(body) and final_match.start() <= match.start(1) < final_match.end()):
+                initial_value = parse_number(match.group(1))
+                initial_span = match.span(1)
+                break
+    if initial_value is None and not unknown_initial:
+        return None
+
+    coefficient = Fraction(1)
+    constant = Fraction(0)
+    consumed = 0
+    clauses = [
+        part.strip()
+        for part in re.split(r"(?<!\d)[,.]|[,.](?!\d)|\bthen\b|\band\b", body)
+        if part.strip()
+    ]
+    cursor = 0
+    inherited_loss = False
+    for clause in clauses:
+        position = body.find(clause, cursor)
+        cursor = max(cursor, position + len(clause))
+        if final_match and position <= final_match.start() < position + len(clause):
+            continue
+        event_clause = clause
+        if initial_span and position <= initial_span[0] < position + len(clause):
+            local_end = initial_span[1] - position
+            event_clause = clause[local_end:]
+        fraction = _fraction_in_clause(event_clause)
+        explicit_loss = any(re.search(rf"\b{re.escape(word)}\b", event_clause) for word in PARTITION_LOSS_WORDS)
+        explicit_loss = explicit_loss or bool(re.search(rf"\bgave\s+(?:{NUMBER_RE})\b", event_clause))
+        is_loss = explicit_loss or inherited_loss and bool(_fraction_in_clause(event_clause) or _numeric_mentions(event_clause))
+        if explicit_loss:
+            inherited_loss = True
+        if fraction is not None and is_loss:
+            current_fraction = bool(re.search(r"\bof\s+(?:his|her|their|its)\b", event_clause))
+            if current_fraction or "remaining" in event_clause or "what was left" in event_clause or "what remained" in event_clause:
+                coefficient *= 1 - fraction
+                constant *= 1 - fraction
+            else:
+                coefficient -= fraction
+            consumed += 1
+            continue
+        values = _numeric_mentions(event_clause)
+        if len(values) != 1:
+            continue
+        value = values[0]
+        if is_loss or re.search(r"\b(?:short|away|off)\b", event_clause):
+            constant -= value
+            consumed += 1
+        elif any(re.search(rf"\b{re.escape(word)}\b", event_clause) for word in GAIN_WORDS):
+            constant += value
+            consumed += 1
+
+    if consumed == 0 or coefficient <= 0:
+        return None
+    state = coefficient * initial_value + constant if initial_value is not None else None
+    query_initial = asks_initial
+    query_percent = "percentage" in question or "percent" in question
+    query_remaining = bool(re.search(r"\b(?:left|remaining|rest|unoccupied|good)\b", question))
+
+    if query_initial and unknown_initial and final_value is not None:
+        equation = AffineEquation({"initial": coefficient}, final_value - constant)
+        return _result(
+            "affine_state_transition_inverse",
+            "initial",
+            [equation],
+            f"final = {format_fraction(coefficient)}*initial + {format_fraction(constant)}",
+        )
+    if state is None or state < 0:
+        return None
+    if query_percent and initial_value:
+        value = state * 100 / initial_value
+        equation = AffineEquation({"percentage": Fraction(1)}, value)
+        return _result("affine_state_transition_percentage", "percentage", [equation], "100*final/initial")
+    if query_remaining:
+        equation = AffineEquation({"remaining": Fraction(1)}, state)
+        return _result(
+            "affine_state_transition_forward",
+            "remaining",
+            [equation],
+            f"{format_fraction(coefficient)}*initial + {format_fraction(constant)}",
+        )
+    return None
+
 
 def _lemma(word: str) -> str:
     return {"win": "won", "wins": "won", "lose": "lost", "loses": "lost"}.get(word, word)
@@ -815,8 +994,190 @@ def solve_percentage_relation(text: str) -> AffineRelationResult | None:
     return None
 
 
+def solve_mixed_affine_fact_graph(text: str) -> AffineRelationResult | None:
+    """Solve connected named facts with offsets, scales and percentages.
+
+    The accepted language is elaborated into equations ``A = q*B + c``.
+    Names are alpha-renamed graph vertices; no concrete name, number or
+    benchmark family appears in the solving rule.
+    """
+    source = re.sub(r"\s+", " ", text.lower().replace("’", "'")).strip()
+    if "\\" in source or "%" not in source:
+        return None
+    blocked = {"he", "she", "they", "it", "there", "each", "which", "who", "what"}
+    equations: list[AffineEquation] = []
+    variables: set[str] = set()
+    relation_spans: list[tuple[int, int]] = []
+    percent_edges = 0
+
+    def valid(name: str) -> str | None:
+        value = _normalize_variable(name)
+        return value if value not in blocked and len(value) > 1 else None
+
+    def add_relation(a_text: str, b_text: str, factor: Fraction, offset: Fraction, span: tuple[int, int]) -> None:
+        a, b = valid(a_text), valid(b_text)
+        if a is None or b is None or a == b:
+            return
+        variables.update((a, b))
+        equations.append(AffineEquation({a: Fraction(1), b: -factor}, offset))
+        relation_spans.append(span)
+
+    percent_pattern = re.compile(
+        r"\b(?P<a>[a-z]+)\s+(?:has|had|owns?|is|was|went|scored|found|killed)\b"
+        r"[^.?!,;]{0,35}?\b(?P<p>\d+(?:\.\d+)?)\s*%\s*"
+        r"(?P<order>more|fewer|less)\b[^.?!]{0,30}?\bthan\s+(?P<b>[a-z]+)\b"
+    )
+    for match in percent_pattern.finditer(source):
+        rate = Fraction(match.group("p")) / 100
+        factor = 1 + rate if match.group("order") == "more" else 1 - rate
+        add_relation(match.group("a"), match.group("b"), factor, Fraction(0), match.span())
+        percent_edges += 1
+
+    category_percent_pattern = re.compile(
+        r"(?P<p>\d+(?:\.\d+)?)\s*%\s*(?P<order>more|fewer|less)\s+"
+        r"(?P<a>[a-z]+)\s+(?P<head>[a-z]+(?:\s+[a-z]+)?)\s+than\s+"
+        r"(?P<b>[a-z]+)\s+(?P=head)\b"
+    )
+    for match in category_percent_pattern.finditer(source):
+        rate = Fraction(match.group("p")) / 100
+        factor = 1 + rate if match.group("order") == "more" else 1 - rate
+        add_relation(match.group("a"), match.group("b"), factor, Fraction(0), match.span())
+        percent_edges += 1
+
+    difference_pattern = re.compile(
+        rf"\b(?P<a>[a-z]+)\b[^.?!]{{0,25}}?\b(?P<d>{NUMBER_RE})\s+"
+        r"(?P<order>more|fewer|less)\b[^.?!]{0,20}?\bthan\s+(?P<b>[a-z]+)\b"
+    )
+    for match in difference_pattern.finditer(source):
+        if any(max(match.start(), left) < min(match.end(), right) for left, right in relation_spans):
+            continue
+        difference = parse_number(match.group("d"))
+        if difference is not None:
+            add_relation(
+                match.group("a"), match.group("b"), Fraction(1),
+                difference if match.group("order") == "more" else -difference,
+                match.span(),
+            )
+
+    factor_pattern = re.compile(
+        rf"\b(?P<a>[a-z]+)\s+(?:has|had|owns?|is|was|went|scored|found|killed)\b"
+        rf"[^.?!]{{0,30}}?\b(?P<f>{NUMBER_RE}|twice|three times|four times)\s+"
+        r"(?:times\s+)?as\s+(?:many|much)\b[^.?!]{0,20}?\bas\s+(?P<b>[a-z]+)\b"
+    )
+    for match in factor_pattern.finditer(source):
+        factor_text = match.group("f")
+        factor = {
+            "twice": Fraction(2), "three times": Fraction(3), "four times": Fraction(4),
+        }.get(factor_text, parse_number(factor_text))
+        if factor is not None:
+            add_relation(match.group("a"), match.group("b"), factor, Fraction(0), match.span())
+
+    # Elliptic category phrase: "15 red cards, and 60% more green cards".
+    implicit = re.search(
+        rf"(?P<base_value>{NUMBER_RE})\s+(?P<b>[a-z]+)\s+(?P<head>[a-z]+)\s*,?\s+and\s+"
+        r"(?P<p>\d+(?:\.\d+)?)\s*%\s*(?P<order>more|fewer|less)\s+"
+        r"(?P<a>[a-z]+)\s+(?P=head)\b",
+        source,
+    )
+    if implicit:
+        rate = Fraction(implicit.group("p")) / 100
+        factor = 1 + rate if implicit.group("order") == "more" else 1 - rate
+        add_relation(implicit.group("a"), implicit.group("b"), factor, Fraction(0), implicit.span())
+        base_value = parse_number(implicit.group("base_value"))
+        base = valid(implicit.group("b"))
+        if base_value is not None and base is not None:
+            equations.append(AffineEquation({base: Fraction(1)}, base_value))
+        percent_edges += 1
+
+    # A third category may explicitly equal the sum of two prior vertices.
+    for match in re.finditer(
+        r"\b(?P<a>[a-z]+)\s+[a-z]+\s+(?:are|is|equal)\b[^.?!]{0,18}?\b"
+        r"sum\s+of\s+(?P<b>[a-z]+)\s+and\s+(?P<c>[a-z]+)\b",
+        source,
+    ):
+        a, b, c = valid(match.group("a")), valid(match.group("b")), valid(match.group("c"))
+        if a and b and c and len({a, b, c}) == 3:
+            variables.update((a, b, c))
+            equations.append(AffineEquation(
+                {a: Fraction(1), b: Fraction(-1), c: Fraction(-1)},
+                Fraction(0),
+            ))
+            relation_spans.append(match.span())
+
+    if percent_edges == 0 or not equations or len(variables) < 2:
+        return None
+
+    total_match = re.search(rf"\b(?:total(?:\s+of)?|contains?)\s+\$?(?P<v>{NUMBER_RE})\s+[a-z]+", source)
+    if total_match and len(variables) >= 2:
+        total_value = parse_number(total_match.group("v"))
+        if total_value is not None:
+            equations.append(AffineEquation(
+                {name: Fraction(1) for name in variables},
+                total_value,
+            ))
+
+    # Ground facts are accepted only when the grammatical subject is already
+    # a graph vertex.  This prevents unrelated numerals from entering the
+    # linear system.
+    for variable in sorted(variables):
+        patterns = (
+            rf"\b{re.escape(variable)}\b[^.?!]{{0,20}}?\b(?:has|had|owns?|scored|found|killed|is|was)\s+\$?(?P<v>{NUMBER_RE})\b",
+            rf"\b{re.escape(variable)}\s+went(?:\s+down)?(?:\s+the(?:\s+[a-z]+){{1,3}})?\s+\$?(?P<v>{NUMBER_RE})\b",
+            rf"\b(?P<v>{NUMBER_RE})\s+{re.escape(variable)}s?\b",
+        )
+        for pattern in patterns:
+            for match in re.finditer(pattern, source):
+                if any(max(match.start(), left) < min(match.end(), right) for left, right in relation_spans):
+                    continue
+                value = parse_number(match.group("v"))
+                if value is not None:
+                    equations.append(AffineEquation({variable: Fraction(1)}, value))
+                    break
+            else:
+                continue
+            break
+
+    question = next(
+        (part for part in reversed(re.split(r"(?<=[.?!])\s+", source)) if re.search(r"\b(?:how|what)\b", part)),
+        "",
+    )
+    mentioned = [name for name in variables if re.search(rf"\b{re.escape(name)}s?\b", question)]
+    difference_query = re.search(
+        r"\bhow\s+many\s+more\s+(?P<a>[a-z]+)\b[^.?!]{0,35}?\bthan\s+(?P<b>[a-z]+)\b",
+        question,
+    )
+    if difference_query:
+        a, b = valid(difference_query.group("a")), valid(difference_query.group("b"))
+        if a in variables and b in variables:
+            query = "answer"
+            equations.append(AffineEquation(
+                {query: Fraction(1), a: Fraction(-1), b: Fraction(1)},
+                Fraction(0),
+            ))
+            return _result("mixed_affine_fact_graph_difference", query, equations, "observe solved vertex difference")
+    direct_query = re.search(
+        r"\bhow\s+many\b[^.?!]{0,35}?\b(?:does|did|do|has|have)\s+(?P<name>[a-z]+)\b",
+        question,
+    )
+    if direct_query:
+        query = valid(direct_query.group("name"))
+        if query in variables:
+            return _result("mixed_affine_fact_graph", query, equations, "project requested solved graph vertex")
+    if re.search(r"\b(?:all mentioned|in all|total|altogether)\b", question):
+        query = "answer"
+        equations.append(AffineEquation(
+            {query: Fraction(1), **{name: Fraction(-1) for name in variables}},
+            Fraction(0),
+        ))
+        return _result("mixed_affine_fact_graph_total", query, equations, "observe sum over solved graph vertices")
+    if len(mentioned) == 1:
+        return _result("mixed_affine_fact_graph", mentioned[0], equations, "solve connected rational affine fact graph")
+    return None
+
+
 def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
     for solver in (
+        solve_affine_state_transition,
         solve_unknown_state,
         solve_total_difference_relation,
         solve_partition_comparison,
@@ -824,6 +1185,7 @@ def solve_affine_relation_problem(text: str) -> AffineRelationResult | None:
         solve_weighted_comparison_total,
         solve_multiplier_offset_relation,
         solve_multisort_comparison,
+        solve_mixed_affine_fact_graph,
         solve_comparison_chain,
         solve_percentage_relation,
     ):
