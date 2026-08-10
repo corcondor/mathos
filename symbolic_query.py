@@ -13,6 +13,7 @@ import re
 from typing import Any
 
 import sympy as sp
+from sympy.calculus.util import continuous_domain, function_range
 from sympy.parsing.sympy_parser import (
     convert_xor,
     implicit_multiplication_application,
@@ -53,12 +54,38 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
     constraints = [
         relation
         for item in segments
-        if relation_operator(item)
-        for relation in expand_chained_relation(item)
+        for clause in split_logical_relations(item)
+        if relation_operator(clause)
+        for relation in expand_chained_relation(clause)
     ]
     constraints = expand_tuple_equalities(constraints)
     expressions = [item for item in segments if not relation_operator(item)]
     variables = sorted(extract_symbols(segments) - set(definitions))
+
+    function_observation = requested_function_set(lower, definitions)
+    if function_observation is not None:
+        operator, function_name = function_observation
+        definition = definitions[function_name]
+        if "expression" in definition:
+            compiled = build_ir(
+                constraints,
+                expressions,
+                operator,
+                definition["expression"],
+                [definition["variable"]],
+                "Scalar" if operator in {"function_domain_minimum", "function_domain_maximum"} else "Set",
+                definitions,
+            )
+            if compiled is not None:
+                return replace(
+                    compiled,
+                    parameters={"function": function_name},
+                    lowering_certificate={
+                        "kind": "real_function_set_observation",
+                        "observation": operator,
+                        "definition": function_name,
+                    },
+                )
 
     inverse_proportion = extract_inverse_proportion_observation(lower)
     if inverse_proportion is not None:
@@ -359,6 +386,26 @@ def compile_symbolic_query(text: str) -> SymbolicQueryIR | None:
             definitions,
         )
 
+    if inequalities and requests_integer_solution_aggregate(lower):
+        compiled = build_ir(
+            constraints,
+            expressions,
+            "integer_solution_sum",
+            " and ".join(inequalities),
+            [query_variable],
+            "Integer",
+            definitions,
+        )
+        if compiled is not None:
+            return replace(
+                compiled,
+                lowering_certificate={
+                    "kind": "finite_integer_set_aggregate",
+                    "constraint_count": len(inequalities),
+                    "observation": "sum",
+                },
+            )
+
     if inequality and query_requests_solution_set(lower):
         return build_ir(
             constraints,
@@ -446,6 +493,22 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
         if expression.free_symbols:
             raise ValueError("closed-term evaluation contains unbound symbols")
         result = sp.simplify(expression)
+    elif operator in {"function_domain", "function_domain_minimum", "function_domain_maximum", "function_range"}:
+        expression = parse_expression(ir.target, locals_map)
+        if operator == "function_range":
+            result = function_range(expression, variable, sp.S.Reals)
+        else:
+            domain = continuous_domain(expression, variable, sp.S.Reals)
+            if operator == "function_domain":
+                result = domain
+            elif operator == "function_domain_minimum":
+                result = domain.inf
+                if result not in domain:
+                    raise ValueError("function domain has an infimum but no minimum")
+            else:
+                result = domain.sup
+                if result not in domain:
+                    raise ValueError("function domain has a supremum but no maximum")
     elif operator in {"floor_value", "ceiling_value", "nearest_integer_value", "positive_square_root", "units_digit"}:
         expression = parse_expression(ir.target, locals_map)
         if expression.free_symbols:
@@ -625,6 +688,22 @@ def execute_symbolic_query(payload: dict[str, Any]) -> dict[str, Any]:
             for item in relation_sources
         ]
         result = sp.Intersection(*solution_sets)
+    elif operator == "integer_solution_sum":
+        relation_sources = [item for item in ir.constraints if inequality_operator(item)]
+        if not relation_sources:
+            raise ValueError("integer aggregate has no order constraints")
+        solution_sets = [
+            sp.solve_univariate_inequality(
+                parse_relation(item, locals_map),
+                variable,
+                relational=False,
+            )
+            for item in relation_sources
+        ]
+        solution_set = sp.Intersection(*solution_sets, sp.S.Integers)
+        if solution_set.is_finite_set is not True:
+            raise ValueError("integer aggregate is not a certified finite set")
+        result = sp.simplify(sum(list(solution_set)))
     elif operator in {"argmin", "minimum_value", "argmax", "maximum_value"}:
         expression = parse_expression(ir.target, locals_map)
         result = solve_polynomial_extremum(expression, variable, operator)
@@ -700,7 +779,7 @@ def parse_relation(source: str, locals_map: dict[str, Any]) -> Any:
 
 
 def parse_expression(source: str, locals_map: dict[str, Any]) -> sp.Expr:
-    cleaned = re.sub(r"\b(?:If|Let|Find|Solve|What|For)\b.*?(?=[A-Za-z0-9_(])", "", source).strip(" .,?:")
+    cleaned = re.sub(r"\b(?:If|Let|Find|Solve|What|For)\b.*?(?=[A-Za-z0-9_(])", "", source).strip(" .,?:~")
     cleaned = normalize_absolute_values(cleaned)
     cleaned = normalize_factorials(cleaned)
     cleaned = cleaned.replace("[", "(").replace("]", ")")
@@ -1068,6 +1147,13 @@ def split_math_statements(source: str) -> list[str]:
     return [part.strip() for part in re.split(r"\s*;\s*", source) if part.strip()]
 
 
+def split_logical_relations(source: str) -> list[str]:
+    parts = [part.strip() for part in re.split(r"\s+and\s+|\s+かつ\s+", source) if part.strip()]
+    if len(parts) > 1 and all(relation_operator(part) for part in parts):
+        return parts
+    return [source]
+
+
 def expression_requested_by_query(lower: str, expressions: list[str]) -> str:
     if not expressions:
         return ""
@@ -1159,6 +1245,45 @@ def query_requests_solution_set(text: str) -> bool:
     return any(
         phrase in text
         for phrase in ("what values", "for what", "interval notation", "all possible", "all real", "範囲", "すべて")
+    )
+
+
+def requested_function_set(
+    text: str,
+    definitions: dict[str, dict[str, Any]],
+) -> tuple[str, str] | None:
+    """Return a typed set observation over an explicitly defined function."""
+    if not definitions:
+        return None
+    if "domain" in text or "定義域" in text:
+        if any(marker in text for marker in ("smallest", "least", "minimum", "最小")):
+            operator = "function_domain_minimum"
+        elif any(marker in text for marker in ("largest", "greatest", "maximum", "最大")):
+            operator = "function_domain_maximum"
+        else:
+            operator = "function_domain"
+    elif "range" in text or "値域" in text:
+        operator = "function_range"
+    else:
+        return None
+    mentioned = [
+        name
+        for name in definitions
+        if re.search(rf"\b{re.escape(name)}\b", text)
+    ]
+    if len(mentioned) != 1:
+        return None
+    return operator, mentioned[0]
+
+
+def requests_integer_solution_aggregate(text: str) -> bool:
+    return bool(
+        re.search(
+            r"\bsum\s+of\s+(?:all\s+)?integers?\b|"
+            r"\bintegers?\b[^.?!]{0,80}\b(?:sum|total)\b",
+            text,
+        )
+        or re.search(r"(?:すべての)?整数[^。]{0,60}(?:和|合計)", text)
     )
 
 

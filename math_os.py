@@ -20,9 +20,11 @@ try:
     from math_os_prototype.container_geometry import detect_container_problem, solve_container_problem
     from math_os_prototype.discrete_constraint_query import compile_discrete_constraint_query, execute_discrete_constraint_query
     from math_os_prototype.field_adapters import detect_specialized_problem, solve_specialized_problem
+    from math_os_prototype.finite_relation_query import compile_finite_relation_query, execute_finite_relation_query
     from math_os_prototype.geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from math_os_prototype.geometry_nl import convert_geometry_nl
     from math_os_prototype.latex_frontend import looks_like_latex, parse_latex_problem
+    from math_os_prototype.linear_constraint_query import compile_linear_constraint_query, execute_linear_constraint_query
     from math_os_prototype.matrix_semantic_query import compile_matrix_semantic_query, execute_matrix_semantic_query
     from math_os_prototype.symbolic_query import compile_symbolic_query, execute_symbolic_query
     from math_os_prototype.vector_query import compile_vector_query, execute_vector_query
@@ -33,9 +35,11 @@ except ImportError:  # Allows `python math_os_prototype\math_os.py ...`.
     from container_geometry import detect_container_problem, solve_container_problem
     from discrete_constraint_query import compile_discrete_constraint_query, execute_discrete_constraint_query
     from field_adapters import detect_specialized_problem, solve_specialized_problem
+    from finite_relation_query import compile_finite_relation_query, execute_finite_relation_query
     from geometry_dsl import inspect_geometry_dsl, run_geometry_dsl
     from geometry_nl import convert_geometry_nl
     from latex_frontend import looks_like_latex, parse_latex_problem
+    from linear_constraint_query import compile_linear_constraint_query, execute_linear_constraint_query
     from matrix_semantic_query import compile_matrix_semantic_query, execute_matrix_semantic_query
     from symbolic_query import compile_symbolic_query, execute_symbolic_query
     from vector_query import compile_vector_query, execute_vector_query
@@ -220,6 +224,25 @@ class ProblemCompiler:
         self.allow_specialized = allow_specialized
 
     def compile(self, text: str) -> MathIR:
+        finite_relation = compile_finite_relation_query(text)
+        if finite_relation is not None:
+            payload = finite_relation.to_dict()
+            return MathIR(
+                problem=text,
+                route="symbolic_algebra",
+                intent=f"finite_relation_{finite_relation.relation}",
+                symbols=[finite_relation.variable],
+                givens={"finite_relation_query": payload},
+                goal="Solve a typed finite relation with exactly one hole.",
+                plan=[
+                    "Lift values into a finite partition or state-transition relation.",
+                    "Check that every numeric premise is consumed exactly once.",
+                    "Solve the one-hole equation with exact arithmetic.",
+                    "Substitute the observation back into the typed relation.",
+                ],
+                tool_calls=[ToolCall("sympy.finite_relation_query", finite_relation.equation, executable=True)],
+            )
+
         arithmetic_problem = detect_arithmetic_nl_problem(
             text,
             allow_surface_morphisms=self.allow_specialized,
@@ -323,6 +346,31 @@ class ProblemCompiler:
                     ToolCall(
                         "sympy.matrix_semantic_query",
                         f"{matrix_query.query_operator}({matrix_query.representation['kind']})",
+                        executable=True,
+                    )
+                ],
+            )
+
+        linear_query = compile_linear_constraint_query(text)
+        if linear_query is not None:
+            payload = linear_query.to_dict()
+            return MathIR(
+                problem=text,
+                route="symbolic_algebra",
+                intent="linear_constraint_projection",
+                symbols=linear_query.variables,
+                givens={"linear_constraint_query": payload},
+                goal="Evaluate a typed observation over a rational linear constraint graph.",
+                plan=[
+                    "Lift named quantities to alpha-renamable typed vertices.",
+                    "Compile weighted equality clauses into rational linear constraints.",
+                    "Project the requested scalar through exact elimination.",
+                    "Substitute the result back into every source constraint.",
+                ],
+                tool_calls=[
+                    ToolCall(
+                        "sympy.linear_constraint_query",
+                        "solve typed rational constraints and evaluate projection",
                         executable=True,
                     )
                 ],
@@ -729,6 +777,10 @@ class ToolExecutor:
                     call.result = execute_vector_query(ir.givens["vector_query"])
                 elif call.name == "sympy.matrix_semantic_query":
                     call.result = execute_matrix_semantic_query(ir.givens["matrix_semantic_query"])
+                elif call.name == "sympy.linear_constraint_query":
+                    call.result = execute_linear_constraint_query(ir.givens["linear_constraint_query"])
+                elif call.name == "sympy.finite_relation_query":
+                    call.result = execute_finite_relation_query(ir.givens["finite_relation_query"])
                 elif call.name == "sympy.discrete_constraint_query":
                     call.result = execute_discrete_constraint_query(ir.givens["discrete_constraint_query"])
                 elif call.name == "sympy.diff":

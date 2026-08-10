@@ -571,6 +571,28 @@ def is_safe_tool_call(call: ToolCall, ir: MathIR, domain_ir: DomainIR, problem: 
             and bool(payload.get("target"))
             and bool(payload.get("lowering_certificate"))
         )
+    if name == "sympy.linear_constraint_query":
+        payload = ir.givens.get("linear_constraint_query") if isinstance(ir.givens, dict) else None
+        certificate = payload.get("lowering_certificate") if isinstance(payload, dict) else None
+        return (
+            isinstance(payload, dict)
+            and len(payload.get("constraints") or []) >= 2
+            and bool(payload.get("query_coefficients"))
+            and isinstance(certificate, dict)
+            and certificate.get("kind") == "rational_linear_constraint_projection"
+            and certificate.get("all_numeric_premises_consumed") is True
+        )
+    if name == "sympy.finite_relation_query":
+        payload = ir.givens.get("finite_relation_query") if isinstance(ir.givens, dict) else None
+        certificate = payload.get("lowering_certificate") if isinstance(payload, dict) else None
+        return (
+            isinstance(payload, dict)
+            and bool(payload.get("equation"))
+            and isinstance(certificate, dict)
+            and certificate.get("kind") == "typed_finite_relation"
+            and certificate.get("hole_count") == 1
+            and certificate.get("all_numeric_premises_consumed") is True
+        )
     if name == "sympy.discrete_constraint_query":
         payload = ir.givens.get("discrete_constraint_query") if isinstance(ir.givens, dict) else None
         return (

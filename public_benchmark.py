@@ -898,10 +898,12 @@ def parse_interval_set(value: str | None) -> Any | None:
     if value is None or sp is None:
         return None
     source = str(value).strip().strip("$ ")
+    source = source.replace(r"\left", "").replace(r"\right", "")
     source = re.sub(r"^[A-Za-z]\s*(?:\\in|in|∈)\s*", "", source)
     source = source.replace("\\infty", "oo").replace("∞", "oo")
     source = re.sub(r"\\sqrt\{([^{}]+)\}", r"sqrt(\1)", source)
-    source = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"(\1)/(\2)", source)
+    source = re.sub(r"\\(?:dfrac|tfrac|frac)\s*\{([^{}]+)\}\s*\{([^{}]+)\}", r"(\1)/(\2)", source)
+    source = re.sub(r"\\(?:dfrac|tfrac|frac)\s*([+-]?\d+)\s*([+-]?\d+)", r"(\1)/(\2)", source)
     source = source.replace("\\cup", " U ").replace("∪", " U ")
     if source.startswith(("Interval", "Union", "FiniteSet")):
         try:

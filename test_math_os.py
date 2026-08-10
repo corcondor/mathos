@@ -1530,6 +1530,89 @@ class MathOsPrototypeTest(unittest.TestCase):
             "closed_term_evaluation",
         )
 
+    def test_function_set_observations_lower_definitions_to_cas(self):
+        domain = run_pipeline(
+            r"What is the smallest real number $x$ in the domain of "
+            r"$g(x)=\sqrt{(x-3)^2-(x-8)^2}$?"
+        )
+        image = run_pipeline(r"Compute the range of the function $h(t)=\sqrt{t^2}$.")
+        self.assertEqual(domain.intent, "symbolic_query_function_domain_minimum")
+        self.assertEqual(domain.tool_calls[0].result["answer_exact"], "11/2")
+        self.assertEqual(image.intent, "symbolic_query_function_range")
+        self.assertEqual(image.tool_calls[0].result["answer_exact"], "Interval(0, oo)")
+
+    def test_integer_constraint_aggregate_executes_over_a_finite_set(self):
+        ir = run_pipeline(
+            r"Find the sum of all integers that satisfy "
+            r"$|x|+1>7\text{ and }|x+1|\le7$."
+        )
+        self.assertEqual(ir.intent, "symbolic_query_integer_solution_sum")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "-15")
+
+    def test_linear_constraint_projection_generalizes_by_alpha_renaming(self):
+        first = run_pipeline(
+            r"Eight pounds of feathers and two ounces of gold together cost $\$932$. "
+            r"Fourteen pounds of feathers and three ounces of gold together cost $\$1402$. "
+            "What is the cost of five pounds of feathers and five ounces of gold?"
+        )
+        renamed = run_pipeline(
+            "Seven crates of apples and three bags of pears together cost $83. "
+            "Two crates of apples and five bags of pears together cost $64. "
+            "What is the cost of four crates of apples and one bag of pears?"
+        )
+        self.assertEqual(first.intent, "linear_constraint_projection")
+        self.assertEqual(first.tool_calls[0].result["answer_exact"], "2300")
+        self.assertEqual(renamed.intent, "linear_constraint_projection")
+        self.assertEqual(renamed.tool_calls[0].result["answer_exact"], "1174/29")
+
+    def test_interval_grader_normalizes_latex_delimiters_and_unbraced_fraction(self):
+        self.assertTrue(
+            answers_match(
+                "Union(Interval.open(-oo, -1/2), Interval.open(-1/2, oo))",
+                r"\left(-\infty,-\frac 12\right)\cup \left(-\frac 12,\infty\right)",
+            )
+        )
+
+    def test_linear_constraint_projection_solves_a_ratio_not_a_known_answer(self):
+        ir = run_pipeline(
+            "Ten treeks weigh as much as three squigs and one goolee. "
+            "Two treeks and one goolee are equal in weight to one squig. "
+            "The combined weight of how many treeks equals the weight of one squig?"
+        )
+        self.assertEqual(ir.intent, "linear_constraint_projection")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "3")
+
+    def test_partition_relation_uses_one_law_across_surface_domains(self):
+        allocation = run_pipeline(
+            "Alberta wants to distribute 320 watches among 19 friends. "
+            "How many would each friend obtain?"
+        )
+        slicing = run_pipeline(
+            "Lindsey had some chocolate. He chopped each chocolate into 26 slices. "
+            "If total 115 chocolate slices Lindsey made, then how many chocolate Lindsey had?"
+        )
+        self.assertEqual(allocation.intent, "finite_relation_Partition")
+        self.assertEqual(allocation.tool_calls[0].result["answer_exact"], "320/19")
+        self.assertEqual(slicing.intent, "finite_relation_Partition")
+        self.assertEqual(slicing.tool_calls[0].result["answer_exact"], "115/26")
+        self.assertEqual(
+            allocation.givens["finite_relation_query"]["lowering_certificate"]["law"],
+            slicing.givens["finite_relation_query"]["lowering_certificate"]["law"],
+        )
+
+    def test_state_transition_recomputes_after_numeric_perturbation(self):
+        loss = run_pipeline(
+            "Vernon had 177 mango. Eric took some mango. Now Vernon has 33 mango. "
+            "How many did Eric take?"
+        )
+        gain = run_pipeline(
+            "Kasey had 23 car. Nancy gave him some more. Now Kasey has 200 car. "
+            "How many did Nancy give him?"
+        )
+        self.assertEqual(loss.intent, "finite_relation_StateTransition")
+        self.assertEqual(loss.tool_calls[0].result["answer_exact"], "144")
+        self.assertEqual(gain.tool_calls[0].result["answer_exact"], "177")
+
     def test_closed_term_evaluator_requires_query_term_dependency(self):
         ir = run_pipeline("Two sides of a triangle are each $8$ units long. What is the greatest possible perimeter?")
         self.assertNotEqual(ir.intent, "symbolic_query_evaluate_expression")
