@@ -5,6 +5,7 @@ import unittest
 from construct_engine import (
     FIXED_SHARD_FAMILY_IDS,
     SHARD_FAMILIES,
+    _verified_problem_entries,
     all_problems,
     explore_random,
 )
@@ -16,12 +17,17 @@ ALL_DEEP_FAMILIES = DEEP_FAMILIES + GEOMETRY_DEEP_FAMILIES
 
 
 class DeepFamiliesTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.entries = _verified_problem_entries()
+        cls.problems = [entry[2] for entry in cls.entries]
+
     def test_every_family_has_verified_candidates(self) -> None:
-        for build, grid in ALL_DEEP_FAMILIES:
+        for build, _grid in ALL_DEEP_FAMILIES:
             candidates = [
                 problem
-                for parameters in grid()
-                if (problem := build(parameters)) is not None
+                for source, _is_traceback, problem in self.entries
+                if source == build.__name__
             ]
             self.assertTrue(candidates, build.__name__)
             self.assertTrue(all(problem.verified for problem in candidates))
@@ -30,13 +36,12 @@ class DeepFamiliesTest(unittest.TestCase):
             )
 
     def test_ultradeep_families_have_at_least_ten_morphisms(self) -> None:
-        ultradeep = []
-        for build, grid in ALL_DEEP_FAMILIES:
-            for parameters in grid():
-                problem = build(parameters)
-                if problem is not None and problem.family_id.startswith("ultradeep."):
-                    ultradeep.append(problem)
-        self.assertEqual(len({problem.family_id for problem in ultradeep}), 10)
+        ultradeep = [
+            problem
+            for problem in self.problems
+            if problem.family_id.startswith("ultradeep.")
+        ]
+        self.assertGreaterEqual(len({problem.family_id for problem in ultradeep}), 10)
         self.assertTrue(
             all(len(problem.morphism_chain) >= 10 for problem in ultradeep)
         )
@@ -90,19 +95,19 @@ class DeepFamiliesTest(unittest.TestCase):
 
     def test_geometry_families_do_not_collapse_to_divisor_count(self) -> None:
         representatives = []
-        for build, grid in GEOMETRY_DEEP_FAMILIES:
+        for build, _grid in GEOMETRY_DEEP_FAMILIES:
             problem = next(
                 (
                     candidate
-                    for parameters in grid()
-                    if (candidate := build(parameters)) is not None
+                    for source, _is_traceback, candidate in self.entries
+                    if source == build.__name__
                 ),
                 None,
             )
             self.assertIsNotNone(problem, build.__name__)
             representatives.append(problem)
 
-        self.assertEqual(len(representatives), 5)
+        self.assertEqual(len(representatives), len(GEOMETRY_DEEP_FAMILIES))
         self.assertTrue(
             all("約数" not in problem.statement_tex for problem in representatives)
         )

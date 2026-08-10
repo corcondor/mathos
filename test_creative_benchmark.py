@@ -15,11 +15,6 @@ from math_os_prototype.creative_benchmark import (
 )
 
 
-REPORT_PATH = Path(
-    "C:/Users/81808/.openclaw/workspace/math_os_prototype/problem_synthesis/geometry_sweep_repair1.json"
-)
-
-
 def record(
     record_id: str,
     source_kind: str,
@@ -58,7 +53,25 @@ class CreativeBenchmarkTests(unittest.TestCase):
         )
 
     def test_loads_verified_mathos_curriculum(self) -> None:
-        records = load_mathos_report(REPORT_PATH)
+        items = [
+            {
+                "dsl": f"task region; family y = t*x - t**2 + {index}; param t in R",
+                "input_tex": f"Generated problem {index}",
+                "expected_answer": f"answer-{index}",
+                "task": "region",
+                "family_id": "quadratic_sweep",
+                "normal_form": {"parse_status": "ok"},
+                "verification": {"status": "verified"},
+            }
+            for index in range(37)
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "verified-report.json"
+            path.write_text(
+                json.dumps({"family": {"name": "quadratic_sweep"}, "curriculum_items": items}),
+                encoding="utf-8",
+            )
+            records = load_mathos_report(path)
 
         self.assertEqual(len(records), 37)
         self.assertTrue(all(item.verification["status"] == "verified" for item in records))

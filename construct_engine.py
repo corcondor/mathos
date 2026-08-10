@@ -21,6 +21,7 @@ import json
 import math
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from functools import lru_cache
 from typing import Any, Callable, Iterable
 
 import sympy as sp
@@ -735,6 +736,7 @@ def explore_random(samples: int = 500, seed: int | None = None,
     return out
 
 
+@lru_cache(maxsize=1)
 def _traceback_families():
     """トレースバック方式: 1構築から演繹閉包の各ノードを問題として切り出す。"""
     try:
@@ -745,9 +747,9 @@ def _traceback_families():
         except ImportError:
             return []
     try:
-        return cut_problems()
+        return tuple(cut_problems())
     except Exception:
-        return []
+        return ()
 
 
 _TRACEBACK_SHARDS_READY = False
@@ -792,6 +794,34 @@ def _deep_families():
     return DEEP_FAMILIES + GEOMETRY_DEEP_FAMILIES
 
 
+@lru_cache(maxsize=1)
+def _verified_problem_entries() -> tuple[tuple[str, bool, Problem], ...]:
+    """Build the deterministic verified corpus once, before shard projection."""
+    _ensure_traceback_shards()
+    entries: list[tuple[str, bool, Problem]] = []
+    seen_structures: set[tuple[str, tuple[str, ...]]] = set()
+    for problem in _traceback_families():
+        signature = (problem.family_id, tuple(problem.morphism_chain))
+        if signature in seen_structures:
+            continue
+        seen_structures.add(signature)
+        entries.append((problem.family_id, True, problem))
+    for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
+        for params in grid():
+            try:
+                problem = build(params)
+            except Exception:
+                problem = None
+            if problem is None or not problem.verified or not problem.independent_check:
+                continue
+            signature = (problem.family_id, tuple(problem.morphism_chain))
+            if signature in seen_structures:
+                continue
+            seen_structures.add(signature)
+            entries.append((build.__name__, False, problem))
+    return tuple(entries)
+
+
 def all_problems(only_family: str | None = None) -> list[Problem]:
     _ensure_traceback_shards()
     allowed_ids = (
@@ -805,44 +835,16 @@ def all_problems(only_family: str | None = None) -> list[Problem]:
         else None
     )
     out: list[Problem] = []
-    # 数値だけ違う同一構造は作らない。構造署名で一意化する。
-    seen_structures: set[tuple[str, tuple[str, ...]]] = set()
-    # トレースバック方式: 1 つの構築から演繹閉包の各ノードを問題として切り出す。
-    # 族を書かずに問題が増えるので、族フィルタ時のみ絞り込む。
-    for problem in _traceback_families():
+    for source, is_traceback, problem in _verified_problem_entries():
         if allowed_ids is not None and problem.family_id not in allowed_ids:
             continue
-        if allowed_builders is not None and not any(
-            name in problem.family_id for name in allowed_builders
-        ):
-            continue
-        signature = (problem.family_id, tuple(problem.morphism_chain))
-        if signature in seen_structures:
-            continue
-        seen_structures.add(signature)
-        out.append(problem)
-    # グリッドは新しい構造を探すために回すが、同じ構造署名が二度出たら捨てる。
-    # 同じ問題を何十個も作って後段で除外するのは、そのぶんの計算資源を
-    # 新しい構築に使えていないというだけのことである。
-    for build, grid in FAMILIES + LAYERED_FAMILIES + _deep_families():
-        if allowed_builders is not None and build.__name__ not in allowed_builders:
-            continue
-        for params in grid():
-            try:
-                p = build(params)
-            except Exception:
-                p = None
-            if (
-                p is not None
-                and p.verified
-                and p.independent_check
-                and (allowed_ids is None or p.family_id in allowed_ids)
-            ):
-                signature = (p.family_id, tuple(p.morphism_chain))
-                if signature in seen_structures:
+        if allowed_builders is not None:
+            if is_traceback:
+                if not any(name in source for name in allowed_builders):
                     continue
-                seen_structures.add(signature)
-                out.append(p)
+            elif source not in allowed_builders:
+                continue
+        out.append(problem)
     return out
 
 

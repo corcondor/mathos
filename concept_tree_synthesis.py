@@ -73,9 +73,17 @@ def query(child: Node, kind: str) -> Node:
 # Numeric evaluation of a subtree to a function of t (given c)
 # ---------------------------------------------------------------------------
 def _roots(c: float, t: float) -> list[float] | None:
-    r = np.roots([1.0, 0.0, -c, 0.0, t])
-    real = sorted(float(x.real) for x in r if abs(x.imag) < 1e-9)
-    return real if len(real) == 4 else None
+    discriminant = c * c - 4.0 * t
+    if discriminant <= 0.0:
+        return None
+    w = float(np.sqrt(discriminant))
+    u2 = (c + w) / 2.0
+    v2 = (c - w) / 2.0
+    if v2 <= 0.0:
+        return None
+    u = float(np.sqrt(u2))
+    v = float(np.sqrt(v2))
+    return [-u, -v, v, u]
 
 
 def _points(c: float, t: float, k: int) -> np.ndarray | None:
@@ -219,7 +227,7 @@ def symbolic_paramreal(node: Node, c: int) -> sp.Expr | None:
 
 
 def symbolic_extremum(expr: sp.Expr, c: int, kind: str) -> tuple[sp.Expr, sp.Expr] | None:
-    """Exact extremum of expr over 0 < t < c^2/4 (interior critical points)."""
+    """Certify an exact global extremum over 0 < t < c^2/4."""
 
     hi = sp.Rational(c * c, 4)
     try:
@@ -241,6 +249,25 @@ def symbolic_extremum(expr: sp.Expr, c: int, kind: str) -> tuple[sp.Expr, sp.Exp
         return None
     chooser = max if kind == "Maximize" else min
     best = chooser(valued, key=lambda item: float(sp.N(item[0])))
+    try:
+        boundaries = (
+            sp.simplify(sp.limit(expr, _T, 0, dir="+")),
+            sp.simplify(sp.limit(expr, _T, hi, dir="-")),
+        )
+    except (NotImplementedError, ValueError, TypeError):
+        return None
+    finite_boundaries = [
+        value for value in boundaries
+        if value.is_real is not False and value.is_finite is True
+    ]
+    if len(finite_boundaries) != 2:
+        return None
+    best_numeric = float(sp.N(best[0]))
+    boundary_numeric = [float(sp.N(value)) for value in finite_boundaries]
+    if kind == "Maximize" and best_numeric <= max(boundary_numeric):
+        return None
+    if kind == "Minimize" and best_numeric >= min(boundary_numeric):
+        return None
     return sp.nsimplify(sp.simplify(best[0])), best[1]
 
 
@@ -307,6 +334,35 @@ def evaluate(tree: Node) -> dict[str, Any] | None:
     obs = observable_function(param_node)
     c = _base_c(param_node)
 
+    # Most concept trees have an exact symbolic observable.  Prove their
+    # global interior extremum before invoking the bounded numeric fallback.
+    try:
+        expr = symbolic_paramreal(param_node, int(round(c)))
+    except Exception:
+        expr = None
+    if expr is not None:
+        extremum = symbolic_extremum(expr, int(round(c)), kind)
+        if extremum is not None:
+            value, point = extremum
+            numeric_point = float(sp.N(point))
+            numeric_value = obs(c, numeric_point)
+            if (
+                not value.free_symbols
+                and not value.atoms(sp.Float)
+                and numeric_value is not None
+                and abs(float(sp.N(value)) - numeric_value) < 1e-7
+            ):
+                return {
+                    "tree_signature": tree.signature(),
+                    "answer_exact": sp.sstr(sp.simplify(value)),
+                    "answer_tex": sp.latex(sp.simplify(value)),
+                    "extreme_value_numeric": round(numeric_value, 10),
+                    "maximizer_t_numeric": round(numeric_point, 8),
+                    "query": kind,
+                    "certified": True,
+                    "certification": "symbolic_proof_global_extremum_with_boundary_limits",
+                }
+
     hi = c * c / 4.0
     sign = 1.0 if kind == "Maximize" else -1.0
 
@@ -320,7 +376,7 @@ def evaluate(tree: Node) -> dict[str, Any] | None:
                     best = (score, float(t))
         return best
 
-    coarse = scan(hi * 1e-4, hi * (1 - 1e-4), 6000)
+    coarse = scan(hi * 1e-4, hi * (1 - 1e-4), 1200)
     if coarse is None:
         return None
     best_t = coarse[1]
@@ -330,9 +386,9 @@ def evaluate(tree: Node) -> dict[str, Any] | None:
         return None
 
     # refine locally to ~1e-12 so closed-form detection is not fooled by grid error.
-    window = hi / 6000
+    window = hi / 1200
     for _ in range(5):
-        refined = scan(max(best_t - window, hi * 1e-6), min(best_t + window, hi), 400)
+        refined = scan(max(best_t - window, hi * 1e-6), min(best_t + window, hi), 160)
         if refined is None:
             break
         best_t = refined[1]
@@ -346,10 +402,6 @@ def evaluate(tree: Node) -> dict[str, Any] | None:
     # closed-form certification when no symbolic route exists.
     certification = "numeric_closed_form_match_1e-9_interior_attained"
     closed: sp.Expr | None = None
-    try:
-        expr = symbolic_paramreal(param_node, int(round(c)))
-    except Exception:
-        expr = None
     if expr is not None:
         extremum = symbolic_extremum(expr, int(round(c)), kind)
         if extremum is not None:

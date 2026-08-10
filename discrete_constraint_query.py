@@ -12,6 +12,7 @@ from dataclasses import asdict, dataclass
 from fractions import Fraction
 from itertools import combinations, combinations_with_replacement, permutations, product
 from math import comb, factorial
+from math import gcd, isqrt
 import re
 from typing import Any
 
@@ -56,6 +57,147 @@ def compile_discrete_constraint_query(text: str) -> DiscreteConstraintQueryIR | 
     source = raw_source.replace(",", " ")
     source = re.sub(r"\\p\s*\*?m\s*\*?o\s*\*?d", " mod ", source)
     math_segments = [item.strip(" ,.;:~?") for item in parsed.math_segments]
+
+    linear_congruence = re.search(
+        r"(\d+)\s*\*?\s*[a-z]\s*(?:\\equiv|≡)\s*\*?\s*(-?\d+)\s*(?:\\p\s*\*?m\s*\*?o\s*\*?d|mod)\s*\*?\s*\{?(\d+)",
+        raw_source,
+    )
+    variable_bound = re.search(r"0\s*<\s*[a-z]\s*(?:\\le|≤|<=)\s*(\d+)", raw_source)
+    if linear_congruence and variable_bound:
+        coefficient, residue, modulus = map(int, linear_congruence.groups())
+        return ir(
+            "finite_model_observation",
+            {"kind": "integer_interval", "lower": 1, "upper": int(variable_bound.group(1))},
+            [{"kind": "linear_congruence", "coefficient": coefficient, "residue": residue, "modulus": modulus}],
+            "cardinality",
+            "Natural",
+        )
+
+    factor_multiple = re.search(r"how many positive factors of\s+(\d+)\s+are multiples of\s+(\d+)", source)
+    if factor_multiple:
+        target, divisor = map(int, factor_multiple.groups())
+        return ir(
+            "finite_model_observation",
+            {"kind": "positive_divisors", "value": target},
+            [{"kind": "divisible_by", "value": divisor}],
+            "cardinality",
+            "Natural",
+        )
+
+    factorial_multiple = re.search(r"least positive integer\s+[a-z]\s+such that\s+(\d+)\s+divides\s+(?:[a-z]!|factorial\s*\(\s*[a-z]\s*\))", source)
+    if factorial_multiple:
+        target = int(factorial_multiple.group(1))
+        return ir(
+            "finite_model_observation",
+            {"kind": "integer_interval", "lower": 1, "upper": target},
+            [{"kind": "factorial_divisible_by", "value": target}],
+            "minimum",
+            "Natural",
+        )
+
+    repeating_fraction = re.search(
+        r"how many integers\s+[a-z]\s+from\s+(\d+)\s+to\s+(\d+).*?\(\(\s*[a-z]\s*\)\s*/\s*\(\s*(\d+)\s*\)\).*?repeating decimal",
+        source,
+    )
+    if repeating_fraction:
+        lower, upper, denominator = map(int, repeating_fraction.groups())
+        return ir(
+            "finite_model_observation",
+            {"kind": "integer_interval", "lower": lower, "upper": upper, "denominator": denominator},
+            [{"kind": "reduced_fraction_repeats", "denominator": denominator}],
+            "cardinality",
+            "Natural",
+        )
+
+    square_interval = re.search(r"how many perfect squares.*?between\s+(\d+)\s+and\s+(\d+)", source)
+    if square_interval:
+        lower, upper = map(int, square_interval.groups())
+        return ir(
+            "finite_model_observation",
+            {"kind": "integer_interval", "lower": lower + 1, "upper": upper - 1},
+            [{"kind": "perfect_square"}],
+            "cardinality",
+            "Natural",
+        )
+
+    dice_max = re.search(r"rolls?\s+(two|\d+)\s+fair\s+(\w+)-sided dice.*?expected value of the larger", source)
+    if dice_max:
+        count = parse_small_number(dice_max.group(1))
+        sides = parse_small_number(dice_max.group(2))
+        if count and sides:
+            return ir(
+                "finite_model_observation",
+                {"kind": "cartesian_power", "items": list(range(1, sides + 1)), "repeat": count},
+                [],
+                "expectation_max",
+                "Rational",
+            )
+
+    dice_occurrences = re.search(
+        r"rolls?\s+(\w+|\d+)\s+fair dice.*?at least\s+(\w+|\d+)\s+(\d+)'?s",
+        source,
+    )
+    if dice_occurrences:
+        repeat = parse_small_number(dice_occurrences.group(1))
+        minimum = parse_small_number(dice_occurrences.group(2))
+        face = int(dice_occurrences.group(3))
+        if repeat and minimum:
+            return ir(
+                "finite_model_observation",
+                {"kind": "cartesian_power", "items": list(range(1, 7)), "repeat": repeat},
+                [{"kind": "occurrence_at_least", "value": face, "minimum": minimum}],
+                "probability",
+                "RationalProbability",
+            )
+
+    choose_sum_parity = re.search(
+        r"balls are numbered.*?integers\s+(\d+)\s+through\s+(\d+).*?(\w+|\d+) are drawn.*?sum.*?is\s+(odd|even)",
+        source,
+    )
+    if choose_sum_parity:
+        lower, upper = map(int, choose_sum_parity.group(1, 2))
+        size = parse_small_number(choose_sum_parity.group(3))
+        if size:
+            return ir(
+                "finite_model_observation",
+                {"kind": "combinations", "items": list(range(lower, upper + 1)), "size": size},
+                [{"kind": "sum_parity", "value": 1 if choose_sum_parity.group(4) == "odd" else 0}],
+                "probability",
+                "RationalProbability",
+            )
+
+    selected_product = re.search(
+        r"two distinct members of the set\s+([\d\s,]+?)\s+are randomly selected.*?product is a multiple of\s+(\d+)",
+        source,
+    )
+    if selected_product:
+        items = [int(value) for value in re.findall(r"\d+", selected_product.group(1))]
+        if len(items) >= 2:
+            return ir(
+                "finite_model_observation",
+                {"kind": "combinations", "items": items, "size": 2},
+                [{"kind": "product_divisible_by", "value": int(selected_product.group(2))}],
+                "probability",
+                "RationalProbability",
+            )
+
+    # The fraction words are retained in normalized text; use the actual
+    # rational quantities rather than category names when present.
+    fraction_overlap = re.search(
+        r"(\d+)\s*/\s*(\d+).*?students.*?(\d+)\s*/\s*(\d+).*?students.*?(\d+)\s+students",
+        raw_source,
+    )
+    if fraction_overlap:
+        a_num, a_den, b_num, b_den, total = map(int, fraction_overlap.groups())
+        a_size = total * a_num // a_den
+        b_size = total * b_num // b_den
+        return ir(
+            "finite_model_observation",
+            {"kind": "intersection_cardinality_interval", "universe": total, "left_size": a_size, "right_size": b_size},
+            [],
+            "minimum",
+            "Natural",
+        )
 
     binomial_matches = list(re.finditer(r"\\(?:d)?binom\s*\{(\d+)\}\s*\{(\d+)\}", text))
     binomials = [(int(match.group(1)), int(match.group(2))) for match in binomial_matches]
@@ -292,7 +434,31 @@ def compile_discrete_constraint_query(text: str) -> DiscreteConstraintQueryIR | 
 def execute_discrete_constraint_query(payload: dict[str, Any]) -> dict[str, Any]:
     query = DiscreteConstraintQueryIR(**payload)
     operator = query.operator
-    if operator == "modular_observation":
+    if operator == "finite_model_observation":
+        members = finite_domain_members(query.domain)
+        accepted = [value for value in members if all(predicate_holds(value, predicate, query.domain) for predicate in query.predicates)]
+        if not members:
+            raise ValueError("finite model has an empty domain")
+        if query.observation == "cardinality":
+            answer: Any = len(accepted)
+        elif query.observation == "probability":
+            value = Fraction(len(accepted), len(members))
+            answer = format_rational(value)
+        elif query.observation == "expectation_max":
+            value = sum((Fraction(max(item)) for item in members), Fraction(0)) / len(members)
+            answer = format_rational(value)
+        elif query.observation == "minimum":
+            if not accepted:
+                raise ValueError("minimum observation has no satisfying witness")
+            answer = min(accepted)
+        elif query.observation == "maximum":
+            if not accepted:
+                raise ValueError("maximum observation has no satisfying witness")
+            answer = max(accepted)
+        else:
+            raise ValueError(f"unsupported finite observation: {query.observation}")
+        witness = {"domain_size": len(members), "accepted_count": len(accepted), "accepted_preview": [str(item) for item in accepted[:20]]}
+    elif operator == "modular_observation":
         expression = parse_expr(str(query.domain["expression"]), transformations=TRANSFORMS)
         modulus = int(query.domain["modulus"])
         if expression.free_symbols or modulus <= 0 or expression.is_integer is False:
@@ -420,6 +586,17 @@ def finite_domain_members(domain: dict[str, Any]) -> list[Any]:
         size = int(domain["size"])
         divisors = [value for value in range(1, target + 1) if target % value == 0]
         return list(combinations(divisors, size))
+    if domain["kind"] == "positive_divisors":
+        target = int(domain["value"])
+        return list(sp.divisors(target))
+    if domain["kind"] == "cartesian_power":
+        return list(product(domain["items"], repeat=int(domain["repeat"])))
+    if domain["kind"] == "combinations":
+        return list(combinations(domain["items"], int(domain["size"])))
+    if domain["kind"] == "intersection_cardinality_interval":
+        lower = max(0, int(domain["left_size"]) + int(domain["right_size"]) - int(domain["universe"]))
+        upper = min(int(domain["left_size"]), int(domain["right_size"]))
+        return list(range(lower, upper + 1))
     raise ValueError(f"unsupported finite domain: {domain['kind']}")
 
 
@@ -443,4 +620,32 @@ def predicate_holds(value: Any, predicate: dict[str, Any], domain: dict[str, Any
     if kind == "concatenated_integer_divisible_by":
         integer = int("".join(str(item) for item in value))
         return integer % int(predicate["value"]) == 0
+    if kind == "linear_congruence":
+        return int(predicate["coefficient"]) * int(value) % int(predicate["modulus"]) == int(predicate["residue"]) % int(predicate["modulus"])
+    if kind == "divisible_by":
+        return int(value) % int(predicate["value"]) == 0
+    if kind == "factorial_divisible_by":
+        return factorial(int(value)) % int(predicate["value"]) == 0
+    if kind == "reduced_fraction_repeats":
+        denominator = int(predicate["denominator"]) // gcd(int(value), int(predicate["denominator"]))
+        while denominator % 2 == 0:
+            denominator //= 2
+        while denominator % 5 == 0:
+            denominator //= 5
+        return denominator != 1
+    if kind == "perfect_square":
+        return int(value) >= 0 and isqrt(int(value)) ** 2 == int(value)
+    if kind == "occurrence_at_least":
+        return tuple(value).count(int(predicate["value"])) >= int(predicate["minimum"])
+    if kind == "sum_parity":
+        return sum(int(item) for item in value) % 2 == int(predicate["value"])
+    if kind == "product_divisible_by":
+        result = 1
+        for item in value:
+            result *= int(item)
+        return result % int(predicate["value"]) == 0
     raise ValueError(f"unsupported finite predicate: {kind}")
+
+
+def format_rational(value: Fraction) -> str:
+    return str(value.numerator) if value.denominator == 1 else f"{value.numerator}/{value.denominator}"

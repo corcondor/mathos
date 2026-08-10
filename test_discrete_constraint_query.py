@@ -23,6 +23,37 @@ class DiscreteConstraintQueryTests(unittest.TestCase):
         self.assertEqual(result["lowering_certificate"]["kind"], "typed_discrete_constraint")
         return result
 
+    def test_common_finite_model_contract_spans_number_theory_and_probability(self) -> None:
+        cases = (
+            (r"Determine the number of solutions in $x$ of $64x\equiv2\pmod{66}$ such that $0<x\le100$.", "3"),
+            ("How many positive factors of 4000 are multiples of 100?", "8"),
+            (r"What is the least positive integer $n$ such that 1560 divides $n!$?", "13"),
+            (r"For how many integers $n$ from $1$ to $29$ is $\frac{n}{30}$ a repeating decimal?", "20"),
+            ("Ben rolls two fair six-sided dice. What is the expected value of the larger of the two numbers rolled?", "161/36"),
+            ("If Michael rolls three fair dice, what is the probability that he will roll at least two 1's?", "2/27"),
+        )
+        operators = set()
+        for problem, expected in cases:
+            with self.subTest(problem=problem):
+                query = compile_discrete_constraint_query(problem)
+                self.assertIsNotNone(query)
+                assert query is not None
+                operators.add(query.operator)
+                self.assertEqual(execute_discrete_constraint_query(query.to_dict())["answer_exact"], expected)
+        self.assertEqual(operators, {"finite_model_observation"})
+
+    def test_finite_model_numeric_perturbation_preserves_operator(self) -> None:
+        first = compile_discrete_constraint_query("How many positive factors of 4000 are multiples of 100?")
+        second = compile_discrete_constraint_query("How many positive factors of 3600 are multiples of 60?")
+        self.assertIsNotNone(first)
+        self.assertIsNotNone(second)
+        assert first is not None and second is not None
+        self.assertEqual(first.operator, second.operator)
+        self.assertNotEqual(
+            execute_discrete_constraint_query(first.to_dict())["answer_exact"],
+            execute_discrete_constraint_query(second.to_dict())["answer_exact"],
+        )
+
     def test_crt_extremum(self) -> None:
         result = self.execute(
             "What is the largest integer less than $2010$ that has a remainder of $5$ when divided by $7$, "
