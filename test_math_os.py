@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest.mock import patch
 
 from math_os_prototype.arithmetic_nl import detect_arithmetic_nl_problem
 from math_os_prototype.case_frame_parser import parse_case_frames
@@ -423,6 +424,60 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertEqual(result.semantic_model["best_candidate_kind"], "typed_rate_chain")
         self.assertIn("(Rate lesson teacher)", result.semantic_model["best_sequent"])
         self.assertIn("(Rate time lesson)", result.semantic_model["best_sequent"])
+
+    def test_dependency_graph_rejects_an_omitted_connected_mixture_premise(self):
+        problem = (
+            "I have 10 liters of orange drink that are two-thirds water and add it "
+            "to 15 liters of pineapple drink that is three-fifths water. "
+            "I spill one liter of the orange drink. How much water is in the mixture?"
+        )
+        with patch.dict("os.environ", {"MATHOS_REQUIRE_DEPENDENCY_COVERAGE": "0"}):
+            baseline = solve_quantity_reasoning_problem(problem)
+        self.assertIsNotNone(baseline)
+        self.assertTrue(baseline.semantic_model["execution_certificate"])
+        candidate = baseline.candidates[0]
+        self.assertTrue(candidate["logic"]["connected_unconsumed_premise_ids"])
+        with patch.dict("os.environ", {"MATHOS_REQUIRE_DEPENDENCY_COVERAGE": "1"}):
+            self.assertIsNone(solve_quantity_reasoning_problem(problem))
+
+    def test_dependency_graph_keeps_a_disconnected_distractor_outside_the_proof(self):
+        problem = (
+            "Rebecca wants to split eggs into 3 groups. Rebecca has 4 marbles and "
+            "15 eggs. How many eggs will each group have?"
+        )
+        with patch.dict("os.environ", {"MATHOS_REQUIRE_DEPENDENCY_COVERAGE": "1"}):
+            result = solve_quantity_reasoning_problem(problem)
+        self.assertIsNotNone(result)
+        self.assertEqual(result.answer_exact, "5")
+        self.assertEqual(
+            result.semantic_model["execution_certificate"]["evidence_ids"],
+            [2, 0],
+        )
+
+    def test_dependency_graph_discharges_bounds_identity_and_common_base(self):
+        cases = [
+            (
+                "There were 12 people on the bus. At the next stop 4 more people got on the bus. "
+                "Each bus can not have more than 36 people. How many people are there on the bus now?",
+                "16",
+            ),
+            (
+                "Will had 59 pieces of clothing to wash. He put 32 of them in one load, "
+                "but split the rest into 9 equal loads. How many pieces could go in each small load?",
+                "3",
+            ),
+            (
+                "Juice Box A is 4 dollars. Juice Box B is 5 dollars more than Juice Box A. "
+                "Juice Box C is 7 dollars more than Juice Box A. How much more is C than B?",
+                "2",
+            ),
+        ]
+        with patch.dict("os.environ", {"MATHOS_REQUIRE_DEPENDENCY_COVERAGE": "1"}):
+            for problem, expected in cases:
+                with self.subTest(problem=problem):
+                    result = solve_quantity_reasoning_problem(problem)
+                    self.assertIsNotNone(result)
+                    self.assertEqual(result.answer_exact, expected)
 
     def test_quantity_reasoner_merges_parallel_rate_branches_before_observation(self):
         per_basket = solve_quantity_reasoning_problem(

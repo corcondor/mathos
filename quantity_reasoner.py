@@ -7,6 +7,7 @@ only candidates whose units/objects match the question well enough.
 
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import asdict, dataclass, field
 from fractions import Fraction
@@ -282,6 +283,10 @@ def candidate_execution_ready(quantities: list[Quantity], candidate: EquationCan
     projection that makes the unused premises irrelevant.
     """
     certificate = build_execution_certificate(quantities, candidate)
+    if os.getenv("MATHOS_REQUIRE_DEPENDENCY_COVERAGE", "1") != "0" and (
+        (candidate.logic or {}).get("connected_unconsumed_premise_ids")
+    ):
+        return False
     if certificate["status"] == "proved":
         return True
     if quantities and len(set(candidate.evidence_ids)) == len(quantities):
@@ -462,12 +467,16 @@ def candidate_comparison_difference(text: str, quantities: list[Quantity]) -> li
         return []
     left, right = relevant
     value = abs(left.value - right.value)
+    proof_evidence_ids = [
+        quantity.id for quantity in quantities
+        if equivalent_object(quantity.obj, target)
+    ]
     return [
         EquationCandidate(
             kind="comparison_difference",
             expression=f"abs({format_fraction(left.value)}-{format_fraction(right.value)})",
             value=value,
-            evidence_ids=[left.id, right.id],
+            evidence_ids=proof_evidence_ids,
             target_object=target,
             confidence=0.94,
             checks=["same_indexed_sort", "comparison_query", "absolute_difference"],
@@ -1798,6 +1807,11 @@ def candidate_difference(text: str, quantities: list[Quantity]) -> list[Equation
         value = a.value - b.value
         if "difference between" in text:
             value = abs(value)
+        checks = ["difference_query", "last_two_quantities"]
+        left_base = comparison_base_reference(a.text)
+        right_base = comparison_base_reference(b.text)
+        if left_base and left_base == right_base:
+            checks.append("common_base_cancellation")
         return [
             EquationCandidate(
                 kind="difference_last_two",
@@ -1806,10 +1820,20 @@ def candidate_difference(text: str, quantities: list[Quantity]) -> list[Equation
                 evidence_ids=[a.id, b.id],
                 target_object=query_object(text),
                 confidence=0.73,
-                checks=["difference_query", "last_two_quantities"],
+                checks=checks,
             )
         ]
     return []
+
+
+def comparison_base_reference(text: str) -> str | None:
+    match = re.search(
+        r"\b(?:more|less|fewer)\s+than\s+(?P<base>[a-z][a-z0-9 ]{0,50}?)(?:[.,;]|$)",
+        text.lower(),
+    )
+    if not match:
+        return None
+    return " ".join(re.findall(r"[a-z0-9]+", match.group("base")))
 
 
 def candidate_rate_times_duration(text: str, quantities: list[Quantity]) -> list[EquationCandidate]:

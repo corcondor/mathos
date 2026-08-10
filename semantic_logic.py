@@ -121,6 +121,8 @@ class SemanticCheck:
     terms: list[SemanticTerm]
     obligations: list[str]
     checks: list[str]
+    dependency_edges: list[tuple[int, int, str]] = field(default_factory=list)
+    connected_unconsumed_premise_ids: list[int] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     rejection: str | None = None
 
@@ -132,6 +134,9 @@ class SemanticCheck:
             "terms": [term.to_dict() for term in self.terms],
             "obligations": self.obligations,
             "checks": self.checks,
+            "dependency_edges": [list(edge) for edge in self.dependency_edges],
+            "connected_unconsumed_premise_ids": self.connected_unconsumed_premise_ids,
+            "premise_dependency_complete": not self.connected_unconsumed_premise_ids,
             "warnings": self.warnings,
             "rejection": self.rejection,
         }
@@ -148,6 +153,7 @@ def verify_quantity_candidate_semantics(text: str, quantities: list[Any], candid
     if target_sort.base != "Unknown":
         checks.append("target_sort_inferred")
     sequent = build_sequent(evidence_terms, candidate, target_sort)
+    dependency_edges, connected_unconsumed = analyze_premise_dependencies(quantities, candidate)
     return SemanticCheck(
         status=status,
         output_sort=target_sort,
@@ -155,9 +161,130 @@ def verify_quantity_candidate_semantics(text: str, quantities: list[Any], candid
         terms=evidence_terms,
         obligations=obligations,
         checks=checks,
+        dependency_edges=dependency_edges,
+        connected_unconsumed_premise_ids=connected_unconsumed,
         warnings=[] if evidence_terms else ["candidate has no evidence terms"],
         rejection=rejection,
     )
+
+
+def analyze_premise_dependencies(
+    quantities: list[Any],
+    candidate: Any,
+) -> tuple[list[tuple[int, int, str]], list[int]]:
+    """Find omitted premises connected to the candidate's evidence.
+
+    The graph is built from typed object identity and local grammatical
+    attachment.  It does not know benchmark ids or candidate answers.
+    Explicit time/category projection certificates may remove a premise from
+    the final observation without deleting it from the graph.
+    """
+    if not quantities:
+        return [], []
+    resolved = resolve_objects(quantities)
+    adjacency: dict[int, set[int]] = {quantity.id: set() for quantity in quantities}
+    edges: list[tuple[int, int, str]] = []
+
+    def connect(left: Any, right: Any, reason: str) -> None:
+        if right.id in adjacency[left.id]:
+            return
+        adjacency[left.id].add(right.id)
+        adjacency[right.id].add(left.id)
+        edges.append((left.id, right.id, reason))
+
+    for index, left in enumerate(quantities):
+        for right in quantities[index + 1 :]:
+            left_object = resolved.get(left.id, "")
+            right_object = resolved.get(right.id, "")
+            if left_object and left_object == right_object and left_object not in SCALAR_OBJECTS:
+                connect(left, right, "same-typed-object")
+                continue
+            if left.sentence_index != right.sentence_index:
+                continue
+            if abs(left.id - right.id) != 1:
+                continue
+            between = text_between_quantity_surfaces(left, right)
+            if between is not None and re.search(
+                r"\b(?:that|which|whose|contains?|consists?|composed|comprises?)\b",
+                between,
+            ):
+                connect(left, right, "local-grammatical-attachment")
+
+    evidence_ids = {int(value) for value in getattr(candidate, "evidence_ids", [])}
+    reached = set(evidence_ids)
+    queue = list(evidence_ids)
+    while queue:
+        current = queue.pop()
+        for neighbor in adjacency.get(current, set()):
+            if neighbor in reached:
+                continue
+            reached.add(neighbor)
+            queue.append(neighbor)
+
+    checks = set(getattr(candidate, "checks", []))
+    evidence_objects = {
+        resolved.get(quantity.id, "")
+        for quantity in quantities
+        if quantity.id in evidence_ids
+    }
+    omitted = []
+    for quantity in quantities:
+        if quantity.id in evidence_ids or quantity.id not in reached:
+            continue
+        if quantity.time and checks & {"time_labels_match", "selected_time_or_category_sum"}:
+            continue
+        quantity_object = resolved.get(quantity.id, "")
+        if (
+            checks & {"time_query", "query_projection"}
+            and quantity_object
+            and quantity_object not in evidence_objects
+            and getattr(quantity, "role", "") not in {"rate", "per_unit", "duration"}
+        ):
+            continue
+        if is_satisfied_upper_bound(quantity, candidate):
+            continue
+        if is_redundant_unit_coefficient(quantity):
+            continue
+        if "common_base_cancellation" in checks:
+            continue
+        omitted.append(quantity.id)
+    return edges, sorted(omitted)
+
+
+def is_satisfied_upper_bound(quantity: Any, candidate: Any) -> bool:
+    text = str(getattr(quantity, "text", "")).lower()
+    if not re.search(r"\b(?:at most|no more than|cannot have more than|can not have more than|maximum)\b", text):
+        return False
+    try:
+        return Fraction(getattr(candidate, "value")) <= Fraction(getattr(quantity, "value"))
+    except Exception:
+        return False
+
+
+def is_redundant_unit_coefficient(quantity: Any) -> bool:
+    if Fraction(getattr(quantity, "value")) != 1:
+        return False
+    surface = str(getattr(quantity, "surface", "")).lower().strip()
+    obj = normalize_object(getattr(quantity, "obj", ""))
+    text = str(getattr(quantity, "text", "")).lower()
+    return surface in {"1", "one"} and bool(obj) and bool(
+        re.search(rf"\b(?:1|one)\s+{re.escape(obj)}s?\b", text)
+    )
+
+
+def text_between_quantity_surfaces(left: Any, right: Any) -> str | None:
+    text = str(getattr(left, "text", ""))
+    if text != str(getattr(right, "text", "")):
+        return None
+    left_surface = str(getattr(left, "surface", "")).lower().removeprefix("$")
+    right_surface = str(getattr(right, "surface", "")).lower().removeprefix("$")
+    left_at = text.lower().find(left_surface)
+    if left_at < 0:
+        return None
+    right_at = text.lower().find(right_surface, left_at + len(left_surface))
+    if right_at < 0:
+        return None
+    return text[left_at + len(left_surface) : right_at]
 
 
 def compile_quantity_terms(quantities: list[Any]) -> dict[int, SemanticTerm]:
