@@ -1,5 +1,8 @@
 # 実行可能意味制約の修復（2026-08-10）
 
+> Historical experiment only. The current MORTRA runtime does not use the official
+> AlphaGeometry/AlphaGeometry2 runtime, DDAR, or an adapter backend.
+
 ## 問題
 
 型検査に成功しても、値を持つ制約として backend へ渡らない問題が多かった。従来の

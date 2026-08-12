@@ -1,6 +1,8 @@
-"""トレースバック作問エンジン（AlphaGeometry の設計を高校数学に移したもの）。
+"""MORTRAのトレースバック作問エンジン。
 
-AlphaGeometry は問題を直接書かない。前提から **導けるもの全部** を計算して
+AlphaGeometryのdeduction-closure/tracebackは歴史的な設計参考であり、runtime依存はない。
+
+前提から **導けるもの全部** を計算して
 DAG を作り、各ノードについて「その結論に必要な最小の前提」を逆算(traceback)
 して、そこを切り出して問題にする。1 つの構築から多数の問題が生まれる。
 
@@ -17,7 +19,7 @@ DAG を作り、各ノードについて「その結論に必要な最小の前�
   * 射の連鎖の深さ
 で測る。トレースバックは *問題数* を増やすのであって、難易度の定義を変えない。
 
-中間対象（問題文に現れないが導出に必要な量）は AlphaGeometry の
+中間対象（問題文に現れないが導出に必要な量）は deduction closure の
 auxiliary construction にあたる。これを hidden_intermediates として記録し、
 数が多いほど「ひらめきが要る」= 深いとみなす。
 """
@@ -1311,7 +1313,7 @@ def synthesize() -> dict[str, Any]:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "method": {
             "name": "Traceback problem synthesis",
-            "inspiration": "AlphaGeometry: derive the deduction closure, then traceback each node",
+            "inspiration": "historical reference: derive the deduction closure, then traceback each node",
             "note": "1 つの構築から複数問が自動で切り出される。難易度の定義は従来どおり。",
         },
         "summary": {

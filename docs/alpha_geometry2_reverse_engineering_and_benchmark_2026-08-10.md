@@ -1,5 +1,8 @@
 # AlphaGeometry 2 reverse engineering and fixed benchmark
 
+> Historical research reference only. The current MORTRA core has no AlphaGeometry,
+> AlphaGeometry2, DDAR, adapter, executor, or environment-variable runtime dependency.
+
 Date: 2026-08-10
 
 ## Scope
