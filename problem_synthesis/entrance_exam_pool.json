@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T21:29:52.837779+00:00",
+  "generated_at": "2026-08-12T18:59:03.170986+00:00",
   "method": {
     "difficulty_policy": "annotation_only_until_human_rating_auc_reaches_0.7",
     "hard_problem_policy": "proof DAG with converging constraints required; flat scalar bridge compositions are excluded",
@@ -1811,7 +1811,7 @@
       "query_sort": "SymbolicReal",
       "research_tier": "verified_standard",
       "semantic_parser_observation": {
-        "canonical_signature": "2bbc92857a3ac088d65dcffd",
+        "canonical_signature": "35e44f11ae8385455898a5ce",
         "definitions": [
           "Area",
           "ConvexHull",
@@ -4742,7 +4742,7 @@
       "query_sort": "Rational",
       "research_tier": "verified_standard",
       "semantic_parser_observation": {
-        "canonical_signature": "dc162717dd8684bf0786108c",
+        "canonical_signature": "6d2ef7e6a63e4d4d00c89b7a",
         "definitions": [
           "Equals",
           "Expectation",
