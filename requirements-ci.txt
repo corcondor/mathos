@@ -1,0 +1,8 @@
+# Shared runtime for benchmark, autonomous generation, and research workflows.
+# One contract prevents scheduled jobs from drifting apart at import time.
+matplotlib>=3.9,<4
+mpmath>=1.3,<2
+numpy>=2,<3
+Pillow>=11,<13
+scipy>=1.15,<2
+sympy>=1.13,<2
