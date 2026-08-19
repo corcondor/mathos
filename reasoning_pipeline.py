@@ -615,6 +615,18 @@ def is_safe_tool_call(call: ToolCall, ir: MathIR, domain_ir: DomainIR, problem: 
             and isinstance(certificate, dict)
             and certificate.get("memorized_answer") is False
         )
+    if name == "sympy.structural_theorem_query":
+        payload = ir.givens.get("structural_theorem_query") if isinstance(ir.givens, dict) else None
+        certificate = payload.get("lowering_certificate") if isinstance(payload, dict) else None
+        return (
+            isinstance(payload, dict)
+            and bool(payload.get("operator"))
+            and isinstance(payload.get("objects"), dict)
+            and isinstance(certificate, dict)
+            and certificate.get("kind") == "typed_structural_theorem"
+            and certificate.get("alpha_renamable") is True
+            and certificate.get("memorized_answer") is False
+        )
     if name == "arithmetic.nl":
         return True
     if name == "geometry.constraint_ir":
