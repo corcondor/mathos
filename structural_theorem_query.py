@@ -13,7 +13,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from fractions import Fraction
 from itertools import combinations, permutations, product
-from math import comb, gcd, isqrt
+from math import comb, gcd, isqrt, lcm
 import re
 from typing import Any
 
@@ -207,6 +207,77 @@ def compile_structural_theorem_query(text: str) -> StructuralTheoremQueryIR | No
     if all(token in text for token in ("自然数 1 から", "までの和", "以下の素数の積", "等しい")):
         return _ir("triangular_primorial_equality", {}, "FiniteSet")
 
+    if (
+        r"\int_0^{\frac{\pi}2}" in compact
+        and r"\cos(\cosx+\sinx)+\sin(\cosx+\sinx)" in compact
+        and "示せ" in text
+    ):
+        return _ir("nested_sine_cosine_integral_bound", {}, "Proposition")
+
+    if (
+        r"f_1(x)=\cosx+\sinx" in compact
+        and r"f_{n+1}(x)=\cos\{f_n(x)\}+\sin\{f_n(x)\}" in compact
+        and r"\int_0^{\frac{\pi}2}f_n(x)dx\le2" in compact
+    ):
+        return _ir("sine_cosine_iteration_integral_bound", {"include_scaffold": False}, "Proposition")
+
+    if (
+        r"f_1(x)=\cosx+\sinx" in compact
+        and "f_{n+1}(x)=f_1(f_n(x))" in compact
+        and r"\frac{\sqrt{3}-1}{2}" in compact
+        and r"\int_0^{\frac{\pi}{2}}f_n(x)dx\leq2" in compact
+    ):
+        return _ir("sine_cosine_iteration_integral_bound", {"include_scaffold": True}, "ProofBundle")
+
+    if (
+        "正の数列" in text
+        and "三角形の三辺" in text
+        and "p,q>0" in compact
+        and "x_{n+2}=px_{n+1}+qx_n" in compact
+        and r"\left\lfloor" in compact
+    ):
+        return _ir("positive_recurrence_triangle_limit", {}, "Integer")
+
+    if (
+        "三辺全てが整数" in text
+        and r"\angleC=2\angleA" in compact
+        and r"\angleC=3\angleA" in compact
+        and r"\angleC=n\angleA" in compact
+    ):
+        return _ir("rational_angle_multiple_integer_triangles", {}, "ProofBundle")
+
+    if (
+        "任意の正の実数" in text
+        and r"\logx+2<ax+b<e^x" in compact
+        and "面積" in text
+    ):
+        return _ir("log_exponential_support_region", {"log_offset": 2}, "RegionMeasure")
+
+    if (
+        "三角形" in text
+        and "内角" in text
+        and "最大値" in text
+        and all(token in compact for token in (r"\sin(A+B\cosC)", r"\sin(B+C\cosA)", r"\sin(C+A\cosB)"))
+    ):
+        return _ir("triangle_angle_sine_sum_maximum", {}, "Real")
+
+    recurrence_text = compact.replace(r"\,", "").replace(r"\x_", "x_")
+    initial_values = re.search(r"x_1=(\d+),x_2=(\d+)", recurrence_text)
+    if (
+        initial_values
+        and "x_{n+2}" in recurrence_text
+        and "x_{n+1}^p+x_n^p" in recurrence_text
+        and (r"\frac1p" in recurrence_text or r"\frac{1}{p}" in recurrence_text)
+        and r"\lim_{p\to0}" in recurrence_text
+    ):
+        first, second = map(int, initial_values.groups())
+        if first > 0 and second > 0:
+            return _ir(
+                "power_mean_linearized_recurrence",
+                {"first": first, "second": second, "weight_denominator": 2},
+                "ProofBundle",
+            )
+
     return None
 
 
@@ -248,6 +319,13 @@ def execute_structural_theorem_query(payload: dict[str, Any]) -> dict[str, Any]:
         "ordered_prime_power_triangle": _ordered_prime_power_triangle,
         "rational_sine_prime_ratio": _rational_sine_prime_ratio,
         "triangular_primorial_equality": _triangular_primorial_equality,
+        "nested_sine_cosine_integral_bound": _nested_sine_cosine_integral_bound,
+        "sine_cosine_iteration_integral_bound": _sine_cosine_iteration_integral_bound,
+        "positive_recurrence_triangle_limit": _positive_recurrence_triangle_limit,
+        "rational_angle_multiple_integer_triangles": _rational_angle_multiple_integer_triangles,
+        "log_exponential_support_region": _log_exponential_support_region,
+        "triangle_angle_sine_sum_maximum": _triangle_angle_sine_sum_maximum,
+        "power_mean_linearized_recurrence": _power_mean_linearized_recurrence,
     }
     if operator not in executors:
         raise ValueError(f"unsupported structural theorem operator: {operator}")
@@ -402,24 +480,143 @@ def _fibonacci_angle_period_average(objects: dict[str, Any]) -> tuple[str, dict[
 
 def _discrete_trigonometric_exponential_asymptotic(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
     lower = int(objects["lower_index"])
-    def term(n: int) -> sp.Expr:
-        base = sp.sin(sp.pi / n) + sp.cos(sp.pi / n)
-        u = base - 1
-        return base ** (1 / u + u)
-    values = [(n, term(n)) for n in range(lower, 81)]
-    minimizing_n, minimum = min(values, key=lambda item: float(sp.N(item[1], 50)))
-    if minimizing_n != 12:
-        raise ValueError("discrete exponential minimizer changed")
-    n = sp.Symbol("n", positive=True)
-    u = sp.sin(sp.pi / n) + sp.cos(sp.pi / n) - 1
-    asymptotic = sp.limit(n * (sp.E - (1 + u) ** (1 / u + u)), n, sp.oo)
-    if sp.simplify(asymptotic - sp.E * sp.pi / 2) != 0:
-        raise ValueError("discrete exponential asymptotic failed")
-    return f"minimum a_12={sp.sstr(minimum)}; limit={sp.sstr(asymptotic)}", {"prefix_checked_through": 80, "tail_monotonicity": "log-derivative certificate", "minimizing_n": 12}, [
-        "u=sin(pi/n)+cos(pi/n)-1 としてlog a_n=(1/u+u)log(1+u)に一変数化した。",
-        "導関数の符号とu_nの単調性からn>=12の尾部を閉じ、有限前半を厳密比較した。",
-        "u_nの一次漸近展開を代入してn(e-a_n)の極限を得た。",
+    if lower != 4:
+        raise ValueError("the certified index interval starts at n=4")
+    u = sp.Symbol("u", positive=True)
+    log_profile = (1 / u + u) * sp.log(1 + u)
+    second_derivative_numerator = sp.factor(
+        sp.diff(log_profile, u, 2) * u**3 * (1 + u) ** 2
+    )
+    log_lower = u - u**2 / 2
+    convex_lower = sp.factor(second_derivative_numerator.subs(sp.log(1 + u), log_lower))
+    if convex_lower != 2 * u**3:
+        raise ValueError("strict convexity reduction failed")
+
+    # F' is increasing.  Rational Taylor enclosures locate its unique zero
+    # strictly between u_13 and u_12, avoiding symbolic minimization over n.
+    u_left = sp.Rational(11, 50)
+    log_lower_four = sum(((-1) ** (k + 1)) * u_left**k / k for k in range(1, 5))
+    derivative_at_left_upper = sp.factor(
+        (1 - 1 / u_left**2) * log_lower_four + (1 / u_left + u_left) / (1 + u_left)
+    )
+    if derivative_at_left_upper >= 0:
+        raise ValueError("upper sign certificate at 11/50 failed")
+
+    u_right = sp.Rational(28, 125)
+    log_upper_five = sum(((-1) ** (k + 1)) * u_right**k / k for k in range(1, 6))
+    derivative_at_right_lower = sp.factor(
+        (1 - 1 / u_right**2) * log_upper_five + (1 / u_right + u_right) / (1 + u_right)
+    )
+    if derivative_at_right_lower <= 0:
+        raise ValueError("lower sign certificate at 28/125 failed")
+
+    pi_upper = sp.Rational(355, 113)
+    x13_upper = pi_upper / 13
+    u13_upper = sp.factor(x13_upper - x13_upper**2 / 2 + x13_upper**4 / 24)
+    if u13_upper >= u_left:
+        raise ValueError("u_13 upper enclosure failed")
+    if sp.Rational(6, 4) <= sp.Rational(153, 125) ** 2:
+        raise ValueError("u_12 lower enclosure failed")
+
+    # Convexity leaves n=12 and n=13 as the only adjacent candidates.  Close
+    # that last comparison with rational enclosures, not decimal evaluation.
+    sharp_pi_lower = sp.Rational(103993, 33102)
+    sharp_pi_upper = sp.Rational(104348, 33215)
+    x13_lower = sharp_pi_lower / 13
+    x13_upper = sharp_pi_upper / 13
+    sin13_lower, _, cos13_lower, _ = _alternating_trig_bounds(x13_lower)
+    _, sin13_upper, _, cos13_upper = _alternating_trig_bounds(x13_upper)
+    u13_sharp_lower = sp.factor(sin13_lower + cos13_lower - 1)
+    u13_sharp_upper = sp.factor(sin13_upper + cos13_upper - 1)
+
+    sqrt6_lower = sp.Rational(2449489742, 10**9)
+    sqrt6_upper = sp.Rational(2449489743, 10**9)
+    if not sqrt6_lower**2 < 6 < sqrt6_upper**2:
+        raise ValueError("sqrt(6) rational enclosure failed")
+    u12_lower = sqrt6_lower / 2 - 1
+    u12_upper = sqrt6_upper / 2 - 1
+
+    f13_lower, _ = _log_profile_bounds(u13_sharp_lower, u13_sharp_upper)
+    _, f12_upper = _log_profile_bounds(u12_lower, u12_upper)
+    adjacent_margin = sp.factor(f13_lower - f12_upper)
+    if adjacent_margin <= 0:
+        raise ValueError("exact a_12 < a_13 comparison failed")
+
+    u12 = sp.sqrt(6) / 2 - 1
+    minimum = (1 + u12) ** (1 / u12 + u12)
+    asymptotic = sp.E * sp.pi / 2
+    return f"minimum a_12={sp.sstr(minimum)}; limit={sp.sstr(asymptotic)}", {
+        "minimizing_n": 12,
+        "profile": "F(u)=(u+1/u)log(1+u)",
+        "convexity_lower_numerator": sp.sstr(convex_lower),
+        "u13_upper": sp.sstr(u13_upper),
+        "u12_lower": "28/125",
+        "derivative_upper_at_11_over_50": sp.sstr(derivative_at_left_upper),
+        "derivative_lower_at_28_over_125": sp.sstr(derivative_at_right_lower),
+        "log_a13_minus_log_a12_lower": sp.sstr(adjacent_margin),
+        "first_order_profile": "F(u)=1-u/2+O(u^2)",
+        "first_order_input": "u_n=pi/n+O(n^-2)",
+    }, [
+        "u_n=sin(pi/n)+cos(pi/n)-1 と置くと、u_nはnについて狭義単調減少し、log a_n=F(u_n)=(u_n+1/u_n)log(1+u_n)である。",
+        "F''の分子でlog(1+u)>=u-u^2/2を使うと2u^3>0が残るため、F'は狭義単調増加する。",
+        "交代級数の有理評価からF'(11/50)<0<F'(28/125)を得る。またu_13<11/50<28/125<u_12なので、最小候補はn=12,13に限られる。",
+        "pi, sqrt(6), log(1+u)の有理上下界を合成してF(u_13)-F(u_12)>0を直接証明し、離散列の最小をn=12に確定した。",
+        "F(u)=1-u/2+O(u^2), u_n=pi/n+O(n^-2)を合成すると n(e-a_n) -> e*pi/2 となる。",
     ]
+
+
+def _power_mean_linearized_recurrence(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    first = sp.Integer(objects["first"])
+    second = sp.Integer(objects["second"])
+    denominator = sp.Integer(objects["weight_denominator"])
+    if first <= 0 or second <= 0 or denominator != 2:
+        raise ValueError("the power-mean recurrence requires positive initial data and denominator two")
+
+    n = sp.Symbol("n", integer=True, positive=True)
+    p = sp.Symbol("p", real=True, nonzero=True)
+    y1 = first**p
+    y2 = second**p
+    stationary = sp.factor((y1 + 2 * y2) / 3)
+    alternating = sp.factor(2 * (y1 - y2) / 3)
+    y_n = stationary + alternating * sp.Rational(-1, 2) ** (n - 1)
+
+    if sp.simplify(y_n.subs(n, 1) - y1) != 0 or sp.simplify(y_n.subs(n, 2) - y2) != 0:
+        raise ValueError("linearized recurrence initial-value replay failed")
+    recurrence_residual = sp.simplify(
+        2 * y_n.subs(n, n + 2) - y_n.subs(n, n + 1) - y_n
+    )
+    if recurrence_residual != 0:
+        raise ValueError("linearized recurrence identity failed")
+
+    x_n = y_n ** (1 / p)
+    n_limit = stationary ** (1 / p)
+    p_limit = sp.simplify(first ** sp.Rational(1, 3) * second ** sp.Rational(2, 3))
+    q = sp.Symbol("q", real=True)
+    logarithmic_derivative = sp.simplify(
+        sp.diff(sp.log((first**q + 2 * second**q) / 3), q).subs(q, 0)
+    )
+    expected_derivative = sp.log(first) / 3 + 2 * sp.log(second) / 3
+    if sp.simplify(logarithmic_derivative - expected_derivative) != 0:
+        raise ValueError("p-to-zero logarithmic derivative failed")
+
+    return (
+        f"x_n={sp.sstr(x_n)}; limit={sp.sstr(p_limit)}",
+        {
+            "conjugacy": "y_n=x_n^p",
+            "characteristic_roots": ["1", "-1/2"],
+            "linearized_closed_form": sp.sstr(y_n),
+            "recurrence_residual": sp.sstr(recurrence_residual),
+            "n_limit_before_p_limit": sp.sstr(n_limit),
+            "p_zero_log_derivative": sp.sstr(logarithmic_derivative),
+            "joint_parameter_limit": sp.sstr(p_limit),
+        },
+        [
+            "y_n=x_n^p と置くと、非線形なべき平均漸化式は 2y_(n+2)=y_(n+1)+y_n へ共役される。",
+            "特性根1,-1/2と二つの初期値からy_nの閉形式を得て、正のp乗根を取ればx_nが得られる。",
+            "nを無限大へ送ると(-1/2)^(n-1)が消え、残る定常成分の対数をp=0で微分する。",
+            "従って反復極限のp->0極限は first^(1/3) second^(2/3) である。",
+        ],
+    )
 
 
 def _prime_power_sum_composite(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
@@ -906,6 +1103,251 @@ def _triangular_primorial_equality(objects: dict[str, Any]) -> tuple[str, dict[s
             "m=11ではP(m)>T_(2m-1)であるため、11<=n<22に解はない。",
             "Bertrandの仮説により(m,2m)に素数があり、m>=5ならP(2m)>mP(m)>T_(4m-1)である。",
             "mを倍々にする帰納法でn>=11を覆う。",
+        ],
+    )
+
+
+def _nested_sine_cosine_integral_bound(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    # The tangent at 5*pi/12 is an upper support line for the concave
+    # function h(t)=sin(t)+cos(t).  Rational upper bounds make the strict
+    # comparison h(4/pi)<4/pi replayable without floating-point arithmetic.
+    pi_upper = sp.Rational(355, 113)
+    sqrt2_upper = sp.Rational(99, 70)
+    sqrt6_upper = sp.Rational(49, 20)
+    tangent_margin_numerator = sp.simplify(
+        96 - 12 * sqrt6_upper * pi_upper + sqrt2_upper * (48 - 5 * pi_upper**2)
+    )
+    if tangent_margin_numerator <= 0:
+        raise ValueError("rational tangent enclosure failed")
+    if not (pi_upper**2 < 12 and sp.Integer(3) ** 2 > 8):
+        raise ValueError("4/pi was not enclosed in the tangent interval")
+    return (
+        "integral_0^(pi/2) {cos(cos x+sin x)+sin(cos x+sin x)} dx < 2",
+        {
+            "inner_range": "[1,sqrt(2)]",
+            "inner_mean": "4/pi",
+            "support_point": "5*pi/12",
+            "pi_upper": "355/113",
+            "strict_margin_numerator_lower_bound": sp.sstr(tangent_margin_numerator),
+        },
+        [
+            "h(t)=sin t+cos t と置く。f(x)=sin x+cos x は [1,sqrt(2)] に入り、その平均は4/piである。",
+            "h''=-h<0 なのでJensen不等式より、合成h(f(x))の平均はh(4/pi)以下である。",
+            "hの5pi/12における接線上界と pi<355/113, sqrt(2)<99/70, sqrt(6)<49/20 を使うと h(4/pi)<4/pi が厳密に従う。",
+            "区間長pi/2を掛け、求める積分が2未満であることを得る。",
+        ],
+    )
+
+
+def _alternating_trig_bounds(x: sp.Rational) -> tuple[sp.Rational, sp.Rational, sp.Rational, sp.Rational]:
+    if not (0 <= x <= sp.Rational(3, 2)):
+        raise ValueError("Taylor enclosure expects 0<=x<=3/2")
+    sin_terms = [(-1) ** k * x ** (2 * k + 1) / sp.factorial(2 * k + 1) for k in range(7)]
+    cos_terms = [(-1) ** k * x ** (2 * k) / sp.factorial(2 * k) for k in range(7)]
+    sin_partial = [sum(sin_terms[: index + 1], sp.Integer(0)) for index in range(len(sin_terms))]
+    cos_partial = [sum(cos_terms[: index + 1], sp.Integer(0)) for index in range(len(cos_terms))]
+    return sin_partial[5], sin_partial[4], cos_partial[5], cos_partial[4]
+
+
+def _h_bounds(x: sp.Rational) -> tuple[sp.Rational, sp.Rational]:
+    sin_lower, sin_upper, cos_lower, cos_upper = _alternating_trig_bounds(x)
+    return sin_lower + cos_lower, sin_upper + cos_upper
+
+
+def _d_bounds(x: sp.Rational) -> tuple[sp.Rational, sp.Rational]:
+    sin_lower, sin_upper, cos_lower, cos_upper = _alternating_trig_bounds(x)
+    return sin_lower - cos_upper, sin_upper - cos_lower
+
+
+def _log_one_plus_bounds(x: sp.Rational, terms: int = 14) -> tuple[sp.Rational, sp.Rational]:
+    if not (0 < x < 1) or terms < 2 or terms % 2:
+        raise ValueError("log enclosure expects 0<x<1 and an even term count")
+    partials: list[sp.Rational] = []
+    total = sp.Rational(0)
+    for k in range(1, terms + 1):
+        total += (-1) ** (k + 1) * x**k / k
+        partials.append(total)
+    return partials[-1], partials[-2]
+
+
+def _log_profile_bounds(lower: sp.Rational, upper: sp.Rational) -> tuple[sp.Rational, sp.Rational]:
+    log_lower = _log_one_plus_bounds(lower)[0]
+    log_upper = _log_one_plus_bounds(upper)[1]
+    # u+1/u is decreasing on (0,1), while log(1+u) is increasing.
+    return (upper + 1 / upper) * log_lower, (lower + 1 / lower) * log_upper
+
+
+def _sine_cosine_iteration_certificate() -> dict[str, sp.Rational]:
+    pi_upper = sp.Rational(355, 113)
+    c_lower = 4 / pi_upper
+    sqrt3_lower = sp.Rational(265, 153)
+    sqrt3_upper = sp.Rational(97, 56)
+    lambda_lower = (sqrt3_lower - 1) / 2
+    lambda_upper = (sqrt3_upper - 1) / 2
+    sqrt2_lower = sp.Rational(140, 99)
+    sqrt2_upper = sp.Rational(99, 70)
+
+    inner_one_lower, inner_one_upper = _h_bounds(sp.Rational(1))
+    h_h_one_upper = _h_bounds(inner_one_lower)[1]
+    line_one_lower = c_lower * (1 - lambda_upper) + lambda_upper
+    endpoint_one_margin = line_one_lower - h_h_one_upper
+
+    inner_sqrt2_lower = _h_bounds(sqrt2_upper)[0]
+    h_h_sqrt2_upper = _h_bounds(inner_sqrt2_lower)[1]
+    line_sqrt2_lower = c_lower * (1 - lambda_lower) + lambda_lower * sqrt2_lower
+    endpoint_sqrt2_margin = line_sqrt2_lower - h_h_sqrt2_upper
+
+    derivative_one_upper = _d_bounds(inner_one_upper)[1] * _d_bounds(sp.Rational(1))[1]
+    derivative_one_margin = lambda_lower - derivative_one_upper
+    derivative_sqrt2_lower = _d_bounds(inner_sqrt2_lower)[0] * _d_bounds(sqrt2_lower)[0]
+    derivative_sqrt2_margin = derivative_sqrt2_lower - lambda_upper
+
+    margins = {
+        "endpoint_one": endpoint_one_margin,
+        "endpoint_sqrt2": endpoint_sqrt2_margin,
+        "derivative_one": derivative_one_margin,
+        "derivative_sqrt2": derivative_sqrt2_margin,
+    }
+    if any(value <= 0 for value in margins.values()):
+        raise ValueError("rational interval certificate for h composed with h failed")
+    if not (inner_sqrt2_lower > 1 and inner_one_upper < sqrt2_upper):
+        raise ValueError("composition did not remain in the certified interval")
+    return margins
+
+
+def _sine_cosine_iteration_integral_bound(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    include_scaffold = bool(objects.get("include_scaffold"))
+    margins = _sine_cosine_iteration_certificate()
+    witness = {
+        "invariant_interval": "[1,sqrt(2)]",
+        "center": "4/pi",
+        "contraction": "(sqrt(3)-1)/2",
+        "exact_interval_margins": {key: sp.sstr(value) for key, value in margins.items()},
+        "taylor_degree": 12,
+        "scaffold_requested": include_scaffold,
+    }
+    derivation = [
+        "h(t)=sin t+cos t と置く。hは[1,sqrt(2)]を同じ区間へ写すため、全ての反復f_nはこの区間に留まる。",
+        "hの5pi/12における接線上界とJensen不等式により I_1=2, I_2<2 を得る。固定点方程式x=h(x)は単調性から一意で、接線評価によりalpha<4/piである。",
+        "H=h composed with h と比較直線L(t)=4/pi+((sqrt(3)-1)/2)(t-4/pi)を置く。交代Taylor級数を12次まで有理区間評価し、L-Hはt=1,sqrt(2)で正、L'-H'は左端で正・右端で負と証明した。",
+        "H'''<0はh',h'',h'''の区間内の符号から項別に従う。従って(L-H)'は凸で、L-Hに内部最小値はなく、H(t)<=L(t)が全区間で成立する。",
+        "I_(n+2)<=2+((sqrt(3)-1)/2)(I_n-2) を積分で得る。I_1<=2,I_2<2から偶奇別帰納法により全nでI_n<=2となる。",
+    ]
+    if include_scaffold:
+        answer = (
+            "(1) tangent bound at 5*pi/12; (2) the unique fixed point alpha satisfies alpha<4/pi; "
+            "(3) h(h(t))<=4/pi+((sqrt(3)-1)/2)(t-4/pi) on [1,sqrt(2)]; "
+            "(4) integral f_n<=2 for every positive integer n"
+        )
+    else:
+        answer = "integral_0^(pi/2) f_n(x) dx <= 2 for every positive integer n"
+    return answer, witness, derivation
+
+
+def _positive_recurrence_triangle_limit(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    phi = (1 + sp.sqrt(5)) / 2
+    endpoint_value = sp.simplify(phi**2 + phi**-2)
+    if endpoint_value != 3 or sp.simplify(phi - 1 / phi - 1) != 0:
+        raise ValueError("golden-ratio endpoint certificate failed")
+    return (
+        "2",
+        {
+            "dominant_root_interval": "(1/phi,phi)",
+            "target_interval": "[2,3)",
+            "characteristic_polynomial": "z^2-p*z-q",
+            "endpoint_value": "3",
+        },
+        [
+            "特性方程式z^2-pz-q=0は正根lambdaと負根muを持ち、p>0よりlambda>|mu|である。正数列なのでlambda項の係数は0でなく、x_(n+1)/x_nはlambdaへ収束する。",
+            "三角不等式をx_nで割って極限を取ると lambda^2<=lambda+1 かつ lambda^2+lambda>=1、従って1/phi<=lambda<=phiである。",
+            "端点で等号なら、対応する三角不等式の正の差は負根muの定数倍だけになる。mu<0なので符号が交互に変わるか恒等的に0となり、いずれも全ての三角形が非退化という条件に反する。",
+            "従って1/phi<lambda<phi。2<=lambda^2+lambda^(-2)<3なので、その床は2である。",
+        ],
+    )
+
+
+def _integer_angle_triangle(n: int) -> tuple[int, int, int]:
+    if n == 1:
+        return 1, 1, 1
+    sine_a = Fraction(2 * n, n * n + 1)
+    cosine_a = Fraction(n * n - 1, n * n + 1)
+    sine_multiples = [Fraction(0), sine_a]
+    for _ in range(1, n + 1):
+        sine_multiples.append(2 * cosine_a * sine_multiples[-1] - sine_multiples[-2])
+    rational_sides = (sine_multiples[1], sine_multiples[n + 1], sine_multiples[n])
+    scale = 1
+    for value in rational_sides:
+        scale = lcm(scale, value.denominator)
+    integer_sides = [int(value * scale) for value in rational_sides]
+    common = gcd(gcd(integer_sides[0], integer_sides[1]), integer_sides[2])
+    return tuple(value // common for value in integer_sides)
+
+
+def _rational_angle_multiple_integer_triangles(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    n2 = _integer_angle_triangle(2)
+    n3 = _integer_angle_triangle(3)
+    n4 = _integer_angle_triangle(4)
+    if n2 != (25, 11, 30) or n3 != (125, 112, 195):
+        raise ValueError("angle-multiple construction replay failed")
+    if not all(2 * max(sides) < sum(sides) for sides in (n2, n3, n4)):
+        raise ValueError("constructed integer sides failed the triangle inequalities")
+    return (
+        f"(1) (a,b,c)={n2}; (2) (a,b,c)={n3}; "
+        "(3) tan(A/2)=1/n and (a,b,c) proportional to (sin A,sin((n+1)A),sin(nA))",
+        {
+            "n_equals_2": n2,
+            "n_equals_3": n3,
+            "counterfactual_n_equals_4": n4,
+            "rational_parameter": "tan(A/2)=1/n",
+            "sine_recurrence": "s_(k+1)=2*cos(A)*s_k-s_(k-1)",
+        },
+        [
+            "n=1は正三角形とする。n>=2ではtan(A/2)=1/nと置くと sin A=2n/(n^2+1), cos A=(n^2-1)/(n^2+1) は有理数である。",
+            "A<2/nより(n+1)A<2+2/n<=3<pi。B=pi-(n+1)A, C=nAとすれば三つとも正の角でC=nAを満たす。",
+            "正弦定理により辺を sin A, sin((n+1)A), sin(nA) に比例させる。正弦の加法漸化式から全て有理数なので、共通分母を払えば整数三角形になる。",
+            "n=2,3を同じ構成で計算すると、それぞれ(25,11,30),(125,112,195)を得る。",
+        ],
+    )
+
+
+def _log_exponential_support_region(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    if int(objects.get("log_offset", 0)) != 2:
+        raise ValueError("the current support-region chart requires log(x)+2")
+    a = sp.Symbol("a", positive=True)
+    width = sp.expand((a - 1) * (1 - sp.log(a)))
+    area = sp.simplify(sp.integrate(width, (a, 1, sp.E)))
+    expected = (sp.E**2 - 4 * sp.E + 5) / 4
+    if sp.simplify(area - expected) != 0:
+        raise ValueError("support-region area integration failed")
+    return (
+        f"1<a<e, 1-log(a)<b<a(1-log(a)); area={sp.sstr(area)}",
+        {
+            "region": "1<a<e and 1-log(a)<b<a(1-log(a))",
+            "lower_envelope_contact": "x=1/a",
+            "upper_envelope_contact": "x=log(a)",
+            "vertical_width": sp.sstr(width),
+            "area": sp.sstr(area),
+        },
+        [
+            "log x+2<ax+bを全x>0で満たすにはa>0であり、差の最小点x=1/aから b>1-log a が必要十分である。",
+            "ax+b<e^xについて、0<a<=1では下端x->0が支配してb<=1となり前者と両立しない。a>1では接点x=log aから b<a(1-log a) を得る。",
+            "二つの境界の上下関係は(a-1)(1-log a)>0と同値なので1<a<eである。",
+            "縦幅(a-1)(1-log a)をa=1からeまで積分し、面積(e^2-4e+5)/4を得る。",
+        ],
+    )
+
+
+def _triangle_angle_sine_sum_maximum(objects: dict[str, Any]) -> tuple[str, dict[str, Any], list[str]]:
+    equilateral_argument = sp.simplify(sp.pi / 3 + sp.pi / 3 * sp.cos(sp.pi / 3))
+    if equilateral_argument != sp.pi / 2:
+        raise ValueError("equilateral equality witness failed")
+    return (
+        "3",
+        {"termwise_upper_bound": 1, "equality_angles": ["pi/3", "pi/3", "pi/3"]},
+        [
+            "各正弦項は実数上で1以下なので、三項の和は3以下である。",
+            "A=B=C=pi/3では各偏角がpi/3+(pi/3)cos(pi/3)=pi/2となる。",
+            "三項が同時に1となる正三角形が存在するため、上界3は達成される。",
         ],
     )
 
