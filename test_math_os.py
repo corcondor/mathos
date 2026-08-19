@@ -2,6 +2,8 @@ import json
 import unittest
 from unittest.mock import patch
 
+import sympy as sp
+
 from math_os_prototype.arithmetic_nl import detect_arithmetic_nl_problem
 from math_os_prototype.case_frame_parser import parse_case_frames
 from math_os_prototype.category_semantics import compile_typed_semantic_graph, run_verifier_gate
@@ -1856,6 +1858,125 @@ class MathOsPrototypeTest(unittest.TestCase):
         self.assertIsNone(result["answer"])
         operations = result["data"]["structural_ir"]["operations"]
         self.assertTrue(any(item["kind"] == "aggregate" for item in operations))
+
+    def test_latex_frontend_preserves_bare_trigonometric_application(self):
+        parsed = parse_latex_problem(r"$\sin\theta,\cos x,\tan t$")
+        self.assertEqual(parsed.math_segments, ["sin(theta),cos(x),tan(t)"])
+
+    def test_typed_analysis_executes_unseen_latex_limit(self):
+        ir = run_pipeline(r"次の極限を求めよ。\[\lim_{t\to0}(1+3t)^{1/t}\]")
+        self.assertEqual(ir.intent, "typed_analysis_limit")
+        self.assertEqual(ir.tool_calls[0].status, "executed")
+        self.assertEqual(ir.tool_calls[0].result["answer_exact"], "exp(3)")
+
+    def test_typed_analysis_rejects_partial_multipart_match(self):
+        ir = run_pipeline(
+            r"(1) \(\lim_{x\to0}\frac{\sin x}{x}\) を求めよ。"
+            r"(2) \(\lim_{x\to0}\frac{1-\cos x}{x^2}\) を求めよ。"
+        )
+        self.assertNotEqual(ir.intent, "typed_analysis_limit")
+
+    def test_typed_analysis_does_not_treat_an_indexed_sequence_as_constant(self):
+        ir = run_pipeline(r"数列 \(S_n\) に対し \[\lim_{n\to\infty}S_n\] を求めよ。")
+        self.assertEqual(ir.intent, "typed_analysis_limit")
+        self.assertEqual(ir.tool_calls[0].status, "failed")
+        self.assertIn("dependency was lost", ir.tool_calls[0].error)
+
+    def test_closed_proposition_rejects_unevaluated_integral(self):
+        ir = run_pipeline(
+            r"\[\int_0^{\pi/2}\{\cos(\cos x+\sin x)+\sin(\cos x+\sin x)\}\,dx<2\]を示せ。"
+        )
+        self.assertEqual(ir.intent, "typed_analysis_decide_closed_proposition")
+        self.assertEqual(ir.tool_calls[0].status, "failed")
+        self.assertIn("unevaluated operator", ir.tool_calls[0].error)
+
+    def test_closed_proposition_is_decided_without_problem_specific_answer(self):
+        ir = run_pipeline(r"\[2^{\sqrt2}<e\]を示せ。")
+        self.assertEqual(ir.intent, "typed_analysis_decide_closed_proposition")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["answer_exact"], "True")
+        self.assertEqual(result["relation"], "2**(sqrt(2)) < E")
+        self.assertEqual(result["proof_certificate"]["kind"], "atanh_log_series_upper_bound")
+        self.assertEqual(result["proof_certificate"]["verified_product_bound"], "True")
+
+    def test_geometric_progression_lowers_to_definition_and_elimination(self):
+        problem = (
+            r"\(\sin t,\cos t,\tan t\) がこの順で等比数列をなすような"
+            r"\(\cos t\)を求めよ。"
+        )
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "progression_geometric_constraint")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["elimination_polynomial"], "c**3 + c**2 - 1")
+        self.assertEqual(len(result["lowering_certificate"]), 4)
+        self.assertAlmostEqual(float(sp.N(sp.sympify(result["answer_exact"]))), 0.7548776662, places=9)
+
+    def test_self_similar_nested_radical_is_lowered_to_iteration(self):
+        problem = r"$\sqrt{e^{\pi\sqrt{e^{\pi\sqrt{e^{\pi\cdots}}}}}}$ の値を求めよ。"
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "iteration_convergence")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["answer_exact"], "oo")
+        self.assertEqual(result["rate"], "pi/2")
+
+    def test_iteration_query_abstains_outside_proved_regime(self):
+        problem = r"$\sqrt{e^{\frac12\sqrt{e^{\frac12\sqrt{e^{\frac12\cdots}}}}}}$ の値を求めよ。"
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "iteration_convergence")
+        self.assertEqual(ir.tool_calls[0].status, "failed")
+
+    def test_cubic_centroid_locus_is_derived_by_elimination(self):
+        problem = r"曲線 $y=x^3-2x$ 上の3点を頂点とする正三角形の重心の軌跡が囲む部分の面積を求めよ。"
+        ir = run_pipeline(problem)
+        self.assertEqual(ir.intent, "cubic_equilateral_centroid_locus_area")
+        result = ir.tool_calls[0].result
+        self.assertEqual(
+            sp.simplify(sp.sympify(result["answer_exact"]) - 4 * sp.pi * (2 - sp.sqrt(3)) / 9),
+            0,
+        )
+        self.assertAlmostEqual(result["numeric_lobe_check"], float(sp.N(2 * sp.pi * (2 - sp.sqrt(3)) / 9)), places=9)
+
+    def test_cubic_centroid_locus_is_translation_invariant(self):
+        original = run_pipeline(
+            r"曲線 $y=x^3-2x$ 上の3点を頂点とする正三角形の重心の軌跡が囲む部分の面積を求めよ。"
+        )
+        translated = run_pipeline(
+            r"曲線 $y=(x-1)^3-2(x-1)+5$ 上の3点を頂点とする正三角形の重心の軌跡が囲む部分の面積を求めよ。"
+        )
+        self.assertEqual(
+            original.tool_calls[0].result["answer_exact"],
+            translated.tool_calls[0].result["answer_exact"],
+        )
+
+    def test_hilbert_witness_is_synthesized_from_target_correlation(self):
+        ir = run_pipeline(
+            r"\[\frac{\int_{0}^{1}f(x)g(x)dx}{\sqrt{\int_{0}^{1}f(x)^2dx}"
+            r"\sqrt{\int_{0}^{1}g(x)^2dx}}=\cos\frac{\pi}{3}\]を満たす関数を一組求めよ."
+        )
+        self.assertEqual(ir.intent, "hilbert_normalized_inner_product_witness")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["target_correlation"], "1/2")
+        self.assertEqual(result["verification"]["normalized_inner_product"], "1/2")
+
+    def test_prime_reciprocal_series_uses_parity_superset(self):
+        ir = run_pipeline(r"$\displaystyle \sum_{p:素数}\dfrac{1}{p^2}<\frac12$を示せ.")
+        self.assertEqual(ir.intent, "prime_structure_bound_prime_reciprocal_power_series")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["answer_exact"], "True")
+        self.assertEqual(result["lowering_certificate"]["kind"], "prime_type_parity_partition")
+        self.assertLess(sp.Rational(result["rational_upper_bound"]), sp.Rational(1, 2))
+
+    def test_prime_reciprocal_series_abstains_if_bound_is_insufficient(self):
+        ir = run_pipeline(r"$\displaystyle \sum_{p:素数}\dfrac{1}{p^2}<\frac25$を示せ.")
+        self.assertEqual(ir.intent, "prime_structure_bound_prime_reciprocal_power_series")
+        self.assertEqual(ir.tool_calls[0].status, "failed")
+
+    def test_prime_triangle_radius_proof_covers_all_parity_cases(self):
+        ir = run_pipeline("三辺が全て素数である三角形の外接円半径は無理数であることを示せ.")
+        self.assertEqual(ir.intent, "prime_structure_prove_prime_triangle_circumradius_irrational")
+        result = ir.tool_calls[0].result
+        self.assertEqual(result["answer_exact"], "True")
+        self.assertEqual(len(result["case_certificates"]), 4)
 
 
 if __name__ == "__main__":
