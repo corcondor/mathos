@@ -5,21 +5,21 @@
 
 ## 集計
 
-- 保留候補: **200件**
-- 異なる型付き射列: **200件**
+- 保留候補: **212件**
+- 異なる型付き射列: **212件**
 - 問いの型: **24種類**
 - 数値替え: **0件**
 - 各候補の照合母数: **28074問以上**
-- atlas自律探索候補: **188件**
+- atlas自律探索候補: **200件**
 - 今回の自律追加: **12件**
 - 現在の探索深さ下限: **18射**
 
 ## 自律探索
 
-- 世代: `17`
+- 世代: `18`
 - 射アトラス: `92射`
 - チャート: `6領域`
-- 探索試行: `52`
+- 探索試行: `53`
 - 商: `typed operation classes + type aliases + numeric erasure + commuting-block normalization`
 
 ## 候補
@@ -3423,6 +3423,210 @@
 \(\mathcal X_0\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 根の重心を0へ移す平行移動共役を施す，(2) 臨界値を根にもつ消去多項式を作る，(3) 根の重心を0へ移す平行移動共役を施す，(4) 根を逆数へ移す相反多項式をとる，(5) 重複度付き根配置へ移す，(6) 根配置からモニック多項式を再構成する，(7) 根を逆数へ移す相反多項式をとる，(8) 重複度付き根配置へ移す，(9) 根配置からモニック多項式を再構成する，(10) 臨界値を根にもつ消去多項式を作る，(11) 根を逆数へ移す相反多項式をとる，(12) 臨界値を根にもつ消去多項式を作る，(13) 根を二乗するGraeffe変換を施す，(14) 根の重心を0へ移す平行移動共役を施す，(15) 導関数をモニックに再正規化する，(16) 重複度付き根配置へ移す，(17) 根の冪和モーメント列を作る，(18) モーメントからHankel行列族を作る，(19) 主小行列式列をとる，(20) 満たす最小線形漸化式を抽出する。最後に、漸化式の最小次数が低下する係数条件を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
 
 射列: `ShiftConjugacy → CriticalValuePolynomial → ShiftConjugacy → ReciprocalPolynomial → RootMultiset → PolynomialReconstruction → ReciprocalPolynomial → RootMultiset → PolynomialReconstruction → CriticalValuePolynomial → ReciprocalPolynomial → CriticalValuePolynomial → GraeffeTransform → ShiftConjugacy → DerivativeRenormalization → RootMultiset → PowerMomentSequence → HankelConstruction → MinorSequence → RecurrenceExtraction → RecurrenceOrderQuery`
+
+### 平面代数曲線の合成変換（ProjectiveDual・OffsetCurve・HessianCurve・ProjectiveDual）
+
+- ID: `research.autonomous.plane_curve.1c92a4175f`
+- 状態: `unresolved_by_mathos`
+- 射数: `21`
+- 問い: `birational_periodicity`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 正則接線族の射影双対曲線をとる，(2) 法線方向の代数的平行曲線をとる，(3) 定義多項式のHessian曲線をとる，(4) 法線方向の代数的平行曲線をとる，(5) 固定光源からの反射光線族の包絡線をとる，(6) 原点中心の円反転像をとる，(7) 固定基準三角形に関する等角共役Cremona像をとる，(8) 射影閉包をとり無限遠点を加える，(9) 基点を避ける一般アフィンチャートへ移す，(10) 固定非退化二次形式に関する極逆像をとる，(11) 法線族の包絡線である発展曲線をとる，(12) 射影閉包をとり無限遠点を加える，(13) 基点を避ける一般アフィンチャートへ移す，(14) 原点中心の円反転像をとる，(15) 射影閉包をとり無限遠点を加える，(16) 基点を避ける一般アフィンチャートへ移す，(17) 固定光源からの反射光線族の包絡線をとる，(18) 法線族の包絡線である発展曲線をとる，(19) 定義多項式のHessian曲線をとる，(20) 正則接線族の射影双対曲線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `ProjectiveDual → OffsetCurve → HessianCurve → OffsetCurve → Catacaustic → CircleInversion → IsogonalCremona → ProjectiveClosure → AffineChartChange → PolarReciprocal → Evolute → ProjectiveClosure → AffineChartChange → CircleInversion → ProjectiveClosure → AffineChartChange → Catacaustic → Evolute → HessianCurve → ProjectiveDual → BirationalPeriodQuery`
+
+### Markov関手と到達時刻不変量（DoobTransform・StateLumping・MomentRecurrence・DenominatorArithmetic）
+
+- ID: `research.autonomous.markov_dynamics.5da32eaf6a`
+- 状態: `unresolved_by_mathos`
+- 射数: `18`
+- 問い: `hitting_moment_arithmetic`
+- 難度仮説: `21`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「有限既約可逆Markov連鎖と指定状態集合を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 正の固有関数によるDoob変換を施す，(2) 自己同型軌道に沿って強 lumping する，(3) 定常分布に関する時間反転をとる，(4) 恒等遷移との凸結合でlazy化する，(5) 正の固有関数によるDoob変換を施す，(6) 自身との同期積連鎖を作る，(7) 正の固有関数によるDoob変換を施す，(8) 自己同型軌道に沿って強 lumping する，(9) 恒等遷移との凸結合でlazy化する，(10) 自己同型軌道に沿って強 lumping する，(11) 恒等遷移との凸結合でlazy化する，(12) 定常分布に関する時間反転をとる，(13) 指定集合で吸収させ過渡核をとる，(14) 過渡核のGreen作用素をとる，(15) 到達時刻の高次モーメント連立系を作る，(16) モーメント次数方向の漸化式を抽出する，(17) 既約分母と素数ごとの付値列を抽出する。最後に、付値列が周期的または有界となる連鎖を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `DoobTransform → StateLumping → TimeReversal → LazyPerturbation → DoobTransform → ProductChain → DoobTransform → StateLumping → LazyPerturbation → StateLumping → LazyPerturbation → TimeReversal → KilledChain → GreenOperator → HittingMomentSystem → MomentRecurrence → DenominatorArithmetic → MarkovMomentQuery`
+
+### 三角形変換の合成力学（ExcentralTransform・AnticomplementaryTransform・OrbitCompactification・LimitSetExtraction）
+
+- ID: `research.autonomous.triangle_dynamics.267e15069f`
+- 状態: `unresolved_by_mathos`
+- 射数: `20`
+- 問い: `triangle_moduli_dynamics`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 傍心三角形へ移す，(2) 反中点三角形へ移す，(3) 傍心三角形へ移す，(4) 類似重心を標識点として付加する，(5) 各頂点と標識点が定める円の対応交点をとる，(6) 三点を頂点とする向き付き三角形を作る，(7) 類似重心を標識点として付加する，(8) 標識点から三辺への垂足三点をとる，(9) 三点を頂点とする向き付き三角形を作る，(10) 垂足三角形へ移す，(11) 反中点三角形へ移す，(12) 類似重心を標識点として付加する，(13) 標識点を三辺に関して反射した三点をとる，(14) 三点を頂点とする向き付き三角形を作る，(15) 重心・面積・向きを固定して相似正規化する，(16) 相似類のモジュライ点へ射影する，(17) ここまでの合成が誘導する写像を反復する，(18) 退化三角形を境界として軌道をコンパクト化する，(19) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `ExcentralTransform → AnticomplementaryTransform → ExcentralTransform → SymmedianMark → VertexCircleTrace → TriangleFormation → SymmedianMark → PedalProjection → TriangleFormation → OrthicTransform → AnticomplementaryTransform → SymmedianMark → SideReflectionTrace → TriangleFormation → SimilarityNormalization → ModuliProjection → InducedIteration → OrbitCompactification → LimitSetExtraction → TriangleDynamicsQuery`
+
+### 凸体関手の合成力学（MinkowskiPolarSum・IntersectionBody・SteinerSymmetrization・VolumeNormalization）
+
+- ID: `research.autonomous.convex_body.4826ac412f`
+- 状態: `unresolved_by_mathos`
+- 射数: `21`
+- 問い: `convex_functor_fixed_points`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 自身と極体のMinkowski和をとる，(2) 交叉体をとる，(3) 重心体をとる，(4) 自身と極体のMinkowski和をとる，(5) 原点に関する極体をとる，(6) 射影体をとる，(7) 原点に関する極体をとる，(8) 射影体をとる，(9) 差体をとる，(10) 原点に関する極体をとる，(11) 差体をとる，(12) 主慣性軸方向にSteiner対称化する，(13) 交叉体をとる，(14) 差体をとる，(15) 射影体をとる，(16) 交叉体をとる，(17) 重心体をとる，(18) 自身と極体のMinkowski和をとる，(19) 主慣性軸方向にSteiner対称化する，(20) 面積と二次モーメントを固定して正規化する。最後に、合成関手の固定体を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `MinkowskiPolarSum → IntersectionBody → CentroidBody → MinkowskiPolarSum → PolarDual → ProjectionBody → PolarDual → ProjectionBody → DifferenceBody → PolarDual → DifferenceBody → SteinerSymmetrization → IntersectionBody → DifferenceBody → ProjectionBody → IntersectionBody → CentroidBody → MinkowskiPolarSum → SteinerSymmetrization → VolumeNormalization → ConvexFixedPointQuery`
+
+### 多項式変換と算術観測（CriticalValuePolynomial・ShiftConjugacy・MinorSequence・RecurrenceExtraction）
+
+- ID: `research.autonomous.polynomial.aba715f128`
+- 状態: `unresolved_by_mathos`
+- 射数: `19`
+- 問い: `recurrence_order_drop`
+- 難度仮説: `23`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0938`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 臨界値を根にもつ消去多項式を作る，(2) 根の重心を0へ移す平行移動共役を施す，(3) 重複度付き根配置へ移す，(4) 根配置からモニック多項式を再構成する，(5) 根を逆数へ移す相反多項式をとる，(6) 臨界値を根にもつ消去多項式を作る，(7) 根を逆数へ移す相反多項式をとる，(8) 根を二乗するGraeffe変換を施す，(9) 臨界値を根にもつ消去多項式を作る，(10) 導関数をモニックに再正規化する，(11) 根の重心を0へ移す平行移動共役を施す，(12) 重複度付き根配置へ移す，(13) 根配置からモニック多項式を再構成する，(14) 重複度付き根配置へ移す，(15) 根の冪和モーメント列を作る，(16) モーメントからHankel行列族を作る，(17) 主小行列式列をとる，(18) 満たす最小線形漸化式を抽出する。最後に、漸化式の最小次数が低下する係数条件を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `CriticalValuePolynomial → ShiftConjugacy → RootMultiset → PolynomialReconstruction → ReciprocalPolynomial → CriticalValuePolynomial → ReciprocalPolynomial → GraeffeTransform → CriticalValuePolynomial → DerivativeRenormalization → ShiftConjugacy → RootMultiset → PolynomialReconstruction → RootMultiset → PowerMomentSequence → HankelConstruction → MinorSequence → RecurrenceExtraction → RecurrenceOrderQuery`
+
+### 凸体関手の合成力学（MinkowskiPolarSum・PolarDual・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.5ef705e437`
+- 状態: `unresolved_by_mathos`
+- 射数: `20`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 自身と極体のMinkowski和をとる，(2) 原点に関する極体をとる，(3) 主慣性軸方向にSteiner対称化する，(4) 差体をとる，(5) 主慣性軸方向にSteiner対称化する，(6) 射影体をとる，(7) 交叉体をとる，(8) 重心体をとる，(9) 交叉体をとる，(10) 差体をとる，(11) 自身と極体のMinkowski和をとる，(12) 交叉体をとる，(13) 重心体をとる，(14) 差体をとる，(15) 射影体をとる，(16) 面積と二次モーメントを固定して正規化する，(17) ここまでの凸体関手を反復する，(18) 支持関数の軌道へ移す，(19) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `MinkowskiPolarSum → PolarDual → SteinerSymmetrization → DifferenceBody → SteinerSymmetrization → ProjectionBody → IntersectionBody → CentroidBody → IntersectionBody → DifferenceBody → MinkowskiPolarSum → IntersectionBody → CentroidBody → DifferenceBody → ProjectionBody → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（Catacaustic・Evolute・ProjectiveDual・CircleInversion）
+
+- ID: `research.autonomous.plane_curve.7dfcda3b44`
+- 状態: `unresolved_by_mathos`
+- 射数: `21`
+- 問い: `birational_periodicity`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 固定光源からの反射光線族の包絡線をとる，(2) 法線族の包絡線である発展曲線をとる，(3) 固定非退化二次形式に関する極逆像をとる，(4) 射影閉包をとり無限遠点を加える，(5) 基点を避ける一般アフィンチャートへ移す，(6) 法線族の包絡線である発展曲線をとる，(7) 射影閉包をとり無限遠点を加える，(8) 基点を避ける一般アフィンチャートへ移す，(9) 原点中心の円反転像をとる，(10) 固定非退化二次形式に関する極逆像をとる，(11) 原点中心の円反転像をとる，(12) 法線族の包絡線である発展曲線をとる，(13) 固定非退化二次形式に関する極逆像をとる，(14) 固定基準三角形に関する等角共役Cremona像をとる，(15) 法線方向の代数的平行曲線をとる，(16) 射影閉包をとり無限遠点を加える，(17) 基点を避ける一般アフィンチャートへ移す，(18) 法線方向の代数的平行曲線をとる，(19) 正則接線族の射影双対曲線をとる，(20) 原点中心の円反転像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `Catacaustic → Evolute → PolarReciprocal → ProjectiveClosure → AffineChartChange → Evolute → ProjectiveClosure → AffineChartChange → CircleInversion → PolarReciprocal → CircleInversion → Evolute → PolarReciprocal → IsogonalCremona → OffsetCurve → ProjectiveClosure → AffineChartChange → OffsetCurve → ProjectiveDual → CircleInversion → BirationalPeriodQuery`
+
+### 三角形変換の合成力学（CentroidMark・CevianTrace・OrbitCompactification・LimitSetExtraction）
+
+- ID: `research.autonomous.triangle_dynamics.eb1996366b`
+- 状態: `unresolved_by_mathos`
+- 射数: `21`
+- 問い: `triangle_moduli_dynamics`
+- 難度仮説: `26`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 重心を標識点として付加する，(2) 標識点を通る三本のcevianの辺上の足をとる，(3) 三点を頂点とする向き付き三角形を作る，(4) 類似重心を標識点として付加する，(5) 標識点から三辺への垂足三点をとる，(6) 三点を頂点とする向き付き三角形を作る，(7) 垂心を標識点として付加する，(8) 各頂点と標識点が定める円の対応交点をとる，(9) 三点を頂点とする向き付き三角形を作る，(10) 傍心三角形へ移す，(11) 三辺の中点三角形へ移す，(12) 垂足三角形へ移す，(13) 反中点三角形へ移す，(14) 垂足三角形へ移す，(15) 三辺の中点三角形へ移す，(16) 重心・面積・向きを固定して相似正規化する，(17) 相似類のモジュライ点へ射影する，(18) ここまでの合成が誘導する写像を反復する，(19) 退化三角形を境界として軌道をコンパクト化する，(20) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `CentroidMark → CevianTrace → TriangleFormation → SymmedianMark → PedalProjection → TriangleFormation → OrthocenterMark → VertexCircleTrace → TriangleFormation → ExcentralTransform → MedialTransform → OrthicTransform → AnticomplementaryTransform → OrthicTransform → MedialTransform → SimilarityNormalization → ModuliProjection → InducedIteration → OrbitCompactification → LimitSetExtraction → TriangleDynamicsQuery`
+
+### Markov関手と到達時刻不変量（ProductChain・StateLumping・MomentRecurrence・DenominatorArithmetic）
+
+- ID: `research.autonomous.markov_dynamics.e5e7cb602f`
+- 状態: `unresolved_by_mathos`
+- 射数: `20`
+- 問い: `hitting_moment_arithmetic`
+- 難度仮説: `23`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「有限既約可逆Markov連鎖と指定状態集合を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 自身との同期積連鎖を作る，(2) 自己同型軌道に沿って強 lumping する，(3) 自身との同期積連鎖を作る，(4) 自己同型軌道に沿って強 lumping する，(5) 正の固有関数によるDoob変換を施す，(6) 自己同型軌道に沿って強 lumping する，(7) 正の固有関数によるDoob変換を施す，(8) 自身との同期積連鎖を作る，(9) 定常分布に関する時間反転をとる，(10) 正の固有関数によるDoob変換を施す，(11) 定常分布に関する時間反転をとる，(12) 恒等遷移との凸結合でlazy化する，(13) 定常分布に関する時間反転をとる，(14) 恒等遷移との凸結合でlazy化する，(15) 指定集合で吸収させ過渡核をとる，(16) 過渡核のGreen作用素をとる，(17) 到達時刻の高次モーメント連立系を作る，(18) モーメント次数方向の漸化式を抽出する，(19) 既約分母と素数ごとの付値列を抽出する。最後に、付値列が周期的または有界となる連鎖を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `ProductChain → StateLumping → ProductChain → StateLumping → DoobTransform → StateLumping → DoobTransform → ProductChain → TimeReversal → DoobTransform → TimeReversal → LazyPerturbation → TimeReversal → LazyPerturbation → KilledChain → GreenOperator → HittingMomentSystem → MomentRecurrence → DenominatorArithmetic → MarkovMomentQuery`
+
+### 多項式変換と算術観測（RootMultiset・PolynomialReconstruction・RecurrenceExtraction・ModularOrbit）
+
+- ID: `research.autonomous.polynomial.0df696dc2e`
+- 状態: `unresolved_by_mathos`
+- 射数: `20`
+- 問い: `polynomial_arithmetic_dynamics`
+- 難度仮説: `24`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0938`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 重複度付き根配置へ移す，(2) 根配置からモニック多項式を再構成する，(3) 重複度付き根配置へ移す，(4) 根配置からモニック多項式を再構成する，(5) 根を二乗するGraeffe変換を施す，(6) 臨界値を根にもつ消去多項式を作る，(7) 根の重心を0へ移す平行移動共役を施す，(8) 根を逆数へ移す相反多項式をとる，(9) 根を二乗するGraeffe変換を施す，(10) 臨界値を根にもつ消去多項式を作る，(11) 根を逆数へ移す相反多項式をとる，(12) 根の重心を0へ移す平行移動共役を施す，(13) 臨界値を根にもつ消去多項式を作る，(14) 重複度付き根配置へ移す，(15) 根の冪和モーメント列を作る，(16) モーメントからHankel行列族を作る，(17) 主小行列式列をとる，(18) 満たす最小線形漸化式を抽出する，(19) 各素数法での周期と例外素数を抽出する。最後に、周期が有界または特異となる初期多項式を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `RootMultiset → PolynomialReconstruction → RootMultiset → PolynomialReconstruction → GraeffeTransform → CriticalValuePolynomial → ShiftConjugacy → ReciprocalPolynomial → GraeffeTransform → CriticalValuePolynomial → ReciprocalPolynomial → ShiftConjugacy → CriticalValuePolynomial → RootMultiset → PowerMomentSequence → HankelConstruction → MinorSequence → RecurrenceExtraction → ModularOrbit → PolynomialArithmeticQuery`
+
+### 三角形変換の合成力学（SymmedianMark・PedalProjection・OrbitCompactification・LimitSetExtraction）
+
+- ID: `research.autonomous.triangle_dynamics.c19536187e`
+- 状態: `unresolved_by_mathos`
+- 射数: `18`
+- 問い: `triangle_moduli_dynamics`
+- 難度仮説: `22`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「鋭角不等辺三角形を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 類似重心を標識点として付加する，(2) 標識点から三辺への垂足三点をとる，(3) 三点を頂点とする向き付き三角形を作る，(4) 内心を標識点として付加する，(5) 各頂点と標識点が定める円の対応交点をとる，(6) 三点を頂点とする向き付き三角形を作る，(7) 外心を標識点として付加する，(8) 標識点を通る三本のcevianの辺上の足をとる，(9) 三点を頂点とする向き付き三角形を作る，(10) 垂足三角形へ移す，(11) 反中点三角形へ移す，(12) 傍心三角形へ移す，(13) 重心・面積・向きを固定して相似正規化する，(14) 相似類のモジュライ点へ射影する，(15) ここまでの合成が誘導する写像を反復する，(16) 退化三角形を境界として軌道をコンパクト化する，(17) 極限集合と周期点データを抽出する。最後に、全周期軌道、吸引域、退化境界上の極限を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `SymmedianMark → PedalProjection → TriangleFormation → IncenterMark → VertexCircleTrace → TriangleFormation → CircumcenterMark → CevianTrace → TriangleFormation → OrthicTransform → AnticomplementaryTransform → ExcentralTransform → SimilarityNormalization → ModuliProjection → InducedIteration → OrbitCompactification → LimitSetExtraction → TriangleDynamicsQuery`
+
+### 凸体関手の合成力学（SteinerSymmetrization・PolarDual・ProjectionBody・VolumeNormalization）
+
+- ID: `research.autonomous.convex_body.3f42c15de5`
+- 状態: `unresolved_by_mathos`
+- 射数: `18`
+- 問い: `convex_functor_fixed_points`
+- 難度仮説: `21`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 主慣性軸方向にSteiner対称化する，(2) 原点に関する極体をとる，(3) 主慣性軸方向にSteiner対称化する，(4) 交叉体をとる，(5) 重心体をとる，(6) 自身と極体のMinkowski和をとる，(7) 重心体をとる，(8) 自身と極体のMinkowski和をとる，(9) 重心体をとる，(10) 自身と極体のMinkowski和をとる，(11) 交叉体をとる，(12) 差体をとる，(13) 原点に関する極体をとる，(14) 射影体をとる，(15) 差体をとる，(16) 射影体をとる，(17) 面積と二次モーメントを固定して正規化する。最後に、合成関手の固定体を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `SteinerSymmetrization → PolarDual → SteinerSymmetrization → IntersectionBody → CentroidBody → MinkowskiPolarSum → CentroidBody → MinkowskiPolarSum → CentroidBody → MinkowskiPolarSum → IntersectionBody → DifferenceBody → PolarDual → ProjectionBody → DifferenceBody → ProjectionBody → VolumeNormalization → ConvexFixedPointQuery`
 
 ## 注意
 
