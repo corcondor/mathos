@@ -2,23 +2,23 @@
   "autonomous_search": {
     "added": 12,
     "atlas_morphisms": 92,
-    "attempts": 173,
+    "attempts": 172,
     "base_maximum_nearest_similarity": 0.82,
-    "depth_ceiling": 34,
-    "depth_floor": 31,
+    "depth_ceiling": 35,
+    "depth_floor": 32,
     "domain_counts": {
       "cayley_spectral": 17,
-      "convex_body": 126,
+      "convex_body": 131,
       "markov_dynamics": 67,
-      "plane_curve": 126,
-      "polynomial": 108,
+      "plane_curve": 132,
+      "polynomial": 109,
       "triangle_dynamics": 68
     },
     "domains": 6,
-    "epoch": 44,
+    "epoch": 45,
     "quotient": "typed operation classes + type aliases + numeric erasure + commuting-block normalization",
     "requested": 12,
-    "seed": 265159352978267,
+    "seed": 145978698877416,
     "similarity_rule": "max(0.55, 0.82 - 0.015 * (depth - 10))"
   },
   "candidates": [
@@ -44164,9 +44164,1167 @@
         "error": null,
         "passed": true
       }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:48415acd2d3229b7",
+      "constraint_skeleton": [
+        "square_free",
+        "monic_normalization",
+        "degree_at_least_three"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.polynomial.48415acd2d",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 38
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0938,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "CriticalValuePolynomial",
+        "ReciprocalPolynomial",
+        "RootMultiset",
+        "PolynomialReconstruction",
+        "RootMultiset",
+        "PolynomialReconstruction",
+        "ReciprocalPolynomial",
+        "CriticalValuePolynomial",
+        "ShiftConjugacy",
+        "DerivativeRenormalization",
+        "ReciprocalPolynomial",
+        "CriticalValuePolynomial",
+        "ReciprocalPolynomial",
+        "RootMultiset",
+        "PolynomialReconstruction",
+        "ReciprocalPolynomial",
+        "RootMultiset",
+        "PolynomialReconstruction",
+        "DerivativeRenormalization",
+        "ShiftConjugacy",
+        "DerivativeRenormalization",
+        "CriticalValuePolynomial",
+        "GraeffeTransform",
+        "DerivativeRenormalization",
+        "ShiftConjugacy",
+        "CriticalValuePolynomial",
+        "DerivativeRenormalization",
+        "RootMultiset",
+        "PowerMomentSequence",
+        "HankelConstruction",
+        "MinorSequence",
+        "RecurrenceExtraction",
+        "ModularOrbit",
+        "PolynomialArithmeticQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "polynomial_arithmetic_dynamics",
+      "quotient_signature": "Polynomial|CriticalValuePolynomial/ReciprocalPolynomial/RootMultiset/PolynomialReconstruction/RootMultiset/PolynomialReconstruction/ReciprocalPolynomial/CriticalValuePolynomial/ShiftConjugacy/DerivativeRenormalization/ReciprocalPolynomial/CriticalValuePolynomial/ReciprocalPolynomial/RootMultiset/PolynomialReconstruction/ReciprocalPolynomial/RootMultiset/PolynomialReconstruction/DerivativeRenormalization/ShiftConjugacy/DerivativeRenormalization/CriticalValuePolynomial/GraeffeTransform/DerivativeRenormalization/ShiftConjugacy/CriticalValuePolynomial/DerivativeRenormalization/RootMultiset/PowerMomentSequence/HankelConstruction/MinorSequence/RecurrenceExtraction/ModularOrbit/PolynomialArithmeticQuery|Classification|degree_at_least_three,monic_normalization,square_free",
+      "search_trace": {
+        "domain": "polynomial",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.5333,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「重根を持たないモニック実多項式を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 臨界値を根にもつ消去多項式を作る，(2) 根を逆数へ移す相反多項式をとる，(3) 重複度付き根配置へ移す，(4) 根配置からモニック多項式を再構成する，(5) 重複度付き根配置へ移す，(6) 根配置からモニック多項式を再構成する，(7) 根を逆数へ移す相反多項式をとる，(8) 臨界値を根にもつ消去多項式を作る，(9) 根の重心を0へ移す平行移動共役を施す，(10) 導関数をモニックに再正規化する，(11) 根を逆数へ移す相反多項式をとる，(12) 臨界値を根にもつ消去多項式を作る，(13) 根を逆数へ移す相反多項式をとる，(14) 重複度付き根配置へ移す，(15) 根配置からモニック多項式を再構成する，(16) 根を逆数へ移す相反多項式をとる，(17) 重複度付き根配置へ移す，(18) 根配置からモニック多項式を再構成する，(19) 導関数をモニックに再正規化する，(20) 根の重心を0へ移す平行移動共役を施す，(21) 導関数をモニックに再正規化する，(22) 臨界値を根にもつ消去多項式を作る，(23) 根を二乗するGraeffe変換を施す，(24) 導関数をモニックに再正規化する，(25) 根の重心を0へ移す平行移動共役を施す，(26) 臨界値を根にもつ消去多項式を作る，(27) 導関数をモニックに再正規化する，(28) 重複度付き根配置へ移す，(29) 根の冪和モーメント列を作る，(30) モーメントからHankel行列族を作る，(31) 主小行列式列をとる，(32) 満たす最小線形漸化式を抽出する，(33) 各素数法での周期と例外素数を抽出する。最後に、周期が有界または特異となる初期多項式を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:ReciprocalPolynomial:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PolynomialReconstruction:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:GraeffeTransform:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:ShiftConjugacy:Polynomial -> Polynomial:CriticalValuePolynomial:Polynomial -> Polynomial:DerivativeRenormalization:Polynomial -> Polynomial:RootMultiset:RootConfiguration -> RootConfiguration:PowerMomentSequence:MomentSequence -> MomentSequence:HankelConstruction:HankelMatrix -> HankelMatrix:MinorSequence:DeterminantSequence -> DeterminantSequence:RecurrenceExtraction:RecurrenceData -> RecurrenceData:ModularOrbit:ArithmeticData -> ArithmeticData:PolynomialArithmeticQuery:Classification",
+      "title": "多項式変換と算術観測（CriticalValuePolynomial・ReciprocalPolynomial・RecurrenceExtraction・ModularOrbit）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:ac5213cea39dfd6b",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.ac5213cea3",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 38
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0625,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ProjectionBody",
+        "SteinerSymmetrization",
+        "ProjectionBody",
+        "IntersectionBody",
+        "DifferenceBody",
+        "SteinerSymmetrization",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "PolarDual",
+        "ProjectionBody",
+        "DifferenceBody",
+        "PolarDual",
+        "CentroidBody",
+        "ProjectionBody",
+        "MinkowskiPolarSum",
+        "PolarDual",
+        "DifferenceBody",
+        "IntersectionBody",
+        "ProjectionBody",
+        "IntersectionBody",
+        "MinkowskiPolarSum",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "CentroidBody",
+        "MinkowskiPolarSum",
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|ProjectionBody/SteinerSymmetrization/ProjectionBody/IntersectionBody/DifferenceBody/SteinerSymmetrization/IntersectionBody/SteinerSymmetrization/DifferenceBody/PolarDual/ProjectionBody/DifferenceBody/PolarDual/CentroidBody/ProjectionBody/MinkowskiPolarSum/PolarDual/DifferenceBody/IntersectionBody/ProjectionBody/IntersectionBody/MinkowskiPolarSum/SteinerSymmetrization/DifferenceBody/CentroidBody/MinkowskiPolarSum/CentroidBody/SteinerSymmetrization/PolarDual/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.5,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 射影体をとる，(2) 主慣性軸方向にSteiner対称化する，(3) 射影体をとる，(4) 交叉体をとる，(5) 差体をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 交叉体をとる，(8) 主慣性軸方向にSteiner対称化する，(9) 差体をとる，(10) 原点に関する極体をとる，(11) 射影体をとる，(12) 差体をとる，(13) 原点に関する極体をとる，(14) 重心体をとる，(15) 射影体をとる，(16) 自身と極体のMinkowski和をとる，(17) 原点に関する極体をとる，(18) 差体をとる，(19) 交叉体をとる，(20) 射影体をとる，(21) 交叉体をとる，(22) 自身と極体のMinkowski和をとる，(23) 主慣性軸方向にSteiner対称化する，(24) 差体をとる，(25) 重心体をとる，(26) 自身と極体のMinkowski和をとる，(27) 重心体をとる，(28) 主慣性軸方向にSteiner対称化する，(29) 原点に関する極体をとる，(30) 面積と二次モーメントを固定して正規化する，(31) ここまでの凸体関手を反復する，(32) 支持関数の軌道へ移す，(33) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（ProjectionBody・SteinerSymmetrization・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:5b93ebe6e63dc81e",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.5b93ebe6e6",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 37
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "HessianCurve",
+        "Evolute",
+        "OffsetCurve",
+        "Evolute",
+        "Catacaustic",
+        "IsogonalCremona",
+        "Catacaustic",
+        "OffsetCurve",
+        "IsogonalCremona",
+        "Evolute",
+        "IsogonalCremona",
+        "PolarReciprocal",
+        "HessianCurve",
+        "CircleInversion",
+        "ProjectiveDual",
+        "PolarReciprocal",
+        "Catacaustic",
+        "HessianCurve",
+        "ProjectiveDual",
+        "CircleInversion",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "CircleInversion",
+        "Catacaustic",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "IsogonalCremona",
+        "Catacaustic",
+        "Evolute",
+        "HessianCurve",
+        "PolarReciprocal",
+        "Evolute",
+        "ProjectiveDual",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|HessianCurve/Evolute/OffsetCurve/Evolute/Catacaustic/IsogonalCremona/Catacaustic/OffsetCurve/IsogonalCremona/Evolute/IsogonalCremona/HessianCurve/PolarReciprocal/CircleInversion/PolarReciprocal/ProjectiveDual/Catacaustic/HessianCurve/ProjectiveDual/CircleInversion/ProjectiveDual/IsogonalCremona/CircleInversion/Catacaustic/ProjectiveClosure/AffineChartChange/IsogonalCremona/Catacaustic/Evolute/HessianCurve/PolarReciprocal/Evolute/ProjectiveDual/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.3864,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 定義多項式のHessian曲線をとる，(2) 法線族の包絡線である発展曲線をとる，(3) 法線方向の代数的平行曲線をとる，(4) 法線族の包絡線である発展曲線をとる，(5) 固定光源からの反射光線族の包絡線をとる，(6) 固定基準三角形に関する等角共役Cremona像をとる，(7) 固定光源からの反射光線族の包絡線をとる，(8) 法線方向の代数的平行曲線をとる，(9) 固定基準三角形に関する等角共役Cremona像をとる，(10) 法線族の包絡線である発展曲線をとる，(11) 固定基準三角形に関する等角共役Cremona像をとる，(12) 固定非退化二次形式に関する極逆像をとる，(13) 定義多項式のHessian曲線をとる，(14) 原点中心の円反転像をとる，(15) 正則接線族の射影双対曲線をとる，(16) 固定非退化二次形式に関する極逆像をとる，(17) 固定光源からの反射光線族の包絡線をとる，(18) 定義多項式のHessian曲線をとる，(19) 正則接線族の射影双対曲線をとる，(20) 原点中心の円反転像をとる，(21) 正則接線族の射影双対曲線をとる，(22) 固定基準三角形に関する等角共役Cremona像をとる，(23) 原点中心の円反転像をとる，(24) 固定光源からの反射光線族の包絡線をとる，(25) 射影閉包をとり無限遠点を加える，(26) 基点を避ける一般アフィンチャートへ移す，(27) 固定基準三角形に関する等角共役Cremona像をとる，(28) 固定光源からの反射光線族の包絡線をとる，(29) 法線族の包絡線である発展曲線をとる，(30) 定義多項式のHessian曲線をとる，(31) 固定非退化二次形式に関する極逆像をとる，(32) 法線族の包絡線である発展曲線をとる，(33) 正則接線族の射影双対曲線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（HessianCurve・Evolute・Evolute・ProjectiveDual）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:a783afd99718d030",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.a783afd997",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 37
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ProjectiveDual",
+        "CircleInversion",
+        "OffsetCurve",
+        "PolarReciprocal",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "IsogonalCremona",
+        "Evolute",
+        "IsogonalCremona",
+        "PolarReciprocal",
+        "ProjectiveDual",
+        "HessianCurve",
+        "PolarReciprocal",
+        "IsogonalCremona",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "OffsetCurve",
+        "Catacaustic",
+        "ProjectiveDual",
+        "PolarReciprocal",
+        "IsogonalCremona",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "OffsetCurve",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "Catacaustic",
+        "CircleInversion",
+        "ProjectiveDual",
+        "PolarReciprocal",
+        "Evolute",
+        "HessianCurve",
+        "CircleInversion",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|ProjectiveDual/CircleInversion/OffsetCurve/PolarReciprocal/ProjectiveClosure/AffineChartChange/IsogonalCremona/Evolute/IsogonalCremona/HessianCurve/PolarReciprocal/PolarReciprocal/ProjectiveDual/IsogonalCremona/ProjectiveDual/IsogonalCremona/OffsetCurve/Catacaustic/PolarReciprocal/ProjectiveDual/IsogonalCremona/ProjectiveClosure/AffineChartChange/OffsetCurve/ProjectiveClosure/AffineChartChange/Catacaustic/CircleInversion/PolarReciprocal/ProjectiveDual/Evolute/HessianCurve/CircleInversion/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.3714,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 正則接線族の射影双対曲線をとる，(2) 原点中心の円反転像をとる，(3) 法線方向の代数的平行曲線をとる，(4) 固定非退化二次形式に関する極逆像をとる，(5) 射影閉包をとり無限遠点を加える，(6) 基点を避ける一般アフィンチャートへ移す，(7) 固定基準三角形に関する等角共役Cremona像をとる，(8) 法線族の包絡線である発展曲線をとる，(9) 固定基準三角形に関する等角共役Cremona像をとる，(10) 固定非退化二次形式に関する極逆像をとる，(11) 正則接線族の射影双対曲線をとる，(12) 定義多項式のHessian曲線をとる，(13) 固定非退化二次形式に関する極逆像をとる，(14) 固定基準三角形に関する等角共役Cremona像をとる，(15) 正則接線族の射影双対曲線をとる，(16) 固定基準三角形に関する等角共役Cremona像をとる，(17) 法線方向の代数的平行曲線をとる，(18) 固定光源からの反射光線族の包絡線をとる，(19) 正則接線族の射影双対曲線をとる，(20) 固定非退化二次形式に関する極逆像をとる，(21) 固定基準三角形に関する等角共役Cremona像をとる，(22) 射影閉包をとり無限遠点を加える，(23) 基点を避ける一般アフィンチャートへ移す，(24) 法線方向の代数的平行曲線をとる，(25) 射影閉包をとり無限遠点を加える，(26) 基点を避ける一般アフィンチャートへ移す，(27) 固定光源からの反射光線族の包絡線をとる，(28) 原点中心の円反転像をとる，(29) 正則接線族の射影双対曲線をとる，(30) 固定非退化二次形式に関する極逆像をとる，(31) 法線族の包絡線である発展曲線をとる，(32) 定義多項式のHessian曲線をとる，(33) 原点中心の円反転像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（ProjectiveDual・CircleInversion・HessianCurve・CircleInversion）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:b0449921081d56b5",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 32,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.b044992108",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 36
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "IntersectionBody",
+        "ProjectionBody",
+        "MinkowskiPolarSum",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "CentroidBody",
+        "IntersectionBody",
+        "DifferenceBody",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "ProjectionBody",
+        "PolarDual",
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "ProjectionBody",
+        "PolarDual",
+        "ProjectionBody",
+        "DifferenceBody",
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "ProjectionBody",
+        "DifferenceBody",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 32,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|IntersectionBody/ProjectionBody/MinkowskiPolarSum/SteinerSymmetrization/PolarDual/MinkowskiPolarSum/CentroidBody/IntersectionBody/DifferenceBody/IntersectionBody/SteinerSymmetrization/ProjectionBody/PolarDual/CentroidBody/SteinerSymmetrization/PolarDual/SteinerSymmetrization/PolarDual/ProjectionBody/PolarDual/ProjectionBody/DifferenceBody/CentroidBody/SteinerSymmetrization/DifferenceBody/ProjectionBody/DifferenceBody/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.5,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 32
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 交叉体をとる，(2) 射影体をとる，(3) 自身と極体のMinkowski和をとる，(4) 主慣性軸方向にSteiner対称化する，(5) 原点に関する極体をとる，(6) 自身と極体のMinkowski和をとる，(7) 重心体をとる，(8) 交叉体をとる，(9) 差体をとる，(10) 交叉体をとる，(11) 主慣性軸方向にSteiner対称化する，(12) 射影体をとる，(13) 原点に関する極体をとる，(14) 重心体をとる，(15) 主慣性軸方向にSteiner対称化する，(16) 原点に関する極体をとる，(17) 主慣性軸方向にSteiner対称化する，(18) 原点に関する極体をとる，(19) 射影体をとる，(20) 原点に関する極体をとる，(21) 射影体をとる，(22) 差体をとる，(23) 重心体をとる，(24) 主慣性軸方向にSteiner対称化する，(25) 差体をとる，(26) 射影体をとる，(27) 差体をとる，(28) 面積と二次モーメントを固定して正規化する，(29) ここまでの凸体関手を反復する，(30) 支持関数の軌道へ移す，(31) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（IntersectionBody・ProjectionBody・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:e834f8e48b2674a1",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 35,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.e834f8e48b",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 39
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "ProjectionBody",
+        "PolarDual",
+        "CentroidBody",
+        "PolarDual",
+        "IntersectionBody",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "CentroidBody",
+        "DifferenceBody",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "DifferenceBody",
+        "CentroidBody",
+        "ProjectionBody",
+        "IntersectionBody",
+        "ProjectionBody",
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "CentroidBody",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "IntersectionBody",
+        "DifferenceBody",
+        "MinkowskiPolarSum",
+        "IntersectionBody",
+        "MinkowskiPolarSum",
+        "DifferenceBody",
+        "SteinerSymmetrization",
+        "MinkowskiPolarSum",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 35,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|ProjectionBody/PolarDual/CentroidBody/PolarDual/IntersectionBody/PolarDual/MinkowskiPolarSum/CentroidBody/DifferenceBody/IntersectionBody/SteinerSymmetrization/DifferenceBody/CentroidBody/ProjectionBody/IntersectionBody/ProjectionBody/CentroidBody/SteinerSymmetrization/PolarDual/CentroidBody/PolarDual/MinkowskiPolarSum/IntersectionBody/DifferenceBody/MinkowskiPolarSum/IntersectionBody/DifferenceBody/MinkowskiPolarSum/SteinerSymmetrization/MinkowskiPolarSum/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.5278,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 35
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 射影体をとる，(2) 原点に関する極体をとる，(3) 重心体をとる，(4) 原点に関する極体をとる，(5) 交叉体をとる，(6) 原点に関する極体をとる，(7) 自身と極体のMinkowski和をとる，(8) 重心体をとる，(9) 差体をとる，(10) 交叉体をとる，(11) 主慣性軸方向にSteiner対称化する，(12) 差体をとる，(13) 重心体をとる，(14) 射影体をとる，(15) 交叉体をとる，(16) 射影体をとる，(17) 重心体をとる，(18) 主慣性軸方向にSteiner対称化する，(19) 原点に関する極体をとる，(20) 重心体をとる，(21) 原点に関する極体をとる，(22) 自身と極体のMinkowski和をとる，(23) 交叉体をとる，(24) 差体をとる，(25) 自身と極体のMinkowski和をとる，(26) 交叉体をとる，(27) 自身と極体のMinkowski和をとる，(28) 差体をとる，(29) 主慣性軸方向にSteiner対称化する，(30) 自身と極体のMinkowski和をとる，(31) 面積と二次モーメントを固定して正規化する，(32) ここまでの凸体関手を反復する，(33) 支持関数の軌道へ移す，(34) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（ProjectionBody・PolarDual・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:f785743df0707756",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.f785743df0",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 38
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "PolarReciprocal",
+        "Catacaustic",
+        "HessianCurve",
+        "OffsetCurve",
+        "Evolute",
+        "CircleInversion",
+        "PolarReciprocal",
+        "ProjectiveDual",
+        "OffsetCurve",
+        "ProjectiveDual",
+        "Evolute",
+        "PolarReciprocal",
+        "CircleInversion",
+        "ProjectiveDual",
+        "Catacaustic",
+        "CircleInversion",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "OffsetCurve",
+        "CircleInversion",
+        "IsogonalCremona",
+        "OffsetCurve",
+        "CircleInversion",
+        "Catacaustic",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "HessianCurve",
+        "OffsetCurve",
+        "HessianCurve",
+        "Evolute",
+        "ProjectiveClosure",
+        "ResolveSingularities",
+        "CurveInvariantExtraction",
+        "SingularityQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "singularity_classification",
+      "quotient_signature": "PlaneCurve|PolarReciprocal/Catacaustic/HessianCurve/OffsetCurve/Evolute/CircleInversion/PolarReciprocal/ProjectiveDual/OffsetCurve/ProjectiveDual/Evolute/PolarReciprocal/CircleInversion/ProjectiveDual/Catacaustic/CircleInversion/ProjectiveClosure/AffineChartChange/OffsetCurve/CircleInversion/IsogonalCremona/OffsetCurve/CircleInversion/Catacaustic/ProjectiveClosure/AffineChartChange/HessianCurve/OffsetCurve/HessianCurve/Evolute/ProjectiveClosure/ResolveSingularities/CurveInvariantExtraction/SingularityQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.325,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 固定非退化二次形式に関する極逆像をとる，(2) 固定光源からの反射光線族の包絡線をとる，(3) 定義多項式のHessian曲線をとる，(4) 法線方向の代数的平行曲線をとる，(5) 法線族の包絡線である発展曲線をとる，(6) 原点中心の円反転像をとる，(7) 固定非退化二次形式に関する極逆像をとる，(8) 正則接線族の射影双対曲線をとる，(9) 法線方向の代数的平行曲線をとる，(10) 正則接線族の射影双対曲線をとる，(11) 法線族の包絡線である発展曲線をとる，(12) 固定非退化二次形式に関する極逆像をとる，(13) 原点中心の円反転像をとる，(14) 正則接線族の射影双対曲線をとる，(15) 固定光源からの反射光線族の包絡線をとる，(16) 原点中心の円反転像をとる，(17) 射影閉包をとり無限遠点を加える，(18) 基点を避ける一般アフィンチャートへ移す，(19) 法線方向の代数的平行曲線をとる，(20) 原点中心の円反転像をとる，(21) 固定基準三角形に関する等角共役Cremona像をとる，(22) 法線方向の代数的平行曲線をとる，(23) 原点中心の円反転像をとる，(24) 固定光源からの反射光線族の包絡線をとる，(25) 射影閉包をとり無限遠点を加える，(26) 基点を避ける一般アフィンチャートへ移す，(27) 定義多項式のHessian曲線をとる，(28) 法線方向の代数的平行曲線をとる，(29) 定義多項式のHessian曲線をとる，(30) 法線族の包絡線である発展曲線をとる，(31) 射影閉包をとり無限遠点を加える，(32) 全特異点を解消して正規化曲線を得る，(33) 次数、分岐、種数、自己交点データを抽出する。最後に、全特異点型と実枝数を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:ResolveSingularities:ResolvedCurve -> ResolvedCurve:CurveInvariantExtraction:CurveInvariants -> CurveInvariants:SingularityQuery:Classification",
+      "title": "平面代数曲線の合成変換（PolarReciprocal・Catacaustic・ResolveSingularities・CurveInvariantExtraction）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:6aadfce333df2a14",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 32,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.6aadfce333",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 35
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "Evolute",
+        "Catacaustic",
+        "IsogonalCremona",
+        "ProjectiveDual",
+        "PolarReciprocal",
+        "Catacaustic",
+        "OffsetCurve",
+        "CircleInversion",
+        "PolarReciprocal",
+        "OffsetCurve",
+        "IsogonalCremona",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "Catacaustic",
+        "CircleInversion",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "OffsetCurve",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "OffsetCurve",
+        "PolarReciprocal",
+        "Catacaustic",
+        "IsogonalCremona",
+        "Evolute",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "CircleInversion",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "PolarReciprocal",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 32,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|Evolute/Catacaustic/IsogonalCremona/PolarReciprocal/ProjectiveDual/Catacaustic/OffsetCurve/CircleInversion/PolarReciprocal/OffsetCurve/IsogonalCremona/ProjectiveClosure/AffineChartChange/Catacaustic/CircleInversion/ProjectiveClosure/AffineChartChange/OffsetCurve/ProjectiveClosure/AffineChartChange/OffsetCurve/PolarReciprocal/Catacaustic/IsogonalCremona/Evolute/ProjectiveDual/IsogonalCremona/CircleInversion/ProjectiveClosure/AffineChartChange/PolarReciprocal/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.3077,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 32
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 法線族の包絡線である発展曲線をとる，(2) 固定光源からの反射光線族の包絡線をとる，(3) 固定基準三角形に関する等角共役Cremona像をとる，(4) 正則接線族の射影双対曲線をとる，(5) 固定非退化二次形式に関する極逆像をとる，(6) 固定光源からの反射光線族の包絡線をとる，(7) 法線方向の代数的平行曲線をとる，(8) 原点中心の円反転像をとる，(9) 固定非退化二次形式に関する極逆像をとる，(10) 法線方向の代数的平行曲線をとる，(11) 固定基準三角形に関する等角共役Cremona像をとる，(12) 射影閉包をとり無限遠点を加える，(13) 基点を避ける一般アフィンチャートへ移す，(14) 固定光源からの反射光線族の包絡線をとる，(15) 原点中心の円反転像をとる，(16) 射影閉包をとり無限遠点を加える，(17) 基点を避ける一般アフィンチャートへ移す，(18) 法線方向の代数的平行曲線をとる，(19) 射影閉包をとり無限遠点を加える，(20) 基点を避ける一般アフィンチャートへ移す，(21) 法線方向の代数的平行曲線をとる，(22) 固定非退化二次形式に関する極逆像をとる，(23) 固定光源からの反射光線族の包絡線をとる，(24) 固定基準三角形に関する等角共役Cremona像をとる，(25) 法線族の包絡線である発展曲線をとる，(26) 正則接線族の射影双対曲線をとる，(27) 固定基準三角形に関する等角共役Cremona像をとる，(28) 原点中心の円反転像をとる，(29) 射影閉包をとり無限遠点を加える，(30) 基点を避ける一般アフィンチャートへ移す，(31) 固定非退化二次形式に関する極逆像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（Evolute・Catacaustic・AffineChartChange・PolarReciprocal）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:abd1e584046704e1",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 32,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.abd1e58404",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 36
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "CentroidBody",
+        "SteinerSymmetrization",
+        "IntersectionBody",
+        "CentroidBody",
+        "PolarDual",
+        "SteinerSymmetrization",
+        "CentroidBody",
+        "PolarDual",
+        "DifferenceBody",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "MinkowskiPolarSum",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "CentroidBody",
+        "DifferenceBody",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "CentroidBody",
+        "DifferenceBody",
+        "MinkowskiPolarSum",
+        "DifferenceBody",
+        "PolarDual",
+        "SteinerSymmetrization",
+        "ProjectionBody",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 32,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|CentroidBody/SteinerSymmetrization/IntersectionBody/CentroidBody/PolarDual/SteinerSymmetrization/CentroidBody/PolarDual/DifferenceBody/IntersectionBody/SteinerSymmetrization/MinkowskiPolarSum/PolarDual/MinkowskiPolarSum/PolarDual/MinkowskiPolarSum/CentroidBody/DifferenceBody/IntersectionBody/SteinerSymmetrization/CentroidBody/DifferenceBody/DifferenceBody/MinkowskiPolarSum/PolarDual/SteinerSymmetrization/ProjectionBody/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.5312,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 32
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 重心体をとる，(2) 主慣性軸方向にSteiner対称化する，(3) 交叉体をとる，(4) 重心体をとる，(5) 原点に関する極体をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 重心体をとる，(8) 原点に関する極体をとる，(9) 差体をとる，(10) 交叉体をとる，(11) 主慣性軸方向にSteiner対称化する，(12) 自身と極体のMinkowski和をとる，(13) 原点に関する極体をとる，(14) 自身と極体のMinkowski和をとる，(15) 原点に関する極体をとる，(16) 自身と極体のMinkowski和をとる，(17) 重心体をとる，(18) 差体をとる，(19) 交叉体をとる，(20) 主慣性軸方向にSteiner対称化する，(21) 重心体をとる，(22) 差体をとる，(23) 自身と極体のMinkowski和をとる，(24) 差体をとる，(25) 原点に関する極体をとる，(26) 主慣性軸方向にSteiner対称化する，(27) 射影体をとる，(28) 面積と二次モーメントを固定して正規化する，(29) ここまでの凸体関手を反復する，(30) 支持関数の軌道へ移す，(31) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:CentroidBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（CentroidBody・SteinerSymmetrization・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:6949274c7d4802d6",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 33,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.6949274c7d",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 36
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0938,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "Evolute",
+        "HessianCurve",
+        "IsogonalCremona",
+        "ProjectiveDual",
+        "HessianCurve",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "ProjectiveDual",
+        "HessianCurve",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "HessianCurve",
+        "OffsetCurve",
+        "PolarReciprocal",
+        "Evolute",
+        "PolarReciprocal",
+        "Evolute",
+        "CircleInversion",
+        "HessianCurve",
+        "CircleInversion",
+        "IsogonalCremona",
+        "Evolute",
+        "IsogonalCremona",
+        "CircleInversion",
+        "ProjectiveDual",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "Evolute",
+        "OffsetCurve",
+        "IsogonalCremona",
+        "OffsetCurve",
+        "CircleInversion",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 33,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|Evolute/HessianCurve/IsogonalCremona/HessianCurve/ProjectiveDual/ProjectiveClosure/AffineChartChange/HessianCurve/ProjectiveDual/ProjectiveClosure/AffineChartChange/HessianCurve/OffsetCurve/PolarReciprocal/Evolute/PolarReciprocal/Evolute/CircleInversion/HessianCurve/CircleInversion/IsogonalCremona/Evolute/IsogonalCremona/CircleInversion/ProjectiveDual/ProjectiveClosure/AffineChartChange/Evolute/OffsetCurve/IsogonalCremona/OffsetCurve/CircleInversion/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.3333,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 33
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 法線族の包絡線である発展曲線をとる，(2) 定義多項式のHessian曲線をとる，(3) 固定基準三角形に関する等角共役Cremona像をとる，(4) 正則接線族の射影双対曲線をとる，(5) 定義多項式のHessian曲線をとる，(6) 射影閉包をとり無限遠点を加える，(7) 基点を避ける一般アフィンチャートへ移す，(8) 正則接線族の射影双対曲線をとる，(9) 定義多項式のHessian曲線をとる，(10) 射影閉包をとり無限遠点を加える，(11) 基点を避ける一般アフィンチャートへ移す，(12) 定義多項式のHessian曲線をとる，(13) 法線方向の代数的平行曲線をとる，(14) 固定非退化二次形式に関する極逆像をとる，(15) 法線族の包絡線である発展曲線をとる，(16) 固定非退化二次形式に関する極逆像をとる，(17) 法線族の包絡線である発展曲線をとる，(18) 原点中心の円反転像をとる，(19) 定義多項式のHessian曲線をとる，(20) 原点中心の円反転像をとる，(21) 固定基準三角形に関する等角共役Cremona像をとる，(22) 法線族の包絡線である発展曲線をとる，(23) 固定基準三角形に関する等角共役Cremona像をとる，(24) 原点中心の円反転像をとる，(25) 正則接線族の射影双対曲線をとる，(26) 射影閉包をとり無限遠点を加える，(27) 基点を避ける一般アフィンチャートへ移す，(28) 法線族の包絡線である発展曲線をとる，(29) 法線方向の代数的平行曲線をとる，(30) 固定基準三角形に関する等角共役Cremona像をとる，(31) 法線方向の代数的平行曲線をとる，(32) 原点中心の円反転像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（Evolute・HessianCurve・OffsetCurve・CircleInversion）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:0c3b85b740c98a1c",
+      "constraint_skeleton": [
+        "origin_symmetric",
+        "strictly_convex",
+        "mod_linear_equivalence"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.convex_body.0c3b85b740",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 38
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0625,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "MinkowskiPolarSum",
+        "CentroidBody",
+        "IntersectionBody",
+        "CentroidBody",
+        "DifferenceBody",
+        "IntersectionBody",
+        "MinkowskiPolarSum",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "CentroidBody",
+        "PolarDual",
+        "MinkowskiPolarSum",
+        "ProjectionBody",
+        "DifferenceBody",
+        "ProjectionBody",
+        "MinkowskiPolarSum",
+        "ProjectionBody",
+        "SteinerSymmetrization",
+        "CentroidBody",
+        "DifferenceBody",
+        "PolarDual",
+        "IntersectionBody",
+        "SteinerSymmetrization",
+        "PolarDual",
+        "IntersectionBody",
+        "DifferenceBody",
+        "CentroidBody",
+        "PolarDual",
+        "IntersectionBody",
+        "VolumeNormalization",
+        "BodyIteration",
+        "SupportFunctionChart",
+        "StabilityLinearization",
+        "ConvexDynamicsQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "convex_body_dynamics",
+      "quotient_signature": "ConvexBody|MinkowskiPolarSum/CentroidBody/IntersectionBody/CentroidBody/DifferenceBody/IntersectionBody/MinkowskiPolarSum/SteinerSymmetrization/PolarDual/CentroidBody/PolarDual/MinkowskiPolarSum/ProjectionBody/DifferenceBody/ProjectionBody/MinkowskiPolarSum/ProjectionBody/SteinerSymmetrization/CentroidBody/DifferenceBody/PolarDual/IntersectionBody/SteinerSymmetrization/PolarDual/IntersectionBody/DifferenceBody/CentroidBody/PolarDual/IntersectionBody/VolumeNormalization/BodyIteration/SupportFunctionChart/StabilityLinearization/ConvexDynamicsQuery|Classification|mod_linear_equivalence,origin_symmetric,strictly_convex",
+      "search_trace": {
+        "domain": "convex_body",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.4857,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 自身と極体のMinkowski和をとる，(2) 重心体をとる，(3) 交叉体をとる，(4) 重心体をとる，(5) 差体をとる，(6) 交叉体をとる，(7) 自身と極体のMinkowski和をとる，(8) 主慣性軸方向にSteiner対称化する，(9) 原点に関する極体をとる，(10) 重心体をとる，(11) 原点に関する極体をとる，(12) 自身と極体のMinkowski和をとる，(13) 射影体をとる，(14) 差体をとる，(15) 射影体をとる，(16) 自身と極体のMinkowski和をとる，(17) 射影体をとる，(18) 主慣性軸方向にSteiner対称化する，(19) 重心体をとる，(20) 差体をとる，(21) 原点に関する極体をとる，(22) 交叉体をとる，(23) 主慣性軸方向にSteiner対称化する，(24) 原点に関する極体をとる，(25) 交叉体をとる，(26) 差体をとる，(27) 重心体をとる，(28) 原点に関する極体をとる，(29) 交叉体をとる，(30) 面積と二次モーメントを固定して正規化する，(31) ここまでの凸体関手を反復する，(32) 支持関数の軌道へ移す，(33) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:MinkowskiPolarSum:ConvexBody -> ConvexBody:ProjectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:SteinerSymmetrization:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:DifferenceBody:ConvexBody -> ConvexBody:CentroidBody:ConvexBody -> ConvexBody:PolarDual:ConvexBody -> ConvexBody:IntersectionBody:ConvexBody -> ConvexBody:VolumeNormalization:NormalizedBody -> NormalizedBody:BodyIteration:BodyOrbit -> BodyOrbit:SupportFunctionChart:FunctionOrbit -> FunctionOrbit:StabilityLinearization:StabilityData -> StabilityData:ConvexDynamicsQuery:Classification",
+      "title": "凸体関手の合成力学（MinkowskiPolarSum・CentroidBody・SupportFunctionChart・StabilityLinearization）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
+    },
+    {
+      "answer_status": "unresolved_by_mathos",
+      "answer_tex": null,
+      "candidate_id": "atlas:0b61afff13af52ed",
+      "constraint_skeleton": [
+        "irreducible",
+        "regular_branch",
+        "exclude_base_locus"
+      ],
+      "effective_morphism_count": 34,
+      "falsification_attempts": [
+        "not executed: backend-specific bounded counterexample search is scheduled"
+      ],
+      "family_id": "research.autonomous.plane_curve.0b61afff13",
+      "hardness": {
+        "reasons": [
+          "type-directed multi-functor composition",
+          "global classification with exceptional strata"
+        ],
+        "score": 37
+      },
+      "hold_reason": "new quotient signature found by typed atlas search; no proof or counterexample has been produced",
+      "known_problem_screen": {
+        "corpus": {
+          "closest_source": "sakumon_curation",
+          "corpus_size": 28074,
+          "exact_jukenmath_collision": false,
+          "maximum_surface_jaccard": 0.0781,
+          "method": "minhash64_conservative",
+          "passed": true,
+          "rejection_threshold": 0.45,
+          "scope": "surface 3-gram sketch; not a proof of mathematical novelty"
+        },
+        "matches": [],
+        "passed": true,
+        "scope": "local marker list; not a literature proof of novelty"
+      },
+      "morphism_chain": [
+        "HessianCurve",
+        "Evolute",
+        "Catacaustic",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "ProjectiveDual",
+        "OffsetCurve",
+        "Evolute",
+        "CircleInversion",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "OffsetCurve",
+        "ProjectiveDual",
+        "PolarReciprocal",
+        "HessianCurve",
+        "PolarReciprocal",
+        "IsogonalCremona",
+        "HessianCurve",
+        "Evolute",
+        "CircleInversion",
+        "HessianCurve",
+        "Evolute",
+        "PolarReciprocal",
+        "Evolute",
+        "Catacaustic",
+        "OffsetCurve",
+        "ProjectiveDual",
+        "Catacaustic",
+        "ProjectiveClosure",
+        "AffineChartChange",
+        "HessianCurve",
+        "ProjectiveDual",
+        "IsogonalCremona",
+        "BirationalPeriodQuery"
+      ],
+      "morphism_count": 34,
+      "not_claimed_human_open": true,
+      "origin": "autonomous_atlas_search",
+      "proof_attempts": [
+        "not executed: a backend contract has not yet been synthesized"
+      ],
+      "query_type": "birational_periodicity",
+      "quotient_signature": "PlaneCurve|HessianCurve/Evolute/Catacaustic/ProjectiveClosure/AffineChartChange/ProjectiveDual/OffsetCurve/Evolute/CircleInversion/ProjectiveDual/IsogonalCremona/OffsetCurve/HessianCurve/PolarReciprocal/PolarReciprocal/ProjectiveDual/IsogonalCremona/HessianCurve/Evolute/CircleInversion/HessianCurve/Evolute/PolarReciprocal/Evolute/Catacaustic/OffsetCurve/ProjectiveDual/Catacaustic/ProjectiveClosure/AffineChartChange/HessianCurve/ProjectiveDual/IsogonalCremona/BirationalPeriodQuery|Classification|exclude_base_locus,irreducible,regular_branch",
+      "search_trace": {
+        "domain": "plane_curve",
+        "epoch": 45,
+        "nearest_prior_structural_similarity": 0.3438,
+        "seed": 145978698877416,
+        "similarity_limit": 0.55,
+        "target_depth": 34
+      },
+      "statement_tex": "\\(\\mathcal X_0\\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\\(\\mathcal X_i\\) に次の型付き構成を順に施す：(1) 定義多項式のHessian曲線をとる，(2) 法線族の包絡線である発展曲線をとる，(3) 固定光源からの反射光線族の包絡線をとる，(4) 射影閉包をとり無限遠点を加える，(5) 基点を避ける一般アフィンチャートへ移す，(6) 正則接線族の射影双対曲線をとる，(7) 法線方向の代数的平行曲線をとる，(8) 法線族の包絡線である発展曲線をとる，(9) 原点中心の円反転像をとる，(10) 正則接線族の射影双対曲線をとる，(11) 固定基準三角形に関する等角共役Cremona像をとる，(12) 法線方向の代数的平行曲線をとる，(13) 正則接線族の射影双対曲線をとる，(14) 固定非退化二次形式に関する極逆像をとる，(15) 定義多項式のHessian曲線をとる，(16) 固定非退化二次形式に関する極逆像をとる，(17) 固定基準三角形に関する等角共役Cremona像をとる，(18) 定義多項式のHessian曲線をとる，(19) 法線族の包絡線である発展曲線をとる，(20) 原点中心の円反転像をとる，(21) 定義多項式のHessian曲線をとる，(22) 法線族の包絡線である発展曲線をとる，(23) 固定非退化二次形式に関する極逆像をとる，(24) 法線族の包絡線である発展曲線をとる，(25) 固定光源からの反射光線族の包絡線をとる，(26) 法線方向の代数的平行曲線をとる，(27) 正則接線族の射影双対曲線をとる，(28) 固定光源からの反射光線族の包絡線をとる，(29) 射影閉包をとり無限遠点を加える，(30) 基点を避ける一般アフィンチャートへ移す，(31) 定義多項式のHessian曲線をとる，(32) 正則接線族の射影双対曲線をとる，(33) 固定基準三角形に関する等角共役Cremona像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。",
+      "structural_signature": "PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:CircleInversion:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:PolarReciprocal:PlaneCurve -> PlaneCurve:Evolute:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:OffsetCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:Catacaustic:PlaneCurve -> PlaneCurve:ProjectiveClosure:ProjectiveCurve -> ProjectiveCurve:AffineChartChange:PlaneCurve -> PlaneCurve:HessianCurve:PlaneCurve -> PlaneCurve:ProjectiveDual:PlaneCurve -> PlaneCurve:IsogonalCremona:PlaneCurve -> PlaneCurve:BirationalPeriodQuery:Classification",
+      "title": "平面代数曲線の合成変換（HessianCurve・Evolute・ProjectiveDual・IsogonalCremona）",
+      "typecheck": {
+        "error": null,
+        "passed": true
+      }
     }
   ],
-  "generated_at": "2026-10-03T08:28:32.892081+00:00",
+  "generated_at": "2026-10-04T08:40:49.718569+00:00",
   "rejected_candidates": [],
   "semantics": {
     "creativity_unit": "unique typed structural_signature, not parameter variants",
@@ -44174,15 +45332,15 @@
   },
   "summary": {
     "added_by_autonomous_search": 12,
-    "autonomous_candidates": 512,
-    "current_depth_floor": 31,
+    "autonomous_candidates": 524,
+    "current_depth_floor": 32,
     "current_runtime_corpus_size": 176,
     "parameter_variants": 0,
     "reference_corpus_size": 28074,
     "reference_corpus_size_max": 28074,
     "rejected": 0,
-    "retained": 524,
+    "retained": 536,
     "unique_query_types": 24,
-    "unique_structural_signatures": 524
+    "unique_structural_signatures": 536
   }
 }
