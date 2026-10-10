@@ -5,21 +5,21 @@
 
 ## 集計
 
-- 保留候補: **596件**
-- 異なる型付き射列: **596件**
+- 保留候補: **608件**
+- 異なる型付き射列: **608件**
 - 問いの型: **24種類**
 - 数値替え: **0件**
 - 各候補の照合母数: **28074問以上**
-- atlas自律探索候補: **584件**
+- atlas自律探索候補: **596件**
 - 今回の自律追加: **12件**
-- 現在の探索深さ下限: **34射**
+- 現在の探索深さ下限: **35射**
 
 ## 自律探索
 
-- 世代: `50`
+- 世代: `51`
 - 射アトラス: `92射`
 - チャート: `6領域`
-- 探索試行: `181`
+- 探索試行: `175`
 - 商: `typed operation classes + type aliases + numeric erasure + commuting-block normalization`
 
 ## 候補
@@ -10155,6 +10155,210 @@
 \(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 原点に関する極体をとる，(2) 自身と極体のMinkowski和をとる，(3) 重心体をとる，(4) 交叉体をとる，(5) 射影体をとる，(6) 原点に関する極体をとる，(7) 射影体をとる，(8) 主慣性軸方向にSteiner対称化する，(9) 原点に関する極体をとる，(10) 差体をとる，(11) 原点に関する極体をとる，(12) 射影体をとる，(13) 自身と極体のMinkowski和をとる，(14) 射影体をとる，(15) 原点に関する極体をとる，(16) 射影体をとる，(17) 主慣性軸方向にSteiner対称化する，(18) 交叉体をとる，(19) 重心体をとる，(20) 主慣性軸方向にSteiner対称化する，(21) 自身と極体のMinkowski和をとる，(22) 重心体をとる，(23) 自身と極体のMinkowski和をとる，(24) 差体をとる，(25) 自身と極体のMinkowski和をとる，(26) 主慣性軸方向にSteiner対称化する，(27) 重心体をとる，(28) 主慣性軸方向にSteiner対称化する，(29) 交叉体をとる，(30) 重心体をとる，(31) 面積と二次モーメントを固定して正規化する，(32) ここまでの凸体関手を反復する，(33) 支持関数の軌道へ移す，(34) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
 
 射列: `PolarDual → MinkowskiPolarSum → CentroidBody → IntersectionBody → ProjectionBody → PolarDual → ProjectionBody → SteinerSymmetrization → PolarDual → DifferenceBody → PolarDual → ProjectionBody → MinkowskiPolarSum → ProjectionBody → PolarDual → ProjectionBody → SteinerSymmetrization → IntersectionBody → CentroidBody → SteinerSymmetrization → MinkowskiPolarSum → CentroidBody → MinkowskiPolarSum → DifferenceBody → MinkowskiPolarSum → SteinerSymmetrization → CentroidBody → SteinerSymmetrization → IntersectionBody → CentroidBody → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 凸体関手の合成力学（CentroidBody・PolarDual・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.686e7a6681`
+- 状態: `unresolved_by_mathos`
+- 射数: `35`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `39`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 重心体をとる，(2) 原点に関する極体をとる，(3) 重心体をとる，(4) 差体をとる，(5) 交叉体をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 自身と極体のMinkowski和をとる，(8) 差体をとる，(9) 原点に関する極体をとる，(10) 自身と極体のMinkowski和をとる，(11) 重心体をとる，(12) 自身と極体のMinkowski和をとる，(13) 原点に関する極体をとる，(14) 自身と極体のMinkowski和をとる，(15) 射影体をとる，(16) 自身と極体のMinkowski和をとる，(17) 交叉体をとる，(18) 原点に関する極体をとる，(19) 重心体をとる，(20) 差体をとる，(21) 原点に関する極体をとる，(22) 差体をとる，(23) 交叉体をとる，(24) 重心体をとる，(25) 主慣性軸方向にSteiner対称化する，(26) 交叉体をとる，(27) 差体をとる，(28) 主慣性軸方向にSteiner対称化する，(29) 交叉体をとる，(30) 主慣性軸方向にSteiner対称化する，(31) 面積と二次モーメントを固定して正規化する，(32) ここまでの凸体関手を反復する，(33) 支持関数の軌道へ移す，(34) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `CentroidBody → PolarDual → CentroidBody → DifferenceBody → IntersectionBody → SteinerSymmetrization → MinkowskiPolarSum → DifferenceBody → PolarDual → MinkowskiPolarSum → CentroidBody → MinkowskiPolarSum → PolarDual → MinkowskiPolarSum → ProjectionBody → MinkowskiPolarSum → IntersectionBody → PolarDual → CentroidBody → DifferenceBody → PolarDual → DifferenceBody → IntersectionBody → CentroidBody → SteinerSymmetrization → IntersectionBody → DifferenceBody → SteinerSymmetrization → IntersectionBody → SteinerSymmetrization → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（Catacaustic・Evolute・HessianCurve・ProjectiveDual）
+
+- ID: `research.autonomous.plane_curve.705519e405`
+- 状態: `unresolved_by_mathos`
+- 射数: `37`
+- 問い: `birational_periodicity`
+- 難度仮説: `40`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 固定光源からの反射光線族の包絡線をとる，(2) 法線族の包絡線である発展曲線をとる，(3) 定義多項式のHessian曲線をとる，(4) 正則接線族の射影双対曲線をとる，(5) 固定基準三角形に関する等角共役Cremona像をとる，(6) 射影閉包をとり無限遠点を加える，(7) 基点を避ける一般アフィンチャートへ移す，(8) 固定基準三角形に関する等角共役Cremona像をとる，(9) 定義多項式のHessian曲線をとる，(10) 固定光源からの反射光線族の包絡線をとる，(11) 原点中心の円反転像をとる，(12) 法線方向の代数的平行曲線をとる，(13) 固定基準三角形に関する等角共役Cremona像をとる，(14) 正則接線族の射影双対曲線をとる，(15) 法線方向の代数的平行曲線をとる，(16) 定義多項式のHessian曲線をとる，(17) 固定非退化二次形式に関する極逆像をとる，(18) 固定基準三角形に関する等角共役Cremona像をとる，(19) 定義多項式のHessian曲線をとる，(20) 法線方向の代数的平行曲線をとる，(21) 法線族の包絡線である発展曲線をとる，(22) 固定非退化二次形式に関する極逆像をとる，(23) 正則接線族の射影双対曲線をとる，(24) 固定非退化二次形式に関する極逆像をとる，(25) 法線方向の代数的平行曲線をとる，(26) 原点中心の円反転像をとる，(27) 正則接線族の射影双対曲線をとる，(28) 固定基準三角形に関する等角共役Cremona像をとる，(29) 固定非退化二次形式に関する極逆像をとる，(30) 原点中心の円反転像をとる，(31) 射影閉包をとり無限遠点を加える，(32) 基点を避ける一般アフィンチャートへ移す，(33) 法線方向の代数的平行曲線をとる，(34) 法線族の包絡線である発展曲線をとる，(35) 定義多項式のHessian曲線をとる，(36) 正則接線族の射影双対曲線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `Catacaustic → Evolute → HessianCurve → ProjectiveDual → IsogonalCremona → ProjectiveClosure → AffineChartChange → IsogonalCremona → HessianCurve → Catacaustic → CircleInversion → OffsetCurve → IsogonalCremona → ProjectiveDual → OffsetCurve → HessianCurve → PolarReciprocal → IsogonalCremona → HessianCurve → OffsetCurve → Evolute → PolarReciprocal → ProjectiveDual → PolarReciprocal → OffsetCurve → CircleInversion → ProjectiveDual → IsogonalCremona → PolarReciprocal → CircleInversion → ProjectiveClosure → AffineChartChange → OffsetCurve → Evolute → HessianCurve → ProjectiveDual → BirationalPeriodQuery`
+
+### 平面代数曲線の合成変換（OffsetCurve・ProjectiveDual・ProjectiveDual・HessianCurve）
+
+- ID: `research.autonomous.plane_curve.a061b21e5c`
+- 状態: `unresolved_by_mathos`
+- 射数: `37`
+- 問い: `birational_periodicity`
+- 難度仮説: `40`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 法線方向の代数的平行曲線をとる，(2) 正則接線族の射影双対曲線をとる，(3) 固定非退化二次形式に関する極逆像をとる，(4) 射影閉包をとり無限遠点を加える，(5) 基点を避ける一般アフィンチャートへ移す，(6) 射影閉包をとり無限遠点を加える，(7) 基点を避ける一般アフィンチャートへ移す，(8) 定義多項式のHessian曲線をとる，(9) 固定光源からの反射光線族の包絡線をとる，(10) 正則接線族の射影双対曲線をとる，(11) 固定光源からの反射光線族の包絡線をとる，(12) 法線族の包絡線である発展曲線をとる，(13) 固定光源からの反射光線族の包絡線をとる，(14) 原点中心の円反転像をとる，(15) 射影閉包をとり無限遠点を加える，(16) 基点を避ける一般アフィンチャートへ移す，(17) 法線族の包絡線である発展曲線をとる，(18) 定義多項式のHessian曲線をとる，(19) 固定非退化二次形式に関する極逆像をとる，(20) 法線方向の代数的平行曲線をとる，(21) 正則接線族の射影双対曲線をとる，(22) 原点中心の円反転像をとる，(23) 正則接線族の射影双対曲線をとる，(24) 射影閉包をとり無限遠点を加える，(25) 基点を避ける一般アフィンチャートへ移す，(26) 固定基準三角形に関する等角共役Cremona像をとる，(27) 法線族の包絡線である発展曲線をとる，(28) 固定基準三角形に関する等角共役Cremona像をとる，(29) 原点中心の円反転像をとる，(30) 法線方向の代数的平行曲線をとる，(31) 原点中心の円反転像をとる，(32) 固定非退化二次形式に関する極逆像をとる，(33) 固定基準三角形に関する等角共役Cremona像をとる，(34) 固定非退化二次形式に関する極逆像をとる，(35) 正則接線族の射影双対曲線をとる，(36) 定義多項式のHessian曲線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `OffsetCurve → ProjectiveDual → PolarReciprocal → ProjectiveClosure → AffineChartChange → ProjectiveClosure → AffineChartChange → HessianCurve → Catacaustic → ProjectiveDual → Catacaustic → Evolute → Catacaustic → CircleInversion → ProjectiveClosure → AffineChartChange → Evolute → HessianCurve → PolarReciprocal → OffsetCurve → ProjectiveDual → CircleInversion → ProjectiveDual → ProjectiveClosure → AffineChartChange → IsogonalCremona → Evolute → IsogonalCremona → CircleInversion → OffsetCurve → CircleInversion → PolarReciprocal → IsogonalCremona → PolarReciprocal → ProjectiveDual → HessianCurve → BirationalPeriodQuery`
+
+### 凸体関手の合成力学（CentroidBody・MinkowskiPolarSum・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.82d49e357a`
+- 状態: `unresolved_by_mathos`
+- 射数: `37`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `41`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 重心体をとる，(2) 自身と極体のMinkowski和をとる，(3) 原点に関する極体をとる，(4) 自身と極体のMinkowski和をとる，(5) 主慣性軸方向にSteiner対称化する，(6) 原点に関する極体をとる，(7) 射影体をとる，(8) 主慣性軸方向にSteiner対称化する，(9) 差体をとる，(10) 主慣性軸方向にSteiner対称化する，(11) 原点に関する極体をとる，(12) 自身と極体のMinkowski和をとる，(13) 射影体をとる，(14) 主慣性軸方向にSteiner対称化する，(15) 射影体をとる，(16) 主慣性軸方向にSteiner対称化する，(17) 射影体をとる，(18) 主慣性軸方向にSteiner対称化する，(19) 重心体をとる，(20) 差体をとる，(21) 自身と極体のMinkowski和をとる，(22) 射影体をとる，(23) 自身と極体のMinkowski和をとる，(24) 原点に関する極体をとる，(25) 重心体をとる，(26) 原点に関する極体をとる，(27) 重心体をとる，(28) 自身と極体のMinkowski和をとる，(29) 原点に関する極体をとる，(30) 差体をとる，(31) 射影体をとる，(32) 交叉体をとる，(33) 面積と二次モーメントを固定して正規化する，(34) ここまでの凸体関手を反復する，(35) 支持関数の軌道へ移す，(36) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `CentroidBody → MinkowskiPolarSum → PolarDual → MinkowskiPolarSum → SteinerSymmetrization → PolarDual → ProjectionBody → SteinerSymmetrization → DifferenceBody → SteinerSymmetrization → PolarDual → MinkowskiPolarSum → ProjectionBody → SteinerSymmetrization → ProjectionBody → SteinerSymmetrization → ProjectionBody → SteinerSymmetrization → CentroidBody → DifferenceBody → MinkowskiPolarSum → ProjectionBody → MinkowskiPolarSum → PolarDual → CentroidBody → PolarDual → CentroidBody → MinkowskiPolarSum → PolarDual → DifferenceBody → ProjectionBody → IntersectionBody → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（Catacaustic・HessianCurve・Evolute・Catacaustic）
+
+- ID: `research.autonomous.plane_curve.dbbdb2fbb8`
+- 状態: `unresolved_by_mathos`
+- 射数: `35`
+- 問い: `birational_periodicity`
+- 難度仮説: `38`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 固定光源からの反射光線族の包絡線をとる，(2) 定義多項式のHessian曲線をとる，(3) 法線方向の代数的平行曲線をとる，(4) 法線族の包絡線である発展曲線をとる，(5) 射影閉包をとり無限遠点を加える，(6) 基点を避ける一般アフィンチャートへ移す，(7) 法線方向の代数的平行曲線をとる，(8) 固定非退化二次形式に関する極逆像をとる，(9) 射影閉包をとり無限遠点を加える，(10) 基点を避ける一般アフィンチャートへ移す，(11) 定義多項式のHessian曲線をとる，(12) 固定非退化二次形式に関する極逆像をとる，(13) 正則接線族の射影双対曲線をとる，(14) 固定非退化二次形式に関する極逆像をとる，(15) 固定基準三角形に関する等角共役Cremona像をとる，(16) 法線方向の代数的平行曲線をとる，(17) 固定非退化二次形式に関する極逆像をとる，(18) 法線方向の代数的平行曲線をとる，(19) 固定基準三角形に関する等角共役Cremona像をとる，(20) 法線方向の代数的平行曲線をとる，(21) 固定基準三角形に関する等角共役Cremona像をとる，(22) 定義多項式のHessian曲線をとる，(23) 固定非退化二次形式に関する極逆像をとる，(24) 法線族の包絡線である発展曲線をとる，(25) 定義多項式のHessian曲線をとる，(26) 正則接線族の射影双対曲線をとる，(27) 固定基準三角形に関する等角共役Cremona像をとる，(28) 原点中心の円反転像をとる，(29) 固定基準三角形に関する等角共役Cremona像をとる，(30) 法線族の包絡線である発展曲線をとる，(31) 固定光源からの反射光線族の包絡線をとる，(32) 原点中心の円反転像をとる，(33) 法線族の包絡線である発展曲線をとる，(34) 固定光源からの反射光線族の包絡線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `Catacaustic → HessianCurve → OffsetCurve → Evolute → ProjectiveClosure → AffineChartChange → OffsetCurve → PolarReciprocal → ProjectiveClosure → AffineChartChange → HessianCurve → PolarReciprocal → ProjectiveDual → PolarReciprocal → IsogonalCremona → OffsetCurve → PolarReciprocal → OffsetCurve → IsogonalCremona → OffsetCurve → IsogonalCremona → HessianCurve → PolarReciprocal → Evolute → HessianCurve → ProjectiveDual → IsogonalCremona → CircleInversion → IsogonalCremona → Evolute → Catacaustic → CircleInversion → Evolute → Catacaustic → BirationalPeriodQuery`
+
+### 凸体関手の合成力学（ProjectionBody・DifferenceBody・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.236242be5d`
+- 状態: `unresolved_by_mathos`
+- 射数: `38`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `42`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0625`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 射影体をとる，(2) 差体をとる，(3) 主慣性軸方向にSteiner対称化する，(4) 差体をとる，(5) 主慣性軸方向にSteiner対称化する，(6) 差体をとる，(7) 射影体をとる，(8) 自身と極体のMinkowski和をとる，(9) 差体をとる，(10) 原点に関する極体をとる，(11) 自身と極体のMinkowski和をとる，(12) 原点に関する極体をとる，(13) 交叉体をとる，(14) 射影体をとる，(15) 自身と極体のMinkowski和をとる，(16) 射影体をとる，(17) 原点に関する極体をとる，(18) 差体をとる，(19) 重心体をとる，(20) 主慣性軸方向にSteiner対称化する，(21) 差体をとる，(22) 自身と極体のMinkowski和をとる，(23) 射影体をとる，(24) 重心体をとる，(25) 射影体をとる，(26) 交叉体をとる，(27) 原点に関する極体をとる，(28) 主慣性軸方向にSteiner対称化する，(29) 重心体をとる，(30) 交叉体をとる，(31) 原点に関する極体をとる，(32) 重心体をとる，(33) 主慣性軸方向にSteiner対称化する，(34) 面積と二次モーメントを固定して正規化する，(35) ここまでの凸体関手を反復する，(36) 支持関数の軌道へ移す，(37) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `ProjectionBody → DifferenceBody → SteinerSymmetrization → DifferenceBody → SteinerSymmetrization → DifferenceBody → ProjectionBody → MinkowskiPolarSum → DifferenceBody → PolarDual → MinkowskiPolarSum → PolarDual → IntersectionBody → ProjectionBody → MinkowskiPolarSum → ProjectionBody → PolarDual → DifferenceBody → CentroidBody → SteinerSymmetrization → DifferenceBody → MinkowskiPolarSum → ProjectionBody → CentroidBody → ProjectionBody → IntersectionBody → PolarDual → SteinerSymmetrization → CentroidBody → IntersectionBody → PolarDual → CentroidBody → SteinerSymmetrization → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（IsogonalCremona・CircleInversion・Catacaustic・HessianCurve）
+
+- ID: `research.autonomous.plane_curve.011d194a8d`
+- 状態: `unresolved_by_mathos`
+- 射数: `38`
+- 問い: `birational_periodicity`
+- 難度仮説: `41`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 固定基準三角形に関する等角共役Cremona像をとる，(2) 原点中心の円反転像をとる，(3) 射影閉包をとり無限遠点を加える，(4) 基点を避ける一般アフィンチャートへ移す，(5) 原点中心の円反転像をとる，(6) 定義多項式のHessian曲線をとる，(7) 固定非退化二次形式に関する極逆像をとる，(8) 法線方向の代数的平行曲線をとる，(9) 固定非退化二次形式に関する極逆像をとる，(10) 射影閉包をとり無限遠点を加える，(11) 基点を避ける一般アフィンチャートへ移す，(12) 原点中心の円反転像をとる，(13) 固定光源からの反射光線族の包絡線をとる，(14) 法線族の包絡線である発展曲線をとる，(15) 固定基準三角形に関する等角共役Cremona像をとる，(16) 固定光源からの反射光線族の包絡線をとる，(17) 定義多項式のHessian曲線をとる，(18) 射影閉包をとり無限遠点を加える，(19) 基点を避ける一般アフィンチャートへ移す，(20) 射影閉包をとり無限遠点を加える，(21) 基点を避ける一般アフィンチャートへ移す，(22) 法線方向の代数的平行曲線をとる，(23) 固定光源からの反射光線族の包絡線をとる，(24) 原点中心の円反転像をとる，(25) 定義多項式のHessian曲線をとる，(26) 固定基準三角形に関する等角共役Cremona像をとる，(27) 法線族の包絡線である発展曲線をとる，(28) 固定光源からの反射光線族の包絡線をとる，(29) 正則接線族の射影双対曲線をとる，(30) 射影閉包をとり無限遠点を加える，(31) 基点を避ける一般アフィンチャートへ移す，(32) 固定非退化二次形式に関する極逆像をとる，(33) 固定基準三角形に関する等角共役Cremona像をとる，(34) 固定光源からの反射光線族の包絡線をとる，(35) 正則接線族の射影双対曲線をとる，(36) 固定光源からの反射光線族の包絡線をとる，(37) 定義多項式のHessian曲線をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `IsogonalCremona → CircleInversion → ProjectiveClosure → AffineChartChange → CircleInversion → HessianCurve → PolarReciprocal → OffsetCurve → PolarReciprocal → ProjectiveClosure → AffineChartChange → CircleInversion → Catacaustic → Evolute → IsogonalCremona → Catacaustic → HessianCurve → ProjectiveClosure → AffineChartChange → ProjectiveClosure → AffineChartChange → OffsetCurve → Catacaustic → CircleInversion → HessianCurve → IsogonalCremona → Evolute → Catacaustic → ProjectiveDual → ProjectiveClosure → AffineChartChange → PolarReciprocal → IsogonalCremona → Catacaustic → ProjectiveDual → Catacaustic → HessianCurve → BirationalPeriodQuery`
+
+### 凸体関手の合成力学（PolarDual・ProjectionBody・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.1cc3cdf678`
+- 状態: `unresolved_by_mathos`
+- 射数: `38`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `42`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0625`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 原点に関する極体をとる，(2) 射影体をとる，(3) 重心体をとる，(4) 主慣性軸方向にSteiner対称化する，(5) 重心体をとる，(6) 主慣性軸方向にSteiner対称化する，(7) 射影体をとる，(8) 原点に関する極体をとる，(9) 差体をとる，(10) 射影体をとる，(11) 原点に関する極体をとる，(12) 自身と極体のMinkowski和をとる，(13) 差体をとる，(14) 交叉体をとる，(15) 主慣性軸方向にSteiner対称化する，(16) 重心体をとる，(17) 主慣性軸方向にSteiner対称化する，(18) 原点に関する極体をとる，(19) 射影体をとる，(20) 主慣性軸方向にSteiner対称化する，(21) 差体をとる，(22) 射影体をとる，(23) 重心体をとる，(24) 射影体をとる，(25) 交叉体をとる，(26) 重心体をとる，(27) 自身と極体のMinkowski和をとる，(28) 重心体をとる，(29) 主慣性軸方向にSteiner対称化する，(30) 自身と極体のMinkowski和をとる，(31) 交叉体をとる，(32) 差体をとる，(33) 原点に関する極体をとる，(34) 面積と二次モーメントを固定して正規化する，(35) ここまでの凸体関手を反復する，(36) 支持関数の軌道へ移す，(37) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `PolarDual → ProjectionBody → CentroidBody → SteinerSymmetrization → CentroidBody → SteinerSymmetrization → ProjectionBody → PolarDual → DifferenceBody → ProjectionBody → PolarDual → MinkowskiPolarSum → DifferenceBody → IntersectionBody → SteinerSymmetrization → CentroidBody → SteinerSymmetrization → PolarDual → ProjectionBody → SteinerSymmetrization → DifferenceBody → ProjectionBody → CentroidBody → ProjectionBody → IntersectionBody → CentroidBody → MinkowskiPolarSum → CentroidBody → SteinerSymmetrization → MinkowskiPolarSum → IntersectionBody → DifferenceBody → PolarDual → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（IsogonalCremona・HessianCurve・OffsetCurve・CircleInversion）
+
+- ID: `research.autonomous.plane_curve.47733d4ab7`
+- 状態: `unresolved_by_mathos`
+- 射数: `36`
+- 問い: `birational_periodicity`
+- 難度仮説: `39`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 固定基準三角形に関する等角共役Cremona像をとる，(2) 定義多項式のHessian曲線をとる，(3) 射影閉包をとり無限遠点を加える，(4) 基点を避ける一般アフィンチャートへ移す，(5) 固定非退化二次形式に関する極逆像をとる，(6) 法線方向の代数的平行曲線をとる，(7) 定義多項式のHessian曲線をとる，(8) 固定基準三角形に関する等角共役Cremona像をとる，(9) 法線族の包絡線である発展曲線をとる，(10) 固定光源からの反射光線族の包絡線をとる，(11) 固定基準三角形に関する等角共役Cremona像をとる，(12) 固定光源からの反射光線族の包絡線をとる，(13) 定義多項式のHessian曲線をとる，(14) 固定光源からの反射光線族の包絡線をとる，(15) 正則接線族の射影双対曲線をとる，(16) 固定基準三角形に関する等角共役Cremona像をとる，(17) 固定光源からの反射光線族の包絡線をとる，(18) 正則接線族の射影双対曲線をとる，(19) 固定非退化二次形式に関する極逆像をとる，(20) 固定光源からの反射光線族の包絡線をとる，(21) 法線方向の代数的平行曲線をとる，(22) 固定基準三角形に関する等角共役Cremona像をとる，(23) 法線族の包絡線である発展曲線をとる，(24) 固定非退化二次形式に関する極逆像をとる，(25) 射影閉包をとり無限遠点を加える，(26) 基点を避ける一般アフィンチャートへ移す，(27) 法線方向の代数的平行曲線をとる，(28) 固定非退化二次形式に関する極逆像をとる，(29) 法線族の包絡線である発展曲線をとる，(30) 定義多項式のHessian曲線をとる，(31) 固定光源からの反射光線族の包絡線をとる，(32) 法線族の包絡線である発展曲線をとる，(33) 原点中心の円反転像をとる，(34) 法線方向の代数的平行曲線をとる，(35) 原点中心の円反転像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `IsogonalCremona → HessianCurve → ProjectiveClosure → AffineChartChange → PolarReciprocal → OffsetCurve → HessianCurve → IsogonalCremona → Evolute → Catacaustic → IsogonalCremona → Catacaustic → HessianCurve → Catacaustic → ProjectiveDual → IsogonalCremona → Catacaustic → ProjectiveDual → PolarReciprocal → Catacaustic → OffsetCurve → IsogonalCremona → Evolute → PolarReciprocal → ProjectiveClosure → AffineChartChange → OffsetCurve → PolarReciprocal → Evolute → HessianCurve → Catacaustic → Evolute → CircleInversion → OffsetCurve → CircleInversion → BirationalPeriodQuery`
+
+### 凸体関手の合成力学（DifferenceBody・MinkowskiPolarSum・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.f541776838`
+- 状態: `unresolved_by_mathos`
+- 射数: `35`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `39`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 差体をとる，(2) 自身と極体のMinkowski和をとる，(3) 交叉体をとる，(4) 差体をとる，(5) 原点に関する極体をとる，(6) 自身と極体のMinkowski和をとる，(7) 交叉体をとる，(8) 自身と極体のMinkowski和をとる，(9) 重心体をとる，(10) 原点に関する極体をとる，(11) 主慣性軸方向にSteiner対称化する，(12) 重心体をとる，(13) 交叉体をとる，(14) 差体をとる，(15) 主慣性軸方向にSteiner対称化する，(16) 自身と極体のMinkowski和をとる，(17) 重心体をとる，(18) 自身と極体のMinkowski和をとる，(19) 主慣性軸方向にSteiner対称化する，(20) 重心体をとる，(21) 主慣性軸方向にSteiner対称化する，(22) 差体をとる，(23) 交叉体をとる，(24) 射影体をとる，(25) 重心体をとる，(26) 交叉体をとる，(27) 射影体をとる，(28) 原点に関する極体をとる，(29) 差体をとる，(30) 主慣性軸方向にSteiner対称化する，(31) 面積と二次モーメントを固定して正規化する，(32) ここまでの凸体関手を反復する，(33) 支持関数の軌道へ移す，(34) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `DifferenceBody → MinkowskiPolarSum → IntersectionBody → DifferenceBody → PolarDual → MinkowskiPolarSum → IntersectionBody → MinkowskiPolarSum → CentroidBody → PolarDual → SteinerSymmetrization → CentroidBody → IntersectionBody → DifferenceBody → SteinerSymmetrization → MinkowskiPolarSum → CentroidBody → MinkowskiPolarSum → SteinerSymmetrization → CentroidBody → SteinerSymmetrization → DifferenceBody → IntersectionBody → ProjectionBody → CentroidBody → IntersectionBody → ProjectionBody → PolarDual → DifferenceBody → SteinerSymmetrization → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
+
+### 平面代数曲線の合成変換（ProjectiveDual・OffsetCurve・IsogonalCremona・PolarReciprocal）
+
+- ID: `research.autonomous.plane_curve.e660a9c2be`
+- 状態: `unresolved_by_mathos`
+- 射数: `37`
+- 問い: `birational_periodicity`
+- 難度仮説: `40`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「特異点を持たない既約実代数平面曲線を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 正則接線族の射影双対曲線をとる，(2) 法線方向の代数的平行曲線をとる，(3) 固定光源からの反射光線族の包絡線をとる，(4) 正則接線族の射影双対曲線をとる，(5) 固定光源からの反射光線族の包絡線をとる，(6) 固定非退化二次形式に関する極逆像をとる，(7) 法線族の包絡線である発展曲線をとる，(8) 射影閉包をとり無限遠点を加える，(9) 基点を避ける一般アフィンチャートへ移す，(10) 法線族の包絡線である発展曲線をとる，(11) 原点中心の円反転像をとる，(12) 法線方向の代数的平行曲線をとる，(13) 法線族の包絡線である発展曲線をとる，(14) 固定光源からの反射光線族の包絡線をとる，(15) 法線方向の代数的平行曲線をとる，(16) 法線族の包絡線である発展曲線をとる，(17) 法線方向の代数的平行曲線をとる，(18) 正則接線族の射影双対曲線をとる，(19) 射影閉包をとり無限遠点を加える，(20) 基点を避ける一般アフィンチャートへ移す，(21) 定義多項式のHessian曲線をとる，(22) 法線方向の代数的平行曲線をとる，(23) 固定非退化二次形式に関する極逆像をとる，(24) 固定光源からの反射光線族の包絡線をとる，(25) 法線方向の代数的平行曲線をとる，(26) 原点中心の円反転像をとる，(27) 固定基準三角形に関する等角共役Cremona像をとる，(28) 固定非退化二次形式に関する極逆像をとる，(29) 固定基準三角形に関する等角共役Cremona像をとる，(30) 射影閉包をとり無限遠点を加える，(31) 基点を避ける一般アフィンチャートへ移す，(32) 定義多項式のHessian曲線をとる，(33) 射影閉包をとり無限遠点を加える，(34) 基点を避ける一般アフィンチャートへ移す，(35) 固定基準三角形に関する等角共役Cremona像をとる，(36) 固定非退化二次形式に関する極逆像をとる。最後に、合成変換で元の曲線と双有理同値になる初期曲線を分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `ProjectiveDual → OffsetCurve → Catacaustic → ProjectiveDual → Catacaustic → PolarReciprocal → Evolute → ProjectiveClosure → AffineChartChange → Evolute → CircleInversion → OffsetCurve → Evolute → Catacaustic → OffsetCurve → Evolute → OffsetCurve → ProjectiveDual → ProjectiveClosure → AffineChartChange → HessianCurve → OffsetCurve → PolarReciprocal → Catacaustic → OffsetCurve → CircleInversion → IsogonalCremona → PolarReciprocal → IsogonalCremona → ProjectiveClosure → AffineChartChange → HessianCurve → ProjectiveClosure → AffineChartChange → IsogonalCremona → PolarReciprocal → BirationalPeriodQuery`
+
+### 凸体関手の合成力学（DifferenceBody・MinkowskiPolarSum・SupportFunctionChart・StabilityLinearization）
+
+- ID: `research.autonomous.convex_body.586cc2e252`
+- 状態: `unresolved_by_mathos`
+- 射数: `35`
+- 問い: `convex_body_dynamics`
+- 難度仮説: `39`
+- 生成元: `autonomous_atlas_search`
+- 既知問題との表層衝突: `検出なし`
+- 表層照合コーパス: `28074問`
+- 最大表層Jaccard: `0.0781`
+- 照合方式: `minhash64_conservative`
+
+\(\mathcal X_0\) を「原点対称で滑らかな厳密凸代数的凸体を初期対象とする」で定める。各構成が定義される非退化な範囲で，\(\mathcal X_i\) に次の型付き構成を順に施す：(1) 差体をとる，(2) 自身と極体のMinkowski和をとる，(3) 差体をとる，(4) 原点に関する極体をとる，(5) 自身と極体のMinkowski和をとる，(6) 原点に関する極体をとる，(7) 交叉体をとる，(8) 射影体をとる，(9) 原点に関する極体をとる，(10) 主慣性軸方向にSteiner対称化する，(11) 射影体をとる，(12) 重心体をとる，(13) 主慣性軸方向にSteiner対称化する，(14) 差体をとる，(15) 重心体をとる，(16) 原点に関する極体をとる，(17) 自身と極体のMinkowski和をとる，(18) 射影体をとる，(19) 主慣性軸方向にSteiner対称化する，(20) 重心体をとる，(21) 自身と極体のMinkowski和をとる，(22) 差体をとる，(23) 原点に関する極体をとる，(24) 主慣性軸方向にSteiner対称化する，(25) 射影体をとる，(26) 主慣性軸方向にSteiner対称化する，(27) 差体をとる，(28) 重心体をとる，(29) 自身と極体のMinkowski和をとる，(30) 射影体をとる，(31) 面積と二次モーメントを固定して正規化する，(32) ここまでの凸体関手を反復する，(33) 支持関数の軌道へ移す，(34) 固定点の周りで線形化しスペクトルを求める。最後に、固定体、周期軌道、局所安定性を線形同値を除いて分類せよ。分類では途中で生じる退化成分と例外パラメータも明示せよ。
+
+射列: `DifferenceBody → MinkowskiPolarSum → DifferenceBody → PolarDual → MinkowskiPolarSum → PolarDual → IntersectionBody → ProjectionBody → PolarDual → SteinerSymmetrization → ProjectionBody → CentroidBody → SteinerSymmetrization → DifferenceBody → CentroidBody → PolarDual → MinkowskiPolarSum → ProjectionBody → SteinerSymmetrization → CentroidBody → MinkowskiPolarSum → DifferenceBody → PolarDual → SteinerSymmetrization → ProjectionBody → SteinerSymmetrization → DifferenceBody → CentroidBody → MinkowskiPolarSum → ProjectionBody → VolumeNormalization → BodyIteration → SupportFunctionChart → StabilityLinearization → ConvexDynamicsQuery`
 
 ## 注意
 
