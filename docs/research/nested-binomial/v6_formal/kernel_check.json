@@ -1,0 +1,34 @@
+{
+  "status": "pass",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T07:29:13.467595+00:00",
+  "lean_version": "4.35.0",
+  "lean_commit": "eb6cafb7290e8bd5f2937522d8d804f58f02bafc",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "dabf7bbf4237b38859437e929e9ffadae72e6b5b5a5da6f143cf24513f2d07c1",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v6_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v6_formal/CommonDivisor.olean",
+    "/workspace/scratch/8e52c1248371/v6_formal/CommonDivisor.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "kernel_check_log": "kernel_check.log",
+  "new_checked_theorems": [
+    "original_ell_one_full_gcd_divisibility",
+    "original_ell_one_coprime_common_divisors"
+  ],
+  "sorry_used": false,
+  "custom_axioms_used": false,
+  "native_decide_used": false,
+  "new_n_minus_one_common_divisor_proof_formalized": false,
+  "new_infinite_family_exclusions_formalized": false,
+  "whole_diophantine_equation_solved": false,
+  "standalone_lake_build_executed": false,
+  "executor_compatibility_shim": "../v4_formal/own_executable_path.c (own process executable path readlink only)",
+  "successful_executor_session": 54585,
+  "successful_result_chunk": "3680ed"
+}

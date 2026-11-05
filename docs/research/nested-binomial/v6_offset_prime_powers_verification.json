@@ -1,0 +1,580 @@
+{
+  "status": "pass",
+  "scope": "Exact checks of proved formulas and four explicitly required small exponents; no unbounded search is claimed.",
+  "original_equation_globally_solved": false,
+  "new_results_formalized_in_Lean": false,
+  "abc_conjecture_used": false,
+  "explicit_divisor_exclusions": [
+    {
+      "base": 2,
+      "a": 9,
+      "n": 512,
+      "D": 511,
+      "factorization_D": {
+        "7": 1,
+        "73": 1
+      },
+      "c3_D": 511,
+      "forced_valuation_r": 4,
+      "necessary_divisor_r": 8176,
+      "three_times_divisor_minus_ten_n": 19408
+    },
+    {
+      "base": 2,
+      "a": 12,
+      "n": 4096,
+      "D": 1365,
+      "factorization_D": {
+        "3": 1,
+        "5": 1,
+        "7": 1,
+        "13": 1
+      },
+      "c3_D": 1365,
+      "forced_valuation_r": 5,
+      "necessary_divisor_r": 43680,
+      "three_times_divisor_minus_ten_n": 90080
+    },
+    {
+      "base": 5,
+      "a": 5,
+      "n": 3125,
+      "D": 1562,
+      "factorization_D": {
+        "2": 1,
+        "11": 1,
+        "71": 1
+      },
+      "c3_D": 1562,
+      "forced_valuation_r": 2,
+      "necessary_divisor_r": 39050,
+      "three_times_divisor_minus_ten_n": 85900
+    },
+    {
+      "base": 5,
+      "a": 8,
+      "n": 390625,
+      "D": 65104,
+      "factorization_D": {
+        "2": 4,
+        "13": 1,
+        "313": 1
+      },
+      "c3_D": 16276,
+      "forced_valuation_r": 3,
+      "necessary_divisor_r": 2034500,
+      "three_times_divisor_minus_ten_n": 2197250
+    }
+  ],
+  "exact_lifting_examples": [
+    {
+      "base": 2,
+      "a": 6,
+      "n_minus_one_factorization": {
+        "3": 2,
+        "7": 1
+      },
+      "repetition_excess": 3,
+      "W": 1,
+      "proved_multiple_of_excess": 6,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 2,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 2,
+          "predicted_vq_n_minus_one": 2
+        },
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 2,
+      "a": 9,
+      "n_minus_one_factorization": {
+        "7": 1,
+        "73": 1
+      },
+      "repetition_excess": 1,
+      "W": 1,
+      "proved_multiple_of_excess": 9,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 73,
+          "order": 9,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 2,
+      "a": 12,
+      "n_minus_one_factorization": {
+        "3": 2,
+        "5": 1,
+        "7": 1,
+        "13": 1
+      },
+      "repetition_excess": 3,
+      "W": 1,
+      "proved_multiple_of_excess": 12,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 2,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 2,
+          "predicted_vq_n_minus_one": 2
+        },
+        {
+          "q": 5,
+          "order": 4,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 13,
+          "order": 12,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 2,
+      "a": 15,
+      "n_minus_one_factorization": {
+        "7": 1,
+        "31": 1,
+        "151": 1
+      },
+      "repetition_excess": 1,
+      "W": 1,
+      "proved_multiple_of_excess": 15,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 31,
+          "order": 5,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 151,
+          "order": 15,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 2,
+      "a": 18,
+      "n_minus_one_factorization": {
+        "3": 3,
+        "7": 1,
+        "19": 1,
+        "73": 1
+      },
+      "repetition_excess": 9,
+      "W": 1,
+      "proved_multiple_of_excess": 18,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 2,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 3,
+          "predicted_vq_n_minus_one": 3
+        },
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 19,
+          "order": 18,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 73,
+          "order": 9,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 5,
+      "a": 5,
+      "n_minus_one_factorization": {
+        "2": 2,
+        "11": 1,
+        "71": 1
+      },
+      "repetition_excess": 2,
+      "W": 1,
+      "proved_multiple_of_excess": 10,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 11,
+          "order": 5,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 71,
+          "order": 5,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 5,
+      "a": 8,
+      "n_minus_one_factorization": {
+        "2": 5,
+        "3": 1,
+        "13": 1,
+        "313": 1
+      },
+      "repetition_excess": 16,
+      "W": 1,
+      "proved_multiple_of_excess": 16,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 2,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 13,
+          "order": 4,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 313,
+          "order": 8,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 5,
+      "a": 11,
+      "n_minus_one_factorization": {
+        "2": 2,
+        "12207031": 1
+      },
+      "repetition_excess": 2,
+      "W": 1,
+      "proved_multiple_of_excess": 22,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 12207031,
+          "order": 11,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 7,
+      "a": 3,
+      "n_minus_one_factorization": {
+        "2": 1,
+        "3": 2,
+        "19": 1
+      },
+      "repetition_excess": 3,
+      "W": 1,
+      "proved_multiple_of_excess": 12,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 1,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 2,
+          "predicted_vq_n_minus_one": 2
+        },
+        {
+          "q": 19,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 7,
+      "a": 6,
+      "n_minus_one_factorization": {
+        "2": 4,
+        "3": 2,
+        "19": 1,
+        "43": 1
+      },
+      "repetition_excess": 24,
+      "W": 1,
+      "proved_multiple_of_excess": 24,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 1,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 2,
+          "predicted_vq_n_minus_one": 2
+        },
+        {
+          "q": 19,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 43,
+          "order": 6,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 11,
+      "a": 3,
+      "n_minus_one_factorization": {
+        "2": 1,
+        "5": 1,
+        "7": 1,
+        "19": 1
+      },
+      "repetition_excess": 1,
+      "W": 1,
+      "proved_multiple_of_excess": 6,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 5,
+          "order": 1,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 19,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    },
+    {
+      "base": 11,
+      "a": 6,
+      "n_minus_one_factorization": {
+        "2": 3,
+        "3": 2,
+        "5": 1,
+        "7": 1,
+        "19": 1,
+        "37": 1
+      },
+      "repetition_excess": 12,
+      "W": 1,
+      "proved_multiple_of_excess": 12,
+      "divisibility_verified": true,
+      "odd_prime_lifting_checks": [
+        {
+          "q": 3,
+          "order": 2,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 2,
+          "predicted_vq_n_minus_one": 2
+        },
+        {
+          "q": 5,
+          "order": 1,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 7,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 19,
+          "order": 3,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        },
+        {
+          "q": 37,
+          "order": 6,
+          "primitive_multiplicity_e": 1,
+          "actual_vq_n_minus_one": 1,
+          "predicted_vq_n_minus_one": 1
+        }
+      ]
+    }
+  ],
+  "explicit_wieferich_prime_checks": [
+    {
+      "base": 2,
+      "q": 1093,
+      "prime_verified": true,
+      "order": 364,
+      "order_factorization": {
+        "2": 2,
+        "7": 1,
+        "13": 1
+      },
+      "proper_order_test_residues": {
+        "2": 1092,
+        "7": 27,
+        "13": 121
+      },
+      "b_to_order_mod_q2": 1,
+      "b_to_order_mod_q3": 1064432260,
+      "primitive_multiplicity": 2
+    },
+    {
+      "base": 2,
+      "q": 3511,
+      "prime_verified": true,
+      "order": 1755,
+      "order_factorization": {
+        "3": 3,
+        "5": 1,
+        "13": 1
+      },
+      "proper_order_test_residues": {
+        "3": 756,
+        "5": 1578,
+        "13": 88
+      },
+      "b_to_order_mod_q2": 1,
+      "b_to_order_mod_q3": 21954602502,
+      "primitive_multiplicity": 2
+    },
+    {
+      "base": 5,
+      "q": 20771,
+      "prime_verified": true,
+      "order": 10385,
+      "order_factorization": {
+        "5": 1,
+        "31": 1,
+        "67": 1
+      },
+      "proper_order_test_residues": {
+        "5": 12936,
+        "31": 3587,
+        "67": 7867
+      },
+      "b_to_order_mod_q2": 1,
+      "b_to_order_mod_q3": 4584422370067,
+      "primitive_multiplicity": 2
+    },
+    {
+      "base": 5,
+      "q": 40487,
+      "prime_verified": true,
+      "order": 40486,
+      "order_factorization": {
+        "2": 1,
+        "31": 1,
+        "653": 1
+      },
+      "proper_order_test_residues": {
+        "2": 40486,
+        "31": 32940,
+        "653": 4413
+      },
+      "b_to_order_mod_q2": 1,
+      "b_to_order_mod_q3": 20181795544729,
+      "primitive_multiplicity": 2
+    }
+  ],
+  "constant_checks": {
+    "base2_lower_bound_at_h5": "32767/25600",
+    "base5_weaker_lower_bound_at_a11": "12207031/4296875",
+    "base2_explicit_set_product": 3837523,
+    "base5_explicit_set_product": 840955477,
+    "base2_set_exclusion_integer_margin": 6133919872,
+    "base5_set_exclusion_integer_margin": 93382776714905
+  }
+}

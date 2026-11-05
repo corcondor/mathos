@@ -1,0 +1,147 @@
+{
+  "version": "v6",
+  "date": "2026-11-05",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "baseline_commit": "73959c873777ecbcc15a1b30b7a99c5473c5ef7f",
+  "original_equation_globally_solved": false,
+  "concrete_solution_found": false,
+  "reports": [
+    "v6_common_divisor_verification.json",
+    "v6_offset_composite_verification.json",
+    "v6_offset_prime_powers_verification.json",
+    "v6_large_prime_cyclotomic_verification.json",
+    "v6_formal/kernel_check.json"
+  ],
+  "verification_summary": {
+    "all_recorded_statuses": "pass",
+    "offset_composite_complete_pairs": 2180,
+    "offset_composite_complete_branch_equations": 4360,
+    "offset_composite_theoretically_proved_n_bound": 8191,
+    "offset_composite_unresolved": 0,
+    "cyclotomic_7q_complete_integer_remainder": 17,
+    "wieferich_explicit_primes_checked": 4,
+    "wieferich_prime_lists_assumed_complete": false,
+    "abc_conjecture_assumed": false,
+    "proof_notes_independently_reviewed": true,
+    "lean_executed_exit_code": 0,
+    "lean_new_checked_theorems": [
+      "original_ell_one_full_gcd_divisibility",
+      "original_ell_one_coprime_common_divisors"
+    ],
+    "all_new_mathematical_theorems_formalized": false,
+    "whole_branch_sparsity_scope": "First indices in ell=1,j=i-3 only; not quadruples in the full equation"
+  },
+  "hash_scope": "All v6 files and the updated navigation/log below; this manifest excludes its own hash.",
+  "files": [
+    {
+      "path": "PROGRESS_v6_ja.md",
+      "bytes": 14491,
+      "sha256": "b5033434b21884e28b07bd54171818ee7d6350b14f5b3fb9c9d695563e0fd2eb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6435,
+      "sha256": "a421666e313bab190fa8d96edeea11a14667566c88ce67202719d0ea0e2719e2"
+    },
+    {
+      "path": "RESEARCH_LOG.md",
+      "bytes": 2224,
+      "sha256": "d834d0e2197cdd9615ca4a31c3170e53f5e60df8216e3b1d93338daf68a166bc"
+    },
+    {
+      "path": "v6_common_divisor.md",
+      "bytes": 5553,
+      "sha256": "6dd90ec4e1e1a7ee7c35009af349e961229ad8067e63e2ff26081327d8b00881"
+    },
+    {
+      "path": "v6_common_divisor_checks.py",
+      "bytes": 2565,
+      "sha256": "e0fb99210240a1cd7c31911751bde358a3476410867801a0f87d9b31c8fc3f72"
+    },
+    {
+      "path": "v6_common_divisor_verification.json",
+      "bytes": 1410,
+      "sha256": "a2e6ecb8321def11f5e44cf41ccc0133f3f6c583b8739eebde462427b6e4bee1"
+    },
+    {
+      "path": "v6_formal/CommonDivisor.lean",
+      "bytes": 7062,
+      "sha256": "dabf7bbf4237b38859437e929e9ffadae72e6b5b5a5da6f143cf24513f2d07c1"
+    },
+    {
+      "path": "v6_formal/README.md",
+      "bytes": 1861,
+      "sha256": "679ab14803e114e0ca617e168ce0e7fdfeaf801c36696439891712da1ecbf138"
+    },
+    {
+      "path": "v6_formal/kernel_check.json",
+      "bytes": 1317,
+      "sha256": "96514da74bece8d5384deab6e9832eef0db60287dedb9c60a1fa46dc97fbcf6a"
+    },
+    {
+      "path": "v6_formal/kernel_check.log",
+      "bytes": 633,
+      "sha256": "1a161eb505118df9978585ba22f81fc87a3e6fcdea1232f67c10a793cdb0cf59"
+    },
+    {
+      "path": "v6_formal/lakefile.toml",
+      "bytes": 298,
+      "sha256": "699a75170d27829e35d179dd4eba6e19354ea7dd4ed3e0260a0399526973cde8"
+    },
+    {
+      "path": "v6_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "path": "v6_large_prime_cyclotomic.md",
+      "bytes": 9261,
+      "sha256": "e94872cb464f6eae693f46a17a9496a5df967d492bf0bee22eedef18d2530972"
+    },
+    {
+      "path": "v6_large_prime_cyclotomic_checks.py",
+      "bytes": 5561,
+      "sha256": "762b6c2dc70a54be4024cd2e803e83d3540393609d5e2cfe72421282c68702ea"
+    },
+    {
+      "path": "v6_large_prime_cyclotomic_verification.json",
+      "bytes": 4700,
+      "sha256": "8c7ba15379dc1b81af2e7c19661ddb2fa3a26e9762b46d702600fef459ace56b"
+    },
+    {
+      "path": "v6_offset_composite.md",
+      "bytes": 10180,
+      "sha256": "6282ee563c28a12a3331c0257edc81e6eaf48d836030362efc0fb5bb99369bea"
+    },
+    {
+      "path": "v6_offset_composite_certificates.json",
+      "bytes": 54769,
+      "sha256": "5744085478ff7608b832f6e1e1bc1391aab921c9332f60b3984fb68f20b77cad"
+    },
+    {
+      "path": "v6_offset_composite_checks.py",
+      "bytes": 7072,
+      "sha256": "93503d178953ed34af8f7b43b7e43ce2c9cad19b72333b36987deefac100825f"
+    },
+    {
+      "path": "v6_offset_composite_verification.json",
+      "bytes": 2214,
+      "sha256": "686b03a404c87cf5b3c9453953ba6c639f579f764594906e49b71da0ef1b4ed8"
+    },
+    {
+      "path": "v6_offset_prime_powers_checks.py",
+      "bytes": 7187,
+      "sha256": "15e0bedb5d86327b5a573346a88cad257c29fa0b37a2f7c943b654a79fbcca94"
+    },
+    {
+      "path": "v6_offset_prime_powers_verification.json",
+      "bytes": 13354,
+      "sha256": "edf4622add51b7d2d13a389b8fdd7dfac2c54297273bc57c8ea2c66274c019df"
+    },
+    {
+      "path": "v6_offset_prime_powers_wieferich.md",
+      "bytes": 12797,
+      "sha256": "262faff450b05b90dc6d56544db2692ce84001dada5ee285aa48fdbfbe0a8b54"
+    }
+  ]
+}

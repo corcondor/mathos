@@ -1,0 +1,109 @@
+{
+  "status": "pass",
+  "uniform_statement": "No solution with ell=1,j=i-3 and i/c3(i/gcd(i,3))<=12",
+  "exact_constant_checks": {
+    "e_upper_rational": "1631/600",
+    "e_upper_less_than_68_over_25": true,
+    "log_48_over_25_comparison_positive_integer": 158348527520157042564998235160576,
+    "log_625_over_32_comparison_positive_integer": 4856,
+    "e9_below_8192_positive_integer": 162899703570432,
+    "initial_exponential_comparison_positive_integer": 88064,
+    "initial_log_comparison_positive_integer": 295
+  },
+  "verified_candidate_pairs": 2180,
+  "verified_branch_equations": 4360,
+  "by_R": {
+    "4": 462,
+    "5": 123,
+    "6": 273,
+    "7": 132,
+    "8": 154,
+    "9": 274,
+    "10": 60,
+    "11": 84,
+    "12": 618
+  },
+  "max_n": 8184,
+  "max_prime": 17,
+  "unresolved": 0,
+  "certificate_sha256": "5744085478ff7608b832f6e1e1bc1391aab921c9332f60b3984fb68f20b77cad",
+  "coverage_independence": "n-first versus R/c-first; t-bound versus original strict r inequalities",
+  "residue_independence": "factorial tables versus direct math.comb on Lucas digits; complementary X index in verifier",
+  "factorization_independence": "smallest-prime-factor sieve versus trial division",
+  "examples": [
+    {
+      "n": 104,
+      "R": 4,
+      "r": 338,
+      "prime_witnesses": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 112,
+      "R": 4,
+      "r": 364,
+      "prime_witnesses": [
+        5,
+        3
+      ]
+    },
+    {
+      "n": 136,
+      "R": 4,
+      "r": 442,
+      "prime_witnesses": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 152,
+      "R": 4,
+      "r": 494,
+      "prime_witnesses": [
+        3,
+        5
+      ]
+    },
+    {
+      "n": 176,
+      "R": 4,
+      "r": 572,
+      "prime_witnesses": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 184,
+      "R": 4,
+      "r": 598,
+      "prime_witnesses": [
+        3,
+        5
+      ]
+    },
+    {
+      "n": 208,
+      "R": 4,
+      "r": 676,
+      "prime_witnesses": [
+        3,
+        3
+      ]
+    },
+    {
+      "n": 232,
+      "R": 4,
+      "r": 754,
+      "prime_witnesses": [
+        3,
+        3
+      ]
+    }
+  ],
+  "formalized_in_Lean": false,
+  "verification_seconds": 0.04407265300687868
+}

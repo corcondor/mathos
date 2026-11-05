@@ -1,0 +1,195 @@
+{
+  "status": "pass",
+  "scope": "Uniform proof in the companion note; exact17-case completion and formula checks here.",
+  "original_equation_globally_solved": false,
+  "new_claims_formalized_in_Lean": false,
+  "exact_constants": {
+    "log3_lower_bound_integer_margin": 1141689649093,
+    "slope_comparison_integer_margin": 245,
+    "proved_p_upper_bound_exclusive": 19683
+  },
+  "finite_completion": {
+    "candidate_count": 17,
+    "coverage_methods": [
+      "two CRT arithmetic progressions",
+      "independent congruence conditions in the proved p interval"
+    ],
+    "primality_assumed_in_completion": false,
+    "unresolved": 0,
+    "rows": [
+      {
+        "p": 107,
+        "S": 2985,
+        "square_lower_witness": 54,
+        "S_minus_b_squared": 69,
+        "next_square_minus_S": 40
+      },
+      {
+        "p": 1355,
+        "S": 474937,
+        "square_lower_witness": 689,
+        "S_minus_b_squared": 216,
+        "next_square_minus_S": 1163
+      },
+      {
+        "p": 2459,
+        "S": 1563665,
+        "square_lower_witness": 1250,
+        "S_minus_b_squared": 1165,
+        "next_square_minus_S": 1336
+      },
+      {
+        "p": 3707,
+        "S": 3553185,
+        "square_lower_witness": 1884,
+        "S_minus_b_squared": 3729,
+        "next_square_minus_S": 40
+      },
+      {
+        "p": 4811,
+        "S": 5984377,
+        "square_lower_witness": 2446,
+        "S_minus_b_squared": 1461,
+        "next_square_minus_S": 3432
+      },
+      {
+        "p": 6059,
+        "S": 9491465,
+        "square_lower_witness": 3080,
+        "S_minus_b_squared": 5065,
+        "next_square_minus_S": 1096
+      },
+      {
+        "p": 7163,
+        "S": 13265121,
+        "square_lower_witness": 3642,
+        "S_minus_b_squared": 957,
+        "next_square_minus_S": 6328
+      },
+      {
+        "p": 8411,
+        "S": 18289777,
+        "square_lower_witness": 4276,
+        "S_minus_b_squared": 5601,
+        "next_square_minus_S": 2952
+      },
+      {
+        "p": 9515,
+        "S": 23405897,
+        "square_lower_witness": 4837,
+        "S_minus_b_squared": 9328,
+        "next_square_minus_S": 347
+      },
+      {
+        "p": 10763,
+        "S": 29948121,
+        "square_lower_witness": 5472,
+        "S_minus_b_squared": 5337,
+        "next_square_minus_S": 5608
+      },
+      {
+        "p": 11867,
+        "S": 36406705,
+        "square_lower_witness": 6033,
+        "S_minus_b_squared": 9616,
+        "next_square_minus_S": 2451
+      },
+      {
+        "p": 13115,
+        "S": 44466497,
+        "square_lower_witness": 6668,
+        "S_minus_b_squared": 4273,
+        "next_square_minus_S": 9064
+      },
+      {
+        "p": 14219,
+        "S": 52267545,
+        "square_lower_witness": 7229,
+        "S_minus_b_squared": 9104,
+        "next_square_minus_S": 5355
+      },
+      {
+        "p": 15467,
+        "S": 61844905,
+        "square_lower_witness": 7864,
+        "S_minus_b_squared": 2409,
+        "next_square_minus_S": 13320
+      },
+      {
+        "p": 16571,
+        "S": 70988417,
+        "square_lower_witness": 8425,
+        "S_minus_b_squared": 7792,
+        "next_square_minus_S": 9059
+      },
+      {
+        "p": 17819,
+        "S": 82083345,
+        "square_lower_witness": 9059,
+        "S_minus_b_squared": 17864,
+        "next_square_minus_S": 255
+      },
+      {
+        "p": 18923,
+        "S": 92569321,
+        "square_lower_witness": 9621,
+        "S_minus_b_squared": 5680,
+        "next_square_minus_S": 13563
+      }
+    ]
+  },
+  "prime_power_obstruction_checks": [
+    {
+      "p": 59,
+      "j": 31,
+      "q": 3541,
+      "a": 1,
+      "cofactor": 1,
+      "normalization_exponent_h": 1,
+      "A_mod_q_to_h": 1,
+      "L_mod_q": 0,
+      "X_mod_q": 1,
+      "right_side_mod_q": 3482,
+      "direct_binomial_cross_check": true
+    },
+    {
+      "p": 313,
+      "j": 159,
+      "q": 181,
+      "a": 2,
+      "cofactor": 3,
+      "normalization_exponent_h": 2,
+      "A_mod_q_to_h": 1,
+      "L_mod_q": 0,
+      "X_mod_q": 1,
+      "right_side_mod_q": 49,
+      "direct_binomial_cross_check": false
+    }
+  ],
+  "seven_q_digit_identity_checks": [
+    {
+      "p": 53,
+      "j": 27,
+      "q": 409,
+      "A_mod_q": 1,
+      "L_mod_q": 0,
+      "X_mod_q_direct": 240,
+      "X_mod_q_formula": 240,
+      "equation_right_side_mod_q": 186,
+      "quadratic_expression_mod_q": 404,
+      "direct_binomial_cross_check": true
+    },
+    {
+      "p": 179,
+      "j": 91,
+      "q": 4603,
+      "A_mod_q": 1,
+      "L_mod_q": 0,
+      "X_mod_q_direct": 1004,
+      "X_mod_q_formula": 1004,
+      "equation_right_side_mod_q": 824,
+      "quadratic_expression_mod_q": 2755,
+      "direct_binomial_cross_check": true
+    }
+  ]
+}

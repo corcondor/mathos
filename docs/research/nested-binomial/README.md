@@ -13,12 +13,50 @@
 
 ## 読み始める場所
 
+- **[最新：v6 日本語概要](PROGRESS_v6_ja.md)**
+- [版ごとの研究記録](RESEARCH_LOG.md)
+- [新しい共通約数と i-1 が平方自由な場合の完全排除](v6_common_divisor.md)
+- [対数幅、R≤12 の排除、候補の疎性](v6_offset_composite.md)
+- [素数冪に必要な Wieferich 因子](v6_offset_prime_powers_wieferich.md)
+- [円分因子による制限と p²+p+1=7q の完全排除](v6_large_prime_cyclotomic.md)
+- [v6 の Lean 検証範囲・実行方法](v6_formal/README.md)
 - [v5 日本語概要](PROGRESS_v5_ja.md)
 - [v4 日本語概要](PROGRESS_v4_ja.md)
 - [ell=1、j=i-3 の区間・付値の証明](v5_offset_three_structure.md)
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v6
+
+ell=1、j=i-3、n=i、r=min(k,C(n,3)-k) の枝では、
+
+\[
+\frac n{\gcd(n,3)}\frac{n-1}{\gcd(n-1,6)}\mid r^3
+\]
+
+という新しい共通約数の条件を証明した。これにより n-1 が
+平方自由な場合を全範囲で排除し、2・5の冪には特定の有限集合の
+外にある Wieferich 素因数が必要だと示した。
+
+また n≥1024 では
+
+\[
+3n<r<3n+\frac{3n}{4\log n}
+\]
+
+を証明。c₃(z)=∏p^ceil(v_p(z)/3)、R=n/c₃(n/gcd(n,3)) とすると
+R≤12 の全範囲を理論的に有限化し、全2,180組・4,360式を排除した。
+両隣の平方約数を使い、この枝で可能な第一添字 n≤X の個数が
+O(X^(3/4)) 以下であることも証明した。
+
+別の残存形 i=jp³、k=p、ell=1 では、p²+p+1 が3以外の
+素因数を少なくとも二つ持つことが必要になった。
+さらに p²+p+1=7q、q素数の場合は、合同式からの二次方程式と
+実数評価を組み合わせ、証明された17候補をすべて排除した。
+
+詳細な仮定・証明・残る範囲は [v6 日本語概要](PROGRESS_v6_ja.md)、
+ファイルハッシュと検証範囲は [v6_manifest.json](v6_manifest.json) に記録する。
 
 ## 2026年11月5日の基準点：v5
 
@@ -44,7 +82,7 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
    明示的な仮定として残している解析評価まで形式化済みとはしない。
 4. 実験・未完了の方向：必要条件と観察だけで、解なしの定理にしない。
 
-v4・v5 の元ファイルは、その時点の記録として保存している。
+過去の版の元ファイルは、その時点の記録として保存している。
 後続の結果は新しい版名で追加し、訂正が必要になった場合は
 旧主張と訂正理由を明示する。
 
@@ -52,6 +90,13 @@ v4・v5 の元ファイルは、その時点の記録として保存している
 
 このディレクトリを作業場所にする。代表的な小さい検算は Python の
 標準ライブラリだけで実行できる。
+
+    python3 v6_common_divisor_checks.py
+    python3 v6_offset_composite_checks.py all
+    python3 v6_offset_prime_powers_checks.py
+    python3 v6_large_prime_cyclotomic_checks.py
+
+前の版：
 
     python3 v5_offset_three_checks.py
     python3 v5_large_prime_localization_checks.py
@@ -69,6 +114,7 @@ v4_formal/README.md と v5_formal/README.md を参照。
 ## 大きい生成済み証明書
 
 Git には証明、生成器、独立検証器、小さい結果記録を収録した。
+v6 の有限証明書は全件含む。v5 までの基準アーカイブにあった
 100 KB を超える生成済み証明書やバイナリ出力の一部は収録していない。
 省略した16ファイルの名前・サイズ・SHA-256、および基準アーカイブとの
 対応は [ARCHIVE_MANIFEST.json](ARCHIVE_MANIFEST.json) にある。
@@ -80,8 +126,9 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 の未排除の合成数・素数冪。
-- i=jp^3 の唯一の実数評価候補と、高い精度の合同条件の両立。
+- ell=1、j=i-3 で R>12、i-1 が平方自由でない未排除の合成数・素数冪。
+- 素数冪に対して、例外的な Wieferich 因子が必要な量だけ現れる可能性。
+- i=jp^3 で、p²+p+1 の未排除の因数構造と、実数評価・合同条件の両立。
 - 下側 i=j+4 の残存区間、およびその他の未排除分岐。
 
 これらはこの研究記録の未完了部分であり、既知の未解決問題であると
