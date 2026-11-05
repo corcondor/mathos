@@ -1,0 +1,7 @@
+'NestedBinomialV11.cubic_difference_dvd_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV11.divisor_of_top_dvd_choose' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV11.four_dvd_choose_of_odd_bottom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV11.binary_defect_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV11.integer_interval_span_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV11.integer_interval_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV11.cube_interval_constants' depends on axioms: [propext, Classical.choice, Quot.sound]

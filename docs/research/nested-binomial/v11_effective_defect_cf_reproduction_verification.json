@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "H": 13,
+  "curves": 804,
+  "continued_fraction_terms": 1173389,
+  "reduced_fractions_sieved": 7346437,
+  "divisor_residue_passes": 909,
+  "exact_cubic_checks": 909,
+  "surviving_points": 0,
+  "recovered_integer_points": [
+    {
+      "T": 2352,
+      "n": "28",
+      "r": "84"
+    },
+    {
+      "T": 2560,
+      "n": "26",
+      "r": "80"
+    },
+    {
+      "T": 2646,
+      "n": "14",
+      "r": "42"
+    },
+    {
+      "T": 2890,
+      "n": "52",
+      "r": "170"
+    }
+  ],
+  "survivors": [],
+  "saved_certificates_read": false,
+  "primary_verifier_imported": false,
+  "cube_root_algorithm_used": false,
+  "CF_generation": "exact integer cubic transformations and polynomial signs",
+  "candidate_enumeration": "union of coefficient lists; gcd(a,b)=1",
+  "residue_modulus": "12HT+1",
+  "original_n_interval_scanned": false,
+  "all_arithmetic_exact": true,
+  "source_sha256": "5d70b7821d69647bef778a1481abbc5c549f781f85c57a6d8b20842386a7efea",
+  "whole_original_equation_solved": false
+}

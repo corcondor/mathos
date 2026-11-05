@@ -13,7 +13,14 @@
 
 ## 読み始める場所
 
-- **[最新：v10 日本語概要](PROGRESS_v10_ja.md)**
+- **[最新：v11 日本語概要](PROGRESS_v11_ja.md)**
+- [平方値のCRT：固定したiの各素因数分配で平方値が最大4候補、E≥512なら最大1候補](v11_simultaneous_square_interval.md)
+- [実際の不足分H=13を完全排除：新しい約数ふるいと二方式の連分数](v11_effective_defect_cf.md)
+- [二進付値による192の改善と、全94余因子の排除](v11_cofactor_extension.md)
+- [指数に依存しない局所平方条件と、無制限の余因子を持つ族の排除](v11_local_square_filters.md)
+- [i−3の素数冪に対する三次上限と四余因子の全排除](v11_mixed_structure.md)
+- [v11の実行済みLean証明8定理と未形式化の範囲](v11_formal/README.md)
+- [v10 日本語概要](PROGRESS_v10_ja.md)
 - [元の等式からの付値回復、混合素因数のCRT条件、一般の高さ上限](v10_valuation_recovery.md)
 - [w/gcd(w,6)≤12 の全30余因子を全素数・全指数で排除](v10_small_cofactors.md)
 - [一般の付値回復補題と円分の有限合同計算の実行済みLean検証](v10_formal/README.md)
@@ -44,6 +51,31 @@
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v11
+
+ell=1、j=i−3 の枝で、各候補iに対してEを零剰余側Zと残存側Hに分け、
+平方の値を先にCRTでまとめた。K=F³/B、u=Zv、J=KZ²とすると、
+162H<Jv³<229H と v²=R+mH の同時条件になる。mの区間幅は
+8/(EK²Z³)^(1/3)未満で、各分配につき最大4個、E≥512なら最大1個の整数検査。
+第一添字iそのものの個数を4個に限定したという意味ではない。
+
+H=A/gcd(A,r³)=13の804曲線を新しいD|6HTの約数ふるいで全排除し、H≥14へ強化。
+完全な1,173,389項の連分数証明書と、三次多項式を直接変換する別実装が一致した。
+二進桁の3回の繰り上がりからE|(i−2)/gcd(i−2,192)を証明し、
+w/gcd(w,192)≤13の全94余因子を全素数・全正指数で排除した。
+主領域28,316組・別の広域69,223組を、元のiやrの全区間走査なしで完全検証した。
+一般の高さもlog i<128w/gcd(w,192)へ改善。
+
+奇素数の正規化単元を指数に依存しない式へ還元し、4w<p<6wで特定の小二項係数が
+非平方ならi=wp^(3t+1)+2を全tで排除。余因子19、23、41など94種類外の具体族も得た。
+さらにi−3側ではA−1の因子とr(r−1)の整除を使い、p≥7、p≡3 mod4に対して
+i=wp^a+3ならi<4000w³/3+1、w=1..4ではp=2またはp≡3 mod4を全指数排除した。
+
+一般の整除・整数区間・定数に関する8定理をLeanで実際に実行し終了0。
+全CRT・CF完全性・94族の全証明まで形式化済みとはしない。
+詳しくは [v11 日本語概要](PROGRESS_v11_ja.md) と
+[v11_manifest.json](v11_manifest.json) を参照。
 
 ## 2026年11月5日の追加：v10
 
@@ -195,8 +227,18 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 
 ## 再計算
 
-このディレクトリを作業場所にする。代表的な小さい検算は Python の
+このディレクトリを作業場所にする。代表的な検証は Python の
 標準ライブラリだけで実行できる。
+
+    python3 v11_simultaneous_square_interval_checks.py
+    python3 v11_effective_defect_cf_checks.py verify
+    python3 v11_effective_defect_cf_reproduction.py
+    python3 v11_cofactor_extension_checks.py verify
+    python3 v11_cofactor_extension_independent_reproduction.py
+    python3 v11_local_square_filters_checks.py
+    python3 v11_mixed_structure_checks.py
+
+前の版：
 
     python3 v10_valuation_recovery_checks.py
     python3 v10_small_cofactors_checks.py verify
@@ -251,8 +293,8 @@ v4_formal/README.md と v5_formal/README.md を参照。
 ## 大きい生成済み証明書
 
 Git には証明、生成器、独立検証器、小さい結果記録を収録した。
-v6〜v10 の有限証明書は全件含む。v9の大きい連分数係数列は、完全な内容を
-圧縮テキストと再検証器で収録している。v5 までの基準アーカイブにあった
+v6〜v11 の有限証明書は全件含む。v9・v11の大きい連分数係数列とv11の余因子証明書は、
+完全な内容を圧縮テキストと再検証器で収録している。v5 までの基準アーカイブにあった
 100 KB を超える生成済み証明書やバイナリ出力の一部は収録していない。
 省略した16ファイルの名前・サイズ・SHA-256、および基準アーカイブとの
 対応は [ARCHIVE_MANIFEST.json](ARCHIVE_MANIFEST.json) にある。
@@ -264,8 +306,9 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 で、回復後の不足分E≥13と平方合同・CRT条件を全て通過する混合素因数。
-- 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,6)≥13かつlog i/128より大きい未排除の値。
+- ell=1、j=i-3 で、実際の不足分H≥14、回復後のE≥14と平方値CRTの短い区間を全て通過する混合素因数。
+- 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,192)≥14かつlog i/128より大きい未排除の値。
+- i−3側の新しい三次高さ条件も通過する値。i=wp^a+3、w=1..4、p=2またはp≡3 mod4の族はv11で完了。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
 - i=jp^3 で、p²+p+1 の未排除の因数構造と、実数評価・合同条件の両立。
 - 下側 i=j+4 の残存区間、およびその他の未排除分岐。

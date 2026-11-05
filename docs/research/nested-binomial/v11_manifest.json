@@ -1,0 +1,462 @@
+{
+  "version": "v11",
+  "date": "2026-11-05",
+  "base_commit": "453c0e216c7c4b8d723ab8fd36704d99c9792076",
+  "original_equation": "C(C(i,j),C(k,ell)) = C(i^2,j^2) + C(k^2,ell^2)",
+  "scope": "ell=1, j=i-3; both k=r and k=A-r branches",
+  "globally_solved": false,
+  "concrete_solution_found": false,
+  "simultaneous_square_interval": {
+    "definitions": "A=C(n,3), X=C(n^2,6n-9), B=A/E, F=c3(B), K=F^3/B, r=Fu, Z=gcd(E,u), E=ZH, u=Zv, J=KZ^2",
+    "unitary_zero_support": "gcd(Z,H)=1 and gcd(v,H)=1",
+    "exact_necessary_interval": "162H < J*v^3 < 229H",
+    "squared_value_CRT": "v^2=R+mH with unique unit R modulo H and integer m>=0",
+    "interval_length_upper_bound": "8/(E*K^2*Z^3)^(1/3)",
+    "uniform_bound_per_fixed_n_and_support_Z": 4,
+    "one_square_test_if": "E*K^2*Z^3>=512; in particular E>=512 or Z>=3",
+    "m_zero_only_if": "E*K^2*Z^3>=52441",
+    "total_square_tests_for_t_eligible_supports": "at most t+4",
+    "each_surviving_r_has_two_original_k_branches": true,
+    "bound_does_not_make_n_or_E_finite": true,
+    "implementation_uses_exact_integer_roots": true,
+    "synthetic_cases": 2760,
+    "support_branches": 4320,
+    "integer_square_tests": 1492,
+    "synthetic_reduced_candidates": 95,
+    "synthetic_candidates_not_claimed_original_solutions": true,
+    "original_binomial_examples": 25,
+    "maximum_four_attained": true,
+    "actual_successful_result_chunk": "b054dc",
+    "exit_code": 0,
+    "independent_reexecutions": [
+      "482570",
+      "b96530"
+    ]
+  },
+  "effective_defect_13_complete_exclusion": {
+    "new_bound": "H=A/gcd(A,r^3)>=14; E>=14 and E_square>=14",
+    "curve": "78*r^3=T*((n-1)^3-(n-1)); 2106<T<2977; 13 does not divide T",
+    "complete_height": "n<2^2496",
+    "primitive_curves": 804,
+    "divisor_sieve": "For reduced r/(n-1)=p/q, D=T*q^3-78*p^3>0 and D divides 78*T",
+    "CF_completeness_source": "v9_gcd_defect_continued_fractions.md, with the new primitive H=13 domain",
+    "CF_terms_in_each_execution": 1173389,
+    "primary_proposed_fractions_including_unreduced": 8866186,
+    "primary_residue_passes": 2045,
+    "primary_exact_cubic_checks": 1405,
+    "independent_reduced_fractions": 7346437,
+    "independent_exact_cubic_checks": 909,
+    "independent_CF_generation": "Exact integer polynomial transformations F_next(y)=y^3*F(a+1/y) and sign comparisons; no certificate or cube-root algorithm",
+    "primary_sieve_modulus": "6HT+1",
+    "independent_sieve_modulus": "12HT+1",
+    "surviving_points": 0,
+    "recovered_n_below_104": [
+      14,
+      26,
+      28,
+      52
+    ],
+    "arbitrary_height_cutoff": false,
+    "primary_result_chunk": "8a4c8b",
+    "independent_result_chunk": "fca253",
+    "both_exit_codes": 0
+  },
+  "binary_gain_and_cofactor_extension": {
+    "new_divisor": "E divides (n-2)/gcd(n-2,192)",
+    "binary_carries": "For h=v2(n-2)>=2, carries at positions 0,1,h+1 force v2(X)>=3",
+    "binary_defect_bound": "d2<=max(h-6,0)",
+    "all_exponent_exclusion": "ell=1, j=i-3, i=w*p^a+2, w/gcd(w,192)<=13, p prime, a>=1",
+    "cofactors": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      20,
+      21,
+      22,
+      24,
+      26,
+      27,
+      28,
+      30,
+      32,
+      33,
+      36,
+      39,
+      40,
+      42,
+      44,
+      48,
+      52,
+      54,
+      56,
+      60,
+      64,
+      66,
+      72,
+      78,
+      80,
+      84,
+      88,
+      96,
+      104,
+      108,
+      112,
+      120,
+      128,
+      132,
+      144,
+      156,
+      160,
+      168,
+      176,
+      192,
+      208,
+      216,
+      224,
+      240,
+      256,
+      264,
+      288,
+      312,
+      320,
+      336,
+      352,
+      384,
+      416,
+      432,
+      448,
+      480,
+      512,
+      528,
+      576,
+      624,
+      640,
+      672,
+      704,
+      768,
+      832,
+      864,
+      960,
+      1056,
+      1152,
+      1248,
+      1344,
+      1536,
+      1728,
+      1920,
+      2112,
+      2304,
+      2496
+    ],
+    "cofactor_count": 94,
+    "new_cofactors_beyond_v10": 64,
+    "maximum_cofactor": 2496,
+    "all_primes_and_positive_exponents": true,
+    "p_dividing_w_included": true,
+    "families_may_overlap": true,
+    "finite_domain_proof": "Normalize p not dividing w. Include p^a<=4w. Otherwise E<=13 unless p divides D_w, p<=6w and alpha=a-[p=3] in {b,b+2,...,3b-2}. In all remaining cases p^a<9w^3.",
+    "complete_parameter_records": 28316,
+    "distinct_indices": 28133,
+    "maximum_index": 7844717829890,
+    "parameter_exclusions": {
+      "logarithmic_gap_with_log_n_greater_than_8": 1,
+      "no_forced_multiple_in_broad_gap": 16566,
+      "recovered_defect_at_most_13": 11749
+    },
+    "distinct_index_exclusions": {
+      "logarithmic_gap_with_log_n_greater_than_8": 1,
+      "no_forced_multiple_in_broad_gap": 16564,
+      "recovered_defect_at_most_13": 11568
+    },
+    "prime_factor_records": 202482,
+    "independent_carry_valuations": 202482,
+    "full_lossless_certificate": true,
+    "certificate_bytes": 2340246,
+    "uncompressed_bytes": 13643226,
+    "uncompressed_sha256": "d61cbaaf09ce4ab443794d3e574b5da86c909e39501a505b7f7a5585ac00eb74",
+    "compressed_bytes": 1754846,
+    "compressed_sha256": "77d1147678c64ab4aa80d910a48753bfc5c26ae0113449657b69bbe86b9d5021",
+    "independent_reproduction": {
+      "domain": "p<=6w, p^a<9w^3, p does not divide w; proved larger domain",
+      "reads_primary_certificate": false,
+      "uses_D_w_or_exponent_progression": false,
+      "parameter_records": 69223,
+      "distinct_indices": 69003,
+      "maximum_index": 348735045407426,
+      "digit_sum_valuations": 532883,
+      "survivors": 0,
+      "successful_result_chunk": "df7659",
+      "exit_code": 0
+    },
+    "primary_successful_result_chunk": "58709f",
+    "exit_code": 0,
+    "every_exact_prime_power_q_of_n_minus_2": "w=(n-2)/q satisfies w/gcd(w,192)>=14; q<=(n-2)/14",
+    "all_w_height": "log n<128*w/gcd(w,192); n<2^(192*w/gcd(w,192))",
+    "exactly_two_distinct_prime_factors": "If present: 2-power>=1024; 3-power>=81; primes 5,7,11,13 occur to exponent>=2"
+  },
+  "local_square_filters": {
+    "uniform_odd_prime_unit": "For n=w*p^a+2, p odd prime, p does not divide w, p^a>4w: v_p(X)=a-beta and X/p^(a-beta)=-2w/(C(6w,2w)/p^beta) modulo p",
+    "character_independent_of_exponent": true,
+    "higher_precision_p_free_factorial_algorithm": true,
+    "band_exclusion": "4w<p<6w and C(2w-1,p-4w-1) a quadratic nonresidue modulo p excludes n=w*p^(3t+1)+2 for every t>=0",
+    "explicit_prime_progression_family": "n=((p+1)/6)*p^(3t+1)+2, prime p=17 or23 mod24, t>=0",
+    "examples_beyond_the_94_cofactors": [
+      "19*113^(3t+1)+2",
+      "23*137^(3t+1)+2",
+      "41*241^(3t+1)+2"
+    ],
+    "index_6860": "X=35 mod 127, -35=92 is nonsquare, E=1143 becomes E_square=9, so previous H>=13 already excludes",
+    "unit_formula_checks": 9382,
+    "higher_precision_direct_checks": 963,
+    "band_unit_checks": 5118,
+    "fixed_offset_checks": 326,
+    "sample_checks_not_substitutes_for_uniform_proofs": true,
+    "successful_result_chunk": "569441",
+    "exit_code": 0
+  },
+  "neighbor_factor_n_minus_3": {
+    "identity": "A-1=(n-3)*(n^2+2)/6",
+    "uniform_local_condition": "n=w*q+3, q=p^a>6w, p>=7 and p=3 mod 4 implies X=1 mod p and q divides r(r-1)",
+    "coefficient_interval": "r=mq+delta, delta in {0,1}, 3w+1<=m<=floor(10w/3)",
+    "uniform_height": "n<4000*w^3/3+1 for all w,a and primes p>=7, p=3 mod4; p dividing w allowed",
+    "exact_prime_power_consequence": "q^3<4000*(n-3)^3/(3*(n-1)); q<12*n^(2/3)",
+    "completed_families": "n=w*p^a+3, w in {1,2,3,4}, p=2 or p=3 mod4, all a>=1",
+    "exceptional_bases_2_and_3_handled": true,
+    "local_examples": 4681,
+    "examples_with_p_dividing_w": 60,
+    "coefficient_endpoint_checks": 9362,
+    "complete_small_divisor_and_exceptional_boundary_calculations": true,
+    "sample_checks_not_substitutes_for_uniform_proofs": true,
+    "successful_result_chunk": "e6ebb2",
+    "exit_code": 0
+  },
+  "Lean": {
+    "status": "PASS",
+    "exit_code": 0,
+    "checked_at_utc": "2026-11-05T11:18:17.756Z",
+    "lean_version": "4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "source_sha256": "aa2f6e6508a2716f4b74d44866aebc598d52af6048d1b16cc659cc67e22732e4",
+    "log_sha256": "406da42bb52380fade68d1cb7c06c19ac609ad0a09514b27ac9dc77111d019fa",
+    "successful_executor_session": 21025,
+    "successful_result_chunk": "9dcace",
+    "executed_command": [
+      "lake",
+      "env",
+      "lean",
+      "--root=/workspace/scratch/8e52c1248371/github_nested_binomial/docs/research/nested-binomial/v11_formal",
+      "-o",
+      "/workspace/scratch/8e52c1248371/v11_ArithmeticCore.olean",
+      "/workspace/scratch/8e52c1248371/github_nested_binomial/docs/research/nested-binomial/v11_formal/ArithmeticCore.lean"
+    ],
+    "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+    "environment": {
+      "PATH_prefix": "/workspace/scratch/8e52c1248371/v4_runtime/lean-4.35.0-linux/bin",
+      "LD_PRELOAD": "/workspace/scratch/8e52c1248371/v4_runtime/own_executable_path.so"
+    },
+    "major_theorems": 7,
+    "auxiliary_theorems": 1,
+    "quantified_structural_theorems": true,
+    "bounded_divisor_sieve_core_formalized": true,
+    "coprime_divisor_of_top_choose_formalized": true,
+    "binary_exponent_gain_conditional_on_x_ge_3_formalized": true,
+    "integer_interval_span_and_uniqueness_formalized": true,
+    "binary_three_carries_formalized": false,
+    "global_defect_product_formalized": false,
+    "CRT_reconstruction_formalized": false,
+    "full_cube_root_interval_bound_formalized": false,
+    "continued_fraction_completeness_formalized": false,
+    "all_804_curves_formalized": false,
+    "cofactor_domain_completeness_formalized": false,
+    "cofactor_finite_records_formalized": false,
+    "local_unit_formula_formalized": false,
+    "neighbor_factor_exclusion_formalized": false,
+    "whole_original_equation_solved": false,
+    "sorry_used": false,
+    "admit_used": false,
+    "native_decide_used": false,
+    "custom_axioms_used": false,
+    "standalone_lake_build_executed": false,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "independent_statement_and_proof_mapping_audit": "PASS by mixed-structure reviewer; source SHA matched",
+    "log_capture": "Verbatim successful direct executor output after exit code 0."
+  },
+  "independent_AI_audits": {
+    "CRT_proof_and_implementation": "PASS by two other reviewers; both independently reexecuted",
+    "effective_defect_13": "PASS by fixed-cofactor reviewer; independent polynomial-sign CF reproduction",
+    "cofactor_domain_and_proofs": "PASS by root and local-square reviewer; complete factor/certificate audit and separate larger-domain reproduction",
+    "local_unit_and_unbounded_families": "PASS by root, mixed-structure and fixed-cofactor reviewers; independent reexecution",
+    "neighbor_factor": "PASS by root, fixed-cofactor and local-square reviewers; independent reexecution",
+    "Lean_statement_mapping": "PASS by mixed-structure reviewer; exact executed-source SHA checked",
+    "overview": "PASS after fixing math delimiters, truncated natural subtraction, latest bounds and square-value versus k candidate scope"
+  },
+  "external_peer_reviewed": false,
+  "not_completed": [
+    "All remaining mixed-prime n",
+    "Other forms of j",
+    "ell>1",
+    "Remaining cyclotomic branch",
+    "A concrete original-equation solution",
+    "Full Lean formalization of CRT, CF completeness and 804 curves, binary carries, 94-family domain and all records, unit formulas and neighbor-factor families"
+  ],
+  "files": [
+    {
+      "path": "PROGRESS_v11_ja.md",
+      "bytes": 13168,
+      "sha256": "07fb7989c90a93195188a9a98dc13f6a685730b6be9fbe1edca591ccf614d863"
+    },
+    {
+      "path": "v11_cofactor_extension.md",
+      "bytes": 18874,
+      "sha256": "60db0f8b46e52200b8bd519ba66ebcfc739b428fbd443b9cd519d40d004172e5"
+    },
+    {
+      "path": "v11_cofactor_extension_certificates.json",
+      "bytes": 2340246,
+      "sha256": "475ff97cdacc84ae8fbfca45b6d3aea8532c622092e48853945812e7c7b55b6c"
+    },
+    {
+      "path": "v11_cofactor_extension_checks.py",
+      "bytes": 15043,
+      "sha256": "b1c225caeeb9a5b187842e1922c2d6fd9c67fcd6da3678e49a6f7fa4b158c33b"
+    },
+    {
+      "path": "v11_cofactor_extension_independent_reproduction.json",
+      "bytes": 2268,
+      "sha256": "811fd5a213b7688ffbb112758949d2f780de8bcfcea8f1dce40ca385072fb09f"
+    },
+    {
+      "path": "v11_cofactor_extension_independent_reproduction.py",
+      "bytes": 5076,
+      "sha256": "8ebccaf6b7caaa6d07c0ae195db5a9af123c39463b135fa64536edc5423ba4ca"
+    },
+    {
+      "path": "v11_cofactor_extension_verification.json",
+      "bytes": 4781,
+      "sha256": "c715e661782181b2a65ead8009248f126e6183e034b5ae334bdcc085ca59f7e2"
+    },
+    {
+      "path": "v11_effective_defect_13_certificate.json",
+      "bytes": 986141,
+      "sha256": "f3b4334f1ed6865fd04cf4b1abe1b310a17f161cde3d1d77ce59577c945a2ec1"
+    },
+    {
+      "path": "v11_effective_defect_cf.md",
+      "bytes": 8015,
+      "sha256": "a4ec631924b88de71ff11ca9a4e0e79ec8e2d3a379dedbb7d5384fcff2f32f58"
+    },
+    {
+      "path": "v11_effective_defect_cf_checks.py",
+      "bytes": 9306,
+      "sha256": "a6120e5497c62dfc9dcd79018a974d5438910382b20f1f971313a85dab20b3ed"
+    },
+    {
+      "path": "v11_effective_defect_cf_reproduction.py",
+      "bytes": 5729,
+      "sha256": "5d70b7821d69647bef778a1481abbc5c549f781f85c57a6d8b20842386a7efea"
+    },
+    {
+      "path": "v11_effective_defect_cf_reproduction_verification.json",
+      "bytes": 1016,
+      "sha256": "69cbe0edf8b84b5e8b4acd7561074024fe50481397c4d9bdf0269371e8fd970b"
+    },
+    {
+      "path": "v11_effective_defect_cf_verification.json",
+      "bytes": 1236,
+      "sha256": "65e2e2ff9a90ca07f3375e87263f2fdb400626c4490b24b414d1df6618aa9dc3"
+    },
+    {
+      "path": "v11_formal/ArithmeticCore.lean",
+      "bytes": 3418,
+      "sha256": "aa2f6e6508a2716f4b74d44866aebc598d52af6048d1b16cc659cc67e22732e4"
+    },
+    {
+      "path": "v11_formal/README.md",
+      "bytes": 3116,
+      "sha256": "4dc7cd794702966fb9a9596576777dfc5f9c92f20d45e769b72e67ced225f275"
+    },
+    {
+      "path": "v11_formal/arithmetic_kernel_check.json",
+      "bytes": 2304,
+      "sha256": "5ed33e6a037f07588e6eb8ba9db8a6b8aea704f17429194b52be3dc8398f508e"
+    },
+    {
+      "path": "v11_formal/arithmetic_kernel_check.log",
+      "bytes": 714,
+      "sha256": "406da42bb52380fade68d1cb7c06c19ac609ad0a09514b27ac9dc77111d019fa"
+    },
+    {
+      "path": "v11_formal/lakefile.toml",
+      "bytes": 296,
+      "sha256": "f9783f94f62788d7614a2535edd201e74e43c10841179b19fc7a057ba63b4597"
+    },
+    {
+      "path": "v11_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "path": "v11_local_square_filters.md",
+      "bytes": 15489,
+      "sha256": "5902c44e854433ecb026dc21b7189b33645a8865bd364186809dae666e2f79cb"
+    },
+    {
+      "path": "v11_local_square_filters_checks.py",
+      "bytes": 14359,
+      "sha256": "149fcadf301b827e6aed783e148846df001eaf86df8dd8d4f1272696cd6153c4"
+    },
+    {
+      "path": "v11_local_square_filters_verification.json",
+      "bytes": 13455,
+      "sha256": "afe0adb5f603e41f36d07c8ffe0ba9f7c14a4e47b32e37b934fa4bcc46026ff8"
+    },
+    {
+      "path": "v11_mixed_structure.md",
+      "bytes": 17284,
+      "sha256": "91a20c8065d31e5beed94dae86d4e74c896c99993cf4765c00b2387611d66d02"
+    },
+    {
+      "path": "v11_mixed_structure_checks.py",
+      "bytes": 16015,
+      "sha256": "aafed8aa2996dfa6d9a98b25ed49f4d60c6c8d54a91b5fd4efcf2cdae15a682c"
+    },
+    {
+      "path": "v11_mixed_structure_verification.json",
+      "bytes": 11030,
+      "sha256": "ec2e0bc63b25f44157b7188b6447fedc53c994d1946a317a33247b70c8daf4f7"
+    },
+    {
+      "path": "v11_simultaneous_square_interval.md",
+      "bytes": 7675,
+      "sha256": "dbae4f55bc7780b410412393bbca1bce3b9b13d379097aa1c55f8c3d50a1318b"
+    },
+    {
+      "path": "v11_simultaneous_square_interval_checks.py",
+      "bytes": 8397,
+      "sha256": "3c5870a685d52cc896ceb93a5d06020262305fc62535a73c1a7435309c903ca4"
+    },
+    {
+      "path": "v11_simultaneous_square_interval_verification.json",
+      "bytes": 7786,
+      "sha256": "9a9debf119b9cdb4dbc88b9a7eaf9c917a010764e11bd0aeed793bf3253a4328"
+    }
+  ]
+}

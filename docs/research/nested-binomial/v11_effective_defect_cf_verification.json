@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "H": 13,
+  "primitive_curves": 804,
+  "continued_fraction_terms": 1173389,
+  "fractions_sieved": 8866186,
+  "divisor_residue_rejections": 8864141,
+  "divisor_residue_passes": 2045,
+  "exact_cubic_checks": 1405,
+  "surviving_points": 0,
+  "all_T_before_coprimality": 870,
+  "recovered_integer_points": [
+    {
+      "H": 13,
+      "T": 2352,
+      "n": "28",
+      "r": "84",
+      "result": "n below 104"
+    },
+    {
+      "H": 13,
+      "T": 2560,
+      "n": "26",
+      "r": "80",
+      "result": "n below 104"
+    },
+    {
+      "H": 13,
+      "T": 2646,
+      "n": "14",
+      "r": "42",
+      "result": "n below 104"
+    },
+    {
+      "H": 13,
+      "T": 2890,
+      "n": "52",
+      "r": "170",
+      "result": "n below 104"
+    }
+  ],
+  "certificate_sha256": "f3b4334f1ed6865fd04cf4b1abe1b310a17f161cde3d1d77ce59577c945a2ec1",
+  "source_sha256": "a6120e5497c62dfc9dcd79018a974d5438910382b20f1f971313a85dab20b3ed",
+  "all_arithmetic_exact": true,
+  "original_n_interval_scanned": false,
+  "complete_CF_argument_source": "v9_gcd_defect_continued_fractions.md",
+  "new_sieve": "positive D divides 6HT, modulus 6HT+1",
+  "whole_original_equation_solved": false,
+  "CF_completeness_Lean_formalized": false
+}
