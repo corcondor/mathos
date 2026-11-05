@@ -1,0 +1,11 @@
+{
+  "status": "all_exact_binomial_consistency_checks_passed",
+  "prime_inclusive_bound": 61,
+  "pairs_checked": 116,
+  "range": "p/2<j<=p-2, j odd; i=j*p^3",
+  "upper_residual_checked": "(L-X-(A-p)^2)/p^4 == 2 (mod p)",
+  "lower_residual_checked": "(L-X-p^2)/p^5 == -j*H_(j-1)-p (mod p^2)",
+  "lower_harmonic_survivors_in_this_finite_check": [],
+  "global_lower_exclusion_claimed": false,
+  "Lean_executed": false
+}

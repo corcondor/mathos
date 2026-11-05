@@ -1,0 +1,16 @@
+{
+  "status": "all_exact_consistency_checks_passed",
+  "global_proof_source": "v4_prime_power_reduction.md",
+  "formal_proof_assistant_executed_by_this_script": false,
+  "arbitrary_i_range": [
+    2,
+    80
+  ],
+  "primitive_denominator_pairs": 3160,
+  "outer_residual_congruences": 331789,
+  "prime_power_i_max": 128,
+  "prime_power_pairs": 699,
+  "valuation_checks": 95849,
+  "normalized_unit_checks": 5464,
+  "higher_precision_product_checks": 630
+}

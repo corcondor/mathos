@@ -1,0 +1,22 @@
+{
+  "status": "all_endpoints_and_congruence_witnesses_verified",
+  "i_min": 23,
+  "i_exclusive_max": 2097152,
+  "covered_i_count": 2097129,
+  "certified_branch_records": 15103216,
+  "coincident_branch_pairs": 8,
+  "distinct_equations": 15103208,
+  "unresolved": 0,
+  "lower_endpoint_checks": 2096128,
+  "upper_endpoint_checks": 2096128,
+  "small_i_full_intervals": 1001,
+  "max_interval_width": 6697,
+  "max_witness_prime": 23,
+  "independent_log_scale_power_of_two": 52,
+  "independent_atanh_terms": 28,
+  "floating_point_operations_in_verifier": false,
+  "lucas_digit_method": "Pascal recurrence",
+  "formal_proof_assistant_executed": false,
+  "certificate_sha256": "5ec127d0e32ca1a43a7789e8115a8d8a7d10a784cace6830e02cf7f169fef144",
+  "verifier_source_sha256": "a73533116a050453aebd525afa9c7f45462d7ed5f0ad4a9492e69412e71a2717"
+}

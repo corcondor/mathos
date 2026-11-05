@@ -1,0 +1,16 @@
+{
+  "verified": true,
+  "uniform_statement": "No upper-branch solution with j=i-2 and min(ell,k-ell)>=3",
+  "analytic_i_strict_bound": 4194304,
+  "candidate_count": 350544,
+  "valuation_certificates": 192,
+  "largest_i": 4194142,
+  "largest_k": 37510,
+  "largest_ell": 37507,
+  "largest_obstruction_prime": 101,
+  "unresolved": 0,
+  "certificate_sha256": "774acdba55f880684e4006bad38f7fac6bb3b16198eeab30d0fec2141e187560",
+  "elapsed_seconds": 2.494,
+  "formal_proof_assistant_executed": false,
+  "prerequisites": "Symmetric shared-prime-part analytic i bound; prior upper ordering/endpoint/gap reductions."
+}

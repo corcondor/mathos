@@ -1,0 +1,142 @@
+{
+  "status": "pass",
+  "scope": "Exact constants and all six a=7 residual cases; infinite proof is in the companion Markdown notes",
+  "formalized_in_Lean": false,
+  "shifted_polynomial_coefficients_ascending": [
+    2064426,
+    1572352,
+    72192,
+    1136,
+    6
+  ],
+  "upper_gap_positive_integer": 40813869371167016,
+  "sharper_gap_positive_integer": 1552720879039172862272697908633,
+  "nonzero_cube_residue_sets": {
+    "13": [
+      1,
+      5,
+      8,
+      12
+    ],
+    "19": [
+      1,
+      7,
+      8,
+      11,
+      12,
+      18
+    ]
+  },
+  "unit_cubes_modulo_9": [
+    1,
+    8
+  ],
+  "a_7_parameters": {
+    "a": 7,
+    "h": 2,
+    "n": 2187,
+    "A": 1741001445,
+    "alpha": 6,
+    "d": 4,
+    "X_valuation": 12,
+    "X_normalized_mod_9": 0,
+    "q_block_valuation": 6,
+    "q_block_unit_mod_9": 4
+  },
+  "a_7_rows": [
+    {
+      "v": 82,
+      "r": 6642,
+      "special_unit_factor_count": 18,
+      "unit_product_mod_9": 1,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 4,
+      "left_unit_stripped_product": 4,
+      "left_unit_q_block_formula": 4,
+      "right_units_lower_upper": [
+        1,
+        1
+      ]
+    },
+    {
+      "v": 83,
+      "r": 6723,
+      "special_unit_factor_count": 18,
+      "unit_product_mod_9": 1,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 7,
+      "left_unit_stripped_product": 7,
+      "left_unit_q_block_formula": 7,
+      "right_units_lower_upper": [
+        4,
+        4
+      ]
+    },
+    {
+      "v": 85,
+      "r": 6885,
+      "special_unit_factor_count": 19,
+      "unit_product_mod_9": 7,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 2,
+      "left_unit_stripped_product": 2,
+      "left_unit_q_block_formula": 2,
+      "right_units_lower_upper": [
+        7,
+        7
+      ]
+    },
+    {
+      "v": 86,
+      "r": 6966,
+      "special_unit_factor_count": 19,
+      "unit_product_mod_9": 7,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 2,
+      "left_unit_stripped_product": 2,
+      "left_unit_q_block_formula": 2,
+      "right_units_lower_upper": [
+        7,
+        7
+      ]
+    },
+    {
+      "v": 88,
+      "r": 7128,
+      "special_unit_factor_count": 20,
+      "unit_product_mod_9": 1,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 7,
+      "left_unit_stripped_product": 7,
+      "left_unit_q_block_formula": 7,
+      "right_units_lower_upper": [
+        4,
+        4
+      ]
+    },
+    {
+      "v": 89,
+      "r": 7209,
+      "special_unit_factor_count": 20,
+      "unit_product_mod_9": 1,
+      "left_valuation": 8,
+      "left_unit_direct_math_comb": 4,
+      "left_unit_stripped_product": 4,
+      "left_unit_q_block_formula": 4,
+      "right_units_lower_upper": [
+        1,
+        1
+      ]
+    }
+  ],
+  "independent_proof_review": {
+    "v5_offset_three_structure.md": [
+      "root: passed",
+      "v5_l1_gap: passed"
+    ],
+    "v5_offset_three_three_power.md": [
+      "root: passed",
+      "v5_l1_gap: passed"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "verification_passed": true,
+  "scope": {
+    "p_prime_at_most": 400,
+    "k_at_most": 20,
+    "j_min": 21,
+    "j_max": "p-2",
+    "effective_second_lower_index_min": 3,
+    "conditions": "j+2 <= B < 3*j; 2*B <= A; p <= k^2",
+    "height_prerequisites": "C(k,3)<=B<3j<3p<=3k^2"
+  },
+  "candidate_count": 9078,
+  "certified_count": 9078,
+  "unresolved_count": 0,
+  "unresolved": [],
+  "by_effective_second_lower_index": {
+    "3": 8448,
+    "4": 616,
+    "5": 14
+  },
+  "distinct_witness_primes": 9,
+  "largest_witness_prime": 23,
+  "coverage": "Independent p,j,e,k enumeration with exact symmetry handling.",
+  "arithmetic": "Exact integers; independent direct-digit Lucas congruences.",
+  "certificate_sha256": "e75437ea8384891f96543878a2d5ed6abc07b7bf6ed0062c3126ef42f8c86da8",
+  "verification_seconds": 0.11540742200304521
+}

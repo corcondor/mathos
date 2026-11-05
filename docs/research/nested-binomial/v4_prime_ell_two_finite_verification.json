@@ -1,0 +1,10 @@
+{
+  "status": "all_finite_candidates_excluded_with_independent_coverage_and_residues",
+  "scope": "prime p<1000000, j>=21,2j<=p,ell=2,j+2<=B=C(k,2)<2j; all necessary m,c,unit-congruence cases",
+  "candidate_count": 69,
+  "unresolved": 0,
+  "largest_p": 996001,
+  "largest_obstruction_prime": 11,
+  "certificate_sha256": "8753e6310eac0462f90f72de40fd8f7a593211d8c51f49910862eb93b805f4c3",
+  "formal_proof_assistant_executed_by_this_script": false
+}

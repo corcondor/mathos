@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "range_b": [
+    22,
+    1000
+  ],
+  "families": 979,
+  "representations": 981,
+  "nontrivial_representations": [
+    {
+      "b": 50,
+      "A": 76076,
+      "i": 78,
+      "j": 3
+    },
+    {
+      "b": 138,
+      "A": 1703016,
+      "i": 218,
+      "j": 3
+    }
+  ],
+  "max_obstruction_prime": 11,
+  "unresolved": 0,
+  "certificate_sha256": "f54f1fc428b39974ebeffcce7f252f6cfb41088acddb0cf110468a9dc5264e05",
+  "elapsed_seconds": 0.748,
+  "formal_proof_assistant_executed": false,
+  "limitation": "Finite b range; uniform single-A theorem is a written proof, not a global exclusion."
+}

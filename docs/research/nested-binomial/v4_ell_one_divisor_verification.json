@@ -1,0 +1,14 @@
+{
+  "status": "all_candidates_excluded_and_coverage_verified",
+  "j_min": 21,
+  "j_max": 100,
+  "coverage": "all valid unbounded i and k, using proved reductions",
+  "candidate_triples": 436700,
+  "candidate_equations": 873394,
+  "largest_i": 788059900,
+  "largest_certificate_prime": 17,
+  "unresolved": 0,
+  "certificate_sha256": "644b13b32c63650e0cf12cbc9f451cdf07f03796de91d97f695b7d2e2496bdb1",
+  "verification_arithmetic": "exact integers, independent enumeration and Lucas residues",
+  "formal_proof_assistant_executed_by_this_script": false
+}

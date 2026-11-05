@@ -1,0 +1,16 @@
+{
+  "verified": true,
+  "uniform_statement": "No solution in L1 with 3j<=b<=4j",
+  "proved_finite_j_range": [
+    6,
+    1535
+  ],
+  "candidate_count": 542642,
+  "ij_pairs": 1475,
+  "max_obstruction_prime": 73,
+  "unresolved": 0,
+  "certificate_sha256": "b82380617732a85c4f92bddaff67ba9c6c1690f02f2e04da49dd3c3586b8dd03",
+  "elapsed_seconds": 4.889,
+  "formal_proof_assistant_executed": false,
+  "prerequisites": "Previously proved L1 structure, b>=22, i-j>=4, b^3/4<A<b^3; written band-height proof."
+}

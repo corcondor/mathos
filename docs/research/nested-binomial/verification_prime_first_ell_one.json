@@ -1,0 +1,16 @@
+{
+  "verified": true,
+  "scope": "Prime i, ell=1, 21<=j<=99, i<330; both B=r and B=A-r",
+  "families_after_proved_modular_filter": 188,
+  "equations_checked": 376,
+  "lower_left_smaller_larger": [
+    0,
+    188
+  ],
+  "upper_left_smaller_larger": [
+    0,
+    188
+  ],
+  "equalities": [],
+  "arithmetic": "Exact integers only, math.comb, exhaustive primality trial division"
+}

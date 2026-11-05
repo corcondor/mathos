@@ -1,0 +1,206 @@
+{
+  "date": "2026-11-05",
+  "equation": "binom(binom(i,j),binom(k,l))=binom(i^2,j^2)+binom(k^2,l^2)",
+  "scope": "Valid nonnegative integer binomial arguments; original equation remains unsolved globally.",
+  "prior_archive_file_count": 17,
+  "prior_archive_files_unchanged": true,
+  "new_prime_certificate_candidates_excluded": 317947,
+  "formal_proof_assistant_executed": false,
+  "human_mathematician_review_claimed": false,
+  "reviews": {
+    "lower_branch_reduction.md": "Root and separate AI mathematical review passed.",
+    "prime_divisibility_reduction.md": "Root and separate AI mathematical review passed.",
+    "adjacent_rows_exclusion.md": "Root mathematical review passed; finite verifier re-executed by root.",
+    "equal_effective_upper.md": "Separate AI mathematical review passed; independently re-executed.",
+    "upper_order_and_prime_support.md": "Root mathematical review passed.",
+    "prime_first_ell_one.md": "Root and separate AI mathematical reviews passed; new infinite argument needs no additional finite scan.",
+    "prime_upper_index_large_gap.md": "Root and separate AI mathematical reviews passed; all three parameter ranges joined.",
+    "prime_lower_branch_remaining.md": "Root mathematical review passed; all finite certificates checked."
+  },
+  "executed_reports": {
+    "finite_prime_outer_verification.json": {
+      "verification_passed": true,
+      "arithmetic": "Exact integers and Lucas congruences; no floating point.",
+      "coverage": "Independent e-first enumeration with exact binomial binary searches.",
+      "modular_arithmetic": "Independent math.comb evaluation of base-prime digits.",
+      "candidate_count": 295411,
+      "by_offset": {
+        "2": 141865,
+        "3": 153546
+      },
+      "certified_count": 295411,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "distinct_witness_primes": 20,
+      "largest_witness_prime": 71,
+      "certificate_sha256": "0764e15f5264ffdfe2fb85898d29acfc21828da283ff9af07128b023b88a4bb0",
+      "verification_seconds": 1.649788016002276
+    },
+    "finite_small_j_prime_verification.json": {
+      "verification_passed": true,
+      "scope": {
+        "j_min": 21,
+        "j_max": 99,
+        "prime_upper_index": true,
+        "all_offsets_at_least": 2,
+        "branch": "B <= A-B and j>l and B>=3*j",
+        "height_prerequisite": "A < B^3 < 1000*j^3",
+        "l1_included": true
+      },
+      "candidate_count": 13458,
+      "certified_count": 13458,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "by_offset": {
+        "2": 6631,
+        "8": 366,
+        "7": 555,
+        "6": 1151,
+        "5": 1602,
+        "4": 1627,
+        "3": 1526
+      },
+      "by_second_lower_index": {
+        "l1": 11819,
+        "l_ge_2": 1639
+      },
+      "prime_index_pair_count": 93,
+      "largest_p": 103,
+      "distinct_witness_primes": 7,
+      "largest_witness_prime": 17,
+      "coverage": "Independent central-binomial p bound; effective-index-first enumeration.",
+      "arithmetic": "Exact integers; independent direct-digit Lucas checks.",
+      "certificate_sha256": "11db19f887a58aea9260b8079f48ebf7516d7e3e0bbfe7033035270998247d14",
+      "verification_seconds": 0.06769902499945601
+    },
+    "finite_prime_effective_index_verification.json": {
+      "verification_passed": true,
+      "scope": {
+        "p_prime_at_most": 400,
+        "k_at_most": 20,
+        "j_min": 21,
+        "j_max": "p-2",
+        "effective_second_lower_index_min": 3,
+        "conditions": "j+2 <= B < 3*j; 2*B <= A; p <= k^2",
+        "height_prerequisites": "C(k,3)<=B<3j<3p<=3k^2"
+      },
+      "candidate_count": 9078,
+      "certified_count": 9078,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "by_effective_second_lower_index": {
+        "3": 8448,
+        "4": 616,
+        "5": 14
+      },
+      "distinct_witness_primes": 9,
+      "largest_witness_prime": 23,
+      "coverage": "Independent p,j,e,k enumeration with exact symmetry handling.",
+      "arithmetic": "Exact integers; independent direct-digit Lucas congruences.",
+      "certificate_sha256": "e75437ea8384891f96543878a2d5ed6abc07b7bf6ed0062c3126ef42f8c86da8",
+      "verification_seconds": 0.11540742200304521
+    },
+    "verification_equal_effective_upper.json": {
+      "equation": "C(C(i,j),C(k,l)) = C(i^2,j^2) + C(k^2,l^2)",
+      "arithmetic": "Python exact integers and math.comb",
+      "scope": "Upper branch; equal effective indices 2; crossed orientations; M >= 21",
+      "cases": {
+        "high_first": {
+          "checked": 2076,
+          "left_smaller": 946,
+          "left_larger": 1130,
+          "equalities": []
+        },
+        "high_second": {
+          "checked": 1197,
+          "left_smaller": 548,
+          "left_larger": 649,
+          "equalities": []
+        }
+      },
+      "verified": true
+    },
+    "verification_adjacent_rows.json": {
+      "verification_passed": true,
+      "scope": "Upper branch t <= B, |i-k|=1, M>=21, 23<=max(i,k)<256",
+      "effective_pairs_checked": 1372807,
+      "nonzero_gaps_below_10n": 468,
+      "exceptions_to_effective_pairs_11_or_22": [
+        [
+          23,
+          1,
+          2,
+          -208
+        ],
+        [
+          24,
+          1,
+          2,
+          -229
+        ]
+      ],
+      "parameters_satisfying_all_necessary_conditions": [],
+      "arithmetic": "Exact arbitrary-precision integers; no floating point"
+    },
+    "verification_prime_first_ell_one.json": {
+      "verified": true,
+      "scope": "Prime i, ell=1, 21<=j<=99, i<330; both B=r and B=A-r",
+      "families_after_proved_modular_filter": 188,
+      "equations_checked": 376,
+      "lower_left_smaller_larger": [
+        0,
+        188
+      ],
+      "upper_left_smaller_larger": [
+        0,
+        188
+      ],
+      "equalities": [],
+      "arithmetic": "Exact integers only, math.comb, exhaustive primality trial division"
+    }
+  },
+  "file_sha256": {
+    "CONTINUATION_ja.md": "a365ad1c4e138f1692a5182ea730a0aae1ba221edfe174366fa70799663eb4a5",
+    "PROGRESS_v3_ja.md": "8e6d95f244c380274dca9487a1c50a4497727955d7abc56ff56e425d6a8c7c6c",
+    "README_ja.md": "929d1fa85e1af1330cf358aff049b488265d0753086fb0670f7551b449bc3b40",
+    "adjacent_rows_exclusion.md": "43ac89e1e33d23493c17be64fa8ad90a00c5273983237db58c46169f0dad76c3",
+    "continuation_arithmetic.md": "4bf0d24434486420cde0841393a2399c25bbed87cabaf0dbb21e46dd30d2955b",
+    "continuation_audit.json": "99f21206e7099c0da5bc7636b6abd18236a3867a8ff532a10eb4ed2f7fcf6a89",
+    "entropy_phi_reduction.md": "dea356bd7153a3df347a8cbe9473f98fd9a10affa8b578887300654d6d8dcfcf",
+    "equal_effective_upper.md": "ee1c610aa05a24335e51e299b39e1dec09100ae16290e954c2ffed6a820eb8a4",
+    "finite_prime_effective_index.py": "6e3841457768689b57f48fadcafa1a5a64010350f265a90237b0a34a88036637",
+    "finite_prime_effective_index_certificates.json": "e75437ea8384891f96543878a2d5ed6abc07b7bf6ed0062c3126ef42f8c86da8",
+    "finite_prime_effective_index_verification.json": "01f6a55ddacb664fcdc3a44037dca1d4c9266f25ff422d4a0d023252a7a45e2d",
+    "finite_prime_outer_certificates.json": "0764e15f5264ffdfe2fb85898d29acfc21828da283ff9af07128b023b88a4bb0",
+    "finite_prime_outer_exclusion.py": "560ecd914988ffc47a03b3a48d93b154caaae2a69fb3783cee2872d150b4e919",
+    "finite_prime_outer_verification.json": "4ca7c74507dee1430c11d2eccb954325a76a4415a58de4e6529b621a71c08128",
+    "finite_small_j_prime_certificates.json": "11db19f887a58aea9260b8079f48ebf7516d7e3e0bbfe7033035270998247d14",
+    "finite_small_j_prime_exclusion.py": "49c9afbb453f0f134e8b5cd03f4990dd1b83798c75ecb61a00a829915b3b1c9a",
+    "finite_small_j_prime_verification.json": "0b043337ec8a71533abd8c9923e7c341db77ea8c416f53296ad7ddc90d04a776",
+    "global_height_bound.md": "03cd1bf0a8f827b01137c4e4b7c129047bba5c1eea7591bd9c09f51dd4b54d10",
+    "hensel_certificates_N20.json": "2e86a7a86dd46be8b231f0d379009bd1d275f376452e2ee6e764cc00bcd1337e",
+    "hensel_upper_experiment.py": "1edc421a242fb9aa77f036c70bee42f589feb8d22b555683c6b63482f2286b74",
+    "independent_verification_N20.log": "a7eb6b403ab4aa9248e9db4f3911b12aa761dab9e6b0057993f4439f8c7b06ed",
+    "lower_branch_reduction.md": "2a3345e2085c87d1bc7eac5f18f2c971e90ccd70e13f008278d1806ba19a7525",
+    "modular_obstructions_N20.json": "96c49599b0179dd0847be1e63aaf5d6ad5a598c32429869110b6a0abfbda2df9",
+    "modular_reduction_experiment.py": "6e6c895f77cc68e67782d377bd0dc8f6e13e0151fa6a5c341317be11dca1500c",
+    "prime_divisibility_reduction.md": "ba7e6e337c79580c229109930d26f67d708f06cb837f11131e9455bf78ea43cd",
+    "prime_first_ell_one.md": "fc3068cc7b5d1e64b951c612809e09f857e6cb5bd5074364bfbf090b5045ae0d",
+    "prime_lower_branch_remaining.md": "02f2ce9ed7208c633776e0b7966976af51aad9359cbd2b6e0bac28f9cfc2d1b6",
+    "prime_upper_index_large_gap.md": "4772242d11b126f7d67169117e6fd2471f69afd74f36c8082500cc3aca3d6c0d",
+    "proof_reduction.md": "f4147377a41ee78b35df9a5bce922f15cf93ce116ab0b39e42f39d1ab314e4bf",
+    "sharp_q_bounds.md": "bab0debf8343f24125b0382e1e03c81c832c192213b05bdea65e7c9601826eb3",
+    "sharp_q_ratio_proof.md": "bab0debf8343f24125b0382e1e03c81c832c192213b05bdea65e7c9601826eb3",
+    "upper_order_and_prime_support.md": "334a146f9ebc95b8781c07cd93408d1e130d86c1e91ca9765135af8693e13116",
+    "verification_adjacent_rows.json": "d2214116906424ab1e7a6320aa7d2719ef2d2cc8e5aceeccef4740f07357c0ec",
+    "verification_equal_complement_upper.json": "ba994df5742fdef2757620e0795b238ef61c8397ccf6e2d7fad6e80ef0f36baa",
+    "verification_equal_effective_upper.json": "01483e401fad969718dc26e37d4918c000156b1362d3a77d0bda71edee5f0322",
+    "verification_prime_first_ell_one.json": "524e889bc233acd9f6f9a2cf8aeccb17c1b7ba48551ac13b7614db035f12481e",
+    "verification_result_N20.json": "a9448510e2816632c73812bb241e8adb86787613ab129a082f82d0f65ae11884",
+    "verify_adjacent_rows.py": "3c1f1c8e7e2c2d58dae00371ae9f14a76f25e8291cca0683814bb6524e44b935",
+    "verify_certificate_bundle.py": "5ddf5fa0a65a7b184dde94e431e5602aeee3f5570bae8e776b38ee7d4c84b7ae",
+    "verify_equal_complement_upper.py": "5f51a03a58b70ae2a809d7f1dbb050a25ee201c6e30f4406be06e6aa6e6df477",
+    "verify_equal_effective_upper.py": "9aeb698a78abfb217c96340fbc8938f19fe756d004a50dca11ab8df124194e2e",
+    "verify_prime_first_ell_one.py": "6bde85903379b5f0e763e41bc195ae6bac76d602784f25fae11325541ba0ddcf"
+  }
+}

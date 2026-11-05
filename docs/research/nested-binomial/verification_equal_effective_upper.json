@@ -1,0 +1,20 @@
+{
+  "equation": "C(C(i,j),C(k,l)) = C(i^2,j^2) + C(k^2,l^2)",
+  "arithmetic": "Python exact integers and math.comb",
+  "scope": "Upper branch; equal effective indices 2; crossed orientations; M >= 21",
+  "cases": {
+    "high_first": {
+      "checked": 2076,
+      "left_smaller": 946,
+      "left_larger": 1130,
+      "equalities": []
+    },
+    "high_second": {
+      "checked": 1197,
+      "left_smaller": 548,
+      "left_larger": 649,
+      "equalities": []
+    }
+  },
+  "verified": true
+}

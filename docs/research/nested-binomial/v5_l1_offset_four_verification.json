@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "uniform_statement": "No L1 solution with 5j/2<=b<8j/3 and i-j>=5",
+  "verified_candidates": 224160,
+  "valuation_certificates": 0,
+  "valuation_examples": [],
+  "max_i": 1029,
+  "max_j": 1023,
+  "max_b": 2727,
+  "max_prime": 71,
+  "unresolved": 0,
+  "certificate_sha256": "cb17bd9580f87aa017150fb33a3694b47d6f6f63a652a6a2e0373420686c98a4",
+  "independent_coverage": "b-first instead of j/offset-first; direct inequalities instead of root-derived intervals",
+  "independent_residues": "direct small combinations in Lucas digits",
+  "independent_valuations": "Kummer carries instead of Legendre floor sums",
+  "formalized_in_Lean": false,
+  "seconds": 2.132467129995348
+}
