@@ -1,0 +1,584 @@
+{
+  "checker_sha256": "2d10fea72fb36cb332d363ecc6c1a12c937f5bcb5e9e5e2d722a3b0b77d09eec",
+  "counts": {
+    "cubic_nonresidues": 2,
+    "integer_thresholds": 7,
+    "normalized_base_three_examples": 3,
+    "small_exceptions": 8,
+    "valuation_examples": 12,
+    "wieferich_certificates": 6
+  },
+  "cubic_nonresidues": [
+    {
+      "120_mod_p": 3,
+      "cubes_mod_p": [
+        0,
+        1,
+        5,
+        8,
+        12
+      ],
+      "prime": 13
+    },
+    {
+      "120_mod_p": 6,
+      "cubes_mod_p": [
+        0,
+        1,
+        7,
+        8,
+        11,
+        12,
+        18
+      ],
+      "prime": 19
+    }
+  ],
+  "formalization": "new v7 arguments are not Lean formalizations",
+  "integer_thresholds": [
+    {
+      "lhs": 2097216,
+      "margin": 458716,
+      "name": "base 2, h=5, W>1",
+      "rhs": 1638500
+    },
+    {
+      "lhs": 4783212,
+      "margin": 1239912,
+      "name": "base 3, a=9, W>1",
+      "rhs": 3543300
+    },
+    {
+      "lhs": 146484750,
+      "margin": 83984430,
+      "name": "base 5, a=8, W>1",
+      "rhs": 62500320
+    },
+    {
+      "lhs": 30517578750,
+      "margin": 19775390810,
+      "name": "base 5, a=11, weaker W>1",
+      "rhs": 10742187940
+    },
+    {
+      "lhs": 262144,
+      "margin": 65404,
+      "name": "base 2 finite-set contradiction, h=18",
+      "rhs": 196740
+    },
+    {
+      "lhs": 3486784401,
+      "margin": 1917419721,
+      "name": "base 3 finite-set contradiction, a=39",
+      "rhs": 1569364680
+    },
+    {
+      "lhs": 244140625,
+      "margin": 187458825,
+      "name": "base 5 finite-set contradiction, a=35",
+      "rhs": 56681800
+    }
+  ],
+  "normalized_base_three_examples": [
+    {
+      "exponent": 5,
+      "methods": [
+        "factor-by-factor unit product",
+        "direct integer binomial"
+      ],
+      "unit_mod_9": 5,
+      "valuation_X": 4
+    },
+    {
+      "exponent": 6,
+      "methods": [
+        "factor-by-factor unit product",
+        "direct integer binomial"
+      ],
+      "unit_mod_9": 5,
+      "valuation_X": 5
+    },
+    {
+      "exponent": 7,
+      "methods": [
+        "factor-by-factor unit product",
+        "direct integer binomial"
+      ],
+      "unit_mod_9": 5,
+      "valuation_X": 6
+    }
+  ],
+  "scope": "finite exact checks supporting the separate uniform written proof",
+  "small_exceptions": [
+    {
+      "base": 2,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 9,
+      "factorization": {
+        "2": 1,
+        "257": 1
+      },
+      "n": 514,
+      "q0": 514
+    },
+    {
+      "base": 2,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 12,
+      "factorization": {
+        "2": 1,
+        "3": 1,
+        "683": 1
+      },
+      "n": 4098,
+      "q0": 1366
+    },
+    {
+      "base": 3,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 6,
+      "factorization": {
+        "17": 1,
+        "43": 1
+      },
+      "n": 731,
+      "q0": 731
+    },
+    {
+      "base": 3,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 7,
+      "factorization": {
+        "11": 1,
+        "199": 1
+      },
+      "n": 2189,
+      "q0": 2189
+    },
+    {
+      "base": 5,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 3,
+      "factorization": {
+        "127": 1
+      },
+      "n": 127,
+      "q0": 127
+    },
+    {
+      "base": 5,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 4,
+      "factorization": {
+        "11": 1,
+        "19": 1,
+        "3": 1
+      },
+      "n": 627,
+      "q0": 209
+    },
+    {
+      "base": 5,
+      "exclusion": "n/gcd(n,3) squarefree",
+      "exponent": 5,
+      "factorization": {
+        "53": 1,
+        "59": 1
+      },
+      "n": 3127,
+      "q0": 3127
+    },
+    {
+      "base": 3,
+      "exclusion": "forced divisor exceeds 10n/3",
+      "exponent": 5,
+      "factorization": {
+        "5": 1,
+        "7": 2
+      },
+      "forced_r_divisor": 4270,
+      "n": 245
+    }
+  ],
+  "status": "pass",
+  "valuation_examples": [
+    {
+      "exponent": 7,
+      "n": 130,
+      "prime": 2,
+      "r_samples": [
+        {
+          "r": 391,
+          "valuation_L": 10,
+          "valuation_r": 0
+        },
+        {
+          "r": 392,
+          "valuation_L": 7,
+          "valuation_r": 3
+        },
+        {
+          "r": 403,
+          "valuation_L": 10,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 8,
+      "valuation_upper_block": 3
+    },
+    {
+      "exponent": 9,
+      "n": 514,
+      "prime": 2,
+      "r_samples": [
+        {
+          "r": 1543,
+          "valuation_L": 12,
+          "valuation_r": 0
+        },
+        {
+          "r": 1544,
+          "valuation_L": 9,
+          "valuation_r": 3
+        },
+        {
+          "r": 1555,
+          "valuation_L": 12,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 10,
+      "valuation_upper_block": 3
+    },
+    {
+      "exponent": 12,
+      "n": 4098,
+      "prime": 2,
+      "r_samples": [
+        {
+          "r": 12295,
+          "valuation_L": 15,
+          "valuation_r": 0
+        },
+        {
+          "r": 12296,
+          "valuation_L": 12,
+          "valuation_r": 3
+        },
+        {
+          "r": 12307,
+          "valuation_L": 15,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 13,
+      "valuation_upper_block": 3
+    },
+    {
+      "exponent": 7,
+      "n": 2189,
+      "prime": 3,
+      "r_samples": [
+        {
+          "r": 6568,
+          "valuation_L": 12,
+          "valuation_r": 0
+        },
+        {
+          "r": 6569,
+          "valuation_L": 12,
+          "valuation_r": 0
+        },
+        {
+          "r": 6580,
+          "valuation_L": 12,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 6,
+      "valuation_upper_block": 6
+    },
+    {
+      "exponent": 9,
+      "n": 19685,
+      "prime": 3,
+      "r_samples": [
+        {
+          "r": 59056,
+          "valuation_L": 16,
+          "valuation_r": 0
+        },
+        {
+          "r": 59057,
+          "valuation_L": 16,
+          "valuation_r": 0
+        },
+        {
+          "r": 59068,
+          "valuation_L": 16,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 8,
+      "valuation_upper_block": 8
+    },
+    {
+      "exponent": 3,
+      "n": 127,
+      "prime": 5,
+      "r_samples": [
+        {
+          "r": 382,
+          "valuation_L": 4,
+          "valuation_r": 0
+        },
+        {
+          "r": 383,
+          "valuation_L": 4,
+          "valuation_r": 0
+        },
+        {
+          "r": 394,
+          "valuation_L": 4,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 2,
+      "valuation_upper_block": 1
+    },
+    {
+      "exponent": 5,
+      "n": 3127,
+      "prime": 5,
+      "r_samples": [
+        {
+          "r": 9382,
+          "valuation_L": 6,
+          "valuation_r": 0
+        },
+        {
+          "r": 9383,
+          "valuation_L": 6,
+          "valuation_r": 0
+        },
+        {
+          "r": 9394,
+          "valuation_L": 6,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 4,
+      "valuation_upper_block": 1
+    },
+    {
+      "exponent": 8,
+      "n": 390627,
+      "prime": 5,
+      "r_samples": [
+        {
+          "r": 1171882,
+          "valuation_L": 9,
+          "valuation_r": 0
+        },
+        {
+          "r": 1171883,
+          "valuation_L": 9,
+          "valuation_r": 0
+        },
+        {
+          "r": 1171894,
+          "valuation_L": 9,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 7,
+      "valuation_upper_block": 1
+    },
+    {
+      "exponent": 3,
+      "n": 345,
+      "prime": 7,
+      "r_samples": [
+        {
+          "r": 1036,
+          "valuation_L": 2,
+          "valuation_r": 1
+        },
+        {
+          "r": 1037,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 1048,
+          "valuation_L": 3,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 3,
+      "valuation_upper_block": 0
+    },
+    {
+      "exponent": 3,
+      "n": 1333,
+      "prime": 11,
+      "r_samples": [
+        {
+          "r": 4000,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 4001,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 4012,
+          "valuation_L": 3,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 3,
+      "valuation_upper_block": 0
+    },
+    {
+      "exponent": 3,
+      "n": 2199,
+      "prime": 13,
+      "r_samples": [
+        {
+          "r": 6598,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 6599,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 6610,
+          "valuation_L": 3,
+          "valuation_r": 0
+        }
+      ],
+      "valuation_X": 3,
+      "valuation_upper_block": 0
+    },
+    {
+      "exponent": 3,
+      "n": 6861,
+      "prime": 19,
+      "r_samples": [
+        {
+          "r": 20584,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 20585,
+          "valuation_L": 3,
+          "valuation_r": 0
+        },
+        {
+          "r": 20596,
+          "valuation_L": 2,
+          "valuation_r": 1
+        }
+      ],
+      "valuation_X": 3,
+      "valuation_upper_block": 0
+    }
+  ],
+  "wieferich_certificates": [
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 1064432260,
+      "base": 2,
+      "can_divide_plus_power": true,
+      "exact_e": 2,
+      "exact_order": 364,
+      "order_prime_divisor_tests": {
+        "13": 121,
+        "2": 1092,
+        "7": 27
+      },
+      "prime": 1093,
+      "required_exponent_divisor": 182
+    },
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 21954602502,
+      "base": 2,
+      "can_divide_plus_power": false,
+      "exact_e": 2,
+      "exact_order": 1755,
+      "order_prime_divisor_tests": {
+        "13": 88,
+        "3": 756,
+        "5": 1578
+      },
+      "prime": 3511,
+      "required_exponent_divisor": null
+    },
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 243,
+      "base": 3,
+      "can_divide_plus_power": false,
+      "exact_e": 2,
+      "exact_order": 5,
+      "order_prime_divisor_tests": {
+        "5": 3
+      },
+      "prime": 11,
+      "required_exponent_divisor": null
+    },
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 717092505034537041,
+      "base": 3,
+      "can_divide_plus_power": true,
+      "exact_e": 2,
+      "exact_order": 1006002,
+      "order_prime_divisor_tests": {
+        "2": 1006002,
+        "3": 980688,
+        "55889": 109334
+      },
+      "prime": 1006003,
+      "required_exponent_divisor": 503001
+    },
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 4584422370067,
+      "base": 5,
+      "can_divide_plus_power": false,
+      "exact_e": 2,
+      "exact_order": 10385,
+      "order_prime_divisor_tests": {
+        "31": 3587,
+        "5": 12936,
+        "67": 7867
+      },
+      "prime": 20771,
+      "required_exponent_divisor": null
+    },
+    {
+      "b_to_f_mod_q2": 1,
+      "b_to_f_mod_q3": 20181795544729,
+      "base": 5,
+      "can_divide_plus_power": true,
+      "exact_e": 2,
+      "exact_order": 40486,
+      "order_prime_divisor_tests": {
+        "2": 40486,
+        "31": 32940,
+        "653": 4413
+      },
+      "prime": 40487,
+      "required_exponent_divisor": 20243
+    }
+  ]
+}

@@ -13,7 +13,8 @@
 
 ## 読み始める場所
 
-- **[最新：v6 日本語概要](PROGRESS_v6_ja.md)**
+- **[最新：v7 日本語概要](PROGRESS_v7_ja.md)**
+- [v6 日本語概要](PROGRESS_v6_ja.md)
 - [版ごとの研究記録](RESEARCH_LOG.md)
 - [新しい共通約数と i-1 が平方自由な場合の完全排除](v6_common_divisor.md)
 - [対数幅、R≤12 の排除、候補の疎性](v6_offset_composite.md)
@@ -26,6 +27,23 @@
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v7
+
+ell=1、d=i-j に対して、d≥7 なら i<172d^36、d≥9 なら
+さらに i<27d^35 を証明した。固定したオフセットごとの上限であり、
+残りの有限範囲を全排除した主張ではない。
+
+ell=1、j=i-3 では i-2 の最大素因数に P⁺(i-2)²≤6(i-2) が必要。
+さらに i=3p^a+2、p≠3 の全素数・全指数を、正確な付値と
+共通約数により40+16組へ還元し、完全な証明書で排除した。
+i=P^a+2 の指数条件・立方剰余条件・Wieferich 因子の必要条件も追加した。
+
+i=jp³ の円分因子7q^aについては全指数に合同条件を拡張し、
+Thomas–Mignotte の既知の三次 Thue 方程式の定理へ帰着して
+3の倍数の指数を排除した。詳細な仮定と外部定理への依存、
+未形式化の範囲は [v7 日本語概要](PROGRESS_v7_ja.md) と
+[v7_manifest.json](v7_manifest.json) に記録する。
 
 ## 2026年11月5日の追加：v6
 
@@ -90,6 +108,13 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 
 このディレクトリを作業場所にする。代表的な小さい検算は Python の
 標準ライブラリだけで実行できる。
+
+    python3 v7_fixed_offset_checks.py
+    python3 v7_offset_cofactor_three_checks.py
+    python3 v7_offset_shifted_prime_powers_checks.py
+    python3 v7_large_prime_prime_power_extensions_checks.py
+
+前の版：
 
     python3 v6_common_divisor_checks.py
     python3 v6_offset_composite_checks.py all

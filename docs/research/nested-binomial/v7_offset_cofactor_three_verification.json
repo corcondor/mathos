@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "large_prime_pairs": 40,
+  "small_prime_pairs": 16,
+  "earlier_small_index_exclusions": 8,
+  "dominant_prime_residual_integers": [
+    118,
+    126,
+    157
+  ],
+  "exact_valuation_samples": 20,
+  "smallest_positive_certificate_margins": {
+    "large_prime_remainder": 215,
+    "small_prime_remainder": 11341
+  },
+  "largest_first_index_in_derived_remainder": 188245553,
+  "unresolved_cases": 0,
+  "proof_scope": "Complete exclusion only of ell=1, j=i-3, i=3*p^a+2 for prime p != 3; dominant-prime theorem also verified as documented.",
+  "not_lean_formalized": true,
+  "certificate_sha256": "f56014675224437c497427f54953fef7249227adb418f75232eb3db0bbcd9925"
+}
