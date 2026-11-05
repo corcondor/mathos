@@ -15,6 +15,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+import time
 import urllib.error
 import urllib.request
 
@@ -132,7 +133,53 @@ def load_method_context(methods_dir):
     return "\n\n".join(path.read_text()[:7000] for path in available)
 
 
-def api(messages):
+def load_api_settings():
+    """Reload non-secret research controls on every API call."""
+    settings = {"profile": "standard", "reasoning_effort": None, "max_tokens": 9000,
+                "request_timeout_seconds": 240, "max_attempts": 5,
+                "lean_timeout_seconds": 120, "capacity_retries": 0,
+                "capacity_backoff_seconds": 5}
+    path = ROOT / "deepseek_settings.json"
+    if path.exists():
+        supplied = json.loads(path.read_text())
+        unknown = set(supplied) - set(settings)
+        if unknown:
+            raise ValueError("Unknown research settings: " + ", ".join(sorted(unknown)))
+        settings.update(supplied)
+    if settings["reasoning_effort"] not in (None, "high"):
+        raise ValueError("Only high and omission (null) have been checked for this model")
+    limits = {"max_tokens": (1, 262144), "request_timeout_seconds": (1, 3600),
+              "max_attempts": (1, 50), "lean_timeout_seconds": (1, 600),
+              "capacity_retries": (0, 5), "capacity_backoff_seconds": (0, 30)}
+    for name, (low, high) in limits.items():
+        value = settings[name]
+        if type(value) is not int or not low <= value <= high:
+            raise ValueError(f"{name} must be an integer in [{low}, {high}]")
+    if not isinstance(settings["profile"], str):
+        raise ValueError("profile must be a string")
+    return settings
+
+
+def completion_text(response):
+    """Extract final text while keeping provider thinking chunks in raw logs."""
+    content = response["choices"][0]["message"].get("content")
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        text = "".join(chunk["text"] for chunk in content
+                       if isinstance(chunk, dict) and chunk.get("type") == "text"
+                       and isinstance(chunk.get("text"), str))
+        if text:
+            return text
+    raise ValueError("No final text returned; inspect finish_reason and the token limit")
+
+
+def api(messages, *, response_format="json_object", reasoning_effort="profile"):
+    settings = load_api_settings()
+    if reasoning_effort != "profile":
+        if reasoning_effort not in (None, "high"):
+            raise ValueError("Only high or the provider default are supported")
+        settings["reasoning_effort"] = reasoning_effort
     state = ROOT.parent / "DEEPSEEK_STATE.md"
     if state.exists():
         persisted = state.read_text()
@@ -146,21 +193,40 @@ def api(messages):
             "Use the following file as persisted research context; it is not a claim that you retain previous conversations. "
             "Keep the current task's fixed statements and verification requirements unchanged.\n<research_state>\n" +
             persisted + "\n</research_state>"}, *messages]
-    body = {"model": MODEL, "messages": messages, "max_tokens": 9000,
-            "response_format": {"type": "json_object"}}
+    body = {"model": MODEL, "messages": messages, "max_tokens": settings["max_tokens"]}
+    if response_format not in (None, "json_object"):
+        raise ValueError("Unsupported response format")
+    if response_format is not None:
+        body["response_format"] = {"type": response_format}
+    if settings["reasoning_effort"] is not None:
+        body["reasoning_effort"] = settings["reasoning_effort"]
     request = urllib.request.Request(
         "https://api.mistral.ai/v1/chat/completions", data=json.dumps(body).encode(),
         headers={"Authorization": "Bearer " + os.environ["MISTRAL_API_KEY"],
                  "Content-Type": "application/json"},
     )
-    try:
-        with urllib.request.urlopen(request, timeout=240) as response:
-            return json.load(response)
-    except urllib.error.HTTPError as error:
-        # Retain a bounded service error without exposing the key or headers.
-        detail = error.read().decode(errors="replace")[:1500]
-        detail = detail.replace(os.environ["MISTRAL_API_KEY"], "[REDACTED]")
-        raise RuntimeError(f"Mistral HTTP {error.code}: {detail}") from None
+    for attempt in range(settings["capacity_retries"] + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=settings["request_timeout_seconds"]) as response:
+                result = json.load(response)
+            result["research_request_settings"] = settings
+            result["research_capacity_retries_used"] = attempt
+            return result
+        except urllib.error.HTTPError as error:
+            # Retry explicit transient capacity failures, never auth/quota errors.
+            detail = error.read().decode(errors="replace")[:1500]
+            detail = detail.replace(os.environ["MISTRAL_API_KEY"], "[REDACTED]")
+            try:
+                payload = json.loads(detail)
+            except ValueError:
+                payload = {}
+            capacity = (error.code == 429 and
+                        (payload.get("type") == "backend_out_of_capacity" or
+                         str(payload.get("code")) == "3505"))
+            if capacity and attempt < settings["capacity_retries"]:
+                time.sleep(min(30, settings["capacity_backoff_seconds"] * (attempt + 1)))
+                continue
+            raise RuntimeError(f"Mistral HTTP {error.code}: {detail}") from None
 
 
 def render(imports, goals, bodies):
@@ -186,9 +252,14 @@ def main():
     parser.add_argument("job", choices=JOBS)
     parser.add_argument("--methods-dir", type=Path, required=True)
     parser.add_argument("--run-dir", type=Path, required=True)
-    parser.add_argument("--attempts", type=int, default=5)
+    parser.add_argument("--attempts", type=int)
     parser.add_argument("--library-reference", type=Path, action="append", default=[])
     args = parser.parse_args()
+    settings = load_api_settings()
+    if args.attempts is None:
+        args.attempts = settings["max_attempts"]
+    if args.attempts < 1:
+        parser.error("--attempts must be positive")
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     version = subprocess.check_output(["lean", "--version"], text=True).strip()
     if commit != MATHLIB_COMMIT or not version.startswith("Lean (version 4.35.0,"):
@@ -235,17 +306,19 @@ Be precise about the odd/even cancellation case; equal valuations can cancel.
         if args.job == "square":
             for dependency in context_paths:
                 command = ["lean", f"--root={ROOT}", "-o", str(Path(build) / (dependency.stem + ".olean")), str(dependency)]
-                result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=120)
+                result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=settings["lean_timeout_seconds"])
                 if result.returncode:
                     raise SystemExit(result.stdout + result.stderr)
         for attempt in range(1, args.attempts + 1):
             print(f"{module}: DeepSeek generation {attempt}", flush=True)
             response = api(messages)
             (args.run_dir / f"attempt-{attempt}.response.json").write_text(json.dumps(response, ensure_ascii=False, indent=2))
-            content = response["choices"][0]["message"]["content"]
+            reply_content = response["choices"][0]["message"].get("content")
+            content = ""
             try:
                 if response["choices"][0]["finish_reason"] != "stop":
                     raise ValueError("Generation incomplete: " + response["choices"][0]["finish_reason"])
+                content = completion_text(response)
                 candidate = render(imports, goals, json.loads(content))
                 source = args.run_dir / (module + ".lean")
                 source.write_text(candidate)
@@ -274,7 +347,7 @@ Be precise about the odd/even cancellation case; equal valuations can cancel.
                         "Check nonzero and positive-modulus hypotheses. Do not request style-only changes.\n" + candidate}]
                     review = api(review_messages)
                     (args.run_dir / f"attempt-{attempt}.review.json").write_text(json.dumps(review, ensure_ascii=False, indent=2))
-                    verdict = json.loads(review["choices"][0]["message"]["content"])
+                    verdict = json.loads(completion_text(review))
                     records[-1]["review"] = verdict
                     if verdict.get("verdict") == "PASS":
                         (ROOT / (module + ".lean")).write_text(candidate)
@@ -291,7 +364,7 @@ Be precise about the odd/even cancellation case; equal valuations can cancel.
             except (ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
                 feedback = str(error)
                 records.append({"attempt": attempt, "validation_error": feedback, "usage": response.get("usage")})
-            messages.extend([{"role": "assistant", "content": content},
+            messages.extend([{"role": "assistant", "content": reply_content},
                              {"role": "user", "content": "Actual validation feedback follows. Repair all proof bodies; keep every fixed statement unchanged. Return only the complete JSON mapping.\n" + feedback}])
         (args.run_dir / "result.json").write_text(json.dumps({"status": "UNRESOLVED", "model": MODEL, "records": records}, indent=2))
         raise SystemExit("Proof loop reached its attempt limit; no candidate was adopted")

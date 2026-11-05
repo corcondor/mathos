@@ -1,0 +1,10 @@
+{
+  "profile": "long_research",
+  "reasoning_effort": "high",
+  "max_tokens": 65536,
+  "request_timeout_seconds": 900,
+  "max_attempts": 20,
+  "lean_timeout_seconds": 180,
+  "capacity_retries": 2,
+  "capacity_backoff_seconds": 5
+}

@@ -1,0 +1,129 @@
+"""Offline checks for the reasoning-enabled API adapter; no live credentials."""
+
+import io
+import json
+import os
+from pathlib import Path
+import tempfile
+import unittest
+from unittest.mock import patch
+import urllib.error
+
+import deepseek_proof_loop as runtime
+
+
+class ReasoningRuntimeTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.root_patch = patch.object(runtime, "ROOT", self.root)
+        self.root_patch.start()
+        self.addCleanup(self.root_patch.stop)
+        self.env_patch = patch.dict(os.environ, {"MISTRAL_API_KEY": "offline-test-key"})
+        self.env_patch.start()
+        self.addCleanup(self.env_patch.stop)
+        self.write_settings(reasoning_effort="high", max_tokens=32768,
+                            request_timeout_seconds=900, capacity_retries=2)
+
+    def write_settings(self, **values):
+        (self.root / "deepseek_settings.json").write_text(json.dumps(values))
+
+    @staticmethod
+    def response(content=None):
+        if content is None:
+            content = [{"type": "thinking", "thinking": "private model reasoning"},
+                       {"type": "text", "text": '{"proof":"by simp"}'}]
+        return io.BytesIO(json.dumps({"choices": [{"message": {"role": "assistant", "content": content},
+                                                "finish_reason": "stop"}]}).encode())
+
+    def test_high_settings_and_final_text_extraction(self):
+        calls = []
+
+        def fake(request, timeout):
+            calls.append((json.loads(request.data), timeout))
+            return self.response()
+
+        with patch.object(runtime.urllib.request, "urlopen", fake):
+            result = runtime.api([{"role": "user", "content": "proof request"}])
+        self.assertEqual(calls[0][0]["reasoning_effort"], "high")
+        self.assertEqual(calls[0][0]["max_tokens"], 32768)
+        self.assertEqual(calls[0][1], 900)
+        self.assertEqual(json.loads(runtime.completion_text(result)), {"proof": "by simp"})
+        self.assertEqual(result["choices"][0]["message"]["content"][0]["type"], "thinking")
+
+    def test_settings_are_reloaded_between_requests(self):
+        calls = []
+
+        def fake(request, timeout):
+            calls.append(json.loads(request.data))
+            return self.response()
+
+        with patch.object(runtime.urllib.request, "urlopen", fake):
+            runtime.api([])
+            self.write_settings(reasoning_effort=None, max_tokens=512)
+            runtime.api([])
+        self.assertEqual(calls[0]["reasoning_effort"], "high")
+        self.assertNotIn("reasoning_effort", calls[1])
+        self.assertEqual(calls[1]["max_tokens"], 512)
+
+    def test_chat_mode_changes_only_format_and_effort_for_this_request(self):
+        calls = []
+        def fake(request, timeout):
+            calls.append(json.loads(request.data))
+            return self.response()
+        with patch.object(runtime.urllib.request, "urlopen", fake):
+            runtime.api([], response_format=None, reasoning_effort=None)
+            runtime.api([])
+        self.assertNotIn("response_format", calls[0])
+        self.assertNotIn("reasoning_effort", calls[0])
+        self.assertEqual(calls[1]["response_format"], {"type": "json_object"})
+        self.assertEqual(calls[1]["reasoning_effort"], "high")
+
+    def test_explicit_capacity_failure_is_retried_without_downgrading(self):
+        calls = []
+
+        def fake(request, timeout):
+            calls.append(json.loads(request.data))
+            if len(calls) == 1:
+                raise urllib.error.HTTPError(request.full_url, 429, "capacity", {},
+                    io.BytesIO(b'{"type":"backend_out_of_capacity","code":"3505"}'))
+            return self.response()
+
+        with patch.object(runtime.urllib.request, "urlopen", fake), patch.object(runtime.time, "sleep") as sleep:
+            result = runtime.api([])
+        self.assertEqual(len(calls), 2)
+        self.assertTrue(all(c["reasoning_effort"] == "high" for c in calls))
+        self.assertEqual(result["research_capacity_retries_used"], 1)
+        sleep.assert_called_once_with(5)
+
+    def test_authentication_and_quota_failures_are_not_retried(self):
+        for status, payload in [(401, b'{"message":"offline-test-key"}'),
+                                (429, b'{"type":"rate_limited","code":"1300"}')]:
+            with self.subTest(status=status):
+                error = urllib.error.HTTPError("https://api.mistral.ai", status, "error", {}, io.BytesIO(payload))
+                with patch.object(runtime.urllib.request, "urlopen", side_effect=error) as send, patch.object(runtime.time, "sleep") as sleep:
+                    with self.assertRaises(RuntimeError) as raised:
+                        runtime.api([])
+                self.assertEqual(send.call_count, 1)
+                sleep.assert_not_called()
+                self.assertNotIn("offline-test-key", str(raised.exception))
+
+    def test_legacy_string_and_missing_final_text(self):
+        self.assertEqual(runtime.completion_text({"choices": [{"message": {"content": "old output"}}]}), "old output")
+        with self.assertRaises(ValueError):
+            runtime.completion_text({"choices": [{"message": {"content": [{"type": "thinking", "thinking": "no final"}]}}]})
+
+    def test_invalid_settings_fail_before_network_access(self):
+        for settings in [{"reasoning_effort": "unverified-level"}, {"max_tokens": True},
+                         {"request_timeout_seconds": 0}, {"endpoint": "unconfigured.example"}]:
+            with self.subTest(settings=settings):
+                self.write_settings(**settings)
+                with patch.object(runtime.urllib.request, "urlopen") as send:
+                    with self.assertRaises(ValueError):
+                        runtime.api([])
+                    send.assert_not_called()
+
+
+if __name__ == "__main__":
+    unittest.main()

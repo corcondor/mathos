@@ -14,7 +14,7 @@ import re
 import subprocess
 import tempfile
 
-from deepseek_proof_loop import JOBS, MODEL, MATHLIB_COMMIT, ROOT, api, digest, render, retrieve_library_context, load_method_context
+from deepseek_proof_loop import JOBS, MODEL, MATHLIB_COMMIT, ROOT, api, digest, render, retrieve_library_context, load_method_context, load_api_settings, completion_text
 
 
 def main():
@@ -23,11 +23,17 @@ def main():
     parser.add_argument("--job-config", type=Path)
     parser.add_argument("--run-dir", required=True, type=Path)
     parser.add_argument("--methods-dir", type=Path, default=ROOT)
-    parser.add_argument("--attempts", type=int, default=5)
+    parser.add_argument("--attempts", type=int)
     parser.add_argument("--library-reference", action="append", default=[], type=Path)
     parser.add_argument("--seed-proofs", type=Path)
     parser.add_argument("--extra-context", action="append", default=[], type=Path)
     args = parser.parse_args()
+    settings = load_api_settings()
+    if args.attempts is None:
+        args.attempts = settings["max_attempts"]
+    if args.attempts < 1:
+        parser.error("--attempts must be positive")
+    local_dependencies = []
     if args.job_config:
         config = json.loads(args.job_config.read_text())
         module = config["module"]
@@ -38,6 +44,10 @@ def main():
             raise SystemExit("Unsupported code in fixed definitions")
         imports = config["imports"] + "\n" + definitions + "\n"
         goals = config["goals"]
+        for name in config.get("local_dependencies", []):
+            if not isinstance(name, str) or Path(name).name != name or not name.endswith(".lean"):
+                raise SystemExit("Local dependencies must be Lean filenames in v10_formal")
+            local_dependencies.append(ROOT / name)
     else:
         if args.job not in JOBS:
             parser.error("Unknown built-in job; use --job-config for new fixed goals")
@@ -52,6 +62,7 @@ def main():
         raise SystemExit("Pinned Lean/mathlib required")
     args.run_dir.mkdir(parents=True, exist_ok=False)
     paths = [ROOT / "ValuationRecovery.lean", ROOT / "NormalizedCancellation.lean"] if args.job == "square" else []
+    paths.extend(local_dependencies)
     context = "\n\n".join(p.name + "\n" + p.read_text() for p in paths)
     context += "\n\n" + "\n\n".join(p.name + "\n" + p.read_text() for p in args.extra_context)
     library = "\n\n".join(str(p) + "\n" + p.read_text() for p in args.library_reference)
@@ -64,7 +75,7 @@ def main():
         env["LEAN_PATH"] = build + os.pathsep + env.get("LEAN_PATH", "")
         for dependency in paths:
             command = ["lean", f"--root={ROOT}", "-o", str(Path(build) / (dependency.stem + ".olean")), str(dependency)]
-            result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=120)
+            result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=settings["lean_timeout_seconds"])
             if result.returncode:
                 raise SystemExit(result.stdout + result.stderr)
         for index, (name, statement) in enumerate(goals):
@@ -92,10 +103,12 @@ Output the proof only in the JSON field; do not claim execution.
                 else:
                     response = api(messages)
                 (args.run_dir / f"{index+1}-{attempt}.response.json").write_text(json.dumps(response, ensure_ascii=False, indent=2))
-                content = response["choices"][0]["message"]["content"]
+                reply_content = response["choices"][0]["message"].get("content")
+                content = ""
                 try:
                     if response["choices"][0]["finish_reason"] != "stop":
                         raise ValueError("Incomplete model output")
+                    content = completion_text(response)
                     body = json.loads(content)["proof"]
                     all_bodies = {**accepted, name: body}
                     candidate = render(imports, goals[:index+1], all_bodies)
@@ -106,7 +119,7 @@ Output the proof only in the JSON field; do not claim execution.
                     source.write_text(candidate)
                     (args.run_dir / f"{index+1}-{attempt}.lean").write_text(candidate)
                     command = ["lean", f"--root={args.run_dir}", "-o", str(Path(build) / (module + ".olean")), str(source)]
-                    result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=120)
+                    result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=settings["lean_timeout_seconds"])
                     output = result.stdout + result.stderr
                     (args.run_dir / f"{index+1}-{attempt}.compiler.txt").write_text(output)
                     passed = result.returncode == 0 and "sorryAx" not in output and "warning:" not in output
@@ -114,7 +127,8 @@ Output the proof only in the JSON field; do not claim execution.
                         if set(re.findall(r"[A-Za-z_][\w.]*", axiom_list)) - {"propext", "Classical.choice", "Quot.sound"}:
                             passed = False
                     record = {"theorem": name, "attempt": attempt, "exit_code": result.returncode,
-                              "accepted": passed, "source_sha256": digest(candidate), "usage": response.get("usage")}
+                              "accepted": passed, "source_sha256": digest(candidate), "usage": response.get("usage"),
+                              "request_settings": response.get("research_request_settings")}
                     records.append(record)
                     print(f"{module}/{name}: Lean exit={result.returncode}, accepted={passed}", flush=True)
                     if passed:
@@ -129,7 +143,7 @@ Output the proof only in the JSON field; do not claim execution.
                 except (ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
                     feedback = str(error)
                     records.append({"theorem": name, "attempt": attempt, "validation_error": feedback})
-                messages.extend([{"role": "assistant", "content": content}, {"role": "user", "content":
+                messages.extend([{"role": "assistant", "content": reply_content}, {"role": "user", "content":
                     "Actual Lean feedback. Repair this proof only; preserve every hypothesis. Return JSON with proof only.\n" + feedback}])
                 if attempt % 2 == 0:
                     diagnosis = api([{"role": "user", "content":
@@ -140,7 +154,7 @@ Output the proof only in the JSON field; do not claim execution.
                         "\nAVAILABLE CONTEXT:\n" + context + "\nLIBRARY SOURCE:\n" + library}])
                     (args.run_dir / f"{index+1}-{attempt}.diagnosis.json").write_text(json.dumps(diagnosis, ensure_ascii=False, indent=2))
                     messages.append({"role": "user", "content": "Your separate mathematical evaluator found:\n" +
-                                     diagnosis["choices"][0]["message"]["content"]})
+                                     completion_text(diagnosis)})
             else:
                 (args.run_dir / "result.json").write_text(json.dumps({"status": "UNRESOLVED", "accepted": list(accepted), "records": records}, indent=2))
                 raise SystemExit("Goal remains open; accepted prefixes retained")
@@ -153,7 +167,7 @@ Output the proof only in the JSON field; do not claim execution.
             "Here is the actual imported context, so check signatures against it:\n" + context +
             "\nVERIFIED MODULE:\n" + final_source}])
         (args.run_dir / "review.json").write_text(json.dumps(review, ensure_ascii=False, indent=2))
-        verdict = json.loads(review["choices"][0]["message"]["content"])
+        verdict = json.loads(completion_text(review))
         report = {"status": "PASS" if verdict.get("verdict") == "PASS" else "REVIEW_ISSUES",
                   "model": MODEL, "lean_version": version, "mathlib_commit": commit,
                   "checked_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

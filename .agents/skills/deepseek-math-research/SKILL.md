@@ -54,9 +54,9 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 - Eleven additional verified repositories, including DeepSeek-Prover-V2, AlphaGeometry/2, formal-conjectures, Evariste, Kimina, LeanDojo/v2, LeanCopilot, REPL and Aesop, were shared with DeepSeek. See AI_RESEARCH_REFERENCES.md and its pinned catalog. Do not claim those systems or model weights are installed.
 
 ## Current verified status
-- 4 new modules / 21 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9).
+- 5 new modules / 27 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6).
 - RecoveredDivisor and NormalizedCancellation had host edits — keep distinct.
-- Dependency + 6 additional modules (7 total) passed latest re-run.
+- Dependency + 7 additional modules (8 total) passed latest re-run.
 - Python exact revalidation: 5214 curves, 4,877,566 CF coefficients, 25,394,330 reduced fractions, 0 residual; saved in `cf_current_revalidation.json`. Python success ≠ Lean formalization complete.
 
 ## Open work (do not claim done)
@@ -83,3 +83,20 @@ cd /workspace/.cloud-setup/lean/mathlib
 lake env python3 /workspace/mathos/docs/research/nested-binomial/v10_formal/deepseek_goal_worker.py --help
 ```
 For a new job use `--run-dir` with a fresh directory and `--methods-dir` pointing to the downloaded public reference files. Existing verified modules deliberately refuse to be overwritten. If the documented runtime paths are absent, inspect the current checkout and available tools before rebuilding the pinned runtime.
+
+## Native reasoning
+- `deepseek_settings.json`: high, max_tokens 65536, request_timeout_seconds 900, max_attempts 20, lean_timeout_seconds 180. Only high and provider-default omission are verified; do not invent supported xhigh/max levels.
+- Token budget includes reasoning. A research request used all 32768 reasoning tokens without final text; continuation with 65536 produced a real proposal. Missing final text/finish_reason=length is not a successful proof response.
+- Preserve provider thinking chunks only server-side for replay. Display final text and usage metadata, never raw reasoning, in the UI.
+- Prioritize sufficient established mathematical methods. Necessity of frontier mathematics has not been demonstrated for the remaining equation.
+
+## Earlier official Mistral Studio setup
+- The user clarified that "chat UI" means Mistral's official UI, not a new custom frontend. Do not resume custom UI construction.
+- Official private Prompt and Skill named mathos-nested-binomial-research were created through /v2/prompts and /v2/skills, with 26 authorized research sources and readback verification. IDs and links are in DEEPSEEK_STATE.md.
+- The stored prompt was retrieved and successfully tested with deepseek-v4-1-flash-1017 / high. This does not select the model in the browser UI.
+- The browser is at Mistral's login page; no access to the user's signed-in browser session was established. Do not claim UI configuration or a Managed Agent deployment is complete.
+- The v1 Agent creation endpoint is disabled for this organization (403, use Managed Agents), not evidence that the API key is invalid or an admin role is missing.
+
+## Active workflow after the user's latest decision
+- The user decided to continue in the current Codex chat. Delegate mathematics and proof generation to DeepSeek; the host compiles, checks and saves to the existing GitHub PR.
+- Do not continue frontend construction or official UI/login setup unless asked again. The saved private Studio Prompt and Skill remain available, but are not required for this workflow.
