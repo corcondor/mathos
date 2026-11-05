@@ -19,7 +19,7 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 - The user has explicitly authorized sending v10/v11 research files and additional files to this API. Do not ask again.
 
 ## Private research location
-- https://github.com/corcondor/mathos/pull/1, head `bd4d2ad338e62102d60d9fffd8c073a5d48bf250`.
+- https://github.com/corcondor/mathos/pull/1; initial inspected base snapshot `bd4d2ad338e62102d60d9fffd8c073a5d48bf250`. Fetch its current head before further changes; verified later uploads are recorded in DEEPSEEK_STATE.md.
 - Public `nested-binomial-equation` main has up to v8; the mathos PR has up to v11.
 - First inspect existing checkouts and GitHub auth; do not make the user re-summarize info available from the known PR. Cloud tasks are isolated; do not create worktrees unless explicitly asked.
 
