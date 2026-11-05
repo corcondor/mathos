@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T08:48:37.123933+00:00",
+  "lean_version": "4.35.0",
+  "lean_commit": "eb6cafb7290e8bd5f2937522d8d804f58f02bafc",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "7fb8e92456fc5808364183f9efa3d7cd8e65726c1e572f8f471541e305941e83",
+  "certificate_sha256": "4e70712950132c869f875bc26bb9fa14bc8c858969655294bea5e19758c44126",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v8_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v8_formal/CubeCertificates.olean",
+    "/workspace/scratch/8e52c1248371/v8_formal/CubeCertificates.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "successful_executor_session": 53466,
+  "successful_result_chunk": "de1af7",
+  "finite_arithmetic_rows_checked": 2903,
+  "batches": 59,
+  "proof_methods": [
+    "decide",
+    "norm_num",
+    "omega"
+  ],
+  "native_decide_used": false,
+  "sorry_used": false,
+  "custom_axioms_used": false,
+  "analytic_and_valuation_reductions_formalized": false,
+  "completeness_of_enumerated_domain_formalized": false,
+  "whole_original_equation_solved": false,
+  "standalone_lake_build_executed": false,
+  "executor_compatibility_shim": "../v4_formal/own_executable_path.c (own-process executable-path compatibility only)"
+}

@@ -1,0 +1,211 @@
+{
+  "status": "PASS",
+  "scope": "Uniform written proof for ell=1,j=i-3,n=w*p^a+2,p>6w; finite checks corroborate identities only.",
+  "constant_polynomial_at_1083": 239142959,
+  "valuation_examples": [
+    {
+      "w": 1,
+      "p": 7,
+      "a": 3,
+      "s": 3,
+      "delta": 0
+    },
+    {
+      "w": 1,
+      "p": 11,
+      "a": 3,
+      "s": 3,
+      "delta": 0
+    },
+    {
+      "w": 2,
+      "p": 13,
+      "a": 2,
+      "s": 6,
+      "delta": 1
+    },
+    {
+      "w": 2,
+      "p": 13,
+      "a": 5,
+      "s": 6,
+      "delta": 1
+    },
+    {
+      "w": 2,
+      "p": 17,
+      "a": 3,
+      "s": 6,
+      "delta": 0
+    },
+    {
+      "w": 3,
+      "p": 19,
+      "a": 2,
+      "s": 9,
+      "delta": 2
+    },
+    {
+      "w": 3,
+      "p": 23,
+      "a": 4,
+      "s": 9,
+      "delta": 4
+    },
+    {
+      "w": 4,
+      "p": 29,
+      "a": 2,
+      "s": 12,
+      "delta": 1
+    },
+    {
+      "w": 4,
+      "p": 31,
+      "a": 3,
+      "s": 12,
+      "delta": 0
+    },
+    {
+      "w": 5,
+      "p": 31,
+      "a": 5,
+      "s": 15,
+      "delta": 1
+    },
+    {
+      "w": 5,
+      "p": 43,
+      "a": 2,
+      "s": 15,
+      "delta": 0
+    },
+    {
+      "w": 5,
+      "p": 43,
+      "a": 2,
+      "s": 16,
+      "delta": 1
+    },
+    {
+      "w": 6,
+      "p": 37,
+      "a": 2,
+      "s": 18,
+      "delta": 2
+    },
+    {
+      "w": 6,
+      "p": 41,
+      "a": 4,
+      "s": 19,
+      "delta": 4
+    },
+    {
+      "w": 7,
+      "p": 47,
+      "a": 2,
+      "s": 21,
+      "delta": 1
+    },
+    {
+      "w": 7,
+      "p": 59,
+      "a": 2,
+      "s": 21,
+      "delta": 0
+    },
+    {
+      "w": 7,
+      "p": 59,
+      "a": 2,
+      "s": 22,
+      "delta": 1
+    },
+    {
+      "w": 9,
+      "p": 59,
+      "a": 2,
+      "s": 27,
+      "delta": 2
+    },
+    {
+      "w": 12,
+      "p": 73,
+      "a": 4,
+      "s": 36,
+      "delta": 4
+    }
+  ],
+  "q_divides_r_examples": [
+    {
+      "w": 4,
+      "p": 29,
+      "a": 2,
+      "s": 13,
+      "v_p_L": 1
+    },
+    {
+      "w": 5,
+      "p": 43,
+      "a": 2,
+      "s": 16,
+      "v_p_L": 0
+    },
+    {
+      "w": 7,
+      "p": 59,
+      "a": 2,
+      "s": 22,
+      "v_p_L": 0
+    },
+    {
+      "w": 7,
+      "p": 59,
+      "a": 3,
+      "s": 23,
+      "v_p_L": 1
+    }
+  ],
+  "normalized_residue_examples": [
+    {
+      "w": 1,
+      "p": 7,
+      "a": 2,
+      "normalized_X_mod_p": 5
+    },
+    {
+      "w": 1,
+      "p": 7,
+      "a": 3,
+      "normalized_X_mod_p": 5
+    },
+    {
+      "w": 2,
+      "p": 13,
+      "a": 2,
+      "normalized_X_mod_p": 9
+    },
+    {
+      "w": 3,
+      "p": 19,
+      "a": 2,
+      "normalized_X_mod_p": 13
+    },
+    {
+      "w": 6,
+      "p": 37,
+      "a": 1,
+      "normalized_X_mod_p": 25
+    },
+    {
+      "w": 9,
+      "p": 59,
+      "a": 1,
+      "normalized_X_mod_p": 18
+    }
+  ],
+  "total_identity_examples": 29,
+  "not_a_finite_exclusion_scan": true,
+  "not_lean_formalized": true
+}

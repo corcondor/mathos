@@ -13,7 +13,13 @@
 
 ## 読み始める場所
 
-- **[最新：v7 日本語概要](PROGRESS_v7_ja.md)**
+- **[最新：v8 日本語概要](PROGRESS_v8_ja.md)**
+- [シフト素数冪 i=P^a+2 の完全排除](v8_shifted_prime_power_completion.md)
+- [全2,903件の有限算術証明書の Lean 検証](v8_formal/README.md)
+- [大きい素数冪因子の一様な分類](v8_composite_dominant_prime_powers.md)
+- [一般の共通約数の不足分による高さ上限](v8_gcd_defect_height.md)
+- [円分因子7q^aの偶数指数・高次付値の制限](v8_cyclotomic_even_exponents.md)
+- [v7 日本語概要](PROGRESS_v7_ja.md)
 - [v6 日本語概要](PROGRESS_v6_ja.md)
 - [版ごとの研究記録](RESEARCH_LOG.md)
 - [新しい共通約数と i-1 が平方自由な場合の完全排除](v6_common_divisor.md)
@@ -27,6 +33,25 @@
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v8
+
+ell=1、j=i-3、i=P^a+2 を、任意の素数 P・正整数 a について完全排除した。
+共通約数から整数商を取り出し、対数幅と合わせて i<2^192 を証明。
+さらに底の素数を合同条件で有限化し、残る全2,903件の値が立方数でないことを
+厳密整数計算と Lean カーネルで確認した。底3には別の短い全指数の証明がある。
+v7 と合わせて i=3P^a+2 も P=3 を含む全ての素数について排除した。
+
+同じ ell=1、j=i-3 の枝の一般の合成数では、i=wp^a+2、p>6w の指数を分類し、3|w のときは
+a=2、i<961η²w³+2（η=1または2）へ還元した。
+また A=C(i,3)、X=C(i²,6i−9)、S=A/gcd(A,X) とすると、
+S|i−2、log i<128S、i<2^(192S) が必要であることを証明した。
+
+i=jp³ の円分因子7q^aの枝では、4の倍数の指数を全排除し、
+偶数指数の素数合同条件と、外側二項係数の正確な q-adic 付値を追加した。
+全体の解の分類は未完了。解析・付値から有限領域への帰着は数学的証明であり、
+全証明の Lean 形式化を主張していない。詳細は
+[v8 日本語概要](PROGRESS_v8_ja.md) と [v8_manifest.json](v8_manifest.json) を参照。
 
 ## 2026年11月5日の追加：v7
 
@@ -109,6 +134,14 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 このディレクトリを作業場所にする。代表的な小さい検算は Python の
 標準ライブラリだけで実行できる。
 
+    python3 v8_shifted_base_three_checks.py
+    python3 v8_shifted_prime_power_completion_checks.py
+    python3 v8_composite_shifted_completion_audit.py
+    python3 v8_composite_dominant_prime_powers_checks.py
+    python3 v8_cyclotomic_even_exponents_checks.py
+
+前の版：
+
     python3 v7_fixed_offset_checks.py
     python3 v7_offset_cofactor_three_checks.py
     python3 v7_offset_shifted_prime_powers_checks.py
@@ -139,7 +172,7 @@ v4_formal/README.md と v5_formal/README.md を参照。
 ## 大きい生成済み証明書
 
 Git には証明、生成器、独立検証器、小さい結果記録を収録した。
-v6 の有限証明書は全件含む。v5 までの基準アーカイブにあった
+v6〜v8 の有限証明書は全件含む。v5 までの基準アーカイブにあった
 100 KB を超える生成済み証明書やバイナリ出力の一部は収録していない。
 省略した16ファイルの名前・サイズ・SHA-256、および基準アーカイブとの
 対応は [ARCHIVE_MANIFEST.json](ARCHIVE_MANIFEST.json) にある。
@@ -151,8 +184,9 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 で R>12、i-1 が平方自由でない未排除の合成数・素数冪。
-- 素数冪に対して、例外的な Wieferich 因子が必要な量だけ現れる可能性。
+- ell=1、j=i-3 で、i-2 が少なくとも二種類の素因数を持ち、3P^a でもない未排除の値。
+- 同じ枝の一般の合成数について、S=A/gcd(A,X) の新しい条件と因数構造の組合せ。
+- i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
 - i=jp^3 で、p²+p+1 の未排除の因数構造と、実数評価・合同条件の両立。
 - 下側 i=j+4 の残存区間、およびその他の未排除分岐。
 

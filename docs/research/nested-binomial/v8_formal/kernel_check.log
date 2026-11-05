@@ -1,0 +1,5 @@
+'NestedBinomialV8.numerical_gap_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV8.quotient_interval_has_no_integer' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV8.allRows_checked' depends on axioms: [propext]
+'NestedBinomialV8.allRows_count' does not depend on any axioms
+'NestedBinomialV8.every_recorded_value_not_cube' depends on axioms: [propext, Quot.sound]

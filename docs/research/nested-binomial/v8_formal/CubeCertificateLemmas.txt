@@ -1,0 +1,62 @@
+import Mathlib.Tactic
+
+namespace NestedBinomialV8
+
+structure CubeWitness where
+  prime : ℕ
+  exponent : ℕ
+  quotient : ℕ
+  lowerRoot : ℕ
+
+def value (w : CubeWitness) : ℕ :=
+  w.quotient * (w.prime ^ w.exponent + 2) *
+    (w.prime ^ w.exponent + 1) / 6
+
+def valid (w : CubeWitness) : Prop :=
+  6 ∣ (w.prime ^ w.exponent + 2) * (w.prime ^ w.exponent + 1) ∧
+  w.lowerRoot ^ 3 < value w ∧ value w < (w.lowerRoot + 1) ^ 3
+
+instance (w : CubeWitness) : Decidable (valid w) :=
+  inferInstanceAs (Decidable (_ ∧ _))
+
+def checkRows (ws : List CubeWitness) : Bool :=
+  ws.all (fun w => decide (valid w))
+
+theorem of_checkRows {ws : List CubeWitness} (h : checkRows ws = true)
+    {w : CubeWitness} (hw : w ∈ ws) : valid w := by
+  simp only [checkRows, List.all_eq_true, decide_eq_true_eq] at h
+  exact h w hw
+
+theorem no_cube_between (N m : ℕ) (hlo : m ^ 3 < N)
+    (hhi : N < (m + 1) ^ 3) : ¬ ∃ v : ℕ, v ^ 3 = N := by
+  rintro ⟨v, hv⟩
+  have hmv : m < v := by
+    by_contra h
+    have hvm : v ≤ m := by omega
+    have hp := Nat.pow_le_pow_left hvm 3
+    omega
+  have hvm : v < m + 1 := by
+    by_contra h
+    have hmv' : m + 1 ≤ v := by omega
+    have hp := Nat.pow_le_pow_left hmv' 3
+    omega
+  omega
+
+theorem valid_not_cube (w : CubeWitness) (h : valid w) :
+    ¬ ∃ v : ℕ, v ^ 3 = value w :=
+  no_cube_between (value w) w.lowerRoot h.2.1 h.2.2
+
+theorem numerical_gap_constant :
+    (162 : ℚ) * (513 / 512) ^ 3 * (1 + 1 / 2 ^ 18) < 163 := by
+  norm_num
+
+theorem quotient_interval_has_no_integer (K t : ℕ)
+    (hlo : 162 < K * t) (hhi : K * t < 163) : False := by
+  omega
+
+theorem checkRows_append {xs ys : List CubeWitness}
+    (hx : checkRows xs = true) (hy : checkRows ys = true) :
+    checkRows (xs ++ ys) = true := by
+  unfold checkRows at *
+  rw [List.all_append, hx, hy]
+  rfl

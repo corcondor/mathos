@@ -1,0 +1,190 @@
+{
+  "version": "v8",
+  "date": "2026-11-05",
+  "original_equation": "C(C(i,j),C(k,ell)) = C(i^2,j^2) + C(k^2,ell^2)",
+  "globally_solved": false,
+  "concrete_solution_found": false,
+  "completed_infinite_families": [
+    "ell=1, j=i-3, i=P^a+2, every prime P and positive integer a, both outer branches",
+    "ell=1, j=i-3, i=3P^a+2, every prime P and positive integer a, together with v7"
+  ],
+  "shifted_power_reduction": {
+    "height_bound": "i < exp(128) < 2^192",
+    "large_prime_bound": 18184,
+    "large_prime_t_pairs": 204,
+    "distinct_large_primes": 119,
+    "maximum_candidate_prime": 17293,
+    "prime_exponent_pairs": 924,
+    "finite_cube_certificate_count": 2903,
+    "counts": {
+      "P_at_least_7": 2131,
+      "P_2": 472,
+      "P_5": 300
+    },
+    "arbitrary_search_cutoff": false,
+    "r_interval_enumeration": false,
+    "independent_domain_reconstruction": "PASS",
+    "independent_reproduction_without_reading_certificate": "PASS",
+    "base_three_proof": "separate uniform proof; last exponent a=9 excluded by squarefreeness"
+  },
+  "other_uniform_theorems": [
+    "i=wp^a+2, p>6w, 3|w implies a=2 and 6w<p<31 eta w; eta=1 for even w and 2 for odd w",
+    "i=wp^a+2, p>6w, 3 does not divide w implies a=3v_p(r), or a+1=3v_p(r) with 6w<p<9w and p+w=0 modulo 3",
+    "ell=1, j=i-3: S=A/gcd(A,X) divides i-2 and log(i)<128S, hence i<2^(192S)",
+    "large-prime branch Phi_3(p)=7q^a: 4|a excluded; even a=2s implies s odd, q=7 mod12, p=149 mod168",
+    "large-prime branch Phi_3(p)=7q^(2s): v_q(L)=s except possibly q=151,211, with an exact formula for both exceptions",
+    "large-prime branch Phi_3(p)=7q^a: prime-only residue test excludes q=13,37 for all exponents"
+  ],
+  "lean": {
+    "status": "PASS",
+    "version": "4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "actual_exit_code": 0,
+    "rows": 2903,
+    "batches": 59,
+    "finite_arithmetic_fully_kernel_checked": true,
+    "analytic_and_valuation_reductions_formalized": false,
+    "finite_domain_completeness_formalized": false,
+    "entire_shifted_power_theorem_formalized": false,
+    "sorry_used": false,
+    "native_decide_used": false,
+    "custom_axioms_used": false,
+    "standalone_lake_build_executed": false
+  },
+  "independent_AI_mathematical_audit": "PASS for all five new proof notes; separate full reproduction of all 2903 cube tests; two reviewers for cyclotomic note",
+  "external_peer_reviewed": false,
+  "new_external_completeness_theorem_used": false,
+  "prior_external_dependency_when_combining_cyclotomic_exponents": "The v7 exclusion of exponents divisible by 3 uses the Thomas-Mignotte theorem cited in v7_manifest.json. The new v8 even-exponent theorem does not use it.",
+  "files": [
+    {
+      "path": "PROGRESS_v8_ja.md",
+      "bytes": 10679,
+      "sha256": "58400eecb433c895d3da361f01ceba08466d65bb88e7f13e97d7a06b37f87f5c"
+    },
+    {
+      "path": "v8_composite_dominant_prime_powers.md",
+      "bytes": 10360,
+      "sha256": "547c4e4852f085fc52e2660db059b505ec78c18dd95c0ba149eb1bec81bed812"
+    },
+    {
+      "path": "v8_composite_dominant_prime_powers_checks.py",
+      "bytes": 5391,
+      "sha256": "8deab089881088b8daf3e4d8293ebf5081a3e56202197d222b59d5a261ea8a85"
+    },
+    {
+      "path": "v8_composite_dominant_prime_powers_verification.json",
+      "bytes": 2916,
+      "sha256": "2e2b3d07065b71597a36c7651dd42894e2e4a0fdb8583046a0d382c3152d9e91"
+    },
+    {
+      "path": "v8_composite_shifted_completion_audit.py",
+      "bytes": 3985,
+      "sha256": "f6b62e858251a11b4cb633b36f0981b9f2424fe5735de2d987d97afca8aac1bc"
+    },
+    {
+      "path": "v8_composite_shifted_completion_audit_verification.json",
+      "bytes": 515,
+      "sha256": "0684296df679fedd25f0467a419f3a6b9e31177948966226aaf6119f91387e30"
+    },
+    {
+      "path": "v8_cyclotomic_even_exponents.md",
+      "bytes": 11108,
+      "sha256": "eac8c8ce73334d2e15ea11abf1282741c7c7cc1a88a1b9bb8975b471f04e6c70"
+    },
+    {
+      "path": "v8_cyclotomic_even_exponents_checks.py",
+      "bytes": 9009,
+      "sha256": "0bed19137c2ed5c5e7629017244138fc0bd85ba279433c1870c3da937ceb35df"
+    },
+    {
+      "path": "v8_cyclotomic_even_exponents_verification.json",
+      "bytes": 9749,
+      "sha256": "3ab4f2800b3c0075f9d86d65449832431b034d84e386c543600ae18056f79fed"
+    },
+    {
+      "path": "v8_formal/CubeCertificateLemmas.txt",
+      "bytes": 1820,
+      "sha256": "61a7de4d97b89b1505582bea363be311670ac0f748b64886fc16b88ec5b98cbe"
+    },
+    {
+      "path": "v8_formal/CubeCertificates.lean",
+      "bytes": 138364,
+      "sha256": "7fb8e92456fc5808364183f9efa3d7cd8e65726c1e572f8f471541e305941e83"
+    },
+    {
+      "path": "v8_formal/README.md",
+      "bytes": 3283,
+      "sha256": "3f77f6fcf35712fccea1bffc68ef136cd71be9abaa6446eb56f5d88e870433ad"
+    },
+    {
+      "path": "v8_formal/generate_certificate_source.py",
+      "bytes": 2489,
+      "sha256": "e498549b1f4c5c76950bda3d1c5d290604079683954167da0f51c35c27579055"
+    },
+    {
+      "path": "v8_formal/kernel_check.json",
+      "bytes": 1376,
+      "sha256": "c665fe6d1dcbc8596d043ee2f6a66a820a38f38d6e9665e88dd24e4999e1b3c6"
+    },
+    {
+      "path": "v8_formal/kernel_check.log",
+      "bytes": 411,
+      "sha256": "11ed423e6abdd68f0da9da967577addceccef5aa7debdc7be3d8018b3034d58b"
+    },
+    {
+      "path": "v8_formal/lakefile.toml",
+      "bytes": 307,
+      "sha256": "f6076e4852a62b46b01bf564cceb0d68e8b6fe392eadb854656d476e519033e1"
+    },
+    {
+      "path": "v8_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "path": "v8_formal/source_mapping_check.json",
+      "bytes": 281,
+      "sha256": "58887cbb4d115bbd43b891ea55cd91f026151aeedcbe772022cb5ff39b86cae6"
+    },
+    {
+      "path": "v8_gcd_defect_height.md",
+      "bytes": 4151,
+      "sha256": "e2754b81cedc76feba73f14658cdff923b39a409cd2982a765bdb59cf2b91d0b"
+    },
+    {
+      "path": "v8_shifted_base_three.md",
+      "bytes": 3694,
+      "sha256": "6d1093041d667baedb02bbe1ffb6e1eef6c7e1b3e5ec0eaad91c402d1a657d4a"
+    },
+    {
+      "path": "v8_shifted_base_three_checks.py",
+      "bytes": 3225,
+      "sha256": "1c5d44e111ff36b26f8b30f0b159f20dae1d904d0e49fc0b628f95883f4b5c75"
+    },
+    {
+      "path": "v8_shifted_base_three_verification.json",
+      "bytes": 1926,
+      "sha256": "ed74bd464602346157de2a412df93d62f9ddc5dec43438a291799eec10127975"
+    },
+    {
+      "path": "v8_shifted_prime_power_completion.md",
+      "bytes": 10367,
+      "sha256": "1ac2900e5fdea1dde8ff9eb37cdefa768c3e6d6eddb6eaaa668c67026bc41eb9"
+    },
+    {
+      "path": "v8_shifted_prime_power_completion_certificates.json",
+      "bytes": 365244,
+      "sha256": "4e70712950132c869f875bc26bb9fa14bc8c858969655294bea5e19758c44126"
+    },
+    {
+      "path": "v8_shifted_prime_power_completion_checks.py",
+      "bytes": 8521,
+      "sha256": "c1e459a0d924f3428d6f5f33e11dc5dcea8a848a0057aa7385513115c32566a5"
+    },
+    {
+      "path": "v8_shifted_prime_power_completion_verification.json",
+      "bytes": 1902,
+      "sha256": "41c2c7c6b71d66eb869aee3db3d0d2df0ab5cf92564dad40bd5f26b3a2cb46cc"
+    }
+  ]
+}
