@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T10:38:37.579196+00:00",
+  "lean_version": "4.35.0",
+  "lean_commit": "eb6cafb7290e8bd5f2937522d8d804f58f02bafc",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "7c10b305151a0380792c2e8faea138aa455581359e96b09343ba2c8072ad00f0",
+  "log_sha256": "582c9af8a7eb4edc61dffa85cd80de6e890e69a718e588b497301c4fe571fd48",
+  "theorem_count": 20,
+  "theorem_names": [
+    "mod2_nonzero_cube",
+    "mod2_scalar_obstruction",
+    "mod2_complete_residues",
+    "mod5_nonzero_period",
+    "mod5_trace_zero_branch_two",
+    "mod5_trace_zero_branch_four",
+    "mod5_scalar_branch_two",
+    "mod5_scalar_branch_four",
+    "mod7_unit_period",
+    "mod7_trace_branch_two",
+    "mod7_trace_branch_four",
+    "concrete_primary_norms",
+    "q19_exact_products",
+    "q19_mod5_forces_a_one_mod4",
+    "q19_mod11_constants",
+    "q19_complete_combined_period",
+    "q19_period_identities",
+    "q31_mod2_constants",
+    "q67_mod5_constants",
+    "next_shape_examples"
+  ],
+  "scope": "Finite modular arithmetic in Eisenstein coordinate pairs; complete F4/F25/split-mod7 residue tests and the q19 120-period certificate",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v10_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v10_formal/CyclotomicFilters.olean",
+    "/workspace/scratch/8e52c1248371/v10_formal/CyclotomicFilters.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "command_environment": {
+    "PATH_prefix": "/workspace/scratch/8e52c1248371/v4_runtime/lean-4.35.0-linux/bin",
+    "LD_PRELOAD": "/workspace/scratch/8e52c1248371/v4_runtime/own_executable_path.so"
+  },
+  "successful_executor_session": 34419,
+  "successful_result_chunk": "b899b3",
+  "proof_methods": [
+    "decide",
+    "norm_num"
+  ],
+  "printed_axiom_dependencies": {
+    "mod2_nonzero_cube": [],
+    "mod2_complete_residues": [],
+    "mod5_nonzero_period": [],
+    "mod5_trace_zero_branch_two": [],
+    "mod5_trace_zero_branch_four": [],
+    "mod7_trace_branch_two": [
+      "propext"
+    ],
+    "mod7_trace_branch_four": [
+      "propext"
+    ],
+    "q19_complete_combined_period": [],
+    "q19_exact_products": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "sorry_used": false,
+  "native_decide_used": false,
+  "custom_axioms_used": false,
+  "exact_Eisenstein_factorization_formalized": false,
+  "primary_unit_normalization_formalized": false,
+  "unbounded_exponent_theorems_formalized": false,
+  "whole_cyclotomic_branch_solved": false,
+  "whole_original_equation_solved": false,
+  "standalone_lake_build_executed": false,
+  "executor_compatibility_shim": "../v4_formal/own_executable_path.c (own-process executable-path compatibility only)",
+  "log_capture": "Verbatim successful executor output copied after exit code0; direct launch without shell stdout redirection.",
+  "earlier_successful_run_before_added_bound_examples": {
+    "executor_session": 87895,
+    "final_result_chunk": "344bec",
+    "source_sha256": "ba2dc13d386545bbaa8098030010020aedaa534bc27d4e983af3bda78eaf7393",
+    "exit_code": 0
+  },
+  "added_final_examples": "379 and 439 prime representations and the five intermediate composite factorizations; all 20 theorems rerun"
+}

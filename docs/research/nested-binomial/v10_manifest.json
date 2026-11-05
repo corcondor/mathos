@@ -1,0 +1,301 @@
+{
+  "version": "v10",
+  "date": "2026-11-05",
+  "original_equation": "C(C(i,j),C(k,ell)) = C(i^2,j^2) + C(k^2,ell^2)",
+  "globally_solved": false,
+  "concrete_solution_found": false,
+  "base_commit": "2e90177b3ceaf1ea390fffa75331349c63b3109d",
+  "valuation_recovery": {
+    "scope": "ell=1, j=i-3, n=i, A=C(n,3), X=C(n^2,6n-9), r=min(k,A-k)",
+    "both_outer_branches": true,
+    "cubic_divisibility": "A divides r*(X+r^2)",
+    "core_lemma": "3*v_p(r)<v_p(A) implies v_p(X)=2*v_p(r)",
+    "new_defect": "E=product p^max(v_p(A)-3*v_p(X)/2,0) over primes with even v_p(X)",
+    "divisor_chain": "G=gcd(A,X) divides B=A/E divides A; B divides r^3; E divides S=A/G",
+    "necessary_conditions": [
+      "E>=13",
+      "E divides (n-2)/gcd(n-2,6)",
+      "log n<128E",
+      "n<2^(192E)"
+    ],
+    "square_refinement": "For x=2t, alpha=3t+d: v_p(r)=t with a normalized square congruence mod p^d, or v_p(r)>=t+d; nonresidues recover the entire p-part",
+    "CRT_conditions": "r=F*u, F=c3(B); u=0 or u^2=-lambda_p mod p^d for each p^d in E",
+    "maximum_CRT_classes": "3^omega_odd(E) times 5 if 2|E, otherwise 3^omega_odd(E)",
+    "short_interval": "u^3<229E",
+    "actual_remaining_defect": "A/gcd(A,r^3)=E/gcd(E,u)>=13",
+    "reused_CF_version": "v9 complete H=1,...,12 result, all 5214 curves, through the proved generalized-divisor transfer",
+    "CF_computation_reexecuted_in_v10": false
+  },
+  "uniform_fixed_cofactor_height": {
+    "scope": "Every w>=1, prime p, a>=1; includes p|w after normalization",
+    "new_bound": "log i<128*w/gcd(w,6); i<2^(192*w/gcd(w,6))",
+    "old_v9_bound": "log i<768*w^2/gcd(w,6)",
+    "large_prime_hypothesis_needed": false,
+    "critical_prime_exponents": "alpha=a-[p=3] in {b,b+2,...,3b-2}, b=v_p(D_w)>0",
+    "critical_prime_polynomial_bound": "i<=216*w^4/25+2<16*w^4",
+    "every_exact_prime_power_factor": "q=p^v_p(i-2)<128*(i-2)/(gcd((i-2)/q,6)*log i)"
+  },
+  "completed_small_cofactor_families": {
+    "scope": "ell=1, j=i-3, i=w*p^a+2, w/gcd(w,6)<=12, p prime, a>=1",
+    "cofactors": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      18,
+      20,
+      21,
+      22,
+      24,
+      27,
+      30,
+      33,
+      36,
+      42,
+      48,
+      54,
+      60,
+      66,
+      72
+    ],
+    "all_primes_and_positive_exponents": true,
+    "includes_p_dividing_w": true,
+    "cofactor_count": 30,
+    "new_cofactors_beyond_1_2_3": 27,
+    "complete_parameter_records": 983,
+    "distinct_indices": 955,
+    "maximum_sharp_domain_index": 54353840,
+    "parameter_exclusions": {
+      "logarithmic_gap_with_log_n_greater_than_8": 1,
+      "no_forced_multiple_in_broad_gap": 502,
+      "recovered_defect_at_most_12": 480
+    },
+    "distinct_index_exclusions": {
+      "logarithmic_gap_with_log_n_greater_than_8": 1,
+      "no_forced_multiple_in_broad_gap": 501,
+      "recovered_defect_at_most_12": 453
+    },
+    "prime_factor_and_independent_valuation_checks": 5717,
+    "certificate_bytes": 416690,
+    "certificate_is_complete": true,
+    "arbitrary_search_cutoff": false,
+    "independent_reproduction": {
+      "reads_primary_certificate": false,
+      "uses_primary_exponent_progression": false,
+      "domain": "p<=6w, p^a<9w^3, p does not divide w; proved quartic height bound",
+      "parameter_records": 2423,
+      "distinct_indices": 2393,
+      "maximum_index": 238172330,
+      "digit_sum_valuations": 15408,
+      "survivors": 0,
+      "execution_result_chunk": "307212",
+      "exit_code": 0
+    },
+    "uniform_consequence": "For every exact prime-power q dividing i-2, w=(i-2)/q satisfies w/gcd(w,6)>=13; hence q<=(i-2)/13",
+    "two_prime_factor_consequence": "Exact powers of 2>=32, of 3>=81, and bases 5,7,11 have exponent>=2"
+  },
+  "cyclotomic_branch": {
+    "scope": "i=j*p^3, k=p, ell=1, p>=103 prime, Phi_3(p)=7*q^a with the prior residual-branch conditions",
+    "uniform_conditions": [
+      "3 does not divide a",
+      "B and m are odd",
+      "5 does not divide B",
+      "p=2 mod7 implies B^2=(q+1)^2 mod7",
+      "p=4 mod7 implies a odd and B=3+5q or 5+3q mod7",
+      "5|m implies q=1 mod5 if p=2 mod7, q=4 mod5 if p=4 mod7"
+    ],
+    "completed_v9_residual_bases": [
+      19,
+      31,
+      67
+    ],
+    "additional_displayed_exclusions": [
+      223,
+      229,
+      367,
+      379,
+      439
+    ],
+    "all_exponent_q_lower_bound": 241,
+    "even_exponent_q_lower_bound": 463,
+    "existence_at_bound_claimed": false,
+    "prime_shape_exclusion": "q=b^2+27*u^2, u nonzero; q prime",
+    "trace_shape_exclusion": "primary trace B divisible by 5",
+    "infinitely_many_primes_of_shapes_claimed": false,
+    "pair_matrix_power_comparisons": 1842,
+    "complete_small_ring_records": 126,
+    "q19_combined_period": 120,
+    "q19_remaining_records_force_p_divisible_by_11": 10,
+    "v9_period_records_independently_reconstructed": 39,
+    "new_external_classification_theorem_used": false,
+    "prime_p_3_divides_a_Thue_dependency_removed": true,
+    "v7_all_integer_x_Thue_dependency_removed": false,
+    "cubic_reciprocity_needed_for_v10_results": false,
+    "whole_branch_solved": false
+  },
+  "Lean": {
+    "version": "4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "general_valuation_module": {
+      "actual_exit_code": 0,
+      "major_quantified_theorems": 9,
+      "auxiliary_theorems": 3,
+      "executor_session": 20452,
+      "result_chunk": "2f5300",
+      "scope": "Both original outer branches to cubic divisibility; prime-local parity recovery and p-power divisibility; critical valuation dichotomy; finite-exponent parametrization"
+    },
+    "cyclotomic_finite_arithmetic_module": {
+      "actual_exit_code": 0,
+      "theorems": 20,
+      "executor_session": 34419,
+      "result_chunk": "b899b3",
+      "scope": "Finite modular arithmetic in Eisenstein coordinate pairs; complete F4/F25/split-mod7 residue tests and the q19 120-period certificate"
+    },
+    "sorry_used": false,
+    "native_decide_used": false,
+    "custom_axioms_used": false,
+    "standalone_lake_build_executed": false,
+    "not_formalized": [
+      "global product B",
+      "normalized square congruence",
+      "CRT reductions",
+      "CF transfer",
+      "analytic height bounds",
+      "small-cofactor domain completeness and all finite records",
+      "Eisenstein UFD and primary normalization",
+      "unbounded cyclotomic deductions",
+      "whole original problem"
+    ]
+  },
+  "independent_AI_mathematical_audits": {
+    "valuation_and_CRT": "PASS, root, fixed-cofactor and cyclotomic reviewers",
+    "all_w_height_strengthening": "PASS, root and three independent reviewers",
+    "small_cofactor_completeness_and_finite_proof": "PASS, root and cyclotomic reviewer; independent enlarged-domain reproduction",
+    "cyclotomic": "PASS, root, mixed-gcd and fixed-cofactor reviewers; independent all-ring and all-period reconstructions",
+    "overview": "PASS with three presentation clarifications applied"
+  },
+  "external_peer_reviewed": false,
+  "files": [
+    {
+      "path": "PROGRESS_v10_ja.md",
+      "bytes": 13453,
+      "sha256": "3d93ea4655cbcf3f842022b49230d3d177593dc4ddd5f9a514ab46bf08b55f49"
+    },
+    {
+      "path": "v10_cyclotomic_auxiliary_rings.md",
+      "bytes": 15625,
+      "sha256": "9fb2dec21aea5a5fe1c1c6e461da623c3f05f5c60afd5a34af8078b289e21377"
+    },
+    {
+      "path": "v10_cyclotomic_auxiliary_rings_checks.py",
+      "bytes": 13623,
+      "sha256": "40bf6a039d411ccfd330491610bb1fbe7eae2a3794c4fec73d4bfe1289077988"
+    },
+    {
+      "path": "v10_cyclotomic_auxiliary_rings_verification.json",
+      "bytes": 29216,
+      "sha256": "2ae497db1c24d199ca1e741a428c2f6ea1c0560dfac1cd4e354be408883e8998"
+    },
+    {
+      "path": "v10_formal/CyclotomicFilters.lean",
+      "bytes": 5958,
+      "sha256": "7c10b305151a0380792c2e8faea138aa455581359e96b09343ba2c8072ad00f0"
+    },
+    {
+      "path": "v10_formal/README.md",
+      "bytes": 5039,
+      "sha256": "7b564081395b2a98022635033eb76357a97aac0e51029a8e0f1dbaa52684073b"
+    },
+    {
+      "path": "v10_formal/ValuationRecovery.lean",
+      "bytes": 7475,
+      "sha256": "ad9b5d4dcfff449089b2ce5b20c5d8a36a512fde865a59f6e8ead4fbb11159cf"
+    },
+    {
+      "path": "v10_formal/cyclotomic_kernel_check.json",
+      "bytes": 3306,
+      "sha256": "635fae071cc23ffd8c09388e222ee55db37c42876cf53686112f06c5cc507db0"
+    },
+    {
+      "path": "v10_formal/cyclotomic_kernel_check.log",
+      "bytes": 767,
+      "sha256": "582c9af8a7eb4edc61dffa85cd80de6e890e69a718e588b497301c4fe571fd48"
+    },
+    {
+      "path": "v10_formal/lakefile.toml",
+      "bytes": 364,
+      "sha256": "d54476aa49f9b2ed6f3278c839758e195ae115a5ee722a596b41e4ae956b9752"
+    },
+    {
+      "path": "v10_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "path": "v10_formal/valuation_kernel_check.json",
+      "bytes": 1996,
+      "sha256": "97d398551833bee012eb624ba896ed54d059bc1370cc0774aad32aee3fb5cca6"
+    },
+    {
+      "path": "v10_formal/valuation_kernel_check.log",
+      "bytes": 966,
+      "sha256": "1a9d83e5ebec501add579d1a7f8065676f3c454b35a623ecc952693bf57aedcd"
+    },
+    {
+      "path": "v10_small_cofactors.md",
+      "bytes": 13929,
+      "sha256": "13fd470d174937f5d1a2fdbdf552d07d5225a55190415e109a0f776d4928fc84"
+    },
+    {
+      "path": "v10_small_cofactors_certificates.json",
+      "bytes": 416690,
+      "sha256": "c8f1e70994232084656e891c3fcf71a8dde4813c75baf342282220d6d411b850"
+    },
+    {
+      "path": "v10_small_cofactors_checks.py",
+      "bytes": 13761,
+      "sha256": "ed7264eedf1fb150a0702b9b14a3afce41adc5cce40733ee95fc1d6d36dc4c4a"
+    },
+    {
+      "path": "v10_small_cofactors_independent_reproduction.py",
+      "bytes": 4651,
+      "sha256": "2d76015ce97588b303ed99307ac1657b3e3e578cd8bd17b8921d1dd57f8f8ff9"
+    },
+    {
+      "path": "v10_small_cofactors_independent_reproduction_verification.json",
+      "bytes": 1328,
+      "sha256": "5c6f2a65032a3f8391e791d2cb91578af49ced436bee2ee97fd78366166ba99e"
+    },
+    {
+      "path": "v10_small_cofactors_verification.json",
+      "bytes": 2119,
+      "sha256": "db640a40792454bb5397cb6319c56219656d2dc688b8f649bdf44d7e982ecaf8"
+    },
+    {
+      "path": "v10_valuation_recovery.md",
+      "bytes": 18423,
+      "sha256": "093e02898b4e319794904b793ed58dcbf682387ab14778c9ce4baa955259e817"
+    },
+    {
+      "path": "v10_valuation_recovery_checks.py",
+      "bytes": 13635,
+      "sha256": "047a81a2a4517b4833885125a9937cceb214c53d02831307ee39c58afb842906"
+    },
+    {
+      "path": "v10_valuation_recovery_verification.json",
+      "bytes": 26303,
+      "sha256": "b432ed709cb863aaf742a15ba10399fb36a97d29411b6996e101fde184720293"
+    }
+  ]
+}

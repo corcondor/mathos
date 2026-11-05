@@ -13,7 +13,12 @@
 
 ## 読み始める場所
 
-- **[最新：v9 日本語概要](PROGRESS_v9_ja.md)**
+- **[最新：v10 日本語概要](PROGRESS_v10_ja.md)**
+- [元の等式からの付値回復、混合素因数のCRT条件、一般の高さ上限](v10_valuation_recovery.md)
+- [w/gcd(w,6)≤12 の全30余因子を全素数・全指数で排除](v10_small_cofactors.md)
+- [一般の付値回復補題と円分の有限合同計算の実行済みLean検証](v10_formal/README.md)
+- [円分因子の小さい剰余環による排除と外部定理依存の縮小](v10_cyclotomic_auxiliary_rings.md)
+- [v9 日本語概要](PROGRESS_v9_ja.md)
 - [連分数による GCD 不足分 S≤12 の全排除](v9_gcd_defect_continued_fractions.md)
 - [任意の固定余因子に対する正確な GCD 公式と有限上限](v9_gcd_structure.md)
 - [i=2P^a+2 の全素数・全指数の排除](v9_cofactor_two.md)
@@ -39,6 +44,33 @@
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v10
+
+ell=1、j=i-3 の枝で、元の等式から A|r(X+r²) を保つと、
+α=v_p(A)、x=v_p(X)、e=v_p(r) に対し 3e<α⇒x=2e が必要になる。
+特にxが奇数なら、Aのその素数成分は全てr³へ回復する。
+回復後の不足分Eは旧Sの約数で、既存の完全なCF結果を移すことで E≥13 が必要となる。
+さらに残る各素数について平方合同と零剰余の二択を作り、CRTで同時に扱う。
+r=Fu とした商の範囲は u³<229E に収まる。
+
+任意の i=wp^a+2 に対し、底pの大きさを仮定せず、
+log i<128w/gcd(w,6)、i<2^(192w/gcd(w,6)) まで一般上限を改善した。
+w/gcd(w,6)≤12 の全30余因子は、全素数・全指数で排除を完了した。
+理論から得た全983組・955添字を厳密に排除し、別実装でも証明された広い領域
+2,423組・2,393添字を証明書なしで再現した。
+任意の正確な素数冪因子 q|i−2 について、q≤(i−2)/13 が必要となる。
+
+円分枝では法2・5・7の一様な条件を導き、v9で残ったq=19,31,67を全指数で排除。
+q≥241、偶数指数ではq≥463が必要になった。素数pのこの枝での3|a排除は
+4元体の短い証明で代替でき、当該結論のThomas–Mignotte依存を除去した。
+v7の一般の整数に対する、より広い定理の外部依存はそのまま保持している。
+
+今回は局所付値回復の一般補題自体をLeanで実際に実行し終了0を確認。
+円分枝の20個の有限算術定理も実行済み。積全体、平方合同、CRT、CF移植、
+解析的高さ評価、30余因子の有限領域全体まで全形式化したとはしない。
+詳しくは [v10 日本語概要](PROGRESS_v10_ja.md) と
+[v10_manifest.json](v10_manifest.json) を参照。
 
 ## 2026年11月5日の追加：v9
 
@@ -166,6 +198,13 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 このディレクトリを作業場所にする。代表的な小さい検算は Python の
 標準ライブラリだけで実行できる。
 
+    python3 v10_valuation_recovery_checks.py
+    python3 v10_small_cofactors_checks.py verify
+    python3 v10_small_cofactors_independent_reproduction.py
+    python3 v10_cyclotomic_auxiliary_rings_checks.py
+
+前の版：
+
     python3 v9_gcd_structure_checks.py
     python3 v9_cofactor_two_checks.py
     python3 v9_gcd_defect_cf_checks.py verify
@@ -212,7 +251,7 @@ v4_formal/README.md と v5_formal/README.md を参照。
 ## 大きい生成済み証明書
 
 Git には証明、生成器、独立検証器、小さい結果記録を収録した。
-v6〜v9 の有限証明書は全件含む。v9の大きい連分数係数列は、完全な内容を
+v6〜v10 の有限証明書は全件含む。v9の大きい連分数係数列は、完全な内容を
 圧縮テキストと再検証器で収録している。v5 までの基準アーカイブにあった
 100 KB を超える生成済み証明書やバイナリ出力の一部は収録していない。
 省略した16ファイルの名前・サイズ・SHA-256、および基準アーカイブとの
@@ -225,8 +264,8 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 で、i-2 が少なくとも二種類の素因数を持ち、2P^a,3P^a でもない未排除の値。
-- 同じ枝の一般の合成数について、S≥13 と正確な GCD 公式、素因数構造の組合せ。
+- ell=1、j=i-3 で、回復後の不足分E≥13と平方合同・CRT条件を全て通過する混合素因数。
+- 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,6)≥13かつlog i/128より大きい未排除の値。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
 - i=jp^3 で、p²+p+1 の未排除の因数構造と、実数評価・合同条件の両立。
 - 下側 i=j+4 の残存区間、およびその他の未排除分岐。

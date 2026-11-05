@@ -1,0 +1,9 @@
+'NestedBinomialV10.Cyclotomic.mod2_nonzero_cube' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.mod2_complete_residues' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.mod5_nonzero_period' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.mod5_trace_zero_branch_two' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.mod5_trace_zero_branch_four' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.mod7_trace_branch_two' depends on axioms: [propext]
+'NestedBinomialV10.Cyclotomic.mod7_trace_branch_four' depends on axioms: [propext]
+'NestedBinomialV10.Cyclotomic.q19_complete_combined_period' does not depend on any axioms
+'NestedBinomialV10.Cyclotomic.q19_exact_products' depends on axioms: [propext, Quot.sound]

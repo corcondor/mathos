@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "scope": "ell=1, j=i-3, i=w*p^a+2, w/gcd(w,6)<=12",
+  "method": "Independent enlarged domain p<=6w, p^a<9w^3; no certificate input or D_w exponent progression",
+  "cofactors": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    22,
+    24,
+    27,
+    30,
+    33,
+    36,
+    42,
+    48,
+    54,
+    60,
+    66,
+    72
+  ],
+  "parameter_records": 2423,
+  "distinct_indices": 2393,
+  "maximum_index": 238172330,
+  "parameter_exclusion_counts": {
+    "recovered_defect_at_most_12": 1920,
+    "no_multiple_in_broad_gap": 502,
+    "logarithmic_gap_with_log_n_greater_than_8": 1
+  },
+  "distinct_index_exclusion_counts": {
+    "no_multiple_in_broad_gap": 501,
+    "recovered_defect_at_most_12": 1891,
+    "logarithmic_gap_with_log_n_greater_than_8": 1
+  },
+  "digit_sum_valuations_checked": 15408,
+  "logarithmic_gap_records": [
+    {
+      "n": 6860,
+      "F": 1330,
+      "E": 1143,
+      "first": 21280
+    }
+  ],
+  "survivors": 0,
+  "reads_primary_certificate": false,
+  "all_integer_arithmetic_exact": true,
+  "arbitrary_search_cutoff": false,
+  "original_i_interval_scanned": false,
+  "source_sha256": "2d76015ce97588b303ed99307ac1657b3e3e578cd8bd17b8921d1dd57f8f8ff9",
+  "elapsed_seconds": 0.06550018400594126
+}
