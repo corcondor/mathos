@@ -59,8 +59,26 @@ Lean 4.35.0、mathlibコミット
 
 ## 形式化していない範囲
 
-素数ごとの結果を積にまとめる \(B\) の全体、正規化した平方合同式、
-平方剰余による追加回復、中国剰余定理の全混合条件、
+当初の2ファイルでは素数ごとの結果を積にまとめる \(B\) の全体と、
+正規化した平方合同式を形式化していなかった。この2点は、追加の
+`RecoveredDivisor.lean` と `NormalizedCancellation.lean` で形式化した。
+詳細と独立した今回の実行記録は
+[追加形式化の説明](ADDITIONAL_FORMALIZATION.md) にある。
+
+さらに `LocalSquareRecovery.lean` で平方非剰余による素数ごとの全回復、
+`CriticalPrimeCRT.lean` で局所分岐と一般のCRT存在・一意性、平方値の集約を形式化した。
+この2本の証明作成・修正はDeepSeek APIが担当し、Lean実行で検証した。
+
+`CFApproximationCore.lean` は、連分数による整数係数表示の存在・一意性と、
+近似定数3/2から|b|≤2を得る部分を追加する。全5,214曲線のLean検証や
+65組への完全な候補縮約までを済ませたという意味ではない。
+
+`GeometricReduction.lean` は幾何学的アプローチとして、有理座標の前後の変換、
+合成の恒等式、mathlibのWeierstrassモデルの判別式・非特異性・j=0を9定理で確認する。
+研究曲線への適用と未実施の降下・階数計算の区別は
+[幾何学的還元](../GEOMETRIC_APPROACH.md) を参照。
+
+改善した回復約数の積、中国剰余定理の全候補数と原問題への完全な接続、
 連分数証明書を新しい不足分へ移す解析的議論、
 30余因子の有限領域の完全性・全955添字の計算は、
 このLeanファイルでは形式化していない。
@@ -80,6 +98,10 @@ lake update
 lake exe cache get
 lake env lean ValuationRecovery.lean
 lake env lean CyclotomicFilters.lean
+lake build RecoveredDivisor NormalizedCancellation
+lake build LocalSquareRecovery CriticalPrimeCRT
+lake build CFApproximationCore
+lake build GeometricReduction
 ```
 
 今回実際に使ったのは、既に準備済みのmathlib作業ディレクトリからの

@@ -1,0 +1,85 @@
+---
+name: deepseek-math-research
+description: Delegate math research, proof generation, Lean code generation/repair, and failure diagnosis to DeepSeek (deepseek-v4-1-flash-1017 via Mistral API) using per-call reloaded file state; host verifies with real Lean and never hand-edits successful proofs.
+---
+
+# DeepSeek Math Research Skill
+
+Purpose: route proof work to DeepSeek as much as possible, persist what it learns in files (no weight updates), and reload that state on every API call.
+
+## State and references
+- Current research state: [DEEPSEEK_STATE.md](../../../docs/research/nested-binomial/DEEPSEEK_STATE.md) (repo `/workspace/mathos`).
+- Skill file lives at `.agents/skills/deepseek-math-research/SKILL.md`; `AGENTS.md` references it.
+- The API helper reloads this skill, DEEPSEEK_STATE.md and AI_RESEARCH_REFERENCES.md on every call; update research state after each completed run.
+
+## API
+- Model: `deepseek-v4-1-flash-1017`
+- Endpoint: `https://api.mistral.ai/v1/chat/completions`
+- Auth: `MISTRAL_API_KEY` via existing environment binding/proxy. Never print, store, or re-request the key.
+- The user has explicitly authorized sending v10/v11 research files and additional files to this API. Do not ask again.
+
+## Private research location
+- https://github.com/corcondor/mathos/pull/1, head `bd4d2ad338e62102d60d9fffd8c073a5d48bf250`.
+- Public `nested-binomial-equation` main has up to v8; the mathos PR has up to v11.
+- First inspect existing checkouts and GitHub auth; do not make the user re-summarize info available from the known PR. Cloud tasks are isolated; do not create worktrees unless explicitly asked.
+
+## Division of labor
+- Host: information retrieval, API delegation, compilation, real verification, saving artifacts.
+- DeepSeek: proof generation and repair (the user wants all proof work delegated). Host must not hand-edit a successful proof body.
+
+## Implemented tooling (in docs/research/nested-binomial/v10_formal/)
+- `deepseek_goal_worker.py` — one theorem at a time; prefer over batch generation.
+- `deepseek_proof_loop.py` — loop driver; add new jobs to `JOBS` with exact types, only proofs go into immutable types. Use a fresh run-dir each time; never overwrite existing successful sources.
+- `check_additional_formalization.py`
+- Worker supports fixed JSON contracts via `--job-config` and bundled method summaries when downloads are absent. Worker flags: `--seed-proofs` (reuse `accepted_proofs.json`, always recompile), `--extra-context`, `--library-reference` (notes + actual mathlib definitions).
+
+## Lean environment
+- Workdir: `/workspace/.cloud-setup/lean/mathlib`
+- `ELAN_HOME=/workspace/.cloud-setup/lean/elan`, prepend `/workspace/.cloud-setup/lean/elan/bin` to PATH.
+- Lean 4.35.0; mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679`.
+
+## Success criteria (strict)
+- No proof holes, no custom axioms, no `native_decide`.
+- Success = real Lean exit 0 + axiom dependencies only `propext`, `Classical.choice`, `Quot.sound` + fixed type.
+- A model saying PASS is not success. A separate evaluation call to the same DeepSeek is not an independent model or external review.
+
+## Known failure modes to warn DeepSeek about
+- Do not replace the original approximation constant 3/2 with Legendre 1/2.
+- Do not derive +1 from det=-1 in the same column.
+- `pQ-qP = b*(PmQ-PQm)`; do not confuse with the previous column.
+- Do not derive `rad(n-2)|S` from `S|n-2`.
+
+## Prior references (procedural only, no code copying)
+- OpenAI lean-gym (Lean 3.39.1, do not port directly), OpenAI evals, Anthropic evaluator_optimizer; pinned commit links in RESEARCH_WORKFLOW.md.
+- Eleven additional verified repositories, including DeepSeek-Prover-V2, AlphaGeometry/2, formal-conjectures, Evariste, Kimina, LeanDojo/v2, LeanCopilot, REPL and Aesop, were shared with DeepSeek. See AI_RESEARCH_REFERENCES.md and its pinned catalog. Do not claim those systems or model weights are installed.
+
+## Current verified status
+- 4 new modules / 21 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9).
+- RecoveredDivisor and NormalizedCancellation had host edits — keep distinct.
+- Dependency + 6 additional modules (7 total) passed latest re-run.
+- Python exact revalidation: 5214 curves, 4,877,566 CF coefficients, 25,394,330 reduced fractions, 0 residual; saved in `cf_current_revalidation.json`. Python success ≠ Lean formalization complete.
+
+## Open work (do not claim done)
+- 30-cofactor final theorem still assumes the CF part.
+- Pending: small denominators a∈[-1,4], large denominators a-b*a_next∈[-3,3], 65-case coverage, convergent interval selection, cylindrical interval certification, Lean check of all curve candidates, final theorem hookup.
+- Full four-variable problem unsolved.
+- GeometricReduction verifies the rational open-chart maps x=-c*r/y, z=c/y, inverses y=c/z, r=-x/z, plus Delta=-432*c^4, ellipticity, j=0 and the c=6*S/T specialization. It does not prove ranks, descent, all rational points, or solve the original equation.
+- The user confirmed: study the CURRENT nested-binomial equation geometrically. Do not ask that question again. Investigate its cubic-curve families and verify all coordinate changes in Lean before using them.
+
+## Working style
+- User dislikes frequent questions/confirmations. Proceed autonomously within existing authorization; on one failure, diagnose and switch strategy.
+- Do not claim snapshot publication, GitHub push, task restore, or persistent model memory unless actually executed.
+
+## Tested commands
+Run existing verification from the prepared mathlib checkout:
+```bash
+export PATH=/workspace/.cloud-setup/lean/elan/bin:$PATH ELAN_HOME=/workspace/.cloud-setup/lean/elan
+cd /workspace/.cloud-setup/lean/mathlib
+lake env python3 /workspace/mathos/docs/research/nested-binomial/v10_formal/check_additional_formalization.py
+```
+Inspect the worker's current arguments before configuring a new, uniquely named job:
+```bash
+cd /workspace/.cloud-setup/lean/mathlib
+lake env python3 /workspace/mathos/docs/research/nested-binomial/v10_formal/deepseek_goal_worker.py --help
+```
+For a new job use `--run-dir` with a fresh directory and `--methods-dir` pointing to the downloaded public reference files. Existing verified modules deliberately refuse to be overwritten. If the documented runtime paths are absent, inspect the current checkout and available tools before rebuilding the pinned runtime.

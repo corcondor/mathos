@@ -1,0 +1,117 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-11-05T18:29:48.872300+00:00",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "records": [
+    {
+      "source": "ValuationRecovery.lean",
+      "source_sha256": "ad9b5d4dcfff449089b2ce5b20c5d8a36a512fde865a59f6e8ead4fbb11159cf",
+      "log": "ValuationRecovery.additional_check.txt",
+      "log_sha256": "1a9d83e5ebec501add579d1a7f8065676f3c454b35a623ecc952693bf57aedcd",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/ValuationRecovery.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ValuationRecovery.lean"
+      ]
+    },
+    {
+      "source": "RecoveredDivisor.lean",
+      "source_sha256": "2a51d2a9b9da909f48a85dba7b32de018b012f1126b3de97b6fb4aaf9d831196",
+      "log": "RecoveredDivisor.additional_check.txt",
+      "log_sha256": "b2440d5fdf937dc2c4daaf2715714738c6394d17fc40af9955ea4560e7489b30",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/RecoveredDivisor.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/RecoveredDivisor.lean"
+      ]
+    },
+    {
+      "source": "NormalizedCancellation.lean",
+      "source_sha256": "f2b8d881af6cfe540a0b0564aa50a34a3856df254fa9fdeb7059dd5aec6f8a0c",
+      "log": "NormalizedCancellation.additional_check.txt",
+      "log_sha256": "ba2d0fcc9b6ae0a9418e123d2918a2e77de03cd0c99a0a73076431580315767c",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/NormalizedCancellation.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/NormalizedCancellation.lean"
+      ]
+    },
+    {
+      "source": "LocalSquareRecovery.lean",
+      "source_sha256": "06ffe51c62baaeff0f6c485b9d802d81a629078381c506d0e563c0abfeee275e",
+      "log": "LocalSquareRecovery.additional_check.txt",
+      "log_sha256": "0554f1c949d754618e38f401af9efd9427bec7f48f4e52997d252068e1576c80",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/LocalSquareRecovery.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/LocalSquareRecovery.lean"
+      ]
+    },
+    {
+      "source": "CriticalPrimeCRT.lean",
+      "source_sha256": "5c9f9d62933363b20cee0bd31ca82f6874ffadbb2c8b7c4cf7eda3b6feb24feb",
+      "log": "CriticalPrimeCRT.additional_check.txt",
+      "log_sha256": "21459dcc289bedc2d2130c9194ea6acf864f3dab8486c3a8b045a0fdade158a9",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/CriticalPrimeCRT.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/CriticalPrimeCRT.lean"
+      ]
+    },
+    {
+      "source": "CFApproximationCore.lean",
+      "source_sha256": "b2279a105cb125473570d31c2ec23b3579b846121840b9b4c066fc01c7ac51cc",
+      "log": "CFApproximationCore.additional_check.txt",
+      "log_sha256": "9538fbb48c87cce179e3a5771962adb8a0918cf02f240b6d6193092e842f85eb",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/CFApproximationCore.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFApproximationCore.lean"
+      ]
+    },
+    {
+      "source": "GeometricReduction.lean",
+      "source_sha256": "f8d48f7f8bffa9c6ff427c65c2e9a2b861e7a83c185ce4ead8d559cd6b99fc8b",
+      "log": "GeometricReduction.additional_check.txt",
+      "log_sha256": "395e712e18a6d11f8e439e1fdde90110345c4ad473cfe53b0f0c5b9ba885426c",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-h6gwxvua/GeometricReduction.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricReduction.lean"
+      ]
+    }
+  ],
+  "scope": "Recovery, local-square, CRT and CF-core modules listed in records; not complete curve exclusion",
+  "height_bound_formalized": false,
+  "finite_search_completeness_formalized": false,
+  "whole_equation_solved": false
+}

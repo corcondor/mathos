@@ -1,0 +1,4 @@
+'NestedBinomialV10.critical_normalized_square_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.nonsquare_forces_large_valuation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.nonsquare_recovers_prime_power' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.original_nonsquare_recovers_prime_power' depends on axioms: [propext, Classical.choice, Quot.sound]

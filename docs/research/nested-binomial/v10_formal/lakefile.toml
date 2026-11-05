@@ -1,6 +1,6 @@
 name = "NestedBinomialV10Proofs"
 version = "0.1.0"
-defaultTargets = ["ValuationRecovery", "CyclotomicFilters"]
+defaultTargets = ["ValuationRecovery", "CyclotomicFilters", "RecoveredDivisor", "NormalizedCancellation", "LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction"]
 
 [[require]]
 name = "mathlib"
@@ -13,3 +13,21 @@ name = "ValuationRecovery"
 
 [[lean_lib]]
 name = "CyclotomicFilters"
+
+[[lean_lib]]
+name = "RecoveredDivisor"
+
+[[lean_lib]]
+name = "NormalizedCancellation"
+
+[[lean_lib]]
+name = "LocalSquareRecovery"
+
+[[lean_lib]]
+name = "CriticalPrimeCRT"
+
+[[lean_lib]]
+name = "CFApproximationCore"
+
+[[lean_lib]]
+name = "GeometricReduction"

@@ -1,0 +1,3 @@
+'NestedBinomialV10.finite_crt_exists_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cubic_prime_power_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.simultaneous_square_value_crt' depends on axioms: [propext, Classical.choice, Quot.sound]

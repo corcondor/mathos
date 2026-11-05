@@ -315,3 +315,18 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 これらはこの研究記録の未完了部分であり、既知の未解決問題であると
 分類したという意味ではない。
+
+## 追加のLean形式化と研究委任
+
+v10で未形式化だった回復約数の積、正規化平方合同式、局所非平方条件、
+CRTの一般部分、連分数の係数評価を追加し、三次曲線から楕円曲線への
+有理座標変換も形式検証した。
+
+- [追加形式化と実行記録](v10_formal/ADDITIONAL_FORMALIZATION.md)
+- [幾何学的還元と残る計算](GEOMETRIC_APPROACH.md)
+- [DeepSeekへ共有した公開研究リポジトリ](AI_RESEARCH_REFERENCES.md)
+- [研究状態と引継ぎ](DEEPSEEK_STATE.md)
+- [再利用する委任スキル](../../../.agents/skills/deepseek-math-research/SKILL.md)
+
+元の四変数方程式全体の解決や、全連分数証明書のLean検証が
+完了したという主張ではない。以前の版のログ・manifestは当時の記録として保持する。
