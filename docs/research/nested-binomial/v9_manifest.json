@@ -1,0 +1,365 @@
+{
+  "version": "v9",
+  "date": "2026-11-05",
+  "original_equation": "C(C(i,j),C(k,ell)) = C(i^2,j^2) + C(k^2,ell^2)",
+  "globally_solved": false,
+  "concrete_solution_found": false,
+  "base_commit": "aba794ce219e98a975395d471b38b9c244682d45",
+  "general_gcd_defect_theorem": {
+    "scope": "ell=1, j=i-3, A=C(i,3), X=C(i^2,6i-9), S=A/gcd(A,X)",
+    "conclusion": "Every solution must have S>=13",
+    "stronger_divisor": "S divides (i-2)/gcd(i-2,6)",
+    "prior_height_bound": "i < 2^(192*S)",
+    "continued_fraction_reduction": "162*S<T<229*S, 6*S*r^3=T*((i-1)^3-(i-1)), r=min(k,A-k)",
+    "maximum_coefficient_pairs_per_step": 65,
+    "complete_curves_checked": 5214,
+    "irrational_curves": 5213,
+    "rational_curves": 1,
+    "complete_continued_fraction_terms": 4877566,
+    "primary_reduced_fractions_checked": 25394330,
+    "independent_reproduction_fractions_checked": 30534156,
+    "surviving_points": 0,
+    "raw_integer_recoveries": 21,
+    "largest_raw_recovered_i": 82,
+    "necessary_i_lower_bound": 104,
+    "arbitrary_original_i_search_cutoff": false,
+    "certificates_are_complete_lossless_compressed_prefixes": true,
+    "complete_certificate_JSON_bytes": 3652343,
+    "primary_verifier_and_reproduction_exit_codes": [
+      0,
+      0
+    ],
+    "Lean_formalized": false
+  },
+  "uniform_fixed_cofactor_theorems": {
+    "exact_formula_scope": "i=w*p^a+2, p prime not dividing w, p^a>4*w",
+    "definitions": "B_w=C(6w,2w), D_w=B_w/gcd(B_w,6), c_w=w/gcd(w,6)",
+    "exact_valuation": "v_p(S)=v_p(D_w)",
+    "defect_divisor": "S divides c_w*p^v_p(D_w)",
+    "all_fixed_cofactors_height_bound": "log(i)<768*w^2/gcd(w,6), i<2^(1152*w^2/gcd(w,6)); includes normalization p|w and small p^a",
+    "large_prime_corollary": "p>6*w implies c_w>=13 for any solution",
+    "all_finite_cofactor_domains_exhausted": false,
+    "carry_identity_checks": 3196,
+    "full_binomial_gcd_checks": 238,
+    "normalization_checks": 1000
+  },
+  "completed_infinite_families": [
+    "ell=1, j=i-3, i=2*P^a+2, every prime P and positive exponent a, both outer branches",
+    "New common proof of i=P^a+2 and i=2*P^a+2 via S>=13 and D_1=5, D_2=165"
+  ],
+  "cofactor_two_independent_cube_proof": {
+    "finite_cube_certificates": 2592,
+    "counts": {
+      "base_13": 85,
+      "base_7": 198,
+      "ordinary_bases": 2309
+    },
+    "prime_exponent_pairs": 1018,
+    "ordinary_prime_quotient_pairs": 241,
+    "ordinary_prime_bases": 163,
+    "largest_candidate_prime": 1436131,
+    "theoretical_prime_bound": 1470392,
+    "height_bound": "i<2^192",
+    "ordinary_prime_congruence": "P divides 6561*t-728 or 6561*t+728",
+    "arbitrary_search_cutoff": false,
+    "independent_domain_reconstruction_and_all_cube_tests": "PASS"
+  },
+  "cyclotomic_branch": {
+    "scope": "i=j*p^3, k=p, ell=1, Phi_3(p)=7*q^a, with the prior residual-branch conditions",
+    "primary_trace": "4*q=B^2+27*m^2, B=2 mod3; B^a=T_1(r) or T_2(r) mod q, r=p mod q",
+    "targets": [
+      "(2*r+1)/(r+3) if p=2 mod7",
+      "(r+2)/(r-2) if p=4 mod7"
+    ],
+    "complete_periods": "lcm(ord_q(B),12), retaining residue 1 for larger exponents",
+    "all_exponent_prime_bases_checked": 21,
+    "all_exponent_bases_excluded": [
+      13,
+      37,
+      43,
+      61,
+      73,
+      79,
+      97,
+      103,
+      109,
+      127,
+      139,
+      151,
+      157,
+      163,
+      181,
+      193,
+      199,
+      211
+    ],
+    "additional_exclusions_beyond_the_old_quadratic_filter": [
+      43,
+      61,
+      73,
+      79,
+      97,
+      103,
+      109,
+      127,
+      139,
+      151,
+      157,
+      163,
+      193,
+      199,
+      211
+    ],
+    "surviving_bases_through_211": [
+      19,
+      31,
+      67
+    ],
+    "surviving_exponent_constraints": {
+      "19": "a=1 mod6, a>=7, r=11, p=4 mod7",
+      "31": "a=9 mod10, 3 does not divide a, a>=19, r=5, p=4 mod7",
+      "67": "a=21 mod22, 3 does not divide a, a>=43, r=37, p=2 mod7"
+    },
+    "even_exponent_q_lower_bound": 367,
+    "even_bases_completely_excluded_below_367": 17,
+    "q367_even_exponents": "a=418 or 662 modulo 732, hence a>=418; no existence claim",
+    "unbounded_shape_exclusion": "4q=1+27m^2, q prime different from 7; all positive exponents excluded for prime p>3",
+    "infinitely_many_primes_of_that_shape_claimed": false,
+    "even_valuation_exception_bases_151_211_eliminated": true,
+    "odd_valuation": "a=2s+1 implies v_q(L)>=s+1; equality for q=19,31,67",
+    "odd_compression": "X=C(M+K,K) mod q^(s+1), K=floor(j^2/q^(s+1))<p, M=j^2*(p^6-1)/q^(s+1)",
+    "independent_all_39_period_records_reconstruction": "PASS",
+    "structural_identity_checks": {
+      "centered_product_cases": 12,
+      "outer_digit_cases": 60,
+      "product_compression_cases": 16
+    },
+    "arbitrary_exponent_cutoff": false,
+    "whole_branch_solved": false,
+    "Lean_formalized": false
+  },
+  "lean": {
+    "status": "PASS",
+    "version": "4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "actual_exit_code": 0,
+    "rows": 2592,
+    "batches": 52,
+    "scope": "All cofactor-two finite arithmetic rows and supporting numerical/integer-gap lemmas",
+    "finite_arithmetic_fully_kernel_checked": true,
+    "analytic_and_valuation_reductions_formalized": false,
+    "finite_domain_completeness_formalized": false,
+    "entire_cofactor_two_theorem_formalized": false,
+    "continued_fraction_completeness_formalized": false,
+    "general_gcd_formula_formalized": false,
+    "sorry_used": false,
+    "native_decide_used": false,
+    "custom_axioms_used": false,
+    "standalone_lake_build_executed": false
+  },
+  "independent_AI_mathematical_audits": {
+    "general_gcd_structure": "PASS, root and separate cofactor reviewer",
+    "continued_fraction_completeness_and_code": "PASS, separate gcd reviewer; two full exact computations",
+    "cofactor_two": "PASS, root and separate gcd reviewer",
+    "cyclotomic_primary_trace": "PASS, root and separate cofactor reviewer, including independent all-period reconstruction"
+  },
+  "external_peer_reviewed": false,
+  "external_dependencies": {
+    "new_external_completeness_theorem_for_gcd_or_CF": false,
+    "exact_trace_formula_and_finite_power_tables_require_cubic_reciprocity": false,
+    "auxiliary_universal_cubic_filter": "J.S. Milne, Class Field Theory v4.03, VIII Example 5.13, printed p.249 (PDF index257), https://www.jmilne.org/math/CourseNotes/CFT.pdf",
+    "combined_exclusion_of_exponents_divisible_by_3": "Prior v7 Thomas-Mignotte theorem dependency remains; see v7_manifest.json"
+  },
+  "files": [
+    {
+      "path": "PROGRESS_v9_ja.md",
+      "bytes": 13426,
+      "sha256": "cefa8fa8c60cfa2105eec307763422a5f6e98b9de91f692910dfe50db166c059"
+    },
+    {
+      "path": "v9_cf_certificates/README.md",
+      "bytes": 1431,
+      "sha256": "8391a46693e41409ea9cfe899c9e0f26403885c5c5e8e39b4a5b1be32be476f5"
+    },
+    {
+      "path": "v9_cf_certificates/S01.json",
+      "bytes": 6659,
+      "sha256": "209528c72fea3bb596584afe8e8b3177d4c168b50cc05c9a82ab8403dcd93891"
+    },
+    {
+      "path": "v9_cf_certificates/S02.json",
+      "bytes": 23924,
+      "sha256": "1320aae5d6c27a6a5d957690311e5800e160990b2408d1d465f4255e9c2a00f3"
+    },
+    {
+      "path": "v9_cf_certificates/S03.json",
+      "bytes": 52153,
+      "sha256": "1381213d6515ef88dce78381a24b36d89ed48595e846e97cfce550a6ed6fe02e"
+    },
+    {
+      "path": "v9_cf_certificates/S04.json",
+      "bytes": 91397,
+      "sha256": "32bfd965c74a321a2d2ca793144d57987dc49e65506be994eb89006325d84587"
+    },
+    {
+      "path": "v9_cf_certificates/S05.json",
+      "bytes": 141810,
+      "sha256": "b1a97477ad82106aa19d250a60edda649c2ee78d65e87af552d6ab219f22590b"
+    },
+    {
+      "path": "v9_cf_certificates/S06.json",
+      "bytes": 203314,
+      "sha256": "5072fbf646b3458e34b043b7f2da554c8dbd8b2f049ae760fb4204eeb96a1221"
+    },
+    {
+      "path": "v9_cf_certificates/S07.json",
+      "bytes": 275927,
+      "sha256": "81121b038b6af128f6bf1b9c1f10b7e938ef2126981c3db5d40a65e2238afe1c"
+    },
+    {
+      "path": "v9_cf_certificates/S08.json",
+      "bytes": 359524,
+      "sha256": "3185404ac4728bc5b350d6283fc93fdeda9b7d53d062c00620787e3de22ead2e"
+    },
+    {
+      "path": "v9_cf_certificates/S09.json",
+      "bytes": 453836,
+      "sha256": "49b90c6c8b6a508e97127944edb13112f559258c535686fce79f480618580585"
+    },
+    {
+      "path": "v9_cf_certificates/S10.json",
+      "bytes": 560785,
+      "sha256": "f038c3be9c2d523f08b97082d79be26a8ad892d42ca66ac63c3303cc96bd5716"
+    },
+    {
+      "path": "v9_cf_certificates/S11.json",
+      "bytes": 677325,
+      "sha256": "a628a19532de608cc6e9b3717a446a6bfc43ca2d9b959d5890dd7e197aa21437"
+    },
+    {
+      "path": "v9_cf_certificates/S12.json",
+      "bytes": 805689,
+      "sha256": "5960c06157714759c7f8c8228b81066ec2757ce3c456bd1eda67d341844d53f6"
+    },
+    {
+      "path": "v9_cofactor_two.md",
+      "bytes": 13550,
+      "sha256": "05c69deb3a87d47bba8987b063987e2a43673e5b0817b280f3bbc96428738f99"
+    },
+    {
+      "path": "v9_cofactor_two_certificates.json",
+      "bytes": 328588,
+      "sha256": "03e778865211a34c8f3a0caa42368839f9f0fdee97b595f4f04627a4ed59175d"
+    },
+    {
+      "path": "v9_cofactor_two_checks.py",
+      "bytes": 11878,
+      "sha256": "33caa1060ef103b47b15d0064b925b34a69188effb6cb1fd4526489312e7bd4b"
+    },
+    {
+      "path": "v9_cofactor_two_verification.json",
+      "bytes": 8206,
+      "sha256": "4cef455ec08b6b512387a370b0a912a22f5950b66ea4e6c23b45c43be2b3b821"
+    },
+    {
+      "path": "v9_cyclotomic_primary_trace.md",
+      "bytes": 15282,
+      "sha256": "72cbad37d6596b793c5353f5ad0a311cd1cee6611f68ac969fdb777bc50dd8fc"
+    },
+    {
+      "path": "v9_cyclotomic_primary_trace_checks.py",
+      "bytes": 14482,
+      "sha256": "7232dbff49f1d778245b2ecd9cc9c2749ffe18967075c472e25262b1b349c9a4"
+    },
+    {
+      "path": "v9_cyclotomic_primary_trace_verification.json",
+      "bytes": 68602,
+      "sha256": "458dc539f8ab6579680343ff3b74810464db8d9b1b352413b0a8b2512aac708e"
+    },
+    {
+      "path": "v9_formal/CubeCertificateLemmas.txt",
+      "bytes": 1836,
+      "sha256": "ecc534d2ca12d49601d75835b73099fb73b23cbfbfbb85a58aab6e8c85569fbc"
+    },
+    {
+      "path": "v9_formal/CubeCertificates.lean",
+      "bytes": 126135,
+      "sha256": "59325b7757f9b4cd85ac6173c4ff74c370f44070dfac81664a86b12b83f436fb"
+    },
+    {
+      "path": "v9_formal/README.md",
+      "bytes": 5338,
+      "sha256": "18b59f6d3f948aa84d86ebd80f31b2655daab1c61bb3898a24fcdf843a7117f9"
+    },
+    {
+      "path": "v9_formal/generate_certificate_source.py",
+      "bytes": 2471,
+      "sha256": "bc9a5b9108556ec4fff23dd0363f1cb5c1c77d69330733138fb2193204a855a1"
+    },
+    {
+      "path": "v9_formal/kernel_check.json",
+      "bytes": 2433,
+      "sha256": "b849d4ce8c95261c9de03528327fe76e52b606d9df151561557e2cea8a07b672"
+    },
+    {
+      "path": "v9_formal/kernel_check.log",
+      "bytes": 411,
+      "sha256": "88c39ac63f26e380cf48e5169de58bcb0c5a542f1954451d5d8191fe7d2dda89"
+    },
+    {
+      "path": "v9_formal/lakefile.toml",
+      "bytes": 314,
+      "sha256": "c14a7e64638d8404c7a3e5ac81cbd01e5f40e78b13ceb29034434ae35b3efa96"
+    },
+    {
+      "path": "v9_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "path": "v9_formal/source_mapping_check.json",
+      "bytes": 281,
+      "sha256": "538d834ff5878cc328b135e5f5faf131c618c6c8b91bc681be2d873147584b44"
+    },
+    {
+      "path": "v9_gcd_defect_cf_checks.py",
+      "bytes": 8632,
+      "sha256": "689482112b0c983e5750a5ab72cff7ace89c236b75935f20158526f12bd79a18"
+    },
+    {
+      "path": "v9_gcd_defect_cf_reproduction.py",
+      "bytes": 4494,
+      "sha256": "d14621296444ec5d2ee4e3166ef7d18492906c06e8084deac321050ca247165a"
+    },
+    {
+      "path": "v9_gcd_defect_cf_reproduction_verification.json",
+      "bytes": 838,
+      "sha256": "a142f525cbd91cf5231a82288e683c34f070f61bb6dce80330560816f0637967"
+    },
+    {
+      "path": "v9_gcd_defect_cf_verification.json",
+      "bytes": 7577,
+      "sha256": "5a27888ca838c8f56e87ced6ba53b83d0e3f4a28183bb92f385ac7b098c68b0d"
+    },
+    {
+      "path": "v9_gcd_defect_continued_fractions.md",
+      "bytes": 11963,
+      "sha256": "eb0abb86578304e25d568c8dced69f322b3886312015576662a40a4f301d7103"
+    },
+    {
+      "path": "v9_gcd_structure.md",
+      "bytes": 9268,
+      "sha256": "c8144db253f06303503d9607c4531553bbc8e3eb076d650b13665cbf99a91e6e"
+    },
+    {
+      "path": "v9_gcd_structure_checks.py",
+      "bytes": 6279,
+      "sha256": "19dad76f7f1b65238723b4ed347ef3fa9e4cb14acc6dc7cfa5bd1687ea7f936d"
+    },
+    {
+      "path": "v9_gcd_structure_verification.json",
+      "bytes": 2857,
+      "sha256": "5952b88638a21cd4c74285203aba1fa7451f971a6f8df9fc28cb680c54f2a98b"
+    }
+  ]
+}

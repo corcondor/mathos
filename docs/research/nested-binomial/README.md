@@ -13,7 +13,13 @@
 
 ## 読み始める場所
 
-- **[最新：v8 日本語概要](PROGRESS_v8_ja.md)**
+- **[最新：v9 日本語概要](PROGRESS_v9_ja.md)**
+- [連分数による GCD 不足分 S≤12 の全排除](v9_gcd_defect_continued_fractions.md)
+- [任意の固定余因子に対する正確な GCD 公式と有限上限](v9_gcd_structure.md)
+- [i=2P^a+2 の全素数・全指数の排除](v9_cofactor_two.md)
+- [新しい2,592件の有限算術証明書の Lean 検証](v9_formal/README.md)
+- [円分因子の primary trace による全指数の制約](v9_cyclotomic_primary_trace.md)
+- [v8 日本語概要](PROGRESS_v8_ja.md)
 - [シフト素数冪 i=P^a+2 の完全排除](v8_shifted_prime_power_completion.md)
 - [全2,903件の有限算術証明書の Lean 検証](v8_formal/README.md)
 - [大きい素数冪因子の一様な分類](v8_composite_dominant_prime_powers.md)
@@ -33,6 +39,32 @@
 - [i=3^a の全指数の排除](v5_offset_three_three_power.md)
 - [i=jp^3 の一候補への絞り込みと高次合同式](v5_large_prime_localization.md)
 - [v5 の Lean 検証範囲・実行方法](v5_formal/README.md)
+
+## 2026年11月5日の追加：v9
+
+ell=1、j=i-3 の枝全体に対し、A=C(i,3)、X=C(i²,6i−9)、
+S=A/gcd(A,X) とすると S≥13 が必要だと証明した。
+S≤12 なら理論的に残る全5,214曲線を連分数の完全な近似分類で扱い、
+全係数を保存した証明書と別実装の再計算で候補0件を確認した。
+第一添字の上限まで整数を順番に走査していない。
+
+一般の i=wp^a+2 では、p∤w、p^a>4w のとき
+D_w=C(6w,2w)/gcd(C(6w,2w),6)、c_w=w/gcd(w,6) を用いて
+v_p(S)=v_p(D_w)、S|c_w p^v_p(D_w) を証明した。
+これにより全ての固定余因子 w について、明示的に有限化できる。
+
+i=2P^a+2 は全素数・全指数で完全排除した。
+別の付値と整数商による証明で残る全2,592件は Lean で実際に検証済み。
+一般 GCD 公式と S≤12 の排除からも、v8 の i=P^a+2 と併せて再証明できる。
+
+円分因子7q^aの枝は、Eisenstein整数の primary trace から指数に依存する
+合同式を導き、q≤211の全21底のうち18底を全指数で排除した。
+偶数指数では q≥367 が必要で、4q=1+27m²（q≠7素数）の形も全指数で排除。
+奇数指数の付値と二項係数の縮約も強めた。
+
+証明・全証明書・検算・監査と未形式化の範囲は
+[v9 日本語概要](PROGRESS_v9_ja.md) と [v9_manifest.json](v9_manifest.json) に記録する。
+元の四変数方程式の全体は引き続き未解決である。
 
 ## 2026年11月5日の追加：v8
 
@@ -134,6 +166,14 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 このディレクトリを作業場所にする。代表的な小さい検算は Python の
 標準ライブラリだけで実行できる。
 
+    python3 v9_gcd_structure_checks.py
+    python3 v9_cofactor_two_checks.py
+    python3 v9_gcd_defect_cf_checks.py verify
+    python3 v9_gcd_defect_cf_reproduction.py 12
+    python3 v9_cyclotomic_primary_trace_checks.py
+
+前の版：
+
     python3 v8_shifted_base_three_checks.py
     python3 v8_shifted_prime_power_completion_checks.py
     python3 v8_composite_shifted_completion_audit.py
@@ -172,7 +212,8 @@ v4_formal/README.md と v5_formal/README.md を参照。
 ## 大きい生成済み証明書
 
 Git には証明、生成器、独立検証器、小さい結果記録を収録した。
-v6〜v8 の有限証明書は全件含む。v5 までの基準アーカイブにあった
+v6〜v9 の有限証明書は全件含む。v9の大きい連分数係数列は、完全な内容を
+圧縮テキストと再検証器で収録している。v5 までの基準アーカイブにあった
 100 KB を超える生成済み証明書やバイナリ出力の一部は収録していない。
 省略した16ファイルの名前・サイズ・SHA-256、および基準アーカイブとの
 対応は [ARCHIVE_MANIFEST.json](ARCHIVE_MANIFEST.json) にある。
@@ -184,8 +225,8 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 で、i-2 が少なくとも二種類の素因数を持ち、3P^a でもない未排除の値。
-- 同じ枝の一般の合成数について、S=A/gcd(A,X) の新しい条件と因数構造の組合せ。
+- ell=1、j=i-3 で、i-2 が少なくとも二種類の素因数を持ち、2P^a,3P^a でもない未排除の値。
+- 同じ枝の一般の合成数について、S≥13 と正確な GCD 公式、素因数構造の組合せ。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
 - i=jp^3 で、p²+p+1 の未排除の因数構造と、実数評価・合同条件の両立。
 - 下側 i=j+4 の残存区間、およびその他の未排除分岐。

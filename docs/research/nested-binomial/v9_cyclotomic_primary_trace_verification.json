@@ -1,0 +1,2862 @@
+{
+  "status": "PASS",
+  "scope": "Exact complete finite-field exponent periods and generic identity checks; no box search of the original equation",
+  "primary_trace_condition": "T1 or T2 = B^a modulo q, with the branch fixed by p modulo 7",
+  "all_exponent_prime_bases_checked": 21,
+  "all_exponent_bases_excluded": [
+    13,
+    37,
+    43,
+    61,
+    73,
+    79,
+    97,
+    103,
+    109,
+    127,
+    139,
+    151,
+    157,
+    163,
+    181,
+    193,
+    199,
+    211
+  ],
+  "old_quadratic_exclusions_in_this_prefix": [
+    13,
+    37,
+    181
+  ],
+  "additional_excluded_bases_in_this_prefix": [
+    43,
+    61,
+    73,
+    79,
+    97,
+    103,
+    109,
+    127,
+    139,
+    151,
+    157,
+    163,
+    193,
+    199,
+    211
+  ],
+  "surviving_bases_in_this_prefix": [
+    19,
+    31,
+    67
+  ],
+  "all_exponent_tables": [
+    {
+      "q": 13,
+      "primary_trace": 5,
+      "norm_m": 1,
+      "multiplicative_order": 4,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 3,
+          "j_squared_residue": 8,
+          "quadratic_character": 12,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 12,
+              "cube_character": 1,
+              "power_log_mod_order": 2,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 5,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 9,
+          "j_squared_residue": 6,
+          "quadratic_character": 12,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 7,
+              "cube_character": 9,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 9,
+              "cube_character": 9,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 19,
+      "primary_trace": -7,
+      "norm_m": 1,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 7,
+          "j_squared_residue": 8,
+          "quadratic_character": 18,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 11,
+              "cube_character": 1,
+              "power_log_mod_order": 2,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 17,
+              "cube_character": 7,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 11,
+          "j_squared_residue": 7,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 3,
+              "cube_character": 7,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 12,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": [
+                1,
+                7
+              ]
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 31,
+      "primary_trace": -4,
+      "norm_m": 2,
+      "multiplicative_order": 10,
+      "full_exponent_period": 60,
+      "roots": [
+        {
+          "p_mod_q": 5,
+          "j_squared_residue": 25,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 13,
+              "cube_character": 5,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 23,
+              "cube_character": 1,
+              "power_log_mod_order": 9,
+              "surviving_exponent_residues_mod_period": [
+                19,
+                29,
+                49,
+                59
+              ]
+            }
+          ]
+        },
+        {
+          "p_mod_q": 25,
+          "j_squared_residue": 26,
+          "quadratic_character": 30,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 14,
+              "cube_character": 25,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 16,
+              "cube_character": 1,
+              "power_log_mod_order": 2,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 37,
+      "primary_trace": 11,
+      "norm_m": 1,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 10,
+          "j_squared_residue": 13,
+          "quadratic_character": 36,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 13,
+              "cube_character": 10,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 20,
+              "cube_character": 26,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 26,
+          "j_squared_residue": 32,
+          "quadratic_character": 36,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 35,
+              "cube_character": 26,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 32,
+              "cube_character": 10,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 43,
+      "primary_trace": 8,
+      "norm_m": 2,
+      "multiplicative_order": 14,
+      "full_exponent_period": 84,
+      "roots": [
+        {
+          "p_mod_q": 6,
+          "j_squared_residue": 5,
+          "quadratic_character": 42,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 11,
+              "cube_character": 1,
+              "power_log_mod_order": 4,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 2,
+              "cube_character": 1,
+              "power_log_mod_order": 5,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 36,
+          "j_squared_residue": 35,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 14,
+              "cube_character": 6,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 34,
+              "cube_character": 6,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 61,
+      "primary_trace": -1,
+      "norm_m": 3,
+      "multiplicative_order": 2,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 13,
+          "j_squared_residue": 52,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 36,
+              "cube_character": 13,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 18,
+              "cube_character": 47,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 47,
+          "j_squared_residue": 57,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 8,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 16,
+              "cube_character": 47,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 67,
+      "primary_trace": 5,
+      "norm_m": 3,
+      "multiplicative_order": 22,
+      "full_exponent_period": 132,
+      "roots": [
+        {
+          "p_mod_q": 29,
+          "j_squared_residue": 44,
+          "quadratic_character": 66,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 50,
+              "cube_character": 37,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 21,
+              "cube_character": 29,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 37,
+          "j_squared_residue": 47,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 27,
+              "cube_character": 1,
+              "power_log_mod_order": 21,
+              "surviving_exponent_residues_mod_period": [
+                43,
+                65,
+                109,
+                131
+              ]
+            },
+            {
+              "p_mod_7": 4,
+              "target": 26,
+              "cube_character": 29,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 73,
+      "primary_trace": -7,
+      "norm_m": 3,
+      "multiplicative_order": 24,
+      "full_exponent_period": 24,
+      "roots": [
+        {
+          "p_mod_q": 8,
+          "j_squared_residue": 12,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 48,
+              "cube_character": 64,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 26,
+              "cube_character": 8,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 64,
+          "j_squared_residue": 35,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 15,
+              "cube_character": 8,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 67,
+              "cube_character": 64,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 79,
+      "primary_trace": 17,
+      "norm_m": 1,
+      "multiplicative_order": 26,
+      "full_exponent_period": 156,
+      "roots": [
+        {
+          "p_mod_q": 23,
+          "j_squared_residue": 7,
+          "quadratic_character": 78,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 17,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 20,
+              "cube_character": 23,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 55,
+          "j_squared_residue": 10,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 6,
+              "cube_character": 55,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 13,
+              "cube_character": 23,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 97,
+      "primary_trace": -19,
+      "norm_m": 1,
+      "multiplicative_order": 32,
+      "full_exponent_period": 96,
+      "roots": [
+        {
+          "p_mod_q": 35,
+          "j_squared_residue": 50,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 81,
+              "cube_character": 35,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 7,
+              "cube_character": 35,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 61,
+          "j_squared_residue": 54,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 58,
+              "cube_character": 61,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 6,
+              "cube_character": 61,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 103,
+      "primary_trace": -13,
+      "norm_m": 3,
+      "multiplicative_order": 34,
+      "full_exponent_period": 204,
+      "roots": [
+        {
+          "p_mod_q": 46,
+          "j_squared_residue": 21,
+          "quadratic_character": 102,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 4,
+              "cube_character": 56,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 76,
+              "cube_character": 1,
+              "power_log_mod_order": 8,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 56,
+          "j_squared_residue": 60,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 70,
+              "cube_character": 56,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 85,
+              "cube_character": 46,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 109,
+      "primary_trace": 2,
+      "norm_m": 4,
+      "multiplicative_order": 36,
+      "full_exponent_period": 36,
+      "roots": [
+        {
+          "p_mod_q": 45,
+          "j_squared_residue": 82,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 95,
+              "cube_character": 63,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 67,
+              "cube_character": 45,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 63,
+          "j_squared_residue": 66,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 30,
+              "cube_character": 45,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 10,
+              "cube_character": 63,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 127,
+      "primary_trace": 20,
+      "norm_m": 2,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 19,
+          "j_squared_residue": 54,
+          "quadratic_character": 126,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 123,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 61,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 107,
+          "j_squared_residue": 64,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 77,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 47,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 139,
+      "primary_trace": 23,
+      "norm_m": 1,
+      "multiplicative_order": 46,
+      "full_exponent_period": 276,
+      "roots": [
+        {
+          "p_mod_q": 42,
+          "j_squared_residue": 95,
+          "quadratic_character": 138,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 110,
+              "cube_character": 96,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 15,
+              "cube_character": 96,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 96,
+          "j_squared_residue": 54,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 89,
+              "cube_character": 42,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 4,
+              "cube_character": 42,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 151,
+      "primary_trace": -19,
+      "norm_m": 3,
+      "multiplicative_order": 10,
+      "full_exponent_period": 60,
+      "roots": [
+        {
+          "p_mod_q": 32,
+          "j_squared_residue": 46,
+          "quadratic_character": 150,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 45,
+              "cube_character": 32,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 132,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 118,
+          "j_squared_residue": 8,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 128,
+              "cube_character": 32,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 126,
+              "cube_character": 118,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 157,
+      "primary_trace": 14,
+      "norm_m": 4,
+      "multiplicative_order": 13,
+      "full_exponent_period": 156,
+      "roots": [
+        {
+          "p_mod_q": 12,
+          "j_squared_residue": 153,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 54,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 127,
+              "cube_character": 144,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 144,
+          "j_squared_residue": 105,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 81,
+              "cube_character": 12,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 74,
+              "cube_character": 144,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 163,
+      "primary_trace": -25,
+      "norm_m": 1,
+      "multiplicative_order": 54,
+      "full_exponent_period": 108,
+      "roots": [
+        {
+          "p_mod_q": 58,
+          "j_squared_residue": 150,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 42,
+              "cube_character": 104,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 36,
+              "cube_character": 1,
+              "power_log_mod_order": 50,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 104,
+          "j_squared_residue": 48,
+          "quadratic_character": 162,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 5,
+              "cube_character": 1,
+              "power_log_mod_order": 41,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 33,
+              "cube_character": 104,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 181,
+      "primary_trace": -7,
+      "norm_m": 5,
+      "multiplicative_order": 12,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 48,
+          "j_squared_residue": 98,
+          "quadratic_character": 180,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 9,
+              "cube_character": 48,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 127,
+              "cube_character": 48,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 132,
+          "j_squared_residue": 96,
+          "quadratic_character": 180,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 69,
+              "cube_character": 48,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 79,
+              "cube_character": 48,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 193,
+      "primary_trace": 23,
+      "norm_m": 3,
+      "multiplicative_order": 32,
+      "full_exponent_period": 96,
+      "roots": [
+        {
+          "p_mod_q": 84,
+          "j_squared_residue": 21,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 33,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 34,
+              "cube_character": 108,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 108,
+          "j_squared_residue": 48,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 188,
+              "cube_character": 84,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 103,
+              "cube_character": 108,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 199,
+      "primary_trace": 11,
+      "norm_m": 5,
+      "multiplicative_order": 22,
+      "full_exponent_period": 132,
+      "roots": [
+        {
+          "p_mod_q": 92,
+          "j_squared_residue": 31,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 180,
+              "cube_character": 106,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 32,
+              "cube_character": 92,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 106,
+          "j_squared_residue": 97,
+          "quadratic_character": 198,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 190,
+              "cube_character": 92,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 24,
+              "cube_character": 106,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 211,
+      "primary_trace": -13,
+      "norm_m": 5,
+      "multiplicative_order": 70,
+      "full_exponent_period": 420,
+      "roots": [
+        {
+          "p_mod_q": 14,
+          "j_squared_residue": 65,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 101,
+              "cube_character": 196,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 142,
+              "cube_character": 196,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 196,
+          "j_squared_residue": 131,
+          "quadratic_character": 210,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 20,
+              "cube_character": 14,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 38,
+              "cube_character": 14,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    }
+  ],
+  "even_exponent_lower_bound": 367,
+  "even_prime_bases_checked": 17,
+  "even_exponent_tables": [
+    {
+      "q": 19,
+      "primary_trace": -7,
+      "norm_m": 1,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 7,
+          "j_squared_residue": 8,
+          "quadratic_character": 18,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 11,
+              "cube_character": 1,
+              "power_log_mod_order": 2,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 17,
+              "cube_character": 7,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 11,
+          "j_squared_residue": 7,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 3,
+              "cube_character": 7,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 12,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": [
+                1,
+                7
+              ]
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 31,
+      "primary_trace": -4,
+      "norm_m": 2,
+      "multiplicative_order": 10,
+      "full_exponent_period": 60,
+      "roots": [
+        {
+          "p_mod_q": 5,
+          "j_squared_residue": 25,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 13,
+              "cube_character": 5,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 23,
+              "cube_character": 1,
+              "power_log_mod_order": 9,
+              "surviving_exponent_residues_mod_period": [
+                19,
+                29,
+                49,
+                59
+              ]
+            }
+          ]
+        },
+        {
+          "p_mod_q": 25,
+          "j_squared_residue": 26,
+          "quadratic_character": 30,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 14,
+              "cube_character": 25,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 16,
+              "cube_character": 1,
+              "power_log_mod_order": 2,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 43,
+      "primary_trace": 8,
+      "norm_m": 2,
+      "multiplicative_order": 14,
+      "full_exponent_period": 84,
+      "roots": [
+        {
+          "p_mod_q": 6,
+          "j_squared_residue": 5,
+          "quadratic_character": 42,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 11,
+              "cube_character": 1,
+              "power_log_mod_order": 4,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 2,
+              "cube_character": 1,
+              "power_log_mod_order": 5,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 36,
+          "j_squared_residue": 35,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 14,
+              "cube_character": 6,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 34,
+              "cube_character": 6,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 67,
+      "primary_trace": 5,
+      "norm_m": 3,
+      "multiplicative_order": 22,
+      "full_exponent_period": 132,
+      "roots": [
+        {
+          "p_mod_q": 29,
+          "j_squared_residue": 44,
+          "quadratic_character": 66,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 50,
+              "cube_character": 37,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 21,
+              "cube_character": 29,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 37,
+          "j_squared_residue": 47,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 27,
+              "cube_character": 1,
+              "power_log_mod_order": 21,
+              "surviving_exponent_residues_mod_period": [
+                43,
+                65,
+                109,
+                131
+              ]
+            },
+            {
+              "p_mod_7": 4,
+              "target": 26,
+              "cube_character": 29,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 79,
+      "primary_trace": 17,
+      "norm_m": 1,
+      "multiplicative_order": 26,
+      "full_exponent_period": 156,
+      "roots": [
+        {
+          "p_mod_q": 23,
+          "j_squared_residue": 7,
+          "quadratic_character": 78,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 17,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 20,
+              "cube_character": 23,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 55,
+          "j_squared_residue": 10,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 6,
+              "cube_character": 55,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 13,
+              "cube_character": 23,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 103,
+      "primary_trace": -13,
+      "norm_m": 3,
+      "multiplicative_order": 34,
+      "full_exponent_period": 204,
+      "roots": [
+        {
+          "p_mod_q": 46,
+          "j_squared_residue": 21,
+          "quadratic_character": 102,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 4,
+              "cube_character": 56,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 76,
+              "cube_character": 1,
+              "power_log_mod_order": 8,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 56,
+          "j_squared_residue": 60,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 70,
+              "cube_character": 56,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 85,
+              "cube_character": 46,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 127,
+      "primary_trace": 20,
+      "norm_m": 2,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 19,
+          "j_squared_residue": 54,
+          "quadratic_character": 126,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 123,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 61,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 107,
+          "j_squared_residue": 64,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 77,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 47,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 139,
+      "primary_trace": 23,
+      "norm_m": 1,
+      "multiplicative_order": 46,
+      "full_exponent_period": 276,
+      "roots": [
+        {
+          "p_mod_q": 42,
+          "j_squared_residue": 95,
+          "quadratic_character": 138,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 110,
+              "cube_character": 96,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 15,
+              "cube_character": 96,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 96,
+          "j_squared_residue": 54,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 89,
+              "cube_character": 42,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 4,
+              "cube_character": 42,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 151,
+      "primary_trace": -19,
+      "norm_m": 3,
+      "multiplicative_order": 10,
+      "full_exponent_period": 60,
+      "roots": [
+        {
+          "p_mod_q": 32,
+          "j_squared_residue": 46,
+          "quadratic_character": 150,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 45,
+              "cube_character": 32,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 132,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 118,
+          "j_squared_residue": 8,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 128,
+              "cube_character": 32,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 126,
+              "cube_character": 118,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 163,
+      "primary_trace": -25,
+      "norm_m": 1,
+      "multiplicative_order": 54,
+      "full_exponent_period": 108,
+      "roots": [
+        {
+          "p_mod_q": 58,
+          "j_squared_residue": 150,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 42,
+              "cube_character": 104,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 36,
+              "cube_character": 1,
+              "power_log_mod_order": 50,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 104,
+          "j_squared_residue": 48,
+          "quadratic_character": 162,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 5,
+              "cube_character": 1,
+              "power_log_mod_order": 41,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 33,
+              "cube_character": 104,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 199,
+      "primary_trace": 11,
+      "norm_m": 5,
+      "multiplicative_order": 22,
+      "full_exponent_period": 132,
+      "roots": [
+        {
+          "p_mod_q": 92,
+          "j_squared_residue": 31,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 180,
+              "cube_character": 106,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 32,
+              "cube_character": 92,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 106,
+          "j_squared_residue": 97,
+          "quadratic_character": 198,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 190,
+              "cube_character": 92,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 24,
+              "cube_character": 106,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 211,
+      "primary_trace": -13,
+      "norm_m": 5,
+      "multiplicative_order": 70,
+      "full_exponent_period": 420,
+      "roots": [
+        {
+          "p_mod_q": 14,
+          "j_squared_residue": 65,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 101,
+              "cube_character": 196,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 142,
+              "cube_character": 196,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 196,
+          "j_squared_residue": 131,
+          "quadratic_character": 210,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 20,
+              "cube_character": 14,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 38,
+              "cube_character": 14,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 223,
+      "primary_trace": -28,
+      "norm_m": 2,
+      "multiplicative_order": 74,
+      "full_exponent_period": 444,
+      "roots": [
+        {
+          "p_mod_q": 39,
+          "j_squared_residue": 169,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 124,
+              "cube_character": 183,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 200,
+              "cube_character": 183,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 183,
+          "j_squared_residue": 70,
+          "quadratic_character": 222,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 195,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 54,
+              "cube_character": 1,
+              "power_log_mod_order": 27,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 271,
+      "primary_trace": 29,
+      "norm_m": 3,
+      "multiplicative_order": 6,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 28,
+          "j_squared_residue": 251,
+          "quadratic_character": 270,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 98,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 22,
+              "cube_character": 28,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 242,
+          "j_squared_residue": 233,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 96,
+              "cube_character": 28,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 132,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 283,
+      "primary_trace": 32,
+      "norm_m": 2,
+      "multiplicative_order": 94,
+      "full_exponent_period": 564,
+      "roots": [
+        {
+          "p_mod_q": 44,
+          "j_squared_residue": 127,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 32,
+              "cube_character": 1,
+              "power_log_mod_order": 1,
+              "surviving_exponent_residues_mod_period": [
+                1,
+                95,
+                283,
+                377
+              ]
+            },
+            {
+              "p_mod_7": 4,
+              "target": 55,
+              "cube_character": 238,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 238,
+          "j_squared_residue": 55,
+          "quadratic_character": 282,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 211,
+              "cube_character": 44,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 25,
+              "cube_character": 238,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": false
+    },
+    {
+      "q": 307,
+      "primary_trace": -16,
+      "norm_m": 6,
+      "multiplicative_order": 102,
+      "full_exponent_period": 204,
+      "roots": [
+        {
+          "p_mod_q": 17,
+          "j_squared_residue": 292,
+          "quadratic_character": 306,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 232,
+              "cube_character": 17,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 165,
+              "cube_character": 17,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 289,
+          "j_squared_residue": 37,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 207,
+              "cube_character": 17,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 185,
+              "cube_character": 17,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    },
+    {
+      "q": 331,
+      "primary_trace": -1,
+      "norm_m": 7,
+      "multiplicative_order": 2,
+      "full_exponent_period": 12,
+      "roots": [
+        {
+          "p_mod_q": 31,
+          "j_squared_residue": 283,
+          "quadratic_character": 1,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 70,
+              "cube_character": 1,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 218,
+              "cube_character": 31,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        },
+        {
+          "p_mod_q": 299,
+          "j_squared_residue": 119,
+          "quadratic_character": 330,
+          "branches": [
+            {
+              "p_mod_7": 2,
+              "target": 25,
+              "cube_character": 299,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            },
+            {
+              "p_mod_7": 4,
+              "target": 254,
+              "cube_character": 31,
+              "power_log_mod_order": null,
+              "surviving_exponent_residues_mod_period": []
+            }
+          ]
+        }
+      ],
+      "all_exponents_excluded": true
+    }
+  ],
+  "first_unexcluded_even_base_table": {
+    "q": 367,
+    "primary_trace": 35,
+    "norm_m": 3,
+    "multiplicative_order": 122,
+    "full_exponent_period": 732,
+    "roots": [
+      {
+        "p_mod_q": 83,
+        "j_squared_residue": 33,
+        "quadratic_character": 1,
+        "branches": [
+          {
+            "p_mod_7": 2,
+            "target": 322,
+            "cube_character": 1,
+            "power_log_mod_order": 52,
+            "surviving_exponent_residues_mod_period": [
+              418,
+              662
+            ]
+          },
+          {
+            "p_mod_7": 4,
+            "target": 214,
+            "cube_character": 283,
+            "power_log_mod_order": null,
+            "surviving_exponent_residues_mod_period": []
+          }
+        ]
+      },
+      {
+        "p_mod_q": 283,
+        "j_squared_residue": 203,
+        "quadratic_character": 366,
+        "branches": [
+          {
+            "p_mod_7": 2,
+            "target": 360,
+            "cube_character": 1,
+            "power_log_mod_order": 23,
+            "surviving_exponent_residues_mod_period": []
+          },
+          {
+            "p_mod_7": 4,
+            "target": 257,
+            "cube_character": 83,
+            "power_log_mod_order": null,
+            "surviving_exponent_residues_mod_period": []
+          }
+        ]
+      }
+    ],
+    "all_exponents_excluded": false
+  },
+  "trace_minus_one_unbounded_family": "4q=1+27m^2, q prime different from 7; all positive exponents excluded for prime p>3",
+  "trace_minus_one_examples": [
+    {
+      "q": 61,
+      "m": 3
+    },
+    {
+      "q": 331,
+      "m": 7
+    },
+    {
+      "q": 547,
+      "m": 9
+    }
+  ],
+  "odd_exact_valuation_harmonic_checks": [
+    {
+      "q": 19,
+      "J": 4,
+      "numerator": 25,
+      "denominator": 12,
+      "residue": 10
+    },
+    {
+      "q": 19,
+      "J": 5,
+      "numerator": 137,
+      "denominator": 60,
+      "residue": 14
+    },
+    {
+      "q": 19,
+      "J": 6,
+      "numerator": 49,
+      "denominator": 20,
+      "residue": 11
+    },
+    {
+      "q": 31,
+      "J": 5,
+      "numerator": 137,
+      "denominator": 60,
+      "residue": 9
+    },
+    {
+      "q": 31,
+      "J": 6,
+      "numerator": 49,
+      "denominator": 20,
+      "residue": 4
+    },
+    {
+      "q": 31,
+      "J": 7,
+      "numerator": 363,
+      "denominator": 140,
+      "residue": 13
+    },
+    {
+      "q": 67,
+      "J": 8,
+      "numerator": 761,
+      "denominator": 280,
+      "residue": 2
+    },
+    {
+      "q": 67,
+      "J": 9,
+      "numerator": 7129,
+      "denominator": 2520,
+      "residue": 17
+    },
+    {
+      "q": 67,
+      "J": 10,
+      "numerator": 7381,
+      "denominator": 2520,
+      "residue": 64
+    },
+    {
+      "q": 67,
+      "J": 11,
+      "numerator": 83711,
+      "denominator": 27720,
+      "residue": 58
+    }
+  ],
+  "structural_identity_counts": {
+    "centered_product_cases": 12,
+    "outer_digit_cases": 60,
+    "product_compression_cases": 16
+  },
+  "structural_identity_examples": {
+    "centered_product_cases": [
+      {
+        "q": 13,
+        "s": 0,
+        "j": 5,
+        "c": 1,
+        "J": 5
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "j": 5,
+        "c": 2,
+        "J": 5
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 53,
+        "c": 1,
+        "J": 4
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 53,
+        "c": 2,
+        "J": 4
+      },
+      {
+        "q": 13,
+        "s": 2,
+        "j": 677,
+        "c": 1,
+        "J": 4
+      },
+      {
+        "q": 13,
+        "s": 2,
+        "j": 677,
+        "c": 2,
+        "J": 4
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 6,
+        "c": 1,
+        "J": 6
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 6,
+        "c": 2,
+        "J": 6
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 96,
+        "c": 1,
+        "J": 5
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 96,
+        "c": 2,
+        "J": 5
+      },
+      {
+        "q": 19,
+        "s": 2,
+        "j": 1806,
+        "c": 1,
+        "J": 5
+      },
+      {
+        "q": 19,
+        "s": 2,
+        "j": 1806,
+        "c": 2,
+        "J": 5
+      }
+    ],
+    "outer_digit_cases": [
+      {
+        "q": 13,
+        "s": 0,
+        "H": 1,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 1,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 2,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 2,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 13,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 13,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 14,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 14,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 169,
+        "bottom": 3,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "H": 169,
+        "bottom": 5,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 1,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 1,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 1,
+        "bottom": 15,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 1,
+        "bottom": 25,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 2,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 2,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 2,
+        "bottom": 15,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 2,
+        "bottom": 25,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 13,
+        "bottom": 3,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 13,
+        "bottom": 5,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 13,
+        "bottom": 15,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 13,
+        "bottom": 25,
+        "valuation": 3
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 14,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 14,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 14,
+        "bottom": 15,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 14,
+        "bottom": 25,
+        "valuation": 2
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 169,
+        "bottom": 3,
+        "valuation": 4
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 169,
+        "bottom": 5,
+        "valuation": 4
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 169,
+        "bottom": 15,
+        "valuation": 4
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "H": 169,
+        "bottom": 25,
+        "valuation": 4
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 1,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 1,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 2,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 2,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 19,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 19,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 20,
+        "bottom": 3,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 20,
+        "bottom": 5,
+        "valuation": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 361,
+        "bottom": 3,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "H": 361,
+        "bottom": 5,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 1,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 1,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 1,
+        "bottom": 21,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 1,
+        "bottom": 37,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 2,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 2,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 2,
+        "bottom": 21,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 2,
+        "bottom": 37,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 19,
+        "bottom": 3,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 19,
+        "bottom": 5,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 19,
+        "bottom": 21,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 19,
+        "bottom": 37,
+        "valuation": 3
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 20,
+        "bottom": 3,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 20,
+        "bottom": 5,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 20,
+        "bottom": 21,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 20,
+        "bottom": 37,
+        "valuation": 2
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 361,
+        "bottom": 3,
+        "valuation": 4
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 361,
+        "bottom": 5,
+        "valuation": 4
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 361,
+        "bottom": 21,
+        "valuation": 4
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "H": 361,
+        "bottom": 37,
+        "valuation": 4
+      }
+    ],
+    "product_compression_cases": [
+      {
+        "q": 13,
+        "s": 0,
+        "j": 4,
+        "c": 1,
+        "original_bottom": 16,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "j": 4,
+        "c": 2,
+        "original_bottom": 16,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "j": 5,
+        "c": 1,
+        "original_bottom": 25,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 13,
+        "s": 0,
+        "j": 5,
+        "c": 2,
+        "original_bottom": 25,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 47,
+        "c": 1,
+        "original_bottom": 2209,
+        "reduced_bottom": 13
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 47,
+        "c": 2,
+        "original_bottom": 2209,
+        "reduced_bottom": 13
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 66,
+        "c": 1,
+        "original_bottom": 4356,
+        "reduced_bottom": 25
+      },
+      {
+        "q": 13,
+        "s": 1,
+        "j": 66,
+        "c": 2,
+        "original_bottom": 4356,
+        "reduced_bottom": 25
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 5,
+        "c": 1,
+        "original_bottom": 25,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 5,
+        "c": 2,
+        "original_bottom": 25,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 6,
+        "c": 1,
+        "original_bottom": 36,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 19,
+        "s": 0,
+        "j": 6,
+        "c": 2,
+        "original_bottom": 36,
+        "reduced_bottom": 1
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 83,
+        "c": 1,
+        "original_bottom": 6889,
+        "reduced_bottom": 19
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 83,
+        "c": 2,
+        "original_bottom": 6889,
+        "reduced_bottom": 19
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 117,
+        "c": 1,
+        "original_bottom": 13689,
+        "reduced_bottom": 37
+      },
+      {
+        "q": 19,
+        "s": 1,
+        "j": 117,
+        "c": 2,
+        "original_bottom": 13689,
+        "reduced_bottom": 37
+      }
+    ]
+  },
+  "independent_domain_and_period_reconstruction": "PASS",
+  "arbitrary_exponent_cutoff": false,
+  "external_reciprocity_needed_for_finite_tables": false,
+  "external_reciprocity_used_for_universal_cube_filter": "Milne, Class Field Theory, VIII Example 5.13, printed p249 / PDF index257",
+  "prior_Thue_dependency_in_combined_exponent_tables": true,
+  "new_Lean_formalization": false,
+  "whole_large_prime_branch_solved": false,
+  "checker_sha256": "7232dbff49f1d778245b2ecd9cc9c2749ffe18967075c472e25262b1b349c9a4",
+  "proof_note_sha256": "72cbad37d6596b793c5353f5ad0a311cd1cee6611f68ac969fdb777bc50dd8fc"
+}
