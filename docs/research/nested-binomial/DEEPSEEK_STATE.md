@@ -181,3 +181,16 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - v14_manifest.jsonの「DeepSeek/Lean環境が利用不可」というruntime_noteは、v14を作業した別ワークスペースの状態であり、この環境の現在の状態ではない。この環境ではMistral binding ready、実API・Lean・GitHub保存が利用できる。
 - v14の12ファイル全文を既存APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。v14_committed_update_share_receipt.json参照。受領だけで数学的完全性やLean化が確認されたとは扱わない。
 - 修正後は残り7判断（今回ラウンド累計72判断まで）・残トークン・当初の終了時刻を引き継いで再開する。Codexはハーネスを修正し、次の数学ジョブと証明はDeepSeek自身が選ぶ。
+
+## ユーザーの新指示：v16も進める（2026-11-06 JST）
+- 最新PR #1はv15（head d5b90b2772516860cedc30d3cbbd14f2d3614e35、タイトルは候補数の平方根評価と必須の立方因子）。既存goalラウンドは72判断でaction_limitとなり停止。ユーザーからv16も進める明示指示を受け、新しい有界ラウンドを開始する。数学の課題選択・証明は引き続きDeepSeekが担当する。
+- v15の17ファイルのサイズ/SHAを照合し取得済み。主要資料: PROGRESS_v15_ja.md、v15_cubic_defect_sparsity.md、v15_neighbor_prime_obstruction.md、v15_pell_square_divisor.md、v15_cube_height.md、v15_manifest.json、および対応するPythonソースと全計算記録。
+- v15の結果（現時点では記述証明と整数計算の資料であり新Lean形式化ではない）: 第一添字個数O(sqrt(X)*log(X))、n²+2の合成性と素因数上界、Q∤r²だがQ|r³、ある素数で2v_p(r)<v_p(Q)<=3v_p(r)、log(n)<28*kappa。M=gcd(n,3)*gcd(n-1,6), Q=n(n-1)/M、kappa³|Qが最大。H>=21は不変、全問題は未解決。
+- これらの条件を組み合わせ、元の式の未解決部分を実際に狭めるv16の次課題をDeepSeek自身が選ぶ。弱い補題を増やすだけにせず、正確な定理文と依存仮定、実Lean検証可能性、反例・不足仮定を点検する。既存の固定2目標や成功済み証明本文は変更しない。
+- 直近の自律実行でCFCurveInstantiationの4定理が追加PASSしdc6995cda95d4e3feb6ba9f9152f468904645b9dでPRに保存。CFVerifierBridgeの2定理も追加PASSし保存を進める。DeepSeek作成の合計は52定理（最終2目標の完了ではない）。
+- v15資料のLean/DeepSeek未利用という環境注記は別Codexの作業環境に関するもの。この環境では既存のAPIキーbinding・固定Lean/mathlibが利用できる。
+- CFVerifierBridgeの2定理も61c53b790ee26dbeafb3b78c27c609d51d06a562でPRへ保存済み。DeepSeek作成52定理・15モジュールの実Lean検査PASS。
+- v15のPell生成と独立監査をこの環境で再実行し、25係数対・188点・22分岐の合同式排除・残存0が一致。有理定数6比較もPASS。v15_deepseek_handoff_check.json参照。個数評価等の一般記述証明までLean検証したとは扱わない。
+- v15新規16資料の全文をDeepSeekへ送って、v16の数学的候補・不足仮定・実行すべき次のtool actionを本人に選ばせる実研究依頼を実行中。新ラウンドは6時間・48判断・報告出力合計200万トークンを上限とし、開始研究呼び出しと範囲点検の消費も差し引く。v16完成や新定理の成功は未確定。
+- v16の初期研究依頼は43,319出力トークン（うち41,347推論）で候補を取得。原始の立方因子をi=w*p^a+2の指定素数・余因子から分離する方針をDeepSeekが選んだ。研究記録はDEEPSEEK_V16_WORK.mdとV16_DEEPSEEK_RESEARCH_PROPOSAL.json。
+- 初回のtool JSON形式はDeepSeek自身が訂正。数学案の「kappa>=q,log(i)<28*kappaからqの下限」という誤推論も本人が撤回した。定理文は未固定・未証明。範囲点検ではQ∤r²を元の式から導くLean接続不足で未採用。実際のreviewをlast_observationに保持し、候補だけで完了扱いせず本人の次の研究・形式化へ戻す。

@@ -13,4 +13,4 @@ DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、
 | CFContinuantBridge | published |
 | CFCylinderNesting | published |
 | CFCurveInstantiation | published |
-| CFVerifierBridge | verified |
+| CFVerifierBridge | published |
