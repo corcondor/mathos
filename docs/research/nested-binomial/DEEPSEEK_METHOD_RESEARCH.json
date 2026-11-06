@@ -23,7 +23,7 @@
         "v16_lower_gap.md",
         "v16_manifest.json"
       ],
-      "status": "experimental",
+      "status": "observed; causal superiority unestablished",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -298,13 +298,38 @@
       "advisory_decision": "revise",
       "causal_effect_established": false,
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
-    }
-  ],
-  "pending_trials": [
+    },
     {
-      "job_id": "ThirtyCofactorPrimeBound-296796b2",
       "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPrimeBound-296796b2",
       "trial": 0,
+      "contract_sha256": "49e62f0421106f25642be2538cb8a2dcd142ca284a471077cef8534b95033e46",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "attempt_records_sha256": "e2fd9ea21fc6f5cef1931dfb2ccb426cd62d312bc3c7bba54e0a53b7bc79a47f",
+          "module_review_report_available": false
+        },
+        {
+          "run": "run-2",
+          "result_sha256": "2147f7c8b7bdffd3147d479f439246851bb11d9c3630e4ece9e8828b8f694fe5"
+        }
+      ],
       "metrics": {
         "attempt_records": 10,
         "accepted_theorems": [
@@ -333,9 +358,16 @@
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true
       },
-      "model_evaluation_pending": true
+      "evidence_id": "80abcdfb06e0f5c2125846c68bd7ac2f68d14a7da96a616d1b9aca45ebfeeae0",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: all four frozen obligations (pow_factorization_choose_six_w, factorization_div_gcd_le, prime_pow_bound, height_bound_ge_five) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The earlier run's only failure was the final review call (Mistral HTTP 520), not a proof failure; the preserved bodies recompiled as seeds (4 seed recompilations with usage null, not counted as newly generated). Measured on this contract: 10 attempt records, 76490 reported completion tokens (75441 reasoning) over the generating attempts, 26.109s recorded Lean time, error classes {proof_gap:1, library_api:1}; one repair each on prime_pow_bound (proof gap) and height_bound_ge_five (library API). The job is not a finite interval cover: it is a Legendre valuation bound p^{v_p(C(6w,2w))} ≤ 6w, a monotonicity step under gcd division, and a polynomial height bound (25 p^a ≤ 216 w^3 ⟹ w p^a < 9 w^4). As in the Valuation, PellReduction and ExponentDomain trials, the element that actually transferred was splitting the frozen statement into small independent integer obligations with explicit bounds; the interval-cover/certificate-list element was again unused. Limitations: sequential non-randomized trial, empty matched baseline, candidate-response token scope excludes planner/scope/repair critics, and the module proves only auxiliary bounds (p^b ≤ 6w and the height bound), not p ≤ 6w as a standalone prime bound, not the 983-record finite exclusion, and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
     }
   ],
+  "pending_trials": [],
   "causal_effect_established": false,
   "proofs_require_the_unchanged_Lean_checker": true
 }
