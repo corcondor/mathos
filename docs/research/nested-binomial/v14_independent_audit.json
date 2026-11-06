@@ -1,0 +1,728 @@
+{
+  "status": "PASS",
+  "scope": "ell=1, j=i-3; prior n>=104, H|n-2, 3n<r<10n/3 and logarithmic upper bound",
+  "complete_solver_dependency": "PARI/GP 2.17.4 thueinit flag 1; not independently proved by this auditor",
+  "audit_scope": "Independent exact arithmetic, coverage, encoding, raw gap-2 transcript, and interval verification; no Lean run",
+  "inputs": [
+    {
+      "file": "v13_thue_support_results.json",
+      "sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4",
+      "coefficient_pairs": 625,
+      "signed_solution_count": 210,
+      "positive_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        15,
+        16,
+        21,
+        25,
+        28,
+        36,
+        49,
+        50,
+        64,
+        81,
+        126,
+        225,
+        2401,
+        4375,
+        6860
+      ],
+      "flag": 1
+    },
+    {
+      "file": "v14_gap2_results.json",
+      "sha256": "d2969872228b60b0f23310dc0d19c52f75781373c2eedd735d6e5625f9887ed5",
+      "coefficient_pairs": 125,
+      "signed_solution_count": 13,
+      "positive_indices": [
+        3,
+        5,
+        7,
+        9,
+        27,
+        245
+      ],
+      "flag": 1
+    }
+  ],
+  "raw_union_including_n_2": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    32,
+    36,
+    37,
+    42,
+    49,
+    50,
+    51,
+    56,
+    64,
+    65,
+    72,
+    81,
+    82,
+    98,
+    100,
+    126,
+    127,
+    128,
+    162,
+    225,
+    226,
+    245,
+    252,
+    450,
+    2401,
+    2402,
+    4375,
+    4376,
+    4802,
+    6860,
+    6861,
+    8750,
+    13720
+  ],
+  "valid_n_ge_3": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    32,
+    36,
+    37,
+    42,
+    49,
+    50,
+    51,
+    56,
+    64,
+    65,
+    72,
+    81,
+    82,
+    98,
+    100,
+    126,
+    127,
+    128,
+    162,
+    225,
+    226,
+    245,
+    252,
+    450,
+    2401,
+    2402,
+    4375,
+    4376,
+    4802,
+    6860,
+    6861,
+    8750,
+    13720
+  ],
+  "n_below_104_count": 39,
+  "n_ge_104": [
+    126,
+    127,
+    128,
+    162,
+    225,
+    226,
+    245,
+    252,
+    450,
+    2401,
+    2402,
+    4375,
+    4376,
+    4802,
+    6860,
+    6861,
+    8750,
+    13720
+  ],
+  "rejections": [
+    {
+      "n": 126,
+      "A": 325500,
+      "D": 2625,
+      "D_factorization": [
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "F": 105,
+      "first_F_multiple_strictly_above_3n": 420,
+      "strict_upper_bound": [
+        420,
+        1
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 0,
+      "excluded": true
+    },
+    {
+      "n": 127,
+      "A": 333375,
+      "D": 2667,
+      "D_factorization": [
+        [
+          3,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          127,
+          1
+        ]
+      ],
+      "F": 2667,
+      "first_F_multiple_strictly_above_3n": 2667,
+      "strict_upper_bound": [
+        1270,
+        3
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 6731,
+      "excluded": true
+    },
+    {
+      "n": 128,
+      "A": 341376,
+      "D": 8128,
+      "D_factorization": [
+        [
+          2,
+          6
+        ],
+        [
+          127,
+          1
+        ]
+      ],
+      "F": 508,
+      "first_F_multiple_strictly_above_3n": 508,
+      "strict_upper_bound": [
+        1280,
+        3
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 244,
+      "excluded": true
+    },
+    {
+      "n": 162,
+      "A": 695520,
+      "D": 4347,
+      "D_factorization": [
+        [
+          3,
+          3
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          23,
+          1
+        ]
+      ],
+      "F": 483,
+      "first_F_multiple_strictly_above_3n": 966,
+      "strict_upper_bound": [
+        540,
+        1
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 426,
+      "excluded": true
+    },
+    {
+      "n": 225,
+      "A": 1873200,
+      "D": 8400,
+      "D_factorization": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "F": 420,
+      "first_F_multiple_strictly_above_3n": 840,
+      "strict_upper_bound": [
+        750,
+        1
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 90,
+      "excluded": true
+    },
+    {
+      "n": 226,
+      "A": 1898400,
+      "D": 8475,
+      "D_factorization": [
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          113,
+          1
+        ]
+      ],
+      "F": 1695,
+      "first_F_multiple_strictly_above_3n": 1695,
+      "strict_upper_bound": [
+        2260,
+        3
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 2825,
+      "excluded": true
+    },
+    {
+      "n": 245,
+      "A": 2421090,
+      "D": 29890,
+      "D_factorization": [
+        [
+          2,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          61,
+          1
+        ]
+      ],
+      "F": 4270,
+      "first_F_multiple_strictly_above_3n": 4270,
+      "strict_upper_bound": [
+        2450,
+        3
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 10360,
+      "excluded": true
+    },
+    {
+      "n": 252,
+      "A": 2635500,
+      "D": 10542,
+      "D_factorization": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          251,
+          1
+        ]
+      ],
+      "F": 10542,
+      "first_F_multiple_strictly_above_3n": 10542,
+      "strict_upper_bound": [
+        840,
+        1
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 9702,
+      "excluded": true
+    },
+    {
+      "n": 450,
+      "A": 15086400,
+      "D": 33675,
+      "D_factorization": [
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          449,
+          1
+        ]
+      ],
+      "F": 6735,
+      "first_F_multiple_strictly_above_3n": 6735,
+      "strict_upper_bound": [
+        1500,
+        1
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": null,
+      "exact_nonnegative_margin": 5235,
+      "excluded": true
+    },
+    {
+      "n": 2401,
+      "A": 2303999600,
+      "D": 960400,
+      "D_factorization": [
+        [
+          2,
+          4
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          4
+        ]
+      ],
+      "F": 980,
+      "first_F_multiple_strictly_above_3n": 7840,
+      "strict_upper_bound": [
+        29841,
+        4
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 7,
+      "exact_nonnegative_margin": 1519,
+      "excluded": true
+    },
+    {
+      "n": 2402,
+      "A": 2306880800,
+      "D": 2883601,
+      "D_factorization": [
+        [
+          7,
+          4
+        ],
+        [
+          1201,
+          1
+        ]
+      ],
+      "F": 58849,
+      "first_F_multiple_strictly_above_3n": 58849,
+      "strict_upper_bound": [
+        104487,
+        14
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 7,
+      "exact_nonnegative_margin": 719399,
+      "excluded": true
+    },
+    {
+      "n": 4375,
+      "A": 13947136875,
+      "D": 3189375,
+      "D_factorization": [
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "F": 1575,
+      "first_F_multiple_strictly_above_3n": 14175,
+      "strict_upper_bound": [
+        54375,
+        4
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 7,
+      "exact_nonnegative_margin": 2325,
+      "excluded": true
+    },
+    {
+      "n": 4376,
+      "A": 13956705000,
+      "D": 9572500,
+      "D_factorization": [
+        [
+          2,
+          2
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          547,
+          1
+        ]
+      ],
+      "F": 191450,
+      "first_F_multiple_strictly_above_3n": 191450,
+      "strict_upper_bound": [
+        95178,
+        7
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 7,
+      "exact_nonnegative_margin": 1244972,
+      "excluded": true
+    },
+    {
+      "n": 4802,
+      "A": 18443521600,
+      "D": 11527201,
+      "D_factorization": [
+        [
+          7,
+          4
+        ],
+        [
+          4801,
+          1
+        ]
+      ],
+      "F": 235249,
+      "first_F_multiple_strictly_above_3n": 235249,
+      "strict_upper_bound": [
+        29841,
+        2
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 7,
+      "exact_nonnegative_margin": 440657,
+      "excluded": true
+    },
+    {
+      "n": 6860,
+      "A": 53781281820,
+      "D": 23526370,
+      "D_factorization": [
+        [
+          2,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          19,
+          3
+        ]
+      ],
+      "F": 1330,
+      "first_F_multiple_strictly_above_3n": 21280,
+      "strict_upper_bound": [
+        169785,
+        8
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 8,
+      "exact_nonnegative_margin": 455,
+      "excluded": true
+    },
+    {
+      "n": 6861,
+      "A": 53804808190,
+      "D": 7844410,
+      "D_factorization": [
+        [
+          2,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          2287,
+          1
+        ]
+      ],
+      "F": 160090,
+      "first_F_multiple_strictly_above_3n": 160090,
+      "strict_upper_bound": [
+        679239,
+        32
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 8,
+      "exact_nonnegative_margin": 4443641,
+      "excluded": true
+    },
+    {
+      "n": 8750,
+      "A": 111615367500,
+      "D": 38276875,
+      "D_factorization": [
+        [
+          5,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          673,
+          1
+        ]
+      ],
+      "F": 1531075,
+      "first_F_multiple_strictly_above_3n": 1531075,
+      "strict_upper_bound": [
+        433125,
+        16
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 8,
+      "exact_nonnegative_margin": 24064075,
+      "excluded": true
+    },
+    {
+      "n": 13720,
+      "A": 430344360040,
+      "D": 31370780,
+      "D_factorization": [
+        [
+          2,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          17,
+          1
+        ],
+        [
+          269,
+          1
+        ]
+      ],
+      "F": 320110,
+      "first_F_multiple_strictly_above_3n": 320110,
+      "strict_upper_bound": [
+        169785,
+        4
+      ],
+      "log_n_strict_lower_bound_from_e_lt_3": 8,
+      "exact_nonnegative_margin": 1110655,
+      "excluded": true
+    }
+  ],
+  "survivors": [],
+  "source_sha256": "a139eb9d5b832ee7732c0f998c1e393fc058400d79aab1a42a7faf096461a9a2"
+}

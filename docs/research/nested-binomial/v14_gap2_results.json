@@ -1,0 +1,1377 @@
+{
+  "status": "PASS",
+  "pari_version": [
+    2,
+    17,
+    4
+  ],
+  "support_primes": [
+    3,
+    5,
+    7
+  ],
+  "rhs": 2,
+  "odd_bases_required": true,
+  "coefficient_pair_count": 125,
+  "pari_calls": 250,
+  "thueinit_flag": 1,
+  "process_exit_code": 0,
+  "stderr_empty": true,
+  "elapsed_seconds": 3.489011564000066,
+  "unbounded_variables": [
+    "x",
+    "y",
+    "n"
+  ],
+  "same_backend_twice": true,
+  "completeness_dependency": "PARI/GP complete Thue solver; exact substitution does not prove completeness independently",
+  "selected_n": [
+    3,
+    5,
+    7,
+    9,
+    27,
+    245
+  ],
+  "positive_n_before_parity": [
+    3,
+    5,
+    7,
+    9,
+    27,
+    245
+  ],
+  "source_sha256": "2a54a569f774a48f40654de5fbc5b4b4d33af113409f65acb358e0b079e40dfa",
+  "gp_input_sha256": "7b1f7296bd17867007d8e6b049c009beba9207d88b6e8d1d201d583d909cdf0b",
+  "gp_stdout_sha256": "eb0f3a560d001c094dc37db901758db428fb3f80aa4e46f94aa292dd0f4cff15",
+  "gp_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "records": [
+    {
+      "A": 1,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          1,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          1,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 15,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 21,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 25,
+      "all_integer_solutions": [
+        [
+          3,
+          1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          3,
+          1
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          3,
+          1
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          3,
+          1
+        ]
+      ],
+      "selected_n": [
+        27
+      ]
+    },
+    {
+      "A": 1,
+      "B": 35,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 45,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 63,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 75,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 105,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 147,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 175,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 245,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 315,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 441,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 525,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 735,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 1575,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 2205,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 3675,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1,
+      "B": 11025,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          3,
+          1
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_n": [
+        3
+      ]
+    },
+    {
+      "A": 3,
+      "B": 5,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -3,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 35,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 175,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 245,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          5,
+          1
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_n": [
+        5
+      ]
+    },
+    {
+      "A": 5,
+      "B": 7,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -5,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 21,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 63,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 147,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 5,
+      "B": 441,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 5,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          7,
+          1
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_n": [
+        7
+      ]
+    },
+    {
+      "A": 7,
+      "B": 9,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -7,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 15,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 45,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 75,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 7,
+      "B": 225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 7,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          9,
+          1
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "selected_n": [
+        9
+      ]
+    },
+    {
+      "A": 9,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 35,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 175,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 245,
+      "all_integer_solutions": [
+        [
+          -3,
+          -1
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -27,
+          -1
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 9,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 15,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 15,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 15,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 21,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 21,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 21,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          -1,
+          -3
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          -25,
+          -3
+        ]
+      ],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 21,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 63,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 147,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 25,
+      "B": 441,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 35,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 35,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 35,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 45,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 45,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 45,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 15,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 45,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 75,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 49,
+      "B": 225,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 63,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 63,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 63,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 75,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 75,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 75,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 105,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 147,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 147,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 147,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 175,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 175,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 175,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 225,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 225,
+      "B": 7,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 225,
+      "B": 49,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 245,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 245,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 245,
+      "B": 9,
+      "all_integer_solutions": [
+        [
+          1,
+          3
+        ]
+      ],
+      "monic_all_integer_solutions": [
+        [
+          245,
+          3
+        ]
+      ],
+      "positive_solutions_before_parity": [
+        [
+          1,
+          3
+        ]
+      ],
+      "selected_positive_solutions": [
+        [
+          1,
+          3
+        ]
+      ],
+      "selected_n": [
+        245
+      ]
+    },
+    {
+      "A": 315,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 441,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 441,
+      "B": 5,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 441,
+      "B": 25,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 525,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 735,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1225,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1225,
+      "B": 3,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1225,
+      "B": 9,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 1575,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 2205,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 3675,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    },
+    {
+      "A": 11025,
+      "B": 1,
+      "all_integer_solutions": [],
+      "monic_all_integer_solutions": [],
+      "positive_solutions_before_parity": [],
+      "selected_positive_solutions": [],
+      "selected_n": []
+    }
+  ]
+}

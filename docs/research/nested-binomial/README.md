@@ -1,6 +1,8 @@
 # 入れ子の二項係数方程式の研究記録
 
-> **最新 v13（2026-11-06）**：主対象 ell=1, j=i−3 において、**T=2^a3^b5^c7^d u³ の全族を、H に上限を置かず排除**。立方因子を除いた係数を625本の Thue 方程式にまとめ、全24第一添字を取得し、残る5個を整除・厳密区間で排除した。従って **ある素数 p≥11 で v_p(T) が3の倍数でないことが必要**。一般の固定素数集合 S では Bennett の既知定理から第一添字の個数を (5^|S|−1)/2 以下に抑えた。全証明・計算の範囲は [PROGRESS_v13_ja.md](PROGRESS_v13_ja.md)、[一様排除の証明](v13_uniform_cube_support.md)、[実行記録](v13_manifest.json) を参照。新しい Lean 実行・元の四変数問題の完全解決はしていない。
+> **最新 v14（2026-11-06）**：主対象 ell=1, j=i−3 で、**n,n−1,n−2 の異なる二つに、11以上の素数が3の倍数でない指数で必要**と証明。従って **HT=2^a3^b5^c7^d p^e u³ を、任意の素数 p≥11・全指数・全Hで一括排除**。二因子の立方剰余部分が2・3・5・7だけで支えられる第一添字は正確に57個、最大13720。既存 n≥104 に残る18個も全排除。新規125本の完全Thue計算と二つの整数検証を記録。詳細は [PROGRESS_v14_ja.md](PROGRESS_v14_ja.md)、[証明](v14_two_factor_support.md)、[全実行記録](v14_manifest.json)。T単独で二素数が必要とは限らず、元の四変数問題は未解決。
+
+> **v13（2026-11-06）**：主対象 ell=1, j=i−3 において、**T=2^a3^b5^c7^d u³ の全族を、H に上限を置かず排除**。立方因子を除いた係数を625本の Thue 方程式にまとめ、全24第一添字を取得し、残る5個を整除・厳密区間で排除した。従って **ある素数 p≥11 で v_p(T) が3の倍数でないことが必要**。一般の固定素数集合 S では Bennett の既知定理から第一添字の個数を (5^|S|−1)/2 以下に抑えた。全証明・計算の範囲は [PROGRESS_v13_ja.md](PROGRESS_v13_ja.md)、[一様排除の証明](v13_uniform_cube_support.md)、[実行記録](v13_manifest.json) を参照。新しい Lean 実行・元の四変数問題の完全解決はしていない。
 
 > **v12（2026-11-06）**：原始不足分 H=14〜20 を全4,690曲線・57,160,284既約分数の厳密計算で排除し、H≥21へ。楕円曲線の3位数点、正の階数を持つ補助曲線の例、三連続整数のcube-free必要条件を追加。詳細は [PROGRESS_v12_ja.md](PROGRESS_v12_ja.md)、[算術幾何ノート](v12_three_descent.md)、[独立再現コード](v12_independent_dyadic_verifier.py)、[検証値と証明書SHA](v12_results_manifest.json)。元の四変数問題は未解決です。
 
@@ -17,7 +19,9 @@
 
 ## 読み始める場所
 
-- **[最新：v13 日本語概要](PROGRESS_v13_ja.md)**
+- **[最新：v14 日本語概要](PROGRESS_v14_ja.md)**
+- [大きな非立方指数の素数は三連続整数の二か所に必要：任意の追加素数を一括排除](v14_two_factor_support.md)
+- [v13 日本語概要](PROGRESS_v13_ja.md)
 - [H に依存しない立方因子の型による一括排除と一般の候補数定理](v13_uniform_cube_support.md)
 - [三連続整数の正確な立方降下と素数冪の配分](v13_exact_three_factor_descent.md)
 - [v12 日本語概要](PROGRESS_v12_ja.md)
@@ -235,6 +239,13 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 
 ## 再計算
 
+v14 の完全Thue計算は PARI/GP を使用する。保存済み全解からの係数・整除・区間の監査は Python 標準ライブラリだけで再実行できる。
+
+    python3 v14_pair_support_verifier.py --adjacent v13_thue_support_results.json --odd-gap v14_gap2_results.json --output reproduced_v14_pairs.json
+    python3 v14_independent_audit.py --gap1 v13_thue_support_results.json --gap2 v14_gap2_results.json --output reproduced_v14_audit.json
+
+ソルバーの再実行と全ての前提は [v14の証明ノート](v14_two_factor_support.md) を参照。
+
 このディレクトリを作業場所にする。代表的な検証は Python の
 標準ライブラリだけで実行できる。
 
@@ -314,7 +325,7 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 ## 現在残る主な課題
 
-- ell=1、j=i-3 で、実際の不足分H≥21、回復後のE≥21と平方値CRTの短い区間を全て通過する混合素因数。さらに v13 により、T の立方因子を除いた部分には11以上の素因数が必要。
+- ell=1、j=i-3 で、実際の不足分H≥21、回復後のE≥21と平方値CRTの短い区間を全て通過する混合素因数。v13ではTに11以上の非立方指数の素数が必要。v14ではさらに、n,n−1,n−2 の異なる二因子にそのような素数が必要で、HTには異なる二素数以上が必要。
 - 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,192)≥14かつlog i/128より大きい未排除の値。
 - i−3側の新しい三次高さ条件も通過する値。i=wp^a+3、w=1..4、p=2またはp≡3 mod4の族はv11で完了。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
