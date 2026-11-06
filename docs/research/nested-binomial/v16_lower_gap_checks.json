@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "scope": "Exact polynomial coefficient and rational checks, plus finite consistency examples; universal completeness rests on the written proof.",
+  "theorem": "n^3 < 2^30*(r-3*n+3)^5",
+  "inputs": "n>=104, 3*n<r<10*n/3, M=gcd(n,3)*gcd(n-1,6), Q=n*(n-1)/M, Q divides r^3",
+  "polynomial_identities": {
+    "cubic_division": "all coefficients zero",
+    "square_root_residual": "all coefficients zero",
+    "lower_q_positive_polynomial": "all coefficients zero",
+    "fixed_denominator_parity": "all coefficients zero",
+    "residual_positive_grouping": "all coefficients zero"
+  },
+  "exact_constants": {
+    "residual_upper": "5674544/6561",
+    "u_bound": "1418636/51",
+    "n_cubed_bound": "124567589888/153",
+    "margin_below_2_30": "39714909184/153"
+  },
+  "finite_limit": 100000,
+  "necessary_condition_first_indices": 45,
+  "necessary_condition_pairs": 48,
+  "smallest_observed_t": 39,
+  "example_pairs": [
+    {
+      "n": 169,
+      "r": 546,
+      "t": 39,
+      "M": 6,
+      "h": 540
+    },
+    {
+      "n": 243,
+      "r": 792,
+      "t": 63,
+      "M": 6,
+      "h": 954
+    },
+    {
+      "n": 250,
+      "r": 830,
+      "t": 80,
+      "M": 3,
+      "h": 745
+    },
+    {
+      "n": 361,
+      "r": 1140,
+      "t": 57,
+      "M": 6,
+      "h": 522
+    },
+    {
+      "n": 625,
+      "r": 1950,
+      "t": 75,
+      "M": 6,
+      "h": 513
+    },
+    {
+      "n": 784,
+      "r": 2436,
+      "t": 84,
+      "M": 3,
+      "h": 255
+    },
+    {
+      "n": 961,
+      "r": 3100,
+      "t": 217,
+      "M": 6,
+      "h": 2752
+    },
+    {
+      "n": 1000,
+      "r": 3330,
+      "t": 330,
+      "M": 3,
+      "h": 3078
+    },
+    {
+      "n": 1025,
+      "r": 3280,
+      "t": 205,
+      "M": 2,
+      "h": 766
+    },
+    {
+      "n": 1369,
+      "r": 4218,
+      "t": 111,
+      "M": 6,
+      "h": 504
+    },
+    {
+      "n": 2401,
+      "r": 7840,
+      "t": 637,
+      "M": 6,
+      "h": 9442
+    },
+    {
+      "n": 3025,
+      "r": 9240,
+      "t": 165,
+      "M": 6,
+      "h": 498
+    }
+  ],
+  "examples_are_original_equation_solutions": false,
+  "proof_by_finite_extrapolation": false,
+  "new_lean_execution": false,
+  "new_deepseek_api_calls": 0,
+  "new_complete_cas_calls": 0,
+  "source_sha256": "a37ff5ebae259a40080fb0452fe2be579e0a966bea20f2133285029a8c22bb36",
+  "proof_note_sha256": "4a141edcc7ee11ff616d42e6f9297e39fd96626b479a973d886322a34d1b18c4"
+}

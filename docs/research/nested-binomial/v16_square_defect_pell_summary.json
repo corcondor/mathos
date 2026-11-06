@@ -1,0 +1,307 @@
+{
+  "status": "PASS",
+  "scope": "ell=1, j=i-3, n>=104, both k branches; original squared-index equation",
+  "definition": "delta=Q/gcd(Q,r^2), Q=n(n-1)/(gcd(n,3)gcd(n-1,6))",
+  "excluded_defects": [
+    1,
+    12
+  ],
+  "necessary_lower_bound": 13,
+  "height": "n<exp(28*delta)<2^(42*delta)",
+  "coefficient_conditions": "M in {1,2,3,6}, C=M*delta, gcd(K,delta)=1, 9*C<K<10400*C/927",
+  "reconstruction": "C*K=s^2*d; x^2-d*y^2=1; n=(x+1)/2; r=s*d*y/(2*C)",
+  "continued_fraction_completeness": "Actual Pell solutions satisfy |x/y-sqrt(d)|<1/(2*y^2), so Legendre's convergent criterion applies. All earlier convergents are encoded and checked. This does not replace the separate old 3/2 approximation constant.",
+  "unit_power_completeness": "Minimal positive-y unit generates all positive Pell solutions by the written norm-one descent.",
+  "disposition_codes": {
+    "i": "n or r is not an integer under reconstruction",
+    "n": "n is below 104",
+    "m": "actual gcd(n,3)*gcd(n-1,6) differs from M",
+    "d": "actual reduced denominator of r^2/Q differs from delta",
+    "q": "Q does not divide r^3",
+    "c": "strict coarse interval fails",
+    "l": "strict rational logarithmic interval fails",
+    "w": "both original k branches have recorded modular witnesses"
+  },
+  "statistics": {
+    "coefficient_triples": 1223,
+    "pell_points_below_height": 34010,
+    "integral_n_r": 24114,
+    "n_ge_104": 23920,
+    "actual_M": 9324,
+    "actual_delta": 9324,
+    "cube_divisibility": 1929,
+    "strict_coarse_interval": 1762,
+    "strict_log_interval": 123,
+    "original_branches": 246,
+    "modular_branch_exclusions": 246,
+    "square_discriminants": 8
+  },
+  "by_delta": [
+    {
+      "delta": 1,
+      "statistics": {
+        "coefficient_triples": 25,
+        "pell_points_below_height": 181,
+        "integral_n_r": 153,
+        "n_ge_104": 133,
+        "actual_M": 62,
+        "actual_delta": 62,
+        "cube_divisibility": 62,
+        "strict_coarse_interval": 58,
+        "strict_log_interval": 11,
+        "original_branches": 22,
+        "modular_branch_exclusions": 22
+      }
+    },
+    {
+      "delta": 2,
+      "statistics": {
+        "coefficient_triples": 26,
+        "pell_points_below_height": 302,
+        "integral_n_r": 249,
+        "n_ge_104": 236,
+        "actual_M": 84,
+        "actual_delta": 84,
+        "cube_divisibility": 61,
+        "strict_coarse_interval": 61,
+        "strict_log_interval": 8,
+        "original_branches": 16,
+        "modular_branch_exclusions": 16
+      }
+    },
+    {
+      "delta": 3,
+      "statistics": {
+        "coefficient_triples": 52,
+        "pell_points_below_height": 741,
+        "integral_n_r": 536,
+        "n_ge_104": 521,
+        "actual_M": 199,
+        "actual_delta": 199,
+        "cube_divisibility": 90,
+        "strict_coarse_interval": 89,
+        "strict_log_interval": 23,
+        "original_branches": 46,
+        "modular_branch_exclusions": 46,
+        "square_discriminants": 2
+      }
+    },
+    {
+      "delta": 4,
+      "statistics": {
+        "coefficient_triples": 53,
+        "pell_points_below_height": 1045,
+        "integral_n_r": 707,
+        "n_ge_104": 694,
+        "actual_M": 292,
+        "actual_delta": 292,
+        "cube_divisibility": 74,
+        "strict_coarse_interval": 67,
+        "strict_log_interval": 5,
+        "original_branches": 10,
+        "modular_branch_exclusions": 10
+      }
+    },
+    {
+      "delta": 5,
+      "statistics": {
+        "coefficient_triples": 107,
+        "pell_points_below_height": 2407,
+        "integral_n_r": 2001,
+        "n_ge_104": 1968,
+        "actual_M": 728,
+        "actual_delta": 728,
+        "cube_divisibility": 238,
+        "strict_coarse_interval": 196,
+        "strict_log_interval": 10,
+        "original_branches": 20,
+        "modular_branch_exclusions": 20
+      }
+    },
+    {
+      "delta": 6,
+      "statistics": {
+        "coefficient_triples": 54,
+        "pell_points_below_height": 1205,
+        "integral_n_r": 813,
+        "n_ge_104": 806,
+        "actual_M": 218,
+        "actual_delta": 218,
+        "cube_divisibility": 83,
+        "strict_coarse_interval": 71,
+        "strict_log_interval": 12,
+        "original_branches": 24,
+        "modular_branch_exclusions": 24,
+        "square_discriminants": 1
+      }
+    },
+    {
+      "delta": 7,
+      "statistics": {
+        "coefficient_triples": 160,
+        "pell_points_below_height": 3913,
+        "integral_n_r": 3373,
+        "n_ge_104": 3349,
+        "actual_M": 1362,
+        "actual_delta": 1362,
+        "cube_divisibility": 225,
+        "strict_coarse_interval": 214,
+        "strict_log_interval": 7,
+        "original_branches": 14,
+        "modular_branch_exclusions": 14
+      }
+    },
+    {
+      "delta": 8,
+      "statistics": {
+        "coefficient_triples": 107,
+        "pell_points_below_height": 3366,
+        "integral_n_r": 1800,
+        "n_ge_104": 1787,
+        "actual_M": 628,
+        "actual_delta": 628,
+        "square_discriminants": 2,
+        "cube_divisibility": 94,
+        "strict_coarse_interval": 86,
+        "strict_log_interval": 4,
+        "original_branches": 8,
+        "modular_branch_exclusions": 8
+      }
+    },
+    {
+      "delta": 9,
+      "statistics": {
+        "coefficient_triples": 159,
+        "pell_points_below_height": 6185,
+        "integral_n_r": 2638,
+        "n_ge_104": 2631,
+        "square_discriminants": 2,
+        "actual_M": 950,
+        "actual_delta": 950,
+        "cube_divisibility": 238,
+        "strict_coarse_interval": 221,
+        "strict_log_interval": 20,
+        "original_branches": 40,
+        "modular_branch_exclusions": 40
+      }
+    },
+    {
+      "delta": 10,
+      "statistics": {
+        "coefficient_triples": 107,
+        "pell_points_below_height": 2813,
+        "integral_n_r": 2472,
+        "n_ge_104": 2461,
+        "actual_M": 943,
+        "actual_delta": 943,
+        "cube_divisibility": 213,
+        "strict_coarse_interval": 176,
+        "strict_log_interval": 5,
+        "original_branches": 10,
+        "modular_branch_exclusions": 10
+      }
+    },
+    {
+      "delta": 11,
+      "statistics": {
+        "coefficient_triples": 266,
+        "pell_points_below_height": 8427,
+        "integral_n_r": 7227,
+        "n_ge_104": 7193,
+        "actual_M": 3070,
+        "actual_delta": 3070,
+        "cube_divisibility": 358,
+        "strict_coarse_interval": 339,
+        "strict_log_interval": 7,
+        "original_branches": 14,
+        "modular_branch_exclusions": 14
+      }
+    },
+    {
+      "delta": 12,
+      "statistics": {
+        "coefficient_triples": 107,
+        "pell_points_below_height": 3425,
+        "integral_n_r": 2145,
+        "n_ge_104": 2141,
+        "actual_M": 788,
+        "actual_delta": 788,
+        "cube_divisibility": 193,
+        "strict_coarse_interval": 184,
+        "square_discriminants": 1,
+        "strict_log_interval": 11,
+        "original_branches": 22,
+        "modular_branch_exclusions": 22
+      }
+    }
+  ],
+  "largest_witness_prime": 23,
+  "both_binomials_zero_witnesses": 242,
+  "largest_candidate_decimal_digits": 150,
+  "survivors": [],
+  "v15_control": {
+    "input_file": "v15_pell_square_divisor_results.json",
+    "input_sha256": "9f60f76a09845876532074b2141e1321cd8289b382a4d0f92e132780bfcebbe3",
+    "same_final_delta1_pairs": true,
+    "pairs": [
+      [
+        169,
+        546
+      ],
+      [
+        243,
+        792
+      ],
+      [
+        361,
+        1140
+      ],
+      [
+        784,
+        2436
+      ],
+      [
+        1369,
+        4218
+      ],
+      [
+        3025,
+        9240
+      ],
+      [
+        11881,
+        35970
+      ],
+      [
+        332668,
+        1016316
+      ],
+      [
+        2589895,
+        7841295
+      ],
+      [
+        564585121,
+        1709366340
+      ],
+      [
+        123076966375,
+        372634020825
+      ]
+    ]
+  },
+  "source_sha256": "6488b2419f08be60ed92267df78a44387728b4e93f27633ddeb100a27610d79c",
+  "verification_boundary": "Written elementary reductions plus exact Python certificate; not Lean verification, external peer review, or a new complete CAS solver execution.",
+  "full_certificate": {
+    "file": "v16_square_defect_pell_results.json.gz",
+    "format": "gzip-compressed UTF-8 JSON",
+    "compressed_bytes": 169374,
+    "compressed_sha256": "44838b5d8278469741dc16bef0488affc8c957a7591f8709a28ece7dee7e54c3",
+    "uncompressed_bytes": 1003011,
+    "uncompressed_sha256": "f2001eaef853c0fe4dd5a13fe331b6890e08bd793b3e55f388099a781df546a2",
+    "lossless": true,
+    "fundamental_units": 570,
+    "families": 1223,
+    "candidate_pairs": 123
+  }
+}

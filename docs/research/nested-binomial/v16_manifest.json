@@ -1,0 +1,439 @@
+{
+  "version": "v16",
+  "date": "2026-11-06 JST",
+  "repository": "corcondor/mathos",
+  "branch": "research/nested-binomial-2026-11-05",
+  "pull_request": 1,
+  "prior_repository_snapshot": "e3b9bc80fa55061a9456a9452a83ccb3a292f2b3",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "scope": {
+    "ell": 1,
+    "j": "i-3",
+    "n": "i",
+    "A": "binom(n,3)",
+    "r": "min(k,A-k)",
+    "branches": [
+      "k=r",
+      "k=A-r"
+    ],
+    "M": "gcd(n,3)*gcd(n-1,6)",
+    "Q": "n*(n-1)/M",
+    "delta": "Q/gcd(Q,r^2)",
+    "offset": "t=r-3*n"
+  },
+  "prior_inputs": [
+    {
+      "path": "docs/research/nested-binomial/v6_offset_composite.md",
+      "git_blob_sha1": "afc5e371baf652ede2f736d41fcfde8f9202e317",
+      "bytes": 10180
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_common_divisor.md",
+      "git_blob_sha1": "e18dd1d93224905f3670c5c8e7c500c240419e72",
+      "bytes": 5553
+    },
+    {
+      "path": "docs/research/nested-binomial/v15_cube_height.md",
+      "git_blob_sha1": "a44ff1fa710e899a1683172d28227ac41c007563",
+      "bytes": 4403
+    },
+    {
+      "path": "docs/research/nested-binomial/v15_pell_square_divisor_results.json",
+      "git_blob_sha1": "f6195eba5d3ce03a1002357ef5cbad7a73c3f1f5",
+      "bytes": 71492
+    },
+    {
+      "path": "docs/research/nested-binomial/v14_two_factor_support.md",
+      "git_blob_sha1": "f59d8b9cac4e9c6c02cec75363b9dda0998b55d3",
+      "bytes": 15521
+    }
+  ],
+  "results": {
+    "intrinsic_defect": {
+      "identities": [
+        "delta divides r",
+        "delta^3 divides Q",
+        "delta divides kappa",
+        "K=delta*r^2/Q is integral and gcd(K,delta)=1"
+      ],
+      "height": "log(n)<28*delta; n<2^(42*delta)",
+      "parametrization": "Q=delta^3*a*b^2, r=delta*a*b*u; a squarefree, gcd(delta,a*u)=1; both directions",
+      "primitive_defect_bridge": [
+        "gcd(delta,H)=1",
+        "delta^3 divides A/H"
+      ],
+      "complete_exclusion": "delta=1,...,12 excluded; delta>=13",
+      "cube_consequences": [
+        "kappa>=13",
+        "Some integer b>=5 has b^3 dividing n or n-1; b need not be prime"
+      ],
+      "uniform_pell_point_bound": "(27*delta-1)*(28*delta+1) for fixed delta",
+      "cumulative_pell_point_bound": "126*D*(D+1)*(2*D+1)-D*(D+1)/2-D for delta<=D",
+      "not_a_bit_complexity_bound": true
+    },
+    "lower_gap": {
+      "theorem": "n^3 < (124567589888/153)*(t+3)^5 < 2^30*(t+3)^5",
+      "equivalents": [
+        "t+3>n^(3/5)/64",
+        "n<1024*(t+3)^(5/3)"
+      ],
+      "method": "Two integer separations; an integral quadratic discriminant and rational quadratic with denominator729M",
+      "new_global_counting_bound_claimed": false,
+      "proof_by_finite_extrapolation": false
+    },
+    "quadratic_neighbors": {
+      "general": "0<=c<=16 and6 divides (c+2)*n-3*c implyPplus(n^2-c)<r",
+      "unconditional_in_n": "Pplus(n^2-10)<r",
+      "cofactor": "3*n<=10*w forw=(n^2-c)/p",
+      "positive_neighbor": "n=3 mod6 impliesPplus(n^2+1)<=6*n-9",
+      "full_prime_power_bound_claimed": false
+    },
+    "repeated_neighbor_primes": {
+      "hypothesis": "p prime, e=v_p(n^2-10)>=2, p^2>6*n-9",
+      "conclusion": "k=A-r, e=3, v_p(r-2*n+5)=1",
+      "small_branch": "k=r impliesp^2<=6*n-9 for every repeated prime divisor of n^2-10",
+      "numerical_prime_cutoff_required": false,
+      "complete_exception_moduli": [
+        29,
+        31,
+        37,
+        41,
+        71,
+        191,
+        239
+      ],
+      "exceptional_indices_excluded": [
+        275,
+        5382
+      ],
+      "parity_boundary": "All11constants retained becausep dividesm-t does not meanp=m-t"
+    }
+  },
+  "verification": {
+    "written_reviews": "Each new written deduction reviewed by the root and separate AI collaborators; internal review, not external peer review",
+    "lower_gap": {
+      "report": "v16_lower_gap_checks.json",
+      "coefficient_identities": 5,
+      "finite_consistency_limit": 100000,
+      "necessary_first_indices": 45,
+      "necessary_pairs": 48,
+      "these_are_original_solutions": false
+    },
+    "quadratic_neighbors": {
+      "report": "v16_quadratic_neighbors_checks.json",
+      "endpoint_constants": 81,
+      "polynomial_identities": 2907,
+      "modular_records": 2100,
+      "actual_binomial_pairs": 64,
+      "positive_neighbor_records": 72,
+      "positive_neighbor_actual_pairs": 24,
+      "prime_r_controls": 18,
+      "finite_samples_are_supporting_only": true
+    },
+    "repeated_primes": {
+      "report": "v16_repeated_neighbor_primes_checks.json",
+      "complete_exception_moduli": 7,
+      "exception_generation": "Complete Hensel lifts checked against all residues modulo eachp^2",
+      "complete_exception_index_exclusions": 2,
+      "general_valuation_samples": 540,
+      "actual_repeated_root_inputs": 27,
+      "actual_valuation_cases": 108,
+      "universal_part": "Written valuation proof, not extrapolation"
+    },
+    "complete_pell": {
+      "producer": "v16_square_defect_pell.py",
+      "certificate": "v16_square_defect_pell_results.json.gz",
+      "summary": "v16_square_defect_pell_summary.json",
+      "auditor": "v16_square_defect_independent_audit.py",
+      "audit_report": "v16_square_defect_independent_audit.json",
+      "counts": {
+        "coefficient_triples": 1223,
+        "pell_points_below_height": 34010,
+        "integral_n_r": 24114,
+        "n_ge_104": 23920,
+        "actual_M": 9324,
+        "actual_delta": 9324,
+        "cube_divisibility": 1929,
+        "strict_coarse_interval": 1762,
+        "strict_log_interval": 123,
+        "original_branches": 246,
+        "modular_branch_exclusions": 246,
+        "square_discriminants": 8
+      },
+      "distinct_nonsquare_radicands": 570,
+      "counts_independently_reproduced": true,
+      "survivors": [],
+      "max_witness_prime": 23,
+      "both_zero_binomial_witnesses": 242,
+      "other_full_residue_witnesses": 4,
+      "largest_candidate_decimal_digits": 150,
+      "v15_control": {
+        "input_file": "v15_pell_square_divisor_results.json",
+        "input_sha256": "9f60f76a09845876532074b2141e1321cd8289b382a4d0f92e132780bfcebbe3",
+        "same_final_delta1_pairs": true,
+        "pairs": [
+          [
+            169,
+            546
+          ],
+          [
+            243,
+            792
+          ],
+          [
+            361,
+            1140
+          ],
+          [
+            784,
+            2436
+          ],
+          [
+            1369,
+            4218
+          ],
+          [
+            3025,
+            9240
+          ],
+          [
+            11881,
+            35970
+          ],
+          [
+            332668,
+            1016316
+          ],
+          [
+            2589895,
+            7841295
+          ],
+          [
+            564585121,
+            1709366340
+          ],
+          [
+            123076966375,
+            372634020825
+          ]
+        ]
+      },
+      "full_certificate_storage": {
+        "file": "v16_square_defect_pell_results.json.gz",
+        "format": "gzip-compressed UTF-8 JSON",
+        "compressed_bytes": 169374,
+        "compressed_sha256": "44838b5d8278469741dc16bef0488affc8c957a7591f8709a28ece7dee7e54c3",
+        "uncompressed_bytes": 1003011,
+        "uncompressed_sha256": "f2001eaef853c0fe4dd5a13fe331b6890e08bd793b3e55f388099a781df546a2",
+        "lossless": true,
+        "fundamental_units": 570,
+        "families": 1223,
+        "candidate_pairs": 123
+      },
+      "completeness_prerequisites": [
+        "Written height bound",
+        "Legendre convergent criterion for genuinePellsolutions",
+        "Exact certified minimal unit",
+        "Unit-power descent",
+        "First omitted point in eachfamily"
+      ]
+    },
+    "new_lean_execution_for_these_results": false,
+    "new_deepseek_api_calls_by_this_workspace": 0,
+    "new_complete_cas_calls": 0,
+    "external_peer_review": false,
+    "runtime_scope": "Lean executable, pinnedmathlib andMISTRAL_API_KEY binding are unavailable in this workspace. SeparateDeepSeek formalization continues in anotherenvironment; thatstatus is not replaced by this report."
+  },
+  "primary_references": [
+    {
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/DiophantineApproximation/Basic.html",
+      "use": "Legendre criterion only for actualPellsolutions withproved1/(2q^2)error; not substituting forolder3/(2q^2)"
+    },
+    {
+      "url": "https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/Pell.html",
+      "use": "Established minimalunit/powerstructure; newv16Leanexecutionnotclaimed"
+    }
+  ],
+  "parallel_work": {
+    "preserved_files": [
+      "DEEPSEEK_V16_WORK.md",
+      "V16_DEEPSEEK_RESEARCH_PROPOSAL.json",
+      "DEEPSEEK_STATE.md",
+      "DEEPSEEK_GOAL_PROGRESS.md"
+    ],
+    "existing_formal_proof_bodies_changed": false,
+    "fixed_goals_changed": false,
+    "separate_goal_completion_claimed": false
+  },
+  "remaining": {
+    "original_four_variable_problem_solved": false,
+    "original_solution_found": false,
+    "whole_offset_three_branch_solved": false,
+    "unbounded_delta_solved": false,
+    "H_lower_bound": 21,
+    "H_lower_bound_source": "v12unchanged",
+    "first_index_count": "v15O(sqrt(X)log(X))unchanged"
+  },
+  "files": [
+    {
+      "path": "PROGRESS_v16_ja.md",
+      "bytes": 13790,
+      "sha256": "79a478abdddc563be87bc56787f1b687e3f052d02a828fd41b94b4d9d4044442",
+      "git_blob_sha1": "2cf608f3fc287f636153a6a2ad8c62a8d5369b31",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 26287,
+      "sha256": "ca4962cab46edf56bbb318108896bc42449c9a0dd9501aa463e1d908c2dbfeb3",
+      "git_blob_sha1": "6605f88f8837f75b68335995538b2c8ca9324f84",
+      "change": "updated_navigation",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "RESEARCH_LOG.md",
+      "bytes": 21302,
+      "sha256": "95b12649b9b4e5a7a2eae73304318b2aed9a469f74bd0a41da85a55bfff8a7cb",
+      "git_blob_sha1": "4bb06cb0fec2944e997996f8d63ee962f995a389",
+      "change": "updated_navigation",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_lower_gap.md",
+      "bytes": 6426,
+      "sha256": "4a141edcc7ee11ff616d42e6f9297e39fd96626b479a973d886322a34d1b18c4",
+      "git_blob_sha1": "1e072810b6519f7773cf3b6253fe92d9281f80d5",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_lower_gap_checks.json",
+      "bytes": 2401,
+      "sha256": "040c914c5fe3756342aa97fc05ef98aba33a78bedf11ae6068deb2887aa7beee",
+      "git_blob_sha1": "42ada2c31000bee076d57cfa59149414bf4be330",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_lower_gap_checks.py",
+      "bytes": 7799,
+      "sha256": "a37ff5ebae259a40080fb0452fe2be579e0a966bea20f2133285029a8c22bb36",
+      "git_blob_sha1": "052e4f6133f245c05b901822dff66d3f06cbf898",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_quadratic_neighbors.md",
+      "bytes": 7746,
+      "sha256": "ac3cb31d741e350ce4e54abf6c9e1bcd20ccb2a854bd46743f012c45fd1b5031",
+      "git_blob_sha1": "974446722dd6b9f65ff80bc140df7fdf5b715988",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_quadratic_neighbors_checks.json",
+      "bytes": 29781,
+      "sha256": "ed86d7e25a0c4bfc0310aebe007cb0588c462e374e4d77f1b234f9a329b2ecd2",
+      "git_blob_sha1": "785c80c197a32359dd2f3eb914cacc5e7546d7dd",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_quadratic_neighbors_checks.py",
+      "bytes": 7403,
+      "sha256": "fd89805f7f733e3f21612c2829f3921e35279b86dcb1ee5fd6a6f85df38cf782",
+      "git_blob_sha1": "5decee3e7e0ede84fcd8f54424808c395da144e9",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes.md",
+      "bytes": 7168,
+      "sha256": "eb0716958da09efe50cc222915928cb808e25bbf9ef14fce1201d4eb2cd868f9",
+      "git_blob_sha1": "fec76b52552523a8d76f0b8a671107b20a77d263",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes_checks.json",
+      "bytes": 12802,
+      "sha256": "0139b68b9efd4aec2439bea0d67f3f39ce9639c4aac304e89e2404dfe6997f7c",
+      "git_blob_sha1": "ddc1f51559884f997521e176ea52c1edff216fdf",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes_checks.py",
+      "bytes": 8632,
+      "sha256": "5bfc92b82a98a8c1b682f197c8e658662e6ef79e7fd5953ad617315f995c3dda",
+      "git_blob_sha1": "ad787324f564cd3e5db9616f438cb6f0907aee49",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_independent_audit.json",
+      "bytes": 163087,
+      "sha256": "8ff0b3a6ba84dd5a5d5056ee91c80d1c3cf2887bd760f504c35bf95b1d43099f",
+      "git_blob_sha1": "5b680b3b93c8ac7187ad7fef3dc179171ce808c0",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_independent_audit.py",
+      "bytes": 16173,
+      "sha256": "b6330a0a5b3279bb3982fd2747c8c90b55e28022efaa302953441d9108dcd337",
+      "git_blob_sha1": "16e46159e05bd1cfad71b44dce0cebb4d071f03e",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_independent_audit_note.md",
+      "bytes": 5195,
+      "sha256": "8ab525eb351d4eca287c242549f979a03703f7908f85650a62b6029d5b1c97c7",
+      "git_blob_sha1": "a1e6a1dc2bfc236a6b4b4af719736707f4894a05",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_pell.md",
+      "bytes": 14887,
+      "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822",
+      "git_blob_sha1": "c1a2a3c43eab49c0036126dd4706dcebef71ee9e",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_pell.py",
+      "bytes": 11093,
+      "sha256": "6488b2419f08be60ed92267df78a44387728b4e93f27633ddeb100a27610d79c",
+      "git_blob_sha1": "311c2123a63aec84d725288463b5de411a9610c9",
+      "change": "new",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "v16_square_defect_pell_results.json.gz",
+      "bytes": 169374,
+      "sha256": "44838b5d8278469741dc16bef0488affc8c957a7591f8709a28ece7dee7e54c3",
+      "git_blob_sha1": "71daea248f6b39cbafb0e423d2743589d93794d8",
+      "change": "new",
+      "encoding": "binary_gzip"
+    },
+    {
+      "path": "v16_square_defect_pell_summary.json",
+      "bytes": 8609,
+      "sha256": "74cb8119dd7a447fff94abf17482a83fe2e1c4864b818881d4cbebafbf8f10fe",
+      "git_blob_sha1": "b4783ff7791e932a8b2179fff154c5bb2abe8994",
+      "change": "new",
+      "encoding": "utf-8"
+    }
+  ],
+  "file_count_excluding_manifest": 19,
+  "new_file_count_including_manifest": 18,
+  "updated_navigation": [
+    "README.md",
+    "RESEARCH_LOG.md"
+  ],
+  "hash_convention": "SHA-256 andGitblobSHA-1 ofexactbytes; manifestexcludesits ownhash. gzipmtime=0 andfulluncompressedcertificatehashrecorded.",
+  "publication_boundary": "Authorizedresearchbranchonly; preserveconcurrentwork, noforcepush, visibilitychangeormerge."
+}

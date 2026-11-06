@@ -1,6 +1,8 @@
 # 入れ子の二項係数方程式の研究記録
 
-> **最新 v15（2026-11-06）**：主対象 ell=1, j=i−3 の両分岐で、第一添字の個数を **O(√X log X)** に改善。**n²+2 が素数の場合を一様に排除**し、各素因数にも上限を証明。さらに **Q∤r²** を25本のPell方程式と独立計算で示し、**n または n−1 に素数の三乗が必要**と判明。Qに含まれる最大の立方因子κ³について **log n<28κ** も得た。詳細は [PROGRESS_v15_ja.md](PROGRESS_v15_ja.md) と [全記録](v15_manifest.json)。新規Lean実行はなく、元の四変数問題は未解決。
+> **最新 v16（2026-11-06）**：主対象 ell=1, j=i−3 の両分岐で、実際の不足約数 **δ=Q/gcd(Q,r²)≥13** と **log n<28δ** を証明。1,223係数族・全34,010 Pell点を独立再現し、残る246分岐を23以下の素数で全排除。さらに **r−3n+3>n^(3/5)/64**、**P⁺(n²−10)<r**、重複する大きな素因数の指数・分岐制限を追加。δと旧来のHは互いに素。詳細は [PROGRESS_v16_ja.md](PROGRESS_v16_ja.md) と [全記録](v16_manifest.json)。記述証明・整数検証の結果であり、新結果のLean形式化と全問題の解決は未完了。
+
+> **v15（2026-11-06）**：主対象 ell=1, j=i−3 の両分岐で、第一添字の個数を **O(√X log X)** に改善。**n²+2 が素数の場合を一様に排除**し、各素因数にも上限を証明。さらに **Q∤r²** を25本のPell方程式と独立計算で示し、**n または n−1 に素数の三乗が必要**と判明。Qに含まれる最大の立方因子κ³について **log n<28κ** も得た。詳細は [PROGRESS_v15_ja.md](PROGRESS_v15_ja.md) と [全記録](v15_manifest.json)。新規Lean実行はなく、元の四変数問題は未解決。
 
 > **v14（2026-11-06）**：主対象 ell=1, j=i−3 で、**n,n−1,n−2 の異なる二つに、11以上の素数が3の倍数でない指数で必要**と証明。従って **HT=2^a3^b5^c7^d p^e u³ を、任意の素数 p≥11・全指数・全Hで一括排除**。二因子の立方剰余部分が2・3・5・7だけで支えられる第一添字は正確に57個、最大13720。既存 n≥104 に残る18個も全排除。新規125本の完全Thue計算と二つの整数検証を記録。詳細は [PROGRESS_v14_ja.md](PROGRESS_v14_ja.md)、[証明](v14_two_factor_support.md)、[全実行記録](v14_manifest.json)。T単独で二素数が必要とは限らず、元の四変数問題は未解決。
 
@@ -21,7 +23,14 @@
 
 ## 読み始める場所
 
-- **[最新：v15 日本語概要](PROGRESS_v15_ja.md)**
+- **[最新：v16 日本語概要](PROGRESS_v16_ja.md)**
+- [実際の不足約数δの構造・高さ・一般Pell帰着とδ≤12の完全排除](v16_square_defect_pell.md)
+- [r−3nの五分の三の下側評価：全素数・全Hに一様](v16_lower_gap.md)
+- [n²−10など複数の二次式に対する最大素因数制限](v16_quadratic_neighbors.md)
+- [重複する大きな素因数の正確な指数と分岐の分類](v16_repeated_neighbor_primes.md)
+- [Pell全証明書の独立再現と検証範囲](v16_square_defect_independent_audit_note.md)
+- [並行するDeepSeekのv16研究・形式化の作業記録](DEEPSEEK_V16_WORK.md)
+- [v15 日本語概要](PROGRESS_v15_ja.md)
 - [第一添字の個数を O(√X log X) に改善する一様な証明](v15_cubic_defect_sparsity.md)
 - [n²+2 の素数値を全排除し、任意の素因数を制約](v15_neighbor_prime_obstruction.md)
 - [Q∤r² と必須の立方因子：完全なPell帰着と独立検証](v15_pell_square_divisor.md)
@@ -246,6 +255,16 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 
 ## 再計算
 
+v16では、任意の固定δに対する有限帰着と、δ≤12の完全な証明書を追加した。
+全証明書は省略なく [gzip形式](v16_square_defect_pell_results.json.gz) で保存。
+下側評価・二次式の一般定理の補助検査と、理論的な全候補の検証を区別している。
+
+    python3 v16_lower_gap_checks.py --limit 100000 --output reproduced_v16_lower_gap.json
+    python3 v16_quadratic_neighbors_checks.py
+    python3 v16_repeated_neighbor_primes_checks.py
+    python3 v16_square_defect_pell.py --limit 12 --output reproduced_v16_square_defect.json --v15-certificate v15_pell_square_divisor_results.json
+    python3 v16_square_defect_independent_audit.py --input reproduced_v16_square_defect.json --generator v16_square_defect_pell.py --v15 v15_pell_square_divisor_results.json --output reproduced_v16_pell_audit.json
+
 v15 の再計算には Python 標準ライブラリだけを使用する。
 Pellの計算は証明された全有限領域の排除、他の有限検査は一般証明の整合性確認。
 詳細な範囲と元の必要条件は [v15の日本語説明](PROGRESS_v15_ja.md) を参照。
@@ -344,6 +363,7 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 
 - ell=1、j=i-3 で、実際の不足分H≥21、回復後のE≥21と平方値CRTの短い区間を全て通過する混合素因数。v13ではTに11以上の非立方指数の素数が必要。v14ではさらに、n,n−1,n−2 の異なる二因子にそのような素数が必要で、HTには異なる二素数以上が必要。
 - v15では同じ枝にQ∤r²、κ≥2、log n<28κ、n²+2が合成数という条件も必要。大きな素因数での平方剰余条件と各素因数の上界も同時に満たす構造が残る。第一添字の個数はO(√X log X)だが、全体を有限個にした結果ではない。
+- v16ではδ=Q/gcd(Q,r²)≥13、log n<28δ、gcd(δ,H)=1、δ³|A/Hも必要。r−3nの五分の三の下限、P⁺(n²−10)<r、各剰余に応じた他の二次式の条件、重複する大きな素因数の分岐制限も同時に課される。無制限δの場合は未解決。
 - 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,192)≥14かつlog i/128より大きい未排除の値。
 - i−3側の新しい三次高さ条件も通過する値。i=wp^a+3、w=1..4、p=2またはp≡3 mod4の族はv11で完了。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。
