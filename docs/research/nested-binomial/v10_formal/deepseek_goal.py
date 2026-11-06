@@ -23,6 +23,7 @@ import uuid
 from deepseek_goal_budget import GoalBudgetExceeded
 from deepseek_proof_loop import ROOT, MODEL, api, completion_text, digest, load_api_settings
 from deepseek_lean_harness import analyze, accepted as lean_accepted, source_context
+from deepseek_publication import PublicationBlocked, synchronize, push_verified
 
 REPO = ROOT.parents[3]
 NOTES = ROOT.parent
@@ -154,6 +155,7 @@ review_failure: {job_id}; ask a separate DeepSeek repair critic for a different 
 set_plan: {milestones:[{id,objective,depends_on:[],modules:[]}]}; persist a dependency plan; evidence status is machine-derived.
 prove_job: {job_id,attempts?}; choose 1..20 proof attempts (default 5), then reconsider using real feedback.
 publish: {}; verify all accepted modules and commit/push ONLY their artifacts to authorized PR branch.
+sync_research: {}; fetch/merge the authorized branch, preserving verified sources; conflicts stop with actual diagnostics.
 checkpoint: {summary}; retain a brief research note, then CONTINUE; it does not end the goal.
 request_completion: {}; succeeds ONLY when both exact final targets are Lean-verified and published.
 There is no done action, arbitrary shell, arbitrary file write, or permission to edit existing proofs.
@@ -466,10 +468,7 @@ class GoalAgent:
     def publish(self):
         pending = [j for j in self.state['jobs'].values() if j['status'] == 'verified']
         if not pending: return {'published': [], 'message': 'No new verified module'}
-        origin = subprocess.check_output(['git', 'remote', 'get-url', 'origin'], cwd=REPO, text=True).strip()
-        if origin not in {'https://github.com/' + self.goal['repository'] + '.git',
-                          'git@github.com:' + self.goal['repository'] + '.git'}:
-            raise ValueError('Origin does not match the authorized repository')
+        synchronization = self.sync_research()
         env = os.environ.copy(); env['ELAN_HOME'] = '/workspace/.cloud-setup/lean/elan'
         env['PATH'] = env['ELAN_HOME'] + '/bin:' + env['PATH']
         check = subprocess.run(['lake', 'env', sys.executable, str(ROOT / 'check_additional_formalization.py')],
@@ -494,14 +493,14 @@ class GoalAgent:
         changes = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=REPO).returncode
         if changes:
             subprocess.run(['git', 'commit', '-m', 'DeepSeek goal: verify ' + ', '.join(j['config']['module'] for j in pending)], cwd=REPO, check=True)
-        subprocess.run(['git', 'push', 'origin', 'HEAD:' + self.goal['branch']], cwd=REPO, check=True)
-        head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=REPO, text=True).strip()
-        remote = subprocess.check_output(['git', 'ls-remote', 'origin', 'refs/heads/' + self.goal['branch']], cwd=REPO, text=True).split()[0]
-        if remote != head: raise ValueError('Remote head does not match published commit')
+        publication = push_verified(REPO, self.goal['branch'], self.publication_origins(),
+                                    self.protected_sources(), self.compiler_inputs)
+        head = publication['commit']
         for job in pending: job['status'] = 'published'; job['published_commit'] = head
         self.state['publication'] = {'commit': head, 'modules': [j['config']['module'] for j in pending]}
         self.save()
-        result = {'published': self.state['publication'], 'kernel_check': 'PASS'}
+        result = {'published': self.state['publication'], 'kernel_check': 'PASS',
+                  'synchronization': synchronization, 'publication_receipt': publication}
         try:
             self.update_pr(head, report)
             result['pr_summary_updated'] = True
@@ -509,6 +508,23 @@ class GoalAgent:
             # The verified git publication is still real if only a summary edit fails.
             result['pr_summary_error'] = str(error)[:1000]
         return result
+
+    def publication_origins(self):
+        return {'https://github.com/' + self.goal['repository'] + '.git',
+                'git@github.com:' + self.goal['repository'] + '.git'}
+
+    def protected_sources(self):
+        paths = [*ROOT.glob('*.lean'), *ROOT.glob('*.goal_job.json'), GOAL]
+        return {str(p.relative_to(REPO)):digest(p.read_bytes()) for p in paths if p.is_file()}
+
+    def compiler_inputs(self):
+        paths = [*ROOT.glob('*.lean'), *ROOT.glob('*.goal_job.json'), REGISTRY, GOAL,
+                 ROOT/'check_additional_formalization.py', ROOT/'deepseek_lean_harness.py',
+                 ROOT/'deepseek_harness.json']
+        return {str(p.relative_to(REPO)):digest(p.read_bytes()) for p in paths if p.is_file()}
+
+    def sync_research(self):
+        return synchronize(REPO, self.goal['branch'], self.publication_origins(), self.protected_sources())
 
     def update_pr(self, head, report):
         endpoint = 'repos/' + self.goal['repository'] + '/pulls/' + str(self.goal['pr'])
@@ -570,6 +586,7 @@ class GoalAgent:
         if name == 'set_plan': return self.set_plan(args)
         if name == 'prove_job': return self.worker(args['job_id'], args.get('attempts', 5))
         if name == 'publish': return self.publish()
+        if name == 'sync_research': return self.sync_research()
         if name == 'checkpoint':
             summary = args.get('summary', '')
             if not isinstance(summary, str) or not 1 <= len(summary) <= 2000: raise ValueError('Use a brief progress summary')
@@ -595,7 +612,8 @@ class GoalAgent:
                                      'deadline': time.time() + max_hours * 3600, 'api_calls': 0})
             previous = os.environ.get('DEEPSEEK_GOAL_BUDGET_FILE')
             os.environ['DEEPSEEK_GOAL_BUDGET_FILE'] = str(budget_path)
-            self.state['status'] = 'running'; self.state['pid'] = os.getpid(); self.save()
+            self.state['status'] = 'running'; self.state['pid'] = os.getpid()
+            self.state['last_error'] = None; self.save()
             try:
                 for _ in range(max_actions):
                     if (self.run_dir / 'PAUSE').exists():
@@ -611,14 +629,26 @@ class GoalAgent:
                     print(json.dumps({'step': self.state['steps'], 'model': MODEL, 'action': action.get('action'), 'reason': action.get('reason', '')}, ensure_ascii=False), flush=True)
                     try:
                         observation = self.execute(action)
+                    except PublicationBlocked as error:
+                        observation = {'tool_error': str(error), 'publication_blocked': True,
+                                       'goal_complete': False, 'retry_in_this_round': False}
+                        self.state['status'] = 'blocked'; self.state['last_error'] = str(error)
                     except (ValueError, KeyError, TypeError, subprocess.SubprocessError, OSError) as error:
                         observation = {'tool_error': str(error)[-18000:], 'goal_complete': False}
+                        if action.get('action') in {'publish', 'sync_research'}:
+                            detail = getattr(error, 'stderr', '') or ''
+                            if isinstance(detail, bytes): detail = detail.decode(errors='replace')
+                            observation.update(publication_blocked=True, retry_in_this_round=False)
+                            observation['tool_error'] += '\n' + detail[-12000:]
+                            self.state['status'] = 'blocked'
+                            self.state['last_error'] = observation['tool_error']
                     write_json(self.run_dir / f"{self.state['steps']:04d}.action.json", {'action': action, 'observation': observation})
                     self.state['last_observation'] = observation
                     self.remember(action, observation)
                     self.history.append({'role': 'user', 'content': 'Actual tool result:\n' + json.dumps(observation, ensure_ascii=False)[:40000] + '\nContinue the goal; choose the next action.'})
                     self.history = self.history[-6:]
                     self.save()
+                    if observation.get('publication_blocked'): break
                 else:
                     if self.state['status'] != 'complete': self.state['status'] = 'action_limit'
             except GoalBudgetExceeded as error:

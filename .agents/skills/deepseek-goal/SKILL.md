@@ -36,6 +36,11 @@ same theorem. They are source observations, not proof certificates. Use
    Unused-variable lint does not invalidate a kernel-checked theorem.
 6. Publish each verified module before starting another new module. Only verified
    source, fixed jobs, generated verification reports and goal progress are staged.
+   The executor synchronizes the authorized branch before publishing and retries
+   concurrent-writer push races at most three times, without force push or changes
+   to protected proofs. `sync_research` can fetch newer versioned research notes.
+   Unrecoverable publication conflicts/errors stop the round as `blocked` with
+   actual Git diagnostics; do not waste actions on publish/checkpoint loops.
 7. Checkpoint after meaningful progress, then continue choosing the next task.
    A checkpoint or one successful lemma does not stop the goal loop.
 

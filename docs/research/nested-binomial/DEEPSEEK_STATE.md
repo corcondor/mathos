@@ -168,3 +168,16 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - v13の13ファイル全文（GP入力・全出力・全解JSONを含む計256345バイト）を既存Mistral APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。受領記録: v13_committed_update_share_receipt.json。
 - 保存の競合は履歴を保持する通常のmergeで解消し、CFContinuantBridgeの4定理を154334c9776e8906549703112320f981c37ad3b0で既存PRへ通常push。remote SHA一致、12モジュールの実Lean検査PASS、PR要約更新を確認。jobはpublishedになった。旧メモの「未push」は解消済み。
 - 最初の48判断のラウンドはaction_limitで未完了。今回のv13情報を受けた新ラウンドは24判断を上限にし、残りのAPI報告トークン・当初の終了時刻を引き継ぐ。固定goalと成功済み本文は変更しない。
+
+## v14の取り込みと実ハーネスの動作点検（2026-11-06 JST）
+- ユーザーの動作確認依頼により実プロセス・全actionログを点検。DeepSeekによる課題選択、証明生成/修正、実Lean検証は動いていた。CFCylinderNestingの4証明が新規PASS。一方、他CodexのGitHub更新を取り込まずpushしてnon-fast-forwardとなり、publish/checkpointを繰り返す不具合を確認した。v14も未同期だった。
+- 保存前に認可された研究ブランチをfetch/mergeする処理と、push中の同時更新に最大3回まで追従する処理を追加。既存の検証済みLeanソース・固定goalを変更するremote更新は自動適用しない。強制pushは使わず両履歴を保持する。入力が変われば再検証を要求する。
+- 回復不能な保存/同期エラーは実際のGit診断を残してblockedで停止し、同じ操作にモデル判断を使い続けない。再開時は古いlast_errorを解除し、過去ログは保持する。DeepSeekのsync_researchツールも追加。
+- 実Gitリポジトリによる同時書込み競合・競合中止・証明保護・認証失敗・再試行上限・保存直後のremote前進などを含む47テストがPASS。新しい同期機構でv14コミットf1e894135740c929e532f57def55e8f42f6af5aeを取得できた。
+- 新しい保存機構でCFCylinderNestingの4定理をa70243379a9af3fceb05f795792b3f919e6b0879へ保存、remote一致とPR更新を確認。合計DeepSeek作成46定理、依存元を含む13モジュールが実Lean検査PASS。最終2目標やv14全体のLean形式化が完了したという意味ではない。
+- v14の報告: n,n-1,n-2の少なくとも二因子に異なる11以上の素数が3の倍数でない指数で必要。原始H,TではHTの非立方部分にそのような素数が少なくとも二つ必要で、T単独に二つとは限らない。HT=2^a*3^b*5^c*7^d*p^e*u³を任意のp>=11、全H・指数・uに対し排除。H>=21の数値下限は変更なし。
+- 2因子のcube-free supportが{2,3,5,7}に限られる補助条件はn>=3で正確に57個、最大13720。v13の隣接対24個からN,N+1,2Nと、新規差2の125本（PARI同一backendで250呼出し、thueinit flag 1）の奇数n=3,5,7,9,27,245を合併。n>=104の18点を整除/区間で排除する計算機支援結果。
+- この環境でv14 manifestの全20記録のサイズ/SHAを照合し、2本の監査コードを再実行して57個・18点・残存0を確認。v14_deepseek_handoff_check.json参照。PARI完全ソルバは再実行せず、独立の完全ソルバ実装や新しいv14 Lean実行は行っていない。BennettのRHS1の一意性をRHS2へ適用しない。
+- v14_manifest.jsonの「DeepSeek/Lean環境が利用不可」というruntime_noteは、v14を作業した別ワークスペースの状態であり、この環境の現在の状態ではない。この環境ではMistral binding ready、実API・Lean・GitHub保存が利用できる。
+- v14の12ファイル全文を既存APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。v14_committed_update_share_receipt.json参照。受領だけで数学的完全性やLean化が確認されたとは扱わない。
+- 修正後は残り7判断（今回ラウンド累計72判断まで）・残トークン・当初の終了時刻を引き継いで再開する。Codexはハーネスを修正し、次の数学ジョブと証明はDeepSeek自身が選ぶ。

@@ -209,6 +209,30 @@ class GoalTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.agent.set_plan({'milestones':bad})
         self.assertEqual(self.agent.state['milestones'],plan)
 
+    def test_unrecoverable_publication_failure_stops_without_spending_more_model_actions(self):
+        action={'action':'publish','arguments':{}}
+        for error in [goal.PublicationBlocked('actual git failure: permission denied'),
+                      goal.subprocess.CalledProcessError(1,['git','commit'],stderr='permission denied')]:
+            with self.subTest(error=type(error).__name__):
+                before=self.agent.state['steps']
+                with patch.object(self.agent,'decision',return_value=action) as model, patch.object(
+                        self.agent,'execute',side_effect=error):
+                    result=self.agent.run(max_actions=8,max_hours=.1,max_completion_tokens=4096)
+                self.assertEqual(result['status'],'blocked')
+                self.assertEqual(result['steps'],before+1)
+                self.assertTrue(result['last_observation']['publication_blocked'])
+                self.assertFalse(result['last_observation']['retry_in_this_round'])
+                self.assertIn('permission denied',result['last_error'])
+                self.assertEqual(model.call_count,1)
+
+    def test_resume_clears_stale_error_but_retains_action_logs(self):
+        self.agent.state['last_error']='old connection failure'
+        with patch.object(self.agent,'decision',return_value={'action':'checkpoint','arguments':{'summary':'Continue verified work'}}):
+            result=self.agent.run(max_actions=1,max_hours=.1,max_completion_tokens=4096)
+        self.assertEqual(result['status'],'action_limit')
+        self.assertIsNone(result['last_error'])
+        self.assertTrue((self.agent.run_dir/'0001.action.json').exists())
+
 
 class BudgetTests(unittest.TestCase):
     def test_shared_budget_caps_request_and_accounts_reported_usage(self):
