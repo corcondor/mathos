@@ -1,0 +1,28 @@
+{
+  "module": "CFContinuantBridge",
+  "imports": "import Mathlib.Tactic\nimport CFCandidateCoverage",
+  "definitions": "def contsZ (a : ℕ → ℤ) : ℕ → ℤ × ℤ\n  | 0 => (1, 0)\n  | 1 => (a 0, 1)\n  | n + 2 => (a (n + 1) * (contsZ a (n + 1)).1 + (contsZ a n).1,\n              a (n + 1) * (contsZ a (n + 1)).2 + (contsZ a n).2)",
+  "goals": [
+    [
+      "contsZ_det_coprime",
+      "theorem contsZ_det_coprime (a : ℕ → ℤ) (n : ℕ) : |(contsZ a (n + 1)).1 * (contsZ a n).2 - (contsZ a n).1 * (contsZ a (n + 1)).2| = 1 ∧ Nat.Coprime (Int.natAbs ((contsZ a (n + 1)).1)) (Int.natAbs ((contsZ a (n + 1)).2))"
+    ],
+    [
+      "contsZ_den_ordering",
+      "theorem contsZ_den_ordering (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (n : ℕ) : 0 ≤ (contsZ a n).2 ∧ (contsZ a n).2 < (contsZ a (n + 1)).2"
+    ],
+    [
+      "cylinder_error_bounds",
+      "theorem cylinder_error_bounds (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (alpha u : ℝ) (m : ℕ) (hu_lo : (a (m + 1) : ℝ) < u) (hu_hi : u < (a (m + 1) : ℝ) + 1) (hcyl : alpha * (((contsZ a (m + 1)).2 : ℝ) * u + ((contsZ a m).2 : ℝ)) = ((contsZ a (m + 1)).1 : ℝ) * u + ((contsZ a m).1 : ℝ)) : |((contsZ a (m + 1)).2 : ℝ) * alpha - ((contsZ a (m + 1)).1 : ℝ)| < 1 / ((contsZ a (m + 2)).2 : ℝ) ∧ |((contsZ a (m + 2)).2 : ℝ) * alpha - ((contsZ a (m + 2)).1 : ℝ)| < 1 / ((contsZ a (m + 2)).2 : ℝ)"
+    ],
+    [
+      "certificate_coverage_bridge",
+      "theorem certificate_coverage_bridge (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (alpha u : ℝ) (m : ℕ) (p q : ℤ) (hu_lo : (a (m + 1) : ℝ) < u) (hu_hi : u < (a (m + 1) : ℝ) + 1) (hcyl : alpha * (((contsZ a (m + 1)).2 : ℝ) * u + ((contsZ a m).2 : ℝ)) = ((contsZ a (m + 1)).1 : ℝ) * u + ((contsZ a m).1 : ℝ)) (hq : 0 < q) (hQm_le_q : (contsZ a (m + 1)).2 ≤ q) (hq_lt_Qn : q < (contsZ a (m + 2)).2) (hred : Nat.Coprime (Int.natAbs p) (Int.natAbs q)) (happrox : |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)) : ∃ a' b c : ℤ, p = a' * (contsZ a (m + 1)).1 + b * (contsZ a m).1 ∧ q = a' * (contsZ a (m + 1)).2 + b * (contsZ a m).2 ∧ c = a' - b * a (m + 1) ∧ p = b * (contsZ a (m + 2)).1 + c * (contsZ a (m + 1)).1 ∧ q = b * (contsZ a (m + 2)).2 + c * (contsZ a (m + 1)).2 ∧ (a', b) ∈ coefficientCandidates (a (m + 1))"
+    ]
+  ],
+  "local_dependencies": [
+    "CFApproximationCore.lean",
+    "CFCoefficientRanges.lean",
+    "CFCandidateCoverage.lean"
+  ]
+}
