@@ -1,0 +1,214 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T09:08:12.468609+00:00",
+  "module": "CFVerifierBridge",
+  "source_sha256": "56c9ebf08e8454af4beb6a4e14b83205e25dcd67638175fd0273b53aeb2224cc",
+  "theorems": [
+    "int_cross_mul_opposite_signs_implies_hbetween",
+    "verifier_certificate_to_coverage"
+  ],
+  "records": [
+    {
+      "theorem": "int_cross_mul_opposite_signs_implies_hbetween",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "70285b6a0d77d344bdbea6bfe27ca5093bbd08b38e96e2513f5005b42eb1281b",
+      "usage": {
+        "prompt_tokens": 48980,
+        "total_tokens": 68458,
+        "completion_tokens": 19478,
+        "prompt_tokens_details": {
+          "cached_tokens": 11264
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 18300
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "no_goals"
+        ],
+        "fingerprint": "46b83860ad1e8766362cc7f48251e77e9ef910fcbd087db1109252ac5c8ef05c",
+        "locations": [
+          {
+            "line": 34,
+            "column": 4,
+            "kind": "error",
+            "message": "No goals to be solved"
+          },
+          {
+            "line": 41,
+            "column": 4,
+            "kind": "error",
+            "message": "No goals to be solved"
+          },
+          {
+            "line": 45,
+            "column": 38,
+            "kind": "error",
+            "message": "mod_cast has type"
+          },
+          {
+            "line": 48,
+            "column": 24,
+            "kind": "error",
+            "message": "mod_cast has type"
+          },
+          {
+            "line": 55,
+            "column": 24,
+            "kind": "error",
+            "message": "mod_cast has type"
+          },
+          {
+            "line": 58,
+            "column": 38,
+            "kind": "error",
+            "message": "mod_cast has type"
+          }
+        ],
+        "warnings": [],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "A prior tactic already closed this goal. Inspect the reported source lines; do not redo the mathematics."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "no_goals"
+          ],
+          "elapsed_seconds": 2.831
+        }
+      ]
+    },
+    {
+      "theorem": "int_cross_mul_opposite_signs_implies_hbetween",
+      "attempt": 2,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "21e74732ed06f7b59acef63ed26a930687c516b9377d4414e82fd372679e31d4",
+      "usage": {
+        "prompt_tokens": 51710,
+        "total_tokens": 61883,
+        "completion_tokens": 10173,
+        "prompt_tokens_details": {
+          "cached_tokens": 48896
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9004
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 2.789
+        }
+      ]
+    },
+    {
+      "theorem": "verifier_certificate_to_coverage",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "56c9ebf08e8454af4beb6a4e14b83205e25dcd67638175fd0273b53aeb2224cc",
+      "usage": {
+        "prompt_tokens": 50770,
+        "total_tokens": 58313,
+        "completion_tokens": 7543,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 7170
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 3.115
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "No mathematical statement issue found. The first theorem correctly converts opposite signs of the two integer cube-comparison factors into strict separation of alpha from the two rationals; Q > 0, Q + Qm > 0, S > 0, and the cube relation are sufficient for nonzero positive denominators and the sign transfer. The second theorem is a conditional bridge: from the curve data, gcd normalization, cylinder sign check, and denominator bound it derives q > 0 and coprimality and then obtains the interval and candidate-coefficient conclusion. It does not assert full certificate verification, global coverage, or a solution of the original equation; its name is acceptable for that conditional local scope. No overstatement or missing positivity/nonzero assumption affecting the proved claims."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}

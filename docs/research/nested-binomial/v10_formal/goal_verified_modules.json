@@ -3,6 +3,7 @@
     "CFAnalyticBounds",
     "CFContinuantBridge",
     "CFCylinderNesting",
-    "CFCurveInstantiation"
+    "CFCurveInstantiation",
+    "CFVerifierBridge"
   ]
 }
