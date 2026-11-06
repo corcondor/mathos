@@ -1,0 +1,6 @@
+PARI version: [2, 17, 4]
+P0_on_curve: 1
+P0_double: [-61, 0]
+P0_order: 4
+rank_bounds: [0, 0, 0, []]
+torsion: [12, [12], [[-37, 360]]]

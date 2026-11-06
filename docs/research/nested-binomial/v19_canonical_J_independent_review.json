@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "method": "Independent mathematical source review plus actual re-execution of the standard-library certificate verifier; no edits to targets",
+  "scope": "Complete canonical small-branch J<=16 exclusion under inherited v17/v18 conditions",
+  "totals": {
+    "primitive_w": 6620,
+    "raw_divisor_records": 237434,
+    "normalized_n": 136852,
+    "height_compatible": 159,
+    "bezout_identities": 110,
+    "max_prime": 107
+  },
+  "sha256": {
+    "v19_canonical_J_checks.py": "05084223f00675af96b8f2d2625209ccf0b6e69924b404f22366383a4e845cd2",
+    "v19_canonical_J_verify.py": "a3a4cef6b74316215879ee3d62de6491803232753bd0d331d8ea3bf6955286a4",
+    "v19_canonical_J_certificate.json": "314edd42c7c884de81c46d9a56ba2af9a11d4829bd85c3f2caf699f99305d57e",
+    "v19_canonical_J_independent_review.md": "9105114bb479d4a4a993252188a1d7bb785d9746a45106a8fea37d43583a4bce",
+    "v19_canonical_J_independent_execution.json": "9827cc63f2c5ec5a567c204a5abaf9282d976bcb5cb94172be64e6851f98aab2",
+    "v19_canonical_J_elimination.md": "45a20d80cbc8ec53859a8d3e8bbda339880303490e9a10d633e8904e8c84685b"
+  },
+  "companion_producer_note_at_review": "Completed final note read in full and included in SHA256 bindings",
+  "final_note_crosschecks": {
+    "max_P_degree": 5,
+    "max_second_domain_size": 96,
+    "J7_w101_example": "confirmed",
+    "status": "PASS"
+  }
+}

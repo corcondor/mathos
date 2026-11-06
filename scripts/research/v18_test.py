@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 from v18_arithmetic import (curve_coefficients, forced_r_divisor, lucas,
                            n_height_exclusive, pairs, residual_points, spf_sieve)
+from v18_compute import conditional_height_checks
 from v18_report import render
 import v18_publish
 
@@ -16,12 +17,57 @@ import v18_publish
 class ArithmeticTests(unittest.TestCase):
     def test_domain_and_singular_curve(self):
         domain = pairs(20)
-        self.assertEqual(len(domain), 83)
-        self.assertEqual([p for p in domain if 3*p[0] == p[1]], [(1,3)])
+        self.assertEqual(len(domain), 52)
+        self.assertEqual([p for p in domain if 3*p[0] == p[1]], [])
+        self.assertNotIn((1,1), domain)
+        self.assertIn((31,27), pairs(31))  # Equality is not in the excluded strip.
+        for a,b in domain:
+            self.assertGreaterEqual(27*a, 31*b)
+        singular_c4,singular_c6 = curve_coefficients(1,3)
+        self.assertEqual(4*singular_c4**3+27*singular_c6**2, 0)
         for a,b in domain:
             c4,c6 = curve_coefficients(a,b)
             self.assertEqual(-16*(4*c4**3+27*c6**2),
                              -995328*a*a*b**4*(3*a-b)**3*(3*a+b)**3)
+
+    def test_positive_neighbor_height_uses_n_squared_plus_one(self):
+        spf = spf_sieve(1486)
+        delta = 13
+        # 117^2+1=10*37^2, 37^2>6*117-9, and 117=3 (mod 6).
+        self.assertEqual(117**2+1, 10*37**2)
+        for epsilon, exponent in ((0,24),(1,42)):
+            rows = conditional_height_checks(117,delta,epsilon,spf)
+            actual = next(x for x in rows if x['c'] == -1 and x['p'] == 37)
+            self.assertEqual(actual['n_upper_exclusive'],(1<<exponent)*delta**4)
+            self.assertTrue(actual['branch_pass'])
+            self.assertTrue(actual['height_pass'])
+        # 1485^2+2=83*163^2 is the wrong neighbor for these two heights.
+        self.assertEqual(1485**2+2,83*163**2)
+        for epsilon in (0,1):
+            rows = conditional_height_checks(1485,delta,epsilon,spf)
+            self.assertFalse(any(x['c'] < 0 and x['p'] == 163 for x in rows))
+            self.assertTrue(all(x['c'] != -2 for x in rows))
+        # The positive-neighbor residue restriction and strict p^2>m remain.
+        self.assertEqual((776**2+1) % 73**2,0)
+        self.assertGreater(73**2,6*776-9)
+        self.assertNotEqual(776 % 6,3)
+        self.assertFalse(any(x['c'] < 0 for x in conditional_height_checks(776,delta,0,spf)))
+        self.assertEqual((243**2+1) % 5**2,0)
+        self.assertFalse(any(x['c'] < 0 and x['p'] == 5
+                             for x in conditional_height_checks(243,delta,0,spf)))
+
+    def test_negative_neighbor_height_constants_and_branch_are_preserved(self):
+        spf = spf_sieve(415)
+        delta = 13
+        for n,c,p,exponent in ((331,10,53,18),(414,2,71,38)):
+            self.assertEqual((n*n-c) % (p*p),0)
+            self.assertGreater(p*p,6*n-9)
+            self.assertEqual(((c+2)*n-3*c) % 6,0)
+            for epsilon in (0,1):
+                rows = conditional_height_checks(n,delta,epsilon,spf)
+                actual = next(x for x in rows if x['c'] == c and x['p'] == p)
+                self.assertEqual(actual['n_upper_exclusive'],(1<<exponent)*delta**4)
+                self.assertEqual(actual['branch_pass'],epsilon == 1)
 
     def test_finite_strip_against_residual_polynomial(self):
         for a,b in pairs(4):
@@ -66,7 +112,10 @@ class ArithmeticTests(unittest.TestCase):
             report = json.loads((root/'out/v18_ranks_a20.json').read_text())
             self.assertFalse(report['cas_complete'])
             self.assertFalse(report['residual_enumeration_complete'])
-            self.assertEqual(len(report['missing_pairs']),83)
+            self.assertEqual(len(report['missing_pairs']),52)
+            text = (root/'out/v18_ranks_a20.md').read_text()
+            self.assertIn('27a≥31b',text)
+            self.assertNotIn('27a<31b',text)
             fixed = json.loads((root/'out/v18_fixed_J_search.json').read_text())
             self.assertEqual(fixed['status'],'missing_artifact')
 

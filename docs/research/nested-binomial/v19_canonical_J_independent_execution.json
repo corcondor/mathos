@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "certificate_sha256": "314edd42c7c884de81c46d9a56ba2af9a11d4829bd85c3f2caf699f99305d57e",
+  "checker": "Python standard library only; no producer import or SymPy",
+  "complete_reconstructed_rows": 159,
+  "bezout_identities": 110,
+  "max_prime": 107,
+  "totals": {
+    "primitive_w": 6620,
+    "raw_divisor_records": 237434,
+    "normalized_n": 136852,
+    "height_compatible": 159
+  },
+  "scope": "Finite canonical J <= 16 only, under the stated inherited conditions."
+}

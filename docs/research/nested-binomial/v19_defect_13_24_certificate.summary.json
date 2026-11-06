@@ -1,0 +1,302 @@
+{
+  "status": "PASS_COMPLETE_EXCLUSION",
+  "scope": "Original squared-index equation; ell=1, j=i-3, n>=104; both k=r and k=C(n,3)-r",
+  "defects_processed": [
+    13,
+    24
+  ],
+  "height": "n < 2^(42*delta), inherited v16 theorem; not an experimental n cutoff",
+  "coefficient_interval": "9*M*delta < K < (10400/927)*M*delta; gcd(K,delta)=1",
+  "baseline": {
+    "file": "v16_square_defect_pell.py",
+    "sha256": "6488b2419f08be60ed92267df78a44387728b4e93f27633ddeb100a27610d79c",
+    "reused_functions": [
+      "squarefree_decomposition",
+      "fundamental_unit",
+      "lucas",
+      "logarithm_lower"
+    ]
+  },
+  "inherited_proof": {
+    "file": "v16_square_defect_pell.md",
+    "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822",
+    "sections": [
+      "4: height",
+      "5: complete Pell reduction",
+      "6: candidate bound"
+    ]
+  },
+  "producer_sha256": "9e0381cee0fdf43f93a47b9a2ac9d7a452d5c54ba8e004aecefd6c86d2376783",
+  "counts": {
+    "coefficient_families": 3571,
+    "pell_points": 145195,
+    "integral": 112424,
+    "n_ge_104": 112249,
+    "actual_M": 42527,
+    "actual_delta": 42527,
+    "cube_divisibility": 3798,
+    "coarse_interval": 3625,
+    "post_log_candidates": 93,
+    "modular_branches_excluded": 186,
+    "modular_branches_remaining": 0,
+    "square_discriminants": 4
+  },
+  "per_defect": [
+    {
+      "delta": 13,
+      "counts": {
+        "coefficient_families": 319,
+        "pell_points": 10458,
+        "integral": 9410,
+        "n_ge_104": 9379,
+        "actual_M": 3799,
+        "actual_delta": 3799,
+        "cube_divisibility": 381,
+        "coarse_interval": 361,
+        "post_log_candidates": 6,
+        "modular_branches_excluded": 12,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 14,
+      "counts": {
+        "coefficient_families": 161,
+        "pell_points": 5149,
+        "integral": 4526,
+        "n_ge_104": 4512,
+        "actual_M": 1532,
+        "actual_delta": 1532,
+        "cube_divisibility": 218,
+        "coarse_interval": 208,
+        "post_log_candidates": 4,
+        "modular_branches_excluded": 8,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 15,
+      "counts": {
+        "coefficient_families": 213,
+        "pell_points": 7842,
+        "integral": 5993,
+        "n_ge_104": 5984,
+        "actual_M": 2246,
+        "actual_delta": 2246,
+        "cube_divisibility": 403,
+        "coarse_interval": 383,
+        "post_log_candidates": 17,
+        "modular_branches_excluded": 34,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 16,
+      "counts": {
+        "coefficient_families": 214,
+        "pell_points": 10421,
+        "integral": 4576,
+        "n_ge_104": 4565,
+        "actual_M": 1865,
+        "actual_delta": 1865,
+        "square_discriminants": 2,
+        "cube_divisibility": 146,
+        "coarse_interval": 131,
+        "post_log_candidates": 4,
+        "modular_branches_excluded": 8,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 17,
+      "counts": {
+        "coefficient_families": 426,
+        "pell_points": 16194,
+        "integral": 13928,
+        "n_ge_104": 13901,
+        "actual_M": 5390,
+        "actual_delta": 5390,
+        "cube_divisibility": 410,
+        "coarse_interval": 396,
+        "post_log_candidates": 6,
+        "modular_branches_excluded": 12,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 18,
+      "counts": {
+        "coefficient_families": 160,
+        "pell_points": 7148,
+        "integral": 3716,
+        "n_ge_104": 3713,
+        "square_discriminants": 1,
+        "actual_M": 1044,
+        "actual_delta": 1044,
+        "cube_divisibility": 213,
+        "coarse_interval": 196,
+        "post_log_candidates": 11,
+        "modular_branches_excluded": 22,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 19,
+      "counts": {
+        "coefficient_families": 479,
+        "pell_points": 18341,
+        "integral": 16187,
+        "n_ge_104": 16162,
+        "actual_M": 6603,
+        "actual_delta": 6603,
+        "cube_divisibility": 378,
+        "coarse_interval": 361,
+        "post_log_candidates": 5,
+        "modular_branches_excluded": 10,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 20,
+      "counts": {
+        "coefficient_families": 213,
+        "pell_points": 9368,
+        "integral": 6550,
+        "n_ge_104": 6544,
+        "actual_M": 2870,
+        "actual_delta": 2870,
+        "cube_divisibility": 357,
+        "coarse_interval": 348,
+        "post_log_candidates": 5,
+        "modular_branches_excluded": 10,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 21,
+      "counts": {
+        "coefficient_families": 320,
+        "pell_points": 14734,
+        "integral": 11006,
+        "n_ge_104": 10996,
+        "actual_M": 3956,
+        "actual_delta": 3956,
+        "cube_divisibility": 360,
+        "coarse_interval": 351,
+        "post_log_candidates": 16,
+        "modular_branches_excluded": 32,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 22,
+      "counts": {
+        "coefficient_families": 266,
+        "pell_points": 11040,
+        "integral": 9819,
+        "n_ge_104": 9801,
+        "actual_M": 3125,
+        "actual_delta": 3125,
+        "cube_divisibility": 281,
+        "coarse_interval": 262,
+        "post_log_candidates": 4,
+        "modular_branches_excluded": 8,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 23,
+      "counts": {
+        "coefficient_families": 587,
+        "pell_points": 24018,
+        "integral": 21210,
+        "n_ge_104": 21191,
+        "actual_M": 8270,
+        "actual_delta": 8270,
+        "cube_divisibility": 422,
+        "coarse_interval": 405,
+        "post_log_candidates": 5,
+        "modular_branches_excluded": 10,
+        "modular_branches_remaining": 0
+      }
+    },
+    {
+      "delta": 24,
+      "counts": {
+        "coefficient_families": 213,
+        "pell_points": 10482,
+        "integral": 5503,
+        "n_ge_104": 5501,
+        "actual_M": 1827,
+        "actual_delta": 1827,
+        "cube_divisibility": 229,
+        "coarse_interval": 223,
+        "post_log_candidates": 10,
+        "modular_branches_excluded": 20,
+        "modular_branches_remaining": 0,
+        "square_discriminants": 1
+      }
+    }
+  ],
+  "primes_permitted": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37,
+    41,
+    43,
+    47,
+    53,
+    59,
+    61,
+    67,
+    71,
+    73,
+    79,
+    83,
+    89,
+    97
+  ],
+  "witness_prime_histogram": {
+    "2": 22,
+    "3": 3,
+    "5": 46,
+    "7": 24,
+    "11": 56,
+    "13": 18,
+    "17": 7,
+    "19": 4,
+    "23": 6
+  },
+  "max_candidate_n": 384184387047640625450129434282186515057663129735569636627844004104895998848174453808436120107730120939057567521778928760301794825299942365045506155164303943606132543398559293595790075702477197195979619588575122821614658422457241738651498960279434591672050538549020733193209419380375021654962311169,
+  "codes": {
+    "i": "nonintegral reconstruction",
+    "n": "n<104",
+    "m": "wrong actual M",
+    "d": "wrong actual delta",
+    "q": "Q does not divide r^3",
+    "c": "coarse interval fails",
+    "l": "necessary rational log interval fails",
+    "w": "both branches excluded by exact residues",
+    "s": "one or both branches survive the listed moduli"
+  },
+  "survivors": [],
+  "claims_not_made": [
+    "unbounded delta excluded",
+    "new Coppersmith implementation",
+    "Lean proof",
+    "DeepSeek call",
+    "cryptographic security result"
+  ],
+  "wall_seconds": 2.326325,
+  "certificate_file": "v19_defect_13_24_certificate.json.gz",
+  "certificate_sha256": "ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7"
+}

@@ -1,0 +1,229 @@
+{
+  "status": "PASS",
+  "scope": "rho<=10 coverage, five reconstructed points, uniform mod5, elliptic coefficient identities",
+  "source_sha256": {
+    "v19_elliptic_residual.md": "481a14198266fbcceaae5157df39dbc77f175b2b5ba0c65a919d834289edb9b2",
+    "v19_elliptic_residual_checks.py": "90463537087be3b53118cd318f8021665fa4eb5a4700fadf157845607b359203",
+    "v19_elliptic_residual_checks.json": "3774b35a34ae9c7c6cc4e0227abf060e74b94f1406c69c33dcfbdef4e82aa614"
+  },
+  "finite_domain": {
+    "fibers": 45,
+    "mod5_blocked": 11,
+    "candidates": 886683,
+    "square_tests": 775235
+  },
+  "all_five_points": [
+    {
+      "a": 13,
+      "b": 2,
+      "rho": 1,
+      "y": 4674,
+      "roots": [
+        {
+          "sign": -1,
+          "t": "0",
+          "n": "0"
+        },
+        {
+          "sign": 1,
+          "t": "2337",
+          "n": "281219/3"
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "b": 1,
+      "rho": 4,
+      "y": 660,
+      "roots": [
+        {
+          "sign": -1,
+          "t": "0",
+          "n": "0"
+        },
+        {
+          "sign": 1,
+          "t": "165",
+          "n": "1375/3"
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "b": 2,
+      "rho": 7,
+      "y": 798,
+      "roots": [
+        {
+          "sign": -1,
+          "t": "-3",
+          "n": "2/21"
+        },
+        {
+          "sign": 1,
+          "t": "54",
+          "n": "729/7"
+        }
+      ]
+    },
+    {
+      "a": 4,
+      "b": 3,
+      "rho": 7,
+      "y": 405,
+      "roots": [
+        {
+          "sign": -1,
+          "t": "-30/7",
+          "n": "40/49"
+        },
+        {
+          "sign": 1,
+          "t": "15",
+          "n": "25"
+        }
+      ]
+    },
+    {
+      "a": 10,
+      "b": 3,
+      "rho": 10,
+      "y": 2430,
+      "roots": [
+        {
+          "sign": -1,
+          "t": "-3",
+          "n": "1/10"
+        },
+        {
+          "sign": 1,
+          "t": "78",
+          "n": "2197/10"
+        }
+      ]
+    }
+  ],
+  "mod5_complete_residue_classes": [
+    [
+      0,
+      1,
+      3
+    ],
+    [
+      1,
+      1,
+      2
+    ],
+    [
+      2,
+      1,
+      3
+    ],
+    [
+      3,
+      1,
+      3
+    ],
+    [
+      4,
+      1,
+      2
+    ],
+    [
+      0,
+      2,
+      2
+    ],
+    [
+      1,
+      2,
+      2
+    ],
+    [
+      2,
+      2,
+      3
+    ],
+    [
+      3,
+      2,
+      3
+    ],
+    [
+      4,
+      2,
+      2
+    ],
+    [
+      0,
+      3,
+      2
+    ],
+    [
+      1,
+      3,
+      2
+    ],
+    [
+      2,
+      3,
+      3
+    ],
+    [
+      3,
+      3,
+      3
+    ],
+    [
+      4,
+      3,
+      2
+    ],
+    [
+      0,
+      4,
+      3
+    ],
+    [
+      1,
+      4,
+      2
+    ],
+    [
+      2,
+      4,
+      3
+    ],
+    [
+      3,
+      4,
+      3
+    ],
+    [
+      4,
+      4,
+      2
+    ]
+  ],
+  "symbolic_identity_checks": [
+    "first_curve_map",
+    "first_curve_discriminant",
+    "second_curve_map",
+    "second_curve_discriminant",
+    "second_c4",
+    "quotient_discriminant",
+    "T_curve",
+    "T_tangent",
+    "T_flex",
+    "S_curve",
+    "S_tangent",
+    "S_flex",
+    "boundary",
+    "remainder"
+  ],
+  "torsion_boundary_rational_reconstructions": true,
+  "independence": "No source import; distinct remainder formula and lower-bound generation; SymPy coefficient algebra instead of producer sparse-polynomial class",
+  "conclusion": "rho>=11 follows for both original k branches from the cited v17/v18 necessary conditions.",
+  "not_reviewed": "External literature completeness/termination claims, optional PARI rank outputs, or new Lean formalization."
+}

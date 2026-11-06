@@ -1,0 +1,165 @@
+{
+  "status": "primary_sources_retrieved",
+  "retrieved_date": "2026-11-06 UTC",
+  "references": [
+    {
+      "key": "Stoll2025_2026",
+      "title": "Determining the rational points on a curve of genus 2 and Mordell-Weil rank 1",
+      "authors": [
+        "Michael Stoll"
+      ],
+      "first_submitted": "2025-09-29",
+      "version": "arXiv:2509.24604v1",
+      "publication": "ICM 2026, Vol.3, pp.484–498",
+      "urls": [
+        "https://arxiv.org/abs/2509.24604",
+        "https://arxiv.org/html/2509.24604v1"
+      ],
+      "retrieval_refs": [
+        "turn66view1",
+        "turn51view2",
+        "turn52view4"
+      ],
+      "specific_section": "Section 3, Algorithm 3.4 (local integral points, odd primes); Theorem 1.1 for scope",
+      "hypotheses": "Local step: squarefree integral polynomial and odd prime. Full rational-point algorithm: known point generating a finite-index subgroup of a Jacobian of rank at most 1; general termination has stated conjectural hypotheses.",
+      "actual_use": "Applied only the affine mod-5 obstruction step to the even sextic. Our curve has rational points at infinity, so projective local-solvability tests alone cannot exclude its integral locus. No full Chabauty/Mordell-Weil sieve was executed."
+    },
+    {
+      "key": "Gajovic_Muller2025",
+      "title": "Linear quadratic Chabauty",
+      "authors": [
+        "Stevan Gajović",
+        "J. Steffen Müller"
+      ],
+      "first_submitted": "2023-07-28",
+      "version": "arXiv:2307.15781v4",
+      "version_date": "2025-11-28",
+      "publication": "Israel Journal of Mathematics 270 (2025),381–411, published 2025-09-29",
+      "urls": [
+        "https://arxiv.org/abs/2307.15781",
+        "https://arxiv.org/html/2307.15781v4",
+        "https://doi.org/10.1007/s11856-025-2812-4"
+      ],
+      "retrieval_refs": [
+        "turn66view0",
+        "turn67view0",
+        "turn49search0"
+      ],
+      "specific_section": "Appendix A, Theorem A.1 and Lemma A.2; main Theorem 1.1",
+      "hypotheses": "Runge appendix: nonconstant squarefree even-degree integral polynomial with square leading coefficient. Main p-adic result: genus g, Jacobian rank g, prime of good reduction p>g.",
+      "actual_use": "The v18 integer separation is an explicit instance of the appendix Runge mechanism. Used its proved a bound with exact local sieving and full reconstruction to exclude rho<=10. The p-adic-height algorithm is not executed, and ranks are not known uniformly."
+    },
+    {
+      "key": "Leonhardt_Luedtke2026",
+      "title": "Affine Chabauty II",
+      "authors": [
+        "Marius Leonhardt",
+        "Martin Lüdtke"
+      ],
+      "first_submitted": "2026-02-05",
+      "version": "arXiv:2602.05643v2",
+      "version_date": "2026-06-16",
+      "publication": "Accepted version, 23 pages",
+      "urls": [
+        "https://arxiv.org/abs/2602.05643",
+        "https://arxiv.org/pdf/2602.05643v2",
+        "https://github.com/martinluedtke/AffChab2",
+        "https://arxiv.org/html/2602.05643v2"
+      ],
+      "retrieval_refs": [
+        "turn52view0",
+        "turn52view1",
+        "turn57view3",
+        "turn51view3",
+        "turn75view0"
+      ],
+      "specific_section": "Introduction inequality(1.1), Section1.2 algorithm, Section5.1 even hyperelliptic curves",
+      "hypotheses": "For K=Q, genus2, two rational boundary points and S empty, the numerical rank condition is rank(J)<3. Also assumes an affine rational base point, a regular model, bad-fiber intersection data, full-rank Mordell-Weil subgroup and Coleman log integrals. The chosen regular integral model must cover the original integer solutions.",
+      "actual_use": "Assessed applicability to our genus2 fibers. The necessary numerical rank condition and required geometric/arithmetic inputs are not supplied uniformly. The rational infinity points do not provide an affine base point. No run of the authors’ Sage implementation is claimed."
+    },
+    {
+      "key": "Zehavi2025",
+      "title": "Modular Chabauty: Effective S-Integral Point Computation On Curves with Elliptic Fibrations",
+      "authors": [
+        "Sa'ar Zehavi"
+      ],
+      "first_submitted": "2025-05-19",
+      "version": "arXiv:2505.12947v1",
+      "urls": [
+        "https://arxiv.org/abs/2505.12947",
+        "https://arxiv.org/html/2505.12947v1"
+      ],
+      "retrieval_refs": [
+        "turn35academia6",
+        "turn36view0",
+        "turn41view0"
+      ],
+      "specific_section": "Definition1.3 and Algorithm2.1; fixed-S effective Shafarevich step",
+      "hypotheses": "A geometrically connected curve over Z[1/S] with a non-isotrivial elliptic scheme, for a specified finite S.",
+      "actual_use": "Computed actual discriminant and c4. Every fixed-(a,b) fiber with a>b, gcd(a,b)=1,b|486 has a multiplicative bad prime >=5. The possible supports are not bounded by b|486, so S={2,3} is not justified. No implementation run."
+    },
+    {
+      "key": "Choi2025_2026",
+      "title": "Number of integral points on quadratic twists of elliptic curves",
+      "authors": [
+        "Seokhyun Choi"
+      ],
+      "first_submitted": "2025-09-03",
+      "version": "arXiv:2509.03274v3",
+      "version_date": "2026-03-27",
+      "urls": [
+        "https://arxiv.org/abs/2509.03274",
+        "https://arxiv.org/html/2509.03274v3"
+      ],
+      "retrieval_refs": [
+        "turn36view1",
+        "turn41view1"
+      ],
+      "specific_section": "Theorem1.1",
+      "hypotheses": "A fixed rational elliptic curve, its quadratic twists by sufficiently large positive squarefree D; conclusion bounds the number of integral points in terms of rank.",
+      "actual_use": "Not directly applicable to the whole residual family: its j-invariant varies. A count bound would not itself determine every point."
+    },
+    {
+      "key": "PARI_docs",
+      "title": "Catalogue of GP/PARI Functions: Elliptic curves",
+      "authors": [
+        "PARI/GP project"
+      ],
+      "retrieved": "2026-11-06 UTC",
+      "runtime_version": [
+        2,
+        17,
+        4
+      ],
+      "urls": [
+        "https://pari.math.u-bordeaux.fr/dochtml/html/Elliptic_curves.html"
+      ],
+      "retrieval_refs": [
+        "turn56view0",
+        "turn57view0",
+        "turn57view1"
+      ],
+      "specific_section": "ellrank, elltors, ellratpoints",
+      "hypotheses": "ellrank/elltors for a rational elliptic curve; ellrank reports algebraic rank bounds.",
+      "actual_use": "Separate real GP experiment on 45 fixed-(b,rho) curves. Rank-zero upper bounds and torsion order3 imply no admissible solution by Theorem2. Not an input to the independent standard-Python certificate. No ellanalyticrank/BSD or ellratpoints height search."
+    },
+    {
+      "key": "Sutherland2013",
+      "title": "18.782 Introduction to Arithmetic Geometry, Lecture24",
+      "authors": [
+        "Andrew V. Sutherland"
+      ],
+      "date": "2013-12-03",
+      "urls": [
+        "https://math.mit.edu/classes/18.782/2013fa/LectureNotes24.pdf"
+      ],
+      "retrieval_refs": [
+        "turn66view2",
+        "turn67view1"
+      ],
+      "specific_section": "Theorem24.21 (Nagell–Lutz)",
+      "hypotheses": "Nonsingular short Weierstrass equation over Q with integer coefficients; rational affine torsion point.",
+      "actual_use": "Primary university lecture notes checked while independently reviewing the root reviewer’s separate uniform non-torsion theorem. That theorem is not reproduced or assumed in this finite certificate."
+    }
+  ]
+}

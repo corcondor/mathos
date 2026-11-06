@@ -33,7 +33,7 @@ gh workflow run v18-number-theory.yml --repo corcondor/mathos \
 
 micromambaでconda-forgeの `sage=10.6`, `python=3.12` をインストールする。`ubuntu-latest` のaptリポジトリでのSageパッケージの有無に依存しない。環境のexplicit package listをartifactに残す。Actions自体もコミットSHAに固定する。
 
-a≥1, b|486, gcd(a,b)=1, 27a<31b, a≤a_maxの全係数対を4ジョブへ分割する。既定では83対、うち (1,3) は判別式0なので特異曲線として別扱いする。
+a≥1, b|486, gcd(a,b)=1, 27a≥31b, a≤a_maxの全係数対を4ジョブへ分割する。v17で排除済みの27a<31bを除いた残存領域であり、等号も含む。既定では52対で、特異な (1,3) は排除済みの領域に属するため対象に含まれない。
 
 Sageで元の曲線・有理最小モデル・モデル間同型・最小判別式を構成し、conductor、`rank(proof=True)`、`gens(proof=True)`、`gens_certain()`、ねじれ生成元を記録する。生成元は最小モデル上の射影座標。時間切れはrank=0や空の認証済み基底に置き換えずunknown/partialとして残す。
 
@@ -66,7 +66,7 @@ binom(binom(n,3), k) = binom(n^2, (n-3)^2) + k^2
 
 13≤δ≤200 と指定J範囲で gcd(δ,J)|25（small）、gcd(δ,J)|72（補分岐）を満たす対を列挙する。これは必要条件の表で、対が実現するという主張ではない。
 
-固定Jの候補に対し、適用可能なn²-cまたはn²+2にp²が実際に存在しp²>6n-9であると確認したときだけ、v18の分岐制約とδ⁴高さを検査する。仮定なしにn<定数δ⁴を使わない。
+固定Jの候補に対し、適用可能なn²-c、またはn≡3 (mod 6)の場合のn²+1にp²が実際に存在しp²>6n-9であると確認したときだけ、v18の分岐制約とδ⁴高さを検査する。これは [v18_defect_resultants.md](v18_defect_resultants.md) §4–5 の条件付き評価であり、canonical Jを定義する別の式n²+2とは区別する。仮定なしにn<定数δ⁴を使わない。
 
 ## 失敗・途中結果・保存
 

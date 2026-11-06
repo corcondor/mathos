@@ -11,8 +11,9 @@ PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43)
 
 
 def pairs(a_max):
+    """Remaining ratio domain after v17 excluded 27*a < 31*b."""
     return [(a, b) for a in range(1, a_max + 1) for b in DENOMINATORS
-            if gcd(a, b) == 1 and 27*a < 31*b]
+            if gcd(a, b) == 1 and 27*a >= 31*b]
 
 
 def curve_coefficients(a, b):

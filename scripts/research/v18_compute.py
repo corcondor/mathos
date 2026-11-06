@@ -101,7 +101,7 @@ def conditional_height_checks(n, delta, epsilon, spf):
     neighbors = [(c, n*n-c) for c in (2,3,5,6,7,8,10,11,12,13,14,15)
                  if ((c+2)*n-3*c) % 6 == 0]
     if n % 6 == 3:
-        neighbors.append((-2, n*n+2))
+        neighbors.append((-1, n*n+1))  # v18_defect_resultants section 5, N_+
     for c, number in neighbors:
         for p in range(2, isqrt(number)+1):
             if spf[p] != p or p*p <= 6*n-9 or number % (p*p):
