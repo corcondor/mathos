@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "producer_imported_or_executed": false,
+  "prime_method": "Eratosthenes sieve through 74",
+  "square_method": "integer binary search with consecutive-square inequalities",
+  "factor_method": "sieve of divisors through square root, independent reconstruction",
+  "complete_endpoint_constants": 118,
+  "complete_cubic_candidates": 828,
+  "complete_seventh_candidates": 2,
+  "all_candidate_records_match": true,
+  "square_candidates": [
+    [
+      13,
+      1,
+      12,
+      47
+    ],
+    [
+      23,
+      2,
+      2,
+      156
+    ],
+    [
+      61,
+      6,
+      3,
+      1167
+    ]
+  ],
+  "forced_divisor_exclusions": [
+    {
+      "n": 156,
+      "M": 3,
+      "Q": 8060,
+      "factorization": [
+        [
+          2,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          31,
+          1
+        ]
+      ],
+      "least_cube_divisor": 4030,
+      "strict_interval_margin": 10530
+    },
+    {
+      "n": 1167,
+      "M": 6,
+      "Q": 226787,
+      "factorization": [
+        [
+          11,
+          1
+        ],
+        [
+          53,
+          1
+        ],
+        [
+          389,
+          1
+        ]
+      ],
+      "least_cube_divisor": 226787,
+      "strict_interval_margin": 668691
+    }
+  ],
+  "all_remaining_survivors": [],
+  "written_proof_review": [
+    "Endpoint-square obstruction is proved uniformly modulo 4 and 9.",
+    "Inner carry levels 2,...,e each contribute one; no condition p^e>m is assumed.",
+    "Pplus(Nc)<r is inherited, so floor(log_p r)>=1 in the shorter excess theorem.",
+    "The p|Q overlap is exactly (11,12) or (13,14) with valuation one.",
+    "Parity formulas for J leave only J=1, or J=3 in the two overlap cases.",
+    "Square-LCM and odd-cofactor conclusions are restricted to k=r.",
+    "The simultaneous excess and v_p(B)>=v_p(Nc)-1 conclusions cover both branches.",
+    "The positive-neighbor theorem is not upgraded from L_m to L_r."
+  ],
+  "source_sha256": "8c628de06b9bb5dd0cf570c1c88920b1b7526501adf93bd9b0eb633fce9196d9",
+  "producer_report_sha256": "be617347402d2ad4172db561cba4134dd2dce03a2100c239255e0a2ed3ad6ead",
+  "proof_note_sha256": "3ed645d66992d89f8f207b017f6ff274c7f2f73baddcfe58c784cac6707bfd78",
+  "new_lean_execution": false,
+  "external_peer_review": false,
+  "verification_boundary": "Written coverage proof reviewed internally; complete finite candidates independently reconstructed. No whole-problem solution claimed."
+}

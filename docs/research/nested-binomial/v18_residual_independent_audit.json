@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "reviewer": "Separate cofactor research collaborator",
+  "producer_imported_or_executed": false,
+  "exact_polynomial_checks": [
+    "F-q0^2 coefficient equality",
+    "D0 positive grouping",
+    "16a^2(F-q1^2) denominator-cleared coefficient equality",
+    "Region I lower envelope coefficients"
+  ],
+  "exact_positive_rational_margins": {
+    "q0_positive_cubic": "1/34",
+    "rho_below_three_quarters": "227/5508",
+    "region_I_envelope_slope": "15/7",
+    "region_I_a_squared": "4/21",
+    "retained_n_height": "240/289",
+    "five_eighths": "290866925436928/289",
+    "seven_elevenths": "7277838100022864262463488/4913"
+  },
+  "height_coefficient_equalities": [
+    "(28/243)*(297/17)^2=10164/289",
+    "(28/243)*(27/17)^2=84/289"
+  ],
+  "written_review": [
+    "a>b follows from v17 h>81M under old necessary conditions; h>=93M is not assumed",
+    "Positive integer rho and exact square discriminant F are inherited from v17",
+    "q0 is an integer and positive, D0>0 follows from rho<3a^2/4, so the first separation is at least one",
+    "The inequality a<rho(rho+32b^2) has the correct direction when inverted to bound u^2",
+    "q1 has denominator dividing 4a; in region rho>=7b^2 the displayed lower envelope is positive",
+    "No positivity of R1 is assumed for rho<7b^2; that entire region uses the first separation instead",
+    "The positive integer 4a(y-q1) yields R1>3a^2/4 with no omitted equality case",
+    "a^2<1095b^4rho^3 covers both residual regions, including any R1 zero in region II",
+    "Eliminating a gives n^5<K5 u^8 and n^7<K7 u^11; b<=486 is used only at the stated global constant step",
+    "The fixed-a and fixed-rho height powers 11/3 and 11/2 follow by squaring/cubing positive inequalities",
+    "No finite support sample proves the universal result; no new Lean or complete elliptic solver is claimed"
+  ],
+  "scope": "n>=104,Q|r^3,3n<r<10n/3 and prior v16/v17 deductions; both original k branches",
+  "proof_note_sha256": "32cf9f073f179542abc9a7e03bd8d630b14a848ab25952abe3bd3884dc85fbf2",
+  "source_sha256": "957b0ef3bc6f8e41969992c90f94227ed0ff1a3dbddd3dac48bbaa3d0487a76b",
+  "new_lean_execution": false,
+  "external_peer_review": false,
+  "verification_boundary": "Independent written review plus exact coefficient/rational checks; inherited finite v17 classification is not reexecuted"
+}
