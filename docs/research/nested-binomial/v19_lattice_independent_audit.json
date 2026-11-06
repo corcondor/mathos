@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "certificate": {
+    "file": "v19_lattice_certificate.json.gz",
+    "sha256": "211a78c56bafa29bd73defe4e7f7427d775c3760b1276a6d5cc1777e2a741b27"
+  },
+  "verifier_sha256": "53cd47201507ba71af9e406fda57aa5f5dee3eeda66b7bbd055a8f087ec4ede3",
+  "scope": "All 3571 families, every dyadic box, complete positive integral conic point sets and 93 final candidates",
+  "counts": {
+    "coefficient_families": 3571,
+    "conic_points_n_ge_104": 112249,
+    "boxes_and_exact_LLL_checks": 2818386,
+    "vectors_in_enlarged_rectangles": 16810508
+  },
+  "final_candidates": 93,
+  "original_binomial_branches_excluded": 186,
+  "no_producer_or_Pell_import": true,
+  "no_Pell_units_or_convergents_read": true,
+  "independence": "Opposite basis order, ties toward zero, positive determinant, other coefficient enumeration, enlarged closed error rectangle, factorial-inverse Lucas digits",
+  "completeness_input": "Written v16 height and coefficient interval; new lattice-rectangle proof in companion note",
+  "wall_seconds": 230.156823,
+  "limits": "Exact arithmetic certificate, not Lean; confirms existing finite delta exclusion, not unbounded delta or the full equation"
+}

@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "hypothesis": "The fixed-defect conic points below the proved height can be completely recovered by exact rank-two lattice reduction and box enumeration, independently of Pell recurrence.",
+  "fixed_contract": {
+    "delta_range": [
+      13,
+      24
+    ],
+    "coefficient_families": 3571,
+    "height": "104<=n<2^(42delta)",
+    "conic": "M*delta*r^2=K*n*(n-1)",
+    "remaining_constraints": "actual M and delta, Q|r^3, coarse and logarithmic intervals, both original binomial branches"
+  },
+  "observed": {
+    "lattice_basis_checks": 2818386,
+    "lattice_conic_points": 112249,
+    "Pell_conic_points": 112249,
+    "final_pairs": 93,
+    "excluded_original_branches": 186,
+    "all_family_point_sets_equal": true,
+    "independent_lattice_audit": "PASS",
+    "actual_sympy_LLL_calls": 3
+  },
+  "wall_seconds": {
+    "lattice_producer": 281.657975,
+    "lattice_independent_verifier": 230.156823,
+    "Pell_independent_verifier": 0.91202,
+    "three_sympy_LLL_samples": 0.050371
+  },
+  "evaluation": "Keep as an independently checkable complete covering algorithm; no speed superiority on this conic family, no stronger numeric delta bound.",
+  "measurement_limits": [
+    "Single runs, not randomized or CPU-isolated benchmarking",
+    "Producer and verifier do different work",
+    "Old Pell units read only for post-generation comparison, never for lattice recovery",
+    "Three SymPy calls do not constitute all-family SymPy execution"
+  ],
+  "formalization": "No new Lean or DeepSeek API execution",
+  "source_files": {
+    "v19_lattice_cover.py": {
+      "bytes": 15650,
+      "sha256": "40586603e360b5b685fe38029afc41af81b9cf480a6fbc365e7c15b14de642f6"
+    },
+    "v19_lattice_verify.py": {
+      "bytes": 10287,
+      "sha256": "53cd47201507ba71af9e406fda57aa5f5dee3eeda66b7bbd055a8f087ec4ede3"
+    },
+    "v19_lattice_cover.md": {
+      "bytes": 12940,
+      "sha256": "45a4c5ab6b586ea65e2ba0214de3b774c476122bdcec2109dd75684016af369d"
+    },
+    "v19_lattice_certificate.json.gz": {
+      "bytes": 354219,
+      "sha256": "211a78c56bafa29bd73defe4e7f7427d775c3760b1276a6d5cc1777e2a741b27"
+    },
+    "v19_lattice_certificate.summary.json": {
+      "bytes": 2342,
+      "sha256": "1fc85f6aeb6929b8d50988e4134c440adf698fea25cb781106982273f0bbb18b"
+    },
+    "v19_lattice_independent_audit.json": {
+      "bytes": 1182,
+      "sha256": "c37ddde59712d0aae622ce8f433e2cffd14790a65b284001581a45f4b89bf72c"
+    },
+    "v19_lattice_pell_baseline_audit.json": {
+      "bytes": 1849,
+      "sha256": "4c6edf24de4743ba58fe9fbf4a465ad783c761afa55bed2b6d2cbdd39dface19"
+    },
+    "v19_lattice_sympy_check.py": {
+      "bytes": 2807,
+      "sha256": "f5403ad15a00f4112c2402a5a3b071f600278a6b7296ecc7c9d95210b3ef1ed3"
+    },
+    "v19_lattice_sympy_check.json": {
+      "bytes": 5420,
+      "sha256": "8b9741cfa1c8e2e3996291b5966ab8e8da08b4a2e1f9010b1c1688c969748d92"
+    }
+  },
+  "external_reference": {
+    "url": "https://docs.sympy.org/latest/modules/polys/domainmatrix.html#sympy.polys.matrices.domainmatrix.DomainMatrix.lll_transform",
+    "checked": "Official SymPy 1.14.0 documentation, LLL reduced basis plus transform T with T*A=B",
+    "retrieved_date_jst": "2026-11-07"
+  }
+}

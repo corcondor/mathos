@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "checker": "Python standard library only",
+  "producer_or_sympy_imported": false,
+  "integer_bezout_identities": [
+    {
+      "epsilon": 0,
+      "generator_count": 3,
+      "multiplier_term_counts": [
+        5,
+        4,
+        4
+      ],
+      "eliminant_degree": 2,
+      "integer_coefficient_identity": true
+    },
+    {
+      "epsilon": 1,
+      "generator_count": 3,
+      "multiplier_term_counts": [
+        20,
+        18,
+        18
+      ],
+      "eliminant_degree": 4,
+      "integer_coefficient_identity": true
+    }
+  ],
+  "rational_height_constants_checked": true,
+  "reconstruction_identity_grid": {
+    "points": 3125,
+    "coordinate_count": 5,
+    "values_per_coordinate": 5,
+    "coordinate_degree_upper_bound": 4,
+    "scope": "Polynomial identity verification, not a bound on original integer solutions"
+  },
+  "certificate_sha256": "dade04d342679b26c403923e6e34260351777d97cb91c02b33709326fc13113b",
+  "scope": "Integer eliminant certificates and exact constant margins; written argument supplies arithmetic implication",
+  "not_verified": "No Lean, no full original equation classification, no external human review"
+}

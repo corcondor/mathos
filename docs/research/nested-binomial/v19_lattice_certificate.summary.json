@@ -1,0 +1,54 @@
+{
+  "status": "PASS_EXACT_LATTICE_COVER",
+  "algorithm": "Incremental exact Gauss reduction, certified as rank-two 3/4-LLL; complete rectangle enumeration",
+  "scope": "All 3571 fixed-defect coefficient families for 13<=delta<=24",
+  "coefficient_conditions": "M in {1,2,3,6}, C=M*delta, 9C<K<10400C/927, gcd(K,delta)=1",
+  "height": "104<=n<2^(42*delta); inherited v16 theorem, not a chosen scan bound",
+  "transform": "x=2n-1, y=2r; C*y^2-K*x^2=-K",
+  "dyadic_cover": "B=2^b, 7<=b<=42*delta, max(B,207)<=x<=min(2B-1,2^(42delta+1)-3)",
+  "rectangle": "-4B<e<2B, e=B^2*y-floor(B^2*sqrt(K/C))*x",
+  "baseline_certificate": {
+    "file": "v19_defect_13_24_certificate.json.gz",
+    "sha256": "ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7"
+  },
+  "producer_sha256": "40586603e360b5b685fe38029afc41af81b9cf480a6fbc365e7c15b14de642f6",
+  "counts": {
+    "coefficient_families": 3571,
+    "square_CK_families": 4,
+    "conic_points_n_ge_104": 112249,
+    "boxes": 2818386,
+    "rectangle_vectors": 16810125,
+    "parity_candidates": 4137798,
+    "reduction_operations": 4532180,
+    "basis_checks": 2818386,
+    "filter_wrong_M": 69722,
+    "filter_log_interval": 3532,
+    "filter_cube_divisibility": 38729,
+    "filter_candidate": 93,
+    "filter_coarse_interval": 173
+  },
+  "same_contract_comparison": {
+    "all_conic_point_sets_equal": true,
+    "all_93_final_pairs_equal": true,
+    "old_Pell_used_for_lattice_generation": false
+  },
+  "modular_branches_excluded": 186,
+  "max_witness_prime": 23,
+  "not_claimed": [
+    "new numerical delta lower bound beyond existing v19",
+    "unbounded delta coverage",
+    "original four-variable classification",
+    "Coppersmith execution",
+    "elliptic-curve discrete logarithm computation",
+    "Lean formalization",
+    "DeepSeek API execution",
+    "external peer review"
+  ],
+  "certificate_file": "v19_lattice_certificate.json.gz",
+  "certificate_sha256": "211a78c56bafa29bd73defe4e7f7427d775c3760b1276a6d5cc1777e2a741b27",
+  "uncompressed_sha256": "3366faaf8065dd4b1ca8f60a952cf2f5ba70bae53b437f9c3d3392dfee616a23",
+  "wall_seconds": 281.657975,
+  "lattice_cover_seconds": 280.270221,
+  "stored_Pell_comparison_seconds": 0.484759,
+  "timing_limits": "Single sequential run; stored-unit comparison excludes Pell unit generation and is not a performance superiority test."
+}

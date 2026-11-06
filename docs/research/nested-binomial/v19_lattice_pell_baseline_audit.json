@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "defects_completely_excluded": [
+    13,
+    24
+  ],
+  "scope": "Original squared-index equation; ell=1, j=i-3, n>=104; both k=r and k=C(n,3)-r",
+  "counts": {
+    "coefficient_families": 3571,
+    "pell_points": 145195,
+    "integral": 112424,
+    "n_ge_104": 112249,
+    "actual_M": 42527,
+    "actual_delta": 42527,
+    "cube_divisibility": 3798,
+    "coarse_interval": 3625,
+    "post_log_candidates": 93,
+    "modular_branches_excluded": 186,
+    "modular_branches_remaining": 0,
+    "square_discriminants": 4
+  },
+  "fundamental_units_independently_recomputed": 2030,
+  "all_cf_terms_and_norms_checked": true,
+  "all_coefficient_families_and_pell_powers_checked": true,
+  "all_first_omitted_points_cross_height": true,
+  "all_recorded_modular_witnesses_recomputed": true,
+  "producer_imported_or_executed": false,
+  "v16_module_imported_or_executed": false,
+  "independence": "Full CF period parity instead of first norm-one stopping; factorial-inverse digit coefficients instead of math.comb; binary exponent search for the logarithm bracket",
+  "certificate_sha256": "ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7",
+  "verifier_sha256": "d76c4fe97f47f0255830ba97029ac404156cd297f981da9f0d95c3378879d701",
+  "producer_sha256_from_certificate": "9e0381cee0fdf43f93a47b9a2ac9d7a452d5c54ba8e004aecefd6c86d2376783",
+  "written_theory_dependency": {
+    "file": "v16_square_defect_pell.md",
+    "sections": [
+      "4: height",
+      "5: complete Pell reduction",
+      "6: candidate bound"
+    ],
+    "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822"
+  },
+  "wall_seconds": 0.91202,
+  "limitations": "Arithmetic certificate verification, not Lean formalization; global completeness depends on the recorded written v16 height and Pell proofs; unbounded delta is not covered"
+}

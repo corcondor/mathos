@@ -1,0 +1,156 @@
+{
+  "base_commit": "bb15643fd43f3595676cc410c1774a67a040c0b5",
+  "status": "PASS",
+  "runs": [
+    {
+      "label": "canonical_J",
+      "exit_code": 0,
+      "wall_seconds": 0.436,
+      "output": {
+        "status": "PASS",
+        "certificate_sha256": "314edd42c7c884de81c46d9a56ba2af9a11d4829bd85c3f2caf699f99305d57e",
+        "checker": "Python standard library only; no producer import or SymPy",
+        "complete_reconstructed_rows": 159,
+        "bezout_identities": 110,
+        "max_prime": 107,
+        "totals": {
+          "primitive_w": 6620,
+          "raw_divisor_records": 237434,
+          "normalized_n": 136852,
+          "height_compatible": 159
+        },
+        "scope": "Finite canonical J <= 16 only, under the stated inherited conditions."
+      },
+      "stderr": ""
+    },
+    {
+      "label": "Pell",
+      "exit_code": 0,
+      "wall_seconds": 0.92,
+      "output": {
+        "status": "PASS",
+        "defects_completely_excluded": [
+          13,
+          24
+        ],
+        "scope": "Original squared-index equation; ell=1, j=i-3, n>=104; both k=r and k=C(n,3)-r",
+        "counts": {
+          "coefficient_families": 3571,
+          "pell_points": 145195,
+          "integral": 112424,
+          "n_ge_104": 112249,
+          "actual_M": 42527,
+          "actual_delta": 42527,
+          "cube_divisibility": 3798,
+          "coarse_interval": 3625,
+          "post_log_candidates": 93,
+          "modular_branches_excluded": 186,
+          "modular_branches_remaining": 0,
+          "square_discriminants": 4
+        },
+        "fundamental_units_independently_recomputed": 2030,
+        "all_cf_terms_and_norms_checked": true,
+        "all_coefficient_families_and_pell_powers_checked": true,
+        "all_first_omitted_points_cross_height": true,
+        "all_recorded_modular_witnesses_recomputed": true,
+        "producer_imported_or_executed": false,
+        "v16_module_imported_or_executed": false,
+        "independence": "Full CF period parity instead of first norm-one stopping; factorial-inverse digit coefficients instead of math.comb; binary exponent search for the logarithm bracket",
+        "certificate_sha256": "ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7",
+        "verifier_sha256": "d76c4fe97f47f0255830ba97029ac404156cd297f981da9f0d95c3378879d701",
+        "producer_sha256_from_certificate": "9e0381cee0fdf43f93a47b9a2ac9d7a452d5c54ba8e004aecefd6c86d2376783",
+        "written_theory_dependency": {
+          "file": "v16_square_defect_pell.md",
+          "sections": [
+            "4: height",
+            "5: complete Pell reduction",
+            "6: candidate bound"
+          ],
+          "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822"
+        },
+        "wall_seconds": 0.847104,
+        "limitations": "Arithmetic certificate verification, not Lean formalization; global completeness depends on the recorded written v16 height and Pell proofs; unbounded delta is not covered"
+      },
+      "stderr": ""
+    },
+    {
+      "label": "residual",
+      "exit_code": 0,
+      "wall_seconds": 1.868,
+      "output": {
+        "status": "PASS",
+        "scope": "rho<=10 coverage, five reconstructed points, uniform mod5, elliptic coefficient identities",
+        "source_sha256": {
+          "v19_elliptic_residual.md": "481a14198266fbcceaae5157df39dbc77f175b2b5ba0c65a919d834289edb9b2",
+          "v19_elliptic_residual_checks.py": "90463537087be3b53118cd318f8021665fa4eb5a4700fadf157845607b359203",
+          "v19_elliptic_residual_checks.json": "3774b35a34ae9c7c6cc4e0227abf060e74b94f1406c69c33dcfbdef4e82aa614"
+        },
+        "finite_domain": {
+          "fibers": 45,
+          "mod5_blocked": 11,
+          "candidates": 886683,
+          "square_tests": 775235
+        },
+        "symbolic_identity_checks": [
+          "first_curve_map",
+          "first_curve_discriminant",
+          "second_curve_map",
+          "second_curve_discriminant",
+          "second_c4",
+          "quotient_discriminant",
+          "T_curve",
+          "T_tangent",
+          "T_flex",
+          "S_curve",
+          "S_tangent",
+          "S_flex",
+          "boundary",
+          "remainder"
+        ],
+        "torsion_boundary_rational_reconstructions": true,
+        "independence": "No source import; distinct remainder formula and lower-bound generation; SymPy coefficient algebra instead of producer sparse-polynomial class",
+        "conclusion": "rho>=11 follows for both original k branches from the cited v17/v18 necessary conditions.",
+        "not_reviewed": "External literature completeness/termination claims, optional PARI rank outputs, or new Lean formalization."
+      },
+      "stderr": ""
+    },
+    {
+      "label": "rank",
+      "exit_code": 0,
+      "wall_seconds": 0.048,
+      "output": {
+        "status": "PASS",
+        "review": "written uniform proof independently read; no logical gap found",
+        "polynomial_method": "13x13 exact grid plus degree <=12 in each variable",
+        "polynomial_identities": 5,
+        "grid_points": 169,
+        "exception_P0": [
+          35,
+          288
+        ],
+        "exception_double": [
+          -61,
+          0
+        ],
+        "checked_logic": [
+          "Nagell-Lutz applies without minimality",
+          "P0 has nonzero y, so its double is affine",
+          "rational lambda with integral square is integral",
+          "gcd(a,b)=1 justifies d|24a",
+          "primes >=5 excluded by gcd(d,a)|3",
+          "v2(d) in {0,2}, v3(d) in {0,1}",
+          "d|12 plus a>b gives only (3,1)",
+          "exception is order4 and its only positive residual is nonsquare"
+        ],
+        "sources": {
+          "v19_residual_positive_rank.md": "9b6f13ce2abcea4db71765b76f75cb3ac78cd9c2fa9d321f60b879193de04248",
+          "v19_residual_positive_rank_checks.py": "864613ac61466ff3c506d6e2d9f08ec4fe8ffc5b11d6ef8d202dc404fc99b538",
+          "v19_uniform_rank_independent_review.py": "ed07532a959067f4ab478f69591df8c78f22f938048fd4783eb6128a045c2803"
+        },
+        "scope": "written proof + exact integer verification; no new Lean or API execution"
+      },
+      "stderr": ""
+    }
+  ],
+  "scope": "Re-execution of existing independent checks; not new mathematical results or Lean verification."
+}

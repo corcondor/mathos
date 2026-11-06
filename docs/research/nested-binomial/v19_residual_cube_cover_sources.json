@@ -1,0 +1,47 @@
+{
+  "checked_date_jst": "2026-11-07",
+  "source_policy": "Primary author manuscripts and official university lecture notes only. The references support methods and hypotheses, not a claim that the original equation has been solved.",
+  "sources": [
+    {
+      "authors": ["Andrew V. Sutherland"],
+      "title": "18.783 Elliptic Curves, Lecture 2: Elliptic curves as abelian groups",
+      "date": "2023-09-12",
+      "url": "https://math.mit.edu/classes/18.783/2023/LectureNotes2.pdf",
+      "retrieval_ref": "turn6view1",
+      "relevant_location": "Section 2.1, the group law for Weierstrass curves",
+      "actual_use": "The finite-field certificate doubles the known order-three point using the ordinary short-Weierstrass formulas.",
+      "not_claimed": "This is not a cryptographic discrete-log attack, a computation of all rational points, or a new general group-law theorem."
+    },
+    {
+      "authors": ["Nils Bruin", "Michael Stoll"],
+      "title": "The Mordell-Weil sieve: proving non-existence of rational points on curves",
+      "manuscript_date": "2009-05-20",
+      "url": "https://mathe2.uni-bayreuth.de/stoll/papers/MWsieve.pdf",
+      "retrieval_ref": "turn4view0",
+      "relevant_location": "Sections 1-3, particularly finite-index subgroup and coprime-index requirements",
+      "actual_use": "Identifies the missing global Mordell-Weil subgroup/index input. Known points and local tables alone are not treated as a complete Mordell-Weil sieve.",
+      "not_claimed": "No full Mordell-Weil sieve or complete basis computation has been executed in this supplement."
+    },
+    {
+      "authors": ["Bjorn Poonen"],
+      "title": "Lectures on rational points on curves",
+      "version_date": "2006-03-05",
+      "url": "https://math.mit.edu/~poonen/papers/curves.pdf",
+      "retrieval_refs": ["turn6view0", "turn6view2"],
+      "relevant_location": "Section 3.3, printed page 52, Hasse-Weil point-count bound",
+      "actual_use": "For nonsingular genus-two fibers over Fp with p>=19, p+1-4sqrt(p)>2 implies an affine point beyond the two rational points at infinity. Together with singular factorization and exact p<=17 tables this proves the stated limit of the whole-fiber mod-prime test.",
+      "not_claimed": "Finite-field solubility is not asserted to imply p-adic, rational, or integral solubility."
+    },
+    {
+      "authors": ["Michael Stoll"],
+      "title": "Determining the rational points on a curve of genus 2 and Mordell-Weil rank 1",
+      "arxiv_id": "2509.24604v1",
+      "displayed_manuscript_date": "2026-08-24",
+      "url": "https://arxiv.org/html/2509.24604v1",
+      "retrieval_ref": "turn4view1",
+      "relevant_location": "Theorem 1.1 and Section 3, Testing for local points",
+      "actual_use": "Separates local integral-point obstructions from a complete rational-point algorithm that needs a point generating a finite-index subgroup of the Jacobian.",
+      "not_claimed": "The complete algorithm, Jacobian subgroup, Coleman integrals, and its termination conditions were not implemented or supplied here."
+    }
+  ]
+}
