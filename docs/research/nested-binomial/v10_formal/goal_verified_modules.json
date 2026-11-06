@@ -6,6 +6,7 @@
     "CFCurveInstantiation",
     "CFVerifierBridge",
     "ThirtyCofactorInputs",
-    "ThirtyCofactorSecondDivisor"
+    "ThirtyCofactorSecondDivisor",
+    "ThirtyCofactorPrimeSeparation"
   ]
 }

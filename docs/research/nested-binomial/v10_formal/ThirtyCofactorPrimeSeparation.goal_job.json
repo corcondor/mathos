@@ -1,0 +1,16 @@
+{
+  "module": "ThirtyCofactorPrimeSeparation",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "odd_prime_not_dvd_Q",
+      "theorem odd_prime_not_dvd_Q (w p a i : ℕ) (hw : 1 ≤ w) (hp : Nat.Prime p) (ha : 1 ≤ a) (hi : i = w * p ^ a + 2) (q : ℕ) (hq : Nat.Prime q) (hq2 : q ≠ 2) (hqwp : q ∣ w * p) : ¬ (q ∣ (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6))"
+    ],
+    [
+      "cube_prime_coprime_or_two",
+      "theorem cube_prime_coprime_or_two (w p a i : ℕ) (hw : 1 ≤ w) (hp : Nat.Prime p) (ha : 1 ≤ a) (hi : i = w * p ^ a + 2) (q : ℕ) (hq : Nat.Prime q) (hq3 : q ^ 3 ∣ (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6)) : q = 2 ∨ Nat.Coprime q (w * p)"
+    ]
+  ],
+  "local_dependencies": []
+}
