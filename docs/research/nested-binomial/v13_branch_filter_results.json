@@ -1,0 +1,192 @@
+{
+  "status": "PASS",
+  "support_primes": [
+    2,
+    3,
+    5,
+    7
+  ],
+  "complete_coefficient_pairs": 625,
+  "positive_first_indices": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    15,
+    16,
+    21,
+    25,
+    28,
+    36,
+    49,
+    50,
+    64,
+    81,
+    126,
+    225,
+    2401,
+    4375,
+    6860
+  ],
+  "indices_below_prior_cutoff_104": 19,
+  "remaining_index_count": 5,
+  "remaining_after_divisibility_interval_checks": 0,
+  "rejections": [
+    {
+      "n": 126,
+      "binomial_n_3": 325500,
+      "D": 2625,
+      "D_factorization": [
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "forced_divisor_F": 105,
+      "r_strict_lower_bound": 378,
+      "first_F_multiple_above_lower_bound": 420,
+      "r_strict_upper_bound": [
+        420,
+        1
+      ],
+      "natural_log_strict_lower_bound": null,
+      "excluded": true
+    },
+    {
+      "n": 225,
+      "binomial_n_3": 1873200,
+      "D": 8400,
+      "D_factorization": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "forced_divisor_F": 420,
+      "r_strict_lower_bound": 675,
+      "first_F_multiple_above_lower_bound": 840,
+      "r_strict_upper_bound": [
+        750,
+        1
+      ],
+      "natural_log_strict_lower_bound": null,
+      "excluded": true
+    },
+    {
+      "n": 2401,
+      "binomial_n_3": 2303999600,
+      "D": 960400,
+      "D_factorization": [
+        [
+          2,
+          4
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          4
+        ]
+      ],
+      "forced_divisor_F": 980,
+      "r_strict_lower_bound": 7203,
+      "first_F_multiple_above_lower_bound": 7840,
+      "r_strict_upper_bound": [
+        29841,
+        4
+      ],
+      "natural_log_strict_lower_bound": 7,
+      "excluded": true
+    },
+    {
+      "n": 4375,
+      "binomial_n_3": 13947136875,
+      "D": 3189375,
+      "D_factorization": [
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "forced_divisor_F": 1575,
+      "r_strict_lower_bound": 13125,
+      "first_F_multiple_above_lower_bound": 14175,
+      "r_strict_upper_bound": [
+        54375,
+        4
+      ],
+      "natural_log_strict_lower_bound": 7,
+      "excluded": true
+    },
+    {
+      "n": 6860,
+      "binomial_n_3": 53781281820,
+      "D": 23526370,
+      "D_factorization": [
+        [
+          2,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          19,
+          3
+        ]
+      ],
+      "forced_divisor_F": 1330,
+      "r_strict_lower_bound": 20580,
+      "first_F_multiple_above_lower_bound": 21280,
+      "r_strict_upper_bound": [
+        169785,
+        8
+      ],
+      "natural_log_strict_lower_bound": 8,
+      "excluded": true
+    }
+  ],
+  "proof_scope": "Exact finite check after the written uniform reduction and PARI complete Thue solving; not Lean verification.",
+  "source_sha256": "eae3593097213d5539a0f561756030e8712f094ffb3e7a50a7e629f8877e108f",
+  "thue_results_sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4"
+}

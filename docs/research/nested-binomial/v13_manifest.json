@@ -1,0 +1,169 @@
+{
+  "version": "v13",
+  "date_client_jst": "2026-11-06",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2)+binom(k^2,ell^2)",
+  "scope": "ell=1,j=i-3; both k=r and k=A-r",
+  "result": "A prime p>=11 with v_p(T) not divisible by 3 is necessary; equivalently all T=2^a*3^b*5^c*7^d*u^3 are excluded, uniformly in H",
+  "numeric_H_lower_bound_unchanged": 21,
+  "support_primes": [
+    2,
+    3,
+    5,
+    7
+  ],
+  "cube_classes_excluded": 81,
+  "ordered_thue_equations": 625,
+  "solver_calls": 1250,
+  "pari_version": "2.17.4",
+  "thueinit_flag": 1,
+  "assumes_GRH": false,
+  "positive_first_indices": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    15,
+    16,
+    21,
+    25,
+    28,
+    36,
+    49,
+    50,
+    64,
+    81,
+    126,
+    225,
+    2401,
+    4375,
+    6860
+  ],
+  "remaining_n_after_104": [
+    126,
+    225,
+    2401,
+    4375,
+    6860
+  ],
+  "remaining_after_branch_filter": 0,
+  "unbounded_parameters": [
+    "H",
+    "T",
+    "u",
+    "a",
+    "b",
+    "c",
+    "d"
+  ],
+  "general_first_index_cardinality_bound": "(5^|S|-1)/2 for any fixed finite prime set S containing 2 and 3",
+  "verification": {
+    "complete_solver": "PARI thue with thueinit flag 1; implementation trusted as a dependency",
+    "dual_encoding": "nonmonic RHS1 and monic RHS alpha^2; same CAS backend",
+    "independent_coverage_and_output_audit": "PASS; no independent reimplementation of the complete solver",
+    "exact_final_five_point_check": "PASS",
+    "new_Lean_execution": false,
+    "DeepSeek_API_call_this_task": false,
+    "full_isogeny_descent": false,
+    "Selmer_group_computation": false,
+    "original_four_variable_problem_solved": false,
+    "external_peer_review": false
+  },
+  "prior_inputs": [
+    "v11_effective_defect_cf.md: primitive H,T, H divides n-2, n>=104, 3n<r<10n/3",
+    "v10_valuation_recovery.md: transfer covers both branches",
+    "v6_offset_composite.md: logarithmic upper gap for n>=1024"
+  ],
+  "sources": [
+    {
+      "label": "Bennett Theorem 1.1",
+      "url": "https://personal.math.ubc.ca/~bennett/B-Crelle2.pdf"
+    },
+    {
+      "label": "PARI complete Thue solver",
+      "url": "https://pari.math.u-bordeaux.fr/dochtml/html/Polynomials_and_power_series.html#thue"
+    },
+    {
+      "label": "Classical arithmetic progression of cubes theorem",
+      "url": "https://arxiv.org/html/0909.0227v1"
+    }
+  ],
+  "files": [
+    {
+      "file": "v13_branch_filter.py",
+      "bytes": 4624,
+      "sha256": "eae3593097213d5539a0f561756030e8712f094ffb3e7a50a7e629f8877e108f",
+      "git_blob_sha1": "959abf035118fb184f78e8f12047054774e26206"
+    },
+    {
+      "file": "v13_branch_filter_results.json",
+      "bytes": 3410,
+      "sha256": "3d732072583ee079e4a28f6735b17ebdca86643b545cd933b21eb597cbebee82",
+      "git_blob_sha1": "c21c6520485c4ca4bdc0b3e983c1f3ded82f35f1"
+    },
+    {
+      "file": "v13_encoding_audit.json",
+      "bytes": 3566,
+      "sha256": "681af50893b2a8a86beaf974c809e6e85a16eafeef30754a990490711a910bf8",
+      "git_blob_sha1": "26c8a44287d34958e7bb7801ec2aaa686ccdf488"
+    },
+    {
+      "file": "v13_encoding_audit.py",
+      "bytes": 12298,
+      "sha256": "a8cea58578ce1e265999ec4212db3d9528fed4f4f0b7d798d7d0047461036c79",
+      "git_blob_sha1": "055ede410c586b7f64fe36dd59500297b49ef6b5"
+    },
+    {
+      "file": "v13_exact_three_factor_descent.md",
+      "bytes": 6121,
+      "sha256": "75f67d94cea0be61beab43aaa6de262812e79213bcdc8014ff130fff71c765e8",
+      "git_blob_sha1": "b8949865051a2fd585943d472dda264c9e7469c0"
+    },
+    {
+      "file": "v13_pari_environment.json",
+      "bytes": 2133,
+      "sha256": "0f7b6a7a7d0b46abad13234919f46cb94ac86a105dba23a94ea7939282fbc5d2",
+      "git_blob_sha1": "dd183b51bfc99a346bb8269240457e465abdc4f2"
+    },
+    {
+      "file": "v13_thue_support_results.gp",
+      "bytes": 48618,
+      "sha256": "292152f2aebd9d6886ace1fabfb3444af1a6dde9642fdc0ad11eea8789bdb5af",
+      "git_blob_sha1": "70ce33cdcb4b79b166a90a7b9bdd03a2fdf968ea"
+    },
+    {
+      "file": "v13_thue_support_results.json",
+      "bytes": 136833,
+      "sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4",
+      "git_blob_sha1": "19688c37318b9a05e938cc7ebf7f9b371674be2d"
+    },
+    {
+      "file": "v13_thue_support_results.stdout",
+      "bytes": 13433,
+      "sha256": "7f76ed5b0a58b45d8807e39262fbb37dcebe9ad15d894207f103bf45c3562cb5",
+      "git_blob_sha1": "2febde01386983d50285af43c0700b2754a0c8a6"
+    },
+    {
+      "file": "v13_thue_support_verifier.py",
+      "bytes": 3773,
+      "sha256": "04e2a9611cc182a9996e85bafb0909c67ad556e3deb2412fc6faa9e467130fdf",
+      "git_blob_sha1": "de90b0c9ed1bac74ddb7983fafa179cf5ba02a48"
+    },
+    {
+      "file": "v13_uniform_cube_support.md",
+      "bytes": 10637,
+      "sha256": "be9d4389ef2ee0bb9bddd137866e0a814ac4013fd45747ffd8eaf309a9aefc87",
+      "git_blob_sha1": "949344f1d4974771eeb01304459a56ed7f100ffa"
+    },
+    {
+      "file": "PROGRESS_v13_ja.md",
+      "bytes": 5756,
+      "sha256": "11ea0c3fdfbe3adf62a012795c46a863d85f8b3726362428bd74e56e3bea4fc6",
+      "git_blob_sha1": "91416889d45f6ea2bfc9137dad32995a3e707daa"
+    }
+  ]
+}
