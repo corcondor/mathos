@@ -53,3 +53,8 @@
 今回、新しいLean実行やDeepSeek API呼び出しは行っていません。
 元資料にある過去の形式検証の範囲は、その資料の記録を参照してください。
 元の二項係数方程式の未解決部分に関する新しい解決結果を、このメモで追加したとは主張しません。
+
+## v19からの追加（2026-11-07 JST）
+
+- [二次式の整除の問題と解答・消去補題](nested-binomial/v19_problem_seed_ja.md)：互いに素な正整数について、a²+3b²が24aを割る組を完全分類する短い問題。研究の無限位数点の証明から切り出しました。
+- [完全な有限検算](nested-binomial/v19_problem_seed_verification.json)と[再現コード](nested-binomial/verify_v19_seed.py)。既存の初版manifestはその時点の記録として保持しています。
