@@ -1,5 +1,7 @@
 # 入れ子の二項係数方程式の研究記録
 
+> **最新 v12（2026-11-06）**：原始不足分 H=14〜20 を全4,690曲線・57,160,284既約分数の厳密計算で排除し、H≥21へ。楕円曲線の3位数点、正の階数を持つ補助曲線の例、三連続整数のcube-free必要条件を追加。詳細は [PROGRESS_v12_ja.md](PROGRESS_v12_ja.md)、[算術幾何ノート](v12_three_descent.md)、[独立再現コード](v12_independent_dyadic_verifier.py)、[検証値と証明書SHA](v12_results_manifest.json)。元の四変数問題は未解決です。
+
 \[
 \boxed{\binom{\binom ij}{\binom{k}{\ell}}
 =\binom{i^2}{j^2}+\binom{k^2}{\ell^2}}
