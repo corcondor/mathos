@@ -1,8 +1,8 @@
 {
-  "profile": "long_research",
-  "reasoning_effort": "high",
-  "max_tokens": 65536,
-  "request_timeout_seconds": 900,
+  "profile": "deep_research",
+  "reasoning_effort": "max",
+  "max_tokens": 131072,
+  "request_timeout_seconds": 1800,
   "max_attempts": 20,
   "lean_timeout_seconds": 180,
   "capacity_retries": 2,

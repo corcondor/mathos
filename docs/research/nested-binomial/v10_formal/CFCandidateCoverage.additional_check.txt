@@ -1,0 +1,4 @@
+'NestedBinomialV10.reduced_approximation_mem_coefficientCandidates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'NestedBinomialV10.finite_prefix_interval' depends on axioms: [propext, Classical.choice, Quot.sound]

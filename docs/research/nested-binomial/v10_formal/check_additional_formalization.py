@@ -37,7 +37,7 @@ def main():
     sources = [ROOT / "ValuationRecovery.lean", ROOT / "RecoveredDivisor.lean"]
     if (ROOT / "NormalizedCancellation.lean").exists():
         sources.append(ROOT / "NormalizedCancellation.lean")
-    for name in ["LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction", "GeometricDescent", "CFCoefficientRanges"]:
+    for name in ["LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction", "GeometricDescent", "CFCoefficientRanges", "CFCandidateCoverage"]:
         if (ROOT / (name + ".lean")).exists():
             sources.append(ROOT / (name + ".lean"))
     records = []

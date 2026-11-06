@@ -82,7 +82,9 @@ Weierstrassモデルの判別式と非特異性、j=0、研究曲線への適用
 [座標公式の検証範囲](../GEOMETRIC_DESCENT_COORDINATES.md) を参照。
 後続の `CFCoefficientRanges.lean` は係数範囲・既約な零係数分岐・候補集合の対応・要素数65以下の6補題を追加する。
 [係数範囲の仮定と未接続部分](../CF_COEFFICIENT_RANGES.md) を参照。
-今回のDeepSeek作成の証明本文は6モジュール・33定理である。
+さらに `CFCandidateCoverage.lean` は、明示した列と誤差条件から候補集合への被覆、有限分母列の区間選択を2定理で接続する。
+[被覆定理の仮定と残る実データへの適用](../CF_CANDIDATE_COVERAGE.md) を参照。
+今回のDeepSeek作成の証明本文は7モジュール・35定理である。
 
 ## 連分数の再検証と、まだ残る仮定
 
@@ -96,7 +98,8 @@ PR内の `v9_cf_certificates/S01.json`〜`S12.json` と検証コードをコピ�
 `CFApproximationCore` は誤差評価と|b|≤2までを形式化するが、
 小分母側a∈[-1,4]、大分母側a−b*a_next∈[-3,3]、候補集合の要素数65以下は
 `CFCoefficientRanges` で明示仮定の下に形式化した。実収束分数データの供給、
-1つの候補被覆定理、各収束分数区間の選択と円筒区間認証、全曲線の候補評価はまだ接続していない。
+一般の候補被覆定理と有限分母列の区間選択は `CFCandidateCoverage` で検証済み。
+実データへの適用、円筒区間認証、全曲線の候補評価はまだ接続していない。
 従って、30余因子の最終定理から連分数部分の仮定を外したとは主張しない。
 
 `deepseek_generation_checks.json` に生成試行・コンパイル結果・ソースハッシュ・

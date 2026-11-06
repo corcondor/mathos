@@ -54,14 +54,14 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 - Eleven additional verified repositories, including DeepSeek-Prover-V2, AlphaGeometry/2, formal-conjectures, Evariste, Kimina, LeanDojo/v2, LeanCopilot, REPL and Aesop, were shared with DeepSeek. See AI_RESEARCH_REFERENCES.md and its pinned catalog. Do not claim those systems or model weights are installed.
 
 ## Current verified status
-- 6 new modules / 33 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6), CFCoefficientRanges(6).
+- 7 new modules / 35 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6), CFCoefficientRanges(6), CFCandidateCoverage(2).
 - RecoveredDivisor and NormalizedCancellation had host edits — keep distinct.
-- Dependency + 8 additional modules (9 total) passed latest re-run.
+- Dependency + 9 additional modules (10 total) passed latest re-run.
 - Python exact revalidation: 5214 curves, 4,877,566 CF coefficients, 25,394,330 reduced fractions, 0 residual; saved in `cf_current_revalidation.json`. Python success ≠ Lean formalization complete.
 
 ## Open work (do not claim done)
 - 30-cofactor final theorem still assumes the CF part.
-- Coefficient-range lemmas and the explicit candidate-set cardinal bound ≤65 are verified in CFCoefficientRanges. Pending: supply actual convergent data and combine them into a coverage theorem, convergent interval selection, cylindrical interval certification, Lean check of all curve candidates, final theorem hookup.
+- Coefficient-range lemmas and the explicit candidate-set cardinal bound ≤65 are verified in CFCoefficientRanges. CFCandidateCoverage supplies a generic candidate-coverage theorem and finite-prefix interval selection. Pending: instantiate both with actual convergent/certificate data, cylindrical interval certification, Lean check of all curve candidates, final theorem hookup.
 - Full four-variable problem unsolved.
 - GeometricReduction verifies the rational open-chart maps x=-c*r/y, z=c/y, inverses y=c/z, r=-x/z, plus Delta=-432*c^4, ellipticity, j=0 and the c=6*S/T specialization. It does not prove ranks, descent, all rational points, or solve the original equation.
 - The user confirmed: study the CURRENT nested-binomial equation geometrically. Do not ask that question again. Investigate its cubic-curve families and verify all coordinate changes in Lean before using them.
@@ -86,7 +86,7 @@ lake env python3 /workspace/mathos/docs/research/nested-binomial/v10_formal/deep
 For a new job use `--run-dir` with a fresh directory and `--methods-dir` pointing to the downloaded public reference files. Existing verified modules deliberately refuse to be overwritten. If the documented runtime paths are absent, inspect the current checkout and available tools before rebuilding the pinned runtime.
 
 ## Native reasoning
-- `deepseek_settings.json`: high, max_tokens 65536, request_timeout_seconds 900, max_attempts 20, lean_timeout_seconds 180. Only high and provider-default omission are verified; do not invent supported xhigh/max levels.
+- `deepseek_settings.json`: max, max_tokens 131072, request_timeout_seconds 1800, max_attempts 20, lean_timeout_seconds 180. The API accepted max on a real research request (25,004 reasoning tokens, 63.8s, complete final proposal). High and provider-default omission were also tested. xhigh remains unverified. Request acceptance does not by itself quantify a quality gain.
 - Token budget includes reasoning. A research request used all 32768 reasoning tokens without final text; continuation with 65536 produced a real proposal. Missing final text/finish_reason=length is not a successful proof response.
 - Preserve provider thinking chunks only server-side for replay. Display final text and usage metadata, never raw reasoning, in the UI.
 - Prioritize sufficient established mathematical methods. Necessity of frontier mathematics has not been demonstrated for the remaining equation.
@@ -101,3 +101,8 @@ For a new job use `--run-dir` with a fresh directory and `--methods-dir` pointin
 ## Active workflow after the user's latest decision
 - The user decided to continue in the current Codex chat. Delegate mathematics and proof generation to DeepSeek; the host compiles, checks and saves to the existing GitHub PR.
 - Do not continue frontend construction or official UI/login setup unless asked again. The saved private Studio Prompt and Skill remain available, but are not required for this workflow.
+
+## Increased research budget (2026-11-06 JST)
+- The user explicitly requested more thinking. Active profile is max, 131072 total output tokens including reasoning, HTTP timeout 1800s, 20 repair attempts, Lean timeout 180s.
+- The actual next CF coverage/finite-prefix interval proposal succeeded with max: 25004 reasoning tokens, 63.8s. See max_reasoning_research_check.json. Do not claim a fixed thinking duration or that all budget is consumed.
+- Use the added budget on the remaining CF/data connections, not disconnected auxiliary identities. Keep verified theorem types fixed and return actual Lean errors for repair.

@@ -67,6 +67,25 @@ class ReasoningRuntimeTests(unittest.TestCase):
         self.assertNotIn("reasoning_effort", calls[1])
         self.assertEqual(calls[1]["max_tokens"], 512)
 
+    def test_max_research_profile_and_model_output_limit(self):
+        self.write_settings(reasoning_effort="max", max_tokens=131072,
+                            request_timeout_seconds=1800)
+        calls = []
+        def fake(request, timeout):
+            calls.append((json.loads(request.data), timeout))
+            return self.response()
+        with patch.object(runtime.urllib.request, "urlopen", fake):
+            result = runtime.api([])
+        self.assertEqual(calls[0][0]["reasoning_effort"], "max")
+        self.assertEqual(calls[0][0]["max_tokens"], 131072)
+        self.assertEqual(calls[0][1], 1800)
+        self.assertEqual(result["research_request_settings"]["reasoning_effort"], "max")
+        self.write_settings(max_tokens=131073)
+        with patch.object(runtime.urllib.request, "urlopen") as send:
+            with self.assertRaises(ValueError):
+                runtime.api([])
+            send.assert_not_called()
+
     def test_chat_mode_changes_only_format_and_effort_for_this_request(self):
         calls = []
         def fake(request, timeout):

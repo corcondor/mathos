@@ -146,9 +146,9 @@ def load_api_settings():
         if unknown:
             raise ValueError("Unknown research settings: " + ", ".join(sorted(unknown)))
         settings.update(supplied)
-    if settings["reasoning_effort"] not in (None, "high"):
-        raise ValueError("Only high and omission (null) have been checked for this model")
-    limits = {"max_tokens": (1, 262144), "request_timeout_seconds": (1, 3600),
+    if settings["reasoning_effort"] not in (None, "high", "max"):
+        raise ValueError("Only high, max and omission (null) have been checked for this model")
+    limits = {"max_tokens": (1, 131072), "request_timeout_seconds": (1, 3600),
               "max_attempts": (1, 50), "lean_timeout_seconds": (1, 600),
               "capacity_retries": (0, 5), "capacity_backoff_seconds": (0, 30)}
     for name, (low, high) in limits.items():
@@ -177,8 +177,8 @@ def completion_text(response):
 def api(messages, *, response_format="json_object", reasoning_effort="profile"):
     settings = load_api_settings()
     if reasoning_effort != "profile":
-        if reasoning_effort not in (None, "high"):
-            raise ValueError("Only high or the provider default are supported")
+        if reasoning_effort not in (None, "high", "max"):
+            raise ValueError("Only high, max or the provider default are supported")
         settings["reasoning_effort"] = reasoning_effort
     state = ROOT.parent / "DEEPSEEK_STATE.md"
     if state.exists():
