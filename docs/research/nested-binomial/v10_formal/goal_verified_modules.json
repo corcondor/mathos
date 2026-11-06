@@ -4,6 +4,7 @@
     "CFContinuantBridge",
     "CFCylinderNesting",
     "CFCurveInstantiation",
-    "CFVerifierBridge"
+    "CFVerifierBridge",
+    "ThirtyCofactorInputs"
   ]
 }
