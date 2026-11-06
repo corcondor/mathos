@@ -1,0 +1,24 @@
+{
+  "module": "ThirtyCofactorExponentDomain",
+  "imports": "import Mathlib.Tactic",
+  "goals": [
+    [
+      "exponent_domain_iff",
+      "theorem exponent_domain_iff (α b : ℕ) (hb : 1 ≤ b) : (∃ k : ℕ, α = b + 2 * k ∧ k < b) ↔ (∃ x k : ℕ, α = b + x ∧ x = 2 * k ∧ 3 * x < 2 * α)"
+    ],
+    [
+      "q_bound_ge_five",
+      "theorem q_bound_ge_five (p w b a : ℕ) (hp : 5 ≤ p) (hb : 1 ≤ b) (hpb : p ^ b ≤ 6 * w) (ha : a ≤ 3 * b - 2) : 25 * p ^ a ≤ 216 * w ^ 3"
+    ],
+    [
+      "q_bound_two",
+      "theorem q_bound_two (w b a : ℕ) (hb : 1 ≤ b) (hpb : 2 ^ b ≤ 3 * w) (ha : a ≤ 3 * b - 2) : 4 * 2 ^ a ≤ 27 * w ^ 3"
+    ],
+    [
+      "q_bound_three",
+      "theorem q_bound_three (w b a : ℕ) (hb : 1 ≤ b) (hpb : 3 ^ b ≤ 2 * w) (ha : a ≤ 3 * b - 1) : 3 * 3 ^ a ≤ 8 * w ^ 3"
+    ]
+  ],
+  "definitions": "",
+  "local_dependencies": []
+}

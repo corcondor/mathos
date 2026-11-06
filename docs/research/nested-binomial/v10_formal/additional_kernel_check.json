@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-06T13:20:33.610777+00:00",
+  "checked_at_utc": "2026-11-06T13:31:28.661168+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -17,7 +17,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ValuationRecovery.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ValuationRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ValuationRecovery.lean"
       ],
       "resource_attempts": [
@@ -26,7 +26,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.508
+          "elapsed_seconds": 2.772
         }
       ],
       "warnings": []
@@ -44,7 +44,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/RecoveredDivisor.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/RecoveredDivisor.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/RecoveredDivisor.lean"
       ],
       "resource_attempts": [
@@ -53,7 +53,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.094
+          "elapsed_seconds": 2.522
         }
       ],
       "warnings": []
@@ -71,7 +71,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/NormalizedCancellation.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/NormalizedCancellation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/NormalizedCancellation.lean"
       ],
       "resource_attempts": [
@@ -80,7 +80,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.407
+          "elapsed_seconds": 2.691
         }
       ],
       "warnings": []
@@ -98,7 +98,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/LocalSquareRecovery.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/LocalSquareRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/LocalSquareRecovery.lean"
       ],
       "resource_attempts": [
@@ -107,7 +107,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.091
+          "elapsed_seconds": 2.358
         }
       ],
       "warnings": []
@@ -125,7 +125,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CriticalPrimeCRT.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CriticalPrimeCRT.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CriticalPrimeCRT.lean"
       ],
       "resource_attempts": [
@@ -134,7 +134,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.148
+          "elapsed_seconds": 2.237
         }
       ],
       "warnings": []
@@ -152,7 +152,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFApproximationCore.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFApproximationCore.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFApproximationCore.lean"
       ],
       "resource_attempts": [
@@ -161,7 +161,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.917
+          "elapsed_seconds": 3.011
         }
       ],
       "warnings": []
@@ -179,7 +179,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/GeometricReduction.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/GeometricReduction.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricReduction.lean"
       ],
       "resource_attempts": [
@@ -188,7 +188,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.249
+          "elapsed_seconds": 2.519
         }
       ],
       "warnings": []
@@ -206,7 +206,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/GeometricDescent.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/GeometricDescent.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricDescent.lean"
       ],
       "resource_attempts": [
@@ -215,7 +215,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.503
+          "elapsed_seconds": 2.519
         }
       ],
       "warnings": []
@@ -233,7 +233,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFCoefficientRanges.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFCoefficientRanges.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCoefficientRanges.lean"
       ],
       "resource_attempts": [
@@ -242,7 +242,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 3.637
+          "elapsed_seconds": 4.119
         }
       ],
       "warnings": []
@@ -260,7 +260,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFCandidateCoverage.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFCandidateCoverage.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCandidateCoverage.lean"
       ],
       "resource_attempts": [
@@ -269,7 +269,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.415
+          "elapsed_seconds": 2.496
         }
       ],
       "warnings": []
@@ -287,7 +287,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFAnalyticBounds.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFAnalyticBounds.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean"
       ],
       "resource_attempts": [
@@ -296,7 +296,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 13.2
+          "elapsed_seconds": 14.633
         }
       ],
       "warnings": [
@@ -327,7 +327,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFContinuantBridge.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFContinuantBridge.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFContinuantBridge.lean"
       ],
       "resource_attempts": [
@@ -336,7 +336,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 5.447
+          "elapsed_seconds": 4.885
         }
       ],
       "warnings": []
@@ -354,7 +354,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFCylinderNesting.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFCylinderNesting.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean"
       ],
       "resource_attempts": [
@@ -363,7 +363,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 3.547
+          "elapsed_seconds": 3.42
         }
       ],
       "warnings": [
@@ -394,7 +394,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFCurveInstantiation.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFCurveInstantiation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCurveInstantiation.lean"
       ],
       "resource_attempts": [
@@ -403,7 +403,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 3.2
+          "elapsed_seconds": 2.98
         }
       ],
       "warnings": [
@@ -425,7 +425,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/CFVerifierBridge.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/CFVerifierBridge.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFVerifierBridge.lean"
       ],
       "resource_attempts": [
@@ -434,7 +434,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 3.166
+          "elapsed_seconds": 3.033
         }
       ],
       "warnings": []
@@ -452,7 +452,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorInputs.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorInputs.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorInputs.lean"
       ],
       "resource_attempts": [
@@ -461,7 +461,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.915
+          "elapsed_seconds": 2.737
         }
       ],
       "warnings": [
@@ -481,7 +481,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorSecondDivisor.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorSecondDivisor.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorSecondDivisor.lean"
       ],
       "resource_attempts": [
@@ -492,7 +492,7 @@
           "categories": [
             "unused_binding"
           ],
-          "elapsed_seconds": 3.607
+          "elapsed_seconds": 3.447
         }
       ],
       "warnings": [
@@ -513,7 +513,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorPrimeSeparation.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorPrimeSeparation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPrimeSeparation.lean"
       ],
       "resource_attempts": [
@@ -524,7 +524,7 @@
           "categories": [
             "unused_binding"
           ],
-          "elapsed_seconds": 2.531
+          "elapsed_seconds": 2.161
         }
       ],
       "warnings": [
@@ -547,7 +547,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorQDivisibility.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorQDivisibility.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorQDivisibility.lean"
       ],
       "resource_attempts": [
@@ -556,7 +556,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 3.183
+          "elapsed_seconds": 3.057
         }
       ],
       "warnings": []
@@ -574,7 +574,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorCubePrimeExtraction.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorCubePrimeExtraction.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorCubePrimeExtraction.lean"
       ],
       "resource_attempts": [
@@ -583,7 +583,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 2.574
+          "elapsed_seconds": 2.318
         }
       ],
       "warnings": [
@@ -603,7 +603,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorPellCovering.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorPellCovering.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellCovering.lean"
       ],
       "resource_attempts": [
@@ -612,7 +612,7 @@
           "max_rec_depth": 1024,
           "exit_code": 0,
           "categories": [],
-          "elapsed_seconds": 5.273
+          "elapsed_seconds": 4.675
         }
       ],
       "warnings": [
@@ -632,7 +632,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorValuation.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorValuation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean"
       ],
       "resource_attempts": [
@@ -643,7 +643,7 @@
           "categories": [
             "unused_binding"
           ],
-          "elapsed_seconds": 3.236
+          "elapsed_seconds": 3.068
         }
       ],
       "warnings": [
@@ -671,7 +671,7 @@
         "-DmaxRecDepth=1024",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-iucj83yl/ThirtyCofactorPellReduction.olean",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorPellReduction.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean"
       ],
       "resource_attempts": [
@@ -682,7 +682,7 @@
           "categories": [
             "unused_binding"
           ],
-          "elapsed_seconds": 2.611
+          "elapsed_seconds": 2.586
         }
       ],
       "warnings": [
@@ -690,6 +690,47 @@
         "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean:49:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing.",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean:62:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing."
+      ]
+    },
+    {
+      "source": "ThirtyCofactorExponentDomain.lean",
+      "source_sha256": "5744d6f497d5ae0a3872f9b5b8bc548ec458cc25df0a5dbc636d2bd28143a695",
+      "log": "ThirtyCofactorExponentDomain.additional_check.txt",
+      "log_sha256": "cfe47e1029e2ad04b282d3d6f9b223d110d8720e2cb948888bbc4be8b00343fa",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "-DmaxHeartbeats=400000",
+        "-DmaxRecDepth=1024",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-t7_l_arp/ThirtyCofactorExponentDomain.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean"
+      ],
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.448
+        }
+      ],
+      "warnings": [
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+        "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:54: warning: Unused tactic linter: `omega` does nothing.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:54: warning: this tactic is never executed",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:54: warning: Unused tactic linter: `omega` does nothing.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:54: warning: this tactic is never executed",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:54: warning: Unused tactic linter: `omega` does nothing.",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:54: warning: this tactic is never executed"
       ]
     }
   ],

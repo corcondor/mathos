@@ -178,13 +178,33 @@
       "advisory_decision": "keep",
       "causal_effect_established": false,
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
-    }
-  ],
-  "pending_trials": [
+    },
     {
-      "job_id": "ThirtyCofactorPellReduction-cec6b56e",
       "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPellReduction-cec6b56e",
       "trial": 0,
+      "contract_sha256": "a4b9aa39ba39b39314222deaa1859a2f5c126f7e939229cba183e14a0297bc0d",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "40edb9de3096ea60cc999a7215dd8ab465ac2ac345f1417a3a02fd84abb535e5"
+        }
+      ],
       "metrics": {
         "attempt_records": 3,
         "accepted_theorems": [
@@ -205,6 +225,48 @@
           "unused_binding": 2
         },
         "attempts_with_Lean_timing": 3,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "206b8a8fe2ffecffbec9f039000b041761b8c48d2b03f23f99a19cbdc888561b",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: both frozen obligations (pell_parametrization, covering_to_pell) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The method's finite-cover principle transferred only partly: this job is a parametric Pell reduction, not an interval-cover certificate. The generic parametrization closed after one library-API repair (wrong argument order in a squarefree/divisibility lemma), and the covering composition closed on the first attempt by reusing the published 25-pair covering and M*r^2=L*n(n-1). Reported candidate completion tokens 99450 (reasoning 95871); recorded Lean time 7.697s over 3 timed attempts. No matched baseline exists for this job; sequential, non-randomized. This proves only the Pell parametrization from the covering data, not the 13 d-values, fundamental solutions, height bound, Q∤r^2, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    }
+  ],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorExponentDomain-5bcafd16",
+      "method_id": "finite-cover-certificate",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "exponent_domain_iff",
+          "q_bound_ge_five",
+          "q_bound_three",
+          "q_bound_two"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "exponent_domain_iff",
+          "q_bound_ge_five",
+          "q_bound_three",
+          "q_bound_two"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 55030,
+        "reported_reasoning_tokens": 53719,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 14.339,
+        "error_categories": {
+          "unused_binding": 5,
+          "proof_gap": 1
+        },
+        "attempts_with_Lean_timing": 5,
         "attempts_without_Lean_timing": 0,
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true

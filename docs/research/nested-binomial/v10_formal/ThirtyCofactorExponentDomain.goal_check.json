@@ -1,0 +1,491 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T13:30:01.328476+00:00",
+  "module": "ThirtyCofactorExponentDomain",
+  "source_sha256": "5744d6f497d5ae0a3872f9b5b8bc548ec458cc25df0a5dbc636d2bd28143a695",
+  "theorems": [
+    "exponent_domain_iff",
+    "q_bound_ge_five",
+    "q_bound_two",
+    "q_bound_three"
+  ],
+  "records": [
+    {
+      "theorem": "exponent_domain_iff",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "41cccca5cb9d7096e90a7932ede0e4f5f6949e3a67bbd56b088036164a9efc8a",
+      "usage": {
+        "prompt_tokens": 17425,
+        "total_tokens": 21728,
+        "completion_tokens": 4303,
+        "prompt_tokens_details": {
+          "cached_tokens": 15104
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4208
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 3.021,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "befef9d4358d7985a92bef303bb8a85d71325d6fa62dbb4d569795fafde529eb",
+        "locations": [
+          {
+            "line": 5,
+            "column": 39,
+            "kind": "warning",
+            "message": "Variable name `hb` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.021
+        }
+      ]
+    },
+    {
+      "theorem": "q_bound_ge_five",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "c617fb892901a9e62e47eef0afd79d9d393b2e1077b2c5b37bbf84c599142c8a",
+      "usage": {
+        "prompt_tokens": 17595,
+        "total_tokens": 38383,
+        "completion_tokens": 20788,
+        "prompt_tokens_details": {
+          "cached_tokens": 15104
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 20395
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 3.547,
+      "harness_diagnostics": {
+        "categories": [
+          "proof_gap",
+          "unused_binding"
+        ],
+        "fingerprint": "d19337fc19db75ef18e95c6e928d5f2d4051df0ae4c61c4df92c332b74642c31",
+        "locations": [
+          {
+            "line": 5,
+            "column": 39,
+            "kind": "warning",
+            "message": "Variable name `hb` is not explicitly referenced."
+          },
+          {
+            "line": 39,
+            "column": 10,
+            "kind": "error",
+            "message": "Tactic `rewrite` failed: Did not find an occurrence of the pattern"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": "  (p ^ 3) ^ b = (p ^ b) ^ 3\n\np w b a : ℕ\nhp : 5 ≤ p\nhb : 1 ≤ b\nhpb : p ^ b ≤ 6 * w\nha : a ≤ 3 * b - 2\nhp2 : 25 ≤ p ^ 2\nhsum : 2 + (3 * b - 2) = 3 * b\nhpa : p ^ a ≤ p ^ (3 * b - 2)\nh25 : 25 * p ^ (3 * b - 2) ≤ p ^ (3 * b)\nhpb3 : (p ^ b) ^ 3 ≤ (6 * w) ^ 3\n⊢ (p ^ 3) ^ b = (p ^ b) ^ 3\n'NestedBinomialV10.exponent_domain_iff' depends on axioms: [propext, Quot.sound]\n'NestedBinomialV10.q_bound_ge_five' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "proof_gap",
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.547
+        }
+      ]
+    },
+    {
+      "theorem": "q_bound_ge_five",
+      "attempt": 2,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "090f23953072c05e5fc20dad031697f33a1cdec27afce76f93a3c3b9adc81207",
+      "usage": {
+        "prompt_tokens": 19240,
+        "total_tokens": 38014,
+        "completion_tokens": 18774,
+        "prompt_tokens_details": {
+          "cached_tokens": 17536
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 18460
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.436,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "d127dbc912c77f5025a629bea6c3f0ec2c5b44c9195304b4ae722b46d063d254",
+        "locations": [
+          {
+            "line": 5,
+            "column": 39,
+            "kind": "warning",
+            "message": "Variable name `hb` is not explicitly referenced."
+          },
+          {
+            "line": 21,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.436
+        }
+      ]
+    },
+    {
+      "theorem": "q_bound_two",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "f15e9fcd056dfbc0511aa41a8bb159fa9ad1f9a75d78e5db7567fce7f120a78c",
+      "usage": {
+        "prompt_tokens": 17969,
+        "total_tokens": 19821,
+        "completion_tokens": 1852,
+        "prompt_tokens_details": {
+          "cached_tokens": 15104
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1583
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.52,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "4356a4cb8af7c609e80ded8057732551aca3a95183a37e3d93b7e727939f83e9",
+        "locations": [
+          {
+            "line": 5,
+            "column": 39,
+            "kind": "warning",
+            "message": "Variable name `hb` is not explicitly referenced."
+          },
+          {
+            "line": 21,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 35,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 35,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 35,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:54: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.52
+        }
+      ]
+    },
+    {
+      "theorem": "q_bound_three",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "5744d6f497d5ae0a3872f9b5b8bc548ec458cc25df0a5dbc636d2bd28143a695",
+      "usage": {
+        "prompt_tokens": 18302,
+        "total_tokens": 27615,
+        "completion_tokens": 9313,
+        "prompt_tokens_details": {
+          "cached_tokens": 14848
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9073
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.815,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "9e4ea34e517709668f9669fb3ce5ddce81020ee2521df1c07b0a7cb2448f0585",
+        "locations": [
+          {
+            "line": 5,
+            "column": 39,
+            "kind": "warning",
+            "message": "Variable name `hb` is not explicitly referenced."
+          },
+          {
+            "line": 21,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 21,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 35,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 35,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 35,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 46,
+            "column": 50,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 46,
+            "column": 54,
+            "kind": "warning",
+            "message": "Unused tactic linter: `omega` does nothing."
+          },
+          {
+            "line": 46,
+            "column": 54,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:21:54: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:35:54: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:46:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:46:54: warning: Unused tactic linter: `omega` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorExponentDomain-5bcafd16/run-1/ThirtyCofactorExponentDomain.lean:46:54: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.815
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "The module proves exactly the displayed arithmetic statements. `exponent_domain_iff` is a genuine equivalence: with x = 2k and α = b + 2k, the inequality 3x < 2α reduces to k < b, and hb keeps the intended natural-number range (its unused status in the proof is only a lint issue). The three `q_bound_*` lemmas are non-vacuous inequalities under `hpb` and `ha`; `hb` ensures `3*b-2` and `3*b-1` are the intended exponents, and the proofs correctly use 25 = 5^2, 4 = 2^2, 3 = 3^1, and cube the given power bound. No hidden division, nonzero denominator, or missing positivity assumption is present. The `q_bound_*` names are generic labels and do not assert an additional q-object or any unproved claim, so they do not overstate the proved content."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}

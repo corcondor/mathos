@@ -12,6 +12,7 @@
     "ThirtyCofactorCubePrimeExtraction",
     "ThirtyCofactorPellCovering",
     "ThirtyCofactorValuation",
-    "ThirtyCofactorPellReduction"
+    "ThirtyCofactorPellReduction",
+    "ThirtyCofactorExponentDomain"
   ]
 }
