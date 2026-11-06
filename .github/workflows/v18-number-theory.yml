@@ -32,6 +32,7 @@ on:
       - scripts/research/v18_*.py
       - docs/research/nested-binomial/v17_square_root_gap.md
       - docs/research/nested-binomial/v18_neighbor_cofactor_height.md
+      - docs/research/nested-binomial/v18_residual_gap.md
       - docs/research/nested-binomial/v18_short_lcm.md
       - docs/research/nested-binomial/v18_short_lcm_checks.json
       - docs/research/nested-binomial/v18_short_lcm_independent_audit.py
@@ -63,6 +64,7 @@ jobs:
       - name: Arithmetic regression checks
         run: python3 -m unittest discover -s scripts/research -p 'v18_test.py' -v
       - name: Fixed-J search (15 minute computation budget)
+        timeout-minutes: 20
         run: >-
           python3 scripts/research/v18_compute.py fixed-j --out _results
           --n-max "$N_MAX" --j-small-max "$J_SMALL_MAX"
@@ -96,6 +98,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install SageMath 10.6 on Ubuntu
+        timeout-minutes: 20
         uses: mamba-org/setup-micromamba@add3a49764cedee8ee24e82dfde87f5bc2914462 # v2
         with:
           environment-name: v18-sage
@@ -113,6 +116,7 @@ jobs:
           sage --version
           micromamba list --explicit > sage-environment.txt
       - name: Residual curves (45 minute computation budget)
+        timeout-minutes: 51
         shell: bash -el {0}
         env:
           SHARD: ${{ matrix.shard }}

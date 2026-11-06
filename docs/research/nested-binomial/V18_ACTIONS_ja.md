@@ -25,7 +25,7 @@ gh workflow run v18-number-theory.yml --repo corcondor/mathos \
 |n_max|1000000|固定J探索のnの上限（最大10000000）|
 |j_small_max|100|k=rのcanonical J上限|
 |j_complement_max|30|k=A-rのcanonical J上限|
-|curve_seconds|120|1曲線あたりのCAS強制終了時間（秒）|
+|curve_seconds|120|1曲線あたりのCAS強制終了時間（10〜300秒）|
 
 ## 実行される計算
 
@@ -72,9 +72,9 @@ binom(binom(n,3), k) = binom(n^2, (n-3)^2) + k^2
 
 各曲線では有限残差列挙をCASより先に保存し、CASの各段階を原子的にcheckpointする。曲線を別プロセスに隔離し、ハング時はそのプロセス群だけを終了する。ランク計算全体は45分、固定J探索は15分の内部予算とし、ジョブの80分/35分制限より先にartifact保存へ進む。各artifact uploadと集約ジョブは `if: always()`、matrixは `fail-fast: false`。
 
-ジョブ結果が欠けた場合は未着の係数対・未計算を報告する。runner自体の消失やGitHub側の強制取消では、最後のupload前のcheckpointを回収できない場合がある。回収できた結果を成功データに混ぜて完全性を主張しない。
+ジョブ結果が欠けた場合は未着の係数対・未計算を報告する。Sageインストールにも20分のstep上限を設け、保存時間を確保する。runner自体の消失やGitHub側の強制取消では、最後のupload前のcheckpointを回収できない場合がある。回収できた結果を成功データに混ぜて完全性を主張しない。
 
-集約ジョブは `permissions: contents: write` と既定の `GITHUB_TOKEN` で、**同じ研究ブランチ**へ生成結果だけを通常commit/pushする。DeepSeekのLeanファイル、既存workflow、master、PRのmerge状態は変更しない。同時更新時はfetch/mergeして最大3回再試行し、force pushしない。結果commitは `[skip ci]` とパスフィルタで再実行を防ぐ。
+集約ジョブは `permissions: contents: write` と既定の `GITHUB_TOKEN` で、**同じ研究ブランチ**へ生成結果だけを通常commit/pushする。DeepSeekのLeanファイル、既存workflow、master、PRのmerge状態は変更しない。同時更新時はfetch/mergeして最大3回再試行し、force pushしない。既存Lean本文のリモート変更があれば自動統合を止め、artifactを保持する。結果commitは `[skip ci]` とパスフィルタで再実行を防ぐ。
 
 * 最新概要: `v18_actions_latest.json`（各ファイルSHA、実行URL、完全性）
 * 実行別証明書: `v18_actions/<run_id>-<run_attempt>/`

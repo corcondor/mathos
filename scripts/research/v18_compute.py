@@ -35,6 +35,7 @@ def write(path, value):
 def provenance():
     sources = [*Path(__file__).parent.glob('v18_*.py'),
                NOTES/'v17_square_root_gap.md', NOTES/'v18_neighbor_cofactor_height.md',
+               NOTES/'v18_residual_gap.md',
                NOTES/'v18_short_lcm.md', NOTES/'v18_defect_resultants.md']
     return {"utc": datetime.now(timezone.utc).isoformat(),
             "source_commit": os.environ.get('GITHUB_SHA', 'local-unpublished'),
@@ -248,6 +249,10 @@ def main():
         if task == 'auxiliary':
             p.add_argument('--delta-max', type=positive, default=200)
     args = parser.parse_args()
+    if args.task in ('fixed-j', 'auxiliary') and max(args.j_small_max, args.j_complement_max) > 1000:
+        parser.error('J limits must be <=1000 for this runner configuration')
+    if args.task == 'ranks' and not 10 <= args.curve_seconds <= 300:
+        parser.error('curve-seconds must be in [10,300] so artifact upload has reserved time')
     args.out.mkdir(parents=True, exist_ok=True)
     if args.task == 'ranks' and not 0 <= args.shard < args.shards:
         parser.error('shard must be in [0, shards)')

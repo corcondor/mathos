@@ -71,6 +71,11 @@ def main():
     mw = record['stages'].get('mordell_weil', {})
     if mw.get('status') == 'ok' and not mw['value']['basis_proven']:
         record['status'] = 'partial'
+    rank = record['stages'].get('rank', {})
+    if rank.get('status') == mw.get('status') == 'ok':
+        if rank['value'] != len(mw['value']['free_basis_minimal']):
+            record['status'] = 'partial'
+            record['inconsistency'] = 'rank and free-basis cardinality disagree'
     save()
 
 

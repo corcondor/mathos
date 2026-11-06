@@ -38,6 +38,10 @@ def publish(branch):
     git('commit','-m','research(v18): save GitHub Actions computation certificates [skip ci]')
     for _ in range(3):
         git('fetch','origin',branch)
+        base = git('merge-base','HEAD','FETCH_HEAD').stdout.strip()
+        changes = git('diff','--name-status',base,'FETCH_HEAD','--','*.lean').stdout.splitlines()
+        if any(not change.startswith('A\t') for change in changes):
+            raise RuntimeError('Remote changed an existing Lean source; preserve artifacts for review')
         merge = git('merge','--no-edit','FETCH_HEAD',check=False)
         if merge.returncode:
             git('merge','--abort',check=False)

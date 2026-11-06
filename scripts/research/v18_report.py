@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import shutil
 
-from v18_arithmetic import pairs
+from v18_arithmetic import pairs, n_height_exclusive
 from v18_compute import ROOT, NOTES, sha, write
 
 
@@ -91,6 +91,17 @@ def render(inputs, out, run_key, a_max):
         raise ValueError('Duplicate fixed-J reports')
     if fixed_files:
         fixed = json.loads(fixed_files[0].read_text())
+        # A killed search may have saved an early checkpoint before final coverage
+        # was computed. Recover coverage from the last fully scanned n only.
+        if 'coverage' not in fixed:
+            fixed['coverage'] = {}
+            for epsilon, name in [(0,'small'),(1,'complement')]:
+                fixed['coverage'][name] = [
+                    {"J": j, "n_upper_exclusive": n_height_exclusive(j,epsilon),
+                     "height_fully_covered": fixed['n_scanned_through'] >= n_height_exclusive(j,epsilon)-1}
+                    for j in range(1,fixed['j_max'][name]+1)]
+        if fixed['status'] == 'running':
+            fixed['status'] = 'interrupted_checkpoint'
         write(out/'v18_fixed_J_search.json', fixed)
         text = ['# v18: 固定Jの有限探索', '', f'実行 `{run_key}`、状態 `{fixed["status"]}`。', '',
                 f'n=104 から **{fixed["n_scanned_through"]:,}** までを検査。', '',

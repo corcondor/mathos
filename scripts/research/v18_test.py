@@ -3,11 +3,14 @@ import json
 from math import comb, gcd, isqrt
 from pathlib import Path
 import tempfile
+import subprocess
 import unittest
+from unittest.mock import patch
 
 from v18_arithmetic import (curve_coefficients, forced_r_divisor, lucas,
                            n_height_exclusive, pairs, residual_points, spf_sieve)
 from v18_report import render
+import v18_publish
 
 
 class ArithmeticTests(unittest.TestCase):
@@ -66,6 +69,59 @@ class ArithmeticTests(unittest.TestCase):
             self.assertEqual(len(report['missing_pairs']),83)
             fixed = json.loads((root/'out/v18_fixed_J_search.json').read_text())
             self.assertEqual(fixed['status'],'missing_artifact')
+
+    def test_interrupted_fixed_search_keeps_coverage_and_results(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root/'in').mkdir()
+            checkpoint = {"status": "running", "n_scanned_through": 1023,
+                          "j_max": {"small": 3, "complement": 1},
+                          "counts": {}, "survivors": []}
+            (root/'in/fixed-j.json').write_text(json.dumps(checkpoint))
+            render(root/'in',root/'out','interrupted-test',20)
+            report = json.loads((root/'out/v18_fixed_J_search.json').read_text())
+            self.assertEqual(report['status'],'interrupted_checkpoint')
+            self.assertTrue(report['coverage']['small'][1]['height_fully_covered'])
+            self.assertFalse(report['coverage']['small'][2]['height_fully_covered'])
+            self.assertFalse(report['coverage']['complement'][0]['height_fully_covered'])
+
+
+class PublicationTests(unittest.TestCase):
+    def test_only_generated_results_committed_with_dirty_lean_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            origin, work = root/'origin.git',root/'work'
+            def command(*args, cwd=root):
+                return subprocess.run(['git',*args],cwd=cwd,check=True,
+                                      text=True,capture_output=True).stdout
+            command('init','--bare',str(origin))
+            command('clone',str(origin),str(work))
+            command('config','user.name','Test',cwd=work)
+            command('config','user.email','test@example.invalid',cwd=work)
+            branch = 'research/v18-next-descent'
+            command('checkout','-b',branch,cwd=work)
+            (work/'Existing.lean').write_text('def fixedValue := 1\n')
+            command('add','Existing.lean',cwd=work)
+            command('commit','-m','existing proof',cwd=work)
+            command('push','origin',branch,cwd=work)
+            (work/'Existing.lean').write_text('def fixedValue := 2\n')
+            report = work/'docs/research/nested-binomial/v18_fixed_J_search.json'
+            report.parent.mkdir(parents=True)
+            report.write_text('{"status":"partial"}\n')
+            (report.parent/'unrelated.md').write_text('leave this untracked\n')
+            with patch.object(v18_publish,'ROOT',work):
+                v18_publish.publish(branch)
+            changed = command('diff-tree','--no-commit-id','--name-only','-r','HEAD',cwd=work).strip()
+            self.assertEqual(changed,str(report.relative_to(work)))
+            self.assertEqual(command('show','HEAD:Existing.lean',cwd=work),'def fixedValue := 1\n')
+            self.assertEqual((work/'Existing.lean').read_text(),'def fixedValue := 2\n')
+            self.assertTrue(command('status','--short',cwd=work))
+            self.assertEqual(command('rev-parse','HEAD',cwd=work),
+                             command('rev-parse','refs/heads/'+branch,cwd=origin))
+
+    def test_publication_rejects_default_branch(self):
+        with self.assertRaises(ValueError):
+            v18_publish.publish('master')
 
 
 if __name__ == '__main__':
