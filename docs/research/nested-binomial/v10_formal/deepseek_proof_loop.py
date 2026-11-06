@@ -100,12 +100,13 @@ JOBS["cf_core"] = ("CFApproximationCore", "import Mathlib.Tactic\n", CF_GOALS)
 
 
 def digest(text):
-    return hashlib.sha256(text.encode()).hexdigest()
+    return hashlib.sha256(text.encode() if isinstance(text, str) else text).hexdigest()
 
 
 def retrieve_library_context(compiler_output):
     """Retrieve bounded, local mathlib declarations for unknown-name errors."""
     names = re.findall(r"Unknown (?:constant|identifier) `([A-Za-z0-9_.]+)`", compiler_output)
+    names += re.findall(r"(?:from an expression|in the application)\s*\n\s*([A-Za-z_][A-Za-z0-9_.]*)", compiler_output)
     snippets = []
     for full_name in list(dict.fromkeys(names))[:4]:
         name = full_name.rsplit(".", 1)[-1]
@@ -336,9 +337,7 @@ Be precise about the odd/even cancellation case; equal valuations can cancel.
                     if set(re.findall(r"[A-Za-z_][\w.]*", axiom_list)) - {"propext", "Classical.choice", "Quot.sound"}:
                         passed = False
                 feedback = output[-16000:]
-                if "warning:" in output:
-                    passed = False
-                    feedback += "\nFix warnings as well without changing the fixed theorem types."
+                # Lint is recorded in the compiler log; only kernel/trust failures reject a proof.
                 records.append({"attempt": attempt, "exit_code": result.returncode,
                                 "passed": passed, "source_sha256": digest(candidate),
                                 "usage": response.get("usage")})
@@ -346,7 +345,7 @@ Be precise about the odd/even cancellation case; equal valuations can cancel.
                 if passed:
                     review_messages = [{"role": "user", "content":
                         "Act as a separate proof statement reviewer. Return JSON with verdict PASS or ISSUES and short feedback. "
-                        "Lean has checked this module with no warnings or holes. Verify that the statements actually cover their named "
+                        "Lean has checked this module without holes and with allowed axioms only. Lint is separate. Verify that the statements actually cover their named "
                         "mathematical claims and do not claim global nonexistence, prime-root counts, or the full CRT search bound. "
                         "Check nonzero and positive-modulus hypotheses. Do not request style-only changes.\n" + candidate}]
                     review = api(review_messages)

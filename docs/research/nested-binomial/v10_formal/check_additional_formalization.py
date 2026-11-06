@@ -15,6 +15,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from deepseek_lean_harness import compile_lean, policy
 
 
 ROOT = Path(__file__).resolve().parent
@@ -70,18 +71,18 @@ def main():
             sources.append(ROOT / (name + ".lean"))
     sources = include_goal_modules(sources)
     records = []
+    harness = policy(ROOT)
     with tempfile.TemporaryDirectory(prefix="nested-binomial-lean-") as build:
         compile_env = os.environ.copy()
         compile_env["LEAN_PATH"] = build + os.pathsep + compile_env.get("LEAN_PATH", "")
         for source in sources:
             command = ["lean", f"--root={ROOT}", "-o", str(Path(build) / (source.stem + ".olean")), str(source)]
-            result = subprocess.run(command, env=compile_env, text=True,
-                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            result = compile_lean(command, compile_env, 180, harness)
             log = ROOT / (source.stem + ".additional_check.txt")
-            log.write_text(result.stdout)
+            log.write_text(result['output'])
             forbidden = bool(re.search(r"\b(sorry|admit|axiom|native_decide)\b", source.read_text()))
-            trusted = "sorryAx" not in result.stdout and not forbidden
-            for axiom_list in re.findall(r"depends on axioms:\s*\[([^\]]*)\]", result.stdout):
+            trusted = "sorryAx" not in result['output'] and not forbidden
+            for axiom_list in re.findall(r"depends on axioms:\s*\[([^\]]*)\]", result['output']):
                 if set(re.findall(r"[A-Za-z_][\w.]*", axiom_list)) - {"propext", "Classical.choice", "Quot.sound"}:
                     trusted = False
             record = {
@@ -89,14 +90,16 @@ def main():
                 "source_sha256": sha256(source),
                 "log": log.name,
                 "log_sha256": sha256(log),
-                "exit_code": result.returncode,
+                "exit_code": result['exit_code'],
                 "proof_hole_or_custom_axiom_detected": not trusted,
-                "command": command,
+                "command": result['command'],
+                "resource_attempts": result['resource_attempts'],
+                "warnings": result['analysis']['warnings'],
             }
             records.append(record)
-            print(f"{source.name}: exit={result.returncode}, no proof holes={trusted}", flush=True)
-            if result.returncode or not trusted:
-                print(result.stdout)
+            print(f"{source.name}: exit={result['exit_code']}, no proof holes={trusted}", flush=True)
+            if result['exit_code'] or not trusted:
+                print(result['output'])
                 break
     passed = len(records) == len(sources) and all(
         r["exit_code"] == 0 and not r["proof_hole_or_custom_axiom_detected"] for r in records

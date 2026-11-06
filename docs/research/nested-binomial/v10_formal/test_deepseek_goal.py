@@ -152,6 +152,63 @@ class GoalTests(unittest.TestCase):
             self.assertEqual(self.agent.run(max_actions=1)['status'], 'complete')
             model.assert_not_called()
 
+    def test_seed_recovery_preserves_accepted_bodies_and_rechecks_lint_only_candidate(self):
+        old=self.agent.run_dir/'old';new=self.agent.run_dir/'new'
+        old.mkdir();new.mkdir()
+        config=self.config();config['goals'].append(['next','theorem next : True'])
+        original='by\n  exact True.intro'
+        accepted='by\n  intro n\n  rfl'
+        goal.write_json(new/'accepted_proofs.json',{'step':accepted})
+        records=[]
+        for index,name,proof in [(1,'step','older unused body'),(2,'next',original)]:
+            source='Exact stored model source '+name
+            prefix=old/f'{index}-1'
+            prefix.with_suffix('.lean').write_text(source)
+            prefix.with_suffix('.compiler.txt').write_text(
+                "M.lean:2:2: warning: Variable name `h` is not explicitly referenced.\n"
+                "'t' depends on axioms: [propext, Classical.choice, Quot.sound]\n")
+            goal.write_json(prefix.with_suffix('.response.json'),{'choices':[{'message':{'content':json.dumps({'proof':proof})}}]})
+            records.append({'theorem':name,'attempt':1,'exit_code':0,'source_sha256':goal.digest(source)})
+        goal.write_json(old/'result.json',{'records':records})
+        job={'config':config,'runs':[str(old),str(new)]}
+        self.assertEqual(self.agent.recover_seeds(job),{'step':accepted,'next':original})
+        (old/'2-1.lean').write_text('changed source')
+        self.assertEqual(self.agent.recover_seeds(job),{'step':accepted})
+
+    def test_disagreeing_accepted_prefixes_are_rejected(self):
+        runs=[]
+        for i in [1,2]:
+            p=self.agent.run_dir/str(i);p.mkdir();runs.append(str(p))
+            goal.write_json(p/'accepted_proofs.json',{'step':'different body '+str(i)})
+        with self.assertRaisesRegex(ValueError,'prefix changed'):
+            self.agent.recover_seeds({'config':self.config(),'runs':runs})
+
+    def test_focused_context_updates_preserve_frozen_contract(self):
+        response={'choices':[{'message':{'content':'{"verdict":"PASS"}'}}]}
+        with patch.object(goal,'api',return_value=response):
+            job_id=self.agent.propose({'config':self.config(),'why_needed':'Necessary fixed-target dependency'})['job_id']
+        job=self.agent.state['jobs'][job_id]
+        frozen=(self.agent.run_dir/'jobs'/job_id/'fixed_job.json').read_bytes()
+        result=self.agent.update_context({'job_id':job_id,'extra_context':['notes.md']})
+        self.assertEqual(result['unchanged_contract_sha256'],goal.digest(json.dumps(job['config'],sort_keys=True)))
+        self.assertEqual((self.agent.run_dir/'jobs'/job_id/'fixed_job.json').read_bytes(),frozen)
+        self.assertIn(str(self.notes/'notes.md'),job['extra_context'])
+        with self.assertRaises(ValueError):
+            self.agent.update_context({'job_id':job_id,'extra_context':['../../outside.txt']})
+
+    def test_plan_cannot_self_declare_evidence_or_change_final_goal(self):
+        plan=[{'id':'bridge','objective':'Bridge the remaining assumptions','depends_on':[],'modules':['Unproved']},
+              {'id':'finish','objective':'Discharge frozen target','depends_on':['bridge'],'modules':['FinalGoal']}]
+        result=self.agent.set_plan({'milestones':plan})
+        self.assertTrue(result['final_targets_unchanged'])
+        self.assertEqual(result['plan'][0]['module_evidence_present'],[])
+        self.assertFalse(result['plan'][1]['semantic_goal_completion'])
+        bad=copy.deepcopy(plan);bad[0]['depends_on']=['finish']
+        with self.assertRaisesRegex(ValueError,'cyclic'):self.agent.set_plan({'milestones':bad})
+        bad=copy.deepcopy(plan);bad[0]['status']='complete'
+        with self.assertRaises(ValueError):self.agent.set_plan({'milestones':bad})
+        self.assertEqual(self.agent.state['milestones'],plan)
+
 
 class BudgetTests(unittest.TestCase):
     def test_shared_budget_caps_request_and_accounts_reported_usage(self):

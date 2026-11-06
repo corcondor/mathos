@@ -15,6 +15,7 @@ import subprocess
 import tempfile
 
 from deepseek_proof_loop import JOBS, MODEL, MATHLIB_COMMIT, ROOT, api, digest, render, retrieve_library_context, load_method_context, load_api_settings, completion_text
+from deepseek_lean_harness import policy, compile_lean, accepted as lean_accepted, analyze, source_context, FailureMemory
 
 
 def main():
@@ -27,8 +28,10 @@ def main():
     parser.add_argument("--library-reference", action="append", default=[], type=Path)
     parser.add_argument("--seed-proofs", type=Path)
     parser.add_argument("--extra-context", action="append", default=[], type=Path)
+    parser.add_argument("--harness-memory", type=Path)
     args = parser.parse_args()
     settings = load_api_settings()
+    harness = policy(ROOT)
     if args.attempts is None:
         args.attempts = settings["max_attempts"]
     if args.attempts < 1:
@@ -61,6 +64,7 @@ def main():
     if commit != MATHLIB_COMMIT or not version.startswith("Lean (version 4.35.0,"):
         raise SystemExit("Pinned Lean/mathlib required")
     args.run_dir.mkdir(parents=True, exist_ok=False)
+    memory = FailureMemory(args.harness_memory or args.run_dir / 'failure_memory.json')
     paths = [ROOT / "ValuationRecovery.lean", ROOT / "NormalizedCancellation.lean"] if args.job == "square" else []
     paths.extend(local_dependencies)
     context = "\n\n".join(p.name + "\n" + p.read_text() for p in paths)
@@ -75,9 +79,9 @@ def main():
         env["LEAN_PATH"] = build + os.pathsep + env.get("LEAN_PATH", "")
         for dependency in paths:
             command = ["lean", f"--root={ROOT}", "-o", str(Path(build) / (dependency.stem + ".olean")), str(dependency)]
-            result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=settings["lean_timeout_seconds"])
-            if result.returncode:
-                raise SystemExit(result.stdout + result.stderr)
+            result = compile_lean(command, env, settings["lean_timeout_seconds"], harness)
+            if not lean_accepted(result['exit_code'], result['output']):
+                raise SystemExit(result['output'])
         for index, (name, statement) in enumerate(goals):
             prefix = render(imports, goals[:index], accepted)
             prompt = """You alone author all Lean proof code and all repairs. The host never edits your proofs.
@@ -91,7 +95,9 @@ Prefer direct reuse of a matching quantified theorem over deriving facts from in
 In particular, a bound e<t+d alone does not imply e=t. The available critical_exponent_dichotomy supplies the missing disjunction.
 Do not index a list by arbitrary Nat with an unproved bounds proof: CRT already accepts lists of modulus values.
 Output the proof only in the JSON field; do not claim execution.
-""" + "\nNEW FIXED GOAL:\n" + statement + "\nACCEPTED PREFIX:\n" + prefix + "\nAVAILABLE CONTEXT:\n" + context + "\nACTUAL PUBLIC MATHLIB SOURCE:\n" + library + "\nPUBLIC WORKFLOW REFERENCES:\n" + methods
+Lint warnings alone do not invalidate a kernel-checked theorem. The executor records them.
+The executor controls bounded heartbeat/recursion limits; do not inject set_option.
+""" + "\nNEW FIXED GOAL:\n" + statement + "\nACCEPTED PREFIX:\n" + prefix + "\nAVAILABLE CONTEXT:\n" + context + "\nACTUAL PUBLIC MATHLIB SOURCE:\n" + library + "\nPUBLIC WORKFLOW REFERENCES:\n" + methods + "\nPERSISTENT FAILURE MEMORY:\n" + json.dumps(memory.summary(name), ensure_ascii=False)
             messages = [{"role": "user", "content": prompt}]
             seen = set()
             for attempt in range(1, args.attempts + 1):
@@ -112,43 +118,50 @@ Output the proof only in the JSON field; do not claim execution.
                     body = json.loads(content)["proof"]
                     all_bodies = {**accepted, name: body}
                     candidate = render(imports, goals[:index+1], all_bodies)
-                    if digest(candidate) in seen:
+                    if digest(candidate) in seen or memory.repeated_nonresource_candidate(name, digest(candidate)):
                         raise ValueError("Identical failed proof repeated. Choose a different argument using the exact available theorem signatures.")
                     seen.add(digest(candidate))
                     source = args.run_dir / (module + ".lean")
                     source.write_text(candidate)
                     (args.run_dir / f"{index+1}-{attempt}.lean").write_text(candidate)
                     command = ["lean", f"--root={args.run_dir}", "-o", str(Path(build) / (module + ".olean")), str(source)]
-                    result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=settings["lean_timeout_seconds"])
-                    output = result.stdout + result.stderr
+                    result = compile_lean(command, env, settings["lean_timeout_seconds"], harness)
+                    output = result['output']
                     (args.run_dir / f"{index+1}-{attempt}.compiler.txt").write_text(output)
-                    passed = result.returncode == 0 and "sorryAx" not in output and "warning:" not in output
-                    for axiom_list in re.findall(r"depends on axioms:\s*\[([^\]]*)\]", output):
-                        if set(re.findall(r"[A-Za-z_][\w.]*", axiom_list)) - {"propext", "Classical.choice", "Quot.sound"}:
-                            passed = False
-                    record = {"theorem": name, "attempt": attempt, "exit_code": result.returncode,
+                    passed = lean_accepted(result['exit_code'], output)
+                    triage = result['analysis']
+                    memory.record(name, digest(candidate), triage, passed, result['resource_attempts'])
+                    (args.run_dir / f"{index+1}-{attempt}.diagnostics.json").write_text(json.dumps({**triage, 'source_context': source_context(candidate, triage), 'resource_attempts': result['resource_attempts']}, ensure_ascii=False, indent=2))
+                    record = {"theorem": name, "attempt": attempt, "exit_code": result['exit_code'],
                               "accepted": passed, "source_sha256": digest(candidate), "usage": response.get("usage"),
-                              "request_settings": response.get("research_request_settings")}
+                              "request_settings": response.get("research_request_settings"),
+                              "harness_diagnostics": triage, "resource_attempts": result['resource_attempts']}
                     records.append(record)
-                    print(f"{module}/{name}: Lean exit={result.returncode}, accepted={passed}", flush=True)
+                    print(f"{module}/{name}: Lean exit={result['exit_code']}, accepted={passed}, categories={triage['categories']}", flush=True)
                     if passed:
                         accepted[name] = body
                         (args.run_dir / "accepted_proofs.json").write_text(json.dumps(accepted, ensure_ascii=False, indent=2))
                         break
                     feedback = output[-16000:]
+                    feedback += '\nSTRUCTURED LEAN DIAGNOSTICS:\n' + json.dumps(triage, ensure_ascii=False)
+                    feedback += '\nACTUAL SOURCE AROUND ERRORS:\n' + source_context(candidate, triage)
                     retrieved = retrieve_library_context(output)
                     if retrieved:
                         (args.run_dir / f"{index+1}-{attempt}.retrieved.txt").write_text(retrieved)
                         feedback += "\nRetrieved from the pinned public mathlib source:\n" + retrieved
                 except (ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
                     feedback = str(error)
+                    triage = analyze(feedback)
                     records.append({"theorem": name, "attempt": attempt, "validation_error": feedback})
                 messages.extend([{"role": "assistant", "content": reply_content}, {"role": "user", "content":
                     "Actual Lean feedback. Repair this proof only; preserve every hypothesis. Return JSON with proof only.\n" + feedback}])
-                if attempt % 2 == 0:
+                repeat = memory.summary(name)['same_failure_streak']
+                if attempt < args.attempts and (repeat >= harness['critic_repeat_threshold'] or (attempt % 2 == 0 and set(triage['categories']) & {'proof_gap', 'library_api'})):
                     diagnosis = api([{"role": "user", "content":
-                        "Independent mathematical evaluator. Diagnose the failed proof below. Identify any false logical inference, "
+                        "Separate DeepSeek repair critic (same model, not independent external review). Diagnose the failed proof below. Identify any false logical inference, "
                         "sign mistake, wrong witness, or API mismatch. Suggest a genuinely different repair strategy when needed. "
+                        "For no_goals or simp_no_progress errors, diagnose redundant tactics instead of reopening valid mathematics. "
+                        "For a resource ceiling, suggest a more focused argument. Lint warnings alone are not proof failures. "
                         "Return JSON with a feedback field, no Lean code. Do not change the fixed theorem.\nGOAL:\n" + statement +
                         "\nFAILED PROOF:\n" + content + "\nACTUAL FEEDBACK:\n" + feedback +
                         "\nAVAILABLE CONTEXT:\n" + context + "\nLIBRARY SOURCE:\n" + library}])
@@ -161,7 +174,7 @@ Output the proof only in the JSON field; do not claim execution.
         final_source = render(imports, goals, accepted)
         review = api([{"role": "user", "content":
             "Act as a separate statement reviewer. Return JSON {verdict:PASS or ISSUES, feedback:...}. "
-            "Lean compiled the following fixed-goal module without holes or warnings. Check its mathematical scope, "
+            "Lean compiled the following fixed-goal module without holes and with allowed axioms only. Lint warnings are recorded separately and are not proof failures. Check its mathematical scope, "
             "nonzero/positive assumptions, and whether its names overstate what is proved. Do not demand unrelated new claims. "
             "Do not report interface or type mismatches that Lean has already checked. Do not mark generic names as ISSUES. "
             "Here is the actual imported context, so check signatures against it:\n" + context +
@@ -174,6 +187,7 @@ Output the proof only in the JSON field; do not claim execution.
                   "module": module, "source_sha256": digest(final_source), "theorems": list(accepted),
                   "records": records, "review": verdict,
                   "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+                  "harness_policy": harness,
                   "whole_equation_solved": False}
         (args.run_dir / "result.json").write_text(json.dumps(report, ensure_ascii=False, indent=2))
         if report["status"] != "PASS":

@@ -71,7 +71,8 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 ## Working style
 - User dislikes frequent questions/confirmations. Proceed autonomously within existing authorization; on one failure, diagnose and switch strategy.
 - Do not claim snapshot publication, GitHub push, task restore, or persistent model memory unless actually executed.
-- The current worker also rejects Lean warnings. For fixed hypotheses, explicitly reference every named assumption, including redundant ones; do not rename or remove fixed binders. Replacing use of one redundant assumption with the other can simply move the unused-variable warning instead of fixing it.
+- Kernel acceptance is Lean exit 0 with the fixed type and allowed axioms, with no holes/native_decide. Lint warnings are recorded separately; do not spend proof attempts on unused-variable warnings or change fixed hypotheses to silence them.
+- The Lean harness classifies errors and retries unchanged source on a pure heartbeat/recursion limit, with bounded resources and the same wall-clock deadline. Use the actual source excerpts and persistent failure memory before trying the same failing proof again.
 
 ## Tested commands
 Run existing verification from the prepared mathlib checkout:

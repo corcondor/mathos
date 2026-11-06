@@ -22,6 +22,7 @@ import uuid
 
 from deepseek_goal_budget import GoalBudgetExceeded
 from deepseek_proof_loop import ROOT, MODEL, api, completion_text, digest, load_api_settings
+from deepseek_lean_harness import analyze, accepted as lean_accepted, source_context
 
 REPO = ROOT.parents[3]
 NOTES = ROOT.parent
@@ -147,6 +148,10 @@ propose_job: {config:{module,imports,definitions,goals:[[name,theorem]],local_de
   You author the job. Executor validates syntax/boundaries, asks a separate DeepSeek scope review,
   freezes the types, and returns job_id. No proof bodies here. Never weaken the final target.
 inspect_job: {job_id}; see the frozen config and actual last result.
+diagnose_job: {job_id}; classified failures, exact source locations, partial successes and reusable candidates.
+update_job_context: {job_id,extra_context?,library_reference?}; add actual sources without changing frozen theorem types.
+review_failure: {job_id}; ask a separate DeepSeek repair critic for a different strategy and pass its notes to the worker.
+set_plan: {milestones:[{id,objective,depends_on:[],modules:[]}]}; persist a dependency plan; evidence status is machine-derived.
 prove_job: {job_id,attempts?}; choose 1..20 proof attempts (default 5), then reconsider using real feedback.
 publish: {}; verify all accepted modules and commit/push ONLY their artifacts to authorized PR branch.
 checkpoint: {summary}; retain a brief research note, then CONTINUE; it does not end the goal.
@@ -178,6 +183,10 @@ class GoalAgent:
             for path in sorted(self.run_dir.glob('*.action.json')):
                 entry = json.loads(path.read_text())
                 self.remember(entry['action'], entry['observation'])
+        for job in self.state['jobs'].values():
+            if job['status'] in {'failed', 'interrupted'}:
+                job['harness_recovery'] = {'reusable_seed_theorems': list(self.recover_seeds(job)),
+                                           'recompilation_required': True}
 
     def remember(self, action, observation):
         name, args = action.get('action'), action.get('arguments', {})
@@ -213,8 +222,11 @@ class GoalAgent:
                 'jobs': {key: {'module': j['config']['module'], 'status': j['status'],
                               'goals': [g[0] for g in j['config']['goals']], 'why_needed': j['why_needed']}
                          for key, j in self.state['jobs'].items()},
+                'job_recovery': {key:j.get('harness_recovery') for key,j in self.state['jobs'].items()
+                                 if j.get('harness_recovery')},
                 'notes': self.state['notes'][-8:], 'last_observation': self.state['last_observation'],
                 'working_memory': self.state.get('working_memory', []),
+                'milestone_plan': self.plan_snapshot(),
                 'budget': json.loads(budget.read_text()) if budget.exists() else None,
                 'verified_theorem_count': verified['accepted_theorem_count'],
                 'verified_module_catalog': [{'module': m['module'], 'theorems': m['theorems']}
@@ -227,7 +239,9 @@ class GoalAgent:
                 name + '\n' + excerpt(rooted(NOTES, name), 1, 180)
                 for name in self.goal['initial_research_files'])
         prompt = SKILL.read_text() + '\n' + TOOLS + '\nCURRENT MACHINE STATE:\n' + json.dumps(self.snapshot(), ensure_ascii=False) + initial
-        history = self.history or [{'role': 'user', 'content': 'Start the persistent goal. You choose the next research action.'}]
+        instruction = ('Resume the saved goal and use working_memory; do not restart already completed inspection.'
+                       if self.state['steps'] else 'Start the persistent goal.')
+        history = self.history or [{'role': 'user', 'content': instruction + ' You choose the next research action.'}]
         response = api([{'role': 'system', 'content': prompt}, *history])
         step = self.state['steps'] + 1
         write_json(self.run_dir / f'{step:04d}.response.json', response)
@@ -296,11 +310,14 @@ class GoalAgent:
             raise ValueError('Frozen theorem contract changed')
         run = directory / ('run-' + str(len(job['runs']) + 1))
         command = ['lake', 'env', sys.executable, str(ROOT / 'deepseek_goal_worker.py'), job_id,
-                   '--job-config', str(config_path), '--run-dir', str(run), '--attempts', str(attempts)]
-        if job['runs']:
-            seed = Path(job['runs'][-1]) / 'accepted_proofs.json'
-            if seed.exists(): command += ['--seed-proofs', str(seed)]
+                   '--job-config', str(config_path), '--run-dir', str(run), '--attempts', str(attempts),
+                   '--harness-memory', str(directory / 'failure_memory.json')]
+        seeds = self.recover_seeds(job)
+        if seeds:
+            seed = directory / 'recovered_seed_proofs.json'; write_json(seed, seeds)
+            command += ['--seed-proofs', str(seed)]
         for path in job['extra_context']: command += ['--extra-context', path]
+        for path in job.get('harness_context', []): command += ['--extra-context', path]
         for path in job['library_reference']: command += ['--library-reference', path]
         job['runs'].append(str(run)); job['status'] = 'running'; self.save()
         env = os.environ.copy()
@@ -328,6 +345,109 @@ class GoalAgent:
         self.save()
         return {'status': job['status'], 'result': report,
                 'actual_worker_log': (directory / 'worker.log').read_text()[-18000:]}
+
+    def recover_seeds(self, job):
+        seeds = {}
+        names = [g[0] for g in job['config']['goals']]
+        for directory in map(Path, job['runs']):
+            accepted = directory / 'accepted_proofs.json'
+            if accepted.exists():
+                for name, proof in json.loads(accepted.read_text()).items():
+                    if name in seeds and seeds[name] != proof:
+                        raise ValueError('Accepted proof prefix changed across runs')
+                    seeds.setdefault(name, proof)
+        # Accepted bodies take priority over all older, previously rejected candidates.
+        for directory in map(Path, job['runs']):
+            report = directory / 'result.json'
+            if not report.exists(): continue
+            for record in json.loads(report.read_text()).get('records', []):
+                name = record.get('theorem')
+                if record.get('exit_code') != 0 or name not in names or name in seeds: continue
+                prefix = str(names.index(name)+1) + '-' + str(record['attempt'])
+                source, log, response = (directory / (prefix + suffix) for suffix in ['.lean', '.compiler.txt', '.response.json'])
+                if not (source.exists() and log.exists() and response.exists()): continue
+                if digest(source.read_bytes()) != record['source_sha256'] or not lean_accepted(0, log.read_text()): continue
+                body = json.loads(completion_text(json.loads(response.read_text())))['proof']
+                seeds[name] = body  # Exact DeepSeek output, recompiled against the unchanged contract.
+        return {name: proof for name, proof in seeds.items() if name in names}
+
+    def diagnose(self, job_id):
+        job = self.state['jobs'][job_id]; failures = []
+        for run in map(Path, job['runs'][-3:]):
+            paths = sorted(run.glob('*-*.compiler.txt'), key=lambda p: tuple(map(int, p.name.split('.compiler')[0].split('-'))))
+            for path in paths[-6:]:
+                source = path.with_name(path.name.replace('.compiler.txt', '.lean'))
+                output = path.read_text()
+                inferred_code = 1 if re.search(r'\berror(?:\([^)]*\))?:|HARNESS_WALL_TIMEOUT', output) else 0
+                info = analyze(output, inferred_code)
+                failures.append({'attempt': path.stem, 'kernel_pass_if_recompiled': lean_accepted(inferred_code, output),
+                    'analysis': info, 'actual_source_context': source_context(source.read_text(), info) if source.exists() else '',
+                    'compiler_output': output[-7000:]})
+        result = {'frozen_config_sha256': job['config_sha256'], 'actual_attempts': failures[-8:],
+                  'reusable_seed_theorems': list(self.recover_seeds(job)), 'recompilation_required': True,
+                  'note': 'Diagnostics and lint are not substitutes for actual fixed-type Lean verification.'}
+        job['last_diagnosis'] = result; self.save()
+        return result
+
+    def update_context(self, args):
+        job = self.state['jobs'][args['job_id']]
+        if job['status'] in {'verified', 'published', 'running'}:
+            raise ValueError('Update context only for a ready, failed or interrupted fixed job')
+        extra = [rooted(NOTES, p) for p in args.get('extra_context', [])]
+        library = [rooted(MATHLIB / 'Mathlib', p) for p in args.get('library_reference', [])]
+        contexts = list(dict.fromkeys(job['extra_context'] + [str(p) for p in extra]))
+        references = list(dict.fromkeys(job['library_reference'] + [str(p) for p in library]))
+        if len(contexts)>8 or len(references)>4 or any(Path(p).stat().st_size>300000 for p in contexts+references):
+            raise ValueError('Use focused source context within the existing file limits')
+        job['extra_context'], job['library_reference'] = contexts, references
+        self.save(); return {'context_updated': True, 'unchanged_contract_sha256': job['config_sha256']}
+
+    def review_failure(self, job_id):
+        job = self.state['jobs'][job_id]
+        diagnostic = self.diagnose(job_id)
+        response = api([{'role':'user','content':
+            'You are a separate DeepSeek repair critic, not an independent external reviewer. '
+            'Use the actual compiler failures and unchanged theorem contract to propose a different repair '
+            'strategy. For resource or syntax failures, do not invent a new mathematical obstruction. '
+            'Return compact JSON {failure_classification,alternative_strategy,needed_facts,avoid}. '
+            'Do not alter any theorem or successful proof.\n'+json.dumps({'config':job['config'], 'diagnosis':diagnostic},ensure_ascii=False)}])
+        advice = json.loads(completion_text(response))
+        directory = self.run_dir/'jobs'/job_id
+        write_json(directory/'repair_critic.response.json',response)
+        note = directory/'repair_advice.md'
+        note.write_text('DeepSeek repair-critic advice (unverified guidance, not proof):\n'+json.dumps(advice,ensure_ascii=False,indent=2))
+        job['harness_context'] = [str(note)]; self.save()
+        return {'critic_advice':advice,'passed_to_next_worker':True,'unchanged_contract_sha256':job['config_sha256']}
+
+    def set_plan(self, args):
+        nodes = args.get('milestones')
+        if not isinstance(nodes,list) or not 1<=len(nodes)<=24: raise ValueError('Use 1..24 focused milestones')
+        found = {}
+        for node in nodes:
+            if (not isinstance(node,dict) or set(node)-{'id','objective','depends_on','modules'}
+                    or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_-]*',node.get('id',''))
+                    or not isinstance(node.get('objective'),str) or not 1<=len(node['objective'])<=2000
+                    or not isinstance(node.get('depends_on',[]),list) or not isinstance(node.get('modules',[]),list)
+                    or any(not isinstance(dep,str) for dep in node.get('depends_on',[]))
+                    or any(not isinstance(m,str) or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',m) for m in node.get('modules',[]))
+                    or node['id'] in found): raise ValueError('Invalid milestone schema')
+            found[node['id']] = node
+        visited, active = set(),set()
+        def visit(key):
+            if key not in found or key in active: raise ValueError('Missing or cyclic milestone dependency')
+            if key in visited:return
+            active.add(key)
+            for dep in found[key].get('depends_on',[]):visit(dep)
+            active.remove(key);visited.add(key)
+        for key in found:visit(key)
+        self.state['milestones']=nodes;self.save()
+        return {'plan_saved':True,'plan':self.plan_snapshot(),'final_targets_unchanged':True}
+
+    def plan_snapshot(self):
+        data=json.loads((ROOT/'deepseek_generation_checks.json').read_text())
+        verified={m['module'] for m in data.get('modules',[]) if m['status']=='PASS'}
+        return [{**node,'module_evidence_present':[m for m in node.get('modules',[]) if m in verified],
+                 'semantic_goal_completion':False} for node in self.state.get('milestones',[])]
 
     def register(self, job):
         config, report = job['config'], job['result']
@@ -444,6 +564,10 @@ class GoalAgent:
             return {'exit_code': result.returncode, 'output': (result.stdout + result.stderr)[-12000:]}
         if name == 'propose_job': return self.propose(args)
         if name == 'inspect_job': return self.state['jobs'][args['job_id']]
+        if name == 'diagnose_job': return self.diagnose(args['job_id'])
+        if name == 'update_job_context': return self.update_context(args)
+        if name == 'review_failure': return self.review_failure(args['job_id'])
+        if name == 'set_plan': return self.set_plan(args)
         if name == 'prove_job': return self.worker(args['job_id'], args.get('attempts', 5))
         if name == 'publish': return self.publish()
         if name == 'checkpoint':

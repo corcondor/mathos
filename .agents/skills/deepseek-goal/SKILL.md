@@ -30,10 +30,20 @@ same theorem. They are source observations, not proof certificates. Use
 5. On failure inspect the actual error, retrieve real library declarations, and
    choose a repair or a different approach. Previously accepted proof bodies
    and frozen target statements must not be weakened or overwritten.
+   `diagnose_job` gives classified failures and exact source excerpts.
+   `update_job_context` passes retrieved sources to a retry without changing types.
+   `review_failure` asks a separate DeepSeek repair critic for another strategy.
+   Unused-variable lint does not invalidate a kernel-checked theorem.
 6. Publish each verified module before starting another new module. Only verified
    source, fixed jobs, generated verification reports and goal progress are staged.
 7. Checkpoint after meaningful progress, then continue choosing the next task.
    A checkpoint or one successful lemma does not stop the goal loop.
+
+Use `set_plan` to preserve a milestone dependency graph when the task spans many
+modules. Its evidence comes from actual verification reports; the graph is a
+research plan, not permission to declare an intermediate milestone or the final
+goal proved. The executor preserves accepted proof prefixes and can recompile
+exact earlier DeepSeek outputs that were rejected only because of lint.
 
 Completion requires BOTH final modules in `goal.json`, with EXACTLY the frozen
 statements, accepted by real Lean without proof holes/custom axioms/native_decide,
