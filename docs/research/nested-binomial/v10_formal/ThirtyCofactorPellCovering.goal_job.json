@@ -1,0 +1,26 @@
+{
+  "module": "ThirtyCofactorPellCovering",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorCubePrimeExtraction",
+  "definitions": "",
+  "goals": [
+    [
+      "cofactor_M_cases",
+      "theorem cofactor_M_cases (n : ℕ) (hn : 1 ≤ n) : Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 1 ∨ Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 2 ∨ Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 3 ∨ Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 6"
+    ],
+    [
+      "L_lower_bound",
+      "theorem L_lower_bound (n r L M : ℕ) (hM : 0 < M) (h : M * r ^ 2 = L * n * (n - 1)) (hn : 2 ≤ n) (hr : 3 * n < r) : 9 * M + 1 ≤ L"
+    ],
+    [
+      "L_upper_bound",
+      "theorem L_upper_bound (n r L M : ℕ) (hM : 0 < M) (h : M * r ^ 2 = L * n * (n - 1)) (hn : 104 ≤ n) (hr : 3 * r < 10 * n) : 927 * L < 10400 * M"
+    ],
+    [
+      "Q_dvd_sq_pair_covering",
+      "theorem Q_dvd_sq_pair_covering (n r L : ℕ) (hn : 104 ≤ n) (hrlo : 3 * n < r) (hrhi : 3 * r < 10 * n) (hL : L * ((n / Nat.gcd n 3) * ((n - 1) / Nat.gcd (n - 1) 6)) = r ^ 2) : (Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 1 ∧ 10 ≤ L ∧ L ≤ 11) ∨ (Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 2 ∧ 19 ≤ L ∧ L ≤ 22) ∨ (Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 3 ∧ 28 ≤ L ∧ L ≤ 33) ∨ (Nat.gcd n 3 * Nat.gcd (n - 1) 6 = 6 ∧ 55 ≤ L ∧ L ≤ 67)"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorCubePrimeExtraction.lean"
+  ]
+}

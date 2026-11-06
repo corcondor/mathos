@@ -55,7 +55,41 @@
     }
   },
   "evaluations": [],
-  "pending_trials": [],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorPellCovering-2987558f",
+      "method_id": "finite-cover-certificate",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "L_lower_bound",
+          "L_upper_bound",
+          "Q_dvd_sq_pair_covering",
+          "cofactor_M_cases"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "L_lower_bound",
+          "L_upper_bound",
+          "Q_dvd_sq_pair_covering",
+          "cofactor_M_cases"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 136700,
+        "reported_reasoning_tokens": 130882,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 20.245,
+        "error_categories": {
+          "other_error": 1
+        },
+        "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "model_evaluation_pending": true
+    }
+  ],
   "causal_effect_established": false,
   "proofs_require_the_unchanged_Lean_checker": true
 }
