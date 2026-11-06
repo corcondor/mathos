@@ -1,0 +1,26 @@
+{
+  "module": "ThirtyCofactorValuation",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorCubePrimeExtraction",
+  "definitions": "",
+  "goals": [
+    [
+      "factorization_mul_prime_pow",
+      "theorem factorization_mul_prime_pow (w p a : ℕ) (hw : 0 < w) (hp : Nat.Prime p) (hpa : ¬ p ∣ w) : (w * p ^ a).factorization p = a"
+    ],
+    [
+      "factorization_two_of_odd",
+      "theorem factorization_two_of_odd (m : ℕ) (hm : Odd m) : m.factorization 2 = 0"
+    ],
+    [
+      "six_mul_choose_three",
+      "theorem six_mul_choose_three (i : ℕ) (hi : 3 ≤ i) : 6 * Nat.choose i 3 = i * (i - 1) * (i - 2)"
+    ],
+    [
+      "factorization_choose_three",
+      "theorem factorization_choose_three (w p a i : ℕ) (hw : 1 ≤ w) (hp : Nat.Prime p) (hpa : ¬ p ∣ w) (ha : 1 ≤ a) (hi : i = w * p ^ a + 2) (hq : 4 * w < p ^ a) : (Nat.choose i 3).factorization p = a - (if p = 3 then 1 else 0)"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorCubePrimeExtraction.lean"
+  ]
+}

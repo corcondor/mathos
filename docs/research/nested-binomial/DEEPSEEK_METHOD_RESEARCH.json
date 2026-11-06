@@ -23,7 +23,7 @@
         "v16_lower_gap.md",
         "v16_manifest.json"
       ],
-      "status": "observed; causal superiority unestablished",
+      "status": "experimental",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -114,7 +114,46 @@
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
     }
   ],
-  "pending_trials": [],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorValuation-4ecb3364",
+      "method_id": "finite-cover-certificate",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 10,
+        "accepted_theorems": [
+          "factorization_choose_three",
+          "factorization_mul_prime_pow",
+          "factorization_two_of_odd",
+          "six_mul_choose_three"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "factorization_choose_three",
+          "factorization_mul_prime_pow",
+          "factorization_two_of_odd",
+          "six_mul_choose_three"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 350029,
+        "reported_reasoning_tokens": 340091,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 25.439,
+        "error_categories": {
+          "library_api": 1,
+          "proof_gap": 4,
+          "unused_binding": 5,
+          "candidate_validation": 1,
+          "syntax": 1,
+          "no_goals": 1
+        },
+        "attempts_with_Lean_timing": 9,
+        "attempts_without_Lean_timing": 1,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "model_evaluation_pending": true
+    }
+  ],
   "causal_effect_established": false,
   "proofs_require_the_unchanged_Lean_checker": true
 }

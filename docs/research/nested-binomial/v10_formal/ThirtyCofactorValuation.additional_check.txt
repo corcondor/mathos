@@ -1,0 +1,38 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:13:38: warning: Variable name `hi` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hi
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:79:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:112:8: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:113:8: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:125:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:126:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:128:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorValuation.lean:129:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+'NestedBinomialV10.factorization_mul_prime_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.factorization_two_of_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.six_mul_choose_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.factorization_choose_three' depends on axioms: [propext, Classical.choice, Quot.sound]
