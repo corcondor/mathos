@@ -208,3 +208,6 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - DeepSeekへの実研究依頼で、finite-cover-certificate（有限区間被覆の証明書設計）とdefect-localization（正確な不足約数deltaへの数学的障害の局所化）の2手法を本人が提案。各仮説・手順・成功/失敗条件をカード化。最初の手法を実際の中断ジョブThirtyCofactorPellCovering-2987558fに適用し、固定型を変えずに試す。DEEPSEEK_METHOD_RESEARCH_START.json、DEEPSEEK_METHOD_RESEARCH.json/.md参照。
 - 方法の初期予測はMの4場合分け・2つの区間補題が先に通り、25係数対への最終分配が難所、というもの。これは予測であり検証済み結果ではない。中断前のbaselineは結果なしで、因果的優越性を評価できないことを本人も明記した。
 - 追加のusage/時刻の欠測や候補検証失敗の扱いを含め、最終の57テストがPASS。方法表のトークンは候補応答の記録分であり、プランナー・範囲点検・修正批評・最終レビューを含む総研究コストではない。共有のgoal予算は全API呼び出しを集計する。
+- 最初の手法実験が完了。finite-cover-certificateを同じ固定PellCovering契約に適用し、5候補試行で4補題がLean通過（3初回、L_lower_boundのみ1修正）。seed再利用0、不明usage0、候補応答の報告出力136700トークン、記録されたLean実行20.245秒。これらは総研究コストやAPI待ち時間ではない。
+- 71定理・21モジュールの実Lean検査PASS。ThirtyCofactorPellCoveringは13d1e9c15d33b8f0b4b0e4ee31e23ce97331110cで保存済み。MとLの25係数対の被覆が形式化されたが、全Pell列の排除やQ∤r²そのものは未完了。
+- DeepSeek自身がevaluate_methodを実行してkeep（同じ族への継続候補）と評価。baselineはホスト中断のため空で、単一の逐次実験から因果的・一般的優越性を主張しないと明記。結果ファイルSHA、契約SHA、baseline、実測、本人の結論をDEEPSEEK_METHOD_RESEARCH.json/.mdに保存した。数学研究と手法研究の自律ループは継続する。

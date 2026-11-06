@@ -4,7 +4,7 @@ DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、
 
 - Decision maker: deepseek-v4-1-flash-1017
 - Status: running
-- Actions: 113
+- Actions: 118
 - Final success requires both frozen targets and verified GitHub publication.
 
 | Module | Actual status |
@@ -19,4 +19,4 @@ DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、
 | ThirtyCofactorPrimeSeparation | published |
 | ThirtyCofactorQDivisibility | published |
 | ThirtyCofactorCubePrimeExtraction | published |
-| ThirtyCofactorPellCovering | verified |
+| ThirtyCofactorPellCovering | published |

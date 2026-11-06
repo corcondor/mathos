@@ -23,7 +23,7 @@
         "v16_lower_gap.md",
         "v16_manifest.json"
       ],
-      "status": "experimental",
+      "status": "observed; causal superiority unestablished",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -54,12 +54,30 @@
       "checker_or_budget_changes_allowed": false
     }
   },
-  "evaluations": [],
-  "pending_trials": [
+  "evaluations": [
     {
-      "job_id": "ThirtyCofactorPellCovering-2987558f",
       "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPellCovering-2987558f",
       "trial": 0,
+      "contract_sha256": "a7d14f0a7796f5fd93626a4443d52e7ebc73cdc5d7884d96292bcc52baf739f2",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-2",
+          "result_sha256": "8bda738d6f77d606673730d169575e30cd6a92037a03eefef9aec2179eb2d2a3"
+        }
+      ],
       "metrics": {
         "attempt_records": 5,
         "accepted_theorems": [
@@ -87,9 +105,16 @@
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true
       },
-      "model_evaluation_pending": true
+      "evidence_id": "d66bf1cd911a0a99dc66236d31bdd669ad44dafeb85fef2533a883b6ace96b44",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: all four frozen obligations (cofactor_M_cases, L_lower_bound, L_upper_bound, Q_dvd_sq_pair_covering) now pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The compositional split predicted by the hypothesis held: the M∈{1,2,3,6} case analysis, the two integer inequalities from M·r²=L·n(n−1), and the exact 25-pair disjunction each closed as small arithmetic facts. Only one repair was needed (L_lower_bound attempt 1 failed on type-class synthesis, not on the mathematics; attempt 2 succeeded). The covering list is now machine-checked and is the documented input to the Pell reduction. Limitations: single sequential trial, no matched baseline (baseline was empty), reported tokens (~136.7k completion, ~130.9k reasoning) cover candidate responses only and exclude planner/scope/repair critics; this does not establish causal superiority of the method, and it proves only the covering disjunction, not Q∤r², Pell solvability, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
     }
   ],
+  "pending_trials": [],
   "causal_effect_established": false,
   "proofs_require_the_unchanged_Lean_checker": true
 }
