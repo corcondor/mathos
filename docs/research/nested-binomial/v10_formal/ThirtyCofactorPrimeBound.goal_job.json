@@ -1,0 +1,24 @@
+{
+  "module": "ThirtyCofactorPrimeBound",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "pow_factorization_choose_six_w",
+      "theorem pow_factorization_choose_six_w (p w : ℕ) (hw : 1 ≤ w) : p ^ (Nat.choose (6 * w) (2 * w)).factorization p ≤ 6 * w"
+    ],
+    [
+      "factorization_div_gcd_le",
+      "theorem factorization_div_gcd_le (p w : ℕ) : (Nat.choose (6 * w) (2 * w) / Nat.gcd (Nat.choose (6 * w) (2 * w)) 6).factorization p ≤ (Nat.choose (6 * w) (2 * w)).factorization p"
+    ],
+    [
+      "prime_pow_bound",
+      "theorem prime_pow_bound (p w : ℕ) (hw : 1 ≤ w) : p ^ (Nat.choose (6 * w) (2 * w) / Nat.gcd (Nat.choose (6 * w) (2 * w)) 6).factorization p ≤ 6 * w"
+    ],
+    [
+      "height_bound_ge_five",
+      "theorem height_bound_ge_five (p w a : ℕ) (hw : 1 ≤ w) (h : 25 * p ^ a ≤ 216 * w ^ 3) : w * p ^ a + 2 < 9 * w ^ 4 + 2"
+    ]
+  ],
+  "local_dependencies": []
+}

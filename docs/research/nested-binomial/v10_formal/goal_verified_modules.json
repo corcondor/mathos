@@ -13,6 +13,7 @@
     "ThirtyCofactorPellCovering",
     "ThirtyCofactorValuation",
     "ThirtyCofactorPellReduction",
-    "ThirtyCofactorExponentDomain"
+    "ThirtyCofactorExponentDomain",
+    "ThirtyCofactorPrimeBound"
   ]
 }

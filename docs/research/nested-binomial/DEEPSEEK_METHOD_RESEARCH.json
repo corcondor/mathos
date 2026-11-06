@@ -306,7 +306,7 @@
       "method_id": "finite-cover-certificate",
       "trial": 0,
       "metrics": {
-        "attempt_records": 6,
+        "attempt_records": 10,
         "accepted_theorems": [
           "factorization_div_gcd_le",
           "height_bound_ge_five",
@@ -319,16 +319,16 @@
           "pow_factorization_choose_six_w",
           "prime_pow_bound"
         ],
-        "seed_recompilations": 0,
+        "seed_recompilations": 4,
         "reported_completion_tokens": 76490,
         "reported_reasoning_tokens": 75441,
-        "attempts_without_usage": 0,
-        "recorded_Lean_seconds": 14.58,
+        "attempts_without_usage": 4,
+        "recorded_Lean_seconds": 26.109,
         "error_categories": {
           "proof_gap": 1,
           "library_api": 1
         },
-        "attempts_with_Lean_timing": 6,
+        "attempts_with_Lean_timing": 10,
         "attempts_without_Lean_timing": 0,
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true
