@@ -1,0 +1,20 @@
+{
+  "module": "CFAnalyticBounds",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "alpha_gt_three",
+      "theorem alpha_gt_three (S T : ℕ) (alpha : ℝ) (hS : 0 < S) (hT : 162 * S < T) (halpha : alpha ^ 3 = (T : ℝ) / (6 * (S : ℝ))) : 3 < alpha"
+    ],
+    [
+      "curve_approximation_bound",
+      "theorem curve_approximation_bound (S T n r : ℕ) (alpha : ℝ) (hS : 0 < S) (hn : 104 ≤ n) (hr : 3 * n < r) (hcurve : 6 * S * r ^ 3 = T * n * (n - 1) * (n - 2)) (hTlow : 162 * S < T) (hThigh : T < 229 * S) (halpha : alpha ^ 3 = (T : ℝ) / (6 * (S : ℝ))) : 0 < alpha - (r : ℝ) / ((n : ℝ) - 1) ∧ alpha - (r : ℝ) / ((n : ℝ) - 1) < 3 / (2 * ((n : ℝ) - 1) ^ 2)"
+    ],
+    [
+      "reduced_approximation_bound",
+      "theorem reduced_approximation_bound (alpha : ℝ) (r x g p q : ℕ) (hg : 0 < g) (hq : 0 < q) (hr : r = g * p) (hx : x = g * q) (hbound : 0 < alpha - (r : ℝ) / (x : ℝ) ∧ alpha - (r : ℝ) / (x : ℝ) < 3 / (2 * (x : ℝ) ^ 2)) : 0 < alpha - (p : ℝ) / (q : ℝ) ∧ |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)"
+    ]
+  ],
+  "local_dependencies": []
+}
