@@ -207,21 +207,27 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
         body["response_format"] = {"type": response_format}
     if settings["reasoning_effort"] is not None:
         body["reasoning_effort"] = settings["reasoning_effort"]
-    request = urllib.request.Request(
-        "https://api.mistral.ai/v1/chat/completions", data=json.dumps(body).encode(),
-        headers={"Authorization": "Bearer " + os.environ["MISTRAL_API_KEY"],
-                 "Content-Type": "application/json"},
-    )
+    capacity_retries_used = transient_retries_used = 0
+    retry_trace = []
     for attempt in range(settings["capacity_retries"] + 1):
         try:
-            with urllib.request.urlopen(request, timeout=settings["request_timeout_seconds"]) as response:
+            # Recheck the shared deadline after backoff; never retry past the run budget.
+            effective_settings, effective_budget = before_call(settings)
+            body['max_tokens']=effective_settings['max_tokens']
+            request = urllib.request.Request(
+                "https://api.mistral.ai/v1/chat/completions", data=json.dumps(body).encode(),
+                headers={"Authorization": "Bearer " + os.environ["MISTRAL_API_KEY"],
+                         "Content-Type": "application/json"})
+            with urllib.request.urlopen(request, timeout=effective_settings["request_timeout_seconds"]) as response:
                 result = json.load(response)
-            result["research_request_settings"] = settings
-            result["research_capacity_retries_used"] = attempt
-            record_usage(goal_budget, result, settings)
+            result["research_request_settings"] = effective_settings
+            result["research_capacity_retries_used"] = capacity_retries_used
+            result["research_transient_retries_used"] = transient_retries_used
+            result["research_retry_trace"] = retry_trace
+            record_usage(effective_budget, result, effective_settings)
             return result
         except urllib.error.HTTPError as error:
-            # Retry explicit transient capacity failures, never auth/quota errors.
+            # Retry explicit capacity and transient provider/gateway errors, never auth/quota errors.
             detail = error.read().decode(errors="replace")[:1500]
             detail = detail.replace(os.environ["MISTRAL_API_KEY"], "[REDACTED]")
             try:
@@ -231,7 +237,13 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
             capacity = (error.code == 429 and
                         (payload.get("type") == "backend_out_of_capacity" or
                          str(payload.get("code")) == "3505"))
-            if capacity and attempt < settings["capacity_retries"]:
+            transient = error.code in {500, 502, 503, 504, 520}
+            if (capacity or transient) and attempt < settings["capacity_retries"]:
+                capacity_retries_used += int(capacity)
+                transient_retries_used += int(transient)
+                retry_trace.append({'http_status':error.code,
+                                    'kind':'capacity' if capacity else 'provider_or_gateway',
+                                    'failed_request_usage_unknown':bool(transient)})
                 time.sleep(min(30, settings["capacity_backoff_seconds"] * (attempt + 1)))
                 continue
             raise RuntimeError(f"Mistral HTTP {error.code}: {detail}") from None

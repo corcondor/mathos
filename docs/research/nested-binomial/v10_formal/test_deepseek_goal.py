@@ -259,6 +259,20 @@ class GoalTests(unittest.TestCase):
         with patch.object(goal,'MAX_COMPRESSED_CONTENT',8),self.assertRaisesRegex(ValueError,'bounded'):
             self.agent.execute({'action':'read_research','arguments':{'path':path.name}})
 
+    def test_github_observations_use_only_the_authorized_pr_and_do_not_certify_Lean(self):
+        self.agent.goal.update(repository='owner/research',pr=1,branch='research')
+        pr={'html_url':'https://github.com/owner/research/pull/1','title':'Research','draft':True,
+            'head':{'sha':'abcdef','ref':'research'}}
+        checks={'check_runs':[{'name':'unit tests','status':'completed','conclusion':'success'}]}
+        responses=[goal.subprocess.CompletedProcess([],0,json.dumps(v),'') for v in [pr,checks]]
+        with patch.object(goal.subprocess,'run',side_effect=responses) as call:
+            result=self.agent.execute({'action':'github_status','arguments':{}})
+        self.assertEqual([c.args[0] for c in call.call_args_list],
+                         [['gh','api','repos/owner/research/pulls/1'],['gh','api','repos/owner/research/commits/abcdef/check-runs']])
+        self.assertTrue(result['not_Lean_proof_evidence'])
+        with self.assertRaisesRegex(ValueError,'no overrides'):
+            self.agent.execute({'action':'github_status','arguments':{'repository':'different/repository'}})
+
 
 class BudgetTests(unittest.TestCase):
     def test_shared_budget_caps_request_and_accounts_reported_usage(self):

@@ -8,6 +8,7 @@ import unittest
 
 from deepseek_method_research import MethodResearch
 from deepseek_goal import rooted
+from deepseek_goal_worker import persist_attempt_records
 
 
 class MethodResearchTests(unittest.TestCase):
@@ -121,6 +122,17 @@ class MethodResearchTests(unittest.TestCase):
         self.assertEqual(m['attempts_without_Lean_timing'],1)
         self.assertEqual(m['newly_generated_verified_theorems_with_known_usage'],[])
         self.assertIn('excludes planner',m['token_measurement_scope'])
+
+    def test_durable_attempts_remain_measurable_when_the_later_api_review_fails(self):
+        job=self.job();self.methods.propose(self.card());self.methods.use({'method_id':'derive-before-search','job_id':'job'})
+        run=self.root/'review-failed';run.mkdir();job['runs'].append(str(run))
+        persist_attempt_records(run,[self.attempt()])
+        self.assertFalse((run/'result.json').exists())
+        result=self.methods.evaluate({'method_id':'derive-before-search','job_id':'job','decision':'revise','conclusion':'The proof passed, but final review did not return.'})
+        self.assertEqual(result['metrics']['newly_generated_verified_theorems_with_known_usage'],['a'])
+        self.assertFalse(result['run_evidence'][0]['module_review_report_available'])
+        self.assertIn('attempt_records_sha256',result['run_evidence'][0])
+        self.assertFalse((run/'attempt_records.tmp').exists())
 
 
 if __name__=='__main__':unittest.main()

@@ -167,6 +167,7 @@ set_plan: {milestones:[{id,objective,depends_on:[],modules:[]}]}; persist a depe
 prove_job: {job_id,attempts?}; choose 1..20 proof attempts (default 5), then reconsider using real feedback.
 publish: {}; verify all accepted modules and commit/push ONLY their artifacts to authorized PR branch.
 sync_research: {}; fetch/merge the authorized branch, preserving verified sources; conflicts stop with actual diagnostics.
+github_status: {}; inspect the authorized research PR and head check-runs. GitHub checks are observations, not Lean proof evidence.
 inspect_methods: {}; real attempt metrics and recorded method hypotheses/evaluations.
 propose_method: {id,title,kind,hypothesis,procedure:[],success_criterion,failure_criterion,references:[]}.
   kind is mathematical_strategy, formalization or certificate_design. References are existing research paths.
@@ -551,6 +552,21 @@ class GoalAgent:
     def sync_research(self):
         return synchronize(REPO, self.goal['branch'], self.publication_origins(), self.protected_sources())
 
+    def github_status(self):
+        def read(endpoint):
+            result=subprocess.run(['gh','api',endpoint],cwd=REPO,capture_output=True,text=True,timeout=60)
+            if result.returncode:raise ValueError('GitHub observation failed: '+(result.stdout+result.stderr)[-4000:])
+            return json.loads(result.stdout)
+        base='repos/'+self.goal['repository']
+        pr=read(base+'/pulls/'+str(self.goal['pr']))
+        head=pr['head']['sha'];checks=read(base+'/commits/'+head+'/check-runs')
+        return {'repository':self.goal['repository'],'pull_request':self.goal['pr'],
+                'url':pr['html_url'],'title':pr['title'],'draft':pr['draft'],
+                'research_branch':self.goal['branch'],'observed_head_branch':pr['head']['ref'],'observed_head_commit':head,
+                'checks':[{'name':c['name'],'status':c['status'],'conclusion':c.get('conclusion'),'url':c.get('html_url')}
+                          for c in checks.get('check_runs',[])[:30]],
+                'not_Lean_proof_evidence':True}
+
     def update_pr(self, head, report):
         endpoint = 'repos/' + self.goal['repository'] + '/pulls/' + str(self.goal['pr'])
         current = json.loads(subprocess.check_output(['gh', 'api', endpoint], cwd=REPO, text=True))
@@ -612,6 +628,9 @@ class GoalAgent:
         if name == 'prove_job': return self.worker(args['job_id'], args.get('attempts', 5))
         if name == 'publish': return self.publish()
         if name == 'sync_research': return self.sync_research()
+        if name == 'github_status':
+            if args:raise ValueError('github_status uses only the authorized repository and PR; no overrides')
+            return self.github_status()
         if name == 'inspect_methods': return self.methods.overview()
         if name in {'propose_method','use_method','evaluate_method'}:
             result=getattr(self.methods,{'propose_method':'propose','use_method':'use','evaluate_method':'evaluate'}[name])(args)

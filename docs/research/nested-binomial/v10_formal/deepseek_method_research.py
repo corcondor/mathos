@@ -85,6 +85,8 @@ class MethodResearch:
             report=run/'result.json'
             if report.exists():
                 records.extend(json.loads(report.read_text()).get('records',[]))
+            elif (run/'attempt_records.json').exists():
+                records.extend(json.loads((run/'attempt_records.json').read_text()))
         return records
 
     @staticmethod
@@ -138,8 +140,7 @@ class MethodResearch:
         evidence={'method_id':name,'job_id':job_id,'trial':index,
                   'contract_sha256':job['config_sha256'],
                   'baseline_metrics':trial['baseline_metrics'],
-                  'run_evidence':[{'run':Path(r).name,'result_sha256':hashlib.sha256((Path(r)/'result.json').read_bytes()).hexdigest()}
-                                  for r in runs if (Path(r)/'result.json').exists()],
+                  'run_evidence':self.run_evidence(runs),
                   'metrics':self.metrics(records,trial['baseline_accepted_theorems'])}
         evidence_id=hashlib.sha256(json.dumps(evidence,sort_keys=True).encode()).hexdigest()
         row={**evidence,'evidence_id':evidence_id,'actual_job_status':job['status'],
@@ -179,14 +180,26 @@ class MethodResearch:
                 runs=job['runs'][trial['start_run_count']:trial.get('end_run_count',len(job['runs']))]
                 records=self.records(runs)
                 if not records:continue
-                hashes=[{'run':Path(r).name,'result_sha256':hashlib.sha256((Path(r)/'result.json').read_bytes()).hexdigest()}
-                        for r in runs if (Path(r)/'result.json').exists()]
+                hashes=self.run_evidence(runs)
                 if any(e['job_id']==key and e['trial']==index and e['run_evidence']==hashes
                        for e in self.state['method_evaluations']):continue
                 pending.append({'job_id':key,'method_id':trial['method_id'],'trial':index,
                                 'metrics':self.metrics(records,trial['baseline_accepted_theorems']),
                                 'model_evaluation_pending':True})
         return pending[:8]
+
+    @staticmethod
+    def run_evidence(runs):
+        evidence=[]
+        for run in map(Path,runs):
+            path=run/'result.json'
+            if path.exists():
+                evidence.append({'run':run.name,'result_sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+            else:
+                path=run/'attempt_records.json'
+                if path.exists():evidence.append({'run':run.name,'attempt_records_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+                                                  'module_review_report_available':False})
+        return evidence
 
     def public_state(self):
         # No raw API responses, prompts, compiler source excerpts or private paths.

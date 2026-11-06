@@ -236,13 +236,33 @@
       "advisory_decision": "keep",
       "causal_effect_established": false,
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
-    }
-  ],
-  "pending_trials": [
+    },
     {
-      "job_id": "ThirtyCofactorExponentDomain-5bcafd16",
       "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorExponentDomain-5bcafd16",
       "trial": 0,
+      "contract_sha256": "aa920e874edec69eea55143cfa7c21d049d1f8cb8906619ab37c68c3984c7a12",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "10e69a627b2614809718cd3438a62f7b0ecf07df051dc8a887fc96e49359e18d"
+        }
+      ],
       "metrics": {
         "attempt_records": 5,
         "accepted_theorems": [
@@ -267,6 +287,48 @@
           "proof_gap": 1
         },
         "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "d5568ceff1ae07672877382eca70a8e121015d85f5af0826a8cf568ea82920d3",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial: all four frozen obligations (exponent_domain_iff, q_bound_ge_five, q_bound_two, q_bound_three) pass real Lean with only propext/Classical.choice/Quot.sound and no hand edits. Measured: 5 attempt records, 55030 reported completion tokens (53719 reasoning), 14.339s recorded Lean time over 5 timed attempts, error classes {unused_binding:5, proof_gap:1}, zero seed recompilations, zero attempts without usage. The predicted split held in the weak sense only: the three polynomial bounds closed quickly as small monotone-power comparisons, but the substantive obligation was not an interval cover at all — exponent_domain_iff is a pure omega-arithmetic equivalence, and the q_bounds are power-monotonicity chains. Across four trials on this method (PellCovering, Valuation, PellReduction, ExponentDomain) the recurring transferable element is 'split the frozen statement into small independent integer obligations with explicit bounds and prove each separately', while the interval-cover/certificate-list part was actually used only in the PellCovering trial. Limitations: sequential non-randomized trials, empty matched baselines, candidate-response token scope excludes planner/scope/repair critics, and this module proves only the exponent-domain equivalence and three polynomial bounds — not p ≤ 6w, not n < 9w^4+2, not Q∤r², and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    }
+  ],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorPrimeBound-296796b2",
+      "method_id": "finite-cover-certificate",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 6,
+        "accepted_theorems": [
+          "factorization_div_gcd_le",
+          "height_bound_ge_five",
+          "pow_factorization_choose_six_w",
+          "prime_pow_bound"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "factorization_div_gcd_le",
+          "height_bound_ge_five",
+          "pow_factorization_choose_six_w",
+          "prime_pow_bound"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 76490,
+        "reported_reasoning_tokens": 75441,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 14.58,
+        "error_categories": {
+          "proof_gap": 1,
+          "library_api": 1
+        },
+        "attempts_with_Lean_timing": 6,
         "attempts_without_Lean_timing": 0,
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true

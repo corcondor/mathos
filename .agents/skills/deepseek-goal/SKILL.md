@@ -41,6 +41,10 @@ same theorem. They are source observations, not proof certificates. Use
    to protected proofs. `sync_research` can fetch newer versioned research notes.
    Unrecoverable publication conflicts/errors stop the round as `blocked` with
    actual Git diagnostics; do not waste actions on publish/checkpoint loops.
+   `github_status` reads the authorized PR and head check-runs. The user explicitly
+   authorized DeepSeek to operate GitHub as part of this research; select sync,
+   publication and PR updates without asking for the same permission again.
+   GitHub check status alone is not mathematical or Lean verification.
 7. Checkpoint after meaningful progress, then continue choosing the next task.
    A checkpoint or one successful lemma does not stop the goal loop.
 

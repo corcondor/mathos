@@ -36,6 +36,9 @@ essay. Use the actual nested-binomial problem and its remaining proof gaps.
    keep, revise or drop. Compare with the historical baseline on the SAME contract.
    Do not count an accepted seed recompilation as a new proof from the new method.
    Missing usage, host pauses and incomplete reports are not mathematical failures.
+   Per-attempt records survive a failed final API review. Kernel-accepted candidate
+   proofs are measured separately from module review and publication; retrying
+   their exact bodies as seeds must not count as generating them again.
 6. Persist observations and revise the method under a new id when needed, then
    return to mathematical work. Do not spend the whole budget expanding a catalogue
    without testing methods. Publish verified mathematical progress as usual; the

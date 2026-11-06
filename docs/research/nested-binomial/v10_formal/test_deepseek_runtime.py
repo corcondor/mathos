@@ -11,6 +11,7 @@ from unittest.mock import patch
 import urllib.error
 
 import deepseek_proof_loop as runtime
+from deepseek_goal_budget import GoalBudgetExceeded
 
 
 class ReasoningRuntimeTests(unittest.TestCase):
@@ -143,6 +144,34 @@ class ReasoningRuntimeTests(unittest.TestCase):
                 self.assertEqual(send.call_count, 1)
                 sleep.assert_not_called()
                 self.assertNotIn("offline-test-key", str(raised.exception))
+
+    def test_transient_review_gateway_error_retries_without_model_downgrade(self):
+        calls=[]
+        def fake(request,timeout):
+            calls.append(json.loads(request.data))
+            if len(calls)==1:
+                raise urllib.error.HTTPError(request.full_url,520,'gateway',{},io.BytesIO(b'error code: 520'))
+            return self.response()
+        with patch.object(runtime.urllib.request,'urlopen',fake),patch.object(runtime.time,'sleep'):
+            result=runtime.api([])
+        self.assertEqual(calls[0],calls[1])
+        self.assertEqual(result['research_capacity_retries_used'],0)
+        self.assertEqual(result['research_transient_retries_used'],1)
+        self.assertTrue(result['research_retry_trace'][0]['failed_request_usage_unknown'])
+
+    def test_gateway_retries_are_bounded_and_stop_at_the_shared_deadline(self):
+        def failed(request,timeout):
+            raise urllib.error.HTTPError(request.full_url,520,'gateway',{},io.BytesIO(b'gateway'))
+        with patch.object(runtime.urllib.request,'urlopen',side_effect=failed) as send,patch.object(runtime.time,'sleep'):
+            with self.assertRaises(RuntimeError):runtime.api([])
+            self.assertEqual(send.call_count,3)
+        path=self.root/'budget.json'
+        path.write_text(json.dumps({'max_completion_tokens':5000,'used_completion_tokens':0,'deadline':time.time()+60}))
+        def expired(_):
+            data=json.loads(path.read_text());data['deadline']=time.time()-1;path.write_text(json.dumps(data))
+        with patch.dict(os.environ,{'DEEPSEEK_GOAL_BUDGET_FILE':str(path)}),patch.object(runtime.urllib.request,'urlopen',side_effect=failed) as send,patch.object(runtime.time,'sleep',expired):
+            with self.assertRaises(GoalBudgetExceeded):runtime.api([])
+            self.assertEqual(send.call_count,1)
 
     def test_legacy_string_and_missing_final_text(self):
         self.assertEqual(runtime.completion_text({"choices": [{"message": {"content": "old output"}}]}), "old output")

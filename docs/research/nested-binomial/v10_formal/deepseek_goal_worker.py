@@ -18,6 +18,13 @@ from deepseek_proof_loop import JOBS, MODEL, MATHLIB_COMMIT, ROOT, api, digest, 
 from deepseek_lean_harness import policy, compile_lean, accepted as lean_accepted, analyze, source_context, FailureMemory
 
 
+def persist_attempt_records(run_dir, records):
+    """Keep measured Lean outcomes even if a later model review is unavailable."""
+    path=Path(run_dir)/'attempt_records.json';temporary=path.with_suffix('.tmp')
+    temporary.write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
+    temporary.chmod(0o600);temporary.replace(path)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("job", help="Built-in job name, or a label used with --job-config")
@@ -139,6 +146,7 @@ The executor controls bounded heartbeat/recursion limits; do not inject set_opti
                               "lean_elapsed_seconds": result['elapsed_seconds'],
                               "harness_diagnostics": triage, "resource_attempts": result['resource_attempts']}
                     records.append(record)
+                    persist_attempt_records(args.run_dir,records)
                     print(f"{module}/{name}: Lean exit={result['exit_code']}, accepted={passed}, categories={triage['categories']}", flush=True)
                     if passed:
                         accepted[name] = body
@@ -155,9 +163,13 @@ The executor controls bounded heartbeat/recursion limits; do not inject set_opti
                     feedback = str(error)
                     triage = analyze(feedback)
                     triage['categories'].append('candidate_validation')
-                    records.append({"theorem": name, "attempt": attempt, "validation_error": feedback,
-                                    "usage":response.get('usage'),"seed_recompile":"seed_source" in response,
-                                    "harness_diagnostics":triage})
+                    if records and records[-1].get('theorem')==name and records[-1].get('attempt')==attempt:
+                        records[-1]['feedback_preparation_error']=feedback
+                    else:
+                        records.append({"theorem": name, "attempt": attempt, "validation_error": feedback,
+                                        "usage":response.get('usage'),"seed_recompile":"seed_source" in response,
+                                        "harness_diagnostics":triage})
+                    persist_attempt_records(args.run_dir,records)
                 messages.extend([{"role": "assistant", "content": reply_content}, {"role": "user", "content":
                     "Actual Lean feedback. Repair this proof only; preserve every hypothesis. Return JSON with proof only.\n" + feedback}])
                 repeat = memory.summary(name)['same_failure_streak']
