@@ -43,3 +43,5 @@ jobs:
           git add v18_ranks_output.txt v18_ranks_summary.md
           git diff --staged --quiet || git commit -m "Update residual curve rank results from Sage"
           git push
+
+# trigger: 2026-11-07
