@@ -136,8 +136,10 @@ def validate_job(config, targets, base=None):
 TOOLS = '''Choose ONE action and return JSON {"action":NAME,"arguments":OBJECT,"reason":SHORT_SUMMARY}.
 list_research: {} -> authorized filenames.
 read_research: {path,start?,count?}; paths relative to docs/research/nested-binomial.
+  start is 1-based and count is at most 250. Reuse working_memory before rereading.
 search_research: {query,glob?}; literal search of research only.
 read_mathlib: {path,start?,count?}; paths relative to pinned mathlib/Mathlib.
+list_mathlib: {glob?}; actual pinned Mathlib filenames, to avoid guessing paths.
 search_mathlib: {query,glob?}; literal search of actual pinned Mathlib declarations.
 cache_mathlib: {path}; fetch the compiled cache for one actual Mathlib/*.lean file.
 propose_job: {config:{module,imports,definitions,goals:[[name,theorem]],local_dependencies?},
@@ -171,6 +173,26 @@ class GoalAgent:
             self.state = {'goal_hash': self.goal_hash, 'status': 'not_started', 'steps': 0,
                           'jobs': {}, 'notes': [], 'last_observation': None, 'publication': None}
         self.history = []
+        if 'working_memory' not in self.state:
+            self.state['working_memory'] = []
+            for path in sorted(self.run_dir.glob('*.action.json')):
+                entry = json.loads(path.read_text())
+                self.remember(entry['action'], entry['observation'])
+
+    def remember(self, action, observation):
+        name, args = action.get('action'), action.get('arguments', {})
+        if name not in {'read_research', 'read_mathlib', 'search_research', 'search_mathlib', 'list_research', 'list_mathlib'} or 'tool_error' in observation:
+            return
+        identity = dict(args)
+        if name.startswith('read_'): identity.pop('count', None)
+        key = name + ':' + json.dumps(identity, sort_keys=True)
+        memory = [m for m in self.state.get('working_memory', []) if m['key'] != key]
+        text = json.dumps(observation, ensure_ascii=False)[:20000]
+        memory.append({'key': key, 'action': name, 'arguments': args,
+                       'observed_tool_result': text, 'not_a_verification': True})
+        while len(memory) > 16 or sum(len(m['observed_tool_result']) for m in memory) > 160000:
+            memory.pop(0)
+        self.state['working_memory'] = memory
 
     def save(self):
         self.state['updated_at_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -192,6 +214,7 @@ class GoalAgent:
                               'goals': [g[0] for g in j['config']['goals']], 'why_needed': j['why_needed']}
                          for key, j in self.state['jobs'].items()},
                 'notes': self.state['notes'][-8:], 'last_observation': self.state['last_observation'],
+                'working_memory': self.state.get('working_memory', []),
                 'budget': json.loads(budget.read_text()) if budget.exists() else None,
                 'verified_theorem_count': verified['accepted_theorem_count'],
                 'verified_module_catalog': [{'module': m['module'], 'theorems': m['theorems']}
@@ -222,7 +245,7 @@ class GoalAgent:
             raise ValueError('Use a literal search query of 1..500 characters')
         pattern = args.get('glob', '*.lean' if base == MATHLIB / 'Mathlib' else '*')
         result = subprocess.run(['rg', '-n', '-F', '--max-count', '30', '--glob', pattern,
-                                 '--', query, str(base)], capture_output=True, text=True, timeout=15)
+                                 '--', query, '.'], cwd=base, capture_output=True, text=True, timeout=15)
         return {'exit_code': result.returncode, 'output': (result.stdout + result.stderr)[:24000]}
 
     def propose(self, args):
@@ -408,6 +431,10 @@ class GoalAgent:
             return {'content': excerpt(rooted(base, args['path']), args.get('start', 1), args.get('count', 160))}
         if name in {'search_research', 'search_mathlib'}:
             return self.search(NOTES if name == 'search_research' else MATHLIB / 'Mathlib', args)
+        if name == 'list_mathlib':
+            result = subprocess.run(['rg', '--files', '--glob', args.get('glob', '*.lean')],
+                                    cwd=MATHLIB / 'Mathlib', capture_output=True, text=True, timeout=15)
+            return {'files': result.stdout.splitlines()[:400]}
         if name == 'cache_mathlib':
             path = rooted(MATHLIB / 'Mathlib', args['path'])
             if path.suffix != '.lean': raise ValueError('Cache only Lean library files')
@@ -437,6 +464,9 @@ class GoalAgent:
                 if job['status'] == 'running': job['status'] = 'interrupted'
             (self.run_dir / 'PAUSE').unlink(missing_ok=True)
             budget_path = self.run_dir / 'budget.json'
+            if budget_path.exists():
+                epochs = self.state.setdefault('previous_budget_epochs', [])
+                epochs.append(json.loads(budget_path.read_text()))
             write_json(budget_path, {'max_completion_tokens': max_completion_tokens, 'used_completion_tokens': 0,
                                      'deadline': time.time() + max_hours * 3600, 'api_calls': 0})
             previous = os.environ.get('DEEPSEEK_GOAL_BUDGET_FILE')
@@ -451,6 +481,8 @@ class GoalAgent:
                         action = self.decision()
                     except ValueError as error:
                         action = {'action': 'invalid', 'arguments': {}, 'reason': str(error)}
+                    if (self.run_dir / 'PAUSE').exists():
+                        self.state['status'] = 'paused'; break
                     self.state['steps'] += 1
                     print(json.dumps({'step': self.state['steps'], 'model': MODEL, 'action': action.get('action'), 'reason': action.get('reason', '')}, ensure_ascii=False), flush=True)
                     try:
@@ -459,8 +491,9 @@ class GoalAgent:
                         observation = {'tool_error': str(error)[-18000:], 'goal_complete': False}
                     write_json(self.run_dir / f"{self.state['steps']:04d}.action.json", {'action': action, 'observation': observation})
                     self.state['last_observation'] = observation
+                    self.remember(action, observation)
                     self.history.append({'role': 'user', 'content': 'Actual tool result:\n' + json.dumps(observation, ensure_ascii=False)[:40000] + '\nContinue the goal; choose the next action.'})
-                    self.history = self.history[-4:]
+                    self.history = self.history[-6:]
                     self.save()
                 else:
                     if self.state['status'] != 'complete': self.state['status'] = 'action_limit'

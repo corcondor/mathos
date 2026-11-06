@@ -13,6 +13,10 @@ subgoal or author proof bodies.
 Read the immutable goal in `goal.json`, the latest research state, and the tool
 observations. You, DeepSeek, choose each next action and its mathematical purpose.
 Do not wait for Codex to tell you which theorem to attempt next.
+The machine snapshot includes `working_memory`: observed source excerpts and
+search results from prior actions. Reuse them instead of repeatedly reading the
+same theorem. They are source observations, not proof certificates. Use
+`list_mathlib` to discover actual file paths before opening an uncertain path.
 
 1. Inspect actual notes, existing verified Lean modules, certificate code/data,
    and pinned mathlib declarations before designing a new module.

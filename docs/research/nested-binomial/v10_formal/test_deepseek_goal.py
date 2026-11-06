@@ -107,6 +107,34 @@ class GoalTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Goal changed'):
             goal.GoalAgent(self.agent.run_dir, self.spec_path)
 
+    def test_observed_sources_survive_resume_and_duplicate_reads_replace_cache(self):
+        action = {'action':'read_research','arguments':{'path':'notes.md','start':1,'count':100}}
+        self.agent.remember(action, {'content':'observed source'})
+        action['arguments']['count'] = 200
+        self.agent.remember(action, {'content':'more complete source'})
+        self.agent.save()
+        restored = goal.GoalAgent(self.agent.run_dir, self.spec_path)
+        memory = restored.snapshot()['working_memory']
+        self.assertEqual(len(memory), 1)
+        self.assertIn('more complete source', memory[0]['observed_tool_result'])
+        self.assertTrue(memory[0]['not_a_verification'])
+
+    def test_search_globs_are_relative_to_the_selected_source_root(self):
+        base = self.repo/'Mathlib'; (base/'Algebra').mkdir(parents=True)
+        (base/'Algebra'/'Fixture.lean').write_text('theorem needle_marker : True := by trivial\n')
+        result = self.agent.search(base, {'query':'needle_marker','glob':'Algebra/**'})
+        self.assertEqual(result['exit_code'], 0)
+        self.assertIn('Algebra/Fixture.lean', result['output'])
+
+    def test_pause_during_model_response_prevents_starting_another_tool(self):
+        def decision():
+            (self.agent.run_dir/'PAUSE').write_text('pause')
+            return {'action':'checkpoint','arguments':{'summary':'must not execute'}}
+        with patch.object(self.agent, 'decision', decision), patch.object(self.agent, 'execute') as tool:
+            result = self.agent.run(max_actions=2)
+        self.assertEqual(result['status'], 'paused')
+        tool.assert_not_called()
+
     def test_status_reads_do_not_mark_live_workers_interrupted(self):
         self.agent.state['jobs']['j'] = {'status': 'running', 'config': self.config(), 'why_needed': 'test'}
         self.agent.save()
