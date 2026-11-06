@@ -10,4 +10,4 @@ DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、
 | Module | Actual status |
 | --- | --- |
 | CFAnalyticBounds | published |
-| CFContinuantBridge | verified |
+| CFContinuantBridge | published |

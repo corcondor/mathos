@@ -156,3 +156,15 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - ユーザーが示した次方向は、Hを一つずつ計算するだけでなく、三連続整数の立方数構造と3降下で複数Hを同時に制約する定理を探すこと。既存の固定goalは変更せず、DeepSeek自身が新資料の利用方針と必要な検証を選ぶ。
 - こちらの自律goalではCFAnalyticBoundsの3証明がDeepSeekにより完成し、11モジュールの実Lean検査PASS。累計38定理、57ea27b5085564760a474c4f83bab87b486814ddでPRへ保存済み。その後API接続の切断で未完了のblockedとなった。今回の共有後に残りの実行予算で再開する。
 - 実API応答でreceived=true、supersedes_previous_v12_status=true、goal_changed=falseを取得。DeepSeekは旧状況を更新し、三連続整数のcube-free条件と3降下を複数Hの同時制約に向けた参照・研究バックログとして保持すると返答。受領記録: v12_committed_update_share_receipt.json。
+
+## 更新：v13の無制限Hに対するcube-support一括排除（2026-11-06 JST）
+- ユーザーが提示したv13の保存コミット58dd0ab25e7d653c947c1717006b98a4ae947c71を取得。PROGRESS_v13_ja.md、v13_uniform_cube_support.md、v13_exact_three_factor_descent.md、検証コード・GP入力・全出力・JSON・manifestをローカルへ統合した。
+- 報告の新必要条件: ell=1,j=i-3の枝で、ある素数p>=11についてv_p(T)が3の倍数でない。すなわちT=2^a*3^b*5^c*7^d*u³の族をHと全指数・uに上限なしで一括排除。uに11以上の素数を含めてよく、T自体がsmoothという意味ではない。H>=21という数値下限はv12のまま。全てのTや元の四変数問題を排除したわけではない。
+- 6Hr³=Tn(n-1)(n-2)とH|(n-2)から、Tのcube-free supportが有限素数集合S（2,3を含む）に支えられればn=alpha*x³,n-1=beta*y³、互いに素なcube-free alpha,betaもSに支えられる。各素数5配分、5^|S|本のalpha*x³-beta*y³=1へ帰着。Bennett既知の一意性定理を使うと候補第一添字の個数<=(5^|S|-1)/2。新しい一般Thue定理の証明ではない。
+- S={2,3,5,7}: 625係数対、PARI 2.17.4のthueinit(...,1)による直接/モニック変換の計1250呼出し。全正nは24個、n>=104は126,225,2401,4375,6860の5個。強制約数Fと区間の矛盾で全て除外する記録。
+- ホストはmanifestの12ファイルのサイズ/SHAを照合し、保存GP入力・出力・全解の整数代入・二つの符号化の対応・625配分の被覆監査と、最後5点の整除/区間チェックをこの環境で再実行してPASS。v13_deepseek_handoff_check.json参照。PARIの完全解法は再実行しておらず、二つの符号化は同じCASであり独立の完全ソルバではない。v13自体のLean形式化・Selmer群・元の式全体の解決を主張しない。
+- ユーザーが示した次方向: 11以上の素数が立方因子の外に残る係数型について、素数の値を順に増やす計算だけに頼らず、配分に共通する一般的な制約を探す。DeepSeek自身が資料の利用・検証方針を選ぶ。現在の固定goal・成功済み証明は変更しない。
+- こちらのDeepSeekはCFContinuantBridgeの4定理を追加して累計42定理、12モジュールの実Lean検査PASS。別Codexのv13 pushと競合して保存が止まっていたため、両方の履歴を保持して統合し、検証済みモジュールの保存を再実行する。
+- v13の13ファイル全文（GP入力・全出力・全解JSONを含む計256345バイト）を既存Mistral APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。受領記録: v13_committed_update_share_receipt.json。
+- 保存の競合は履歴を保持する通常のmergeで解消し、CFContinuantBridgeの4定理を154334c9776e8906549703112320f981c37ad3b0で既存PRへ通常push。remote SHA一致、12モジュールの実Lean検査PASS、PR要約更新を確認。jobはpublishedになった。旧メモの「未push」は解消済み。
+- 最初の48判断のラウンドはaction_limitで未完了。今回のv13情報を受けた新ラウンドは24判断を上限にし、残りのAPI報告トークン・当初の終了時刻を引き継ぐ。固定goalと成功済み本文は変更しない。

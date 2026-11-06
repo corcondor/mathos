@@ -1,0 +1,340 @@
+{
+  "source_commit": "58dd0ab25e7d653c947c1717006b98a4ae947c71",
+  "status": "PASS",
+  "files_checked": [
+    {
+      "file": "v13_branch_filter.py",
+      "bytes": 4624,
+      "sha256": "eae3593097213d5539a0f561756030e8712f094ffb3e7a50a7e629f8877e108f"
+    },
+    {
+      "file": "v13_branch_filter_results.json",
+      "bytes": 3410,
+      "sha256": "3d732072583ee079e4a28f6735b17ebdca86643b545cd933b21eb597cbebee82"
+    },
+    {
+      "file": "v13_encoding_audit.json",
+      "bytes": 3566,
+      "sha256": "681af50893b2a8a86beaf974c809e6e85a16eafeef30754a990490711a910bf8"
+    },
+    {
+      "file": "v13_encoding_audit.py",
+      "bytes": 12298,
+      "sha256": "a8cea58578ce1e265999ec4212db3d9528fed4f4f0b7d798d7d0047461036c79"
+    },
+    {
+      "file": "v13_exact_three_factor_descent.md",
+      "bytes": 6121,
+      "sha256": "75f67d94cea0be61beab43aaa6de262812e79213bcdc8014ff130fff71c765e8"
+    },
+    {
+      "file": "v13_pari_environment.json",
+      "bytes": 2133,
+      "sha256": "0f7b6a7a7d0b46abad13234919f46cb94ac86a105dba23a94ea7939282fbc5d2"
+    },
+    {
+      "file": "v13_thue_support_results.gp",
+      "bytes": 48618,
+      "sha256": "292152f2aebd9d6886ace1fabfb3444af1a6dde9642fdc0ad11eea8789bdb5af"
+    },
+    {
+      "file": "v13_thue_support_results.json",
+      "bytes": 136833,
+      "sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4"
+    },
+    {
+      "file": "v13_thue_support_results.stdout",
+      "bytes": 13433,
+      "sha256": "7f76ed5b0a58b45d8807e39262fbb37dcebe9ad15d894207f103bf45c3562cb5"
+    },
+    {
+      "file": "v13_thue_support_verifier.py",
+      "bytes": 3773,
+      "sha256": "04e2a9611cc182a9996e85bafb0909c67ad556e3deb2412fc6faa9e467130fdf"
+    },
+    {
+      "file": "v13_uniform_cube_support.md",
+      "bytes": 10637,
+      "sha256": "be9d4389ef2ee0bb9bddd137866e0a814ac4013fd45747ffd8eaf309a9aefc87"
+    },
+    {
+      "file": "PROGRESS_v13_ja.md",
+      "bytes": 5756,
+      "sha256": "11ea0c3fdfbe3adf62a012795c46a863d85f8b3726362428bd74e56e3bea4fc6"
+    }
+  ],
+  "metadata_hash_and_size_checks_passed": true,
+  "saved_output_audit": {
+    "status": "PASS",
+    "audit_source_sha256": "a8cea58578ce1e265999ec4212db3d9528fed4f4f0b7d798d7d0047461036c79",
+    "generated_at_utc": "2026-11-06T08:09:37.021085+00:00",
+    "scope": "Independent finite coverage generation, exact listed-solution checks, encoding correspondence, and saved-file hashes. No CAS rerun; this is not an independent proof of PARI solver completeness, an independent CAS implementation, or Lean verification.",
+    "bennett_cardinality_statement_review": {
+      "status": "mathematical statement audit; not a machine-checked proof",
+      "primary_reference": "https://personal.math.ubc.ca/~bennett/B-Crelle2.pdf",
+      "reference": "M. A. Bennett, J. reine angew. Math. 535 (2001), 1-49, Theorem 1.1",
+      "assumptions": [
+        "S is a finite set of primes containing 2 and 3",
+        "n>=3 and H,T,r are positive integers",
+        "H divides n-2 and 6 H r^3 = T n(n-1)(n-2)",
+        "v_p(T) is divisible by 3 for every prime p outside S"
+      ],
+      "reduction": "If p outside S divides n or n-1, it divides neither 6H nor the other two consecutive factors. Valuations imply 3 divides v_p(n) or v_p(n-1), respectively. Thus their unique positive cube-free cores A,B are supported on S and coprime.",
+      "cardinality_reason": "Each prime has five placements: absent, exponent 1 or 2 in A, or exponent 1 or 2 in B. Swapping A,B has only the fixed pair (1,1), which has no solution in positive cubic bases. Bennett's theorem applied to |A x^3-B y^3|=1 gives at most one positive base pair per remaining unordered core pair; n is the larger of the two terms.",
+      "distinct_first_index_bound": "(5^|S|-1)/2, uniformly in H and all allowed exponents of T",
+      "full_auxiliary_tuple_finiteness": "Also impose 3n<r<10n/3. For each n there are floor((n-1)/3) integer choices of r, finitely many positive H dividing n-2, and at most one T for each n,H,r. If gcd(H,T)=1, n,r uniquely determine H=A0/g and T=r^3/g, where A0=binomial(n,3), g=gcd(A0,r^3). Without a bound on r, the first-index bound alone does not give finiteness of all auxiliary tuples.",
+      "scope_limit": "This does not classify the original four-variable equation."
+    },
+    "reports": [
+      {
+        "status": "PASS",
+        "input_file": "v13_thue_support_results.json",
+        "support_primes": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "coverage_method": "all 3^s cube-free cores squared, then gcd(A,B)=1",
+        "core_count": 81,
+        "unfiltered_ordered_pair_count": 6561,
+        "verified_ordered_pair_count": 625,
+        "unordered_nontrivial_pair_count": 312,
+        "listed_direct_signed_solution_count": 210,
+        "listed_transformed_signed_solution_count": 210,
+        "transformed_solutions_rejected_by_A_divisibility": 0,
+        "positive_n": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          15,
+          16,
+          21,
+          25,
+          28,
+          36,
+          49,
+          50,
+          64,
+          81,
+          126,
+          225,
+          2401,
+          4375,
+          6860
+        ],
+        "positive_n_count": 24,
+        "pari_version_recorded_in_source_output": [
+          2,
+          17,
+          4
+        ],
+        "input_report_sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4",
+        "generator_source_sha256": "04e2a9611cc182a9996e85bafb0909c67ad556e3deb2412fc6faa9e467130fdf",
+        "gp_input_sha256": "292152f2aebd9d6886ace1fabfb3444af1a6dde9642fdc0ad11eea8789bdb5af",
+        "gp_stdout_sha256": "7f76ed5b0a58b45d8807e39262fbb37dcebe9ad15d894207f103bf45c3562cb5"
+      }
+    ]
+  },
+  "finite_branch_filter_replay": {
+    "status": "PASS",
+    "support_primes": [
+      2,
+      3,
+      5,
+      7
+    ],
+    "complete_coefficient_pairs": 625,
+    "positive_first_indices": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      15,
+      16,
+      21,
+      25,
+      28,
+      36,
+      49,
+      50,
+      64,
+      81,
+      126,
+      225,
+      2401,
+      4375,
+      6860
+    ],
+    "indices_below_prior_cutoff_104": 19,
+    "remaining_index_count": 5,
+    "remaining_after_divisibility_interval_checks": 0,
+    "rejections": [
+      {
+        "n": 126,
+        "binomial_n_3": 325500,
+        "D": 2625,
+        "D_factorization": [
+          [
+            3,
+            1
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "forced_divisor_F": 105,
+        "r_strict_lower_bound": 378,
+        "first_F_multiple_above_lower_bound": 420,
+        "r_strict_upper_bound": [
+          420,
+          1
+        ],
+        "natural_log_strict_lower_bound": null,
+        "excluded": true
+      },
+      {
+        "n": 225,
+        "binomial_n_3": 1873200,
+        "D": 8400,
+        "D_factorization": [
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "forced_divisor_F": 420,
+        "r_strict_lower_bound": 675,
+        "first_F_multiple_above_lower_bound": 840,
+        "r_strict_upper_bound": [
+          750,
+          1
+        ],
+        "natural_log_strict_lower_bound": null,
+        "excluded": true
+      },
+      {
+        "n": 2401,
+        "binomial_n_3": 2303999600,
+        "D": 960400,
+        "D_factorization": [
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            4
+          ]
+        ],
+        "forced_divisor_F": 980,
+        "r_strict_lower_bound": 7203,
+        "first_F_multiple_above_lower_bound": 7840,
+        "r_strict_upper_bound": [
+          29841,
+          4
+        ],
+        "natural_log_strict_lower_bound": 7,
+        "excluded": true
+      },
+      {
+        "n": 4375,
+        "binomial_n_3": 13947136875,
+        "D": 3189375,
+        "D_factorization": [
+          [
+            3,
+            6
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "forced_divisor_F": 1575,
+        "r_strict_lower_bound": 13125,
+        "first_F_multiple_above_lower_bound": 14175,
+        "r_strict_upper_bound": [
+          54375,
+          4
+        ],
+        "natural_log_strict_lower_bound": 7,
+        "excluded": true
+      },
+      {
+        "n": 6860,
+        "binomial_n_3": 53781281820,
+        "D": 23526370,
+        "D_factorization": [
+          [
+            2,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            19,
+            3
+          ]
+        ],
+        "forced_divisor_F": 1330,
+        "r_strict_lower_bound": 20580,
+        "first_F_multiple_above_lower_bound": 21280,
+        "r_strict_upper_bound": [
+          169785,
+          8
+        ],
+        "natural_log_strict_lower_bound": 8,
+        "excluded": true
+      }
+    ],
+    "proof_scope": "Exact finite check after the written uniform reduction and PARI complete Thue solving; not Lean verification.",
+    "source_sha256": "eae3593097213d5539a0f561756030e8712f094ffb3e7a50a7e629f8877e108f",
+    "thue_results_sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4"
+  },
+  "PARI_complete_solver_rerun": false,
+  "independent_complete_solver_implementation": false,
+  "v13_Lean_verification_performed": false
+}

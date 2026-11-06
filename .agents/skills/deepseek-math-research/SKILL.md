@@ -20,7 +20,7 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 
 ## Private research location
 - https://github.com/corcondor/mathos/pull/1; initial inspected base snapshot `bd4d2ad338e62102d60d9fffd8c073a5d48bf250`. Fetch its current head before further changes; verified later uploads are recorded in DEEPSEEK_STATE.md.
-- Public `nested-binomial-equation` main has up to v8. The private mathos PR now includes v12: read PROGRESS_v12_ja.md, v12_three_descent.md, the independent verifier and v12_results_manifest.json. The complete certificate ZIP is not stored on GitHub and has not been obtained in this environment; report receipt, source/hash checks and full recomputation separately.
+- Public `nested-binomial-equation` main has up to v8. The private mathos PR now includes v13: read PROGRESS_v13_ja.md, v13_uniform_cube_support.md, v13_exact_three_factor_descent.md and v13_manifest.json for the uniform cube-support exclusion. It relies on prior reductions, PARI complete Thue solving and (for the general candidate count) Bennett; it is not Lean-verified. v12 remains the H>=21 numerical bound; see its report, independent verifier and manifest. The complete certificate ZIP is not stored on GitHub and has not been obtained in this environment; report receipt, source/hash checks and full recomputation separately.
 - First inspect existing checkouts and GitHub auth; do not make the user re-summarize info available from the known PR. Cloud tasks are isolated; do not create worktrees unless explicitly asked.
 
 ## Division of labor
