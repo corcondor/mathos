@@ -1,0 +1,24 @@
+{
+  "module": "ThirtyCofactorSquareDefect",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "defect_dvd_r",
+      "theorem defect_dvd_r (Q r : ℕ) (h : Q ∣ r ^ 3) : Q / Nat.gcd Q (r ^ 2) ∣ r"
+    ],
+    [
+      "defect_cube_dvd",
+      "theorem defect_cube_dvd (Q r : ℕ) (h : Q ∣ r ^ 3) : (Q / Nat.gcd Q (r ^ 2)) ^ 3 ∣ Q"
+    ],
+    [
+      "defect_gt_one",
+      "theorem defect_gt_one (Q r : ℕ) (h3 : Q ∣ r ^ 3) (h2 : ¬ Q ∣ r ^ 2) : 1 < Q / Nat.gcd Q (r ^ 2)"
+    ],
+    [
+      "defect_cube_dvd_choose_three",
+      "theorem defect_cube_dvd_choose_three (Q r i : ℕ) (h3 : Q ∣ r ^ 3) (hA : Q ∣ Nat.choose i 3) : (Q / Nat.gcd Q (r ^ 2)) ^ 3 ∣ Nat.choose i 3"
+    ]
+  ],
+  "local_dependencies": []
+}

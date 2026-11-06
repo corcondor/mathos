@@ -5,7 +5,7 @@
 
 | 手法 | 種類 | 状態 |
 | --- | --- | --- |
-| Finite interval-cover certificate for the interrupted Pell covering job | certificate_design | observed; causal superiority unestablished |
+| Finite interval-cover certificate for the interrupted Pell covering job | certificate_design | experimental |
 | Localize the remaining obstruction in the exact square defect before global Pell search | mathematical_strategy | hypothesis |
 
 ## 実測した試行

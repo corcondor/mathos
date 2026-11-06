@@ -23,7 +23,7 @@
         "v16_lower_gap.md",
         "v16_manifest.json"
       ],
-      "status": "observed; causal superiority unestablished",
+      "status": "experimental",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -367,7 +367,42 @@
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
     }
   ],
-  "pending_trials": [],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorSquareDefect-df603e79",
+      "method_id": "finite-cover-certificate",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 7,
+        "accepted_theorems": [
+          "defect_cube_dvd",
+          "defect_cube_dvd_choose_three",
+          "defect_dvd_r",
+          "defect_gt_one"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "defect_cube_dvd",
+          "defect_cube_dvd_choose_three",
+          "defect_dvd_r",
+          "defect_gt_one"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 142034,
+        "reported_reasoning_tokens": 139391,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 16.236,
+        "error_categories": {
+          "library_api": 2,
+          "proof_gap": 1
+        },
+        "attempts_with_Lean_timing": 7,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "model_evaluation_pending": true
+    }
+  ],
   "causal_effect_established": false,
   "proofs_require_the_unchanged_Lean_checker": true
 }
