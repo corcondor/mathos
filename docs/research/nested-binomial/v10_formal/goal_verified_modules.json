@@ -2,6 +2,7 @@
   "modules": [
     "CFAnalyticBounds",
     "CFContinuantBridge",
-    "CFCylinderNesting"
+    "CFCylinderNesting",
+    "CFCurveInstantiation"
   ]
 }

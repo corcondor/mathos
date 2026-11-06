@@ -1,0 +1,13 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCurveInstantiation.lean:16:64: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCurveInstantiation.lean:16:68: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCurveInstantiation.lean:16:68: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+'NestedBinomialV10.cube_lt_iff_int_cross_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cube_between_implies_hbetween' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.curve_data_supplies_happrox' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.curve_data_to_coverage' depends on axioms: [propext, Classical.choice, Quot.sound]

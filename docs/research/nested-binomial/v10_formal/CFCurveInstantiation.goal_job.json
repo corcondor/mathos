@@ -1,0 +1,31 @@
+{
+  "module": "CFCurveInstantiation",
+  "imports": "import Mathlib.Tactic\nimport CFCylinderNesting\nimport CFAnalyticBounds",
+  "definitions": "",
+  "local_dependencies": [
+    "CFApproximationCore.lean",
+    "CFCoefficientRanges.lean",
+    "CFCandidateCoverage.lean",
+    "CFContinuantBridge.lean",
+    "CFCylinderNesting.lean",
+    "CFAnalyticBounds.lean"
+  ],
+  "goals": [
+    [
+      "cube_lt_iff_int_cross_mul",
+      "theorem cube_lt_iff_int_cross_mul (P Q : ℤ) (T S : ℕ) (hQ : 0 < Q) (hS : 0 < S) : ((P : ℝ) / (Q : ℝ)) ^ 3 < (T : ℝ) / (6 * (S : ℝ)) ↔ P ^ 3 * (6 * (S : ℤ)) < (T : ℤ) * Q ^ 3"
+    ],
+    [
+      "cube_between_implies_hbetween",
+      "theorem cube_between_implies_hbetween (alpha x y : ℝ) (h : (x ^ 3 - alpha ^ 3) * (y ^ 3 - alpha ^ 3) < 0) : (alpha - x) * (alpha - y) < 0"
+    ],
+    [
+      "curve_data_supplies_happrox",
+      "theorem curve_data_supplies_happrox (S T n r g p q : ℕ) (alpha : ℝ) (hS : 0 < S) (hn : 104 ≤ n) (hr : 3 * n < r) (hcurve : 6 * S * r ^ 3 = T * n * (n - 1) * (n - 2)) (hTlow : 162 * S < T) (hThigh : T < 229 * S) (halpha : alpha ^ 3 = (T : ℝ) / (6 * (S : ℝ))) (hg : 0 < g) (hrg : r = g * p) (hxg : n - 1 = g * q) : 0 < q ∧ 0 < alpha - (p : ℝ) / (q : ℝ) ∧ |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)"
+    ],
+    [
+      "curve_data_to_coverage",
+      "theorem curve_data_to_coverage (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (alpha : ℝ) (M : ℕ) (S T n r g p q : ℕ) (hS : 0 < S) (hn : 104 ≤ n) (hr : 3 * n < r) (hcurve : 6 * S * r ^ 3 = T * n * (n - 1) * (n - 2)) (hTlow : 162 * S < T) (hThigh : T < 229 * S) (halpha : alpha ^ 3 = (T : ℝ) / (6 * (S : ℝ))) (hg : 0 < g) (hgeq : g = Nat.gcd r (n - 1)) (hrg : r = g * p) (hxg : n - 1 = g * q) (hbetween : (alpha - ((contsZ a (M + 1)).1 : ℝ) / ((contsZ a (M + 1)).2 : ℝ)) * (alpha - (((contsZ a (M + 1)).1 + (contsZ a M).1 : ℤ) : ℝ) / (((contsZ a (M + 1)).2 + (contsZ a M).2 : ℤ) : ℝ)) < 0) (hqB : (q : ℤ) < (2 : ℤ) ^ (192 * S)) (hBQ : (2 : ℤ) ^ (192 * S) ≤ (contsZ a (M + 1)).2) : ∃ i : ℕ, i < M ∧ (contsZ a (i + 1)).2 ≤ (q : ℤ) ∧ (q : ℤ) < (contsZ a (i + 2)).2 ∧ ∃ a' b c : ℤ, (p : ℤ) = a' * (contsZ a (i + 1)).1 + b * (contsZ a i).1 ∧ (q : ℤ) = a' * (contsZ a (i + 1)).2 + b * (contsZ a i).2 ∧ c = a' - b * a (i + 1) ∧ (p : ℤ) = b * (contsZ a (i + 2)).1 + c * (contsZ a (i + 1)).1 ∧ (q : ℤ) = b * (contsZ a (i + 2)).2 + c * (contsZ a (i + 1)).2 ∧ (a', b) ∈ coefficientCandidates (a (i + 1))"
+    ]
+  ]
+}

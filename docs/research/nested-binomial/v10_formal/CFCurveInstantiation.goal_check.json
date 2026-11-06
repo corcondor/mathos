@@ -1,0 +1,310 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T09:00:28.161404+00:00",
+  "module": "CFCurveInstantiation",
+  "source_sha256": "476c592d4ac4187a63cc8c49daf20dc9ffe08c4077167892856aec2cacca22f9",
+  "theorems": [
+    "cube_lt_iff_int_cross_mul",
+    "cube_between_implies_hbetween",
+    "curve_data_supplies_happrox",
+    "curve_data_to_coverage"
+  ],
+  "records": [
+    {
+      "theorem": "cube_lt_iff_int_cross_mul",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "8838b8b54b0543c07bd907ebae548b3a0877bdd67d37a9991a6fe7a4f293eba0",
+      "usage": {
+        "prompt_tokens": 45755,
+        "total_tokens": 59094,
+        "completion_tokens": 13339,
+        "prompt_tokens_details": {
+          "cached_tokens": 11264
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 12755
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "e49217b22fe27641f75dbe47f50b25106159c9a79c9b07d1511073abfd8bc85a",
+        "locations": [
+          {
+            "line": 16,
+            "column": 64,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:64: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 2.354
+        }
+      ]
+    },
+    {
+      "theorem": "cube_between_implies_hbetween",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "aff1d5d6e832b9fc6c64e022e3929f283ce320ec7b10000446f44af9eaa97d33",
+      "usage": {
+        "prompt_tokens": 46402,
+        "total_tokens": 74489,
+        "completion_tokens": 28087,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 26797
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "e49217b22fe27641f75dbe47f50b25106159c9a79c9b07d1511073abfd8bc85a",
+        "locations": [
+          {
+            "line": 16,
+            "column": 64,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:64: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 2.796
+        }
+      ]
+    },
+    {
+      "theorem": "curve_data_supplies_happrox",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "c2ed69e3e53af0b5e1f536afc082df7179b1e9ca19e8d62937a4b312b3349617",
+      "usage": {
+        "prompt_tokens": 47872,
+        "total_tokens": 60535,
+        "completion_tokens": 12663,
+        "prompt_tokens_details": {
+          "cached_tokens": 11520
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 12304
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "e49217b22fe27641f75dbe47f50b25106159c9a79c9b07d1511073abfd8bc85a",
+        "locations": [
+          {
+            "line": 16,
+            "column": 64,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:64: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 9.514
+        }
+      ]
+    },
+    {
+      "theorem": "curve_data_to_coverage",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "476c592d4ac4187a63cc8c49daf20dc9ffe08c4077167892856aec2cacca22f9",
+      "usage": {
+        "prompt_tokens": 48838,
+        "total_tokens": 71978,
+        "completion_tokens": 23140,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 22436
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "e49217b22fe27641f75dbe47f50b25106159c9a79c9b07d1511073abfd8bc85a",
+        "locations": [
+          {
+            "line": 16,
+            "column": 64,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 16,
+            "column": 68,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:64: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCurveInstantiation-6bfafee2/run-1/CFCurveInstantiation.lean:16:68: warning: this tactic is never executed"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 4.526
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "The four fixed statements are mathematically sound under the stated hypotheses. Positivity assumptions are sufficient: S>0 and Q>0 for the cube cross-multiplication; q>0 is derived in curve_data_supplies_happrox from n>=104, g>0 and n-1=g*q; g>0 is explicit in curve_data_to_coverage. The cube comparison and betweenness lemmas are exact. curve_data_supplies_happrox correctly transfers the analytic bound from r/(n-1) to p/q, and curve_data_to_coverage correctly uses the CF denominator bound and the cylinder bracket to invoke certificate_prefix_coverage. Scope note: curve_data_to_coverage is conditional on a supplied continued-fraction sequence a, the index M, hbetween and hBQ; it does not construct the CF, prove the bracket, or assert global coverage of all curves. This is a scope limitation, not a false or overstated fixed statement."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}
