@@ -1,0 +1,256 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T13:18:59.315634+00:00",
+  "module": "ThirtyCofactorPellReduction",
+  "source_sha256": "3e10243974ef6ee48a3b5c956c057f39f7384053885554fac52a565d7ab9942e",
+  "theorems": [
+    "pell_parametrization",
+    "covering_to_pell"
+  ],
+  "records": [
+    {
+      "theorem": "pell_parametrization",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "faeb16c4719aad44cbc10644b750fe5b6c877a0140b6f22a8e0301cad44461ce",
+      "usage": {
+        "prompt_tokens": 58213,
+        "total_tokens": 95791,
+        "completion_tokens": 37578,
+        "prompt_tokens_details": {
+          "cached_tokens": 14848
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 36217
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.511,
+      "harness_diagnostics": {
+        "categories": [
+          "library_api"
+        ],
+        "fingerprint": "05e29451cb9a6df8c93c794ab3e7bdd21b98840a2034300fb8d5341c5f228bf9",
+        "locations": [
+          {
+            "line": 48,
+            "column": 30,
+            "kind": "error",
+            "message": "Application type mismatch: The argument"
+          },
+          {
+            "line": 59,
+            "column": 30,
+            "kind": "error",
+            "message": "Application type mismatch: The argument"
+          }
+        ],
+        "warnings": [],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Retrieve the real pinned declaration and its argument order; do not guess lemma names."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "library_api"
+          ],
+          "elapsed_seconds": 2.511
+        }
+      ]
+    },
+    {
+      "theorem": "pell_parametrization",
+      "attempt": 2,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "c48e52003d0b28e2a77f185b317f390374af4de31f04978c6c5e47e495396706",
+      "usage": {
+        "prompt_tokens": 61196,
+        "total_tokens": 87206,
+        "completion_tokens": 26010,
+        "prompt_tokens_details": {
+          "cached_tokens": 58112
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 24607
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.502,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "cb0cacae118cb314384f0450ac7fd5a2b3ca0f32442fd4441c2dcfab80af2305",
+        "locations": [
+          {
+            "line": 6,
+            "column": 48,
+            "kind": "warning",
+            "message": "Variable name `hM` is not explicitly referenced."
+          },
+          {
+            "line": 49,
+            "column": 8,
+            "kind": "warning",
+            "message": "Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing."
+          },
+          {
+            "line": 62,
+            "column": 8,
+            "kind": "warning",
+            "message": "Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:6:48: warning: Variable name `hM` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:49:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:62:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing."
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.502
+        }
+      ]
+    },
+    {
+      "theorem": "covering_to_pell",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "3e10243974ef6ee48a3b5c956c057f39f7384053885554fac52a565d7ab9942e",
+      "usage": {
+        "prompt_tokens": 59800,
+        "total_tokens": 95662,
+        "completion_tokens": 35862,
+        "prompt_tokens_details": {
+          "cached_tokens": 14848
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 35047
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.684,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "cb0cacae118cb314384f0450ac7fd5a2b3ca0f32442fd4441c2dcfab80af2305",
+        "locations": [
+          {
+            "line": 6,
+            "column": 48,
+            "kind": "warning",
+            "message": "Variable name `hM` is not explicitly referenced."
+          },
+          {
+            "line": 49,
+            "column": 8,
+            "kind": "warning",
+            "message": "Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing."
+          },
+          {
+            "line": 62,
+            "column": 8,
+            "kind": "warning",
+            "message": "Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:6:48: warning: Variable name `hM` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:49:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorPellReduction-cec6b56e/run-1/ThirtyCofactorPellReduction.lean:62:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing."
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.68
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "The statements are mathematically sound. `pell_parametrization` is a one-way reduction (existence of a Pell parameter `y`), not a completeness/converse claim; the positivity assumptions `M,L,s,d>0`, `n≥2`, and `Squarefree d` are sufficient. `covering_to_pell` correctly supplies the squarefree decomposition and proves `y>0`; it bridges a single covering candidate `hL`, not the full 25-pair disjunction, and does not assert that stronger claim. No name overstates the proved scope. The unused `hrhi` is only a lint issue, not a proof failure."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}
