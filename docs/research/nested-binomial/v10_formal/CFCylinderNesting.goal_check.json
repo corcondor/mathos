@@ -1,0 +1,514 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T08:27:22.839118+00:00",
+  "module": "CFCylinderNesting",
+  "source_sha256": "4a3e1a2ba65c026a389b72d90ccca3a8c1467c6cf6c25a336815d7fe69b5352c",
+  "theorems": [
+    "certificate_cylinder_supply",
+    "cylinder_step",
+    "terminal_cylinder_descends",
+    "certificate_prefix_coverage"
+  ],
+  "records": [
+    {
+      "theorem": "certificate_cylinder_supply",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "f2392b66ded1096b84e3b3875fad4a5d78b335fc4e467550d63d8adf6460eb3e",
+      "usage": {
+        "prompt_tokens": 35693,
+        "total_tokens": 67745,
+        "completion_tokens": 32052,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 30520
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "cbb5171fec4e9d0c063cc22bdbd655b10a1c082f36f0a1ee2a2aeaf9a3800dcc",
+        "locations": [
+          {
+            "line": 51,
+            "column": 35,
+            "kind": "warning",
+            "message": "`simp` already closes the goal"
+          },
+          {
+            "line": 28,
+            "column": 23,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 32,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 56,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 56,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 72,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:51:35: warning: `simp` already closes the goal",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 3.231
+        }
+      ]
+    },
+    {
+      "theorem": "cylinder_step",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "6861449a8daaaf39462076d93270db2096a2968b401434545976fb42200fc84a",
+      "usage": {
+        "prompt_tokens": 37380,
+        "total_tokens": 77657,
+        "completion_tokens": 40277,
+        "prompt_tokens_details": {
+          "cached_tokens": 10496
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 39484
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "02948d0c57abec5ed792e05e7726c0c0255da3d76127df11209acac40168d49b",
+        "locations": [
+          {
+            "line": 51,
+            "column": 35,
+            "kind": "warning",
+            "message": "`simp` already closes the goal"
+          },
+          {
+            "line": 28,
+            "column": 23,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 32,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 56,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 56,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 72,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:51:35: warning: `simp` already closes the goal",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 3.231
+        }
+      ]
+    },
+    {
+      "theorem": "terminal_cylinder_descends",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "0e207ee071d4e1d68eff2b15a8424f620d1506ae54807f24a4d609326e7d6adf",
+      "usage": {
+        "prompt_tokens": 38382,
+        "total_tokens": 49820,
+        "completion_tokens": 11438,
+        "prompt_tokens_details": {
+          "cached_tokens": 10240
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 10938
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "02948d0c57abec5ed792e05e7726c0c0255da3d76127df11209acac40168d49b",
+        "locations": [
+          {
+            "line": 51,
+            "column": 35,
+            "kind": "warning",
+            "message": "`simp` already closes the goal"
+          },
+          {
+            "line": 28,
+            "column": 23,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 32,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 56,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 56,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 72,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:51:35: warning: `simp` already closes the goal",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 2.984
+        }
+      ]
+    },
+    {
+      "theorem": "certificate_prefix_coverage",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "4a3e1a2ba65c026a389b72d90ccca3a8c1467c6cf6c25a336815d7fe69b5352c",
+      "usage": {
+        "prompt_tokens": 39318,
+        "total_tokens": 64486,
+        "completion_tokens": 25168,
+        "prompt_tokens_details": {
+          "cached_tokens": 10240
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 23923
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "02948d0c57abec5ed792e05e7726c0c0255da3d76127df11209acac40168d49b",
+        "locations": [
+          {
+            "line": 51,
+            "column": 35,
+            "kind": "warning",
+            "message": "`simp` already closes the goal"
+          },
+          {
+            "line": 28,
+            "column": 23,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 32,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 56,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 56,
+            "column": 29,
+            "kind": "warning",
+            "message": "Unused tactic linter: `ring` does nothing."
+          },
+          {
+            "line": 72,
+            "column": 25,
+            "kind": "warning",
+            "message": "Unused tactic linter: `<;>` should be replaced with `;` or be removed."
+          },
+          {
+            "line": 28,
+            "column": 27,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          },
+          {
+            "line": 32,
+            "column": 29,
+            "kind": "warning",
+            "message": "this tactic is never executed"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:51:35: warning: `simp` already closes the goal",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: Unused tactic linter: `ring` does nothing.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:28:27: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:32:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:56:29: warning: this tactic is never executed",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/CFCylinderNesting-48f7be6b/run-1/CFCylinderNesting.lean:72:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 3.081
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "PASS. The module proves local cylinder and finite-prefix coverage lemmas. Positivity/nonzero conditions are explicit (0<q, 1<u, 1≤a_i, 2≤a_1) or derived from contsZ_den_ordering; hbetween is the strict terminal-cylinder condition and rules out endpoint equality. certificate_cylinder_supply asserts only existence of u>1, not uniqueness or a complete certificate. terminal_cylinder_descends and certificate_prefix_coverage are scoped to finite prefixes and do not claim global continued-fraction completeness, all-curve verification, or the final arithmetic theorem. The names do not overstate the proved scope."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}

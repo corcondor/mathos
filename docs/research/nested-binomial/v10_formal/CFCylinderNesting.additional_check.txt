@@ -1,0 +1,55 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:51:35: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [hA0] at hAC
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:28:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:28:27: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:32:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:32:29: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:56:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:56:29: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:72:25: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:28:27: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:32:29: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:56:29: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:72:25: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:123:35: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:126:35: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:123:35: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCylinderNesting.lean:126:35: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+'NestedBinomialV10.certificate_cylinder_supply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cylinder_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.terminal_cylinder_descends' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.certificate_prefix_coverage' depends on axioms: [propext, Classical.choice, Quot.sound]
