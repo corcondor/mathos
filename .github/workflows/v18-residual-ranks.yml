@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - research/v18-next-descent
-    paths:
-      - 'docs/research/nested-binomial/v18_compute_ranks.sage'
-      - '.github/workflows/v18-residual-ranks.yml'
 
 jobs:
   compute-ranks:
