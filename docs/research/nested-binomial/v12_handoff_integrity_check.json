@@ -1,0 +1,14 @@
+{
+  "kind": "metadata_and_source_integrity_check_only",
+  "source_sha256_matches_manifest": true,
+  "row_totals_match": true,
+  "primitive_curve_counts_match": true,
+  "totals": {
+    "curves": 4690,
+    "cf_terms": 9127458,
+    "reduced_fractions": 57160284,
+    "survivors": 0
+  },
+  "full_4690_curve_recomputation_performed_here": false,
+  "full_zip_available_here": false
+}

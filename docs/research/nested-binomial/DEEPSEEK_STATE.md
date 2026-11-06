@@ -145,3 +145,14 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - lintと証明の正当性を分離。構文・API・未解決ゴール・計算量などを分類し、実際のソース位置を返す。純粋な計算量不足のみ同じ本文で上限を段階的に増やし、総180秒を維持する。失敗履歴と成功済みの証明を再開時に引き継ぐ。
 - DeepSeek用にdiagnose_job・update_job_context・review_failure・set_planを追加。計画や別呼び出しの助言は完了証明にならず、固定型・実Lean・GitHub保存の条件は維持する。
 - オフラインの36テストがPASS。既存の10モジュールも新しいコンパイル方針でPASS。Codexは証明本文を編集していない。
+
+## 更新：v12はGitHub保存を確認済み（2026-11-06 JST）
+- 上の「v12未保存」は以前の状況。最新PR #1のhead 51a97c665a4431fcc5e2c94626b7624b64fc7bac を取得し、v12の報告・数学ノート・独立検証ソース・manifestが保存されていることを確認した。PRは引き続き非公開リポジトリのドラフト。
+- 参照ファイル: PROGRESS_v12_ja.md、v12_three_descent.md、v12_independent_dyadic_verifier.py、v12_results_manifest.json。4ファイルの全文と各SHAをDeepSeekへ実送信済み。
+- v12報告の結果: H=14..20、4690曲線、9127458 CF係数、57160284既約分数、残存0、従って元の枝ell=1,j=i-3の必要条件H>=21。これは既存の解析・CF完全性と厳密計算に基づく報告であり、全体のLean形式化ではない。
+- ホストで実施した追加確認はmanifestの合計、原始Tの曲線数、独立検証ソースSHAの照合のみ。4690曲線の全計算をこの引き継ぎで再実行したという意味ではない。圧縮証明書ZIP本体はGitHub未保存で、この環境にも取得できていない。v12_handoff_integrity_check.json参照。
+- 数学ノート: c=6H/T>0のE_c:z²=x³+c²にはP=(0,c)の有理3位数点。整数係数化と(w+Av³)(w-Av³)=u³から、cube-free classが2Aの素因子に支えられる有限三次被覆を得る。元の方程式ではn=d0*a³,n-1=d1*b³,n-2=d2*s³、各djの素因子は6HTを割る、という三連続整数の必要条件。
+- すべてが階数0という方針は使えない。ノートのH=14,T=2523,n=29,r=87は正の階数の例であり、n<104なので元の枝の解ではない。Selmer群・全有理点・全H>=21の排除・元の四変数問題の解決を主張しない。
+- ユーザーが示した次方向は、Hを一つずつ計算するだけでなく、三連続整数の立方数構造と3降下で複数Hを同時に制約する定理を探すこと。既存の固定goalは変更せず、DeepSeek自身が新資料の利用方針と必要な検証を選ぶ。
+- こちらの自律goalではCFAnalyticBoundsの3証明がDeepSeekにより完成し、11モジュールの実Lean検査PASS。累計38定理、57ea27b5085564760a474c4f83bab87b486814ddでPRへ保存済み。その後API接続の切断で未完了のblockedとなった。今回の共有後に残りの実行予算で再開する。
+- 実API応答でreceived=true、supersedes_previous_v12_status=true、goal_changed=falseを取得。DeepSeekは旧状況を更新し、三連続整数のcube-free条件と3降下を複数Hの同時制約に向けた参照・研究バックログとして保持すると返答。受領記録: v12_committed_update_share_receipt.json。
