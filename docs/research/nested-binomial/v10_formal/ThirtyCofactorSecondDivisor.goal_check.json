@@ -1,0 +1,878 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-06T11:29:20.722547+00:00",
+  "module": "ThirtyCofactorSecondDivisor",
+  "source_sha256": "d34cec1589247f247b40e74c26d44395977177fcf39ee3a1a03ab059110532cd",
+  "theorems": [
+    "cofactor_one_dvd_choose_three",
+    "choose_squared_two_dvd",
+    "choose_shift_two_congruent_six",
+    "cofactor_one_dvd_squared_index_choose"
+  ],
+  "records": [
+    {
+      "theorem": "cofactor_one_dvd_choose_three",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "004ce0dfcf564a04df9df0bdf84b593fdbcc168341a1ca0098e5fd04f19b68b7",
+      "usage": {
+        "prompt_tokens": 37775,
+        "total_tokens": 120363,
+        "completion_tokens": 82588,
+        "prompt_tokens_details": {
+          "cached_tokens": 12544
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 80151
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "proof_gap"
+        ],
+        "fingerprint": "d477fc6bf9142844fe87ec0e5268c9692a19b3e412c536d5059779f4a24bd4d9",
+        "locations": [
+          {
+            "line": 10,
+            "column": 49,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 23,
+            "column": 49,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 30,
+            "column": 44,
+            "kind": "error",
+            "message": "not a positivity goal"
+          },
+          {
+            "line": 34,
+            "column": 6,
+            "kind": "error",
+            "message": "Type mismatch"
+          },
+          {
+            "line": 46,
+            "column": 51,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 53,
+            "column": 46,
+            "kind": "error",
+            "message": "not a positivity goal"
+          },
+          {
+            "line": 57,
+            "column": 8,
+            "kind": "error",
+            "message": "Type mismatch"
+          },
+          {
+            "line": 58,
+            "column": 51,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 65,
+            "column": 46,
+            "kind": "error",
+            "message": "not a positivity goal"
+          },
+          {
+            "line": 69,
+            "column": 8,
+            "kind": "error",
+            "message": "Type mismatch"
+          }
+        ],
+        "warnings": [],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": "Try this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:10:49: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\n⊢ ↑n * ↑(n - 2) = ↑((n - 1) ^ 2 - 1)\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:23:49: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\nhsq_eq : n * (n - 2) = (n - 1) ^ 2 - 1\nhcop : (n - 1).Coprime 2\nhp2 : Nat.Prime 2\nhnot : ¬2 ∣ n - 1\nhmod0 : (n - 1) % 2 ≠ 0\nhmod : (n - 1) % 2 = 1\nhdm : 2 * ((n - 1) / 2) + (n - 1) % 2 = n - 1\n⊢ 1 + (n - 1) / 2 * 2 = 1 + (1 + (n - 1) / 2 * 2) / 2 * 2\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:30:44: error: not a positivity goal\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:34:6: error: Type mismatch\n  dvd_mul_left 2 ?m.381\nhas type\n  2 ∣ ?m.381 * 2\nbut is expected to have type\n  2 ∣ 2 * (2 * k ^ 2 + 2 * k)\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:46:51: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\nhsq_eq : n * (n - 2) = (n - 1) ^ 2 - 1\nh2_dvd : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nhcop : (n - 1).Coprime 3\nhp3 : Nat.Prime 3\nhnot : ¬3 ∣ n - 1\nhmod0 : (n - 1) % 3 ≠ 0\nh1 : (n - 1) % 3 = 1\nhdm : 3 * ((n - 1) / 3) + (n - 1) % 3 = n - 1\n⊢ 1 + (n - 1) / 3 * 3 = 1 + (1 + (n - 1) / 3 * 3) / 3 * 3\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:53:46: error: not a positivity goal\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:57:8: error: Type mismatch\n  dvd_mul_left 3 ?m.692\nhas type\n  3 ∣ ?m.692 * 3\nbut is expected to have type\n  3 ∣ 3 * (3 * k ^ 2 + 2 * k)\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:58:51: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\nhsq_eq : n * (n - 2) = (n - 1) ^ 2 - 1\nh2_dvd : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nhcop : (n - 1).Coprime 3\nhp3 : Nat.Prime 3\nhnot : ¬3 ∣ n - 1\nhmod0 : (n - 1) % 3 ≠ 0\nh2 : (n - 1) % 3 = 2\nhdm : 3 * ((n - 1) / 3) + (n - 1) % 3 = n - 1\n⊢ 2 + (n - 1) / 3 * 3 = 2 + (2 + (n - 1) / 3 * 3) / 3 * 3\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:65:46: error: not a positivity goal\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:69:8: error: Type mismatch\n  dvd_mul_left 3 ?m.866\nhas type\n  3 ∣ ?m.866 * 3\nbut is expected to have type\n  3 ∣ 3 * (3 * k ^ 2 + 4 * k + 1)\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:73:6: error: Type mismatch\n  Eq.symm h\nhas type\n  Nat.factorial 3 * n.choose 3 = (n - 2) * ((n - 1) * n)\nbut is expected to have type\n  6 * n.choose 3 = n * (n - 1) * (n - 2)\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:91:42: error: Invalid argument name `i` for function `Nat.coprime_div_gcd_div_gcd`\n\nHint: Perhaps you meant one of the following parameter names:\n  • `m`: i̵m̲\n  • `n`: i̵n̲\n  • `H`: i̵H̲\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:91:68: error: Type mismatch: After simplification, term\n  hg_pos\n has type\n  True\nbut is expected to have type\n  0 < ?m.1037 ∨ 0 < ?m.1038\n'NestedBinomialV10.cofactor_one_dvd_choose_three' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "proof_gap"
+          ],
+          "elapsed_seconds": 3.792
+        }
+      ]
+    },
+    {
+      "theorem": "cofactor_one_dvd_choose_three",
+      "attempt": 2,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "b147b05a14df0ff0e792941af9dd38e2952dd94c54a7a34d8c28170f2fbdc564",
+      "usage": {
+        "prompt_tokens": 45732,
+        "total_tokens": 80607,
+        "completion_tokens": 34875,
+        "prompt_tokens_details": {
+          "cached_tokens": 37760
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 32628
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "proof_gap"
+        ],
+        "fingerprint": "14b1886edc26bd15b903fe82e4ebf758f53f26a9cccdc43ed82ef49f188e47d1",
+        "locations": [
+          {
+            "line": 84,
+            "column": 27,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 102,
+            "column": 27,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 113,
+            "column": 27,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 120,
+            "column": 27,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 136,
+            "column": 10,
+            "kind": "error",
+            "message": "Tactic `rewrite` failed: Did not find an occurrence of the pattern"
+          }
+        ],
+        "warnings": [],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": "hg_eq : 1 = (n - 1).gcd 6\nhq_eq : q = (n - 1) / 1\nhh_eq : h = 6 / 1\nhg_dvd_n1 : 1 ∣ n - 1\nhg_dvd_6 : 1 ∣ 6\nhg_pos : 0 < 1\nhq_mul : 1 * q = n - 1\nhh_mul : 1 * h = 6\nhg_le : 1 ≤ 6\nhcop6 : (n - 1).Coprime 6\nh2 : 2 ∣ n * (n - 2)\nh3 : 3 ∣ n * (n - 2)\n⊢ 6 / g = 6\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:102:27: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\ng : ℕ := (n - 1).gcd 6\nq : ℕ := (n - 1) / g\nh : ℕ := 6 / g\ntwo_dvd_of_coprime : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nthree_dvd_of_coprime : (n - 1).Coprime 3 → 3 ∣ n * (n - 2)\nhg_eq : 2 = (n - 1).gcd 6\nhq_eq : q = (n - 1) / 2\nhh_eq : h = 6 / 2\nhg_dvd_n1 : 2 ∣ n - 1\nhg_dvd_6 : 2 ∣ 6\nhg_pos : 0 < 2\nhq_mul : 2 * q = n - 1\nhh_mul : 2 * h = 6\nhg_le : 2 ≤ 6\nh3not : ¬3 ∣ n - 1\nhcop3 : (n - 1).Coprime 3\n⊢ 6 / g = 3\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:113:27: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\ng : ℕ := (n - 1).gcd 6\nq : ℕ := (n - 1) / g\nh : ℕ := 6 / g\ntwo_dvd_of_coprime : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nthree_dvd_of_coprime : (n - 1).Coprime 3 → 3 ∣ n * (n - 2)\nhg_eq : 3 = (n - 1).gcd 6\nhq_eq : q = (n - 1) / 3\nhh_eq : h = 6 / 3\nhg_dvd_n1 : 3 ∣ n - 1\nhg_dvd_6 : 3 ∣ 6\nhg_pos : 0 < 3\nhq_mul : 3 * q = n - 1\nhh_mul : 3 * h = 6\nhg_le : 3 ≤ 6\nh2not : ¬2 ∣ n - 1\nhcop2 : (n - 1).Coprime 2\n⊢ 6 / g = 2\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:120:27: error: unsolved goals\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\ng : ℕ := (n - 1).gcd 6\nq : ℕ := (n - 1) / g\nh : ℕ := 6 / g\ntwo_dvd_of_coprime : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nthree_dvd_of_coprime : (n - 1).Coprime 3 → 3 ∣ n * (n - 2)\nhg_eq : 6 = (n - 1).gcd 6\nhq_eq : q = (n - 1) / 6\nhh_eq : h = 6 / 6\nhg_dvd_n1 : 6 ∣ n - 1\nhg_dvd_6 : 6 ∣ 6\nhg_pos : 0 < 6\nhq_mul : 6 * q = n - 1\nhh_mul : 6 * h = 6\nhg_le : 6 ≤ 6\n⊢ 6 / g = 1\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:136:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (n - 2) * ((n - 1) * n)\nin the target expression\n  6 * n.choose 3 = n * (n - 1) * (n - 2)\n\nn : ℕ\nhn : 1 ≤ n\nhn3 : ¬n < 3\nhn3' : 3 ≤ n\ng : ℕ := (n - 1).gcd 6\nhg_eq : g = (n - 1).gcd 6\nq : ℕ := (n - 1) / g\nhq_eq : q = (n - 1) / g\nh✝ : ℕ := 6 / g\nhh_eq : h✝ = 6 / g\nhg_dvd_n1 : g ∣ n - 1\nhg_dvd_6 : g ∣ 6\nhg_pos : 0 < g\nhq_mul : g * q = n - 1\nhh_mul : g * h✝ = 6\ntwo_dvd_of_coprime : (n - 1).Coprime 2 → 2 ∣ n * (n - 2)\nthree_dvd_of_coprime : (n - 1).Coprime 3 → 3 ∣ n * (n - 2)\nhdiv : h✝ ∣ n * (n - 2)\nh6q : 6 * q = h✝ * (n - 1)\nhprod_dvd : 6 * q ∣ n * (n - 1) * (n - 2)\nh : (n - 2) * ((n - 1) * n) = 6 * n.choose 3\n⊢ 6 * n.choose 3 = n * (n - 1) * (n - 2)\n'NestedBinomialV10.cofactor_one_dvd_choose_three' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "proof_gap"
+          ],
+          "elapsed_seconds": 2.836
+        }
+      ]
+    },
+    {
+      "theorem": "cofactor_one_dvd_choose_three",
+      "attempt": 3,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "38a7c8953d76b5bc52c459f482b76a250959375794df39acf1288cc9fab9360b",
+      "usage": {
+        "prompt_tokens": 52992,
+        "total_tokens": 88696,
+        "completion_tokens": 35704,
+        "prompt_tokens_details": {
+          "cached_tokens": 12288
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 33478
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "da3ba094aabb488e5035ccffef65d8ec2654b47b1b57a9492487efa2f6cbdd6a",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.57
+        }
+      ]
+    },
+    {
+      "theorem": "choose_squared_two_dvd",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "4c8f434c9f97c23d79668fa6b1a02be95dd36a7fe45da0e743c8388b6870c18c",
+      "usage": {
+        "prompt_tokens": 39993,
+        "total_tokens": 65907,
+        "completion_tokens": 25914,
+        "prompt_tokens_details": {
+          "cached_tokens": 12544
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 25485
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding",
+          "other_error"
+        ],
+        "fingerprint": "0d47fdbb171fdc1427c7c1c3767cbb679b2af0ea0bb6263c7cd556403d623d0f",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          },
+          {
+            "line": 149,
+            "column": 6,
+            "kind": "error",
+            "message": "Type mismatch"
+          },
+          {
+            "line": 151,
+            "column": 4,
+            "kind": "error",
+            "message": "Type mismatch: After simplification, term"
+          },
+          {
+            "line": 160,
+            "column": 2,
+            "kind": "error",
+            "message": "Type mismatch"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "unused_binding",
+            "other_error"
+          ],
+          "elapsed_seconds": 3.052
+        }
+      ]
+    },
+    {
+      "theorem": "choose_squared_two_dvd",
+      "attempt": 2,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "7b7ff3842d36d7b2c60ab0d9272bf224f75bcdf9893cacc787692db2f08c6222",
+      "usage": {
+        "prompt_tokens": 41997,
+        "total_tokens": 67109,
+        "completion_tokens": 25112,
+        "prompt_tokens_details": {
+          "cached_tokens": 39936
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 24760
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "proof_gap",
+          "unused_binding"
+        ],
+        "fingerprint": "693deed739302d25f7d73a66a3f215a77f3842262f40a2b0ed1208ed26a35a94",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          },
+          {
+            "line": 146,
+            "column": 40,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 148,
+            "column": 42,
+            "kind": "error",
+            "message": "unsolved goals"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": "  [apply] _hn\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:146:40: error: unsolved goals\nn k : ℕ\nhk : n = k + k\n⊢ k * 2 + k ^ 2 * 4 = k ^ 2 * 4 + k ^ 3 * 8\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:148:42: error: unsolved goals\nn k : ℕ\nhk : n = 2 * k + 1\n⊢ 2 + k * 6 + k ^ 2 * 4 = 2 + k * 10 + k ^ 2 * 16 + k ^ 3 * 8\n'NestedBinomialV10.cofactor_one_dvd_choose_three' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NestedBinomialV10.choose_squared_two_dvd' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "proof_gap",
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.918
+        }
+      ]
+    },
+    {
+      "theorem": "choose_squared_two_dvd",
+      "attempt": 3,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "b01fd090719e4985af3e3984dd1a9b21ebe149f1b95c1c09f116eec186e7f778",
+      "usage": {
+        "prompt_tokens": 44678,
+        "total_tokens": 53005,
+        "completion_tokens": 8327,
+        "prompt_tokens_details": {
+          "cached_tokens": 41984
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 7943
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "da3ba094aabb488e5035ccffef65d8ec2654b47b1b57a9492487efa2f6cbdd6a",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.113
+        }
+      ]
+    },
+    {
+      "theorem": "choose_shift_two_congruent_six",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "ca69757a4463b074fd9697e946e6fde0fc2578e6b3e85ab34c92dfdda5afb962",
+      "usage": {
+        "prompt_tokens": 40414,
+        "total_tokens": 92878,
+        "completion_tokens": 52464,
+        "prompt_tokens_details": {
+          "cached_tokens": 12288
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 51105
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "no_goals",
+          "unused_binding"
+        ],
+        "fingerprint": "c7eee5a10a9b84f2854ed12cd8399d9dff4da1696df33a2eeac73dd603372958",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          },
+          {
+            "line": 198,
+            "column": 8,
+            "kind": "error",
+            "message": "No goals to be solved"
+          },
+          {
+            "line": 212,
+            "column": 4,
+            "kind": "error",
+            "message": "No goals to be solved"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "A prior tactic already closed this goal. Inspect the reported source lines; do not redo the mathematics.",
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "no_goals",
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.152
+        }
+      ]
+    },
+    {
+      "theorem": "choose_shift_two_congruent_six",
+      "attempt": 2,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "e8ff1c4ee27095b0a1f53e961a25bf9c700e95fa78a90fb1e8d7c754b7885306",
+      "usage": {
+        "prompt_tokens": 42876,
+        "total_tokens": 49475,
+        "completion_tokens": 6599,
+        "prompt_tokens_details": {
+          "cached_tokens": 40320
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5250
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "da3ba094aabb488e5035ccffef65d8ec2654b47b1b57a9492487efa2f6cbdd6a",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.471
+        }
+      ]
+    },
+    {
+      "theorem": "cofactor_one_dvd_squared_index_choose",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "fffcccfd75b8e0b136e258434673a2e917eb8cdfa36d5e9b42a1791fc14ece43",
+      "usage": {
+        "prompt_tokens": 41801,
+        "total_tokens": 81845,
+        "completion_tokens": 40044,
+        "prompt_tokens_details": {
+          "cached_tokens": 12544
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 38935
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "proof_gap",
+          "unused_binding"
+        ],
+        "fingerprint": "ce7b50fbd5c8083f592b99711bc73097b65f798942b1ae4434928ddc30d81ac7",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          },
+          {
+            "line": 285,
+            "column": 39,
+            "kind": "error",
+            "message": "unsolved goals"
+          },
+          {
+            "line": 304,
+            "column": 42,
+            "kind": "warning",
+            "message": "`simp` already closes the goal"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:304:42: warning: `simp` already closes the goal"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": "hgdvdt : g ∣ t\nhgdvd6 : g ∣ 6\nht_eq : g * q = t\nh6_eq : g * (6 / g) = 6\nhm4 : 4 ≤ m\nhm2 : 2 ≤ m\nhC2dvd : t ∣ (n ^ 2).choose 2\nhshift : t ∣ m.choose 2 - 6\nhchoose_mul : X * m.choose 2 = (n ^ 2).choose 2 * (n ^ 2 - 2).choose (m - 2)\nhXm : t ∣ X * m.choose 2\nhXdiff : t ∣ X * (m.choose 2 - 6)\nh4 : Nat.choose 4 2 ≤ m.choose 2\n⊢ Nat.choose 4 2 = 6\n/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:304:42: warning: `simp` already closes the goal\n\nHint: Use `simp` instead of `simpa`:\n  [apply] simp [hg]\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\n'NestedBinomialV10.cofactor_one_dvd_choose_three' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NestedBinomialV10.choose_squared_two_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NestedBinomialV10.choose_shift_two_congruent_six' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NestedBinomialV10.cofactor_one_dvd_squared_index_choose' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]"
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "proof_gap",
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.161
+        }
+      ]
+    },
+    {
+      "theorem": "cofactor_one_dvd_squared_index_choose",
+      "attempt": 2,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "b2c352dd44eb4044ffb956d6897c23481ce75e5f7d7614564ae486a16f1c736a",
+      "usage": {
+        "prompt_tokens": 44929,
+        "total_tokens": 60475,
+        "completion_tokens": 15546,
+        "prompt_tokens_details": {
+          "cached_tokens": 41728
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 14426
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "no_goals",
+          "unused_binding"
+        ],
+        "fingerprint": "2a0209b7874932fc87880eea29f01a07b2e0c90c883b13c9a260c662a1c1e6a1",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          },
+          {
+            "line": 286,
+            "column": 6,
+            "kind": "error",
+            "message": "No goals to be solved"
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "A prior tactic already closed this goal. Inspect the reported source lines; do not redo the mathematics.",
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "no_goals",
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.494
+        }
+      ]
+    },
+    {
+      "theorem": "cofactor_one_dvd_squared_index_choose",
+      "attempt": 3,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "d34cec1589247f247b40e74c26d44395977177fcf39ee3a1a03ab059110532cd",
+      "usage": {
+        "prompt_tokens": 46976,
+        "total_tokens": 48322,
+        "completion_tokens": 1346,
+        "prompt_tokens_details": {
+          "cached_tokens": 44928
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 240
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "da3ba094aabb488e5035ccffef65d8ec2654b47b1b57a9492487efa2f6cbdd6a",
+        "locations": [
+          {
+            "line": 5,
+            "column": 47,
+            "kind": "warning",
+            "message": "Variable name `hn` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf/jobs/ThirtyCofactorSecondDivisor-55d6c6fd/run-1/ThirtyCofactorSecondDivisor.lean:5:47: warning: Variable name `hn` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.408
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "The module exactly formalizes the q1=(n-1)/gcd(n-1,6) divisibility inputs: q1 | C(n,3), (n-1) | C(n^2,2), (n-1) | C((n-3)^2,2)-6, and q1 | C(n^2,(n-3)^2). The hypotheses hn:1≤n and hn:5≤n are sufficient; the n=1 case in the first theorem is degenerate (q1=0 and 0|0) but true and outside the intended n≥104 use. The names do not claim the full Q|r^3, Q∤r^2, or the 30-cofactor theorem, so no overstatement."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}

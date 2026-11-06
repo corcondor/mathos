@@ -5,6 +5,7 @@
     "CFCylinderNesting",
     "CFCurveInstantiation",
     "CFVerifierBridge",
-    "ThirtyCofactorInputs"
+    "ThirtyCofactorInputs",
+    "ThirtyCofactorSecondDivisor"
   ]
 }

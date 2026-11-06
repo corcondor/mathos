@@ -1,0 +1,24 @@
+{
+  "module": "ThirtyCofactorSecondDivisor",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "cofactor_one_dvd_choose_three",
+      "theorem cofactor_one_dvd_choose_three (n : ℕ) (hn : 1 ≤ n) : (n - 1) / Nat.gcd (n - 1) 6 ∣ n.choose 3"
+    ],
+    [
+      "choose_squared_two_dvd",
+      "theorem choose_squared_two_dvd (n : ℕ) : (n - 1) ∣ (n ^ 2).choose 2"
+    ],
+    [
+      "choose_shift_two_congruent_six",
+      "theorem choose_shift_two_congruent_six (n : ℕ) (hn : 5 ≤ n) : (n - 1) ∣ ((n - 3) ^ 2).choose 2 - 6"
+    ],
+    [
+      "cofactor_one_dvd_squared_index_choose",
+      "theorem cofactor_one_dvd_squared_index_choose (n : ℕ) (hn : 5 ≤ n) : (n - 1) / Nat.gcd (n - 1) 6 ∣ (n ^ 2).choose ((n - 3) ^ 2)"
+    ]
+  ],
+  "local_dependencies": []
+}
