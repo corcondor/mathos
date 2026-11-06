@@ -1,6 +1,8 @@
 # 入れ子の二項係数方程式の研究記録
 
-> **最新 v14（2026-11-06）**：主対象 ell=1, j=i−3 で、**n,n−1,n−2 の異なる二つに、11以上の素数が3の倍数でない指数で必要**と証明。従って **HT=2^a3^b5^c7^d p^e u³ を、任意の素数 p≥11・全指数・全Hで一括排除**。二因子の立方剰余部分が2・3・5・7だけで支えられる第一添字は正確に57個、最大13720。既存 n≥104 に残る18個も全排除。新規125本の完全Thue計算と二つの整数検証を記録。詳細は [PROGRESS_v14_ja.md](PROGRESS_v14_ja.md)、[証明](v14_two_factor_support.md)、[全実行記録](v14_manifest.json)。T単独で二素数が必要とは限らず、元の四変数問題は未解決。
+> **最新 v15（2026-11-06）**：主対象 ell=1, j=i−3 の両分岐で、第一添字の個数を **O(√X log X)** に改善。**n²+2 が素数の場合を一様に排除**し、各素因数にも上限を証明。さらに **Q∤r²** を25本のPell方程式と独立計算で示し、**n または n−1 に素数の三乗が必要**と判明。Qに含まれる最大の立方因子κ³について **log n<28κ** も得た。詳細は [PROGRESS_v15_ja.md](PROGRESS_v15_ja.md) と [全記録](v15_manifest.json)。新規Lean実行はなく、元の四変数問題は未解決。
+
+> **v14（2026-11-06）**：主対象 ell=1, j=i−3 で、**n,n−1,n−2 の異なる二つに、11以上の素数が3の倍数でない指数で必要**と証明。従って **HT=2^a3^b5^c7^d p^e u³ を、任意の素数 p≥11・全指数・全Hで一括排除**。二因子の立方剰余部分が2・3・5・7だけで支えられる第一添字は正確に57個、最大13720。既存 n≥104 に残る18個も全排除。新規125本の完全Thue計算と二つの整数検証を記録。詳細は [PROGRESS_v14_ja.md](PROGRESS_v14_ja.md)、[証明](v14_two_factor_support.md)、[全実行記録](v14_manifest.json)。T単独で二素数が必要とは限らず、元の四変数問題は未解決。
 
 > **v13（2026-11-06）**：主対象 ell=1, j=i−3 において、**T=2^a3^b5^c7^d u³ の全族を、H に上限を置かず排除**。立方因子を除いた係数を625本の Thue 方程式にまとめ、全24第一添字を取得し、残る5個を整除・厳密区間で排除した。従って **ある素数 p≥11 で v_p(T) が3の倍数でないことが必要**。一般の固定素数集合 S では Bennett の既知定理から第一添字の個数を (5^|S|−1)/2 以下に抑えた。全証明・計算の範囲は [PROGRESS_v13_ja.md](PROGRESS_v13_ja.md)、[一様排除の証明](v13_uniform_cube_support.md)、[実行記録](v13_manifest.json) を参照。新しい Lean 実行・元の四変数問題の完全解決はしていない。
 
@@ -19,7 +21,12 @@
 
 ## 読み始める場所
 
-- **[最新：v14 日本語概要](PROGRESS_v14_ja.md)**
+- **[最新：v15 日本語概要](PROGRESS_v15_ja.md)**
+- [第一添字の個数を O(√X log X) に改善する一様な証明](v15_cubic_defect_sparsity.md)
+- [n²+2 の素数値を全排除し、任意の素因数を制約](v15_neighbor_prime_obstruction.md)
+- [Q∤r² と必須の立方因子：完全なPell帰着と独立検証](v15_pell_square_divisor.md)
+- [立方因子の大きさからの高さ上限 log n<28κ](v15_cube_height.md)
+- [v14 日本語概要](PROGRESS_v14_ja.md)
 - [大きな非立方指数の素数は三連続整数の二か所に必要：任意の追加素数を一括排除](v14_two_factor_support.md)
 - [v13 日本語概要](PROGRESS_v13_ja.md)
 - [H に依存しない立方因子の型による一括排除と一般の候補数定理](v13_uniform_cube_support.md)
@@ -239,6 +246,16 @@ ell>j の下側 k=ell+1=b の分岐でも、8j/3<=b<=4j を排除し、
 
 ## 再計算
 
+v15 の再計算には Python 標準ライブラリだけを使用する。
+Pellの計算は証明された全有限領域の排除、他の有限検査は一般証明の整合性確認。
+詳細な範囲と元の必要条件は [v15の日本語説明](PROGRESS_v15_ja.md) を参照。
+
+    python3 v15_cubic_defect_sparsity_checks.py --limit 100000 --output reproduced_sparsity_checks.json
+    python3 v15_neighbor_prime_checks.py
+    python3 v15_pell_square_divisor.py --output reproduced_pell.json
+    python3 v15_pell_independent_audit.py --input reproduced_pell.json --generator v15_pell_square_divisor.py --output reproduced_pell_audit.json
+    python3 v15_theory_constants.py --output reproduced_theory_audit.json
+
 v14 の完全Thue計算は PARI/GP を使用する。保存済み全解からの係数・整除・区間の監査は Python 標準ライブラリだけで再実行できる。
 
     python3 v14_pair_support_verifier.py --adjacent v13_thue_support_results.json --odd-gap v14_gap2_results.json --output reproduced_v14_pairs.json
@@ -326,6 +343,7 @@ Lean の実行環境本体と mathlib の依存チェックアウトは Git に�
 ## 現在残る主な課題
 
 - ell=1、j=i-3 で、実際の不足分H≥21、回復後のE≥21と平方値CRTの短い区間を全て通過する混合素因数。v13ではTに11以上の非立方指数の素数が必要。v14ではさらに、n,n−1,n−2 の異なる二因子にそのような素数が必要で、HTには異なる二素数以上が必要。
+- v15では同じ枝にQ∤r²、κ≥2、log n<28κ、n²+2が合成数という条件も必要。大きな素因数での平方剰余条件と各素因数の上界も同時に満たす構造が残る。第一添字の個数はO(√X log X)だが、全体を有限個にした結果ではない。
 - 同じ枝の各正確な素数冪qに対し、補因子w=(i−2)/qがw/gcd(w,192)≥14かつlog i/128より大きい未排除の値。
 - i−3側の新しい三次高さ条件も通過する値。i=wp^a+3、w=1..4、p=2またはp≡3 mod4の族はv11で完了。
 - i 自身が素数冪になる旧来の残存族とその Wieferich 条件。i=P^a+2 の族は v8 で完了。

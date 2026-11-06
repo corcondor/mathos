@@ -1,0 +1,611 @@
+{
+  "status": "PASS",
+  "scope": "Independent finite Pell and original-equation modular audit; no CAS or Lean execution",
+  "input_file": "v15_pell_square_divisor_results.json",
+  "input_sha256": "9f60f76a09845876532074b2141e1321cd8289b382a4d0f92e132780bfcebbe3",
+  "generator_file": "v15_pell_square_divisor.py",
+  "generator_sha256": "09acde2b08f87b02782c727c2779e6a9505f14a6996d742589f57737116ac745",
+  "coefficient_pair_count": 25,
+  "radicand_count": 13,
+  "fundamental_unit_method": "Continued fractions, plus exact rejection of every smaller positive y",
+  "point_generation_method": "Second-order recurrence, with the first omitted point certified",
+  "modular_method": "Factorial-table Lucas digits on actual k and j^2; also verify producer zero-digit certificates",
+  "statistics": {
+    "pell_points_below_height": 188,
+    "integral_n_r": 160,
+    "n_ge_104": 140,
+    "correct_M": 66,
+    "strict_coarse_interval": 62,
+    "strict_log_interval": 11,
+    "modular_branch_exclusions": 22
+  },
+  "fundamental_units": [
+    {
+      "d": 6,
+      "x": 5,
+      "y": 2,
+      "continued_fraction_quotients": [
+        2,
+        2
+      ],
+      "all_smaller_positive_y_rejected": 1
+    },
+    {
+      "d": 10,
+      "x": 19,
+      "y": 6,
+      "continued_fraction_quotients": [
+        3,
+        6
+      ],
+      "all_smaller_positive_y_rejected": 5
+    },
+    {
+      "d": 11,
+      "x": 10,
+      "y": 3,
+      "continued_fraction_quotients": [
+        3,
+        3
+      ],
+      "all_smaller_positive_y_rejected": 2
+    },
+    {
+      "d": 21,
+      "x": 55,
+      "y": 12,
+      "continued_fraction_quotients": [
+        4,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "all_smaller_positive_y_rejected": 11
+    },
+    {
+      "d": 38,
+      "x": 37,
+      "y": 6,
+      "continued_fraction_quotients": [
+        6,
+        6
+      ],
+      "all_smaller_positive_y_rejected": 5
+    },
+    {
+      "d": 42,
+      "x": 13,
+      "y": 2,
+      "continued_fraction_quotients": [
+        6,
+        2
+      ],
+      "all_smaller_positive_y_rejected": 1
+    },
+    {
+      "d": 87,
+      "x": 28,
+      "y": 3,
+      "continued_fraction_quotients": [
+        9,
+        3
+      ],
+      "all_smaller_positive_y_rejected": 2
+    },
+    {
+      "d": 93,
+      "x": 12151,
+      "y": 1260,
+      "continued_fraction_quotients": [
+        9,
+        1,
+        1,
+        1,
+        4,
+        6,
+        4,
+        1,
+        1,
+        1
+      ],
+      "all_smaller_positive_y_rejected": 1259
+    },
+    {
+      "d": 330,
+      "x": 109,
+      "y": 6,
+      "continued_fraction_quotients": [
+        18,
+        6
+      ],
+      "all_smaller_positive_y_rejected": 5
+    },
+    {
+      "d": 354,
+      "x": 258065,
+      "y": 13716,
+      "continued_fraction_quotients": [
+        18,
+        1,
+        4,
+        2,
+        2,
+        18,
+        2,
+        2,
+        4,
+        1
+      ],
+      "all_smaller_positive_y_rejected": 13715
+    },
+    {
+      "d": 366,
+      "x": 907925,
+      "y": 47458,
+      "continued_fraction_quotients": [
+        19,
+        7,
+        1,
+        1,
+        1,
+        2,
+        12,
+        2,
+        1,
+        1,
+        1,
+        7
+      ],
+      "all_smaller_positive_y_rejected": 47457
+    },
+    {
+      "d": 390,
+      "x": 79,
+      "y": 4,
+      "continued_fraction_quotients": [
+        19,
+        1,
+        2,
+        1
+      ],
+      "all_smaller_positive_y_rejected": 3
+    },
+    {
+      "d": 402,
+      "x": 401,
+      "y": 20,
+      "continued_fraction_quotients": [
+        20,
+        20
+      ],
+      "all_smaller_positive_y_rejected": 19
+    }
+  ],
+  "terminal_points": [
+    {
+      "M": 1,
+      "L": 10,
+      "power": 9,
+      "x": 82094249361619,
+      "y": 25960481078454
+    },
+    {
+      "M": 1,
+      "L": 11,
+      "power": 11,
+      "x": 99612037019890,
+      "y": 30034159217997
+    },
+    {
+      "M": 2,
+      "L": 19,
+      "power": 8,
+      "x": 448940843963137,
+      "y": 72827821711344
+    },
+    {
+      "M": 2,
+      "L": 20,
+      "power": 9,
+      "x": 82094249361619,
+      "y": 25960481078454
+    },
+    {
+      "M": 2,
+      "L": 21,
+      "power": 11,
+      "x": 1805486216133613,
+      "y": 278592571459798
+    },
+    {
+      "M": 2,
+      "L": 22,
+      "power": 11,
+      "x": 99612037019890,
+      "y": 30034159217997
+    },
+    {
+      "M": 3,
+      "L": 28,
+      "power": 7,
+      "x": 97379496466615,
+      "y": 21249948271188
+    },
+    {
+      "M": 3,
+      "L": 29,
+      "power": 9,
+      "x": 2700320229494524,
+      "y": 289504716611715
+    },
+    {
+      "M": 3,
+      "L": 30,
+      "power": 9,
+      "x": 82094249361619,
+      "y": 25960481078454
+    },
+    {
+      "M": 3,
+      "L": 31,
+      "power": 4,
+      "x": 174396621583094401,
+      "y": 18084087230585040
+    },
+    {
+      "M": 3,
+      "L": 32,
+      "power": 15,
+      "x": 429364731169925,
+      "y": 175287417485598
+    },
+    {
+      "M": 3,
+      "L": 33,
+      "power": 11,
+      "x": 99612037019890,
+      "y": 30034159217997
+    },
+    {
+      "M": 6,
+      "L": 55,
+      "power": 7,
+      "x": 11697727186918189,
+      "y": 643938688356522
+    },
+    {
+      "M": 6,
+      "L": 56,
+      "power": 7,
+      "x": 97379496466615,
+      "y": 21249948271188
+    },
+    {
+      "M": 6,
+      "L": 57,
+      "power": 8,
+      "x": 448940843963137,
+      "y": 72827821711344
+    },
+    {
+      "M": 6,
+      "L": 58,
+      "power": 9,
+      "x": 2700320229494524,
+      "y": 289504716611715
+    },
+    {
+      "M": 6,
+      "L": 59,
+      "power": 3,
+      "x": 68745981000924305,
+      "y": 3653807666346684
+    },
+    {
+      "M": 6,
+      "L": 60,
+      "power": 9,
+      "x": 82094249361619,
+      "y": 25960481078454
+    },
+    {
+      "M": 6,
+      "L": 61,
+      "power": 3,
+      "x": 2993711291685588725,
+      "y": 156483795997357542
+    },
+    {
+      "M": 6,
+      "L": 62,
+      "power": 4,
+      "x": 174396621583094401,
+      "y": 18084087230585040
+    },
+    {
+      "M": 6,
+      "L": 63,
+      "power": 11,
+      "x": 1805486216133613,
+      "y": 278592571459798
+    },
+    {
+      "M": 6,
+      "L": 64,
+      "power": 15,
+      "x": 429364731169925,
+      "y": 175287417485598
+    },
+    {
+      "M": 6,
+      "L": 65,
+      "power": 7,
+      "x": 1228705572407119,
+      "y": 62217925186588
+    },
+    {
+      "M": 6,
+      "L": 66,
+      "power": 11,
+      "x": 99612037019890,
+      "y": 30034159217997
+    },
+    {
+      "M": 6,
+      "L": 67,
+      "power": 5,
+      "x": 165896976010001,
+      "y": 8274189120100
+    }
+  ],
+  "original_equation_modular_evidence": [
+    {
+      "n": 332668,
+      "r": 1016316,
+      "branch": "k=r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 332668,
+      "r": 1016316,
+      "branch": "k=A-r",
+      "prime": 11,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 3,
+      "right_residue": 3,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 784,
+      "r": 2436,
+      "branch": "k=r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 784,
+      "r": 2436,
+      "branch": "k=A-r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 4,
+      "right_residue": 4,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 11881,
+      "r": 35970,
+      "branch": "k=r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 2,
+      "right_residue": 2,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 11881,
+      "r": 35970,
+      "branch": "k=A-r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 2,
+      "right_residue": 2,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 2589895,
+      "r": 7841295,
+      "branch": "k=r",
+      "prime": 2,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 2589895,
+      "r": 7841295,
+      "branch": "k=A-r",
+      "prime": 13,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 564585121,
+      "r": 1709366340,
+      "branch": "k=r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 2,
+      "right_residue": 2,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 564585121,
+      "r": 1709366340,
+      "branch": "k=A-r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 2,
+      "right_residue": 2,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 123076966375,
+      "r": 372634020825,
+      "branch": "k=r",
+      "prime": 2,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 123076966375,
+      "r": 372634020825,
+      "branch": "k=A-r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 2,
+      "right_residue": 2,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 3025,
+      "r": 9240,
+      "branch": "k=r",
+      "prime": 13,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 9,
+      "right_residue": 9,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 3025,
+      "r": 9240,
+      "branch": "k=A-r",
+      "prime": 13,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 3,
+      "right_residue": 3,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 1369,
+      "r": 4218,
+      "branch": "k=r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 4,
+      "right_residue": 4,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 1369,
+      "r": 4218,
+      "branch": "k=A-r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 361,
+      "r": 1140,
+      "branch": "k=r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 361,
+      "r": 1140,
+      "branch": "k=A-r",
+      "prime": 7,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 4,
+      "right_residue": 4,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 169,
+      "r": 546,
+      "branch": "k=r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 169,
+      "r": 546,
+      "branch": "k=A-r",
+      "prime": 3,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 243,
+      "r": 792,
+      "branch": "k=r",
+      "prime": 5,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 4,
+      "right_residue": 4,
+      "both_zero_digit_certificates_valid": true
+    },
+    {
+      "n": 243,
+      "r": 792,
+      "branch": "k=A-r",
+      "prime": 2,
+      "actual_k_left_residue": 0,
+      "actual_j_squared_X_residue": 0,
+      "k_squared_residue": 1,
+      "right_residue": 1,
+      "both_zero_digit_certificates_valid": true
+    }
+  ],
+  "largest_witness_prime": 13,
+  "survivors": [],
+  "completeness_boundary": "Written height and integer Pell-unit descent proof are necessary; no claim that finite checking alone proves them",
+  "source_sha256": "f4fe2fc411774d2c9eef880ad8672aca5d747cbd993b94d9ab1b3ffb5a0a193b"
+}
