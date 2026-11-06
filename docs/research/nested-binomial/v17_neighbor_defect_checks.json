@@ -1,0 +1,193 @@
+{
+  "status": "PASS",
+  "scope": "ell=1,j=i-3,n>=104,both k branches; squared-index equation",
+  "adaptive_height_bounds": {
+    "small": "n<52*sqrt(delta)*w+1",
+    "complementary": "n<983*sqrt(delta)*w^2+1"
+  },
+  "adaptive_prime_bounds": {
+    "small": "p<53*sqrt(delta)*n",
+    "complementary": "p<32*delta^(1/4)*n^(3/2)"
+  },
+  "fixed_J_small_branch": [
+    "n^4<2^150*J^15",
+    "w^2<2^40*J^5"
+  ],
+  "fixed_J_complementary_branch_claimed": false,
+  "polynomial_identities": {
+    "neighbor_excess_epsilon_0": "all coefficients zero",
+    "neighbor_excess_epsilon_1": "all coefficients zero",
+    "small_branch_positive_comparison": "all coefficients zero",
+    "complementary_positive_comparison": "all coefficients zero",
+    "small_branch_coefficient_gcd": "all coefficients zero",
+    "complementary_coefficient_gcd": "all coefficients zero"
+  },
+  "positive_rational_margins": {
+    "small_height": "272/9",
+    "complementary_height": "273745/243",
+    "complementary_prime_bound": "110017/9900",
+    "fixed_J_height_after_cubing": "133100096978944/793881",
+    "fixed_J_cofactor": "2097152/9",
+    "small_prime_bound_at_n104": "5200",
+    "complementary_positive_remainder_at_n104": "10434"
+  },
+  "local_divisor_transfer_samples": {
+    "cases": 31456,
+    "domain": "1<=N<=80, 1<=r<=120, N|r^3, 1<=w<=8, epsilon=0/1, shifts=0/1",
+    "finite_supporting_checks_only": true
+  },
+  "complete_cofactor_exclusion": {
+    "max_cofactor": 64,
+    "statistics": {
+      "families": 8712,
+      "divisor_points": 590028,
+      "normalized_n": 350188,
+      "second_divisor": 1260,
+      "integral_p": 20,
+      "p_large": 11,
+      "square": 0
+    },
+    "largest_generated_n": 1816487208,
+    "last_square_witnesses": [
+      [
+        2,
+        22,
+        1,
+        676,
+        228489,
+        5030806,
+        2242
+      ],
+      [
+        6,
+        61,
+        1,
+        136,
+        3083,
+        188871,
+        434
+      ],
+      [
+        6,
+        66,
+        1,
+        676,
+        76163,
+        5030806,
+        2242
+      ],
+      [
+        17,
+        158,
+        1,
+        163,
+        1563,
+        247924,
+        497
+      ],
+      [
+        17,
+        188,
+        0,
+        160,
+        1506,
+        284080,
+        532
+      ],
+      [
+        18,
+        172,
+        1,
+        364,
+        7361,
+        1268268,
+        1126
+      ],
+      [
+        22,
+        225,
+        1,
+        784,
+        27939,
+        6290971,
+        2508
+      ],
+      [
+        33,
+        323,
+        1,
+        349,
+        3691,
+        1194279,
+        1092
+      ],
+      [
+        33,
+        355,
+        0,
+        223,
+        1507,
+        536315,
+        732
+      ],
+      [
+        33,
+        361,
+        1,
+        289,
+        2531,
+        915417,
+        956
+      ],
+      [
+        41,
+        394,
+        0,
+        276,
+        1858,
+        733700,
+        856
+      ]
+    ],
+    "small_case_index_count": 280,
+    "small_case_pairs": [
+      [
+        169,
+        546,
+        1
+      ],
+      [
+        243,
+        792,
+        1
+      ],
+      [
+        250,
+        830,
+        5
+      ],
+      [
+        361,
+        1140,
+        1
+      ]
+    ],
+    "survivors": []
+  },
+  "certificate": {
+    "file": "v17_neighbor_cofactor_certificate.json.gz",
+    "compressed_bytes": 49290,
+    "compressed_sha256": "7a496312c8fcd614b683d4ee0a60268ec218c4bd0991104554457b001fdb8c88",
+    "uncompressed_bytes": 269767,
+    "uncompressed_sha256": "e171f8b5844e50b577b17acee313a10207943450e626a16a7a781847556078df"
+  },
+  "source_sha256": "14d1d8a71d416631083f47fa6f0833558a16dd12a0480931f1b8d67606e093f7",
+  "proof_note_sha256": "94e7cedb7d0a194aeae8411e706cc380ddfb64e42b7344663ff1aa360b4fe406",
+  "new_lean_execution": false,
+  "new_deepseek_api_calls": 0,
+  "new_complete_CAS_calls": 0,
+  "external_peer_review": false,
+  "original_solution_found": false,
+  "unbounded_delta_or_J_solved": false,
+  "verification_boundary": "Generic statements use the written proofs; local finite samples support them only. The cofactor exclusion is complete because the finite divisor domains are proved to cover all cases."
+}

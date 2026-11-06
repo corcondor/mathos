@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "review_type": "Independent written-mathematics review by a separate AI collaborator; not external peer review or Lean verification",
+  "reviewed_file": "audit_v17/neighbors/v17_quadratic_prime_powers.md",
+  "reviewed_sha256": "429bcd176f0b0855fe24133271dc9043b540485988c614cf265667f0ebdb7116",
+  "checks": [
+    "For all admissible nonsquare c, p^2>m implies p>=29>c and p does not divide n-3; both factorial-loss values lie in {0,1}.",
+    "The 118 constants retain both odd and even t. The exception-count correction from 68 to 69 was acknowledged; numerical root enumeration is independently handled by root.",
+    "After the stated complete exceptions, p>=41 and F=0; valuation parity forces e=3 and v_p(k)=1, and Q cancellation excludes the small branch.",
+    "Repeated primes across distinct N_c are distinct, Q divides A, and the product inequality implies at most four primes in total.",
+    "For p|n, p^2>m: the 3|n branch has outer valuation 1; the other branches give 6w<p<9w and p|3w^2+2 exactly in n=2 mod 3.",
+    "For p|n-1, w<p/6 makes the second residue 2pw+1 below p^2, while w^2 mod p is nonzero. This yields exactly two inner carries and outer valuation at most one.",
+    "The binomial divisibility lemmas use an integer identity and Vandermonde, without dividing by nonunits.",
+    "For n=3 mod 6, p=2 has valuation one and p=3 is absent; odd p follows from alternating Pascal and the two roots of one modulo p^s.",
+    "The negative-neighbor excess product retains primes>=17, which cannot be shared by two neighbors and are coprime to Q; the product divisibility and small-branch bound follow."
+  ],
+  "numerical_exception_tables_recomputed_by_this_reviewer": false,
+  "new_lean_execution": false,
+  "files_edited": []
+}
