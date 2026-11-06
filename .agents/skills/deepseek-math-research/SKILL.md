@@ -54,14 +54,14 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 - Eleven additional verified repositories, including DeepSeek-Prover-V2, AlphaGeometry/2, formal-conjectures, Evariste, Kimina, LeanDojo/v2, LeanCopilot, REPL and Aesop, were shared with DeepSeek. See AI_RESEARCH_REFERENCES.md and its pinned catalog. Do not claim those systems or model weights are installed.
 
 ## Current verified status
-- 5 new modules / 27 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6).
+- 6 new modules / 33 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6), CFCoefficientRanges(6).
 - RecoveredDivisor and NormalizedCancellation had host edits — keep distinct.
-- Dependency + 7 additional modules (8 total) passed latest re-run.
+- Dependency + 8 additional modules (9 total) passed latest re-run.
 - Python exact revalidation: 5214 curves, 4,877,566 CF coefficients, 25,394,330 reduced fractions, 0 residual; saved in `cf_current_revalidation.json`. Python success ≠ Lean formalization complete.
 
 ## Open work (do not claim done)
 - 30-cofactor final theorem still assumes the CF part.
-- Pending: small denominators a∈[-1,4], large denominators a-b*a_next∈[-3,3], 65-case coverage, convergent interval selection, cylindrical interval certification, Lean check of all curve candidates, final theorem hookup.
+- Coefficient-range lemmas and the explicit candidate-set cardinal bound ≤65 are verified in CFCoefficientRanges. Pending: supply actual convergent data and combine them into a coverage theorem, convergent interval selection, cylindrical interval certification, Lean check of all curve candidates, final theorem hookup.
 - Full four-variable problem unsolved.
 - GeometricReduction verifies the rational open-chart maps x=-c*r/y, z=c/y, inverses y=c/z, r=-x/z, plus Delta=-432*c^4, ellipticity, j=0 and the c=6*S/T specialization. It does not prove ranks, descent, all rational points, or solve the original equation.
 - The user confirmed: study the CURRENT nested-binomial equation geometrically. Do not ask that question again. Investigate its cubic-curve families and verify all coordinate changes in Lean before using them.
@@ -69,6 +69,7 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 ## Working style
 - User dislikes frequent questions/confirmations. Proceed autonomously within existing authorization; on one failure, diagnose and switch strategy.
 - Do not claim snapshot publication, GitHub push, task restore, or persistent model memory unless actually executed.
+- The current worker also rejects Lean warnings. For fixed hypotheses, explicitly reference every named assumption, including redundant ones; do not rename or remove fixed binders. Replacing use of one redundant assumption with the other can simply move the unused-variable warning instead of fixing it.
 
 ## Tested commands
 Run existing verification from the prepared mathlib checkout:

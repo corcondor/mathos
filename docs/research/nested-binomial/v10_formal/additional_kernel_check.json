@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-05T23:28:30.721101+00:00",
+  "checked_at_utc": "2026-11-06T00:00:44.615043+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -15,7 +15,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/ValuationRecovery.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/ValuationRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ValuationRecovery.lean"
       ]
     },
@@ -30,7 +30,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/RecoveredDivisor.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/RecoveredDivisor.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/RecoveredDivisor.lean"
       ]
     },
@@ -45,7 +45,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/NormalizedCancellation.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/NormalizedCancellation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/NormalizedCancellation.lean"
       ]
     },
@@ -60,7 +60,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/LocalSquareRecovery.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/LocalSquareRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/LocalSquareRecovery.lean"
       ]
     },
@@ -75,7 +75,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/CriticalPrimeCRT.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/CriticalPrimeCRT.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CriticalPrimeCRT.lean"
       ]
     },
@@ -90,7 +90,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/CFApproximationCore.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/CFApproximationCore.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFApproximationCore.lean"
       ]
     },
@@ -105,7 +105,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/GeometricReduction.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/GeometricReduction.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricReduction.lean"
       ]
     },
@@ -120,8 +120,23 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-6nfq70c3/GeometricDescent.olean",
+        "/tmp/nested-binomial-lean-1ejv_oy2/GeometricDescent.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricDescent.lean"
+      ]
+    },
+    {
+      "source": "CFCoefficientRanges.lean",
+      "source_sha256": "a55626ab017f59f5a73b166c3fef21bbf9d90954583f5417a69c235c65f38b1f",
+      "log": "CFCoefficientRanges.additional_check.txt",
+      "log_sha256": "14af17ec62aa57f38104bdc2acc097422496f93f6179ef245e3d915818cb7f65",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-1ejv_oy2/CFCoefficientRanges.olean",
+        "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCoefficientRanges.lean"
       ]
     }
   ],
