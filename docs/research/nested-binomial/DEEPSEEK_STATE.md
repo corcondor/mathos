@@ -194,3 +194,17 @@ v12は算術幾何学的な方向を本格的に進める版にするのが有�
 - v15新規16資料の全文をDeepSeekへ送って、v16の数学的候補・不足仮定・実行すべき次のtool actionを本人に選ばせる実研究依頼を実行中。新ラウンドは6時間・48判断・報告出力合計200万トークンを上限とし、開始研究呼び出しと範囲点検の消費も差し引く。v16完成や新定理の成功は未確定。
 - v16の初期研究依頼は43,319出力トークン（うち41,347推論）で候補を取得。原始の立方因子をi=w*p^a+2の指定素数・余因子から分離する方針をDeepSeekが選んだ。研究記録はDEEPSEEK_V16_WORK.mdとV16_DEEPSEEK_RESEARCH_PROPOSAL.json。
 - 初回のtool JSON形式はDeepSeek自身が訂正。数学案の「kappa>=q,log(i)<28*kappaからqの下限」という誤推論も本人が撤回した。定理文は未固定・未証明。範囲点検ではQ∤r²を元の式から導くLean接続不足で未採用。実際のreviewをlast_observationに保持し、候補だけで完了扱いせず本人の次の研究・形式化へ戻す。
+
+## 追加指示：数学研究の手法自体もDeepSeekが研究する（2026-11-06 JST）
+- ユーザーの「さらに進めて」に続き、「ハーネスで数学研究の手法自体も研究して」という明示指示を受領。元の研究と並行して、数学的戦略・反例や不足仮定の発見・形式化手順・証明書設計を仮説として提案し、実際の固定ジョブで試し、記録と評価に基づいて修正する。
+- deepseek-research-methodsスキルとinspect_methods/propose_method/use_method/evaluate_methodを実装。手法はDeepSeekが選ぶ。固定型のhash、同じ定理の基準履歴、結果ファイルhash、実Lean通過、報告トークン、エラー種別、Lean実行時間を記録。seed再検査は新しい手法による新証明に数えず、usage不明・ホスト中断・結果なしを数学的失敗扱いしない。逐次比較は統制実験ではなく、因果的優越性を証明したとは扱わない。
+- 手法カードは研究データであり、元の式・固定目標・成功済み本文・検査器・予算を変更する権限ではない。モデルの評価文は機械的な証明判定や一般手法の有効性の証明を代替しない。新しい方法の有効性は現時点で未確定。
+- 手法実験のprovenance等を含む56テストPASS。read_researchは8MiBを上限に.json.gzの有限行読取にも対応し、v16全証明書をモデルが必要に応じて参照できる。
+- 最新のDeepSeek成果は67定理・20モジュールの実Lean検査PASSでGitHub保存済み（4814e17a6022418ae0902c37fc5f8e0d20168382）。元の二項係数等式からQ|r³へ接続するThirtyCofactorQDivisibility等が追加。Q∤r²や全問題の証明が完了したとは扱わない。
+- ThirtyCofactorPellCoveringの新ジョブは、ハーネス更新のためホストが停止要求を出した際に生成1の応答待ちで中断した。数学的な失敗ではなく、固定型と中断前の成果を保持して再開する。
+- v16本体は別Codexがa1e9e70c736ec3db8b0a7c8797d1abdd68537533で保存。PROGRESS_v16_ja.md、v16_square_defect_pell.md、v16_lower_gap.md、v16_quadratic_neighbors.md、v16_repeated_neighbor_primes.mdと対応するコード・証明書・manifestを取得した。
+- v16の記述結果: 実際の不足約数delta=Q/gcd(Q,r²)>=13、log(n)<28delta、gcd(delta,H)=1、delta³|A/H。t=r-3nとしてn³<2³⁰(t+3)⁵。Pplus(n²-10)<r等の二次式制限と、p²|n²-10,p²>6n-9の場合の分岐・指数の制限。H>=21とO(sqrt(X)log(X))は不変。v16のこれら一般定理はLean未形式化で元の問題は未解決。
+- この環境でv16 manifestの19ファイルのサイズ/SHAと圧縮/解凍SHAを照合。独立監査コードを全証明書に再実行し、1223係数三つ組、34010 Pell点、123最終対、246元方程式分岐の全排除、残存0、最大法素数23が一致。v16_deepseek_handoff_check.json参照。記述の高さ・Pell完全性のLean証明を代替しない。
+- DeepSeekへの実研究依頼で、finite-cover-certificate（有限区間被覆の証明書設計）とdefect-localization（正確な不足約数deltaへの数学的障害の局所化）の2手法を本人が提案。各仮説・手順・成功/失敗条件をカード化。最初の手法を実際の中断ジョブThirtyCofactorPellCovering-2987558fに適用し、固定型を変えずに試す。DEEPSEEK_METHOD_RESEARCH_START.json、DEEPSEEK_METHOD_RESEARCH.json/.md参照。
+- 方法の初期予測はMの4場合分け・2つの区間補題が先に通り、25係数対への最終分配が難所、というもの。これは予測であり検証済み結果ではない。中断前のbaselineは結果なしで、因果的優越性を評価できないことを本人も明記した。
+- 追加のusage/時刻の欠測や候補検証失敗の扱いを含め、最終の57テストがPASS。方法表のトークンは候補応答の記録分であり、プランナー・範囲点検・修正批評・最終レビューを含む総研究コストではない。共有のgoal予算は全API呼び出しを集計する。

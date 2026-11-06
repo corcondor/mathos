@@ -1,0 +1,61 @@
+{
+  "active_method_id": "finite-cover-certificate",
+  "methods": {
+    "finite-cover-certificate": {
+      "id": "finite-cover-certificate",
+      "title": "Finite interval-cover certificate for the interrupted Pell covering job",
+      "kind": "certificate_design",
+      "hypothesis": "ThirtyCofactorPellCovering is a finite covering statement, not a Pell-solvability theorem. A certificate that separates the four possible M values, exact integer bounds for L, and the resulting 25 (M,L) pairs should let Lean check the job compositionally. This should reduce repair loops because each obligation is a small arithmetic fact and the frozen theorem type is never weakened.",
+      "procedure": [
+        "Reopen ThirtyCofactorPellCovering-2987558f and record the four frozen goals and exact types; do not edit theorem statements.",
+        "Prove cofactor_M_cases from gcd divisibility: gcd n 3 divides 3 and gcd(n-1) 6 divides 6, and the two factors cannot both contribute a factor 3, so the product lies in {1,2,3,6}.",
+        "Normalize M*r^2 = L*n*(n-1). From 3n<r derive L>9M, hence 9M+1<=L. From 3r<10n and n>=104 derive 927L<10400M by cross-multiplication.",
+        "Split on M in {1,2,3,6}; convert each strict rational interval into explicit integer lower and upper bounds for L.",
+        "Define the explicit 25-pair list (1,10..11), (2,19..22), (3,28..33), (6,55..67) and prove the disjunction for L by interval arithmetic.",
+        "Package the four goals into the fixed module; compile with real Lean and inspect exact errors before any repair.",
+        "If nonlinear gcd normalization blocks, add small helper lemmas for gcd divisibility and integer division rather than changing hypotheses."
+      ],
+      "success_criterion": "All four frozen goals of ThirtyCofactorPellCovering-2987558f compile with Lean exit 0, only propext/Classical.choice/Quot.sound, no holes or native_decide, and unchanged theorem types; the job is accepted and publishable.",
+      "failure_criterion": "If the derived interval admits an L outside the 25 pairs, or Lean cannot close a specific gcd/division obligation after exact diagnosis, record the failing goal and interval; revise the certificate or drop the method. An interrupted or usage-missing run is not counted as mathematical failure.",
+      "references": [
+        "PROGRESS_v16_ja.md",
+        "v16_square_defect_pell.md",
+        "v16_lower_gap.md",
+        "v16_manifest.json"
+      ],
+      "status": "experimental",
+      "author": "DeepSeek",
+      "not_a_proof": true,
+      "checker_or_budget_changes_allowed": false
+    },
+    "defect-localization": {
+      "id": "defect-localization",
+      "title": "Localize the remaining obstruction in the exact square defect before global Pell search",
+      "kind": "mathematical_strategy",
+      "hypothesis": "The v16 exact denominator delta=Q/gcd(Q,r^2) and primitive defect H impose p-adic constraints stronger than the global Pell equation alone. Proving these local constraints as reusable Lean lemmas can eliminate entire delta-families or reduce the final ThirtyCofactorGoal to finite congruence/valuation obligations, without assuming Pell completeness, Bennett, or a new Thue theorem.",
+      "procedure": [
+        "Formalize the v16 identities delta | r, delta^3 | Q, and gcd(delta,H)=1 with exact hypotheses as small Lean lemmas.",
+        "For each prime p | delta, derive v_p(A)=v_p(Q) and the allowed range of v_p(r) from Q | r^3; separate p=2,3 and p>=5.",
+        "Combine these valuations with 3n<r<10n/3, S | (n-2), and the cofactor condition to obtain congruence restrictions on n modulo p^e.",
+        "Use the restrictions to rule out a nontrivial delta-family or to produce a finite residue table; do not introduce an unproved distribution or Pell-completeness assumption.",
+        "Feed only the resulting fixed lemmas to the goal worker and compare against the frozen baseline; record whether the final target's hypothesis set actually shrinks."
+      ],
+      "success_criterion": "At least one new fixed Lean lemma eliminates a nontrivial delta-family or strictly reduces the hypotheses needed by a frozen target, with no new assumptions and real Lean verification.",
+      "failure_criterion": "If the local valuations are compatible with all delta>=13, or the reduction needs an unproved prime-distribution/Thue/Pell theorem, record the compatible family or missing lemma and revise or drop the method. A written v16 argument or Python audit is not counted as Lean success.",
+      "references": [
+        "v16_square_defect_pell.md",
+        "v16_repeated_neighbor_primes.md",
+        "v16_quadratic_neighbors.md",
+        "PROGRESS_v16_ja.md"
+      ],
+      "status": "hypothesis",
+      "author": "DeepSeek",
+      "not_a_proof": true,
+      "checker_or_budget_changes_allowed": false
+    }
+  },
+  "evaluations": [],
+  "pending_trials": [],
+  "causal_effect_established": false,
+  "proofs_require_the_unchanged_Lean_checker": true
+}

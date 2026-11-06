@@ -135,6 +135,8 @@ The executor controls bounded heartbeat/recursion limits; do not inject set_opti
                     record = {"theorem": name, "attempt": attempt, "exit_code": result['exit_code'],
                               "accepted": passed, "source_sha256": digest(candidate), "usage": response.get("usage"),
                               "request_settings": response.get("research_request_settings"),
+                              "seed_recompile": "seed_source" in response,
+                              "lean_elapsed_seconds": result['elapsed_seconds'],
                               "harness_diagnostics": triage, "resource_attempts": result['resource_attempts']}
                     records.append(record)
                     print(f"{module}/{name}: Lean exit={result['exit_code']}, accepted={passed}, categories={triage['categories']}", flush=True)
@@ -152,7 +154,10 @@ The executor controls bounded heartbeat/recursion limits; do not inject set_opti
                 except (ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
                     feedback = str(error)
                     triage = analyze(feedback)
-                    records.append({"theorem": name, "attempt": attempt, "validation_error": feedback})
+                    triage['categories'].append('candidate_validation')
+                    records.append({"theorem": name, "attempt": attempt, "validation_error": feedback,
+                                    "usage":response.get('usage'),"seed_recompile":"seed_source" in response,
+                                    "harness_diagnostics":triage})
                 messages.extend([{"role": "assistant", "content": reply_content}, {"role": "user", "content":
                     "Actual Lean feedback. Repair this proof only; preserve every hypothesis. Return JSON with proof only.\n" + feedback}])
                 repeat = memory.summary(name)['same_failure_streak']

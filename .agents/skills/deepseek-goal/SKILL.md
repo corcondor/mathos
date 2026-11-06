@@ -64,6 +64,13 @@ returns only the requested proof and never changes goal types.
 Use the existing math-research skill for proof rules and known failed inferences.
 The original approximation constant is 3/(2q²), not Legendre's 1/(2q²).
 
+The user also requested research on mathematical methods themselves. Use
+deepseek-research-methods to propose falsifiable mathematical strategies and
+certificate designs, apply them to fixed jobs, and evaluate actual trials.
+Check research_methods.pending_evaluations after a worker returns. Preserve the
+baseline and distinguish seed recompilation, host interruption and missing data.
+Method self-reports cannot establish proof, causality, or final-goal completion.
+
 The loop has explicit action, wall-clock and reported-token limits and can be
 paused. A limit/pause produces a resumable checkpoint, never `complete`.
 API timeout is a waiting limit, not a guaranteed duration of model thinking.

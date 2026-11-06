@@ -1,5 +1,6 @@
 """Offline tests for goal ownership, immutable targets and resumable limits."""
 import copy
+import gzip
 import json
 import os
 from pathlib import Path
@@ -232,6 +233,31 @@ class GoalTests(unittest.TestCase):
         self.assertEqual(result['status'],'action_limit')
         self.assertIsNone(result['last_error'])
         self.assertTrue((self.agent.run_dir/'0001.action.json').exists())
+
+    def test_method_is_inherited_without_mutating_a_new_frozen_job(self):
+        card={'id':'input-first','title':'Derive inputs first','kind':'mathematical_strategy',
+              'hypothesis':'First derive the missing input.','procedure':['Inspect the actual dependency.'],
+              'success_criterion':'Input verified','failure_criterion':'Input assumed','references':['notes.md']}
+        self.agent.execute({'action':'propose_method','arguments':card})
+        self.agent.execute({'action':'use_method','arguments':{'method_id':'input-first'}})
+        response={'choices':[{'message':{'content':'{"verdict":"PASS"}'}}]}
+        with patch.object(goal,'api',return_value=response):
+            result=self.agent.propose({'config':self.config(),'why_needed':'Required dependency for fixed target'})
+        job=self.agent.state['jobs'][result['job_id']]
+        frozen=json.loads((self.agent.run_dir/'jobs'/result['job_id']/'fixed_job.json').read_text())
+        self.assertEqual(job['config'],frozen)
+        self.assertEqual(job['method_trials'][0]['method_id'],'input-first')
+        self.assertTrue(Path(job['method_context'][0]).is_file())
+
+    def test_gzip_certificate_reads_are_bounded_and_not_allowed_as_job_context(self):
+        path=self.notes/'certificate.json.gz'
+        with gzip.open(path,'wb') as stream:stream.write(b'{\n  "value": 42\n}\n')
+        result=self.agent.execute({'action':'read_research','arguments':{'path':path.name,'start':2,'count':1}})
+        self.assertEqual(result['content'],'2:   "value": 42')
+        self.assertIn(path.name,self.agent.execute({'action':'list_research','arguments':{}})['files'])
+        with self.assertRaises(ValueError):goal.rooted(self.notes,path.name)
+        with patch.object(goal,'MAX_COMPRESSED_CONTENT',8),self.assertRaisesRegex(ValueError,'bounded'):
+            self.agent.execute({'action':'read_research','arguments':{'path':path.name}})
 
 
 class BudgetTests(unittest.TestCase):

@@ -1,0 +1,174 @@
+{
+  "status": "PASS",
+  "v16_source_commit": "a1e9e70c736ec3db8b0a7c8797d1abdd68537533",
+  "file_integrity": [
+    {
+      "path": "PROGRESS_v16_ja.md",
+      "bytes": 13790,
+      "sha256": "79a478abdddc563be87bc56787f1b687e3f052d02a828fd41b94b4d9d4044442"
+    },
+    {
+      "path": "README.md",
+      "bytes": 26287,
+      "sha256": "ca4962cab46edf56bbb318108896bc42449c9a0dd9501aa463e1d908c2dbfeb3"
+    },
+    {
+      "path": "RESEARCH_LOG.md",
+      "bytes": 21302,
+      "sha256": "95b12649b9b4e5a7a2eae73304318b2aed9a469f74bd0a41da85a55bfff8a7cb"
+    },
+    {
+      "path": "v16_lower_gap.md",
+      "bytes": 6426,
+      "sha256": "4a141edcc7ee11ff616d42e6f9297e39fd96626b479a973d886322a34d1b18c4"
+    },
+    {
+      "path": "v16_lower_gap_checks.json",
+      "bytes": 2401,
+      "sha256": "040c914c5fe3756342aa97fc05ef98aba33a78bedf11ae6068deb2887aa7beee"
+    },
+    {
+      "path": "v16_lower_gap_checks.py",
+      "bytes": 7799,
+      "sha256": "a37ff5ebae259a40080fb0452fe2be579e0a966bea20f2133285029a8c22bb36"
+    },
+    {
+      "path": "v16_quadratic_neighbors.md",
+      "bytes": 7746,
+      "sha256": "ac3cb31d741e350ce4e54abf6c9e1bcd20ccb2a854bd46743f012c45fd1b5031"
+    },
+    {
+      "path": "v16_quadratic_neighbors_checks.json",
+      "bytes": 29781,
+      "sha256": "ed86d7e25a0c4bfc0310aebe007cb0588c462e374e4d77f1b234f9a329b2ecd2"
+    },
+    {
+      "path": "v16_quadratic_neighbors_checks.py",
+      "bytes": 7403,
+      "sha256": "fd89805f7f733e3f21612c2829f3921e35279b86dcb1ee5fd6a6f85df38cf782"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes.md",
+      "bytes": 7168,
+      "sha256": "eb0716958da09efe50cc222915928cb808e25bbf9ef14fce1201d4eb2cd868f9"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes_checks.json",
+      "bytes": 12802,
+      "sha256": "0139b68b9efd4aec2439bea0d67f3f39ce9639c4aac304e89e2404dfe6997f7c"
+    },
+    {
+      "path": "v16_repeated_neighbor_primes_checks.py",
+      "bytes": 8632,
+      "sha256": "5bfc92b82a98a8c1b682f197c8e658662e6ef79e7fd5953ad617315f995c3dda"
+    },
+    {
+      "path": "v16_square_defect_independent_audit.json",
+      "bytes": 163087,
+      "sha256": "8ff0b3a6ba84dd5a5d5056ee91c80d1c3cf2887bd760f504c35bf95b1d43099f"
+    },
+    {
+      "path": "v16_square_defect_independent_audit.py",
+      "bytes": 16173,
+      "sha256": "b6330a0a5b3279bb3982fd2747c8c90b55e28022efaa302953441d9108dcd337"
+    },
+    {
+      "path": "v16_square_defect_independent_audit_note.md",
+      "bytes": 5195,
+      "sha256": "8ab525eb351d4eca287c242549f979a03703f7908f85650a62b6029d5b1c97c7"
+    },
+    {
+      "path": "v16_square_defect_pell.md",
+      "bytes": 14887,
+      "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822"
+    },
+    {
+      "path": "v16_square_defect_pell.py",
+      "bytes": 11093,
+      "sha256": "6488b2419f08be60ed92267df78a44387728b4e93f27633ddeb100a27610d79c"
+    },
+    {
+      "path": "v16_square_defect_pell_results.json.gz",
+      "bytes": 169374,
+      "sha256": "44838b5d8278469741dc16bef0488affc8c957a7591f8709a28ece7dee7e54c3"
+    },
+    {
+      "path": "v16_square_defect_pell_summary.json",
+      "bytes": 8609,
+      "sha256": "74cb8119dd7a447fff94abf17482a83fe2e1c4864b818881d4cbebafbf8f10fe"
+    }
+  ],
+  "independent_Pell_certificate_audit": {
+    "status": "PASS",
+    "statistics": {
+      "coefficient_triples": 1223,
+      "pell_points_below_height": 34010,
+      "integral_n_r": 24114,
+      "n_ge_104": 23920,
+      "actual_M": 9324,
+      "actual_delta": 9324,
+      "cube_divisibility": 1929,
+      "strict_coarse_interval": 1762,
+      "strict_log_interval": 123,
+      "original_branches": 246,
+      "modular_branch_exclusions": 246,
+      "square_discriminants": 8
+    },
+    "distinct_radicands": 570,
+    "largest_witness_prime": 23,
+    "both_binomials_zero_witnesses": 242,
+    "nonvanishing_pattern_witnesses": [
+      {
+        "delta": 2,
+        "n": 5329,
+        "r": 16206,
+        "branch": "k=r",
+        "prime": 5,
+        "actual_k_left_residue": 0,
+        "actual_j_squared_B_residue": 3,
+        "k_squared_residue": 1,
+        "right_residue": 4
+      },
+      {
+        "delta": 2,
+        "n": 5329,
+        "r": 16206,
+        "branch": "k=A-r",
+        "prime": 5,
+        "actual_k_left_residue": 0,
+        "actual_j_squared_B_residue": 3,
+        "k_squared_residue": 4,
+        "right_residue": 2
+      },
+      {
+        "delta": 3,
+        "n": 9801,
+        "r": 30030,
+        "branch": "k=r",
+        "prime": 13,
+        "actual_k_left_residue": 6,
+        "actual_j_squared_B_residue": 0,
+        "k_squared_residue": 0,
+        "right_residue": 0
+      },
+      {
+        "delta": 3,
+        "n": 9801,
+        "r": 30030,
+        "branch": "k=A-r",
+        "prime": 13,
+        "actual_k_left_residue": 6,
+        "actual_j_squared_B_residue": 0,
+        "k_squared_residue": 1,
+        "right_residue": 1
+      }
+    ],
+    "survivors": [],
+    "input_sha256": "f2001eaef853c0fe4dd5a13fe331b6890e08bd793b3e55f388099a781df546a2",
+    "generator_sha256": "6488b2419f08be60ed92267df78a44387728b4e93f27633ddeb100a27610d79c",
+    "source_sha256": "b6330a0a5b3279bb3982fd2747c8c90b55e28022efaa302953441d9108dcd337",
+    "completeness_boundary": "The written height, Pell-convergent completeness and minimal-unit descent proofs are necessary; the finite check does not itself formalize them."
+  },
+  "v16_written_theorems_Lean_verified": false,
+  "replay_report_sha256": "2bd1e33eacd3298205ee4ed420f2a4b47cb4a3891647c1e6c2a2811471894c58"
+}

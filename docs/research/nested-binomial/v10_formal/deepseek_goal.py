@@ -19,11 +19,13 @@ import subprocess
 import sys
 import time
 import uuid
+import gzip
 
 from deepseek_goal_budget import GoalBudgetExceeded
 from deepseek_proof_loop import ROOT, MODEL, api, completion_text, digest, load_api_settings
 from deepseek_lean_harness import analyze, accepted as lean_accepted, source_context
 from deepseek_publication import PublicationBlocked, synchronize, push_verified
+from deepseek_method_research import MethodResearch
 
 REPO = ROOT.parents[3]
 NOTES = ROOT.parent
@@ -46,13 +48,17 @@ def write_json(path, value):
     temporary.replace(path)
 
 
-def rooted(base, name):
+MAX_COMPRESSED_CONTENT = 8 * 1024 * 1024
+
+
+def rooted(base, name, allow_compressed=False):
     if not isinstance(name, str) or Path(name).is_absolute():
         raise ValueError('Expected a relative research/library path')
     path = (base / name).resolve()
     if not path.is_relative_to(base.resolve()) or not path.is_file():
         raise ValueError('File is outside the allowed research/library root or missing')
-    if path.suffix not in {'.lean', '.md', '.py', '.json', '.txt', '.toml'}:
+    if path.suffix not in {'.lean', '.md', '.py', '.json', '.txt', '.toml'} and not (
+            allow_compressed and path.name.endswith('.json.gz')):
         raise ValueError('Unsupported research/library file type')
     return path
 
@@ -60,6 +66,11 @@ def rooted(base, name):
 def excerpt(path, start=1, count=160):
     if type(start) is not int or type(count) is not int or start < 1 or not 1 <= count <= 250:
         raise ValueError('Use a positive start and 1..250 lines')
+    if path.name.endswith('.json.gz'):
+        with gzip.open(path,'rb') as source: data=source.read(MAX_COMPRESSED_CONTENT+1)
+        if len(data)>MAX_COMPRESSED_CONTENT:raise ValueError('Compressed research exceeds the bounded 8 MiB inspection limit')
+        return '\n'.join(f'{i}: {line}' for i,line in enumerate(data.decode('utf-8').splitlines(),1)
+                         if start<=i<start+count)[:32000]
     lines = []
     with path.open() as source:
         for index, line in enumerate(source, 1):
@@ -156,6 +167,11 @@ set_plan: {milestones:[{id,objective,depends_on:[],modules:[]}]}; persist a depe
 prove_job: {job_id,attempts?}; choose 1..20 proof attempts (default 5), then reconsider using real feedback.
 publish: {}; verify all accepted modules and commit/push ONLY their artifacts to authorized PR branch.
 sync_research: {}; fetch/merge the authorized branch, preserving verified sources; conflicts stop with actual diagnostics.
+inspect_methods: {}; real attempt metrics and recorded method hypotheses/evaluations.
+propose_method: {id,title,kind,hypothesis,procedure:[],success_criterion,failure_criterion,references:[]}.
+  kind is mathematical_strategy, formalization or certificate_design. References are existing research paths.
+use_method: {method_id,job_id?}; apply a hypothesis to planning and optionally a ready/failed/interrupted job, preserving its fixed type.
+evaluate_method: {method_id,job_id,conclusion,decision}; compare real trial evidence; decision is keep/revise/drop, not a proof or causal finding.
 checkpoint: {summary}; retain a brief research note, then CONTINUE; it does not end the goal.
 request_completion: {}; succeeds ONLY when both exact final targets are Lean-verified and published.
 There is no done action, arbitrary shell, arbitrary file write, or permission to edit existing proofs.
@@ -189,6 +205,7 @@ class GoalAgent:
             if job['status'] in {'failed', 'interrupted'}:
                 job['harness_recovery'] = {'reusable_seed_theorems': list(self.recover_seeds(job)),
                                            'recompilation_required': True}
+        self.methods = MethodResearch(self.state,self.run_dir,NOTES,ROOT,lambda path:rooted(NOTES,path))
 
     def remember(self, action, observation):
         name, args = action.get('action'), action.get('arguments', {})
@@ -215,6 +232,7 @@ class GoalAgent:
                 '| Module | Actual status |', '| --- | --- |']
         rows += [f"| {j['config']['module']} | {j['status']} |" for j in self.state['jobs'].values()]
         PROGRESS.write_text('\n'.join(rows) + '\n')
+        self.methods.save_public()
 
     def snapshot(self):
         budget = self.run_dir / 'budget.json'
@@ -229,6 +247,7 @@ class GoalAgent:
                 'notes': self.state['notes'][-8:], 'last_observation': self.state['last_observation'],
                 'working_memory': self.state.get('working_memory', []),
                 'milestone_plan': self.plan_snapshot(),
+                'research_methods': self.methods.planning_context(),
                 'budget': json.loads(budget.read_text()) if budget.exists() else None,
                 'verified_theorem_count': verified['accepted_theorem_count'],
                 'verified_module_catalog': [{'module': m['module'], 'theorems': m['theorems']}
@@ -296,6 +315,8 @@ class GoalAgent:
         self.state['jobs'][job_id] = {'config': config, 'config_sha256': digest(json.dumps(config, sort_keys=True)),
             'why_needed': why, 'extra_context': [str(p) for p in contexts],
             'library_reference': [str(p) for p in library], 'status': 'ready', 'runs': [], 'review': verdict}
+        if self.state.get('active_method_id'):
+            self.methods.use({'method_id':self.state['active_method_id'],'job_id':job_id})
         self.save()
         return {'accepted': True, 'job_id': job_id, 'frozen_config': config, 'review': verdict}
 
@@ -320,24 +341,27 @@ class GoalAgent:
             command += ['--seed-proofs', str(seed)]
         for path in job['extra_context']: command += ['--extra-context', path]
         for path in job.get('harness_context', []): command += ['--extra-context', path]
+        for path in job.get('method_context', []): command += ['--extra-context', path]
         for path in job['library_reference']: command += ['--library-reference', path]
         job['runs'].append(str(run)); job['status'] = 'running'; self.save()
         env = os.environ.copy()
         env['ELAN_HOME'] = '/workspace/.cloud-setup/lean/elan'
         env['PATH'] = env['ELAN_HOME'] + '/bin:' + env['PATH']
         with (directory / 'worker.log').open('a') as log:
+            interrupted = False
             process = subprocess.Popen(command, cwd=MATHLIB, env=env, stdout=log,
                                        stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
             while process.poll() is None:
                 budget = json.loads((self.run_dir / 'budget.json').read_text())
                 if (self.run_dir / 'PAUSE').exists() or time.time() >= budget['deadline']:
+                    interrupted = True
                     os.killpg(process.pid, signal.SIGTERM); process.wait(timeout=15)
                     break
                 time.sleep(.5)
         report_path = run / 'result.json'
         report = json.loads(report_path.read_text()) if report_path.exists() else {}
         job['result'] = report
-        job['status'] = 'failed'
+        job['status'] = 'interrupted' if interrupted else 'failed'
         if process.returncode == 0 and report.get('status') == 'PASS':
             source = ROOT / (frozen['module'] + '.lean')
             if digest(source.read_bytes()) != report['source_sha256']:
@@ -478,6 +502,7 @@ class GoalAgent:
         report = json.loads((ROOT / 'additional_kernel_check.json').read_text())
         checked = {r['source']: r for r in report['records']}
         allowed = {ROOT / 'additional_kernel_check.json', ROOT / 'deepseek_generation_checks.json', REGISTRY, PROGRESS}
+        allowed.update(NOTES/name for name in ['DEEPSEEK_METHOD_RESEARCH.json','DEEPSEEK_METHOD_RESEARCH.md'] if (NOTES/name).is_file())
         for job in pending:
             name = job['config']['module']; record = checked.get(name + '.lean')
             if (not record or record['exit_code'] or record['proof_hole_or_custom_axiom_detected']
@@ -561,10 +586,10 @@ class GoalAgent:
     def execute(self, action):
         name, args = action.get('action'), action.get('arguments', {})
         if name == 'list_research':
-            return {'files': sorted(str(p.relative_to(NOTES)) for p in NOTES.rglob('*') if p.is_file() and p.suffix in {'.lean', '.md', '.py', '.json', '.txt', '.toml'})}
+            return {'files': sorted(str(p.relative_to(NOTES)) for p in NOTES.rglob('*') if p.is_file() and (p.suffix in {'.lean', '.md', '.py', '.json', '.txt', '.toml'} or p.name.endswith('.json.gz')))}
         if name in {'read_research', 'read_mathlib'}:
             base = NOTES if name == 'read_research' else MATHLIB / 'Mathlib'
-            return {'content': excerpt(rooted(base, args['path']), args.get('start', 1), args.get('count', 160))}
+            return {'content': excerpt(rooted(base, args['path'],allow_compressed=name=='read_research'), args.get('start', 1), args.get('count', 160))}
         if name in {'search_research', 'search_mathlib'}:
             return self.search(NOTES if name == 'search_research' else MATHLIB / 'Mathlib', args)
         if name == 'list_mathlib':
@@ -587,6 +612,10 @@ class GoalAgent:
         if name == 'prove_job': return self.worker(args['job_id'], args.get('attempts', 5))
         if name == 'publish': return self.publish()
         if name == 'sync_research': return self.sync_research()
+        if name == 'inspect_methods': return self.methods.overview()
+        if name in {'propose_method','use_method','evaluate_method'}:
+            result=getattr(self.methods,{'propose_method':'propose','use_method':'use','evaluate_method':'evaluate'}[name])(args)
+            self.save();return result
         if name == 'checkpoint':
             summary = args.get('summary', '')
             if not isinstance(summary, str) or not 1 <= len(summary) <= 2000: raise ValueError('Use a brief progress summary')

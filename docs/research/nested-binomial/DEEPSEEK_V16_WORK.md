@@ -33,3 +33,20 @@ Q∤r²を元の二項係数の等式から導く接続がLeanでは未完了で
 この不足をDeepSeekへ返し、同じ固定目標を保って次の数学的な修正・接続・形式化を本人に選ばせる。
 また、研究提案にあった「kappa>=q と log(i)<28*kappa からqの下限が出る」という推論は撤回・訂正済み。そのような下限を成果として主張しない。
 元の候補のLean証明が成功したとは扱わない。
+
+## 追加の形式化と手法研究（2026-11-06 JST）
+
+初期提案の後、DeepSeekは元の式との接続を分解して実際に進めた。
+ThirtyCofactorInputs、ThirtyCofactorSecondDivisor、ThirtyCofactorPrimeSeparation、
+ThirtyCofactorQDivisibility、ThirtyCofactorCubePrimeExtractionの5モジュール・15定理が
+実Lean検査を通過しGitHubへ保存された。既存分との合計は67定理、依存元を含む20モジュール。
+元の式からQ|r³への接続、指定素数・余因子との素数分離、
+Q|r³かつQ∤r²からの素数立方因子の抽出が入った。
+Q∤r²を元の式から排除する全Pell議論と、固定した最終目標は未完了。
+
+ユーザーの追加依頼により、数学研究の方法自体もDeepSeekが仮説・実験・評価する。
+DEEPSEEK_METHOD_RESEARCH.md/.jsonに本人が選んだ手法と実測を保存する。
+最初の実験は、有限区間被覆を証明書として組み立てる手法を、
+既に固定済みのThirtyCofactorPellCoveringへ適用するもの。
+別候補は、正確な不足約数deltaへ障害を局所化する数学的戦略。
+両方とも手法の一般的有効性が証明されたとは扱わず、実際の固定型・Lean結果・基準履歴に結び付けて評価する。

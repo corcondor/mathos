@@ -190,6 +190,9 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
         skill = ROOT.parents[3] / ".agents/skills/deepseek-math-research/SKILL.md"
         if skill.exists():
             persisted = "Delegation skill:\n" + skill.read_text() + "\n\nCurrent research state:\n" + persisted
+        method_skill = ROOT.parents[3] / '.agents/skills/deepseek-research-methods/SKILL.md'
+        if method_skill.exists():
+            persisted += '\n\nResearch-method experimentation skill:\n' + method_skill.read_text()
         references = ROOT.parent / "AI_RESEARCH_REFERENCES.md"
         if references.exists():
             persisted += "\n\nPublic research-method references:\n" + references.read_text()
