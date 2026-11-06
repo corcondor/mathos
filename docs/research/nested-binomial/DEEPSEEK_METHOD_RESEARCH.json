@@ -1,5 +1,5 @@
 {
-  "active_method_id": "finite-cover-certificate",
+  "active_method_id": "defect-localization",
   "methods": {
     "finite-cover-certificate": {
       "id": "finite-cover-certificate",
@@ -23,7 +23,7 @@
         "v16_lower_gap.md",
         "v16_manifest.json"
       ],
-      "status": "experimental",
+      "status": "observed; causal superiority unestablished",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -48,7 +48,7 @@
         "v16_quadratic_neighbors.md",
         "PROGRESS_v16_ja.md"
       ],
-      "status": "hypothesis",
+      "status": "experimental",
       "author": "DeepSeek",
       "not_a_proof": true,
       "checker_or_budget_changes_allowed": false
@@ -365,13 +365,33 @@
       "advisory_decision": "revise",
       "causal_effect_established": false,
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
-    }
-  ],
-  "pending_trials": [
+    },
     {
-      "job_id": "ThirtyCofactorSquareDefect-df603e79",
       "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorSquareDefect-df603e79",
       "trial": 0,
+      "contract_sha256": "bed2a49938b1a20dc3fd8333de8db826ee1c4d0d7336765b6d00faece4ed721b",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "deeb448c38d097abce2a408ff01ed6c4b86c45318c6149dbf3c106f496ed343e"
+        }
+      ],
       "metrics": {
         "attempt_records": 7,
         "accepted_theorems": [
@@ -396,6 +416,47 @@
           "proof_gap": 1
         },
         "attempts_with_Lean_timing": 7,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "148332068884226fb7a27bb343a5f174c58ee40699cf34cc48e9e1acf9b9909c",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial: all four frozen obligations (defect_dvd_r, defect_cube_dvd, defect_gt_one, defect_cube_dvd_choose_three) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits) and the module is published at 46183128. Measured: 7 attempt records, 142034 reported completion tokens (139391 reasoning), 16.236s recorded Lean time over 7 timed attempts, error classes {library_api:2, proof_gap:1}, zero seed recompilations, zero attempts without usage. As in the Valuation, PellReduction, ExponentDomain and PrimeBound trials, the element that actually transferred was splitting the frozen statement into small independent integer obligations with explicit hypotheses (here: delta | r, delta^3 | Q, delta > 1, delta^3 | C(i,3), each stated separately about delta = Q/gcd(Q,r^2)); the finite interval-cover/certificate-list element was again unused. defect_dvd_r needed 2 library-API repairs (guessed Nat.zero_dvd_iff/pow_eq_zero names), defect_gt_one 1 proof-gap repair (omega), while defect_cube_dvd and defect_cube_dvd_choose_three closed first try. Limitations: sequential non-randomized trial, empty matched baseline, candidate-response token scope excludes planner/scope/repair critics, and the module proves only the generic defect divisibility theory — not delta >= 13, not gcd(delta,H)=1, not Q ∤ r^2, not the Pell/983-record checks, and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    }
+  ],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorCubeLocalization-e8f08c57",
+      "method_id": "defect-localization",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "coprime_Q_factors",
+          "cube_prime_localization",
+          "prime_cube_dvd_coprime_factor",
+          "prime_cube_dvd_index_or_pred"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "coprime_Q_factors",
+          "cube_prime_localization",
+          "prime_cube_dvd_coprime_factor",
+          "prime_cube_dvd_index_or_pred"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 46302,
+        "reported_reasoning_tokens": 44726,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 12.392,
+        "error_categories": {
+          "library_api": 1
+        },
+        "attempts_with_Lean_timing": 5,
         "attempts_without_Lean_timing": 0,
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true

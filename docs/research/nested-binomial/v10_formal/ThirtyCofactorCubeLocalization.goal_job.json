@@ -1,0 +1,27 @@
+{
+  "module": "ThirtyCofactorCubeLocalization",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorCubePrimeExtraction\nimport ThirtyCofactorPrimeSeparation",
+  "definitions": "",
+  "goals": [
+    [
+      "prime_cube_dvd_coprime_factor",
+      "theorem prime_cube_dvd_coprime_factor (a b q : ℕ) (hq : Nat.Prime q) (hcop : Nat.Coprime a b) (hdvd : q ^ 3 ∣ a * b) : q ^ 3 ∣ a ∨ q ^ 3 ∣ b"
+    ],
+    [
+      "coprime_Q_factors",
+      "theorem coprime_Q_factors (i : ℕ) (hi : 1 ≤ i) : Nat.Coprime (i / Nat.gcd i 3) ((i - 1) / Nat.gcd (i - 1) 6)"
+    ],
+    [
+      "prime_cube_dvd_index_or_pred",
+      "theorem prime_cube_dvd_index_or_pred (i q : ℕ) (hi : 1 ≤ i) (hq : Nat.Prime q) (hq3 : q ^ 3 ∣ (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6)) : q ^ 3 ∣ i ∨ q ^ 3 ∣ i - 1"
+    ],
+    [
+      "cube_prime_localization",
+      "theorem cube_prime_localization (w p a i r : ℕ) (hw : 1 ≤ w) (hp : Nat.Prime p) (ha : 1 ≤ a) (hi : i = w * p ^ a + 2) (hr : 0 < r) (hdvd : (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6) ∣ r ^ 3) (hnot : ¬ (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6) ∣ r ^ 2) : ∃ q : ℕ, Nat.Prime q ∧ (q ^ 3 ∣ i ∨ q ^ 3 ∣ i - 1) ∧ (q = 2 ∨ Nat.Coprime q (w * p))"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorCubePrimeExtraction.lean",
+    "ThirtyCofactorPrimeSeparation.lean"
+  ]
+}

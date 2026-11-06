@@ -15,6 +15,7 @@
     "ThirtyCofactorPellReduction",
     "ThirtyCofactorExponentDomain",
     "ThirtyCofactorPrimeBound",
-    "ThirtyCofactorSquareDefect"
+    "ThirtyCofactorSquareDefect",
+    "ThirtyCofactorCubeLocalization"
   ]
 }
