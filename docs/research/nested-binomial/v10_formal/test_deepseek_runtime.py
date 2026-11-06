@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 import urllib.error
@@ -98,6 +99,21 @@ class ReasoningRuntimeTests(unittest.TestCase):
         self.assertNotIn("reasoning_effort", calls[0])
         self.assertEqual(calls[1]["response_format"], {"type": "json_object"})
         self.assertEqual(calls[1]["reasoning_effort"], "high")
+
+    def test_goal_budget_is_shared_by_actual_api_adapter(self):
+        budget = self.root / 'budget.json'
+        budget.write_text(json.dumps({'max_completion_tokens': 5000, 'used_completion_tokens': 2000,
+                                      'deadline': time.time()+60, 'api_calls': 0}))
+        calls = []
+        def fake(request, timeout):
+            calls.append((json.loads(request.data), timeout))
+            return io.BytesIO(json.dumps({'choices':[{'message':{'content':'{}'}}],
+                                          'usage':{'completion_tokens':700}}).encode())
+        with patch.dict(os.environ, {'DEEPSEEK_GOAL_BUDGET_FILE': str(budget)}), patch.object(runtime.urllib.request, 'urlopen', fake):
+            runtime.api([])
+        self.assertEqual(calls[0][0]['max_tokens'], 3000)
+        self.assertLessEqual(calls[0][1], 60)
+        self.assertEqual(json.loads(budget.read_text())['used_completion_tokens'], 2700)
 
     def test_explicit_capacity_failure_is_retried_without_downgrading(self):
         calls = []

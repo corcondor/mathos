@@ -25,6 +25,34 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def include_goal_modules(sources):
+    registry = ROOT / "goal_verified_modules.json"
+    if not registry.exists():
+        return sources
+    names = json.loads(registry.read_text())["modules"]
+    ordered, seen, active = [], set(), set()
+    def visit(name):
+        if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", name):
+            raise ValueError("Invalid registered Lean module")
+        if name in active:
+            raise ValueError("Cyclic local Lean imports")
+        if name in seen:
+            return
+        source = ROOT / (name + ".lean")
+        if not source.is_file():
+            raise ValueError("Registered Lean module missing: " + name)
+        active.add(name)
+        for dependency in re.findall(r"^import ([A-Za-z][A-Za-z0-9_]*)\s*$", source.read_text(), re.M):
+            if (ROOT / (dependency + ".lean")).is_file():
+                visit(dependency)
+        active.remove(name); seen.add(name); ordered.append(source)
+    for source in sources:
+        visit(source.stem)
+    for name in names:
+        visit(name)
+    return ordered
+
+
 def main():
     mathlib_commit = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], text=True
@@ -40,6 +68,7 @@ def main():
     for name in ["LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction", "GeometricDescent", "CFCoefficientRanges", "CFCandidateCoverage"]:
         if (ROOT / (name + ".lean")).exists():
             sources.append(ROOT / (name + ".lean"))
+    sources = include_goal_modules(sources)
     records = []
     with tempfile.TemporaryDirectory(prefix="nested-binomial-lean-") as build:
         compile_env = os.environ.copy()

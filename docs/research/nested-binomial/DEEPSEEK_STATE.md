@@ -98,3 +98,10 @@
 - CFCandidateCoverageの2定理はmax指定・上限131072トークンでDeepSeekへ依頼。いずれも初回の実Lean検査に成功。本文の手動編集なし。
 - 近似分数から候補係数を導出して集合の被覆へ接続し、有限の分母列から区間を選ぶ一般定理も検証。実データへの仮定の供給・適用と全曲線の証明書検査は未完了。
 - 詳細はCF_CANDIDATE_COVERAGE.md。設定・境界値・リクエストの8テストもPASS。
+
+## 最新方針：DeepSeek自身のgoalループ
+- ユーザーはCodexの/goalではなく、DeepSeekが次の課題選びから継続する仕組みを要求。DeepSeek用カスタムgoalスキルと実行器を実装する。
+- DeepSeek自身が最終2定理の文を生成。元のv9/v10ノートとの対応をホストで点検し、.agents/skills/deepseek-goal/goal.jsonに型とハッシュを固定。CFの正しさを仮定に入れていない。
+- 目標プランナーも証明ワーカーもDeepSeek max。Codexはツール実装・実行・監視・実検証を担当し、個別の次補題を選ぶ役割から外れる。
+- 完了には両固定定理の実Lean成功とGitHub保存が必要。補題数やモデルのdoneでは終了しない。実行上限では未完了のまま再開可能な状態を保存する。
+- 最新の自動進捗はDEEPSEEK_GOAL_PROGRESS.mdとdeepseek_generation_checks.jsonを参照。既存の35定理・10モジュールは自律化前の手動チェックポイント。

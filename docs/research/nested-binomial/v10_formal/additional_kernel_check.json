@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-06T05:41:28.208790+00:00",
+  "checked_at_utc": "2026-11-06T06:23:52.771427+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -15,7 +15,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/ValuationRecovery.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/ValuationRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ValuationRecovery.lean"
       ]
     },
@@ -30,7 +30,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/RecoveredDivisor.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/RecoveredDivisor.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/RecoveredDivisor.lean"
       ]
     },
@@ -45,7 +45,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/NormalizedCancellation.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/NormalizedCancellation.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/NormalizedCancellation.lean"
       ]
     },
@@ -60,7 +60,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/LocalSquareRecovery.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/LocalSquareRecovery.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/LocalSquareRecovery.lean"
       ]
     },
@@ -75,7 +75,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/CriticalPrimeCRT.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/CriticalPrimeCRT.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CriticalPrimeCRT.lean"
       ]
     },
@@ -90,7 +90,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/CFApproximationCore.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/CFApproximationCore.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFApproximationCore.lean"
       ]
     },
@@ -105,7 +105,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/GeometricReduction.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/GeometricReduction.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricReduction.lean"
       ]
     },
@@ -120,7 +120,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/GeometricDescent.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/GeometricDescent.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/GeometricDescent.lean"
       ]
     },
@@ -135,7 +135,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/CFCoefficientRanges.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/CFCoefficientRanges.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCoefficientRanges.lean"
       ]
     },
@@ -150,7 +150,7 @@
         "lean",
         "--root=/workspace/mathos/docs/research/nested-binomial/v10_formal",
         "-o",
-        "/tmp/nested-binomial-lean-dpxgykmf/CFCandidateCoverage.olean",
+        "/tmp/nested-binomial-lean-60v8r8wo/CFCandidateCoverage.olean",
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/CFCandidateCoverage.lean"
       ]
     }

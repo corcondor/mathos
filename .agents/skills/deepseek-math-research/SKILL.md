@@ -26,6 +26,7 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 ## Division of labor
 - Host: information retrieval, API delegation, compilation, real verification, saving artifacts.
 - DeepSeek: proof generation and repair (the user wants all proof work delegated). Host must not hand-edit a successful proof body.
+- Latest correction: DeepSeek must also choose the next mathematical task and drive the persistent goal. Use [deepseek-goal](../deepseek-goal/SKILL.md) and its executor; Codex should not keep issuing individual mathematical assignments.
 
 ## Implemented tooling (in docs/research/nested-binomial/v10_formal/)
 - `deepseek_goal_worker.py` — one theorem at a time; prefer over batch generation.
@@ -53,10 +54,11 @@ Purpose: route proof work to DeepSeek as much as possible, persist what it learn
 - OpenAI lean-gym (Lean 3.39.1, do not port directly), OpenAI evals, Anthropic evaluator_optimizer; pinned commit links in RESEARCH_WORKFLOW.md.
 - Eleven additional verified repositories, including DeepSeek-Prover-V2, AlphaGeometry/2, formal-conjectures, Evariste, Kimina, LeanDojo/v2, LeanCopilot, REPL and Aesop, were shared with DeepSeek. See AI_RESEARCH_REFERENCES.md and its pinned catalog. Do not claim those systems or model weights are installed.
 
-## Current verified status
+## Manual checkpoint before the autonomous goal
 - 7 new modules / 35 theorems authored and repaired solely by DeepSeek pass Lean: LocalSquareRecovery(4), CriticalPrimeCRT(3), CFApproximationCore(5), GeometricReduction(9), GeometricDescent(6), CFCoefficientRanges(6), CFCandidateCoverage(2).
 - RecoveredDivisor and NormalizedCancellation had host edits — keep distinct.
 - Dependency + 9 additional modules (10 total) passed latest re-run.
+- During the autonomous run, use `deepseek_generation_checks.json`, `goal_verified_modules.json`, and `DEEPSEEK_GOAL_PROGRESS.md` for current machine-verified progress; the counts above are the prior manual checkpoint.
 - Python exact revalidation: 5214 curves, 4,877,566 CF coefficients, 25,394,330 reduced fractions, 0 residual; saved in `cf_current_revalidation.json`. Python success ≠ Lean formalization complete.
 
 ## Open work (do not claim done)

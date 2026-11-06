@@ -1,0 +1,43 @@
+{
+  "id": "nested-binomial-cf",
+  "objective": "DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、CF仮定のない小不足分曲線排除と30余因子の非存在定理を検証し、既存PR #1へ保存する。補題数だけで完了にしない。",
+  "targets": [
+    {
+      "module": "CFSmallDefectGoal",
+      "name": "small_defect_curve_exclusion",
+      "statement": "theorem small_defect_curve_exclusion : forall S T n r : Nat, ((1 ≤ S) ∧ (S ≤ 12) ∧ (162 * S < T) ∧ (T < 229 * S) ∧ (104 ≤ n) ∧ (n < 2 ^ (192 * S)) ∧ (3 * n < r) ∧ (3 * r < 10 * n) ∧ (S ∣ (n - 2)) ∧ (6 * S * r ^ 3 = T * n * (n - 1) * (n - 2))) → False",
+      "scope_mapping": {
+        "source": "v9_gcd_defect_continued_fractions.md sections 1-6",
+        "mapping": "Exact finite curve exclusion used for S=1..12: n>=104, 3n<r<10n/3, S|(n-2), n<2^(192S), 162S<T<229S, and 6S r^3=T n(n-1)(n-2). The no-survivor table covers all 5214 curves.",
+        "non_claim": "This is not a new CF theorem and does not assert any stronger undocumented exclusion."
+      },
+      "statement_sha256": "3ec6a3bc914d2c72c8a850fccc728f7085d8c7a2ed9b50712c9a0fad2f7c60de"
+    },
+    {
+      "module": "ThirtyCofactorGoal",
+      "name": "thirty_cofactor_exclusion",
+      "statement": "theorem thirty_cofactor_exclusion : forall w p a i k : Nat, ((1 ≤ w) ∧ (Nat.Prime p) ∧ (1 ≤ a) ∧ (i = w * p ^ a + 2) ∧ (w / (Nat.gcd w 6) ≤ 12) ∧ (1 ≤ k) ∧ (Nat.choose (Nat.choose i (i - 3)) (Nat.choose k 1) = Nat.choose (i ^ 2) ((i - 3) ^ 2) + Nat.choose (k ^ 2) (1 ^ 2))) → False",
+      "scope_mapping": {
+        "source": "v10_small_cofactors.md Theorem (1), cofactor list (2), and the original equation",
+        "mapping": "ell=1, j=i-3, i=w p^a+2, p prime, a>=1, w/gcd(w,6)<=12, k>=1, and the literal squared-index nested-binomial equation. Covers all thirty cofactor families with no upper bound on i.",
+        "non_claim": "The v9 CF result is an intermediate proof input, not a hypothesis. This does not solve the full four-variable equation."
+      },
+      "statement_sha256": "6df3b07f6a2418ffebb4dcc150e72a79bf124deeb9d89d0f0c7d45501daff080"
+    }
+  ],
+  "target_author": "DeepSeek API; host checked alignment with the actual v9/v10 notes and froze these exact strings",
+  "repository": "corcondor/mathos",
+  "branch": "research/nested-binomial-2026-11-05",
+  "pr": 1,
+  "default_limits": {
+    "max_actions": 48,
+    "max_hours": 6,
+    "max_completion_tokens": 2000000
+  },
+  "initial_research_files": [
+    "README.md",
+    "CF_CANDIDATE_COVERAGE.md",
+    "v9_gcd_defect_continued_fractions.md",
+    "v10_small_cofactors.md"
+  ]
+}

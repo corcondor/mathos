@@ -8,3 +8,4 @@ Apply these preferences to mathematical research and Lean formalization in this 
 4. Use a fresh run-dir per run; never overwrite successful sources. Add new jobs to `JOBS` with exact types.
 5. Update DEEPSEEK_STATE.md after each run. Do not ask the user again for already-granted API/file authorization or for info retrievable from the known PR.
 6. On failure, diagnose root cause and try a different strategy before reporting.
+7. When the user wants DeepSeek itself to own a persistent goal, use `.agents/skills/deepseek-goal/SKILL.md` and `deepseek_goal.py`. DeepSeek chooses research actions and theorem designs; Codex runs/monitors the executor, verifies evidence and reports status. Do not manually select each next theorem or stop the goal after an auxiliary lemma. Final success requires the two exact frozen goal targets, real Lean verification, and GitHub publication.

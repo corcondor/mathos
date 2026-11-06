@@ -19,6 +19,8 @@ import time
 import urllib.error
 import urllib.request
 
+from deepseek_goal_budget import before_call, record_usage
+
 
 ROOT = Path(__file__).resolve().parent
 MODEL = "deepseek-v4-1-flash-1017"
@@ -180,6 +182,7 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
         if reasoning_effort not in (None, "high", "max"):
             raise ValueError("Only high, max or the provider default are supported")
         settings["reasoning_effort"] = reasoning_effort
+    settings, goal_budget = before_call(settings)
     state = ROOT.parent / "DEEPSEEK_STATE.md"
     if state.exists():
         persisted = state.read_text()
@@ -211,6 +214,7 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
                 result = json.load(response)
             result["research_request_settings"] = settings
             result["research_capacity_retries_used"] = attempt
+            record_usage(goal_budget, result, settings)
             return result
         except urllib.error.HTTPError as error:
             # Retry explicit transient capacity failures, never auth/quota errors.
@@ -237,7 +241,7 @@ def render(imports, goals, bodies):
         proof = bodies[name]
         if not isinstance(proof, str) or not proof.lstrip().startswith("by"):
             raise ValueError(f"{name}: expected a tactic proof starting with by")
-        if re.search(r"\b(sorry|admit|axiom|native_decide|unsafe|initialize|run_cmd|elab|macro|syntax)\b|#|\bIO\.", proof):
+        if re.search(r"\b(sorry|admit|axiom|native_decide|unsafe|initialize|run_cmd|run_tac|run_elab|run_io|liftIO|elab|macro|macro_rules|syntax|notation|attribute)\b|#|\b(IO|Lean|System)\.", proof):
             raise ValueError(f"{name}: unsupported command or proof hole")
         if re.search(r"(?m)^\s*(import|namespace|end|theorem|lemma|def|opaque|constant|instance|set_option)\b", proof):
             raise ValueError(f"{name}: proof bodies may not inject declarations")
