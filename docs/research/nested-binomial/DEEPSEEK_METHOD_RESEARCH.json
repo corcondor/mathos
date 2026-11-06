@@ -427,13 +427,33 @@
       "advisory_decision": "revise",
       "causal_effect_established": false,
       "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
-    }
-  ],
-  "pending_trials": [
+    },
     {
-      "job_id": "ThirtyCofactorCubeLocalization-e8f08c57",
       "method_id": "defect-localization",
+      "job_id": "ThirtyCofactorCubeLocalization-e8f08c57",
       "trial": 0,
+      "contract_sha256": "6aa3218177b1936bb4f07875026828f2eb9163adcf3e846d48bb8198a3c2e6b8",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "0a0c03152dbe00000fba9926a60e11b358248725c4a55a9846a3f4b96a9ec58b"
+        }
+      ],
       "metrics": {
         "attempt_records": 5,
         "accepted_theorems": [
@@ -457,6 +477,43 @@
           "library_api": 1
         },
         "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "b56ca1a3335be6a93703281910e9b24f10b8e07f5012c216166dd9c9a1dbb33b",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial on the defect-localization program: all four frozen obligations (prime_cube_dvd_coprime_factor, coprime_Q_factors, prime_cube_dvd_index_or_pred, cube_prime_localization) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits) and the module is published at 01f5af67. Measured: 5 attempt records, 4 newly generated verified theorems with known usage, 46302 reported completion tokens (44726 reasoning), 12.392s recorded Lean time over 5 timed attempts, error classes {library_api:1}, zero seed recompilations, zero attempts without usage. The localization step the method predicted is now real: the cube q^3 | Q forced by Q | r^3 and not Q | r^2 is located in exactly one of the two coprime factors, hence in i or i-1, and the published separation gives q = 2 or Coprime q (w*p). Limitations: the hypothesis hnot (not Q | r^2) is still the unformalized v15 input, so this trial localizes the obstruction but does not eliminate it; sequential non-randomized trial with empty matched baseline; candidate-response token scope excludes planner/scope/repair critics. Not claimed: delta >= 13, gcd(delta,H) = 1, Q ∤ r^2 itself, the Pell/983-record checks, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    }
+  ],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorTargetCubeLocalization-75e7178a",
+      "method_id": "defect-localization",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 2,
+        "accepted_theorems": [
+          "delta_gt_one_imp_not_dvd_sq",
+          "target_cube_localization"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "delta_gt_one_imp_not_dvd_sq",
+          "target_cube_localization"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 9845,
+        "reported_reasoning_tokens": 9276,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 4.394,
+        "error_categories": {
+          "unused_binding": 2
+        },
+        "attempts_with_Lean_timing": 2,
         "attempts_without_Lean_timing": 0,
         "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
         "completion_tokens_are_not_a_billing_guarantee": true

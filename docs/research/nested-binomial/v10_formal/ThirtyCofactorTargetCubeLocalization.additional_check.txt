@@ -1,0 +1,14 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorTargetCubeLocalization.lean:30:4: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [hr0]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorTargetCubeLocalization.lean:9:120: warning: Variable name `hk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'NestedBinomialV10.target_cube_localization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.delta_gt_one_imp_not_dvd_sq' depends on axioms: [propext, Quot.sound]

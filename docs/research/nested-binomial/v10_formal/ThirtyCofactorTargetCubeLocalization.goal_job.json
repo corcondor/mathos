@@ -1,0 +1,23 @@
+{
+  "module": "ThirtyCofactorTargetCubeLocalization",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorInputs\nimport ThirtyCofactorQDivisibility\nimport ThirtyCofactorCubePrimeExtraction\nimport ThirtyCofactorCubeLocalization",
+  "definitions": "",
+  "goals": [
+    [
+      "target_cube_localization",
+      "theorem target_cube_localization (w p a i k : ℕ) (hw : 1 ≤ w) (hp : Nat.Prime p) (ha : 1 ≤ a) (hi : i = w * p ^ a + 2) (hk : 1 ≤ k) (heq : Nat.choose (Nat.choose i (i - 3)) (Nat.choose k 1) = Nat.choose (i ^ 2) ((i - 3) ^ 2) + Nat.choose (k ^ 2) (1 ^ 2)) (hnot : ¬ ((i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6)) ∣ (min k (Nat.choose i (i - 3) - k)) ^ 2) : ∃ q : ℕ, Nat.Prime q ∧ (q ^ 3 ∣ i ∨ q ^ 3 ∣ i - 1) ∧ (q = 2 ∨ Nat.Coprime q (w * p))"
+    ],
+    [
+      "delta_gt_one_imp_not_dvd_sq",
+      "theorem delta_gt_one_imp_not_dvd_sq (Q r : ℕ) (hQ : 0 < Q) (h : 1 < Q / Nat.gcd Q (r ^ 2)) : ¬ Q ∣ r ^ 2"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorInputs.lean",
+    "ThirtyCofactorSecondDivisor.lean",
+    "ThirtyCofactorQDivisibility.lean",
+    "ThirtyCofactorCubePrimeExtraction.lean",
+    "ThirtyCofactorPrimeSeparation.lean",
+    "ThirtyCofactorCubeLocalization.lean"
+  ]
+}
