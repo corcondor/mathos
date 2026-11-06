@@ -1,0 +1,20 @@
+{
+  "module": "ThirtyCofactorCubePrimeExtraction",
+  "imports": "import Mathlib.Tactic",
+  "definitions": "",
+  "goals": [
+    [
+      "prime_cube_dvd_of_dvd_cube_not_dvd_sq",
+      "theorem prime_cube_dvd_of_dvd_cube_not_dvd_sq (Q r : ℕ) (hQ : 0 < Q) (hr : 0 < r) (hdvd : Q ∣ r ^ 3) (hnot : ¬ Q ∣ r ^ 2) : ∃ q : ℕ, Nat.Prime q ∧ q ^ 3 ∣ Q ∧ q ∣ r"
+    ],
+    [
+      "cofactor_M_mul_Q",
+      "theorem cofactor_M_mul_Q (n : ℕ) : Nat.gcd n 3 * Nat.gcd (n - 1) 6 * ((n / Nat.gcd n 3) * ((n - 1) / Nat.gcd (n - 1) 6)) = n * (n - 1)"
+    ],
+    [
+      "cofactor_M_mul_sq",
+      "theorem cofactor_M_mul_sq (n r L : ℕ) (hL : L * ((n / Nat.gcd n 3) * ((n - 1) / Nat.gcd (n - 1) 6)) = r ^ 2) : Nat.gcd n 3 * Nat.gcd (n - 1) 6 * r ^ 2 = L * n * (n - 1)"
+    ]
+  ],
+  "local_dependencies": []
+}

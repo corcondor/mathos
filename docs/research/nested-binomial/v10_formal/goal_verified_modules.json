@@ -8,6 +8,7 @@
     "ThirtyCofactorInputs",
     "ThirtyCofactorSecondDivisor",
     "ThirtyCofactorPrimeSeparation",
-    "ThirtyCofactorQDivisibility"
+    "ThirtyCofactorQDivisibility",
+    "ThirtyCofactorCubePrimeExtraction"
   ]
 }
