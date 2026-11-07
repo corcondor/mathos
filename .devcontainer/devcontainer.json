@@ -1,0 +1,15 @@
+{
+  "name": "mathos Lean research",
+  "build": { "dockerfile": "Dockerfile" },
+  "remoteUser": "vscode",
+  "customizations": {
+    "codespaces": { "openFiles": [".devcontainer/README.md"] }
+  },
+  "secrets": {
+    "MISTRAL_API_KEY": {
+      "description": "Mistral API key for the explicitly started DeepSeek Lean research runner."
+    }
+  },
+  "postCreateCommand": "env -u MISTRAL_API_KEY bash .devcontainer/research setup",
+  "waitFor": "postCreateCommand"
+}

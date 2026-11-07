@@ -116,6 +116,26 @@ class ReasoningRuntimeTests(unittest.TestCase):
         self.assertLessEqual(calls[0][1], 60)
         self.assertEqual(json.loads(budget.read_text())['used_completion_tokens'], 2700)
 
+    def test_capped_round_reserves_failed_attempt_and_counts_retry(self):
+        self.write_settings(max_tokens=2000, capacity_retries=2)
+        budget = self.root / 'budget.json'
+        budget.write_text(json.dumps({'max_completion_tokens': 5000, 'used_completion_tokens': 0,
+                                      'deadline': time.time() + 60, 'max_api_calls': 2, 'api_calls': 0}))
+        gateway_error = urllib.error.HTTPError('https://api.mistral.ai', 503, 'gateway', {},
+                                               io.BytesIO(b'offline-test-key'))
+        response = io.BytesIO(b'{"usage":{"completion_tokens":700}}')
+        with patch.dict(os.environ, {'DEEPSEEK_GOAL_BUDGET_FILE': str(budget)}), \
+                patch.object(runtime.time, 'sleep'), \
+                patch.object(runtime.urllib.request, 'urlopen', side_effect=[gateway_error, response]) as send:
+            runtime.api([])
+            with self.assertRaises(GoalBudgetExceeded):
+                runtime.api([])
+        self.assertEqual(send.call_count, 2)
+        self.assertEqual(json.loads(budget.read_text())['used_completion_tokens'], 2700)
+        request = send.call_args.args[0]
+        self.assertEqual(request.get_header('Authorization'), 'Bearer offline-test-key')
+        self.assertNotIn('Authorization', request.headers)
+
     def test_explicit_capacity_failure_is_retried_without_downgrading(self):
         calls = []
 

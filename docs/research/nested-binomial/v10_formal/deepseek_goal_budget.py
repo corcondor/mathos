@@ -25,7 +25,7 @@ def locked_budget(path):
         temporary.replace(path)
 
 
-def before_call(settings):
+def before_call(settings, *, reserve=False):
     value = os.environ.get("DEEPSEEK_GOAL_BUDGET_FILE")
     if not value:
         return settings, None
@@ -41,9 +41,19 @@ def before_call(settings):
         seconds = int(deadline - time.time())
         if remaining < 1024 or seconds < 1:
             raise GoalBudgetExceeded("DeepSeek goal budget exhausted; checkpoint retained, goal not complete")
+        max_calls = budget.get("max_api_calls")
+        if max_calls is not None:
+            if path.with_name("PAUSE").exists():
+                raise GoalBudgetExceeded("DeepSeek pause requested; checkpoint retained")
+            if budget["api_calls"] >= max_calls:
+                raise GoalBudgetExceeded("DeepSeek API attempt limit reached; checkpoint retained")
         adjusted = dict(settings)
         adjusted["max_tokens"] = min(settings["max_tokens"], remaining)
         adjusted["request_timeout_seconds"] = min(settings["request_timeout_seconds"], seconds)
+        if reserve and max_calls is not None:
+            # Charge before sending so timeouts, retries and interrupted workers stay bounded.
+            budget["api_calls"] += 1
+            budget["used_completion_tokens"] += adjusted["max_tokens"]
     return adjusted, path
 
 
@@ -56,8 +66,11 @@ def record_usage(path, response, request_settings):
         # Do not treat an unknown usage report as free computation.
         completion = request_settings["max_tokens"]
     with locked_budget(path) as budget:
-        budget["used_completion_tokens"] += completion
-        budget["api_calls"] = budget.get("api_calls", 0) + 1
+        if "max_api_calls" in budget:
+            budget["used_completion_tokens"] += completion - request_settings["max_tokens"]
+        else:
+            budget["used_completion_tokens"] += completion
+            budget["api_calls"] = budget.get("api_calls", 0) + 1
         budget["last_usage"] = {"completion_tokens": completion,
                                 "reasoning_tokens": (usage.get("completion_tokens_details") or {}).get("reasoning_tokens"),
                                 "model": response.get("model"), "time": time.time()}

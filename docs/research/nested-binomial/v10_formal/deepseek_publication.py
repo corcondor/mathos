@@ -22,7 +22,8 @@ def git(repo, arguments, *, check=True, binary=False):
 
 def authorize(repo, branch, origins):
     origin = git(repo, ['remote', 'get-url', 'origin']).stdout.strip()
-    if origin not in origins:
+    push_urls = git(repo, ['remote', 'get-url', '--push', '--all', 'origin']).stdout.splitlines()
+    if origin not in origins or len(push_urls) != 1 or push_urls[0] not in origins:
         raise PublicationBlocked('Origin does not match the authorized repository')
     git(repo, ['check-ref-format', 'refs/heads/' + branch])
 

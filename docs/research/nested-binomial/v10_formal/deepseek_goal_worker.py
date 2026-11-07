@@ -209,7 +209,11 @@ The executor controls bounded heartbeat/recursion limits; do not inject set_opti
         (args.run_dir / "result.json").write_text(json.dumps(report, ensure_ascii=False, indent=2))
         if report["status"] != "PASS":
             raise SystemExit("Reviewer found issues; verified source retained in run directory")
-        (ROOT / (module + ".lean")).write_text(final_source)
+        # Install the complete source atomically and never replace an existing proof.
+        with tempfile.NamedTemporaryFile(mode="w", dir=ROOT, encoding="utf-8") as finished:
+            finished.write(final_source)
+            finished.flush()
+            os.link(finished.name, ROOT / (module + ".lean"))
         print(f"{module}: verified module saved", flush=True)
 
 

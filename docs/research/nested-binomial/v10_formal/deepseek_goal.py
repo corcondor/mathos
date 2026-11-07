@@ -24,12 +24,13 @@ import gzip
 from deepseek_goal_budget import GoalBudgetExceeded
 from deepseek_proof_loop import ROOT, MODEL, api, completion_text, digest, load_api_settings
 from deepseek_lean_harness import analyze, accepted as lean_accepted, source_context
-from deepseek_publication import PublicationBlocked, synchronize, push_verified
+from deepseek_publication import PublicationBlocked, authorize, synchronize, push_verified
 from deepseek_method_research import MethodResearch
 
 REPO = ROOT.parents[3]
 NOTES = ROOT.parent
-MATHLIB = Path('/workspace/.cloud-setup/lean/mathlib')
+MATHLIB = Path(os.environ.get('DEEPSEEK_MATHLIB', '/workspace/.cloud-setup/lean/mathlib'))
+ELAN_HOME = os.environ.get('ELAN_HOME', '/workspace/.cloud-setup/lean/elan')
 SKILL = REPO / '.agents/skills/deepseek-goal/SKILL.md'
 GOAL = SKILL.with_name('goal.json')
 DEFAULT_RUN = Path('/workspace/.cloud-setup/deepseek-goal/nested-binomial-cf')
@@ -37,6 +38,14 @@ PROGRESS = NOTES / 'DEEPSEEK_GOAL_PROGRESS.md'
 REGISTRY = ROOT / 'goal_verified_modules.json'
 FORBIDDEN = (r'\b(sorry|admit|axiom|native_decide|unsafe|initialize|run_cmd|run_tac|run_elab|'
              r'run_io|liftIO|elab|macro|macro_rules|syntax|notation|attribute|set_option)\b|#|\b(IO|Lean|System)\.')
+
+
+def lean_environment():
+    env = os.environ.copy()
+    env['ELAN_HOME'] = ELAN_HOME
+    env['PATH'] = str(Path(ELAN_HOME) / 'bin') + os.pathsep + env['PATH']
+    env.pop('MISTRAL_API_KEY', None)
+    return env
 
 
 def write_json(path, value):
@@ -182,6 +191,8 @@ Return compact actionable JSON, not a long essay. A result on one lemma is progr
 
 
 class GoalAgent:
+    run_lock_fd = None
+
     def __init__(self, run_dir=DEFAULT_RUN, goal_path=GOAL):
         self.run_dir = Path(run_dir)
         self.run_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -189,6 +200,10 @@ class GoalAgent:
         self.goal = json.loads(Path(goal_path).read_text())
         self.goal_hash = digest(json.dumps(self.goal, sort_keys=True))
         self.state_path = self.run_dir / 'state.json'
+        self.history = []
+        self.load_state()
+
+    def load_state(self):
         if self.state_path.exists():
             self.state = json.loads(self.state_path.read_text())
             if self.state['goal_hash'] != self.goal_hash:
@@ -196,7 +211,6 @@ class GoalAgent:
         else:
             self.state = {'goal_hash': self.goal_hash, 'status': 'not_started', 'steps': 0,
                           'jobs': {}, 'notes': [], 'last_observation': None, 'publication': None}
-        self.history = []
         if 'working_memory' not in self.state:
             self.state['working_memory'] = []
             for path in sorted(self.run_dir.glob('*.action.json')):
@@ -231,6 +245,9 @@ class GoalAgent:
                 '- Actions: ' + str(self.state['steps']),
                 '- Final success requires both frozen targets and verified GitHub publication.', '',
                 '| Module | Actual status |', '| --- | --- |']
+        if self.state.get('run_origin') == 'codespaces':
+            rows[4:4] = ['- New Codespaces run based on checked-in Lean modules. The earlier '
+                         '179-action state was not imported.']
         rows += [f"| {j['config']['module']} | {j['status']} |" for j in self.state['jobs'].values()]
         PROGRESS.write_text('\n'.join(rows) + '\n')
         self.methods.save_public()
@@ -345,33 +362,60 @@ class GoalAgent:
         for path in job.get('method_context', []): command += ['--extra-context', path]
         for path in job['library_reference']: command += ['--library-reference', path]
         job['runs'].append(str(run)); job['status'] = 'running'; self.save()
-        env = os.environ.copy()
-        env['ELAN_HOME'] = '/workspace/.cloud-setup/lean/elan'
-        env['PATH'] = env['ELAN_HOME'] + '/bin:' + env['PATH']
+        env = lean_environment()
+        if 'MISTRAL_API_KEY' in os.environ:
+            env['MISTRAL_API_KEY'] = os.environ['MISTRAL_API_KEY']
+        lock_fds = () if self.run_lock_fd is None else (self.run_lock_fd,)
         with (directory / 'worker.log').open('a') as log:
             interrupted = False
             process = subprocess.Popen(command, cwd=MATHLIB, env=env, stdout=log,
-                                       stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
-            while process.poll() is None:
-                budget = json.loads((self.run_dir / 'budget.json').read_text())
-                if (self.run_dir / 'PAUSE').exists() or time.time() >= budget['deadline']:
-                    interrupted = True
-                    os.killpg(process.pid, signal.SIGTERM); process.wait(timeout=15)
-                    break
-                time.sleep(.5)
+                                       stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL,
+                                       start_new_session=True, pass_fds=lock_fds)
+            try:
+                while process.poll() is None:
+                    budget = json.loads((self.run_dir / 'budget.json').read_text())
+                    if (self.run_dir / 'PAUSE').exists() or time.time() >= budget['deadline']:
+                        interrupted = True
+                        break
+                    time.sleep(.5)
+            finally:
+                if process.poll() is None:
+                    try:
+                        os.killpg(process.pid, signal.SIGTERM)
+                        process.wait(timeout=15)
+                    except ProcessLookupError:
+                        process.wait()
+                    except subprocess.TimeoutExpired:
+                        os.killpg(process.pid, signal.SIGKILL)
+                        process.wait()
         report_path = run / 'result.json'
         report = json.loads(report_path.read_text()) if report_path.exists() else {}
         job['result'] = report
         job['status'] = 'interrupted' if interrupted else 'failed'
         if process.returncode == 0 and report.get('status') == 'PASS':
-            source = ROOT / (frozen['module'] + '.lean')
-            if digest(source.read_bytes()) != report['source_sha256']:
-                raise ValueError('Verified source hash mismatch')
-            job['status'] = 'verified'
-            self.register(job)
+            self.accept_worker_result(job, report)
         self.save()
         return {'status': job['status'], 'result': report,
                 'actual_worker_log': (directory / 'worker.log').read_text()[-18000:]}
+
+    def accept_worker_result(self, job, report):
+        source = ROOT / (job['config']['module'] + '.lean')
+        if digest(source.read_bytes()) != report['source_sha256']:
+            raise ValueError('Verified source hash mismatch')
+        job['result'] = report
+        self.register(job)
+        job['status'] = 'verified'
+
+    def recover_interrupted_worker(self, job):
+        job['status'] = 'interrupted'
+        if not job['runs']:
+            return
+        report_path = Path(job['runs'][-1]) / 'result.json'
+        source = ROOT / (job['config']['module'] + '.lean')
+        if report_path.is_file() and source.is_file():
+            report = json.loads(report_path.read_text())
+            if report.get('status') == 'PASS':
+                self.accept_worker_result(job, report)
 
     def recover_seeds(self, job):
         seeds = {}
@@ -494,8 +538,7 @@ class GoalAgent:
         pending = [j for j in self.state['jobs'].values() if j['status'] == 'verified']
         if not pending: return {'published': [], 'message': 'No new verified module'}
         synchronization = self.sync_research()
-        env = os.environ.copy(); env['ELAN_HOME'] = '/workspace/.cloud-setup/lean/elan'
-        env['PATH'] = env['ELAN_HOME'] + '/bin:' + env['PATH']
+        env = lean_environment()
         check = subprocess.run(['lake', 'env', sys.executable, str(ROOT / 'check_additional_formalization.py')],
                                cwd=MATHLIB, env=env, capture_output=True, text=True, timeout=1800)
         if check.returncode:
@@ -536,8 +579,9 @@ class GoalAgent:
         return result
 
     def publication_origins(self):
-        return {'https://github.com/' + self.goal['repository'] + '.git',
-                'git@github.com:' + self.goal['repository'] + '.git'}
+        repository = self.goal['repository']
+        return {'https://github.com/' + repository, 'https://github.com/' + repository + '.git',
+                'git@github.com:' + repository + '.git'}
 
     def protected_sources(self):
         paths = [*ROOT.glob('*.lean'), *ROOT.glob('*.goal_job.json'), GOAL]
@@ -615,7 +659,7 @@ class GoalAgent:
         if name == 'cache_mathlib':
             path = rooted(MATHLIB / 'Mathlib', args['path'])
             if path.suffix != '.lean': raise ValueError('Cache only Lean library files')
-            env = os.environ.copy(); env['ELAN_HOME'] = '/workspace/.cloud-setup/lean/elan'; env['PATH'] = env['ELAN_HOME'] + '/bin:' + env['PATH']
+            env = lean_environment()
             result = subprocess.run(['lake', 'exe', 'cache', 'get', str(path.relative_to(MATHLIB))],
                                     cwd=MATHLIB, env=env, capture_output=True, text=True, timeout=600)
             return {'exit_code': result.returncode, 'output': (result.stdout + result.stderr)[-12000:]}
@@ -643,26 +687,38 @@ class GoalAgent:
         if name == 'request_completion': return self.completion()
         raise ValueError('Unknown action; there is no self-reported done action')
 
-    def run(self, max_actions=48, max_hours=6, max_completion_tokens=2000000):
+    def run(self, max_actions=48, max_hours=6, max_completion_tokens=2000000,
+            max_api_calls=None, run_origin=None):
         if max_actions < 1 or max_hours <= 0 or max_completion_tokens < 1024:
             raise ValueError('Execution limits must be positive')
         with (self.run_dir / 'running.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            # Reload under the lock in case another process saved state after we opened it.
+            if self.state_path.exists():
+                self.load_state()
             if self.state['status'] == 'complete': return self.state
-            for job in self.state['jobs'].values():
-                if job['status'] == 'running': job['status'] = 'interrupted'
+            if run_origin is not None:
+                self.state.setdefault('run_origin', run_origin)
             (self.run_dir / 'PAUSE').unlink(missing_ok=True)
             budget_path = self.run_dir / 'budget.json'
             if budget_path.exists():
                 epochs = self.state.setdefault('previous_budget_epochs', [])
                 epochs.append(json.loads(budget_path.read_text()))
-            write_json(budget_path, {'max_completion_tokens': max_completion_tokens, 'used_completion_tokens': 0,
-                                     'deadline': time.time() + max_hours * 3600, 'api_calls': 0})
+            budget = {'max_completion_tokens': max_completion_tokens, 'used_completion_tokens': 0,
+                      'deadline': time.time() + max_hours * 3600, 'api_calls': 0}
+            if max_api_calls is not None:
+                budget['max_api_calls'] = max_api_calls
+            write_json(budget_path, budget)
             previous = os.environ.get('DEEPSEEK_GOAL_BUDGET_FILE')
             os.environ['DEEPSEEK_GOAL_BUDGET_FILE'] = str(budget_path)
             self.state['status'] = 'running'; self.state['pid'] = os.getpid()
-            self.state['last_error'] = None; self.save()
+            self.state['last_error'] = None
+            self.run_lock_fd = lock.fileno()
             try:
+                for job in self.state['jobs'].values():
+                    if job['status'] == 'running':
+                        self.recover_interrupted_worker(job)
+                self.save()
                 for _ in range(max_actions):
                     if (self.run_dir / 'PAUSE').exists():
                         self.state['status'] = 'paused'; break
@@ -701,9 +757,12 @@ class GoalAgent:
                     if self.state['status'] != 'complete': self.state['status'] = 'action_limit'
             except GoalBudgetExceeded as error:
                 self.state['status'] = 'budget_limit'; self.state['last_error'] = str(error)
+            except KeyboardInterrupt:
+                self.state['status'] = 'paused'
             except Exception as error:
                 self.state['status'] = 'blocked'; self.state['last_error'] = str(error)[:2000]
             finally:
+                self.run_lock_fd = None
                 if (self.run_dir / 'PAUSE').exists() and self.state['status'] != 'complete':
                     self.state['status'] = 'paused'
                 self.save()
@@ -719,16 +778,37 @@ def main():
     parser.add_argument('--max-actions', type=int, default=48)
     parser.add_argument('--max-hours', type=float, default=6)
     parser.add_argument('--max-completion-tokens', type=int, default=2000000)
+    parser.add_argument('--max-api-calls', type=int)
+    parser.add_argument('--run-origin', choices=['codespaces'])
+    parser.add_argument('--summary', action='store_true', help='Show a compact status')
     args = parser.parse_args()
+    if args.max_api_calls is not None and args.max_api_calls < 1:
+        parser.error('--max-api-calls must be positive')
     agent = GoalAgent(args.run_dir)
     if args.command == 'pause':
         (args.run_dir / 'PAUSE').write_text('User requested pause\n')
         print('Pause requested; the goal is not marked complete.')
-    elif args.command == 'status': print(json.dumps(agent.snapshot(), ensure_ascii=False, indent=2))
+    elif args.command == 'status':
+        snapshot = agent.snapshot()
+        if args.summary:
+            snapshot = {key: snapshot[key] for key in ('status', 'steps', 'budget', 'jobs',
+                                                       'verified_theorem_count')}
+            snapshot['last_error'] = agent.state.get('last_error')
+            snapshot['publication'] = agent.state['publication']
+        print(json.dumps(snapshot, ensure_ascii=False, indent=2))
     else:
-        state = agent.run(args.max_actions, args.max_hours, args.max_completion_tokens)
+        try:
+            if args.run_origin == 'codespaces':
+                authorize(REPO, agent.goal['branch'], agent.publication_origins())
+            state = agent.run(args.max_actions, args.max_hours, args.max_completion_tokens,
+                              args.max_api_calls, args.run_origin)
+        except PublicationBlocked as error:
+            parser.exit(1, str(error) + '\n')
+        except BlockingIOError:
+            parser.exit(1, 'A research runner or its proof worker is still active.\n')
         print(json.dumps({'status': state['status'], 'steps': state['steps'], 'publication': state['publication']}, ensure_ascii=False))
+        return 1 if args.run_origin == 'codespaces' and state['status'] == 'blocked' else 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

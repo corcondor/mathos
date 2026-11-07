@@ -92,6 +92,8 @@ def source_context(source, info):
 
 
 def compile_lean(command, env, timeout, settings):
+    env = {key: value for key, value in env.items()
+           if key not in {'MISTRAL_API_KEY', 'GITHUB_TOKEN', 'GH_TOKEN', 'GH_ENTERPRISE_TOKEN'}}
     started = time.monotonic(); heartbeats = settings['initial_heartbeats']; retries = []
     depth = settings['initial_rec_depth']
     while True:

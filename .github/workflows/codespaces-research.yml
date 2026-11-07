@@ -1,0 +1,43 @@
+name: Codespaces research setup
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/codespaces-research.yml'
+      - 'docs/research/nested-binomial/v10_formal/deepseek_*.py'
+      - 'docs/research/nested-binomial/v10_formal/check_additional_formalization.py'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates curl gh git python3 ripgrep util-linux zstd
+      - name: Run offline DeepSeek tests
+        run: python3 -m unittest discover -s docs/research/nested-binomial/v10_formal -p 'test_deepseek*.py'
+      - name: Check explicit launch and required secret
+        run: |
+          bash -n .devcontainer/research
+          python3 -m json.tool .devcontainer/devcontainer.json > /dev/null
+          .devcontainer/research status
+          if output=$(env -u MISTRAL_API_KEY .devcontainer/research run 2>&1); then
+            echo "The runner unexpectedly started without a key."
+            exit 1
+          fi
+          [[ $output == 'Set MISTRAL_API_KEY '* ]]
+      - name: Set up pinned Lean and verify existing proofs
+        run: |
+          env -u MISTRAL_API_KEY .devcontainer/research setup
+          test -f .mathos-codespaces/verified
+          git diff --exit-code

@@ -212,12 +212,13 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
     for attempt in range(settings["capacity_retries"] + 1):
         try:
             # Recheck the shared deadline after backoff; never retry past the run budget.
-            effective_settings, effective_budget = before_call(settings)
+            effective_settings, effective_budget = before_call(settings, reserve=True)
             body['max_tokens']=effective_settings['max_tokens']
             request = urllib.request.Request(
                 "https://api.mistral.ai/v1/chat/completions", data=json.dumps(body).encode(),
-                headers={"Authorization": "Bearer " + os.environ["MISTRAL_API_KEY"],
-                         "Content-Type": "application/json"})
+                headers={"Content-Type": "application/json"})
+            key = os.environ["MISTRAL_API_KEY"]
+            request.add_unredirected_header("Authorization", "Bearer " + key)
             with urllib.request.urlopen(request, timeout=effective_settings["request_timeout_seconds"]) as response:
                 result = json.load(response)
             result["research_request_settings"] = effective_settings
@@ -228,8 +229,7 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
             return result
         except urllib.error.HTTPError as error:
             # Retry explicit capacity and transient provider/gateway errors, never auth/quota errors.
-            detail = error.read().decode(errors="replace")[:1500]
-            detail = detail.replace(os.environ["MISTRAL_API_KEY"], "[REDACTED]")
+            detail = error.read().decode(errors="replace").replace(key, "[REDACTED]")[:1500]
             try:
                 payload = json.loads(detail)
             except ValueError:

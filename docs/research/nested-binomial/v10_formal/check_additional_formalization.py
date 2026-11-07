@@ -6,6 +6,7 @@ The script preserves compiler exit codes and writes fresh, hashed evidence.
 It does not download dependencies or modify the original proof logs.
 """
 
+import argparse
 import datetime
 import hashlib
 import json
@@ -55,6 +56,10 @@ def include_goal_modules(sources):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=ROOT)
+    args = parser.parse_args()
+    args.output_dir.mkdir(parents=True, exist_ok=True)
     mathlib_commit = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], text=True
     ).strip()
@@ -78,7 +83,7 @@ def main():
         for source in sources:
             command = ["lean", f"--root={ROOT}", "-o", str(Path(build) / (source.stem + ".olean")), str(source)]
             result = compile_lean(command, compile_env, 180, harness)
-            log = ROOT / (source.stem + ".additional_check.txt")
+            log = args.output_dir / (source.stem + ".additional_check.txt")
             log.write_text(result['output'])
             forbidden = bool(re.search(r"\b(sorry|admit|axiom|native_decide)\b", source.read_text()))
             trusted = "sorryAx" not in result['output'] and not forbidden
@@ -115,7 +120,7 @@ def main():
         "finite_search_completeness_formalized": False,
         "whole_equation_solved": False,
     }
-    (ROOT / "additional_kernel_check.json").write_text(json.dumps(report, indent=2) + "\n")
+    (args.output_dir / "additional_kernel_check.json").write_text(json.dumps(report, indent=2) + "\n")
     return 0 if passed else 1
 
 

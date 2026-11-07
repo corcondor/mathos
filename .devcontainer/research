@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+set +x
+set -euo pipefail
+umask 077
+export PYTHONUTF8=1 GIT_TERMINAL_PROMPT=0
+
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
+repo=$(pwd -P)
+runtime=$repo/.mathos-codespaces
+run_dir=$runtime/goal
+formal=$repo/docs/research/nested-binomial/v10_formal
+toolchain=leanprover/lean4:v4.35.0
+mathlib_commit=56a005855ea17e0b0958f73ec801ae140b0a1679
+branch=research/nested-binomial-2026-11-05
+export ELAN_HOME=$runtime/elan
+export DEEPSEEK_MATHLIB=$runtime/mathlib
+export PATH=$ELAN_HOME/bin:$PATH
+export MATHLIB_CACHE_DIR=$runtime/mathlib-cache
+
+fail() { printf '%s\n' "$*" >&2; exit 1; }
+
+command=${1:-help}
+[[ $# -le 1 ]] || fail 'Usage: .devcontainer/research {run|status|pause|logs|setup|verify}'
+if [[ $command == run ]]; then
+    # Keep the value in Bash and export it only to the Python runner.
+    export -n MISTRAL_API_KEY
+else
+    unset MISTRAL_API_KEY
+fi
+case "$command" in
+    run|status|pause|logs|setup|verify) ;;
+    help) printf '%s\n' 'Usage: .devcontainer/research {run|status|pause|logs|setup|verify}'; exit 0 ;;
+    *) fail "Unknown command: $command" ;;
+esac
+[[ ! -L $runtime && ! -L $run_dir ]] || fail 'Refusing a symlink for the private runtime or run directory.'
+mkdir -p -- "$runtime"
+chmod 700 -- "$runtime"
+python3 -c 'import sys; assert sys.version_info >= (3, 11), "Python 3.11 or later is required"'
+
+lock_workspace() {
+    exec 9>"$runtime/workspace.lock"
+    flock -n 9 || fail 'Setup, verification or a research run is already active.'
+}
+
+check_pins() {
+    [[ $(<"$DEEPSEEK_MATHLIB/lean-toolchain") == "$toolchain" ]] ||
+        fail 'Unexpected mathlib Lean toolchain.'
+    [[ $(git -C "$DEEPSEEK_MATHLIB" rev-parse HEAD) == "$mathlib_commit" ]] ||
+        fail 'Unexpected mathlib commit.'
+    local version
+    version=$(cd -- "$DEEPSEEK_MATHLIB" && "$ELAN_HOME/bin/lean" --version)
+    [[ $version == 'Lean (version 4.35.0,'* ]] || fail "Unexpected Lean version: $version"
+}
+
+setup() (
+    staging=$(mktemp -d "$runtime/setup.XXXXXXXX")
+    trap 'rm -rf -- "$staging"' EXIT
+    if [[ ! -x $ELAN_HOME/bin/elan ]]; then
+        [[ $(uname -m) == x86_64 ]] || fail 'This Codespaces setup requires x86-64 Linux.'
+        archive=$staging/elan.tar.gz
+        curl --fail --silent --show-error --location --retry 3 \
+            https://github.com/leanprover/elan/releases/download/v4.2.3/elan-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$archive"
+        printf '%s  %s\n' df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2 "$archive" |
+            sha256sum --check
+        tar -xzf "$archive" -C "$staging"
+        "$staging/elan-init" -y --no-modify-path --default-toolchain none
+    fi
+    "$ELAN_HOME/bin/elan" toolchain install "$toolchain"
+    if [[ ! -e $DEEPSEEK_MATHLIB ]]; then
+        git init -q "$staging/mathlib"
+        git -C "$staging/mathlib" remote add origin \
+            https://github.com/leanprover-community/mathlib4.git
+        git -C "$staging/mathlib" fetch --depth=1 origin "$mathlib_commit"
+        git -C "$staging/mathlib" checkout --detach FETCH_HEAD
+        mv -- "$staging/mathlib" "$DEEPSEEK_MATHLIB"
+    fi
+    check_pins
+    cd -- "$DEEPSEEK_MATHLIB"
+    # Mathlib.Tactic and the explicit imports cover the existing checked modules.
+    lake exe cache get Mathlib.Tactic Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass \
+        Mathlib.Data.Nat.ChineseRemainder Mathlib.Data.Nat.Factorization.Basic \
+        Mathlib.Data.Nat.GCD.BigOperators Mathlib.NumberTheory.Padics.PadicVal.Basic
+)
+
+verify() {
+    rm -f -- "$runtime/verified"
+    check_pins
+    cd -- "$DEEPSEEK_MATHLIB"
+    lake env python3 "$formal/check_additional_formalization.py" --output-dir "$runtime/verification"
+    touch -- "$runtime/verified"
+}
+
+case "$command" in
+    setup) lock_workspace; rm -f -- "$runtime/verified"; setup; verify ;;
+    verify) lock_workspace; verify ;;
+    run)
+        [[ -n ${MISTRAL_API_KEY:-} ]] ||
+            fail 'Set MISTRAL_API_KEY in GitHub Codespaces secrets, then stop and reopen this Codespace.'
+        lock_workspace
+        [[ $(git branch --show-current) == "$branch" ]] || fail "Open the $branch branch first."
+        [[ -f $runtime/verified ]] || fail 'Setup must pass first. Run .devcontainer/research setup.'
+        check_pins
+        mkdir -p -- "$run_dir"
+        if [[ -f $run_dir/state.json ]]; then
+            printf '%s\n' 'Resuming the run saved in this Codespace.'
+        else
+            printf '%s\n' 'Starting a new run with the checked-in Lean modules. The earlier 179-action state was not imported.'
+        fi
+        printf '%s\n' 'Limits for this round: 8 API attempts, 200,000 output tokens, 8 actions, 1 hour of API scheduling.'
+        MISTRAL_API_KEY=$MISTRAL_API_KEY python3 -u "$formal/deepseek_goal.py" run --run-dir "$run_dir" \
+            --max-actions 8 --max-hours 1 --max-completion-tokens 200000 \
+            --max-api-calls 8 --run-origin codespaces \
+            2>&1 | tee -a "$run_dir/runner.log"
+        ;;
+    status|pause)
+        if [[ ! -d $run_dir ]]; then
+            printf '%s\n' 'No Codespaces run has started. The checked-in proof modules are available.'
+        else
+            if [[ $command == status ]]; then
+                if [[ -f $run_dir/running.lock ]] && ! flock -n "$run_dir/running.lock" true; then
+                    printf '%s\n' 'Runner or proof worker is active.'
+                else
+                    printf '%s\n' 'No active process. The status below is the last checkpoint.'
+                fi
+            fi
+            python3 "$formal/deepseek_goal.py" "$command" --run-dir "$run_dir" --summary
+        fi
+        ;;
+    logs)
+        if [[ -f $run_dir/runner.log ]]; then
+            tail -n 80 -- "$run_dir/runner.log"
+        else
+            printf '%s\n' 'No runner log yet.'
+        fi
+        ;;
+esac
