@@ -1,0 +1,14 @@
+{
+  "module": "ThirtyCofactorDefectPellReductionC",
+  "imports": "import Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith\nimport Mathlib.Data.Nat.Squarefree\nimport Mathlib.Data.Nat.Factorization.Basic\nimport Mathlib.Data.Nat.GCD.Basic\nimport ThirtyCofactorDefectBridge",
+  "definitions": "",
+  "goals": [
+    [
+      "defect_to_pell",
+      "theorem defect_to_pell (M Q n r s d : ℕ) (hM : 0 < M) (hMQ : M * Q = n * (n - 1)) (hn : 104 ≤ n) (hr : 3 * n < r) (hs : 0 < s) (hd : 0 < d) (hdSq : Squarefree d) (hML : (M * (Q / Nat.gcd Q (r ^ 2))) * (r ^ 2 / Nat.gcd Q (r ^ 2)) = s ^ 2 * d) : ∃ y : ℕ, 0 < y ∧ 2 * (M * (Q / Nat.gcd Q (r ^ 2))) * r = s * d * y ∧ (2 * n - 1) ^ 2 = d * y ^ 2 + 1"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorDefectBridge.lean"
+  ]
+}

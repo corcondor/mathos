@@ -5,11 +5,14 @@ DeepSeek自身が研究を継続し、残るCF証明書をLean形式化して、
 - New Codespaces run based on checked-in Lean modules. The earlier 179-action state was not imported.
 - Decision maker: deepseek-v4-1-flash-1017
 - Status: running
-- Actions: 38
+- Actions: 63
 - Final success requires both frozen targets and verified GitHub publication.
 
 | Module | Actual status |
 | --- | --- |
 | ThirtyCofactorDefectPell | failed |
 | ThirtyCofactorDefectCoprime | interrupted |
-| ThirtyCofactorDefectBridge | verified |
+| ThirtyCofactorDefectBridge | published |
+| ThirtyCofactorDefectPellReduction | failed |
+| ThirtyCofactorDefectPellReductionB | interrupted |
+| ThirtyCofactorDefectPellReductionC | verified |
