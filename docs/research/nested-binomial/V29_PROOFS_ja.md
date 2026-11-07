@@ -56,7 +56,7 @@ c_4=576(45T^3+130T^2+120T+36)
 である。ゆえに
 
 \[
-\boxed{\operatorname{ord}_{\Phi_5(E_T)}([R])=2k+3l.}\tag{V29.1}
+\boxed{\operatorname{ord}_{\Phi_5(E_T)}([R])=2k+3l.}\tag{V29.2}
 \]
 
 **5進衝突ファイバーでは、Rが成分群全体を生成する。** v28の `p|rho` での位数5とは異なり、この位数は `k` や `l` が大きくなると無制限に増え得る。
@@ -107,7 +107,7 @@ X=5z,\qquad Y=5w
 \[
 \boxed{z'\equiv\frac{A_0C_0}{x_0}
 +\left(1+\frac{2B_0}{x_0}\right)z
--\frac{2y_0}{x_0^2}w\pmod5.}\tag{V29.2}
+-\frac{2y_0}{x_0^2}w\pmod5.}\tag{V29.3}
 \]
 
 これは加法公式の5進一次展開から従い、分母 `x_0` は5進単元である。なお `w'≡(y_0/x_0)(z-z')−w` も成り立ち、二つの直線のそれぞれに移ることを確認できる。
@@ -143,7 +143,7 @@ X=5z,\qquad Y=5w
 
 \[
 \boxed{\rho\equiv3b^2\pmod{25}\Longrightarrow
-\forall m\in\mathbf Z,\quad mR\text{ は元問題の整数候補を与えない}.}\tag{V29.3}
+\forall m\in\mathbf Z,\quad mR\text{ は元問題の整数候補を与えない}.}\tag{V29.1}
 \]
 
 **適用範囲**：この結論は、上に列挙したv20〜v28の必要条件と `P=mR` を仮定した条件付き排除である。特殊化した `E_T(Q)` の全有理点を排除したわけではない。
