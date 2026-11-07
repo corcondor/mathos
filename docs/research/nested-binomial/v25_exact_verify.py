@@ -187,4 +187,3 @@ print('PASS independent group-law and Velu isogeny checks on 16 points')
     'generic_rank':'0, by Shioda--Tate and rational elliptic surface classification',
     'point_order':'3, proved algebraically',
     'points':witnesses},indent=2,ensure_ascii=False)+'\n')
-
