@@ -301,10 +301,25 @@ class GoalAgent:
                                  '--', query, '.'], cwd=base, capture_output=True, text=True, timeout=15)
         return {'exit_code': result.returncode, 'output': (result.stdout + result.stderr)[:24000]}
 
+    def check_codespaces_imports(self, config):
+        if self.state.get('run_origin') != 'codespaces':
+            return
+        sources = [(config['module'], config['imports'])]
+        sources.extend((name, (ROOT / name).read_text()) for name in config['local_dependencies'])
+        for source, text in sources:
+            for name in re.findall(r'^import (Mathlib\.[A-Za-z0-9_.]+)\s*$', text, re.M):
+                if name == 'Mathlib.Tactic':
+                    raise ValueError(f'{source} uses the broad Mathlib.Tactic import, which times out in Codespaces. '
+                                     'Use focused imports and keep any slow local module as source context.')
+                if not (MATHLIB / (name.replace('.', '/') + '.lean')).is_file():
+                    raise ValueError(f'{name} in {source} is absent from pinned mathlib. '
+                                     'Check list_mathlib before freezing or retrying the job.')
+
     def propose(self, args):
         if any(j['status'] == 'verified' for j in self.state['jobs'].values()):
             raise ValueError('Publish verified progress before proposing another module')
         config = validate_job(args.get('config'), self.goal['targets'])
+        self.check_codespaces_imports(config)
         if any(j['config']['module'] == config['module'] for j in self.state['jobs'].values()):
             raise ValueError('This module already has a frozen job; inspect/retry it or choose a new module')
         why = args.get('why_needed', '')
@@ -349,6 +364,7 @@ class GoalAgent:
         frozen = json.loads(config_path.read_text())
         if digest(json.dumps(frozen, sort_keys=True)) != job['config_sha256'] or frozen != job['config']:
             raise ValueError('Frozen theorem contract changed')
+        self.check_codespaces_imports(frozen)
         run = directory / ('run-' + str(len(job['runs']) + 1))
         command = ['lake', 'env', 'env', '-u', 'LD_LIBRARY_PATH', sys.executable,
                    str(ROOT / 'deepseek_goal_worker.py'), job_id,

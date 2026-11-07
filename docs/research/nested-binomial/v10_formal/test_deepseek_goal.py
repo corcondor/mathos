@@ -73,6 +73,25 @@ class GoalTests(unittest.TestCase):
                         dict(config, definitions='notation "bad" => True')]:
             with self.assertRaises(ValueError): goal.validate_job(altered, [target])
 
+    def test_codespaces_rejects_missing_and_broad_imports_before_scope_review(self):
+        self.agent.state['run_origin'] = 'codespaces'
+        mathlib = self.repo / 'mathlib'
+        narrow = mathlib / 'Mathlib/Data/Nat/GCD/Basic.lean'
+        narrow.parent.mkdir(parents=True)
+        narrow.touch()
+        (self.formal / 'Slow.lean').write_text('import Mathlib.Tactic\n')
+        with patch.object(goal, 'MATHLIB', mathlib), patch.object(goal, 'api') as api:
+            for imports, message in [
+                ('import Mathlib.Tactic.Omega', 'absent from pinned mathlib'),
+                ('import Mathlib.Tactic', 'times out in Codespaces'),
+                ('import Mathlib.Data.Nat.GCD.Basic\nimport Slow', 'Slow.lean uses the broad'),
+            ]:
+                with self.subTest(imports=imports), self.assertRaisesRegex(ValueError, message):
+                    self.agent.propose({'config': dict(self.config(), imports=imports)})
+            self.agent.check_codespaces_imports(goal.validate_job(
+                dict(self.config(), imports='import Mathlib.Data.Nat.GCD.Basic'), []))
+            api.assert_not_called()
+
     def test_paths_reject_escape_symlinks_and_secret_types(self):
         outside = Path(self.temp.name) / 'outside.txt'; outside.write_text('private')
         (self.notes / 'link.txt').symlink_to(outside)
