@@ -4,6 +4,7 @@ This module never writes a mathematical proof or changes a theorem statement.
 """
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -94,6 +95,11 @@ def source_context(source, info):
 def compile_lean(command, env, timeout, settings):
     env = {key: value for key, value in env.items()
            if key not in {'MISTRAL_API_KEY', 'GITHUB_TOKEN', 'GH_TOKEN', 'GH_ENTERPRISE_TOKEN'}}
+    if sysroot := env.get('LEAN_SYSROOT'):
+        paths = env.get('LEAN_PATH', '').split(os.pathsep)
+        standard_library = str(Path(sysroot) / 'lib' / 'lean')
+        if standard_library not in paths:
+            env['LEAN_PATH'] = os.pathsep.join(filter(None, [*paths, standard_library]))
     started = time.monotonic(); heartbeats = settings['initial_heartbeats']; retries = []
     depth = settings['initial_rec_depth']
     while True:
