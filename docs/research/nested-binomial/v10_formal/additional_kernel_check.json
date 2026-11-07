@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-07T13:53:14.818922+00:00",
+  "checked_at_utc": "2026-11-07T13:59:39.454970+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -934,6 +934,38 @@
         }
       ],
       "warnings": []
+    },
+    {
+      "source": "ThirtyCofactorDefectPellConcrete.lean",
+      "source_sha256": "4b36d3b69d73d03a042771a2a4fa30a2c35ef897de8b73c38d12cf1f47280a2a",
+      "log": "ThirtyCofactorDefectPellConcrete.additional_check.txt",
+      "log_sha256": "77ce0dbe11b455f4a6bfd2cf18f43399d7db88f06df5d43c75a302092920c99b",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "-DmaxHeartbeats=400000",
+        "-DmaxRecDepth=1024",
+        "--root=/workspaces/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-5p9crz5j/ThirtyCofactorDefectPellConcrete.olean",
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorDefectPellConcrete.lean"
+      ],
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.064
+        }
+      ],
+      "warnings": [
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorDefectPellConcrete.lean:50:61: warning: Variable name `hs` is not explicitly referenced.",
+        "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+      ]
     }
   ],
   "scope": "Recovery, local-square, CRT and CF-core modules listed in records; not complete curve exclusion",
@@ -941,7 +973,7 @@
   "finite_search_completeness_formalized": false,
   "whole_equation_solved": false,
   "reused_verification": {
-    "commit": "2f3ae87c78e4ce1ad3b1d305426a365aaa824c90",
+    "commit": "4b74f4a268a8a6501eb7ccc698f9c0f16dc7fa1c",
     "sources": [
       "CFAnalyticBounds.lean",
       "CFApproximationCore.lean",
@@ -960,6 +992,7 @@
       "ThirtyCofactorCubeLocalization.lean",
       "ThirtyCofactorCubePrimeExtraction.lean",
       "ThirtyCofactorDefectBridge.lean",
+      "ThirtyCofactorDefectKRange.lean",
       "ThirtyCofactorDefectPellReductionC.lean",
       "ThirtyCofactorExponentDomain.lean",
       "ThirtyCofactorInputs.lean",

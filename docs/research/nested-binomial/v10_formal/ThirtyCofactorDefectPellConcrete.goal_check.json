@@ -1,0 +1,242 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-07T13:59:33.926331+00:00",
+  "module": "ThirtyCofactorDefectPellConcrete",
+  "source_sha256": "4b36d3b69d73d03a042771a2a4fa30a2c35ef897de8b73c38d12cf1f47280a2a",
+  "theorems": [
+    "defect_pell_dy_sq",
+    "defect_pell_coefficient_eq",
+    "defect_pell_d_bound",
+    "defect_pell_linear"
+  ],
+  "records": [
+    {
+      "theorem": "defect_pell_dy_sq",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "e3393939fb59ee25669e0c7cc055b9d81d1a9c21792acb698b8031b2bd370499",
+      "usage": {
+        "prompt_tokens": 27269,
+        "total_tokens": 37529,
+        "completion_tokens": 10260,
+        "prompt_tokens_details": {
+          "cached_tokens": 16512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9995
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 1.777,
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.777
+        }
+      ]
+    },
+    {
+      "theorem": "defect_pell_coefficient_eq",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "cd6eb4fc8ea4e5c329d98513e5381617a833a8051959e53cfd619256e00df99a",
+      "usage": {
+        "prompt_tokens": 27585,
+        "total_tokens": 41244,
+        "completion_tokens": 13659,
+        "prompt_tokens_details": {
+          "cached_tokens": 16896
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 13611
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 1.717,
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.717
+        }
+      ]
+    },
+    {
+      "theorem": "defect_pell_d_bound",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "64a878a31de234c031df89b9e338d31600be5f1cfcd646434e38145ac1fe6c36",
+      "usage": {
+        "prompt_tokens": 27713,
+        "total_tokens": 33941,
+        "completion_tokens": 6228,
+        "prompt_tokens_details": {
+          "cached_tokens": 16512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5957
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 1.795,
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.795
+        }
+      ]
+    },
+    {
+      "theorem": "defect_pell_linear",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "4b36d3b69d73d03a042771a2a4fa30a2c35ef897de8b73c38d12cf1f47280a2a",
+      "usage": {
+        "prompt_tokens": 28103,
+        "total_tokens": 39534,
+        "completion_tokens": 11431,
+        "prompt_tokens_details": {
+          "cached_tokens": 16896
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 10692
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 2.124,
+      "harness_diagnostics": {
+        "categories": [
+          "unused_binding"
+        ],
+        "fingerprint": "2e0c853523ce7f6220e8e48f1b3b4ca63d360660a64cb6db9a832b602221ef8b",
+        "locations": [
+          {
+            "line": 50,
+            "column": 61,
+            "kind": "warning",
+            "message": "Variable name `hs` is not explicitly referenced."
+          }
+        ],
+        "warnings": [
+          "/workspaces/mathos/.mathos-codespaces/goal/jobs/ThirtyCofactorDefectPellConcrete-c11d8755/run-1/ThirtyCofactorDefectPellConcrete.lean:50:61: warning: Variable name `hs` is not explicitly referenced.",
+          "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+        ],
+        "untrusted_axioms": [],
+        "resource_only": true,
+        "hints": [
+          "Unused-variable warnings are retained as lint. They do not invalidate a kernel-checked fixed theorem."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 2.124
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "The statements are mathematically consistent with their explicit hypotheses. defect_to_pell claims only the conditional reduction from the assumed square decomposition hML (with s > 0 and d > 0 squarefree) to a positive Pell solution and the stated linear relation; it does not claim that the original equation always yields hML. defect_K_lower_bound and defect_K_upper_bound correctly require hC, the defining equation, and the stated strict inequalities with n ≥ 2 or n ≥ 104. defect_pell_dy_sq, defect_pell_coefficient_eq, defect_pell_d_bound, and defect_pell_linear have the necessary positivity assumptions where division or cancellation occurs (s > 0, C > 0) and no missing nonzero assumptions. The names match the proved conditional implications; no mathematical overstatement found."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}
