@@ -17,6 +17,7 @@
     "ThirtyCofactorPrimeBound",
     "ThirtyCofactorSquareDefect",
     "ThirtyCofactorCubeLocalization",
-    "ThirtyCofactorTargetCubeLocalization"
+    "ThirtyCofactorTargetCubeLocalization",
+    "ThirtyCofactorDefectBridge"
   ]
 }

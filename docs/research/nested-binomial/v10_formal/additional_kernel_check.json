@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-06T15:25:28.678528+00:00",
+  "checked_at_utc": "2026-11-07T13:20:06.768961+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -846,10 +846,70 @@
         "/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorTargetCubeLocalization.lean:9:120: warning: Variable name `hk` is not explicitly referenced.",
         "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
       ]
+    },
+    {
+      "source": "ThirtyCofactorDefectBridge.lean",
+      "source_sha256": "7ff9610141e5026634fd25204a9b41822abdaa758424b11d711238379aac0601",
+      "log": "ThirtyCofactorDefectBridge.additional_check.txt",
+      "log_sha256": "207fe74bf20e00294ce61d264df843f1e17c48744be8948766b8061a08344490",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "-DmaxHeartbeats=400000",
+        "-DmaxRecDepth=1024",
+        "--root=/workspaces/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-2j2kvma3/ThirtyCofactorDefectBridge.olean",
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorDefectBridge.lean"
+      ],
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.706
+        }
+      ],
+      "warnings": []
     }
   ],
   "scope": "Recovery, local-square, CRT and CF-core modules listed in records; not complete curve exclusion",
   "height_bound_formalized": false,
   "finite_search_completeness_formalized": false,
-  "whole_equation_solved": false
+  "whole_equation_solved": false,
+  "reused_verification": {
+    "commit": "4d08b54ac3216fb7dd40b5bdc8ea99db9c3fb6fe",
+    "sources": [
+      "CFAnalyticBounds.lean",
+      "CFApproximationCore.lean",
+      "CFCandidateCoverage.lean",
+      "CFCoefficientRanges.lean",
+      "CFContinuantBridge.lean",
+      "CFCurveInstantiation.lean",
+      "CFCylinderNesting.lean",
+      "CFVerifierBridge.lean",
+      "CriticalPrimeCRT.lean",
+      "GeometricDescent.lean",
+      "GeometricReduction.lean",
+      "LocalSquareRecovery.lean",
+      "NormalizedCancellation.lean",
+      "RecoveredDivisor.lean",
+      "ThirtyCofactorCubeLocalization.lean",
+      "ThirtyCofactorCubePrimeExtraction.lean",
+      "ThirtyCofactorExponentDomain.lean",
+      "ThirtyCofactorInputs.lean",
+      "ThirtyCofactorPellCovering.lean",
+      "ThirtyCofactorPellReduction.lean",
+      "ThirtyCofactorPrimeBound.lean",
+      "ThirtyCofactorPrimeSeparation.lean",
+      "ThirtyCofactorQDivisibility.lean",
+      "ThirtyCofactorSecondDivisor.lean",
+      "ThirtyCofactorSquareDefect.lean",
+      "ThirtyCofactorTargetCubeLocalization.lean",
+      "ThirtyCofactorValuation.lean",
+      "ValuationRecovery.lean"
+    ]
+  }
 }

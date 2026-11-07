@@ -1,0 +1,2 @@
+'NestedBinomialV10.defect_coprime_pell_coefficient' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV10.defect_pell_identity' depends on axioms: [propext, Quot.sound]
