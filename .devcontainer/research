@@ -22,9 +22,12 @@ fail() { printf '%s\n' "$*" >&2; exit 1; }
 
 command=${1:-help}
 [[ $# -le 1 ]] || fail 'Usage: .devcontainer/research {run|auto|auto-stop|auto-status|status|pause|logs|setup|verify}'
-if [[ $command == run || $command == auto || $command == autostart ]]; then
-    # Keep the value in Bash and export it only to the Python runner.
+if [[ $command == run ]]; then
+    # Keep the value in Bash and export it only to the Python goal runner.
     export -n MISTRAL_API_KEY
+elif [[ $command == auto || $command == autostart ]]; then
+    # The opted-in watchdog needs to inherit the existing Codespaces secret.
+    :
 else
     unset MISTRAL_API_KEY
 fi
