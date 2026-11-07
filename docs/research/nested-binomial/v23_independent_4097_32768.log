@@ -1,0 +1,10 @@
+POINT rho=17242 n=71875 t=12075 a=689 b=3 delta=55
+POINT rho=13033 n=8576 t=2412 a=467 b=6 delta=56
+POINT rho=16339 n=1431126 t=54567 a=1393 b=6 delta=430
+POINT rho=4738 n=13690 t=2220 a=367 b=9 delta=1
+POINT rho=13063 n=166375 t=9240 a=1033 b=18 delta=55
+POINT rho=7288 n=1025 t=205 a=383 b=81 delta=2
+POINT rho=9988 n=6860 t=700 a=653 b=81 delta=133
+POINT rho=19507 n=9801 t=627 a=1096 b=243 delta=3
+RANGE 4097 32768
+COUNTS square=129 t=18 n=16 branch=8 delta25=5
