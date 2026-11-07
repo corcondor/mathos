@@ -1,6 +1,9 @@
 {
   "name": "mathos Lean research",
   "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "ghcr.io/devcontainers/features/sshd:1": {}
+  },
   "remoteUser": "vscode",
   "customizations": {
     "codespaces": { "openFiles": [".devcontainer/README.md"] }
