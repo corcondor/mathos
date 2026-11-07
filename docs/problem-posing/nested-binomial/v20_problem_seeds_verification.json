@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "gcd_support_samples": 4001,
+  "samples_are_not_universal_proof": true,
+  "derivative_polynomial_identity_verified": true,
+  "written_universal_proofs": "Prime valuations; monotonicity for x>=2",
+  "note_sha256": "f1e389dece919c80aff999f1c771b4470ced19abbebe8437632d0522dade5284",
+  "script_sha256": "86b0e91758a2a63122df7c8af2896f44e04fd60c265c15a8b136e4672005f364",
+  "new_Lean_execution": false,
+  "originality_search_performed": false
+}

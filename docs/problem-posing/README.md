@@ -58,3 +58,13 @@
 
 - [二次式の整除の問題と解答・消去補題](nested-binomial/v19_problem_seed_ja.md)：互いに素な正整数について、a²+3b²が24aを割る組を完全分類する短い問題。研究の無限位数点の証明から切り出しました。
 - [完全な有限検算](nested-binomial/v19_problem_seed_verification.json)と[再現コード](nested-binomial/verify_v19_seed.py)。既存の初版manifestはその時点の記録として保持しています。
+
+
+
+## v20からの追記
+
+[最大公約数と正符号の四次方程式](nested-binomial/v20_problem_seeds_ja.md)に、
+gcd(t³,t²+3t+3)=gcd(t,3)の全称公式と、正符号を保つ四次方程式の根の一意性を追加した。
+それぞれ独立した問題・完全な解答・研究への接続を含む。
+[支持検算](nested-binomial/v20_problem_seeds_verification.json)と
+[再現コード](nested-binomial/verify_v20_seeds.py)を収録。既出調査は未実施。
