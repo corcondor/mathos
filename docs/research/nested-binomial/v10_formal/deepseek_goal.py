@@ -540,14 +540,20 @@ class GoalAgent:
         if not pending: return {'published': [], 'message': 'No new verified module'}
         synchronization = self.sync_research()
         env = lean_environment()
-        check = subprocess.run(['lake', 'env', 'env', '-u', 'LD_LIBRARY_PATH', sys.executable,
-                                str(ROOT / 'check_additional_formalization.py')],
+        command = ['lake', 'env', 'env', '-u', 'LD_LIBRARY_PATH', sys.executable,
+                   str(ROOT / 'check_additional_formalization.py')]
+        if self.state.get('run_origin') == 'codespaces':
+            for job in pending:
+                command.extend(['--recheck', job['config']['module']])
+        check = subprocess.run(command,
                                cwd=MATHLIB, env=env, capture_output=True, text=True, timeout=1800)
         if check.returncode:
             raise ValueError('Actual full Lean verification failed:\n' + (check.stdout + check.stderr)[-20000:])
         report = json.loads((ROOT / 'additional_kernel_check.json').read_text())
         checked = {r['source']: r for r in report['records']}
         allowed = {ROOT / 'additional_kernel_check.json', ROOT / 'deepseek_generation_checks.json', REGISTRY, PROGRESS}
+        if 'reused_verification' in report:
+            allowed.update(ROOT / record['log'] for record in report['records'])
         allowed.update(NOTES/name for name in ['DEEPSEEK_METHOD_RESEARCH.json','DEEPSEEK_METHOD_RESEARCH.md'] if (NOTES/name).is_file())
         for job in pending:
             name = job['config']['module']; record = checked.get(name + '.lean')

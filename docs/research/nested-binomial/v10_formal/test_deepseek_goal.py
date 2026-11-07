@@ -308,6 +308,29 @@ class BudgetTests(unittest.TestCase):
 
 
 class RegistryTests(unittest.TestCase):
+    def test_reuse_requires_matching_logs_and_dependencies(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "docs/research/nested-binomial/v10_formal"
+            root.mkdir(parents=True)
+            sources = [root / f"{name}.lean" for name in ("Base", "Dependent", "Unrelated")]
+            report = {"status": "PASS", "lean_version": "pinned", "mathlib_commit": "pinned", "records": []}
+            for source, text in zip(sources, ("def x := 1", "import Base", "def y := 2")):
+                source.write_text(text)
+                log = source.with_suffix(".additional_check.txt")
+                log.write_text("checked")
+                report["records"].append({
+                    "source": source.name, "source_sha256": checker.sha256(source),
+                    "log": log.name, "log_sha256": checker.sha256(log), "exit_code": 0,
+                    "proof_hole_or_custom_axiom_detected": False,
+                })
+            with patch.object(checker, "ROOT", root), patch.object(
+                    checker.subprocess, "check_output", side_effect=["commit", json.dumps(report)] * 2):
+                cached, _ = checker.reusable_records(sources, "pinned", "pinned")
+                self.assertEqual(set(cached), {source.name for source in sources})
+                sources[0].with_suffix(".additional_check.txt").write_text("changed")
+                cached, _ = checker.reusable_records(sources, "pinned", "pinned")
+                self.assertEqual(set(cached), {"Unrelated.lean"})
+
     def test_registered_modules_include_dependencies_in_order(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
