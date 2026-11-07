@@ -1,0 +1,37 @@
+{
+  "version": "v31",
+  "scope": "genus-2 local 5-adic square and cyclic-point CRT necessary conditions",
+  "files": {
+    "V31_PADIC_AND_WEIGHTED_SIEVE_ja.md": {
+      "bytes": 8099,
+      "sha256": "6bececced74d888cd66d7ac98accccd3d935a6c63dc57d9447754a93bd035990"
+    },
+    "v31_weighted_local_sieve.py": {
+      "bytes": 7204,
+      "sha256": "ca1f2b3f388388084450613126431989098994522eb104c288a5a529d7b193e8"
+    },
+    "v31_symbolic_crosscheck.py": {
+      "bytes": 775,
+      "sha256": "fe90acf9cdac9b42d11f56b325e27443d69ae0d7c960cb70759c0a2851e74e60"
+    },
+    "v31_certificate.json": {
+      "bytes": 1495,
+      "sha256": "d63d469a6400b520bc6ac6957ce5d4d519df9abbb077c43ebff5a5fa82698305"
+    },
+    "v31_run.log": {
+      "bytes": 1495,
+      "sha256": "d63d469a6400b520bc6ac6957ce5d4d519df9abbb077c43ebff5a5fa82698305"
+    },
+    "v31_symbolic.log": {
+      "bytes": 110,
+      "sha256": "bf551c4b45b86f29100d831a36ed93f16f417920c513382390c667965b07dd6a"
+    }
+  },
+  "methods": [
+    "m-weighted CRT",
+    "1024 subset bitset",
+    "SymPy symbolic crosscheck",
+    "Hensel root and 5-adic residue audits"
+  ],
+  "original_equation_solved": false
+}
