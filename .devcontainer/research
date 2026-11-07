@@ -47,9 +47,14 @@ check_pins() {
         fail 'Unexpected mathlib Lean toolchain.'
     [[ $(git -C "$DEEPSEEK_MATHLIB" rev-parse HEAD) == "$mathlib_commit" ]] ||
         fail 'Unexpected mathlib commit.'
-    local version
+    local version lean_binary
     version=$(cd -- "$DEEPSEEK_MATHLIB" && "$ELAN_HOME/bin/lean" --version)
     [[ $version == 'Lean (version 4.35.0,'* ]] || fail "Unexpected Lean version: $version"
+    # Derive Lake and Lean's locations from Elan, including in remote shells
+    # where the executable cannot resolve its own installation directory.
+    lean_binary=$(cd -- "$DEEPSEEK_MATHLIB" && "$ELAN_HOME/bin/elan" which lean)
+    export LEAN_SYSROOT=${lean_binary%/bin/lean}
+    export LAKE_HOME=$LEAN_SYSROOT
 }
 
 setup() (
