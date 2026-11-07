@@ -1,0 +1,44 @@
+name: Nested binomial Lean proof verification
+
+on:
+  pull_request:
+    branches: [master, research/nested-binomial-2026-11-05]
+    paths:
+      - 'docs/research/nested-binomial/v10_formal/*.lean'
+      - 'docs/research/nested-binomial/v10_formal/*.goal_job.json'
+      - 'docs/research/nested-binomial/v10_formal/*.goal_check.json'
+      - '.github/workflows/nested-binomial-lean-check.yml'
+  push:
+    branches: [master, research/nested-binomial-2026-11-05]
+    paths:
+      - 'docs/research/nested-binomial/v10_formal/*.lean'
+      - 'docs/research/nested-binomial/v10_formal/*.goal_job.json'
+      - 'docs/research/nested-binomial/v10_formal/*.goal_check.json'
+      - '.github/workflows/nested-binomial-lean-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nested-binomial-lean-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare pinned research toolchain (no inference API)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ca-certificates curl gh git python3 ripgrep util-linux zstd
+          env -u MISTRAL_API_KEY bash .devcontainer/research setup
+      - name: Recheck saved Lean modules with Lean 4.35.0 and pinned mathlib
+        run: |
+          env -u MISTRAL_API_KEY bash .devcontainer/research verify
+          git diff --exit-code
