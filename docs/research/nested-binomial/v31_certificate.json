@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "local_5adic_odd_ell_records": [
+    {
+      "T": 13,
+      "ell": 3,
+      "threshold": 5,
+      "roots_modulus": 3125,
+      "roots": [
+        1292,
+        1833
+      ],
+      "tested_a": 3125
+    },
+    {
+      "T": 37513,
+      "ell": 3,
+      "threshold": 5,
+      "roots_modulus": 3125,
+      "roots": [
+        1292,
+        1833
+      ],
+      "tested_a": 3125
+    },
+    {
+      "T": 1388,
+      "ell": 5,
+      "threshold": 8,
+      "roots_modulus": 390625,
+      "roots": [
+        129167,
+        261458
+      ],
+      "tested_a": 3125
+    }
+  ],
+  "local_5adic_counterexample": {
+    "a": 1292,
+    "b": 1,
+    "rho": 37513,
+    "valuation_F": 9
+  },
+  "stage": "v31_weighted_local_sieve",
+  "primes": [
+    7,
+    11,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37,
+    41,
+    43
+  ],
+  "orders": {
+    "7": 6,
+    "11": 10,
+    "17": 4,
+    "19": 18,
+    "23": 22,
+    "29": 7,
+    "31": 10,
+    "37": 9,
+    "41": 5,
+    "43": 14
+  },
+  "m_period": 69300,
+  "old_fraction": "304/20475",
+  "old_percent": "1.484737484737",
+  "new_fraction": "123810551442944/10240301801354625",
+  "new_percent": "1.209051782307",
+  "relative_improvement": "1764440497001/9502599962185",
+  "independent_agreement": true,
+  "bitset_subsets_checked": 1024,
+  "base_modulo": 25,
+  "prime_13_forbidden": true,
+  "original_equation_solved": false,
+  "scope": "necessary local conditions for solutions whose auxiliary point lies in <R>; one independent genus-2 5-adic lemma"
+}
