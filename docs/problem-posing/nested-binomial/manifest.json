@@ -1,0 +1,172 @@
+{
+  "date_jst": "2026-11-07",
+  "kind": "problem-posing notes extracted and adapted from existing research",
+  "repository": "corcondor/mathos",
+  "source_commit": "4d2b7c60122c2fdcefc414b179a05d2b945545a0",
+  "branch": "notes/nested-binomial-problem-posing-2026-11-07",
+  "lemma_cards": 9,
+  "short_problem_drafts": [
+    "P01",
+    "P02"
+  ],
+  "supplementary_exercises": [
+    "P03",
+    "P04"
+  ],
+  "complete_written_solutions": [
+    "P01",
+    "P02",
+    "P03",
+    "P04"
+  ],
+  "sources": [
+    {
+      "path": "docs/research/nested-binomial/v10_valuation_recovery.md",
+      "bytes": 18423,
+      "sha256": "093e02898b4e319794904b793ed58dcbf682387ab14778c9ce4baa955259e817",
+      "git_blob_sha1": "8d04676e0aff0a532c5b071ffa7a565205fa31de",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v10_valuation_recovery.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v15_neighbor_prime_obstruction.md",
+      "bytes": 8598,
+      "sha256": "490fa2be8a1c105bb4ff21278d23d68946f902aeccdcc747c1f7782543609123",
+      "git_blob_sha1": "3ae85f1b01bec733afae644b98ba490e7e605fa3",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v15_neighbor_prime_obstruction.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_lower_gap.md",
+      "bytes": 6426,
+      "sha256": "4a141edcc7ee11ff616d42e6f9297e39fd96626b479a973d886322a34d1b18c4",
+      "git_blob_sha1": "1e072810b6519f7773cf3b6253fe92d9281f80d5",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v16_lower_gap.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell.md",
+      "bytes": 14887,
+      "sha256": "f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822",
+      "git_blob_sha1": "c1a2a3c43eab49c0036126dd4706dcebef71ee9e",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v16_square_defect_pell.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_prime_powers.md",
+      "bytes": 15204,
+      "sha256": "429bcd176f0b0855fe24133271dc9043b540485988c614cf265667f0ebdb7116",
+      "git_blob_sha1": "de64bd225fec075c2e2d507eff99c9228802373c",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v17_quadratic_prime_powers.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_gap.md",
+      "bytes": 9518,
+      "sha256": "32cf9f073f179542abc9a7e03bd8d630b14a848ab25952abe3bd3884dc85fbf2",
+      "git_blob_sha1": "b038eadc81f1605e5e6a7dff87dc9e5386195999",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v18_residual_gap.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_height.md",
+      "bytes": 16676,
+      "sha256": "c055e541abdb0774b67b85c43034d524ace2f537784613b549845421cc3e8933",
+      "git_blob_sha1": "c045fcc92cc9d95588f9daa32de93c57a73ea074",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v18_neighbor_cofactor_height.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants.md",
+      "bytes": 8958,
+      "sha256": "a9de3326fc494e137ae14c739a3f2ff15f6d72806dca77739502e573161a0bb1",
+      "git_blob_sha1": "3e0962dd0968096b4dde0a670a441321899581c0",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v18_defect_resultants.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm.md",
+      "bytes": 10563,
+      "sha256": "3ed645d66992d89f8f207b017f6ff274c7f2f73baddcfe58c784cac6707bfd78",
+      "git_blob_sha1": "63fd3846485ca3a02979ea47f7bbe24687667310",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/v18_short_lcm.md"
+    },
+    {
+      "path": "docs/research/nested-binomial/PROGRESS_v18_ja.md",
+      "bytes": 14408,
+      "sha256": "552e0d287fc41426e6920a5571cac0589c108351101a6120a4150cd095b70bf6",
+      "git_blob_sha1": "25705e099718f675a7a136c12d0d214aed43fe3f",
+      "url": "https://github.com/corcondor/mathos/blob/4d2b7c60122c2fdcefc414b179a05d2b945545a0/docs/research/nested-binomial/PROGRESS_v18_ja.md"
+    }
+  ],
+  "files_excluding_manifest": [
+    {
+      "path": "docs/problem-posing/README.md",
+      "bytes": 3772,
+      "sha256": "8ef38006df74ee1432f03f6ae4d9a798247709f2b6bbb3117ad81087f908ddf4",
+      "git_blob_sha1": "008d333e69bbd9a243d84c8a536b50f1605548ce"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/LEMMA_CARDS_ja.md",
+      "bytes": 13485,
+      "sha256": "d7011caab4d1ad70c2ca3fe6c797a932c8a4c19fbe444013b461abb03fdf9619",
+      "git_blob_sha1": "967a4ca9c22d5c4a0ea52cab53e93d550de56f91"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/PROBLEM_SEEDS_ja.md",
+      "bytes": 7459,
+      "sha256": "f53b75e3e1879f4e5f32bc8864a1e69fb7cd7c65a942439e8cf03646838cf078",
+      "git_blob_sha1": "1e1f50345ffe42eae77bac989220cf95070bb097"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/verify_examples.py",
+      "bytes": 7013,
+      "sha256": "2e22341b132b89cce8714ed1f37c5e89e717c7ce5774e5b83aac32777c48c40c",
+      "git_blob_sha1": "3bdc7c4834d1bc04fcc0d1d5b7c766935cf9c230"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/verification.json",
+      "bytes": 13789,
+      "sha256": "dcf537d58ddaab1986e07436701b96b50e2813cf0383c3a5f724c55fd17d7f54",
+      "git_blob_sha1": "7ebae06dbd20e32deb39bcd8599e69ae471de885"
+    }
+  ],
+  "internal_reviews": [
+    {
+      "scope": [
+        "L01-L09",
+        "P01-P04",
+        "README",
+        "research-dependency boundaries"
+      ],
+      "result": "Written claims accepted after explicitly stating n is an integer in L08."
+    },
+    {
+      "scope": [
+        "P02",
+        "P04",
+        "L02",
+        "L05",
+        "L06",
+        "L08",
+        "L09",
+        "source sections"
+      ],
+      "result": "Written proofs and universal scopes accepted; same L08 wording clarification applied."
+    },
+    {
+      "scope": [
+        "P01",
+        "P03",
+        "L01",
+        "L03",
+        "L07",
+        "P02 transcription"
+      ],
+      "result": "No correction required; positive n domain retained for P02."
+    }
+  ],
+  "review_type": "Internal AI cross-review, not external peer review or kernel verification.",
+  "executed_check": {
+    "command": "python3 verify_examples.py",
+    "exit_code": 0,
+    "report": "verification.json",
+    "status": "PASS"
+  },
+  "novelty_check": "Not performed. Mathematical validity does not establish originality.",
+  "new_lean_execution": false,
+  "new_deepseek_api_call": false,
+  "research_theorem_status": "No new result on the unresolved original equation is claimed by these editorial notes."
+}

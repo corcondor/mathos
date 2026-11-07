@@ -1,0 +1,35 @@
+{
+  "date_jst": "2026-11-07",
+  "research_commit": "08da42759139cd7971f92f00d86ac42d615670d6",
+  "notes_base_commit": "ef8274349d1808cb838e8a466aa78f698d0e8c34",
+  "internal_independent_proof_review": "Both proof cards read independently; no mathematical changes required",
+  "external_peer_review": false,
+  "new_Lean_execution": false,
+  "originality_search": false,
+  "files": [
+    {
+      "path": "docs/problem-posing/README.md",
+      "bytes": 4781,
+      "sha256": "9a5f6069423d91669820d7cbc01a1b4cd3537746ba94b1efc2ab5d36253e401b",
+      "git_blob_sha": "84de28342ef1ed80c89d236ef367a41ff538d0f9"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/v20_problem_seeds_ja.md",
+      "bytes": 3799,
+      "sha256": "f1e389dece919c80aff999f1c771b4470ced19abbebe8437632d0522dade5284",
+      "git_blob_sha": "00ec576f9ff7dc45681f448bb3e08ee82c2ca86b"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/verify_v20_seeds.py",
+      "bytes": 1108,
+      "sha256": "86b0e91758a2a63122df7c8af2896f44e04fd60c265c15a8b136e4672005f364",
+      "git_blob_sha": "d79c0cf46ec25461b018a48871f9565cdc2dd58a"
+    },
+    {
+      "path": "docs/problem-posing/nested-binomial/v20_problem_seeds_verification.json",
+      "bytes": 465,
+      "sha256": "277513d70cbda119bd6e44a2fd1cd850708a93517cde5624c3adb6c14ca87573",
+      "git_blob_sha": "163b7dd269ee2be927a4bf560f52e26724a9d113"
+    }
+  ]
+}
