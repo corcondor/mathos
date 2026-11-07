@@ -113,3 +113,5 @@ weakening final statements, or claiming v30 is solved.
 A GitHub commit or Issue does not by itself invoke DeepSeek. Do not claim this
 context was received by a running Codespaces process until its checked-out
 workspace has synced and the actual execution log records an inspection/action.
+
+The machine snapshot now includes `recent_version_notes` after branch synchronization. When the list changes (for example v31/v32), inspect the new source if it may genuinely advance the two frozen targets. Propose genuinely new bridge lemmas only after checking the supplied theorem and certificate. Do not regard version notes as verified by name, and do not let new notes silently change the immutable final-goal contract.
