@@ -1,0 +1,3 @@
+PASS independent pure-Python divisor enumeration
+counts: {'divisors_checked': 3744, 'positive_rho_from_divisors': 346, 'integer_a_squared': 346, 'square_a_squared': 24, 'primitive': 2, 'primitive_and_z_positive': 1, 'primitive_and_v20_rho_mod9': 0}
+primitive points: [(1, 3, 2), (1, 18, 6)]
