@@ -1,0 +1,6 @@
+POINT rho=9988 n=6860 t=700 a=653 b=81 delta=133 p1=11 p2=11
+POINT rho=13033 n=8576 t=2412 a=467 b=6 delta=56 p1=11 p2=3
+POINT rho=13063 n=166375 t=9240 a=1033 b=18 delta=55 p1=2 p2=7
+POINT rho=16339 n=1431126 t=54567 a=1393 b=6 delta=430 p1=2 p2=2
+RANGE 8193 16384
+COUNTS attempts=218374332 primitive=17935926 square=39 t=7 n=5 branch=4 delta25=4
