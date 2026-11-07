@@ -92,6 +92,13 @@ class GoalTests(unittest.TestCase):
                 dict(self.config(), imports='import Mathlib.Data.Nat.GCD.Basic'), []))
             api.assert_not_called()
 
+    def test_new_run_preserves_existing_method_report_until_it_has_evidence(self):
+        for name in ('DEEPSEEK_METHOD_RESEARCH.json', 'DEEPSEEK_METHOD_RESEARCH.md'):
+            (self.notes / name).write_text('previous verified method evidence')
+        self.agent.methods.save_public()
+        for name in ('DEEPSEEK_METHOD_RESEARCH.json', 'DEEPSEEK_METHOD_RESEARCH.md'):
+            self.assertEqual((self.notes / name).read_text(), 'previous verified method evidence')
+
     def test_paths_reject_escape_symlinks_and_secret_types(self):
         outside = Path(self.temp.name) / 'outside.txt'; outside.write_text('private')
         (self.notes / 'link.txt').symlink_to(outside)

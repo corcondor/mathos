@@ -210,7 +210,10 @@ class MethodResearch:
 
     def save_public(self):
         state=self.public_state()
-        (self.notes/'DEEPSEEK_METHOD_RESEARCH.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
+        destination=self.notes/'DEEPSEEK_METHOD_RESEARCH.json'
+        if destination.exists() and not (state['methods'] or state['evaluations'] or state['pending_trials']):
+            return
+        destination.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
         lines=['# DeepSeekによる数学研究手法の研究','',
                '手法の仮説・実験・実測結果を保持する。手法の自己申告は証明ではなく、固定型のLean検証を必要とする。',
                '同じ定理でも逐次試行は文脈が変わるため、因果効果や一般的優越性を証明したとは扱わない。','',
