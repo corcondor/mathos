@@ -29,7 +29,7 @@ else
     unset MISTRAL_API_KEY
 fi
 case "$command" in
-    run|status|pause|logs|setup|verify) ;;
+    run|status|pause|logs|prepare|setup|verify) ;;
     help) printf '%s\n' 'Usage: .devcontainer/research {run|status|pause|logs|setup|verify}'; exit 0 ;;
     *) fail "Unknown command: $command" ;;
 esac
@@ -92,16 +92,32 @@ setup() (
 )
 
 verify() {
-    rm -f -- "$runtime/verified"
     check_pins
     cd -- "$DEEPSEEK_MATHLIB"
     lake env env -u LD_LIBRARY_PATH python3 "$formal/check_additional_formalization.py" \
         --output-dir "$runtime/verification"
+}
+
+smoke() {
+    check_pins
+    cd -- "$DEEPSEEK_MATHLIB"
+    printf '%s\n' 'import Mathlib.Data.Nat.GCD.BigOperators' \
+        'example : Nat.gcd 12 8 = 4 := by decide' |
+        timeout 120 lake env env -u LD_LIBRARY_PATH bash -c '
+            export LEAN_PATH="$LEAN_SYSROOT/lib/lean${LEAN_PATH:+:$LEAN_PATH}"
+            exec lean -j1 --stdin
+        '
     touch -- "$runtime/verified"
 }
 
 case "$command" in
-    setup) lock_workspace; rm -f -- "$runtime/verified"; setup; verify ;;
+    prepare)
+        if [[ ! -f $runtime/verified ]]; then
+            nohup bash "$repo/.devcontainer/research" setup </dev/null >>"$runtime/setup.log" 2>&1 &
+            printf '%s\n' 'Lean setup started. Use .devcontainer/research logs to follow it.'
+        fi
+        ;;
+    setup) lock_workspace; rm -f -- "$runtime/verified"; setup; smoke ;;
     verify) lock_workspace; verify ;;
     run)
         [[ -n ${MISTRAL_API_KEY:-} ]] ||
@@ -138,6 +154,8 @@ case "$command" in
     logs)
         if [[ -f $run_dir/runner.log ]]; then
             tail -n 80 -- "$run_dir/runner.log"
+        elif [[ -f $runtime/setup.log ]]; then
+            tail -n 80 -- "$runtime/setup.log"
         else
             printf '%s\n' 'No runner log yet.'
         fi

@@ -13,6 +13,6 @@
       "description": "Mistral API key for the explicitly started DeepSeek Lean research runner."
     }
   },
-  "postCreateCommand": "env -u MISTRAL_API_KEY bash .devcontainer/research setup",
+  "postCreateCommand": "env -u MISTRAL_API_KEY bash .devcontainer/research prepare",
   "waitFor": "postCreateCommand"
 }
