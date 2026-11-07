@@ -19,6 +19,7 @@
     "ThirtyCofactorCubeLocalization",
     "ThirtyCofactorTargetCubeLocalization",
     "ThirtyCofactorDefectBridge",
-    "ThirtyCofactorDefectPellReductionC"
+    "ThirtyCofactorDefectPellReductionC",
+    "ThirtyCofactorDefectKRange"
   ]
 }
