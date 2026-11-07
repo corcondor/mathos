@@ -5,12 +5,16 @@ on:
     branches: [master, research/nested-binomial-2026-11-05]
     paths:
       - 'docs/research/nested-binomial/V[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*.md'
+      - 'docs/research/nested-binomial/PROGRESS_v[0-9]*.md'
       - 'docs/research/nested-binomial/v[0-9]*_verify.py'
       - '.github/workflows/nested-binomial-publish-research.yml'
   push:
     branches: [master]
     paths:
       - 'docs/research/nested-binomial/V[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*.md'
+      - 'docs/research/nested-binomial/PROGRESS_v[0-9]*.md'
       - 'docs/research/nested-binomial/v[0-9]*_verify.py'
       - '.github/workflows/nested-binomial-publish-research.yml'
   workflow_dispatch:
@@ -100,7 +104,7 @@ jobs:
           from pathlib import Path
           root=Path("docs/research/nested-binomial")
           if os.environ.get("EVENT_NAME")=="workflow_dispatch":
-              files=[p.name for p in root.glob("V[0-9]*.md")]
+              files=[p.name for pattern in ("V[0-9]*.md","v[0-9]*.md","PROGRESS_v[0-9]*.md") for p in root.glob(pattern)]
           else:
               before=os.environ.get("BEFORE","")
               if not re.fullmatch("[0-9a-f]{40}",before) or before=="0"*40:
@@ -111,8 +115,8 @@ jobs:
                   files=[Path(p).name for p in files]
               except subprocess.CalledProcessError:
                   files=[]
-          files=[p for p in files if re.fullmatch(r"V[0-9]+[A-Za-z0-9_.-]*\.md",p)]
-          files.sort(key=lambda x:(int(re.match(r"V([0-9]+)",x).group(1)),x))
+          files=[p for p in files if re.fullmatch(r"(?:V|v|PROGRESS_v)[0-9]+[A-Za-z0-9_.-]*\.md",p)]
+          files.sort(key=lambda x:(int(re.search(r"(?:V|v)([0-9]+)",x).group(1)),x))
           print(files[-1] if files else "")
           PY
           )
