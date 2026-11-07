@@ -45,3 +45,8 @@ jobs:
           env -u MISTRAL_API_KEY .devcontainer/research setup
           test -f .mathos-codespaces/verified
           git diff --exit-code
+      - name: Repeat setup with the toolchain already installed
+        run: |
+          env -u MISTRAL_API_KEY .devcontainer/research setup
+          test -f .mathos-codespaces/verified
+          git diff --exit-code
