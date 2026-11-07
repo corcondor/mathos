@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "queries": [
+    {
+      "J": 17,
+      "branch": "small",
+      "delta": 25
+    },
+    {
+      "J": 33,
+      "branch": "complement",
+      "delta": 25
+    }
+  ],
+  "counts": {
+    "coefficient_families": 1062,
+    "divisor_polynomials": 31682
+  },
+  "root_certificate_types": {
+    "quadratic": 11842,
+    "adjacent_bracket": 16155,
+    "domain_start": 3685
+  },
+  "primes_proved_by_recursive_Lucas_certificates": 1111,
+  "all_coefficient_families_and_G_divisors_complete": true,
+  "all_root_isolation_certificates_checked": true,
+  "undecided_count": 0,
+  "imports_producer_or_SymPy": false,
+  "certificate_sha256": "2fae3b054c771919bff0e876560075bf0e43f1ec8ff4aae33ce19eec1e849a45",
+  "verifier_sha256": "9ec662a4998660398d6c604dce27f776037c339cbd945a017028f119351e383d",
+  "input_note_sha256": "612c3973d28962340870bdfcab891fb549e2ce3af15faaf8c2a5ed073bb8d025",
+  "wall_seconds": 0.277885,
+  "scope": "Exact finite parameter queries only; general completeness uses the v19 integer eliminant and new monotonicity proof"
+}

@@ -1,0 +1,40 @@
+{
+  "status": "PASS_INDEPENDENT_WRITTEN_AND_SYMBOLIC_AUDIT",
+  "note_sha256": "8f921aac18023e6f2d9209bfac1a293dbdf6f72a3bb11dabd8857be84d34e0e1",
+  "reviewer_script_sha256": "94ae4c7ecaf201a34425bca1749e16268444ee5a917ec8b31376b5a6df867549",
+  "sympy_version": "1.14.0",
+  "producer_imported": false,
+  "symbolic_identities": 3,
+  "positive_rational_margins": {
+    "L_gt_100": "6236/81",
+    "x_lt_one_percent": "10529/1433600",
+    "bracket_gt_one_twohundredth": "8573/7741440",
+    "log_6y_less_than_3": "1219/1350",
+    "log48_less_than4": "208/81",
+    "four_3_plus_x_less_than13": "24/25",
+    "A_gt_16n_squared_threshold": "115792089237316195423570985008687907853269984665640564039457584007913129639824",
+    "ceil_bound_b_less_than_4n": "2865854208623575836733381878965025719368432120474603959976575204195849958588391/25",
+    "binomial_ratio_threshold": "14474011154664524427946373126085988481658748083205070504932198000989141200067/25",
+    "upper_log_gap_threshold_monotonicity": "14474011154664524427946373126085988481658748083205070504932198000989141204967/2894802230932904885589274625217197696331749616641014100986439600197828240998400",
+    "alpha_squared_over_L_lt_one_fourhundredth": "291/1000000",
+    "nine_L_less_than_n_over_1000": "115792089237316195423570985008687907853269984665640564039457584007913128019936",
+    "n_over_nminus1_lt_1001_over_1000": "23158417847463239084714197001737581570653996933128112807891516801582625927787/23158417847463239084714197001737581570653996933128112807891516801582625927987000",
+    "defect_constant_margin": "42059/1000000",
+    "low_n_range_covered_by_delta_ge_25": "1229/5",
+    "25_log2_greater_than17": "23/81"
+  },
+  "written_checks": [
+    "Upper and lower factorial integral bounds have the correct directions",
+    "Product lower bound uses b^2<A and b<A",
+    "Numerator monotonicity keeps the denominator 2*e*b fixed",
+    "A logarithmic lower bound is uniform for n>=12",
+    "The log-ratio brace and both logarithmic constants are correct",
+    "r<ceil(a) implies r<a for every real a because r is an integer",
+    "The intrinsic-defect inequality uses K-9C>=1 without a gcd cancellation",
+    "The n/(n-1) correction and +9*log(n) term are retained",
+    "The low-n case is covered by inherited delta>=25 without circular use of the new bound",
+    "No n scan up to 2^256 is required"
+  ],
+  "blocking_findings": [],
+  "limits": "Written/internal AI review with exact symbolic and rational checks; no Lean or external human peer review. Inherited delta>=25 and B<L<2B are taken from the recorded previous results."
+}

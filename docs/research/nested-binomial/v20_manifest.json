@@ -1,0 +1,335 @@
+{
+  "version": "v20",
+  "date_jst": "2026-11-07",
+  "base_commit": "fc95017b349516cb1dfab766f80e37720589be45",
+  "base_tree_sha": "466981896d148ad5ded35d3a4ab615b1012682c3",
+  "original_equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "scope": "ell=1, j=i-3; both k branches",
+  "main_new_results": [
+    "Complement canonical J>=33 for all n and delta",
+    "t>2n/(5logn) for n>=1024; t>9n/(20logn) for n>=32768",
+    "Small n<2^12 J^(3/2)(1+logJ); complement n<2^25 J^3(1+logJ)^2",
+    "Global logn<17delta and n<2^(24delta)",
+    "gcd(a,rho)=gcd(a,3); rho mod9 in {1,4,6,7}; rho>=13",
+    "Uniform 2/3-adic cube-cover restrictions",
+    "Complete fixed-parameter queries small(delta25,J17), complement(delta25,J33) excluded"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "sympy": "1.14.0"
+  },
+  "new_Lean_execution": false,
+  "new_DeepSeek_API_execution": false,
+  "external_peer_review": false,
+  "unresolved": "delta, J, a remain unbounded; original equation and whole offset-three branch unsolved; no original solution found",
+  "inherited_inputs": [
+    {
+      "path": "docs/research/nested-binomial/v5_offset_three_structure.md",
+      "git_blob_sha": "80062f7355ec18336f4aefc60288384d76c46610"
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_offset_composite.md",
+      "git_blob_sha": "afc5e371baf652ede2f736d41fcfde8f9202e317"
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell.md",
+      "git_blob_sha": "c1a2a3c43eab49c0036126dd4706dcebef71ee9e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap.md",
+      "git_blob_sha": "d49eda164eadd4cdf4957019e9919adc70d0194a"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_height.md",
+      "git_blob_sha": "c045fcc92cc9d95588f9daa32de93c57a73ea074"
+    },
+    {
+      "path": "docs/research/nested-binomial/v19_canonical_J_elimination.md",
+      "git_blob_sha": "43d70cfa23aa8c3540fc5d192905d377c3b9f6fc"
+    },
+    {
+      "path": "docs/research/nested-binomial/v19_crypto_methods.md",
+      "git_blob_sha": "d2719bae27b870cc17021cd3f82208cde1ce9dba"
+    },
+    {
+      "path": "docs/research/nested-binomial/v19_elliptic_residual.md",
+      "git_blob_sha": "c882b5c51a22f45a003ad3cf171afe19faab48cf"
+    },
+    {
+      "path": "docs/research/nested-binomial/v19_canonical_defect_elimination.md",
+      "git_blob_sha": "14d4ec44a2a659644cb49ff8c4d7057ce5845a57"
+    },
+    {
+      "path": "docs/research/nested-binomial/v19_residual_cube_cover.md",
+      "git_blob_sha": "4a5782a2365ff6fccb197b89dbc419c208efb396"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/research/nested-binomial/PROGRESS_v20_ja.md",
+      "bytes": 11195,
+      "sha256": "8771f50a30b15728fafd83f13717329937432f640da857bf4e2b310dd73d4635",
+      "git_blob_sha": "65d318c3d2cd35eb2928ce58cc6b49dbbc49fa87"
+    },
+    {
+      "path": "docs/research/nested-binomial/README.md",
+      "bytes": 33673,
+      "sha256": "382d5b95dbd60aede12f8d2da5309a44ee328eb23a80d12f902c2c9229902a0b",
+      "git_blob_sha": "c591c4098828b3cf12d7f5f3b05f1b7d97dd8c25"
+    },
+    {
+      "path": "docs/research/nested-binomial/RESEARCH_LOG.md",
+      "bytes": 35339,
+      "sha256": "1f387a892be8e04048234d0de6572ca40ffa6e14445aacb86881776b99880938",
+      "git_blob_sha": "7651e1ff852da6a940203f0675588a151d6f61bb"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_binary_height_24.json",
+      "bytes": 4606,
+      "sha256": "4249da91c636a4e673baf9070841627533f5fd64000d33f9f9a231a2555a2c09",
+      "git_blob_sha": "959328a64fb46db0a5b944342a8fb0980b0b10ef"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_binary_height_24.md",
+      "bytes": 7186,
+      "sha256": "42ada7b821e7de6d2f4aa8035f3dac20ac66b4694e83b487d63385c0cd52855c",
+      "git_blob_sha": "3cb53ec8bfe0a904c6409644fff92497db3dc921"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_binary_height_24.py",
+      "bytes": 6061,
+      "sha256": "9d480060d94f30ce326a7816981c87219d2b6d392bdd7f546a8842fe1c28daa7",
+      "git_blob_sha": "c48621526cad706d31b876a05ec8f712f8375c0c"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_binary_height_24_root_audit.json",
+      "bytes": 595,
+      "sha256": "3e73dceb36a78d36e991ba908357c82bbc18d6116c501027a945496e21510597",
+      "git_blob_sha": "5802a88c589c6f8893b40bf4c8c7740dfe1a60d2"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_certificate.json.gz",
+      "bytes": 316739,
+      "sha256": "c765b4efc5d400f4e29f89c00c3e0a6f691eaec2f837db11018c4c02f15b0a81",
+      "git_blob_sha": "4d195b8df082f70e172fa34bae8fcfb494887482"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_certificate.summary.json",
+      "bytes": 7158,
+      "sha256": "631aab0020cf76171acdc3d02bdafccdd79f905851324d9b9986612614aefa95",
+      "git_blob_sha": "d3193879e1bd1b256ca17b7b01bdfc8fc706dc9d"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_cover.py",
+      "bytes": 7579,
+      "sha256": "75f6a861f13b3a529128748b3bbe189d489101924d2a8ee3d1c08540c2287486",
+      "git_blob_sha": "06d8812c74641f56b6e256877d8b0249ee5b508e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_exclusion.md",
+      "bytes": 7152,
+      "sha256": "61e933d305d658a83dcda97a1f3812a9fd4efa2383d958b368736960075ea9ec",
+      "git_blob_sha": "2aa9a118f7414abf4e5650684719e161e2c72dd0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_root_rerun.json",
+      "bytes": 1291,
+      "sha256": "27efcd971877480c08834456d7ebdf265fa5735177340a5ddda485131688a299",
+      "git_blob_sha": "aaa83034bee1a2709f80fa7243147b521ad4545f"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_verification.json",
+      "bytes": 1291,
+      "sha256": "cb49eb218150be14292fccc5992c359620dfc9657ef2228e87add074a644a8e4",
+      "git_blob_sha": "c8c751d4bef81d5ec6131d91c30959e06f9dce42"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_complement_J_verify.py",
+      "bytes": 6893,
+      "sha256": "3fb4bfb479892ccec38506d501df4856a9e78c196840944a1db38d978d607003",
+      "git_blob_sha": "b8f5e98ed0c7ddb331842f3a5b5d00e37c1bd4f0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_execution.json",
+      "bytes": 9001,
+      "sha256": "2a6d7e268827fa538be2d5162da4161101f0083bda6a82751fa0158bc174ce07",
+      "git_blob_sha": "5dd0d5d8a7baf7e655a4e772f6561826d027f31e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_final_five_modular_audit.json",
+      "bytes": 1404,
+      "sha256": "eb782c664503a9299d3c055e24c2f2bb36fc020b11e2f618a6c5ad39a3b4480e",
+      "git_blob_sha": "19d2f437cbeeb136bb69d20ed16fc55aae92c140"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_certificate.json.gz",
+      "bytes": 334419,
+      "sha256": "2fae3b054c771919bff0e876560075bf0e43f1ec8ff4aae33ce19eec1e849a45",
+      "git_blob_sha": "2b87e0b0cd4afbe91b6a0e70ad928010aa710605"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_certificate.summary.json",
+      "bytes": 1515,
+      "sha256": "e4d99417cb78e40e6186d16cb6a80d507af84fadbf0ecb2b39dbba2a9a41eb8f",
+      "git_blob_sha": "f9049aa7959cbb0ef992e66e8554c76f7cd038a8"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_reconstruction.md",
+      "bytes": 7555,
+      "sha256": "f21c57073f3b9d6f7dccf3bd44c927dcb811ad1ced3c25c3c043bd361bf0f37d",
+      "git_blob_sha": "26c4d23c0f609fd8018617b6ec812de236614f67"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_solver.py",
+      "bytes": 9179,
+      "sha256": "43cfaa15151d1f3809b70b8ae503007e042ae19cc3e3ed706de5a2f940b4eaf6",
+      "git_blob_sha": "cbdab7ecd80c89e1c5c360d40ff7e078d65d3590"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_verification.json",
+      "bytes": 1050,
+      "sha256": "225346a532bc4b8043ce3513f1d1c2c42cf25c5b13a39cd22e5f3ac7d7589e08",
+      "git_blob_sha": "8a7fa5c81fef18e05f564e63d42ca34a151bd9c1"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_fixed_parameter_verify.py",
+      "bytes": 8381,
+      "sha256": "9ec662a4998660398d6c604dce27f776037c339cbd945a017028f119351e383d",
+      "git_blob_sha": "0c230440cd57428d2e318c30fadbb72083854f73"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_logarithmic_gap.md",
+      "bytes": 10462,
+      "sha256": "bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6",
+      "git_blob_sha": "0fbb2f7a759fd80854724e3cbff6a531c3f9d1db"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_logarithmic_gap_checks.json",
+      "bytes": 3937,
+      "sha256": "e452757408e9984fac7ecc2d8239597905be60de3bc9cd7727034366d9ae92f2",
+      "git_blob_sha": "7839e19a35bf352e547e6cfa9c2e7084bcb35a80"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_logarithmic_gap_checks.py",
+      "bytes": 7259,
+      "sha256": "f0e1018593490701d2192a40914c410bcae24a57f47efe937130332f58d12bfc",
+      "git_blob_sha": "84bc602f28b0f4b8565457a3e2dcc46eaa6a758b"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_logarithmic_gap_independent_review.json",
+      "bytes": 1418,
+      "sha256": "104ee534903a0b24a4986b36a7d883e6811af2cbb4bd75ae690c8d8f1212226f",
+      "git_blob_sha": "42887faf3fcaeedfc24dd8ca673b0769e627c714"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_reproduction.md",
+      "bytes": 3132,
+      "sha256": "f0aeac63024161b9a3ee47a8aa888d2b554580b52e379c8de1de194cee8accb0",
+      "git_blob_sha": "dbd151ad00c31c2b1e637426610f4d5773537a6e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_residual_integrality.md",
+      "bytes": 10553,
+      "sha256": "c40b0994eae56dddf41d3f14288d9e4a621b4937bf4a69fa2ecaad8a0d376bf5",
+      "git_blob_sha": "f0593cd4c09bf86df2041086d07926ac61d0072e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_residual_integrality_audit.json",
+      "bytes": 1401,
+      "sha256": "01ae0844a3acc8139f5bf2962d0035d8ada67ddadf5460c8dce1d24d0af980b3",
+      "git_blob_sha": "c2ec488655993239e4ac30d2cba30c56dd83e80b"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_residual_integrality_certificate.json",
+      "bytes": 30085,
+      "sha256": "8fab4ea47637fbb0871e5a641678d3aaffc1e8079158e3d1d3976b77b566e575",
+      "git_blob_sha": "8f20c5cc5667bc29d0cb8a48951d19268b35fcea"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_residual_integrality_checks.py",
+      "bytes": 9487,
+      "sha256": "df81910745a9c1e7565438a8fededda7cbb10bb2f1c61f290ddff33d1d4fca76",
+      "git_blob_sha": "3fe8dc889b36dfa682b5f896ef6958a76cc9d4d4"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_residual_integrality_verify.py",
+      "bytes": 9559,
+      "sha256": "c62e7608c414c9b9e25dfb46fdf96bcb4afa0f571ccb52eb88accbc436ca68ab",
+      "git_blob_sha": "f68bbedd9e106330fae1df396ead392381838708"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_review_ja.md",
+      "bytes": 4952,
+      "sha256": "324ab79e5119f0e88c8f0f7f6646459d11ca0b5165f1380d71864ade6b6d02ea",
+      "git_blob_sha": "6779b7ac718c795c758ebb779561af014e79946f"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_root_isolation_checks.json",
+      "bytes": 6111,
+      "sha256": "53a122c7850dfd7d58054874de287d4025a963317fb3ef4d6b52df62ad1a02db",
+      "git_blob_sha": "a71a2699b6ca957654666c950963d384de9140e4"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_root_isolation_checks.py",
+      "bytes": 2195,
+      "sha256": "38a656b8c9dfa4ff9174f9b2ed85a85f584c5052dbeeb717f85f94a85840d48f",
+      "git_blob_sha": "01b175e6db9ec224b3715edb2df63c4a7105b0c4"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height.md",
+      "bytes": 5406,
+      "sha256": "8f921aac18023e6f2d9209bfac1a293dbdf6f72a3bb11dabd8857be84d34e0e1",
+      "git_blob_sha": "4a03fb87c0d4e82d12024fea92d7bf8f71f67235"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height_checks.json",
+      "bytes": 1524,
+      "sha256": "cb280fc16dceb0a19947dd82bf82a7dbbba93f276f1cca05dfcd52bbeceec7cb",
+      "git_blob_sha": "750a16aef39d7730b1649f4c7665e37b456c5da0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height_checks.py",
+      "bytes": 3689,
+      "sha256": "2b698d5acb27d77e2cf39791269706dfc4cc61d71bfee171a989c10311e303b0",
+      "git_blob_sha": "db1d6306a4b0cd86b5a978e1879376172ffc3cbe"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height_independent_audit.json",
+      "bytes": 2588,
+      "sha256": "f3dcac3f84dc345351935b1cc899a2de3902c17584ad92534e7dc34e138b5152",
+      "git_blob_sha": "56fdbd20363594bc82ded379ffea31775c3a003e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height_independent_audit.py",
+      "bytes": 3999,
+      "sha256": "94ae4c7ecaf201a34425bca1749e16268444ee5a917ec8b31376b5a6df867549",
+      "git_blob_sha": "246cfabad5508647be44b71e8ff72e973d803c04"
+    },
+    {
+      "path": "docs/research/nested-binomial/v20_sharper_defect_height_independent_review.md",
+      "bytes": 2869,
+      "sha256": "1ce9511ad4af53821dc1904d5ee511b34b89ac9f64e48492a0c0c083ff65267a",
+      "git_blob_sha": "49e11ecb96a8d1dbb49efba22f8d6d7d4468606a"
+    }
+  ],
+  "manifest_self_hash": "Excluded intentionally; its Git blob SHA is checked during publication",
+  "coverage_certificates": {
+    "complement_J": {
+      "families": 5323,
+      "raw_divisor_records": 608102,
+      "normalized_records": 429917,
+      "second_divisors": 862,
+      "final_nonsquares": 5,
+      "survivors": 0
+    },
+    "fixed_pairs": {
+      "coefficient_families": 1062,
+      "divisor_polynomials": 31682,
+      "recursive_prime_certificates": 1111,
+      "integer_n_ge104_roots": 0
+    }
+  },
+  "execution_file": "v20_execution.json",
+  "relative_markdown_links_checked": true,
+  "python_syntax_checked": true
+}

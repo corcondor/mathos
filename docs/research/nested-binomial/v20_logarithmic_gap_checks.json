@@ -1,0 +1,149 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "scope": "Exact algebra and rational margins supporting the written universal analytic proof",
+  "check_count": 29,
+  "records": [
+    {
+      "label": "binomial_ratio_margin",
+      "coefficient_identity": true
+    },
+    {
+      "label": "product_loss_is_less_than_31",
+      "coefficient_identity": true
+    },
+    {
+      "label": "log_B_minus_3nD_expansion",
+      "coefficient_identity": true
+    },
+    {
+      "label": "exp_series_at_7_over_10",
+      "positive_margin": "13/6000"
+    },
+    {
+      "label": "exp_series_at_25_over_36",
+      "positive_margin": "43441/40310784"
+    },
+    {
+      "label": "e_less_than_3_implies_log6_gt_3over2",
+      "positive_margin": "9"
+    },
+    {
+      "label": "first_gap_threshold",
+      "positive_margin": "17/5"
+    },
+    {
+      "label": "first_gap_derivative",
+      "positive_margin": "231/2560"
+    },
+    {
+      "label": "second_gap_threshold",
+      "positive_margin": "6182/15"
+    },
+    {
+      "label": "second_gap_derivative",
+      "positive_margin": "4021/245760"
+    },
+    {
+      "label": "t_greater_than_5_at_first_threshold",
+      "positive_margin": "1873/35"
+    },
+    {
+      "label": "N_less_than_5001_over_5000_n_squared",
+      "positive_margin": "816"
+    },
+    {
+      "label": "first_w_coefficient",
+      "positive_margin": "11871/1978000"
+    },
+    {
+      "label": "second_w_coefficient",
+      "positive_margin": "296497/73623000"
+    },
+    {
+      "label": "both_fixed_J_polynomial_substitutions",
+      "coefficient_identity": true
+    },
+    {
+      "label": "P1_minus_derivative_at_2",
+      "positive_margin": "2506"
+    },
+    {
+      "label": "P1_minus_derivative_increases_above_2",
+      "positive_margin": "6399"
+    },
+    {
+      "label": "2P0_minus_derivative_at_2",
+      "positive_margin": "1052748"
+    },
+    {
+      "label": "2P0_minus_derivative_increases_above_2",
+      "positive_margin": "1170450"
+    },
+    {
+      "label": "complement_near_cubic_global_height",
+      "positive_margin": "7831133/2"
+    },
+    {
+      "label": "small_near_three_halves_global_height",
+      "positive_margin": "4935861"
+    },
+    {
+      "label": "small_global_height_covers_low_n_using_J_ge_17",
+      "positive_margin": "81352720384"
+    },
+    {
+      "label": "log_H1_scale_coefficient",
+      "positive_margin": "25/2"
+    },
+    {
+      "label": "log_H0_scale_coefficient",
+      "positive_margin": "59/10"
+    },
+    {
+      "label": "J_le_8_low_n_w_bound",
+      "positive_margin": "9968/10625"
+    },
+    {
+      "label": "J_le_8_middle_n_w_bound",
+      "positive_margin": "113/4"
+    },
+    {
+      "label": "J_le_8_endpoint_exponent",
+      "positive_margin": "2/3"
+    },
+    {
+      "label": "J_le_8_exact_integer_endpoint",
+      "positive_margin": "2411115099644699999"
+    },
+    {
+      "label": "J_le_8_monotonicity",
+      "positive_margin": "520/601"
+    }
+  ],
+  "lower_gap_thresholds": [
+    {
+      "n_minimum": 1024,
+      "bound": "t > 2*n/(5*log(n))",
+      "w_bound": "w < (7/16)*J*log(n)"
+    },
+    {
+      "n_minimum": 32768,
+      "bound": "t > 9*n/(20*log(n))",
+      "w_bound": "w < (3/8)*J*log(n)"
+    }
+  ],
+  "global_heights": {
+    "small": "n < 2^12*J^(3/2)*(1+log(J)); uses existing J>=17 for low n",
+    "complement": "n < 2^25*J^3*(1+log(J))^2"
+  },
+  "analytic_complement_J_exclusion": "All 1<=J<=8, without a delta or n scan",
+  "note_sha256": "bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6",
+  "checker_sha256": "f0e1018593490701d2192a40914c410bcae24a57f47efe937130332f58d12bfc",
+  "limits": [
+    "The integral factorial inequalities and monotonicity arguments are written proofs, not Lean certificates",
+    "No numerical logarithm or floating-point comparison was used",
+    "No arbitrary n or delta scan was performed",
+    "No new original solution, DeepSeek API execution, or full classification is claimed"
+  ]
+}

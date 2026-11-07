@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "conclusion": "Complementary canonical J>=33 under the written inherited and new v20 analytic inputs",
+  "certificate_file": "v20_complement_J_certificate.json.gz",
+  "certificate_sha256": "c765b4efc5d400f4e29f89c00c3e0a6f691eaec2f837db11018c4c02f15b0a81",
+  "verifier_sha256": "3fb4bfb479892ccec38506d501df4856a9e78c196840944a1db38d978d607003",
+  "gap_note_sha256": "bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6",
+  "counts": {
+    "raw_divisor_records": 608102,
+    "normalized_n": 429917,
+    "coefficient_families": 5323,
+    "second_divisor": 862,
+    "w_divides_N": 5
+  },
+  "all_5323_coefficient_families_reconstructed": true,
+  "all_cube_divisor_domains_reconstructed": true,
+  "all_862_second_divisor_points_reconstructed": true,
+  "all_five_consecutive_square_obstructions_checked": true,
+  "uses_producer_or_CAS": false,
+  "independence": "Sieve factorization, recursive divisors, set-normalized n, alternate S expression, binary integer square roots",
+  "no_bound_on_delta": true,
+  "no_arbitrary_n_cutoff": true,
+  "original_binomial_Lucas_witnesses_needed": false,
+  "wall_seconds": 0.534107,
+  "limitations": "Written analytic gap and divisor-transfer proofs are inputs; no new Lean/API execution or full equation classification"
+}

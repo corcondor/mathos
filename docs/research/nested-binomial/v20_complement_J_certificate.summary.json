@@ -1,0 +1,292 @@
+{
+  "status": "PASS_COMPLETE_COMPLEMENT_J_EXCLUSION",
+  "scope": "Original squared-index binomial equation, ell=1,j=i-3,k=C(n,3)-r; all exact defects, all n>=104",
+  "proved_conclusion": "Canonical complementary numerator J>=33",
+  "finite_domain": {
+    "J": [
+      1,
+      32
+    ],
+    "w": [
+      65,
+      383
+    ],
+    "coprime": true,
+    "excluded_J_residue": "J=2 mod4"
+  },
+  "theory_inputs": [
+    "v18 canonical w>=65 and complementary cube divisibilities",
+    "v17/v19 strict square-root gap gives T1>17*n^(3/2)",
+    "v19 canonical J not congruent to 2 modulo 4",
+    "v20 analytic gap gives w<(7/16)*J*log(n) for n>=1024"
+  ],
+  "written_input_sha256": {
+    "v20_logarithmic_gap.md": "bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6",
+    "v18_neighbor_cofactor_height.md": "c055e541abdb0774b67b85c43034d524ace2f537784613b549845421cc3e8933",
+    "v19_canonical_J_elimination.md": "45a20d80cbc8ec53859a8d3e8bbda339880303490e9a10d633e8904e8c84685b"
+  },
+  "cap_constants": {
+    "exp_7_over_10_positive_partial_sum": [
+      482921,
+      240000
+    ],
+    "n_at_w384_J32_upper": 130842624000,
+    "power_of_two_exponent": 37,
+    "w384_gap_lower": [
+      107,
+      5
+    ],
+    "derivative_lower": [
+      57,
+      64
+    ]
+  },
+  "producer_sha256": "75f6a861f13b3a529128748b3bbe189d489101924d2a8ee3d1c08540c2287486",
+  "counts": {
+    "raw_divisor_records": 608102,
+    "normalized_n": 429917,
+    "coefficient_families": 5323,
+    "second_divisor": 862,
+    "w_divides_N": 5
+  },
+  "per_J": {
+    "1": {
+      "raw_divisor_records": 29312,
+      "normalized_n": 26016,
+      "coefficient_families": 319,
+      "second_divisor": 45,
+      "w_divides_N": 1
+    },
+    "2": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "3": {
+      "raw_divisor_records": 58512,
+      "normalized_n": 33195,
+      "coefficient_families": 213,
+      "second_divisor": 37
+    },
+    "4": {
+      "raw_divisor_records": 5300,
+      "normalized_n": 4598,
+      "coefficient_families": 160,
+      "second_divisor": 49
+    },
+    "5": {
+      "raw_divisor_records": 17328,
+      "normalized_n": 15101,
+      "coefficient_families": 255,
+      "second_divisor": 16
+    },
+    "6": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "7": {
+      "raw_divisor_records": 20444,
+      "normalized_n": 17876,
+      "coefficient_families": 274,
+      "second_divisor": 21
+    },
+    "8": {
+      "raw_divisor_records": 5174,
+      "normalized_n": 4476,
+      "coefficient_families": 160,
+      "second_divisor": 59,
+      "w_divides_N": 2
+    },
+    "9": {
+      "raw_divisor_records": 74394,
+      "normalized_n": 38237,
+      "coefficient_families": 213,
+      "second_divisor": 47,
+      "w_divides_N": 1
+    },
+    "10": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "11": {
+      "raw_divisor_records": 23788,
+      "normalized_n": 20920,
+      "coefficient_families": 290,
+      "second_divisor": 32
+    },
+    "12": {
+      "raw_divisor_records": 11104,
+      "normalized_n": 6099,
+      "second_divisor": 47,
+      "coefficient_families": 107
+    },
+    "13": {
+      "raw_divisor_records": 25116,
+      "normalized_n": 22143,
+      "coefficient_families": 294,
+      "second_divisor": 27
+    },
+    "14": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "15": {
+      "raw_divisor_records": 35704,
+      "normalized_n": 19957,
+      "coefficient_families": 170,
+      "second_divisor": 15
+    },
+    "16": {
+      "raw_divisor_records": 5144,
+      "normalized_n": 4448,
+      "coefficient_families": 160,
+      "second_divisor": 45
+    },
+    "17": {
+      "raw_divisor_records": 26316,
+      "normalized_n": 23288,
+      "coefficient_families": 300,
+      "second_divisor": 33
+    },
+    "18": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "19": {
+      "raw_divisor_records": 27208,
+      "normalized_n": 24120,
+      "coefficient_families": 302,
+      "second_divisor": 33
+    },
+    "20": {
+      "raw_divisor_records": 2986,
+      "normalized_n": 2544,
+      "coefficient_families": 128,
+      "second_divisor": 27
+    },
+    "21": {
+      "raw_divisor_records": 43488,
+      "normalized_n": 24475,
+      "second_divisor": 14,
+      "coefficient_families": 183
+    },
+    "22": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "23": {
+      "raw_divisor_records": 27178,
+      "normalized_n": 24045,
+      "coefficient_families": 305,
+      "second_divisor": 29
+    },
+    "24": {
+      "raw_divisor_records": 10912,
+      "normalized_n": 5983,
+      "coefficient_families": 107,
+      "second_divisor": 47
+    },
+    "25": {
+      "raw_divisor_records": 17232,
+      "normalized_n": 15014,
+      "coefficient_families": 255,
+      "second_divisor": 14
+    },
+    "26": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "27": {
+      "raw_divisor_records": 77322,
+      "normalized_n": 40807,
+      "coefficient_families": 213,
+      "second_divisor": 55
+    },
+    "28": {
+      "raw_divisor_records": 3672,
+      "normalized_n": 3139,
+      "coefficient_families": 138,
+      "second_divisor": 33
+    },
+    "29": {
+      "raw_divisor_records": 27580,
+      "normalized_n": 24419,
+      "coefficient_families": 308,
+      "second_divisor": 39,
+      "w_divides_N": 1
+    },
+    "30": {
+      "excluded_by_uniform_two_adic_condition": true
+    },
+    "31": {
+      "raw_divisor_records": 27684,
+      "normalized_n": 24513,
+      "coefficient_families": 309,
+      "second_divisor": 41
+    },
+    "32": {
+      "raw_divisor_records": 5204,
+      "normalized_n": 4504,
+      "second_divisor": 57,
+      "coefficient_families": 160
+    }
+  },
+  "complete_square_obstructions": [
+    {
+      "J": 1,
+      "w": 118,
+      "n": 1216,
+      "g": 1,
+      "d": 3,
+      "G": 12531,
+      "r_minus_one_squared": 13327741,
+      "floor_square_root": 3650
+    },
+    {
+      "J": 8,
+      "w": 89,
+      "n": 129,
+      "g": 3,
+      "d": 2,
+      "G": 187,
+      "r_minus_one_squared": 152049,
+      "floor_square_root": 389
+    },
+    {
+      "J": 8,
+      "w": 121,
+      "n": 2197,
+      "g": 1,
+      "d": 6,
+      "G": 39891,
+      "r_minus_one_squared": 43773601,
+      "floor_square_root": 6616
+    },
+    {
+      "J": 9,
+      "w": 278,
+      "n": 784,
+      "g": 1,
+      "d": 3,
+      "G": 2211,
+      "r_minus_one_squared": 5556517,
+      "floor_square_root": 2357
+    },
+    {
+      "J": 29,
+      "w": 102,
+      "n": 976,
+      "g": 1,
+      "d": 3,
+      "G": 9339,
+      "r_minus_one_squared": 8849881,
+      "floor_square_root": 2974
+    }
+  ],
+  "survivors": [],
+  "claims_not_made": [
+    "unbounded J excluded",
+    "whole four-variable equation solved",
+    "new lower bound on delta",
+    "Lucas witnesses used in this certificate",
+    "Lean execution",
+    "DeepSeek API execution",
+    "external peer review"
+  ],
+  "certificate_file": "v20_complement_J_certificate.json.gz",
+  "certificate_sha256": "c765b4efc5d400f4e29f89c00c3e0a6f691eaec2f837db11018c4c02f15b0a81",
+  "uncompressed_sha256": "6cd5d8ecd2907cf8fdf0b30733d029c8a1bc2d99f0181a7aea1bc64a488cbb36",
+  "wall_seconds": 0.622791
+}

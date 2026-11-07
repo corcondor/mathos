@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "scope": "Exact constants/algebra for the written global binary-height theorem",
+  "theorem": "Every original solution in ell=1,j=i-3 satisfies n < 2^(24*delta)",
+  "upper_gap": "t < 231*n/(500*log(n)) for n>=2^600",
+  "threshold_bits": 600,
+  "inherited_delta_lower_bound": 25,
+  "log2_rational_lower": "693147/1000000",
+  "high_n_only_natural_log_coefficient": "1663510663509/100000000000",
+  "check_count": 19,
+  "checks": [
+    {
+      "label": "logarithmic_binomial_comparison_with_2xL_equals_2alpha",
+      "coefficient_identity": true
+    },
+    {
+      "label": "intrinsic_defect_finite_n_identity",
+      "coefficient_identity": true
+    },
+    {
+      "label": "six_term_integral_series_log2_lower",
+      "positive_margin": "335369/4546773000000"
+    },
+    {
+      "label": "truncated_exp_log2_upper",
+      "positive_margin": "13/6000"
+    },
+    {
+      "label": "x_less_than_one_percent",
+      "positive_margin": "88021/9902100"
+    },
+    {
+      "label": "binomial_bracket_exceeds_one_ten_thousandth",
+      "positive_margin": "276387/33007000000"
+    },
+    {
+      "label": "log_6y_less_than3",
+      "positive_margin": "1219/1350"
+    },
+    {
+      "label": "log48_less_than4",
+      "positive_margin": "208/81"
+    },
+    {
+      "label": "A_greater_than_n_cubed_over7_threshold",
+      "positive_margin": "4149515568880992958512407863691161151012446232242436899995657329690652811412908146399707048947103794288197886611300789182395151075411775307886874834113963687061181803401509523685355"
+    },
+    {
+      "label": "n_cubed_over7_greater_than16n_squared_threshold",
+      "positive_margin": "4149515568880992958512407863691161151012446232242436899995657329690652811412908146399707048947103794288197886611300789182395151075411775307886874834113963687061181803401509523685264"
+    },
+    {
+      "label": "ceil_a_less_than4n",
+      "positive_margin": "102700510329804575723182094626356238487558044248000313274892518909843657082469476623392749461440818908632897693629694532264279989116441438870200152144320601254764249634187360711213031/25"
+    },
+    {
+      "label": "four_times_3_plus_x_less_than13",
+      "positive_margin": "24/25"
+    },
+    {
+      "label": "positive_log_binomial_ratio_at_threshold",
+      "positive_margin": "259344723055062059907025491480697571938277889515152306249728583105665800713306759149981690559193987143012367913206299323899696942213235956742929677132122730441323862712594344957211/625"
+    },
+    {
+      "label": "ratio_bound_increases_above_threshold",
+      "positive_margin": "259344723055062059907025491480697571938277889515152306249728583105665800713306759149981690559193987143012367913206299323899696942213235956742929677132122730441323862712594345229711/2593447230550620599070254914806975719382778895151523062497285831056658007133067591499816905591939871430123679132062993238996969422132359567429296771321227304413238627125943452303360000"
+    },
+    {
+      "label": "alpha_squared_over_L_bound",
+      "positive_margin": "12799/16503500000"
+    },
+    {
+      "label": "nine_log_n_over_n_endpoint",
+      "positive_margin": "4149515568880992958512407863691161151012446232242436899995657329690652811412908146399707048947103794288197886611300789182395151075411775307886874834113963687061181803401505743685376"
+    },
+    {
+      "label": "n_over_nminus1_correction",
+      "positive_margin": "33196124551047943668099262909529289208099569857939495199965258637525222491303265171197656391576830354305583092890406313459161208603294202463094998672911709496489454427212076181483/33196124551047943668099262909529289208099569857939495199965258637525222491303265171197656391576830354305583092890406313459161208603294202463094998672911709496489454427212076189483000000"
+    },
+    {
+      "label": "high_n_coefficient_less_than24log2",
+      "positive_margin": "42136491/100000000000"
+    },
+    {
+      "label": "entire_low_n_range_covered_by_delta_ge_25",
+      "integer_identity": "24*25=600"
+    }
+  ],
+  "note_sha256": "42ada7b821e7de6d2f4aa8035f3dac20ac66b4694e83b487d63385c0cd52855c",
+  "checker_sha256": "9d480060d94f30ce326a7816981c87219d2b6d392bdd7f546a8842fe1c28daa7",
+  "limits": [
+    "The coefficient beta is a high-n bound, not a claimed global rational log-height constant",
+    "The global low-n range uses existing delta>=25; no new finite delta scan is used",
+    "Integral, monotonicity, and ceil arguments are written proofs rather than Lean certificates",
+    "No floating-point logarithm, arbitrary n scan, remote proof API, or original-equation solution is asserted"
+  ]
+}

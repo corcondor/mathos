@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "scope": "Independent rational margins and written proof review for the 24-delta appendix; not a separate full binomial formalization",
+  "note_sha256": "42ada7b821e7de6d2f4aa8035f3dac20ac66b4694e83b487d63385c0cd52855c",
+  "series_margin": "335369/4546773000000",
+  "binomial_margin_above_one_ten_thousandth": "276387/33007000000",
+  "finite_n_correction_margin": "12799/16503500000",
+  "beta": "1663510663509/100000000000",
+  "binary_height_margin": "42136491/100000000000",
+  "low_range": "600=24*25; inherited delta>=25; strict high-range argument includes n=2^600"
+}

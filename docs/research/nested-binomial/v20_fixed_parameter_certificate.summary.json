@@ -1,0 +1,40 @@
+{
+  "status": "PASS_COMPLETE_EXCLUSION_FOR_QUERIES",
+  "queries": [
+    {
+      "delta": 25,
+      "J": 17,
+      "branch": "small"
+    },
+    {
+      "delta": 25,
+      "J": 33,
+      "branch": "complement"
+    }
+  ],
+  "scope": "Every M,K and every G|E for the stated fixed parameter pairs; all n>=104, no numeric n cutoff",
+  "input_theory": "v19_canonical_defect_elimination.md, integer E0/E1 divisibility and n equations",
+  "elimination_note_sha256": "612c3973d28962340870bdfcab891fb549e2ce3af15faaf8c2a5ed073bb8d025",
+  "new_root_theorem": "L(n)/sqrt(n(n-1)) is strictly increasing for n>=2; retains L(n)>0",
+  "factor_discovery": "SymPy factorint, with separate complete recursive Lucas primality certificates",
+  "sympy_version": "1.14.0",
+  "producer_sha256": "43cfaa15151d1f3809b70b8ae503007e042ae19cc3e3ed706de5a2f940b4eaf6",
+  "counts": {
+    "coefficient_families": 1062,
+    "divisor_polynomials": 31682
+  },
+  "integer_root_records": [],
+  "undecided": [],
+  "claims_not_made": [
+    "unbounded delta or J solved",
+    "every local root satisfies original equation",
+    "Lean execution",
+    "DeepSeek API execution",
+    "global parameter exclusion from two example queries"
+  ],
+  "certificate_file": "v20_fixed_parameter_certificate.json.gz",
+  "certificate_sha256": "2fae3b054c771919bff0e876560075bf0e43f1ec8ff4aae33ce19eec1e849a45",
+  "uncompressed_sha256": "34b409508bbfbd27894e12a47fe6030ef3b07e7678c45412a4807e83aa6b740c",
+  "primality_certificate_count": 1111,
+  "wall_seconds": 0.67255
+}
