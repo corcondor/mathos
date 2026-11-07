@@ -1,0 +1,165 @@
+name: Nested binomial automatic verification and research
+
+on:
+  pull_request:
+    branches: [master, research/nested-binomial-2026-11-05]
+    paths:
+      - 'docs/research/nested-binomial/V[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*.md'
+      - 'docs/research/nested-binomial/PROGRESS_v[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*_verify.py'
+      - '.github/workflows/nested-binomial-publish-research.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'docs/research/nested-binomial/V[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*.md'
+      - 'docs/research/nested-binomial/PROGRESS_v[0-9]*.md'
+      - 'docs/research/nested-binomial/v[0-9]*_verify.py'
+      - '.github/workflows/nested-binomial-publish-research.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mathos-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile checker syntax and reproduce v30 result
+        run: |
+          python -m py_compile .github/scripts/nested_binomial_ai_proposal.py
+          python -m py_compile docs/research/nested-binomial/v30_local_crt_verify.py
+          python docs/research/nested-binomial/v30_local_crt_verify.py
+      - name: Verify changed version-specific scripts (no secrets available)
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          python - <<'PY'
+          import os, re, subprocess, sys
+          before=os.environ.get("BEFORE","")
+          if not re.fullmatch("[0-9a-f]{40}",before) or before=="0"*40:
+              before="HEAD^"
+          try:
+              files=subprocess.check_output(["git","diff","--name-only",before,"HEAD",
+                  "--","docs/research/nested-binomial"],text=True).splitlines()
+          except subprocess.CalledProcessError:
+              files=[]
+          scripts=[p for p in files if re.fullmatch(
+              r"docs/research/nested-binomial/v[0-9]+_[A-Za-z0-9_-]*verify\.py",p)]
+          for p in scripts:
+              print("Executing published numerical checker:",p,flush=True)
+              subprocess.run(["timeout","180",sys.executable,p],check=True)
+          print("Versioned numeric checks:",len(scripts),
+                "— no Lean/general theorem-completeness claim")
+          PY
+
+  independent-deepseek:
+    needs: offline-verification
+    if: github.event_name != 'pull_request' && github.repository == 'corcondor/mathos'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Actions secret without exposing its value
+        id: secret
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: |
+          if [[ -n "$MISTRAL_API_KEY" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Actions MISTRAL_API_KEY absent — no inference charged."
+          fi
+      - name: Choose newest newly published version
+        id: source
+        if: steps.secret.outputs.enabled == 'true'
+        env:
+          BEFORE: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          source=$(python - <<'PY'
+          import os,re,subprocess
+          from pathlib import Path
+          root=Path("docs/research/nested-binomial")
+          if os.environ.get("EVENT_NAME")=="workflow_dispatch":
+              files=[p.name for pattern in ("V[0-9]*.md","v[0-9]*.md","PROGRESS_v[0-9]*.md") for p in root.glob(pattern)]
+          else:
+              before=os.environ.get("BEFORE","")
+              if not re.fullmatch("[0-9a-f]{40}",before) or before=="0"*40:
+                  before="HEAD^"
+              try:
+                  files=subprocess.check_output(["git","diff","--diff-filter=A",
+                      "--name-only",before,"HEAD","--",str(root)],text=True).splitlines()
+                  files=[Path(p).name for p in files]
+              except subprocess.CalledProcessError:
+                  files=[]
+          files=[p for p in files if re.fullmatch(r"(?:V|v|PROGRESS_v)[0-9]+[A-Za-z0-9_.-]*\.md",p)]
+          files.sort(key=lambda x:(int(re.search(r"(?:V|v)([0-9]+)",x).group(1)),x))
+          print(files[-1] if files else "")
+          PY
+          )
+          echo "note=$source" >> "$GITHUB_OUTPUT"
+          [[ -n "$source" ]] || echo "::notice::No newly added V-numbered note; no API call."
+
+      - name: Ask DeepSeek for one testable new idea
+        id: ai
+        if: steps.source.outputs.note != ''
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          SOURCE_NOTE: ${{ steps.source.outputs.note }}
+        run: |
+          python .github/scripts/nested_binomial_ai_proposal.py \
+            --source "$SOURCE_NOTE" \
+            --output "docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md"
+
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.source.outputs.note != ''
+        with:
+          name: deepseek-unverified-${{ github.run_id }}
+          path: docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Publish hypothesis as UNVERIFIED draft PR
+        if: steps.ai.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_NOTE: ${{ steps.source.outputs.note }}
+        run: |
+          branch="auto/deepseek-${{ github.run_id }}"
+          git fetch origin master
+          git switch -c "$branch" origin/master
+          git config user.name "mathos-research-bot"
+          git config user.email "mathos-research-bot@users.noreply.github.com"
+          git add "docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md"
+          git commit -m "proposal: DeepSeek hypothesis from $SOURCE_NOTE (UNVERIFIED)"
+          if git push origin "HEAD:$branch"; then
+            gh pr create --draft --base master --head "$branch" \
+              --title "UNVERIFIED DeepSeek research from $SOURCE_NOTE" \
+              --body "Independent AI hypothesis generated from $SOURCE_NOTE. NOT verified mathematics; review and test before promoting to research results." \
+            || echo "::warning::PR creation is disabled by GitHub repository settings; use the branch/artifact."
+          else
+            echo "::warning::Push not permitted; proposal is available as a workflow artifact."
+          fi

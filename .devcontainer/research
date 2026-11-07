@@ -21,16 +21,19 @@ export DEEPSEEK_CACHE_COMMAND=$repo/.devcontainer/cache-mathlib
 fail() { printf '%s\n' "$*" >&2; exit 1; }
 
 command=${1:-help}
-[[ $# -le 1 ]] || fail 'Usage: .devcontainer/research {run|status|pause|logs|setup|verify}'
+[[ $# -le 1 ]] || fail 'Usage: .devcontainer/research {run|auto|auto-stop|auto-status|status|pause|logs|setup|verify}'
 if [[ $command == run ]]; then
-    # Keep the value in Bash and export it only to the Python runner.
+    # Keep the value in Bash and export it only to the Python goal runner.
     export -n MISTRAL_API_KEY
+elif [[ $command == auto || $command == autostart ]]; then
+    # The opted-in watchdog needs to inherit the existing Codespaces secret.
+    :
 else
     unset MISTRAL_API_KEY
 fi
 case "$command" in
-    run|status|pause|logs|prepare|setup|verify) ;;
-    help) printf '%s\n' 'Usage: .devcontainer/research {run|status|pause|logs|setup|verify}'; exit 0 ;;
+    run|auto|autostart|auto-stop|auto-status|status|pause|logs|prepare|setup|verify) ;;
+    help) printf '%s\n' 'Usage: .devcontainer/research {run|auto|auto-stop|auto-status|status|pause|logs|setup|verify}'; exit 0 ;;
     *) fail "Unknown command: $command" ;;
 esac
 [[ ! -L $runtime && ! -L $run_dir ]] || fail 'Refusing a symlink for the private runtime or run directory.'
@@ -133,11 +136,61 @@ case "$command" in
             printf '%s\n' 'Starting a new run with the checked-in Lean modules. The earlier 179-action state was not imported.'
         fi
         printf '%s\n' 'Using the standard DeepSeek research settings.'
+        options=()
+        if [[ -n ${MATHOS_RESEARCH_MAX_ACTIONS:-} ]]; then
+            options+=(--max-actions "$MATHOS_RESEARCH_MAX_ACTIONS")
+        fi
+        if [[ -n ${MATHOS_RESEARCH_MAX_HOURS:-} ]]; then
+            options+=(--max-hours "$MATHOS_RESEARCH_MAX_HOURS")
+        fi
+        if [[ -n ${MATHOS_RESEARCH_MAX_COMPLETION_TOKENS:-} ]]; then
+            options+=(--max-completion-tokens "$MATHOS_RESEARCH_MAX_COMPLETION_TOKENS")
+        fi
+        if [[ -n ${MATHOS_RESEARCH_MAX_API_CALLS:-} ]]; then
+            options+=(--max-api-calls "$MATHOS_RESEARCH_MAX_API_CALLS")
+        fi
         MISTRAL_API_KEY=$MISTRAL_API_KEY python3 -u "$formal/deepseek_goal.py" run --run-dir "$run_dir" \
-            --run-origin codespaces \
+            --run-origin codespaces "${options[@]}" \
             2>&1 | tee -a "$run_dir/runner.log"
         ;;
+    auto)
+        [[ -n ${MISTRAL_API_KEY:-} ]] ||
+            fail 'Existing MISTRAL_API_KEY must be accessible in this Codespace.'
+        [[ $(git branch --show-current) == "$branch" ]] || fail "Open the $branch branch first."
+        [[ -f $runtime/verified ]] || fail 'Lean setup must pass before enabling the autopilot.'
+        mkdir -p -- "$run_dir"
+        rm -f "$run_dir/PAUSE"
+        touch "$runtime/autopilot.enabled"
+        bash "$repo/.devcontainer/research" autostart
+        ;;
+    autostart)
+        [[ -f $runtime/autopilot.enabled ]] || exit 0
+        [[ -n ${MISTRAL_API_KEY:-} ]] ||
+            fail 'Autopilot enabled, but the existing Codespaces API secret is unavailable.'
+        nohup python3 -u "$repo/.devcontainer/research_autopilot.py" \
+            </dev/null >>"$runtime/autopilot.log" 2>&1 &
+        printf '%s\n' 'Research autopilot launched. Its private log is .mathos-codespaces/autopilot.log.'
+        ;;
+    auto-stop)
+        rm -f "$runtime/autopilot.enabled"
+        if [[ -d $run_dir ]]; then printf '%s\n' 'Pause requested by user.' > "$run_dir/PAUSE"; fi
+        printf '%s\n' 'Autopilot disabled. Current bounded job will observe PAUSE; its state is retained.'
+        ;;
+    auto-status)
+        if [[ -f $runtime/autopilot.enabled ]]; then
+            printf '%s\n' 'Autopilot enabled (not necessarily an active process).'
+        else
+            printf '%s\n' 'Autopilot disabled.'
+        fi
+        if [[ -f $runtime/autopilot-ledger.json ]]; then
+            cat "$runtime/autopilot-ledger.json"
+        fi
+        if [[ -f $runtime/autopilot.log ]]; then tail -n 18 "$runtime/autopilot.log"; fi
+        ;;
     status|pause)
+        if [[ $command == pause ]]; then
+            rm -f "$runtime/autopilot.enabled"
+        fi
         if [[ ! -d $run_dir ]]; then
             printf '%s\n' 'No Codespaces run has started. The checked-in proof modules are available.'
         else

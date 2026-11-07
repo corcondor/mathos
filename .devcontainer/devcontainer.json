@@ -1,12 +1,18 @@
 {
   "name": "mathos Lean research",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/sshd:1": {}
   },
   "remoteUser": "vscode",
   "customizations": {
-    "codespaces": { "openFiles": [".devcontainer/README.md"] }
+    "codespaces": {
+      "openFiles": [
+        ".devcontainer/README.md"
+      ]
+    }
   },
   "secrets": {
     "MISTRAL_API_KEY": {
@@ -14,5 +20,6 @@
     }
   },
   "postCreateCommand": "env -u MISTRAL_API_KEY bash .devcontainer/research prepare",
-  "waitFor": "postCreateCommand"
+  "waitFor": "postCreateCommand",
+  "postStartCommand": "bash .devcontainer/research autostart"
 }
