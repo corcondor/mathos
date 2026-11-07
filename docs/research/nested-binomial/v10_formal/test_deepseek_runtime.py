@@ -136,6 +136,13 @@ class ReasoningRuntimeTests(unittest.TestCase):
         self.assertEqual(request.get_header('Authorization'), 'Bearer offline-test-key')
         self.assertNotIn('Authorization', request.headers)
 
+    def test_malformed_key_fails_without_exposing_it_or_sending(self):
+        with patch.dict(os.environ, {'MISTRAL_API_KEY': 'offline-test-key\n'}), \
+                patch.object(runtime.urllib.request, 'urlopen') as send:
+            with self.assertRaisesRegex(RuntimeError, '^MISTRAL_API_KEY is missing or contains invalid characters$'):
+                runtime.api([])
+            send.assert_not_called()
+
     def test_explicit_capacity_failure_is_retried_without_downgrading(self):
         calls = []
 

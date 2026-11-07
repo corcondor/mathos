@@ -178,6 +178,9 @@ def completion_text(response):
 
 
 def api(messages, *, response_format="json_object", reasoning_effort="profile"):
+    key = os.environ.get("MISTRAL_API_KEY", "")
+    if not re.fullmatch(r"[!-~]+", key):
+        raise RuntimeError("MISTRAL_API_KEY is missing or contains invalid characters")
     settings = load_api_settings()
     if reasoning_effort != "profile":
         if reasoning_effort not in (None, "high", "max"):
@@ -217,7 +220,6 @@ def api(messages, *, response_format="json_object", reasoning_effort="profile"):
             request = urllib.request.Request(
                 "https://api.mistral.ai/v1/chat/completions", data=json.dumps(body).encode(),
                 headers={"Content-Type": "application/json"})
-            key = os.environ["MISTRAL_API_KEY"]
             request.add_unredirected_header("Authorization", "Bearer " + key)
             with urllib.request.urlopen(request, timeout=effective_settings["request_timeout_seconds"]) as response:
                 result = json.load(response)
