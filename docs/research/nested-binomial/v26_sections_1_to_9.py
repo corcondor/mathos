@@ -164,4 +164,3 @@ for key,v in counts.items():
  print(f'm={key}:',v['counts'])
 print('PASS: no necessary-condition candidates in |m|<=9, assuming v23 rho>=32770')
 print('certificate:',path)
-
