@@ -37,4 +37,3 @@ assert counts=={'divisors_checked':3744,'positive_rho_from_divisors':346,
 print('PASS independent pure-Python divisor enumeration')
 print('counts:',counts)
 print('primitive points:',solutions)
-
