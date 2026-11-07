@@ -91,3 +91,25 @@ python3 docs/research/nested-binomial/v10_formal/deepseek_goal.py pause
 
 `run` resumes the saved goal with a fresh explicitly bounded execution budget.
 There is no claim that `/goal` is a native DeepSeek API command.
+
+
+## User-submitted v30 research context (2026-11-07)
+
+After synchronizing the authorized research branch, inspect
+\`docs/research/nested-binomial/DEEPSEEK_V30_HANDOFF_ja.md\`,
+\`docs/research/nested-binomial/V30_LOCAL_CRT_NOTE_ja.md\`, and
+\`docs/research/nested-binomial/v30_local_crt_verify.py\`.
+The user specifically requested work on the unresolved deep 5-adic collision
+\`T ≡ 13,18 (mod 25)\` and certified Mordell–Weil rank/generators for
+specialized elliptic curves. GitHub Issue #3 records the request.
+
+**Scope boundary:** This is *research context*, NOT a change to the immutable
+\`goal.json\` or the exact two final Lean targets. If a concrete lemma from this
+work demonstrably helps the frozen targets, inspect it and pursue it with the
+normal fixed-job + Lean-verification workflow. If it is logically unrelated,
+report it as a separate pending goal instead of silently diverting this agent,
+weakening final statements, or claiming v30 is solved.
+
+A GitHub commit or Issue does not by itself invoke DeepSeek. Do not claim this
+context was received by a running Codespaces process until its checked-out
+workspace has synced and the actual execution log records an inspection/action.
