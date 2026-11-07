@@ -165,4 +165,3 @@ print('PASS: 4R integer lifts sieve, all b|486, no rho upper bound')
 print('4R counts:',counts)
 print('4R primitive lifts:',primitive)
 print('certificate:',out)
-
