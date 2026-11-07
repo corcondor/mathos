@@ -1,0 +1,5 @@
+PASS symbolic: rational 3-torsion, Tate normal form, base reparametrization
+PASS symbolic: 3-isogenous curve and discriminant, 2 elliptic quotients of genus 2
+PASS arithmetic: v19 cubic cover, gcd prime support, all 16 auxiliary points
+PASS independent group-law and Velu isogeny checks on 16 points
+
