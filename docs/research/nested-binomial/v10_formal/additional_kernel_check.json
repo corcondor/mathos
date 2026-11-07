@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-07T13:59:39.454970+00:00",
+  "checked_at_utc": "2026-11-07T14:11:49.784571+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -966,6 +966,38 @@
         "/workspaces/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorDefectPellConcrete.lean:50:61: warning: Variable name `hs` is not explicitly referenced.",
         "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
       ]
+    },
+    {
+      "source": "CFCurveRecovery.lean",
+      "source_sha256": "bec24de37e55b843c3cd7cac60e5d9bb8bbc9ead93b9e93ba6c96c32933c50b2",
+      "log": "CFCurveRecovery.additional_check.txt",
+      "log_sha256": "b4b1cefc763ed07c4f17f8e35b92ac36a3a8a304c5f40c1b0d1ebbaa8b8264e6",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "-DmaxHeartbeats=400000",
+        "-DmaxRecDepth=1024",
+        "--root=/workspaces/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-9qd9d03y/CFCurveRecovery.olean",
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFCurveRecovery.lean"
+      ],
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.008
+        }
+      ],
+      "warnings": [
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFCurveRecovery.lean:95:76: warning: Variable name `hT` is not explicitly referenced.",
+        "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+      ]
     }
   ],
   "scope": "Recovery, local-square, CRT and CF-core modules listed in records; not complete curve exclusion",
@@ -973,7 +1005,7 @@
   "finite_search_completeness_formalized": false,
   "whole_equation_solved": false,
   "reused_verification": {
-    "commit": "4b74f4a268a8a6501eb7ccc698f9c0f16dc7fa1c",
+    "commit": "8443435da8da92cc26a26e2931174825c4a49760",
     "sources": [
       "CFAnalyticBounds.lean",
       "CFApproximationCore.lean",
@@ -993,6 +1025,7 @@
       "ThirtyCofactorCubePrimeExtraction.lean",
       "ThirtyCofactorDefectBridge.lean",
       "ThirtyCofactorDefectKRange.lean",
+      "ThirtyCofactorDefectPellConcrete.lean",
       "ThirtyCofactorDefectPellReductionC.lean",
       "ThirtyCofactorExponentDomain.lean",
       "ThirtyCofactorInputs.lean",

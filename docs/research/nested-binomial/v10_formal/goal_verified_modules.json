@@ -21,6 +21,7 @@
     "ThirtyCofactorDefectBridge",
     "ThirtyCofactorDefectPellReductionC",
     "ThirtyCofactorDefectKRange",
-    "ThirtyCofactorDefectPellConcrete"
+    "ThirtyCofactorDefectPellConcrete",
+    "CFCurveRecovery"
   ]
 }
