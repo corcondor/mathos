@@ -107,10 +107,9 @@ case "$command" in
         else
             printf '%s\n' 'Starting a new run with the checked-in Lean modules. The earlier 179-action state was not imported.'
         fi
-        printf '%s\n' 'Limits for this round: 8 API attempts, 200,000 output tokens, 8 actions, 1 hour of API scheduling.'
+        printf '%s\n' 'Using the standard DeepSeek research settings.'
         MISTRAL_API_KEY=$MISTRAL_API_KEY python3 -u "$formal/deepseek_goal.py" run --run-dir "$run_dir" \
-            --max-actions 8 --max-hours 1 --max-completion-tokens 200000 \
-            --max-api-calls 8 --run-origin codespaces \
+            --run-origin codespaces \
             2>&1 | tee -a "$run_dir/runner.log"
         ;;
     status|pause)
