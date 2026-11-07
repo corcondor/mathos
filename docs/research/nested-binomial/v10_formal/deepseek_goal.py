@@ -350,7 +350,8 @@ class GoalAgent:
         if digest(json.dumps(frozen, sort_keys=True)) != job['config_sha256'] or frozen != job['config']:
             raise ValueError('Frozen theorem contract changed')
         run = directory / ('run-' + str(len(job['runs']) + 1))
-        command = ['lake', 'env', sys.executable, str(ROOT / 'deepseek_goal_worker.py'), job_id,
+        command = ['lake', 'env', 'env', '-u', 'LD_LIBRARY_PATH', sys.executable,
+                   str(ROOT / 'deepseek_goal_worker.py'), job_id,
                    '--job-config', str(config_path), '--run-dir', str(run), '--attempts', str(attempts),
                    '--harness-memory', str(directory / 'failure_memory.json')]
         seeds = self.recover_seeds(job)
@@ -539,7 +540,8 @@ class GoalAgent:
         if not pending: return {'published': [], 'message': 'No new verified module'}
         synchronization = self.sync_research()
         env = lean_environment()
-        check = subprocess.run(['lake', 'env', sys.executable, str(ROOT / 'check_additional_formalization.py')],
+        check = subprocess.run(['lake', 'env', 'env', '-u', 'LD_LIBRARY_PATH', sys.executable,
+                                str(ROOT / 'check_additional_formalization.py')],
                                cwd=MATHLIB, env=env, capture_output=True, text=True, timeout=1800)
         if check.returncode:
             raise ValueError('Actual full Lean verification failed:\n' + (check.stdout + check.stderr)[-20000:])
@@ -660,7 +662,9 @@ class GoalAgent:
             path = rooted(MATHLIB / 'Mathlib', args['path'])
             if path.suffix != '.lean': raise ValueError('Cache only Lean library files')
             env = lean_environment()
-            result = subprocess.run(['lake', 'exe', 'cache', 'get', str(path.relative_to(MATHLIB))],
+            cache_command = env.get('DEEPSEEK_CACHE_COMMAND')
+            command = [cache_command] if cache_command else ['lake', 'exe', 'cache', 'get']
+            result = subprocess.run([*command, str(path.relative_to(MATHLIB))],
                                     cwd=MATHLIB, env=env, capture_output=True, text=True, timeout=600)
             return {'exit_code': result.returncode, 'output': (result.stdout + result.stderr)[-12000:]}
         if name == 'propose_job': return self.propose(args)

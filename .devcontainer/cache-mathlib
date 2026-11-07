@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $(lean --print-prefix) == "$LEAN_SYSROOT" ]]; then
+    exec lake exe cache get "$@"
+fi
+
+# The pinned cache executable asks lean for its prefix instead of consulting
+# LEAN_SYSROOT. Adapt that query locally when the executable reports a bad path.
+tools=$(mktemp -d)
+trap 'rm -rf -- "$tools"' EXIT
+cat >"$tools/lean" <<'EOF'
+#!/usr/bin/env bash
+if [[ $# == 1 && $1 == --print-prefix ]]; then
+    printf '%s\n' "$LEAN_SYSROOT"
+else
+    exec "$LEAN_SYSROOT/bin/lean" "$@"
+fi
+EOF
+cat >"$tools/system-tool" <<'EOF'
+#!/usr/bin/env bash
+unset LD_LIBRARY_PATH
+exec "/usr/bin/${0##*/}" "$@"
+EOF
+chmod 700 "$tools/lean" "$tools/system-tool"
+ln -s system-tool "$tools/curl"
+ln -s system-tool "$tools/git"
+
+lake build cache
+lake env bash -c 'export PATH="$1:$PATH"; shift; exec .lake/build/bin/cache "$@"' \
+    mathlib-cache "$tools" get "$@"

@@ -16,6 +16,7 @@ export ELAN_HOME=$runtime/elan
 export DEEPSEEK_MATHLIB=$runtime/mathlib
 export PATH=$ELAN_HOME/bin:$PATH
 export MATHLIB_CACHE_DIR=$runtime/mathlib-cache
+export DEEPSEEK_CACHE_COMMAND=$repo/.devcontainer/cache-mathlib
 
 fail() { printf '%s\n' "$*" >&2; exit 1; }
 
@@ -85,7 +86,7 @@ setup() (
     check_pins
     cd -- "$DEEPSEEK_MATHLIB"
     # Mathlib.Tactic and the explicit imports cover the existing checked modules.
-    lake exe cache get Mathlib.Tactic Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass \
+    "$DEEPSEEK_CACHE_COMMAND" Mathlib.Tactic Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass \
         Mathlib.Data.Nat.ChineseRemainder Mathlib.Data.Nat.Factorization.Basic \
         Mathlib.Data.Nat.GCD.BigOperators Mathlib.NumberTheory.Padics.PadicVal.Basic
 )
@@ -94,7 +95,8 @@ verify() {
     rm -f -- "$runtime/verified"
     check_pins
     cd -- "$DEEPSEEK_MATHLIB"
-    lake env python3 "$formal/check_additional_formalization.py" --output-dir "$runtime/verification"
+    lake env env -u LD_LIBRARY_PATH python3 "$formal/check_additional_formalization.py" \
+        --output-dir "$runtime/verification"
     touch -- "$runtime/verified"
 }
 
