@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Exact finite constants and symbolic identities supporting a written universal proof; not Lean verification.",
+  "note_sha256": "8f921aac18023e6f2d9209bfac1a293dbdf6f72a3bb11dabd8857be84d34e0e1",
+  "checks_count": 27,
+  "checks": {
+    "integral_lower_log2": true,
+    "log_n_lower_constant": true,
+    "log_n_lower_above_100": true,
+    "x_upper_constant": true,
+    "x_below_one_hundredth": true,
+    "exponential_log2_upper": true,
+    "derivative_log_below_three": true,
+    "log48_below_four": true,
+    "main_linear_constant": true,
+    "positive_gap_margin": true,
+    "A_lower_at_21": true,
+    "A_above_16n_squared": true,
+    "b_below_four_n": true,
+    "four_a_over_n_below_13": true,
+    "threshold_log_below_180": true,
+    "threshold_binomial_margin": true,
+    "threshold_log_over_n": true,
+    "threshold_n_ratio": true,
+    "square_alpha_over_log_bound": true,
+    "defect_exact_coefficient": true,
+    "defect_coefficient_below_17": true,
+    "lower_range_defect_margin": true,
+    "base_two_height_conversion": true,
+    "bit_height_reduction": true,
+    "quadratic_height_identity": true,
+    "analytic_constant_identity": true,
+    "A_exp_lower_margin": true
+  },
+  "new_bounds": {
+    "upper_gap_threshold": "n >= 2^256",
+    "upper_gap": "r - 3*n < 47*n/(100*log(n))",
+    "defect_height": "log(n) < 17*delta; n < 2^(25*delta)",
+    "low_range_input": "Previously established delta >= 25"
+  },
+  "unresolved": "delta is unbounded; the original equation is unsolved"
+}

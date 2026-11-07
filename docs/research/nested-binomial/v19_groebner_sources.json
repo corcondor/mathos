@@ -1,0 +1,79 @@
+{
+  "accessed_utc": "2026-11-06",
+  "policy": "Primary papers and official project documentation only. Abstract-only or inaccessible materials are not used for a new theorem.",
+  "sources": [
+    {
+      "id": "DRR2025",
+      "authors": ["Alexander Demin", "Fabrice Rouillier", "Joao Ruiz"],
+      "title": "Reading Rational Univariate Representations on lexicographic Groebner bases",
+      "first_submitted": "2024-02-11",
+      "version": "v3",
+      "version_date": "2025-05-23",
+      "url": "https://arxiv.org/abs/2402.07141v3",
+      "full_text_url": "https://arxiv.org/html/2402.07141v3",
+      "retrieval_refs": ["turn42view0", "turn50view3", "turn55view0", "turn55view1"],
+      "read_scope": "Abstract, introduction, Section 2, Theorem 1 and separation discussion in the full primary text.",
+      "conditions": "A zero-dimensional ideal over a field; the proofs assume characteristic zero or sufficiently large characteristic where needed. A separating form must be certified for an actual RUR. Shape position is not assumed in the general algorithm.",
+      "used_for": "Determine why the fixed-J rational surface is not yet an eligible finite RUR input; design a finite divisor-domain elimination before seeking an empty-root certificate.",
+      "not_claimed": "No integer-point finiteness theorem, installation of the authors' software, or RUR execution is claimed. Our small-prime Bezout certificates are verified directly rather than by invoking the paper in small characteristic."
+    },
+    {
+      "id": "RUR_JL_2026",
+      "authors": ["RationalUnivariateRepresentation.jl project maintainers"],
+      "title": "RationalUnivariateRepresentation.jl official documentation",
+      "documentation_generated": "2026-10-28",
+      "url": "https://newrur.gitlabpages.inria.fr/RationalUnivariateRepresentation.jl/",
+      "retrieval_refs": ["turn42view2"],
+      "conditions": "Zero-dimensional polynomial systems over the rationals or a prime field; radical parametrization, optional separating-form and multiplicity information.",
+      "used_for": "Current implementation and input-domain confirmation.",
+      "not_claimed": "Not installed or executed."
+    },
+    {
+      "id": "BES2023",
+      "authors": ["Jeremy Berthomieu", "Christian Eder", "Mohab Safey El Din"],
+      "title": "New efficient algorithms for computing Groebner bases of saturation ideals (F4SAT) and colon ideals (Sparse-FGLM-colon)",
+      "first_submitted": "2022-02-27",
+      "version": "v2",
+      "version_date": "2023-07-27",
+      "url": "https://arxiv.org/abs/2202.13387v2",
+      "full_text_url": "https://arxiv.org/html/2202.13387v2",
+      "retrieval_refs": ["turn61view0", "turn63view1"],
+      "read_scope": "Introduction and algebraic setup in the primary full text.",
+      "conditions": "Polynomial ideal I and polynomial phi over a field. Saturation is (I + <1-t*phi>) intersected with the original polynomial ring. Its variety is the Zariski closure of the open set difference; finiteness does not follow merely from saturation.",
+      "used_for": "Rabinowitsch saturation by w*n*(n-1), with nonzero and integer conditions retained separately.",
+      "not_claimed": "The F4SAT or Sparse-FGLM-colon implementation was not run."
+    },
+    {
+      "id": "MSOLVE_2026",
+      "authors": ["msolve project maintainers"],
+      "title": "Official msolve release list",
+      "release": "0.11.0",
+      "release_date": "2026-10-09",
+      "url": "https://msolve.lip6.fr/binaries/index.html",
+      "retrieval_refs": ["turn42view3", "turn50view2"],
+      "used_for": "Verify recent maintained implementation status as of the access date.",
+      "not_claimed": "No binary was installed or run; published benchmarks are not our benchmarks."
+    },
+    {
+      "id": "SYMPY_1_14",
+      "authors": ["SymPy development team"],
+      "title": "Polynomials Manipulation Module Reference",
+      "version": "1.14.0",
+      "url": "https://docs.sympy.org/latest/modules/polys/reference.html",
+      "retrieval_refs": ["turn50view1", "turn55view2"],
+      "used_for": "Actual resultant, lexicographic Groebner basis, gcdex and zero-dimensionality APIs in the executed producer.",
+      "conditions": "Explicit coefficient domain QQ or the stated prime field. The independent verifier does not use SymPy."
+    },
+    {
+      "id": "DR2026_ABSTRACT_ONLY",
+      "authors": ["Alexander Demin", "Fabrice Rouillier"],
+      "title": "Fast Rational Univariate Representation via Gaussian Elimination",
+      "first_submitted": "2026-07-07",
+      "url": "https://arxiv.org/abs/2607.06397",
+      "retrieval_refs": ["turn39academia8", "turn59academia36"],
+      "read_scope": "Primary arXiv search metadata and abstract only; direct abstract/full-text opens failed with DisabledError.",
+      "used_for": "Bibliographic lead only, corroborated by the accessible current official package documentation.",
+      "not_claimed": "No theorem from this unread full text is used."
+    }
+  ]
+}

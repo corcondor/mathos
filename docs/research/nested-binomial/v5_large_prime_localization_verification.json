@@ -1,0 +1,97 @@
+{
+  "scope": "Small formula checks only; no claim to enumerate all primes or all solutions.",
+  "exact_constant_checks": {
+    "negative_error_bound": "3564997/18469506",
+    "less_than_one_quarter": true,
+    "positive_error_bound": "532/839523",
+    "less_than_one_thirteenth": true
+  },
+  "certified_localization_examples": [
+    {
+      "p": 23,
+      "first_allowed_integer": 12,
+      "G_at_first_integer_rational_interval": [
+        "-7878901193426588292137/100000000000000000000",
+        "-984862649178323536517/12500000000000000000"
+      ],
+      "conclusion": "G is already negative; every larger j is excluded."
+    },
+    {
+      "p": 101,
+      "last_integer_with_G_positive": 51,
+      "G_at_that_integer_rational_interval": [
+        "59450683389518669856687/50000000000000000000",
+        "951210934232298717707/800000000000000000"
+      ],
+      "next_integer": 52,
+      "G_at_next_integer_rational_interval": [
+        "-6692762256613746456633/25000000000000000000",
+        "-26771049026454985826531/100000000000000000000"
+      ],
+      "all_j_excluded_by_G": true,
+      "reason": "G(j,p) > 1/3 at the last positive integer; all others are ruled out by monotonicity."
+    },
+    {
+      "p": 1009,
+      "last_integer_with_G_positive": 515,
+      "G_at_that_integer_rational_interval": [
+        "498815258427312080480431/25000000000000000000",
+        "79810441348369932876869/4000000000000000000"
+      ],
+      "next_integer": 516,
+      "G_at_next_integer_rational_interval": [
+        "-192026913414034316158293/100000000000000000000",
+        "-48006728353508579039573/25000000000000000000"
+      ],
+      "all_j_excluded_by_G": true,
+      "reason": "G(j,p) > 1/3 at the last positive integer; all others are ruled out by monotonicity."
+    },
+    {
+      "p": 1000003,
+      "last_integer_with_G_positive": 505961,
+      "G_at_that_integer_rational_interval": [
+        "5634869465485790391899683/20000000000000000000",
+        "1760896707964309497468651/6250000000000000000"
+      ],
+      "next_integer": 505962,
+      "G_at_next_integer_rational_interval": [
+        "-4216492805811080867084781389/100000000000000000000",
+        "-1054123201452770216771195347/25000000000000000000"
+      ],
+      "all_j_excluded_by_G": true,
+      "reason": "G(j,p) > 1/3 at the last positive integer; all others are ruled out by monotonicity."
+    }
+  ],
+  "exact_harmonic_identity_checks": [
+    {
+      "p": 53,
+      "j": 31,
+      "H_j_minus_1_mod_p": 0,
+      "predicted_negative_scaled_residual_mod_p5": 257130878,
+      "actual_negative_scaled_residual_mod_p5": 257130878,
+      "identity_verified": true,
+      "L_bit_length": 30171,
+      "X_bit_length": 34408
+    },
+    {
+      "p": 61,
+      "j": 51,
+      "H_j_minus_1_mod_p": 0,
+      "predicted_negative_scaled_residual_mod_p5": 56348140,
+      "actual_negative_scaled_residual_mod_p5": 56348140,
+      "identity_verified": true,
+      "L_bit_length": 59308,
+      "X_bit_length": 96301
+    },
+    {
+      "p": 109,
+      "j": 65,
+      "H_j_minus_1_mod_p": 0,
+      "predicted_negative_scaled_residual_mod_p5": 3592953157,
+      "actual_negative_scaled_residual_mod_p5": 3592953157,
+      "identity_verified": true,
+      "L_bit_length": 153022,
+      "X_bit_length": 177662
+    }
+  ]
+}

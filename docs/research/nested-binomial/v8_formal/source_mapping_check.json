@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "all_rows_exactly_match_frozen_JSON": true,
+  "rows": 2903,
+  "batches": 59,
+  "source_sha256": "7fb8e92456fc5808364183f9efa3d7cd8e65726c1e572f8f471541e305941e83",
+  "certificate_sha256": "4e70712950132c869f875bc26bb9fa14bc8c858969655294bea5e19758c44126"
+}

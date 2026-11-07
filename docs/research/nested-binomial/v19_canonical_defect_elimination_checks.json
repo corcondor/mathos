@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "sympy_version": "1.14.0",
+  "cas": [
+    {
+      "epsilon": 0,
+      "basis": [
+        "-6*n + r**2 + 8",
+        "n**2 + 2",
+        "-34*c/5 + h*n + h/5",
+        "c*n - c/5 + 3*h/10",
+        "68*c**2/3 - 4*c*h/3 + h**2"
+      ],
+      "elimination_generator": "(68*c**2 - 4*c*h + 3*h**2)/3",
+      "is_zero_dimensional": false,
+      "saturation_factor": "c*h*n*(n-1)",
+      "saturated_basis": [
+        "-6*n + r**2 + 8",
+        "n**2 + 2",
+        "-34*c/5 + h*n + h/5",
+        "c*n - c/5 + 3*h/10",
+        "68*c**2/3 - 4*c*h/3 + h**2"
+      ],
+      "saturation_unchanged": true,
+      "iterated_resultant": "4*(68*c**2 - 4*c*h + 3*h**2)**2",
+      "raw_resultant_has_unnecessary_square": true
+    },
+    {
+      "epsilon": 1,
+      "basis": [
+        "-6*n + r**2 - 2*r + 9",
+        "75*c*n/4 + 33*c/2 - 3*h*n + h*r + 5*h/2",
+        "3*c*n + c*r - 9*c/2 + h*n/2 + h",
+        "n**2 + 2",
+        "-921*c**2*n/38 + 219*c**2/19 - 242*c*h/19 + h**2*n + 2*h**2/19",
+        "-21*c**2*n/19 - 141*c**2/38 + c*h*n - 2*c*h/19 + 3*h**2/19",
+        "c**3*n - 3761*c**3/5539 + 6433*c**2*h/16617 - 26*c*h**2/16617 + 38*h**3/5539",
+        "2601*c**4/4 - 146*c**3*h + 101*c**2*h**2/3 - 4*c*h**3/3 + h**4"
+      ],
+      "elimination_generator": "(7803*c**4 - 1752*c**3*h + 404*c**2*h**2 - 16*c*h**3 + 12*h**4)/12",
+      "is_zero_dimensional": false,
+      "saturation_factor": "c*h*n*(n-1)",
+      "saturated_basis": [
+        "-6*n + r**2 - 2*r + 9",
+        "75*c*n/4 + 33*c/2 - 3*h*n + h*r + 5*h/2",
+        "3*c*n + c*r - 9*c/2 + h*n/2 + h",
+        "n**2 + 2",
+        "-921*c**2*n/38 + 219*c**2/19 - 242*c*h/19 + h**2*n + 2*h**2/19",
+        "-21*c**2*n/19 - 141*c**2/38 + c*h*n - 2*c*h/19 + 3*h**2/19",
+        "c**3*n - 3761*c**3/5539 + 6433*c**2*h/16617 - 26*c*h**2/16617 + 38*h**3/5539",
+        "2601*c**4/4 - 146*c**3*h + 101*c**2*h**2/3 - 4*c*h**3/3 + h**4"
+      ],
+      "saturation_unchanged": true,
+      "iterated_resultant": "3*(7803*c**4 - 1752*c**3*h + 404*c**2*h**2 - 16*c*h**3 + 12*h**4)",
+      "raw_resultant_has_unnecessary_square": false
+    }
+  ],
+  "constants": {
+    "ratio_upper_bound": "45/4",
+    "small_norm_endpoint": "6443/8",
+    "complement_norm_endpoint": "40062681/64",
+    "small_norm_delta_bound": "57987/2",
+    "complement_norm_delta_bound": "3245077161/4",
+    "small_n_squared_coefficient": "1744740/7",
+    "complement_n_squared_coefficient": "51539937460/7"
+  },
+  "integer_bezout_certificates": 2,
+  "regression": {
+    "inherited_certificate_uncompressed_sha256": "bf0c86a2fb4effd4ad2c559d72666cd17061d2b314ed5f21e1c4570956fa218d",
+    "previous_candidates": 93,
+    "branch_checks": 186,
+    "examples": [
+      {
+        "epsilon": 0,
+        "delta": 13,
+        "C": 39,
+        "K": 352,
+        "c": 39,
+        "h": 352,
+        "G": 2,
+        "E": 840456,
+        "n_decimal_digits": 41,
+        "J_decimal_digits": 79
+      },
+      {
+        "epsilon": 1,
+        "delta": 13,
+        "C": 39,
+        "K": 352,
+        "c": 39,
+        "h": 352,
+        "G": 3,
+        "E": 643853069649,
+        "n_decimal_digits": 41,
+        "J_decimal_digits": 79
+      }
+    ],
+    "scope": "Supporting regression only; these candidates were already excluded in v19"
+  },
+  "certificate_sha256": "dade04d342679b26c403923e6e34260351777d97cb91c02b33709326fc13113b",
+  "proof_scope": "Exact identities plus written inequalities; no Lean execution"
+}

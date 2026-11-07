@@ -1,0 +1,34 @@
+{
+  "module": "GeometricDescent",
+  "imports": "import Mathlib.Tactic\nimport Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\nimport GeometricReduction",
+  "definitions": "def iso3X (c x : ℚ) : ℚ := (x ^ 3 + 4 * c ^ 2) / x ^ 2\ndef iso3Y (c x z : ℚ) : ℚ := z * (x ^ 3 - 8 * c ^ 2) / x ^ 3\ndef mordellModel3 (c : ℚ) : WeierstrassCurve ℚ := ⟨0, 0, 0, 0, -27 * c ^ 2⟩",
+  "local_dependencies": [
+    "GeometricReduction.lean"
+  ],
+  "goals": [
+    [
+      "mordellModel3_delta",
+      "theorem mordellModel3_delta (c : ℚ) : (mordellModel3 c).Δ = -314928 * c ^ 4"
+    ],
+    [
+      "mordellModel3_delta_ne_zero",
+      "theorem mordellModel3_delta_ne_zero (c : ℚ) (hc : c ≠ 0) : (mordellModel3 c).Δ ≠ 0"
+    ],
+    [
+      "iso3_image_equation",
+      "theorem iso3_image_equation (c x z : ℚ) (hc : c ≠ 0) (hx : x ≠ 0) (h : z ^ 2 = x ^ 3 + c ^ 2) : (iso3Y c x z) ^ 2 = (iso3X c x) ^ 3 - 27 * c ^ 2"
+    ],
+    [
+      "branch_image_coords",
+      "theorem branch_image_coords (c r y : ℚ) (hc : c ≠ 0) (hr : r ≠ 0) (hy : y ≠ 0) (h : y ^ 3 - y = c * r ^ 3) : iso3X c (Xcoord c r y) = (3 * y ^ 2 + 1) / r ^ 2 ∧ iso3Y c (Xcoord c r y) (Zcoord c y) = (9 * y ^ 2 - 1) / r ^ 3"
+    ],
+    [
+      "branch_pell_relation",
+      "theorem branch_pell_relation (c r y : ℚ) (hc : c ≠ 0) (hr : r ≠ 0) (hy : y ≠ 0) (h : y ^ 3 - y = c * r ^ 3) : iso3X c (Xcoord c r y) * r ^ 2 = 3 * y ^ 2 + 1"
+    ],
+    [
+      "branch_r_sq_relation",
+      "theorem branch_r_sq_relation (c r y : ℚ) (hc : c ≠ 0) (hr : r ≠ 0) (hy : y ≠ 0) (h : y ^ 3 - y = c * r ^ 3) : r ^ 2 * (3 * iso3X c (Xcoord c r y) - iso3Y c (Xcoord c r y) (Zcoord c y) * r) = 4"
+    ]
+  ]
+}

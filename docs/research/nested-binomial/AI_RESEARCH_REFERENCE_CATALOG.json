@@ -1,0 +1,94 @@
+{
+  "checked_at_utc": "2026-11-05T18:26:25.259815+00:00",
+  "references": [
+    {
+      "repository": "deepseek-ai/DeepSeek-Prover-V2",
+      "url": "https://github.com/deepseek-ai/DeepSeek-Prover-V2",
+      "commit": "e598a57ea3284997d4a2a168a069fdd5064afbc8",
+      "readme_sha256": "08d0b515c693c84d2aca9160efe72e15405f85d8990c547f7a779a555753fb54",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "google-deepmind/alphageometry",
+      "url": "https://github.com/google-deepmind/alphageometry",
+      "commit": "6777cb586cbb46beed28db12dc72c69770b68337",
+      "readme_sha256": "8abb18c2ada5d4bc2948125edae4d688a641e9a4273f6093341dac473d344f52",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "google-deepmind/formal-conjectures",
+      "url": "https://github.com/google-deepmind/formal-conjectures",
+      "commit": "3f4490479b53386e1c18d2cccf4f1164c16655ca",
+      "readme_sha256": "f76f44765bb5e87474a6c6f52205ef9b699cc5e74b4db3be50c8448a93caee80",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "facebookresearch/Evariste",
+      "url": "https://github.com/facebookresearch/Evariste",
+      "commit": "ef43511f2d234bcb28e380388b8fe0d06a4d93a7",
+      "readme_sha256": "e1b5df27e7bb176bf451198e05340a233e25c0cea96b66566193f9732585f3bd",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "project-numina/kimina-lean-server",
+      "url": "https://github.com/project-numina/kimina-lean-server",
+      "commit": "fb2393de3461db35eda4c714e3fd21187e92ec90",
+      "readme_sha256": "0caa1c290f4d25ff7f63965eec4401ee6ff03c58606d6b5d7fd0f71daebd7dde",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "lean-dojo/LeanDojo",
+      "url": "https://github.com/lean-dojo/LeanDojo",
+      "commit": "7a9f600b250a89a62e991c05ffe81ba033018e6e",
+      "readme_sha256": "ea303b9f712b2511790986ae7f0f6ba3eba20c455538b9ef8b918572783c77c7",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "lean-dojo/LeanCopilot",
+      "url": "https://github.com/lean-dojo/LeanCopilot",
+      "commit": "078135523a51e34b6a095bb2e4088ab4ee0161f0",
+      "readme_sha256": "7baf2c9f7459b509a08c60fe24e8a7487ce521faf66458f3bbdcdf73b1260806",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "leanprover-community/repl",
+      "url": "https://github.com/leanprover-community/repl",
+      "commit": "6a2be396449a5213a36748ca7682d16d54a1ca4a",
+      "readme_sha256": "33711c7ba3bf51820978212de61d4b8d8859e8a2e1c41ffc7f45708b56383896",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "leanprover-community/aesop",
+      "url": "https://github.com/leanprover-community/aesop",
+      "commit": "7d11bfa88558f8d3d90afdf6bd877ed70001498d",
+      "readme_sha256": "b092a9fd20cdaf59d719bfdcd9ef3a6cf7dde43bbb4095d730a12e61dc320bf5",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "google-deepmind/alphageometry2",
+      "url": "https://github.com/google-deepmind/alphageometry2",
+      "commit": "251e7e16f0bba8ac7c83cdea789fccc195d0c0c7",
+      "readme_sha256": "c4b03146f1e1e9f3c6b3e8f3787cd1836cb23caea7acc9593dd4f617e57c8958",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    },
+    {
+      "repository": "lean-dojo/LeanDojo-v2",
+      "url": "https://github.com/lean-dojo/LeanDojo-v2",
+      "commit": "f3b01b180e7429ed5389c2409ed14ce9ede93987",
+      "readme_sha256": "2a25731b6da276068971808485ce82c5d03af35c502ad2ea6ed837e9445da618",
+      "shared_with_model": "deepseek-v4-1-flash-1017",
+      "installed_as_a_tool": false
+    }
+  ],
+  "claim": "README excerpts were sent to the model. This does not install these systems or prove compatibility."
+}

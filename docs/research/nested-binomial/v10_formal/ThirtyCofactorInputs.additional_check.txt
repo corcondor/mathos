@@ -1,0 +1,10 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorInputs.lean:65:6: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [pow_two]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'NestedBinomialV10.target_equation_iff_normalized' depends on axioms: [propext]
+'NestedBinomialV10.target_k_le_choose' depends on axioms: [propext]
+'NestedBinomialV10.gcd_index_sub_three' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV10.target_index_cube_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]

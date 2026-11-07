@@ -1,0 +1,22 @@
+{
+  "model": "deepseek-v4-1-flash-1017",
+  "reasoning_effort": "max",
+  "max_tokens": 131072,
+  "finish_reason": "stop",
+  "elapsed_seconds": 63.8,
+  "usage": {
+    "prompt_tokens": 20947,
+    "total_tokens": 47488,
+    "completion_tokens": 26541,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 25004
+    }
+  },
+  "final_text_present": true,
+  "official_model_card": "https://docs.mistral.ai/models/deepseek-v4-flash-1017",
+  "official_reasoning_docs": "https://docs.mistral.ai/inference/conversations/reasoning",
+  "scope": "API acceptance on the actual research task; not a measured quality comparison with high"
+}

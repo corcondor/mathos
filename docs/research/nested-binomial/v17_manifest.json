@@ -1,0 +1,475 @@
+{
+  "version": "v17",
+  "date": "2026-11-06 JST",
+  "repository": "corcondor/mathos",
+  "branch": "research/nested-binomial-2026-11-05",
+  "pull_request": 1,
+  "prior_repository_snapshot": "2a2ce44315f38239e8a0e4cbafdfe99c223b8c26",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "scope": {
+    "ell": 1,
+    "j": "i-3",
+    "n": "i",
+    "A": "binom(n,3)",
+    "m": "6*n-9",
+    "r": "min(k,A-k)",
+    "branches": [
+      "k=r",
+      "k=A-r"
+    ],
+    "M": "gcd(n,3)*gcd(n-1,6)",
+    "Q": "n*(n-1)/M",
+    "delta": "Q/gcd(Q,r^2)",
+    "t": "r-3*n"
+  },
+  "prior_inputs": [
+    {
+      "path": "docs/research/nested-binomial/v15_cube_height.md",
+      "git_blob_sha1": "a44ff1fa710e899a1683172d28227ac41c007563",
+      "bytes": 4403
+    },
+    {
+      "path": "docs/research/nested-binomial/v15_cubic_defect_sparsity.md",
+      "git_blob_sha1": "b928b4683be580fdadd7f61339a59b309a5ee219",
+      "bytes": 7067
+    },
+    {
+      "path": "docs/research/nested-binomial/v15_neighbor_prime_obstruction.md",
+      "git_blob_sha1": "3ae85f1b01bec733afae644b98ba490e7e605fa3",
+      "bytes": 8598
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_lower_gap.md",
+      "git_blob_sha1": "1e072810b6519f7773cf3b6253fe92d9281f80d5",
+      "bytes": 6426
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_manifest.json",
+      "git_blob_sha1": "1bab4cfa997eacd7423343c7082aa7e5f7b69d5d",
+      "bytes": 15081
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_quadratic_neighbors.md",
+      "git_blob_sha1": "974446722dd6b9f65ff80bc140df7fdf5b715988",
+      "bytes": 7746
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_repeated_neighbor_primes.md",
+      "git_blob_sha1": "fec76b52552523a8d76f0b8a671107b20a77d263",
+      "bytes": 7168
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_independent_audit.json",
+      "git_blob_sha1": "5b680b3b93c8ac7187ad7fef3dc179171ce808c0",
+      "bytes": 163087
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell.md",
+      "git_blob_sha1": "c1a2a3c43eab49c0036126dd4706dcebef71ee9e",
+      "bytes": 14887
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell_summary.json",
+      "git_blob_sha1": "b4783ff7791e932a8b2179fff154c5bb2abe8994",
+      "bytes": 8609
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_common_divisor.md",
+      "git_blob_sha1": "e18dd1d93224905f3670c5c8e7c500c240419e72",
+      "bytes": 5553
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_offset_composite.md",
+      "git_blob_sha1": "afc5e371baf652ede2f736d41fcfde8f9202e317",
+      "bytes": 10180
+    }
+  ],
+  "navigation_baselines": {
+    "docs/research/nested-binomial/README.md": "6605f88f8837f75b68335995538b2c8ca9324f84",
+    "docs/research/nested-binomial/RESEARCH_LOG.md": "4bb06cb0fec2944e997996f8d63ee962f995a389"
+  },
+  "results": {
+    "square_root_boundary": {
+      "necessary_conditions": "n>=104, Q|r^3, 3*n<r<10*n/3 imply (r-3*n)^2>=9*n",
+      "equality_s": [
+        13,
+        19,
+        25,
+        28,
+        37,
+        55,
+        73,
+        82,
+        109,
+        163,
+        217,
+        325,
+        649
+      ],
+      "equality_pairs": "n=s^2, r=3*s*(s+1)",
+      "original_equation": "r>3*n+3*sqrt(n), h>=93*M, (r-3*n+3)^2>31*n/3",
+      "necessary_gap_is_sharp": {
+        "n": 421201,
+        "r": 1265550,
+        "M": 6,
+        "h": 487,
+        "delta": 6,
+        "original_solution": false
+      },
+      "parameter_height": "Fixed a in h/(81*M)=a/b has 12 denominators b|486 and an explicit degree-five bound for n",
+      "elliptic_discriminant": "-995328*a^2*b^4*(3*a-b)^3*(3*a+b)^3",
+      "positive_coprime_singular_pair": [
+        1,
+        3
+      ]
+    },
+    "main_index_primes": {
+      "all_branch_solutions": [
+        "Pplus(n)<3*sqrt(n)",
+        "Pplus(n-1)^2<=6*n-9"
+      ],
+      "if_n_mod_3_is_0_or_1": "Pplus(n)^2<=6*n-9",
+      "large_prime_dividing_n": "p|n and p^2>6*n-9 imply n=p*w=2 mod3, 6*w<p<9*w, p|(3*w^2+2)"
+    },
+    "quadratic_neighbors": {
+      "negative_offsets": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "negative_applicability": "6 divides (c+2)*n-3*c",
+      "negative_repeated": "p^2|(n^2-c), p^2>6*n-9 imply k=A-r, v_p(n^2-c)=3, v_p(r-a_c)=1",
+      "combined_large_repeated_primes_at_most": 4,
+      "positive_applicability": "n=3 mod6",
+      "positive_all_exponents": "n^2+1 divides lcm(1,...,6*n-9)^2",
+      "positive_odd_exponent": "p^e exactly divides n^2+1, e odd, w=(n^2+1)/p^e imply p<36*w",
+      "negative_excess_product": "R=product over admissible c of ((n^2-c)/gcd(n^2-c,L_m)) with only prime factors >=17 retained",
+      "negative_excess_conditions": [
+        "R divides k^2",
+        "gcd(R,Q)=1",
+        "R^3*Q^2 divides k^6"
+      ],
+      "negative_excess_small_branch": "R<(225*n)^(2/3)"
+    },
+    "n_squared_plus_two": {
+      "all_prime_cofactors": "p|(n^2+2) prime implies w=(n^2+2)/p>=65",
+      "large_prime_condition": "p>6*n-9",
+      "adaptive_small_branch": "n<52*sqrt(delta)*w+1",
+      "adaptive_complementary_branch": "n<983*sqrt(delta)*w^2+1",
+      "fixed_J_scope": "p>6*n-9, k=r, J=z-9*w>0",
+      "fixed_J_height": [
+        "n^4<2^150*J^15",
+        "w^2<2^40*J^5"
+      ],
+      "fixed_J_complementary_height_claimed": false
+    }
+  },
+  "verification": {
+    "final_directory_runs": "Three producers and three independent auditors exited 0 and reported PASS; optional SymPy auditor also exited 0 and PASS",
+    "written_review": "Independent AI collaborators plus root; not external peer review",
+    "square_root_complete": {
+      "coefficient_pairs": 557,
+      "residual_values": 94710,
+      "square_discriminants": 272,
+      "integer_t_ge_4": 30,
+      "integer_n_ge_104": 13,
+      "restored_necessary_pairs": 13,
+      "equality_pairs": 13,
+      "original_branch_exclusions": 26
+    },
+    "square_root_all_classifications_and_both_roots_saved": true,
+    "square_root_independent_method": "Rescale every original M|6 to M=6, H=6h/M in 1..557; enumerate raw residual JR modulo 486*gcd(H,486); raw elimination quadratic for t; original h-quadratic for n. Generator not imported or executed.",
+    "quadratic_complete": {
+      "constants": 118,
+      "root_tables": 69,
+      "all_residues_checked": 1056789,
+      "exceptional_n": [
+        149,
+        157,
+        275,
+        5382
+      ],
+      "independent_table_match": true
+    },
+    "quadratic_supporting_only": {
+      "n_inputs": 867,
+      "n_r_cases": 3453,
+      "n_minus_one_inputs": 868,
+      "n_minus_one_r_cases": 3734,
+      "actual_binomial_checks": 12
+    },
+    "cofactor_complete": {
+      "families": 8712,
+      "divisor_points": 590028,
+      "normalized_n": 350188,
+      "second_divisor": 1260,
+      "integral_p": 20,
+      "p_large": 11,
+      "square": 0
+    },
+    "cofactor_independent_method": "Complete pairs d, N/d for 1<=d<=floor(sqrt(N)), N=c0^3; square-transfer filter d^2|N",
+    "cofactor_small_case": {
+      "indices": 280,
+      "r_values_independently_checked": 22540,
+      "pairs": [
+        [
+          169,
+          546,
+          1
+        ],
+        [
+          243,
+          792,
+          1
+        ],
+        [
+          250,
+          830,
+          5
+        ],
+        [
+          361,
+          1140,
+          1
+        ]
+      ]
+    },
+    "compressed_certificate": {
+      "file": "v17_neighbor_cofactor_certificate.json.gz",
+      "compressed_bytes": 49290,
+      "compressed_sha256": "7a496312c8fcd614b683d4ee0a60268ec218c4bd0991104554457b001fdb8c88",
+      "uncompressed_bytes": 269767,
+      "uncompressed_sha256": "e171f8b5844e50b577b17acee313a10207943450e626a16a7a781847556078df"
+    },
+    "polynomial_identity_audit": {
+      "identities": 5,
+      "sympy_version": "1.14.0",
+      "complete_solver": false
+    },
+    "report_source_and_note_bindings": {
+      "v17_square_root_gap_results.json": {
+        "source_sha256": "v17_square_root_gap.py",
+        "proof_note_sha256": "v17_square_root_gap.md"
+      },
+      "v17_square_root_gap_independent_audit.json": {
+        "input_sha256": "v17_square_root_gap_results.json",
+        "generator_sha256": "v17_square_root_gap.py",
+        "proof_note_sha256": "v17_square_root_gap.md",
+        "auditor_sha256": "v17_square_root_gap_independent_audit.py"
+      },
+      "v17_quadratic_prime_powers_checks.json": {
+        "source_sha256": "v17_quadratic_prime_powers_checks.py",
+        "proof_note_sha256": "v17_quadratic_prime_powers.md"
+      },
+      "v17_quadratic_independent_audit.json": {
+        "producer_report_sha256": "v17_quadratic_prime_powers_checks.json",
+        "proof_note_sha256": "v17_quadratic_prime_powers.md",
+        "source_sha256": "v17_quadratic_independent_audit.py"
+      },
+      "v17_neighbor_defect_checks.json": {
+        "source_sha256": "v17_neighbor_defect_checks.py",
+        "proof_note_sha256": "v17_neighbor_defect.md"
+      },
+      "v17_neighbor_defect_independent_audit.json": {
+        "certificate_sha256": "v17_neighbor_cofactor_certificate.json.gz",
+        "producer_sha256": "v17_neighbor_defect_checks.py",
+        "proof_note_sha256": "v17_neighbor_defect.md",
+        "auditor_sha256": "v17_neighbor_defect_independent_audit.py"
+      },
+      "v17_neighbor_written_review.json": {
+        "reviewed_sha256": "v17_quadratic_prime_powers.md"
+      },
+      "v17_symbolic_audit.json": {
+        "source_sha256": "v17_symbolic_audit.py",
+        "proof_note_sha256": "v17_square_root_gap.md"
+      }
+    },
+    "finite_samples_prove_universal_theorems": false,
+    "new_lean_execution": false,
+    "new_deepseek_api_calls": 0,
+    "complete_CAS_solver_calls": 0
+  },
+  "reproduction": {
+    "working_directory": "docs/research/nested-binomial",
+    "standard_library_commands": [
+      "python3 v17_square_root_gap.py",
+      "python3 v17_square_root_gap_independent_audit.py",
+      "python3 v17_quadratic_prime_powers_checks.py",
+      "python3 v17_quadratic_independent_audit.py",
+      "python3 v17_neighbor_defect_checks.py",
+      "python3 v17_neighbor_defect_independent_audit.py"
+    ],
+    "optional_sympy_command": "python3 v17_symbolic_audit.py"
+  },
+  "boundaries": {
+    "primitive_H_lower_bound": 21,
+    "candidate_first_index_count": "O(sqrt(X)*log(X))",
+    "whole_branch_solved": false,
+    "original_equation_solved": false,
+    "original_solutions_found": false,
+    "parallel_DeepSeek_goal_and_formal_proofs_changed_by_this_update": false,
+    "global_parameter_bound_for_a_delta_or_J": false
+  },
+  "files": [
+    {
+      "path": "docs/research/nested-binomial/PROGRESS_v17_ja.md",
+      "bytes": 14136,
+      "sha256": "86a177a29598124d500502e6d3b06bfb3f807809294e6d7c3f590e3720c4110b",
+      "git_blob_sha1": "2eab74ecc2a41b6ea3934ada7a405c5b3127b053"
+    },
+    {
+      "path": "docs/research/nested-binomial/README.md",
+      "bytes": 28491,
+      "sha256": "dd0a059f4bdf1f970f11f5c4472098bd07ffc4507e73f68a57b5e7858f278c94",
+      "git_blob_sha1": "846617ffdb65d78142cd9f3b7deef26f07307c76"
+    },
+    {
+      "path": "docs/research/nested-binomial/RESEARCH_LOG.md",
+      "bytes": 24173,
+      "sha256": "2a220c177798d1aa382d73024b4899257b110fa139ae95e2326ae66977a024ce",
+      "git_blob_sha1": "71fe4d027db721d9e1c8867ed2469a8c97982e0e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_cofactor_certificate.json.gz",
+      "bytes": 49290,
+      "sha256": "7a496312c8fcd614b683d4ee0a60268ec218c4bd0991104554457b001fdb8c88",
+      "git_blob_sha1": "f9ecb8453f6cc8f2de84db6a834824b3d99d26eb"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect.md",
+      "bytes": 10316,
+      "sha256": "94e7cedb7d0a194aeae8411e706cc380ddfb64e42b7344663ff1aa360b4fe406",
+      "git_blob_sha1": "ae4b1a2eff29ff7a34a0e076db744951516bf0ca"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_checks.json",
+      "bytes": 4162,
+      "sha256": "39a5df958b3536b80d796ee65bd01196f9b56035dc3d3952086142023bfd22bc",
+      "git_blob_sha1": "46e5c075140c6ff022d9227f0e8ddac541362dc1"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_checks.py",
+      "bytes": 12427,
+      "sha256": "14d1d8a71d416631083f47fa6f0833558a16dd12a0480931f1b8d67606e093f7",
+      "git_blob_sha1": "2bccdf7a889270890070815b481c41a12a1c3d0d"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_independent_audit.json",
+      "bytes": 2901,
+      "sha256": "dc24d4b5415ce1c19505f6d9fc149ed6fb65ea910cb61e84c04b09c27284e3e0",
+      "git_blob_sha1": "c0f40dfc31fea72e43819c584564b4aa1a6f7bb5"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_independent_audit.py",
+      "bytes": 8786,
+      "sha256": "c5f90abc49ec91bfbdee894410863c1fc2040b55b3661033626fc9937abaa27b",
+      "git_blob_sha1": "9006e394af4c8fd67525473f1cedccee88cf559d"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_independent_audit_note.md",
+      "bytes": 4229,
+      "sha256": "190cc31ccc056338740ff1c771d8645cc5159160c7b72cbde7778db0d5ffdc4d",
+      "git_blob_sha1": "9d24412979d518906c4a7a165644ab37b514f26d"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_written_review.json",
+      "bytes": 1771,
+      "sha256": "6a38d96937bf7c163ff2b96e771138e1ab269a60347a1744442342dd8f802902",
+      "git_blob_sha1": "d343f1519cfa538067c11eee61891f5bea26f658"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_independent_audit.json",
+      "bytes": 13835,
+      "sha256": "e84d9a62767ead60b994a28cdb3dd15473c9e27c4af6045967cbc41e27e7bb5e",
+      "git_blob_sha1": "77f54c535c5337408122bf1bf09a129d60a22f20"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_independent_audit.py",
+      "bytes": 6463,
+      "sha256": "ca33d6da62362be52ecb39415fbb31e3aa12f2c24480d8b4ddc26b6f4cc107c1",
+      "git_blob_sha1": "9f3242a3561cc783a0ff1f54b7ffed0b6c999a14"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_prime_powers.md",
+      "bytes": 15204,
+      "sha256": "429bcd176f0b0855fe24133271dc9043b540485988c614cf265667f0ebdb7116",
+      "git_blob_sha1": "de64bd225fec075c2e2d507eff99c9228802373c"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_prime_powers_checks.json",
+      "bytes": 32364,
+      "sha256": "fb2521b4cd0cd0f63ff49c9a1b05291747d10f8acbb318833de2484cda0cddd8",
+      "git_blob_sha1": "ad0f52b228b667d48ee8cb77ea44c8f3f43dbafa"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_prime_powers_checks.py",
+      "bytes": 9683,
+      "sha256": "2f2fa7ce48cd401acd627307dfaf92589ad0d2299dd75f12c8d0dc7202238602",
+      "git_blob_sha1": "595d0635b81794959273786adf13ab9a21645968"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_review_ja.md",
+      "bytes": 7115,
+      "sha256": "be6b8cc9d620fc42cc4188a29e7ce438ac6268a539fb54e04fabc8965c171516",
+      "git_blob_sha1": "2389f715a3f386de69aec2757bdd60c9d049a29d"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap.md",
+      "bytes": 13970,
+      "sha256": "b383870fc763e6bb4dae37d9213baa0a4ed3bf42911fab7d92b1e195132f66a5",
+      "git_blob_sha1": "d49eda164eadd4cdf4957019e9919adc70d0194a"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap.py",
+      "bytes": 14022,
+      "sha256": "2c4a61287a9decbff2516756eac753a8107ae6b77aba11598deada44a278c459",
+      "git_blob_sha1": "1b5b933240e4de9ea83901c63ed83d93ab41ca4f"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_independent_audit.json",
+      "bytes": 115299,
+      "sha256": "ca2c335778f076491465ce75aa5d064397013c99465045642ce3bde16a0ae7bf",
+      "git_blob_sha1": "64a3319a44f8376c26c4f3045475611186fcd782"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_independent_audit.md",
+      "bytes": 5166,
+      "sha256": "0dc25246540b3ea90ec15fcfe842a06a1b2aa0291df1f8b210a3bbec48395d2f",
+      "git_blob_sha1": "5dfdebd3b1e14f65f69a2f54dfcc0b07587a0162"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_independent_audit.py",
+      "bytes": 13586,
+      "sha256": "fe305be3cf022c289e26ced61da06985fc42a03fc644e1374ea9a03c9f093c4d",
+      "git_blob_sha1": "090e22f6e5db120a30ab6907516b81d76db307ba"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_results.json",
+      "bytes": 330324,
+      "sha256": "d32f7b1bbe02bd82c8298ca529173d03005952bbad12d41827f55e8bf4568840",
+      "git_blob_sha1": "9cfbf6295abc9598b756bf062de0a8baaea69dda"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_symbolic_audit.json",
+      "bytes": 646,
+      "sha256": "a81131b396f07d1ff00a7ebb3ee2fd614a179d97934f8bd90d58d7b12e1e0978",
+      "git_blob_sha1": "35d681a4689c14f4e0a9a129fe6dbcf9e9960f9e"
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_symbolic_audit.py",
+      "bytes": 1704,
+      "sha256": "e5a366b4a7eaedab6a3c8b0a0a98940fa6b1bb2170d520e353c847db6f4522f2",
+      "git_blob_sha1": "db2d21d3c8e2630a9d4128f8e8c76a0f26a03cbf"
+    }
+  ],
+  "manifest_self_hash_omitted": true
+}

@@ -1,0 +1,8 @@
+PASS: Hauptmodul and dual isogeny, including rational map
+PASS: E2 discriminants, singular fiber valuation tests
+PASS: exact points R, 2R, 3R=-P0, 4R
+PASS: t=1 good reduction group orders and nontorsion specialization
+PASS: 4R integer lifts sieve, all b|486, no rho upper bound
+4R counts: {'divisors_checked': 3744, 'positive_rho_from_divisors': 346, 'integer_a_squared': 346, 'square_a_squared': 24, 'primitive': 2, 'primitive_and_z_positive': 1, 'primitive_and_v20_rho_mod9': 0}
+4R primitive lifts: [(1, 3, 2), (1, 18, 6)]
+certificate: /mnt/data/v26/v26_audit_certificate.json

@@ -1,0 +1,19 @@
+{
+  "module": "ThirtyCofactorQDivisibility",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorInputs\nimport ThirtyCofactorSecondDivisor",
+  "definitions": "",
+  "goals": [
+    [
+      "cofactor_two_cube_dvd",
+      "theorem cofactor_two_cube_dvd (i k : ℕ) (hi : 3 ≤ i) (hk : k ≤ Nat.choose i (i - 3)) (heq : Nat.choose (Nat.choose i (i - 3)) k = Nat.choose (i ^ 2) ((i - 3) ^ 2) + k ^ 2) : (i - 1) / Nat.gcd (i - 1) 6 ∣ (min k (Nat.choose i (i - 3) - k)) ^ 3"
+    ],
+    [
+      "Q_cube_dvd",
+      "theorem Q_cube_dvd (i k : ℕ) (hi : 3 ≤ i) (hk : k ≤ Nat.choose i (i - 3)) (heq : Nat.choose (Nat.choose i (i - 3)) k = Nat.choose (i ^ 2) ((i - 3) ^ 2) + k ^ 2) : (i / Nat.gcd i 3) * ((i - 1) / Nat.gcd (i - 1) 6) ∣ (min k (Nat.choose i (i - 3) - k)) ^ 3"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorInputs.lean",
+    "ThirtyCofactorSecondDivisor.lean"
+  ]
+}

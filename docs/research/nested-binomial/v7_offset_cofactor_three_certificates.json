@@ -1,0 +1,871 @@
+{
+  "scope": "ell=1, j=i-3, i=3*p^a+2, p prime other than 3",
+  "large_prime_remainder": [
+    {
+      "p": 19,
+      "a": 2,
+      "n": 1085,
+      "d": 1,
+      "H": 588070,
+      "D": 1085,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        31
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 895
+    },
+    {
+      "p": 23,
+      "a": 2,
+      "n": 1589,
+      "d": 1,
+      "H": 1261666,
+      "D": 1589,
+      "distinct_prime_factors_of_D": [
+        7,
+        227
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 1359
+    },
+    {
+      "p": 29,
+      "a": 2,
+      "n": 2525,
+      "d": 1,
+      "H": 3186550,
+      "D": 505,
+      "distinct_prime_factors_of_D": [
+        5,
+        101
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 215
+    },
+    {
+      "p": 31,
+      "a": 2,
+      "n": 2885,
+      "d": 1,
+      "H": 4160170,
+      "D": 2885,
+      "distinct_prime_factors_of_D": [
+        5,
+        577
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 2575
+    },
+    {
+      "p": 37,
+      "a": 2,
+      "n": 4109,
+      "d": 1,
+      "H": 8439886,
+      "D": 4109,
+      "distinct_prime_factors_of_D": [
+        7,
+        587
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 3739
+    },
+    {
+      "p": 41,
+      "a": 2,
+      "n": 5045,
+      "d": 1,
+      "H": 12723490,
+      "D": 5045,
+      "distinct_prime_factors_of_D": [
+        5,
+        1009
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 4635
+    },
+    {
+      "p": 43,
+      "a": 2,
+      "n": 5549,
+      "d": 1,
+      "H": 15392926,
+      "D": 5549,
+      "distinct_prime_factors_of_D": [
+        31,
+        179
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 5119
+    },
+    {
+      "p": 47,
+      "a": 2,
+      "n": 6629,
+      "d": 1,
+      "H": 21968506,
+      "D": 6629,
+      "distinct_prime_factors_of_D": [
+        7,
+        947
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 6159
+    },
+    {
+      "p": 53,
+      "a": 2,
+      "n": 8429,
+      "d": 1,
+      "H": 35519806,
+      "D": 8429,
+      "distinct_prime_factors_of_D": [
+        8429
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 7899
+    },
+    {
+      "p": 59,
+      "a": 2,
+      "n": 10445,
+      "d": 1,
+      "H": 54543790,
+      "D": 10445,
+      "distinct_prime_factors_of_D": [
+        5,
+        2089
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 9855
+    },
+    {
+      "p": 61,
+      "a": 2,
+      "n": 11165,
+      "d": 1,
+      "H": 62323030,
+      "D": 11165,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        11,
+        29
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 10555
+    },
+    {
+      "p": 67,
+      "a": 2,
+      "n": 13469,
+      "d": 1,
+      "H": 90700246,
+      "D": 13469,
+      "distinct_prime_factors_of_D": [
+        13469
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 12799
+    },
+    {
+      "p": 71,
+      "a": 2,
+      "n": 15125,
+      "d": 1,
+      "H": 114375250,
+      "D": 7562,
+      "distinct_prime_factors_of_D": [
+        2,
+        19,
+        199
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 6852
+    },
+    {
+      "p": 73,
+      "a": 2,
+      "n": 15989,
+      "d": 1,
+      "H": 127816066,
+      "D": 15989,
+      "distinct_prime_factors_of_D": [
+        59,
+        271
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 15259
+    },
+    {
+      "p": 79,
+      "a": 2,
+      "n": 18725,
+      "d": 1,
+      "H": 175303450,
+      "D": 3745,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        107
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 2955
+    },
+    {
+      "p": 83,
+      "a": 2,
+      "n": 20669,
+      "d": 1,
+      "H": 213593446,
+      "D": 20669,
+      "distinct_prime_factors_of_D": [
+        11,
+        1879
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 19839
+    },
+    {
+      "p": 89,
+      "a": 2,
+      "n": 23765,
+      "d": 1,
+      "H": 282375730,
+      "D": 3395,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        97
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 2505
+    },
+    {
+      "p": 97,
+      "a": 2,
+      "n": 28229,
+      "d": 1,
+      "H": 398424106,
+      "D": 28229,
+      "distinct_prime_factors_of_D": [
+        28229
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 27259
+    },
+    {
+      "p": 101,
+      "a": 2,
+      "n": 30605,
+      "d": 1,
+      "H": 468317710,
+      "D": 30605,
+      "distinct_prime_factors_of_D": [
+        5,
+        6121
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 29595
+    },
+    {
+      "p": 103,
+      "a": 2,
+      "n": 31829,
+      "d": 1,
+      "H": 506526706,
+      "D": 31829,
+      "distinct_prime_factors_of_D": [
+        7,
+        4547
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 30799
+    },
+    {
+      "p": 107,
+      "a": 2,
+      "n": 34349,
+      "d": 1,
+      "H": 589909726,
+      "D": 4907,
+      "distinct_prime_factors_of_D": [
+        7,
+        701
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 3837
+    },
+    {
+      "p": 109,
+      "a": 2,
+      "n": 35645,
+      "d": 1,
+      "H": 635265190,
+      "D": 35645,
+      "distinct_prime_factors_of_D": [
+        5,
+        7129
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 34555
+    },
+    {
+      "p": 113,
+      "a": 2,
+      "n": 38309,
+      "d": 1,
+      "H": 733770586,
+      "D": 38309,
+      "distinct_prime_factors_of_D": [
+        29,
+        1321
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 37179
+    },
+    {
+      "p": 127,
+      "a": 2,
+      "n": 48389,
+      "d": 1,
+      "H": 1170723466,
+      "D": 48389,
+      "distinct_prime_factors_of_D": [
+        11,
+        53,
+        83
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 47119
+    },
+    {
+      "p": 131,
+      "a": 2,
+      "n": 51485,
+      "d": 1,
+      "H": 1325326870,
+      "D": 51485,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        1471
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 50175
+    },
+    {
+      "p": 137,
+      "a": 2,
+      "n": 56309,
+      "d": 1,
+      "H": 1585323586,
+      "D": 56309,
+      "distinct_prime_factors_of_D": [
+        11,
+        5119
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 54939
+    },
+    {
+      "p": 139,
+      "a": 2,
+      "n": 57965,
+      "d": 1,
+      "H": 1679941630,
+      "D": 57965,
+      "distinct_prime_factors_of_D": [
+        5,
+        11593
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 56575
+    },
+    {
+      "p": 149,
+      "a": 2,
+      "n": 66605,
+      "d": 1,
+      "H": 2218079710,
+      "D": 66605,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        11,
+        173
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 65115
+    },
+    {
+      "p": 151,
+      "a": 2,
+      "n": 68405,
+      "d": 1,
+      "H": 2339587810,
+      "D": 68405,
+      "distinct_prime_factors_of_D": [
+        5,
+        13681
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 66895
+    },
+    {
+      "p": 157,
+      "a": 2,
+      "n": 73949,
+      "d": 1,
+      "H": 2734190326,
+      "D": 73949,
+      "distinct_prime_factors_of_D": [
+        73,
+        1013
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 72379
+    },
+    {
+      "p": 163,
+      "a": 2,
+      "n": 79709,
+      "d": 1,
+      "H": 3176722486,
+      "D": 79709,
+      "distinct_prime_factors_of_D": [
+        7,
+        59,
+        193
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 78079
+    },
+    {
+      "p": 167,
+      "a": 2,
+      "n": 83669,
+      "d": 1,
+      "H": 3500208946,
+      "D": 83669,
+      "distinct_prime_factors_of_D": [
+        31,
+        2699
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 81999
+    },
+    {
+      "p": 173,
+      "a": 2,
+      "n": 89789,
+      "d": 1,
+      "H": 4030987366,
+      "D": 89789,
+      "distinct_prime_factors_of_D": [
+        7,
+        101,
+        127
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 88059
+    },
+    {
+      "p": 179,
+      "a": 2,
+      "n": 96125,
+      "d": 1,
+      "H": 4619959750,
+      "D": 3845,
+      "distinct_prime_factors_of_D": [
+        5,
+        769
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 2055
+    },
+    {
+      "p": 181,
+      "a": 2,
+      "n": 98285,
+      "d": 1,
+      "H": 4829921470,
+      "D": 98285,
+      "distinct_prime_factors_of_D": [
+        5,
+        11,
+        1787
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 96475
+    },
+    {
+      "p": 191,
+      "a": 2,
+      "n": 109445,
+      "d": 1,
+      "H": 5989049290,
+      "D": 109445,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        53,
+        59
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 107535
+    },
+    {
+      "p": 193,
+      "a": 2,
+      "n": 111749,
+      "d": 1,
+      "H": 6243863626,
+      "D": 111749,
+      "distinct_prime_factors_of_D": [
+        11,
+        10159
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 109819
+    },
+    {
+      "p": 197,
+      "a": 2,
+      "n": 116429,
+      "d": 1,
+      "H": 6777797806,
+      "D": 116429,
+      "distinct_prime_factors_of_D": [
+        173,
+        673
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 114459
+    },
+    {
+      "p": 199,
+      "a": 2,
+      "n": 118805,
+      "d": 1,
+      "H": 7057254610,
+      "D": 118805,
+      "distinct_prime_factors_of_D": [
+        5,
+        23761
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 116815
+    },
+    {
+      "p": 211,
+      "a": 2,
+      "n": 133565,
+      "d": 1,
+      "H": 8919737830,
+      "D": 133565,
+      "distinct_prime_factors_of_D": [
+        5,
+        26713
+      ],
+      "contradiction": "D > 10p",
+      "integer_margin": 131455
+    }
+  ],
+  "small_prime_remainder": [
+    {
+      "p": 2,
+      "a": 9,
+      "n": 1538,
+      "d": 4,
+      "H": 1181953,
+      "D": 769,
+      "distinct_prime_factors_of_D": [
+        769
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 21532
+    },
+    {
+      "p": 2,
+      "a": 11,
+      "n": 6146,
+      "d": 5,
+      "H": 18883585,
+      "D": 3073,
+      "distinct_prime_factors_of_D": [
+        7,
+        439
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 233548
+    },
+    {
+      "p": 2,
+      "a": 13,
+      "n": 24578,
+      "d": 6,
+      "H": 302026753,
+      "D": 12289,
+      "distinct_prime_factors_of_D": [
+        12289
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 2113708
+    },
+    {
+      "p": 2,
+      "a": 15,
+      "n": 98306,
+      "d": 7,
+      "H": 4831985665,
+      "D": 49153,
+      "distinct_prime_factors_of_D": [
+        13,
+        19,
+        199
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 17891692
+    },
+    {
+      "p": 2,
+      "a": 17,
+      "n": 393218,
+      "d": 8,
+      "H": 77310001153,
+      "D": 196609,
+      "distinct_prime_factors_of_D": [
+        7,
+        28087
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 147063532
+    },
+    {
+      "p": 5,
+      "a": 4,
+      "n": 1877,
+      "d": 2,
+      "H": 1760626,
+      "D": 1877,
+      "distinct_prime_factors_of_D": [
+        1877
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 122005
+    },
+    {
+      "p": 5,
+      "a": 6,
+      "n": 46877,
+      "d": 3,
+      "H": 1098703126,
+      "D": 46877,
+      "distinct_prime_factors_of_D": [
+        46877
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 17110105
+    },
+    {
+      "p": 7,
+      "a": 3,
+      "n": 1031,
+      "d": 1,
+      "H": 530965,
+      "D": 1031,
+      "distinct_prime_factors_of_D": [
+        1031
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 11341
+    },
+    {
+      "p": 7,
+      "a": 5,
+      "n": 50423,
+      "d": 2,
+      "H": 1271214253,
+      "D": 50423,
+      "distinct_prime_factors_of_D": [
+        50423
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 6907951
+    },
+    {
+      "p": 7,
+      "a": 7,
+      "n": 2470631,
+      "d": 3,
+      "H": 3052007533765,
+      "D": 2470631,
+      "distinct_prime_factors_of_D": [
+        2470631
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 2517572989
+    },
+    {
+      "p": 11,
+      "a": 4,
+      "n": 43925,
+      "d": 2,
+      "H": 964680850,
+      "D": 8785,
+      "distinct_prime_factors_of_D": [
+        5,
+        7,
+        251
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 2749705
+    },
+    {
+      "p": 13,
+      "a": 3,
+      "n": 6593,
+      "d": 1,
+      "H": 21730528,
+      "D": 6593,
+      "distinct_prime_factors_of_D": [
+        19,
+        347
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 191197
+    },
+    {
+      "p": 13,
+      "a": 5,
+      "n": 1113881,
+      "d": 2,
+      "H": 620364884140,
+      "D": 1113881,
+      "distinct_prime_factors_of_D": [
+        379,
+        2939
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 553598857
+    },
+    {
+      "p": 13,
+      "a": 7,
+      "n": 188245553,
+      "d": 3,
+      "H": 17718194018015128,
+      "D": 188245553,
+      "distinct_prime_factors_of_D": [
+        281,
+        669913
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 1238843984293
+    },
+    {
+      "p": 17,
+      "a": 3,
+      "n": 14741,
+      "d": 1,
+      "H": 108641170,
+      "D": 14741,
+      "distinct_prime_factors_of_D": [
+        14741
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 604381
+    },
+    {
+      "p": 17,
+      "a": 5,
+      "n": 4259573,
+      "d": 2,
+      "H": 9071978941378,
+      "D": 4259573,
+      "distinct_prime_factors_of_D": [
+        431,
+        9883
+      ],
+      "contradiction": "3*p^d*D >= 10n",
+      "integer_margin": 3650454061
+    }
+  ],
+  "small_first_indices": [
+    {
+      "p": 2,
+      "a": 6,
+      "n": 194,
+      "prime_factors": [
+        2,
+        97
+      ]
+    },
+    {
+      "p": 2,
+      "a": 7,
+      "n": 386,
+      "prime_factors": [
+        2,
+        193
+      ]
+    },
+    {
+      "p": 2,
+      "a": 8,
+      "n": 770,
+      "prime_factors": [
+        2,
+        5,
+        7,
+        11
+      ]
+    },
+    {
+      "p": 5,
+      "a": 3,
+      "n": 377,
+      "prime_factors": [
+        13,
+        29
+      ]
+    },
+    {
+      "p": 7,
+      "a": 2,
+      "n": 149,
+      "prime_factors": [
+        149
+      ]
+    },
+    {
+      "p": 11,
+      "a": 2,
+      "n": 365,
+      "prime_factors": [
+        5,
+        73
+      ]
+    },
+    {
+      "p": 13,
+      "a": 2,
+      "n": 509,
+      "prime_factors": [
+        509
+      ]
+    },
+    {
+      "p": 17,
+      "a": 2,
+      "n": 869,
+      "prime_factors": [
+        11,
+        79
+      ]
+    }
+  ]
+}

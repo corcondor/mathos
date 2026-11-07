@@ -1,0 +1,11 @@
+'NestedBinomialV10.recoveredDivisor_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.recoveredDivisor_dvd_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.gcd_dvd_recoveredDivisor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.recoveredDefect_dvd_old_defect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.recoveredDefect_mul_recoveredDivisor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.recoveredDefectProduct_mul_recoveredDivisor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'NestedBinomialV10.recoveredDefectProduct_eq_recoveredDefect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.recoveredDefectProduct_dvd_old_defect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.original_recovers_divisor' depends on axioms: [propext, Classical.choice, Quot.sound]

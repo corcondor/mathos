@@ -1,0 +1,37 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:5:39: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:54: warning: Unused tactic linter: `omega` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:21:54: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:54: warning: Unused tactic linter: `omega` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:35:54: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:50: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:54: warning: Unused tactic linter: `omega` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorExponentDomain.lean:46:54: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+'NestedBinomialV10.exponent_domain_iff' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV10.q_bound_ge_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.q_bound_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.q_bound_three' depends on axioms: [propext, Classical.choice, Quot.sound]

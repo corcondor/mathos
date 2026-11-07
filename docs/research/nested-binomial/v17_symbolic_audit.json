@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "identities": {
+    "quadratic_reconstruction": "all coefficients vanish",
+    "reduced_discriminant": "all coefficients vanish",
+    "elliptic_coordinate": "all coefficients vanish",
+    "elliptic_discriminant": "all coefficients vanish",
+    "shifted_square_root_bound": "all coefficients vanish"
+  },
+  "sympy_version": "1.14.0",
+  "producer_imported_or_called": false,
+  "complete_CAS_solver_called": false,
+  "new_lean_execution": false,
+  "source_sha256": "e5a366b4a7eaedab6a3c8b0a0a98940fa6b1bb2170d520e353c847db6f4522f2",
+  "proof_note_sha256": "b383870fc763e6bb4dae37d9213baa0a4ed3bf42911fab7d92b1e195132f66a5"
+}

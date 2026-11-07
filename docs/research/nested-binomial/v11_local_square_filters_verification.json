@@ -1,0 +1,666 @@
+{
+  "status": "PASS",
+  "scope": "Exact checks of uniform local-unit and square-filter proofs; no search of the original equation",
+  "uniform_odd_unit_formula": "For n=w*p^a+2, p odd prime, p does not divide w, p^a>4w: v_p(X)=a-beta and X/p^(a-beta)=-2w/(C(6w,2w)/p^beta) modulo p",
+  "uniform_formula_cases": 9382,
+  "cases_with_beta_greater_than_one": 424,
+  "prime_three_cases": 103,
+  "exponent_one_cases": 414,
+  "uniform_formula_direct_exact_binomial_checks": 123,
+  "uniform_formula_range": {
+    "w": [
+      1,
+      64
+    ],
+    "odd_primes_at_most": 127,
+    "a": [
+      1,
+      6
+    ],
+    "restrictions": "p does not divide w, p^a>4w"
+  },
+  "sample_uniform_records": [
+    {
+      "w": 1,
+      "p": 3,
+      "a": 2,
+      "n": 11,
+      "beta": 1,
+      "valuation_X": 1,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 3,
+      "n": 29,
+      "beta": 1,
+      "valuation_X": 2,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 4,
+      "n": 83,
+      "beta": 1,
+      "valuation_X": 3,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 5,
+      "n": 245,
+      "beta": 1,
+      "valuation_X": 4,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 6,
+      "n": 731,
+      "beta": 1,
+      "valuation_X": 5,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 1,
+      "n": 7,
+      "beta": 1,
+      "valuation_X": 0,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 2,
+      "n": 27,
+      "beta": 1,
+      "valuation_X": 1,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 3,
+      "n": 127,
+      "beta": 1,
+      "valuation_X": 2,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 4,
+      "n": 627,
+      "beta": 1,
+      "valuation_X": 3,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 5,
+      "n": 3127,
+      "beta": 1,
+      "valuation_X": 4,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 1,
+      "p": 5,
+      "a": 6,
+      "n": 15627,
+      "beta": 1,
+      "valuation_X": 5,
+      "unit_X": 1,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 2,
+      "p": 3,
+      "a": 2,
+      "n": 20,
+      "beta": 2,
+      "valuation_X": 0,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 2,
+      "p": 3,
+      "a": 3,
+      "n": 56,
+      "beta": 2,
+      "valuation_X": 1,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 2,
+      "p": 3,
+      "a": 4,
+      "n": 164,
+      "beta": 2,
+      "valuation_X": 2,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    },
+    {
+      "w": 2,
+      "p": 3,
+      "a": 5,
+      "n": 488,
+      "beta": 2,
+      "valuation_X": 3,
+      "unit_X": 2,
+      "character_negative_unit": 1
+    }
+  ],
+  "higher_precision_product_and_exact_binomial_checks": 963,
+  "higher_precision_primes": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13
+  ],
+  "higher_precision_range": [
+    1,
+    4
+  ],
+  "band_unit_formula_cases": 5118,
+  "band_nonsquare_prime_cofactor_pairs": 844,
+  "band_check_range": {
+    "w": [
+      1,
+      100
+    ],
+    "p": "all primes with4w<p<6w",
+    "a": [
+      1,
+      4,
+      7
+    ]
+  },
+  "fixed_offset_constant_checks": 326,
+  "fixed_offset_constants": [
+    {
+      "c": 1,
+      "numerator": -2,
+      "denominator": 3,
+      "integer_character": -6,
+      "square_multiplier_numerator": 1,
+      "square_multiplier_denominator": 9
+    },
+    {
+      "c": 5,
+      "numerator": 14,
+      "denominator": 729,
+      "integer_character": 14,
+      "square_multiplier_numerator": 1,
+      "square_multiplier_denominator": 729
+    },
+    {
+      "c": 7,
+      "numerator": -88,
+      "denominator": 19683,
+      "integer_character": -66,
+      "square_multiplier_numerator": 4,
+      "square_multiplier_denominator": 59049
+    },
+    {
+      "c": 11,
+      "numerator": 3952,
+      "denominator": 14348907,
+      "integer_character": 741,
+      "square_multiplier_numerator": 16,
+      "square_multiplier_denominator": 43046721
+    }
+  ],
+  "gauss_residue_check_primes": 304,
+  "gauss_residue_check_bound": 10000,
+  "large_prime_contradiction_polynomial": [
+    9,
+    1093,
+    34987,
+    99911
+  ],
+  "small_boundary_pair": [
+    13,
+    53
+  ],
+  "small_boundary_binomial": 1,
+  "proved_unbounded_exclusion": "4w<p<6w and C(2w-1,p-4w-1) a quadratic nonresidue modulo p excludes n=w*p^(3t+1)+2 for every t>=0",
+  "explicit_prime_progression_family": "n=((p+1)/6)*p^(3t+1)+2, prime p=17 or23 mod24, t>=0",
+  "example_infinite_subfamilies": [
+    "19*113^(3t+1)+2",
+    "23*137^(3t+1)+2",
+    "41*241^(3t+1)+2"
+  ],
+  "sample_family_records": [
+    {
+      "w": 19,
+      "p": 113,
+      "c": 1,
+      "a": 1,
+      "n": 2149,
+      "valuation_X": 0,
+      "negative_leading_unit": 92,
+      "nonresidue_Euler_power": 112
+    },
+    {
+      "w": 19,
+      "p": 113,
+      "c": 1,
+      "a": 4,
+      "n": 3097899861,
+      "valuation_X": 3,
+      "negative_leading_unit": 92,
+      "nonresidue_Euler_power": 112
+    },
+    {
+      "w": 19,
+      "p": 113,
+      "c": 1,
+      "a": 7,
+      "n": 4469950412851525,
+      "valuation_X": 6,
+      "negative_leading_unit": 92,
+      "nonresidue_Euler_power": 112
+    },
+    {
+      "w": 23,
+      "p": 137,
+      "c": 1,
+      "a": 1,
+      "n": 3153,
+      "valuation_X": 0,
+      "negative_leading_unit": 5,
+      "nonresidue_Euler_power": 136
+    },
+    {
+      "w": 23,
+      "p": 137,
+      "c": 1,
+      "a": 4,
+      "n": 8102333305,
+      "valuation_X": 3,
+      "negative_leading_unit": 5,
+      "nonresidue_Euler_power": 136
+    },
+    {
+      "w": 23,
+      "p": 137,
+      "c": 1,
+      "a": 7,
+      "n": 20833959045668961,
+      "valuation_X": 6,
+      "negative_leading_unit": 5,
+      "nonresidue_Euler_power": 136
+    },
+    {
+      "w": 41,
+      "p": 241,
+      "c": 5,
+      "a": 1,
+      "n": 9883,
+      "valuation_X": 0,
+      "negative_leading_unit": 185,
+      "nonresidue_Euler_power": 240
+    },
+    {
+      "w": 41,
+      "p": 241,
+      "c": 5,
+      "a": 4,
+      "n": 138309505003,
+      "valuation_X": 3,
+      "negative_leading_unit": 185,
+      "nonresidue_Euler_power": 240
+    },
+    {
+      "w": 41,
+      "p": 241,
+      "c": 5,
+      "a": 7,
+      "n": 1935990200751102523,
+      "valuation_X": 6,
+      "negative_leading_unit": 185,
+      "nonresidue_Euler_power": 240
+    }
+  ],
+  "complete_local_example_records": [
+    {
+      "n": 289,
+      "A": 3981264,
+      "factorization_A": {
+        "17": 2,
+        "2": 4,
+        "3": 1,
+        "7": 1,
+        "41": 1
+      },
+      "prime_records": [
+        {
+          "p": 2,
+          "alpha": 4,
+          "x": 11,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 3,
+          "alpha": 1,
+          "x": 4,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 7,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 7,
+          "normalized_X_unit": 5,
+          "negative_unit": 2,
+          "is_square": true,
+          "Euler_power": 1
+        },
+        {
+          "p": 17,
+          "alpha": 2,
+          "x": 4,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 41,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 41,
+          "normalized_X_unit": 35,
+          "negative_unit": 6,
+          "is_square": false,
+          "Euler_power": 40
+        }
+      ],
+      "E": 287,
+      "E_square": 7
+    },
+    {
+      "n": 6860,
+      "A": 53781281820,
+      "factorization_A": {
+        "2": 2,
+        "5": 1,
+        "7": 3,
+        "19": 3,
+        "3": 2,
+        "127": 1
+      },
+      "prime_records": [
+        {
+          "p": 2,
+          "alpha": 2,
+          "x": 13,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 3,
+          "alpha": 2,
+          "x": 0,
+          "critical_defect_exponent": 2,
+          "square_test_modulus": 3,
+          "normalized_X_unit": 2,
+          "negative_unit": 1,
+          "is_square": true,
+          "Euler_power": 1
+        },
+        {
+          "p": 5,
+          "alpha": 1,
+          "x": 5,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 7,
+          "alpha": 3,
+          "x": 6,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 19,
+          "alpha": 3,
+          "x": 6,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 127,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 127,
+          "normalized_X_unit": 35,
+          "negative_unit": 92,
+          "is_square": false,
+          "Euler_power": 126
+        }
+      ],
+      "E": 1143,
+      "E_square": 9
+    },
+    {
+      "n": 2149,
+      "A": 1651777274,
+      "factorization_A": {
+        "7": 1,
+        "307": 1,
+        "2": 1,
+        "179": 1,
+        "19": 1,
+        "113": 1
+      },
+      "prime_records": [
+        {
+          "p": 2,
+          "alpha": 1,
+          "x": 1,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 7,
+          "alpha": 1,
+          "x": 3,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 19,
+          "alpha": 1,
+          "x": 1,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 113,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 113,
+          "normalized_X_unit": 21,
+          "negative_unit": 92,
+          "is_square": false,
+          "Euler_power": 112
+        },
+        {
+          "p": 179,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 307,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        }
+      ],
+      "E": 113,
+      "E_square": 1
+    },
+    {
+      "n": 3153,
+      "A": 5219240776,
+      "factorization_A": {
+        "1051": 1,
+        "2": 3,
+        "197": 1,
+        "23": 1,
+        "137": 1
+      },
+      "prime_records": [
+        {
+          "p": 2,
+          "alpha": 3,
+          "x": 10,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 23,
+          "alpha": 1,
+          "x": 1,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 137,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 137,
+          "normalized_X_unit": 132,
+          "negative_unit": 5,
+          "is_square": false,
+          "Euler_power": 136
+        },
+        {
+          "p": 197,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 1051,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        }
+      ],
+      "E": 137,
+      "E_square": 1
+    },
+    {
+      "n": 9883,
+      "A": 160836011181,
+      "factorization_A": {
+        "9883": 1,
+        "3": 3,
+        "61": 1,
+        "41": 1,
+        "241": 1
+      },
+      "prime_records": [
+        {
+          "p": 3,
+          "alpha": 3,
+          "x": 7,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 41,
+          "alpha": 1,
+          "x": 1,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 61,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        },
+        {
+          "p": 241,
+          "alpha": 1,
+          "x": 0,
+          "critical_defect_exponent": 1,
+          "square_test_modulus": 241,
+          "normalized_X_unit": 56,
+          "negative_unit": 185,
+          "is_square": false,
+          "Euler_power": 240
+        },
+        {
+          "p": 9883,
+          "alpha": 1,
+          "x": 2,
+          "critical_defect_exponent": 0
+        }
+      ],
+      "E": 241,
+      "E_square": 1
+    }
+  ],
+  "hardest_v10_index_6860_now_excluded_by": "E_square=9 after removing127 by a nonsquare unit; existing CF threshold suffices",
+  "index_6860_separate_small_certificate": {
+    "prime": 127,
+    "base_p_digits_least_significant_first": [
+      [
+        4,
+        89,
+        123,
+        22
+      ],
+      [
+        3,
+        70,
+        2,
+        0
+      ],
+      [
+        1,
+        19,
+        121,
+        22
+      ]
+    ],
+    "small_binomial_residues": [
+      4,
+      112,
+      10,
+      1
+    ],
+    "unit_X": 35,
+    "negative_unit": 92,
+    "Euler_power": 126,
+    "E": 1143,
+    "E_square": 9
+  },
+  "all_arithmetic_exact": true,
+  "new_external_classification_theorem_used": false,
+  "arbitrary_exponent_cutoff_used_in_proof": false,
+  "full_unbounded_theorems_Lean_formalized": false,
+  "whole_original_equation_solved": false,
+  "checker_sha256": "149fcadf301b827e6aed783e148846df001eaf86df8dd8d4f1272696cd6153c4",
+  "proof_note_sha256": "5902c44e854433ecb026dc21b7189b33645a8865bd364186809dae666e2f79cb"
+}

@@ -1,0 +1,375 @@
+{
+  "status": "PASS",
+  "source_commit": "de948036a595b0585f64d5f81942a2b7a09bfb92",
+  "original_blobs_match_GitHub": true,
+  "bugs_fixed": [
+    "Remaining residual-curve region is 27a>=31b, not the v17-excluded strip",
+    "Positive repeated-prime delta^4 condition uses n^2+1, not canonical-J neighbor n^2+2"
+  ],
+  "a_max_20": {
+    "old_excluded_pair_count": 83,
+    "correct_remaining_pair_count": 52,
+    "all_coprime_pairs_with_b_dividing_486": 135,
+    "remaining_by_denominator": {
+      "1": 19,
+      "2": 9,
+      "3": 12,
+      "6": 5,
+      "9": 7
+    },
+    "remaining_pairs": [
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        7,
+        6
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        2
+      ],
+      [
+        10,
+        1
+      ],
+      [
+        10,
+        3
+      ],
+      [
+        11,
+        1
+      ],
+      [
+        11,
+        2
+      ],
+      [
+        11,
+        3
+      ],
+      [
+        11,
+        6
+      ],
+      [
+        11,
+        9
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        13,
+        1
+      ],
+      [
+        13,
+        2
+      ],
+      [
+        13,
+        3
+      ],
+      [
+        13,
+        6
+      ],
+      [
+        13,
+        9
+      ],
+      [
+        14,
+        1
+      ],
+      [
+        14,
+        3
+      ],
+      [
+        14,
+        9
+      ],
+      [
+        15,
+        1
+      ],
+      [
+        15,
+        2
+      ],
+      [
+        16,
+        1
+      ],
+      [
+        16,
+        3
+      ],
+      [
+        16,
+        9
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        17,
+        2
+      ],
+      [
+        17,
+        3
+      ],
+      [
+        17,
+        6
+      ],
+      [
+        17,
+        9
+      ],
+      [
+        18,
+        1
+      ],
+      [
+        19,
+        1
+      ],
+      [
+        19,
+        2
+      ],
+      [
+        19,
+        3
+      ],
+      [
+        19,
+        6
+      ],
+      [
+        19,
+        9
+      ],
+      [
+        20,
+        1
+      ],
+      [
+        20,
+        3
+      ],
+      [
+        20,
+        9
+      ]
+    ],
+    "singular_pairs": [],
+    "equality_boundary_test_at_a_max_31": [
+      31,
+      27
+    ]
+  },
+  "positive_neighbor_observations": {
+    "before": {
+      "117:0": [],
+      "117:1": [],
+      "1485:0": [
+        {
+          "branch_pass": true,
+          "c": -2,
+          "height_pass": true,
+          "n_upper_exclusive": 479174066176,
+          "p": 163
+        }
+      ],
+      "1485:1": [
+        {
+          "branch_pass": true,
+          "c": -2,
+          "height_pass": true,
+          "n_upper_exclusive": 125612606403641344,
+          "p": 163
+        }
+      ]
+    },
+    "after": {
+      "117:0": [
+        {
+          "branch_pass": true,
+          "c": -1,
+          "height_pass": true,
+          "n_upper_exclusive": 479174066176,
+          "p": 37
+        }
+      ],
+      "117:1": [
+        {
+          "branch_pass": true,
+          "c": -1,
+          "height_pass": true,
+          "n_upper_exclusive": 125612606403641344,
+          "p": 37
+        }
+      ],
+      "1485:0": [],
+      "1485:1": []
+    }
+  },
+  "regression_cases": {
+    "positive_true": "117^2+1=10*37^2; 117=3 mod 6; 37^2>693",
+    "wrong_neighbor_removed": "1485^2+2=83*163^2; 163^2>8901; this is not the n^2+1 hypothesis",
+    "positive_residue_gate": "776^2+1=113*73^2 but 776!=3 mod 6",
+    "small_repeated_prime_skipped": "5^2 divides 243^2+1 but 5^2<=6*243-9",
+    "negative_special": "331^2-10=39*53^2; exponent 18 and complementary-only branch preserved",
+    "negative_general": "414^2-2=34*71^2; exponent 38 and complementary-only branch preserved"
+  },
+  "tests": {
+    "old_code_with_new_targeted_regressions_exit": 1,
+    "patched_full_lightweight_suite_exit": 0,
+    "patched_tests_run": 11,
+    "before_log": "v19_actions_corrections_before.log",
+    "after_log": "v19_actions_corrections_after.log",
+    "before_log_sha256": "b34316c79e01b1e2708059e6cba8d6e2bc3e5353a5c213d6f303477df9db81b5",
+    "after_log_sha256": "d5cc76414354379e51b5539d85c390218b6db74f5a92ce1209525c90324746cf",
+    "publication_test_scope": "Existing tests simulate publication to temporary local bare git repositories only; no GitHub writes"
+  },
+  "unchanged_scope": [
+    "fixed_j candidate generation and height limits",
+    "canonical J definition using n^2+2",
+    "negative-neighbor constants and branch conditions",
+    "v18_publish.py",
+    "V18_ACTIONS_STATUS_ja.md historical report",
+    "all Lean and persistent-goal files"
+  ],
+  "mathematical_sources": [
+    "v17_square_root_gap.md sections 5-6: h>=93M and the excluded 27a<31b region",
+    "v18_defect_resultants.md sections 4-5: negative branch/exponents and N_+=n^2+1 positive condition"
+  ],
+  "changed_files": [
+    {
+      "path": "scripts/research/v18_arithmetic.py",
+      "before_sha256": "76d9293f2a1165f8f85c1d7824b80d879c00fcd0ee609e02341fc4899fe19c83",
+      "after_sha256": "8fb4f73670bc2dd2a68e8d7496044bc71bf1c5505f6b296c45ea5ed0da96a31b"
+    },
+    {
+      "path": "scripts/research/v18_compute.py",
+      "before_sha256": "f01a42f1e203e7b596935908a04657473d710f6718dcaca2261b7d07c49a758e",
+      "after_sha256": "09a17bc5f4d439350a07de8e59361edc7bc66e716a01335d8f54604e2e0467cc"
+    },
+    {
+      "path": "scripts/research/v18_test.py",
+      "before_sha256": "1c21680e1d71c919c76a40845d33fdeacd5da0a869f761eefa738080bf328e4e",
+      "after_sha256": "e0d2fa7b37ebe41c16d6d3485454941bda07592d138fe52348ac222bf3d909ef"
+    },
+    {
+      "path": "scripts/research/v18_report.py",
+      "before_sha256": "50755221224d2e38230c052e7b4e3c53be593347d3499322cec33e03ee7a21dc",
+      "after_sha256": "d76ab6fe69a5056a28387bbd84702f22929692fc5456279795768412bd926453"
+    },
+    {
+      "path": "docs/research/nested-binomial/V18_ACTIONS_ja.md",
+      "before_sha256": "df3cf272f19e5e3425130a2450c75106bf647558f9ea200df0ede2327e9cdf9f",
+      "after_sha256": "00ceb87152646f7ecee9a7e14fe2a64b27b4f80ab6658efe37e086db079805d2"
+    }
+  ],
+  "patch_sha256": "aac412562a4fc6e225c6116d07573f9946039cffa7610aa18664f38755feb394",
+  "audit_script_sha256": "710c36bce5001f580b4a6e8089d9b941e7c3354ba7335fa379b706aa9f23d20d",
+  "no_GitHub_writes": true,
+  "new_Sage_Lean_DeepSeek_runs": false,
+  "original_git_blobs": [
+    {
+      "path": "scripts/research/v18_arithmetic.py",
+      "blob_sha": "d32903bb82b101136e72ffb24c15855528a0e370",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/scripts/research/v18_arithmetic.py"
+    },
+    {
+      "path": "scripts/research/v18_compute.py",
+      "blob_sha": "f424e736e4e12f385ac09f81aadc734ee8a49017",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/scripts/research/v18_compute.py"
+    },
+    {
+      "path": "scripts/research/v18_test.py",
+      "blob_sha": "5b90462730ac0c6d15240e81a74f79900e0f9d11",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/scripts/research/v18_test.py"
+    },
+    {
+      "path": "scripts/research/v18_report.py",
+      "blob_sha": "78242922db8f4e9a15d030214e2523e9f004c9f1",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/scripts/research/v18_report.py"
+    },
+    {
+      "path": "scripts/research/v18_publish.py",
+      "blob_sha": "896b06b374175c2ba8131a3b566d8ec5da210a04",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/scripts/research/v18_publish.py"
+    },
+    {
+      "path": "docs/research/nested-binomial/V18_ACTIONS_ja.md",
+      "blob_sha": "f47eafcea5db2086a707a11081d3a2fbf8a5d74b",
+      "url": "https://github.com/corcondor/mathos/blob/de948036a595b0585f64d5f81942a2b7a09bfb92/docs/research/nested-binomial/V18_ACTIONS_ja.md"
+    }
+  ]
+}

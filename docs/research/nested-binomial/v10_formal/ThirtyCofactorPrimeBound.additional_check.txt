@@ -1,0 +1,4 @@
+'NestedBinomialV10.pow_factorization_choose_six_w' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.factorization_div_gcd_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.prime_pow_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.height_bound_ge_five' depends on axioms: [propext, Classical.choice, Quot.sound]

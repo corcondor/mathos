@@ -1,0 +1,13 @@
+{"S": 1, "curves": 66, "irrational_curves": 66, "rational_curves": 0, "continued_fraction_terms": 7412, "reduced_fractions_checked": 38185, "surviving_points": 0}
+{"S": 2, "curves": 133, "irrational_curves": 133, "rational_curves": 0, "continued_fraction_terms": 29999, "reduced_fractions_checked": 155542, "surviving_points": 0}
+{"S": 3, "curves": 200, "irrational_curves": 200, "rational_curves": 0, "continued_fraction_terms": 67610, "reduced_fractions_checked": 350369, "surviving_points": 0}
+{"S": 4, "curves": 267, "irrational_curves": 267, "rational_curves": 0, "continued_fraction_terms": 119657, "reduced_fractions_checked": 623155, "surviving_points": 0}
+{"S": 5, "curves": 334, "irrational_curves": 334, "rational_curves": 0, "continued_fraction_terms": 188373, "reduced_fractions_checked": 975346, "surviving_points": 0}
+{"S": 6, "curves": 401, "irrational_curves": 401, "rational_curves": 0, "continued_fraction_terms": 269886, "reduced_fractions_checked": 1404511, "surviving_points": 0}
+{"S": 7, "curves": 468, "irrational_curves": 468, "rational_curves": 0, "continued_fraction_terms": 367130, "reduced_fractions_checked": 1913847, "surviving_points": 0}
+{"S": 8, "curves": 535, "irrational_curves": 535, "rational_curves": 0, "continued_fraction_terms": 480002, "reduced_fractions_checked": 2501278, "surviving_points": 0}
+{"S": 9, "curves": 602, "irrational_curves": 601, "rational_curves": 1, "continued_fraction_terms": 607177, "reduced_fractions_checked": 3160468, "surviving_points": 0}
+{"S": 10, "curves": 669, "irrational_curves": 669, "rational_curves": 0, "continued_fraction_terms": 751641, "reduced_fractions_checked": 3910137, "surviving_points": 0}
+{"S": 11, "curves": 736, "irrational_curves": 736, "rational_curves": 0, "continued_fraction_terms": 907633, "reduced_fractions_checked": 4728751, "surviving_points": 0}
+{"S": 12, "curves": 803, "irrational_curves": 803, "rational_curves": 0, "continued_fraction_terms": 1081046, "reduced_fractions_checked": 5632741, "surviving_points": 0}
+{"status": "PASS", "curves": 5214, "irrational_curves": 5213, "rational_curves": 1, "continued_fraction_terms": 4877566, "reduced_fractions_checked": 25394330, "surviving_points": 0}

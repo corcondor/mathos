@@ -1,0 +1,20 @@
+{
+  "status": "pass",
+  "verified_candidates": 150663,
+  "first_indices_covered": 2097129,
+  "analytic_i_exclusive_bound": 2097152,
+  "valuation_certificates": 0,
+  "valuation_examples": [],
+  "max_i": 2096169,
+  "max_k": 4208,
+  "max_ell": 4206,
+  "max_prime": 67,
+  "certificate_sha256": "aa2ec4edc8bc0347d8cd9d5f326b114730133deb0cf09b9ee994e75b29bebf0a",
+  "window_sha256": "5ec127d0e32ca1a43a7789e8115a8d8a7d10a784cace6830e02cf7f169fef144",
+  "coverage": "independent top-first binomial representations and direct intervening-integer enumeration",
+  "residue_check": "direct small combinations in Lucas theorem",
+  "valuation_check": "Kummer carries, independent of generator Legendre floors",
+  "endpoint_check": "separate required C++ verifier on exact same extended binary",
+  "formalized_in_Lean": false,
+  "seconds": 3.083836590994906
+}

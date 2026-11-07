@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-07",
+  "files": {
+    "v25_certificate.json": {
+      "sha256": "ab4876687d5ec4fe9e8354b6834ca4e1363a5aaa8cfeb35843203507bb30ebdf",
+      "bytes": 5949
+    },
+    "PROGRESS_v25_ja.md": {
+      "sha256": "ce56b78a5eb4ae6223567a1779cdc060c11b0d9a74dab29db55b7cb4d17f3b4c",
+      "bytes": 1950
+    },
+    "v25_verify.log": {
+      "sha256": "c105852c17ee196b9585b0c0697ec93b01f7e3d4e9d4f412d9aeb41109ff9a23",
+      "bytes": 300
+    },
+    "V25_PROOFS_ja.md": {
+      "sha256": "a271d60debd6acfbf0029816f2ebffe5c8c691cb3bbb72d14a5c9f58bcc2851e",
+      "bytes": 10636
+    },
+    "v24_certificate_reference.json": {
+      "sha256": "37ba134b2e0d97d2235090fdcc4181e7b248e7466e39eb0ef2b91e430b4955d9",
+      "bytes": 4690
+    },
+    "v25_exact_verify.py": {
+      "sha256": "f74f16a7a2a3f5348bac2d259f2fb7ffc167beee251bdbb35a8a4ffc2a37598c",
+      "bytes": 7853
+    }
+  },
+  "scope": "v25 local verification only; literature theorem on rank not re-proven by CAS"
+}

@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T09:36:25.711326+00:00",
+  "lean_version": "4.35.0",
+  "lean_commit": "eb6cafb7290e8bd5f2937522d8d804f58f02bafc",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "59325b7757f9b4cd85ac6173c4ff74c370f44070dfac81664a86b12b83f436fb",
+  "certificate_sha256": "03e778865211a34c8f3a0caa42368839f9f0fdee97b595f4f04627a4ed59175d",
+  "value_definition": "quotient * (2*prime^exponent+2) * (2*prime^exponent+1) / 3",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v9_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v9_formal/CubeCertificates.olean",
+    "/workspace/scratch/8e52c1248371/v9_formal/CubeCertificates.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "command_environment": {
+    "PATH_prefix": "/workspace/scratch/8e52c1248371/v4_runtime/lean-4.35.0-linux/bin",
+    "LD_PRELOAD": "/workspace/scratch/8e52c1248371/v4_runtime/own_executable_path.so"
+  },
+  "successful_executor_session": 97757,
+  "successful_result_chunk": "1f3c56",
+  "finite_arithmetic_rows_checked": 2592,
+  "batches": 52,
+  "namespace": "NestedBinomialV9",
+  "proof_methods": [
+    "decide",
+    "norm_num",
+    "omega"
+  ],
+  "printed_axiom_dependencies": {
+    "numerical_gap_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "quotient_interval_has_no_integer": [
+      "propext",
+      "Quot.sound"
+    ],
+    "allRows_checked": [
+      "propext"
+    ],
+    "allRows_count": [],
+    "every_recorded_value_not_cube": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "native_decide_used": false,
+  "sorry_used": false,
+  "custom_axioms_used": false,
+  "analytic_and_valuation_reductions_formalized": false,
+  "completeness_of_enumerated_domain_formalized": false,
+  "entire_cofactor_two_theorem_formalized": false,
+  "whole_original_equation_solved": false,
+  "standalone_lake_build_executed": false,
+  "executor_compatibility_shim": "../v4_formal/own_executable_path.c (own-process executable-path compatibility only)",
+  "log_capture": "Verbatim successful executor output copied after exit code 0. Direct launch without shell stdout redirection.",
+  "initial_redirected_launch": {
+    "exit_code": 1,
+    "reason": "could not detect the configuration of the Lake installation",
+    "proof_processing_started": false
+  }
+}

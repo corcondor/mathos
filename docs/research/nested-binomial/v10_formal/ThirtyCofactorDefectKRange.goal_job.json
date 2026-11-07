@@ -1,0 +1,16 @@
+{
+  "module": "ThirtyCofactorDefectKRange",
+  "imports": "import Mathlib.Data.Nat.GCD.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith",
+  "definitions": "",
+  "goals": [
+    [
+      "defect_K_lower_bound",
+      "theorem defect_K_lower_bound (C K n r : ℕ) (hC : 0 < C) (h : C * r ^ 2 = K * n * (n - 1)) (hn : 2 ≤ n) (hr : 3 * n < r) : 9 * C + 1 ≤ K"
+    ],
+    [
+      "defect_K_upper_bound",
+      "theorem defect_K_upper_bound (C K n r : ℕ) (hC : 0 < C) (h : C * r ^ 2 = K * n * (n - 1)) (hn : 104 ≤ n) (hr : 3 * r < 10 * n) : 927 * K < 10400 * C"
+    ]
+  ],
+  "local_dependencies": []
+}

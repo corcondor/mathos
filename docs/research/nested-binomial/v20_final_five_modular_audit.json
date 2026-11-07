@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "scope": "Third check of five final nonsquares only; the separate independent verifier regenerated the complete divisor domains",
+  "certificate_sha256": "c765b4efc5d400f4e29f89c00c3e0a6f691eaec2f837db11018c4c02f15b0a81",
+  "rows": [
+    {
+      "J": 1,
+      "w": 118,
+      "n": 1216,
+      "square_target": 13327741,
+      "modulus": 8,
+      "target_residue": 5,
+      "all_square_residues": [
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "J": 8,
+      "w": 89,
+      "n": 129,
+      "square_target": 152049,
+      "modulus": 9,
+      "target_residue": 3,
+      "all_square_residues": [
+        0,
+        1,
+        4,
+        7
+      ]
+    },
+    {
+      "J": 8,
+      "w": 121,
+      "n": 2197,
+      "square_target": 43773601,
+      "modulus": 17,
+      "target_residue": 12,
+      "all_square_residues": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        13,
+        15,
+        16
+      ]
+    },
+    {
+      "J": 9,
+      "w": 278,
+      "n": 784,
+      "square_target": 5556517,
+      "modulus": 5,
+      "target_residue": 2,
+      "all_square_residues": [
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "J": 29,
+      "w": 102,
+      "n": 976,
+      "square_target": 8849881,
+      "modulus": 7,
+      "target_residue": 5,
+      "all_square_residues": [
+        0,
+        1,
+        2,
+        4
+      ]
+    }
+  ]
+}

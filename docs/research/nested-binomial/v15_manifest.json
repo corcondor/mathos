@@ -1,0 +1,286 @@
+{
+  "version": "v15",
+  "date": "2026-11-06 JST",
+  "repository": "corcondor/mathos",
+  "branch": "research/nested-binomial-2026-11-05",
+  "pull_request": 1,
+  "prior_repository_snapshot": "660c1469408e0714fc41313f30bf828e0988c910",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "scope": {
+    "ell": 1,
+    "j": "i-3",
+    "n": "i",
+    "A": "binom(n,3)",
+    "r": "min(k,A-k)",
+    "branches": [
+      "k=r",
+      "k=A-r"
+    ],
+    "M": "gcd(n,3)*gcd(n-1,6)",
+    "Q": "n*(n-1)/M",
+    "kappa": "product_p p^floor(v_p(Q)/3)"
+  },
+  "prior_inputs": [
+    {
+      "path": "docs/research/nested-binomial/v6_common_divisor.md",
+      "git_blob_sha": "e18dd1d93224905f3670c5c8e7c500c240419e72",
+      "bytes": 5553
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_offset_composite.md",
+      "git_blob_sha": "afc5e371baf652ede2f736d41fcfde8f9202e317",
+      "bytes": 10180
+    },
+    {
+      "path": "docs/research/nested-binomial/v5_offset_three_structure.md",
+      "git_blob_sha": "80062f7355ec18336f4aefc60288384d76c46610",
+      "bytes": 8213
+    },
+    {
+      "path": "docs/research/nested-binomial/v11_mixed_structure.md",
+      "git_blob_sha": "a947c53bde993505e288a9d9773e619d9581e442",
+      "bytes": 17284
+    },
+    {
+      "path": "docs/research/nested-binomial/v14_two_factor_support.md",
+      "git_blob_sha": "f59d8b9cac4e9c6c02cec75363b9dda0998b55d3",
+      "bytes": 15521
+    },
+    {
+      "path": "docs/research/nested-binomial/v12_three_descent.md",
+      "git_blob_sha": "69754ad4ae33d2343df912aaebf9dd7145d3bb87",
+      "bytes": 3631
+    }
+  ],
+  "results": {
+    "sparsity": {
+      "theorem": "N(X) <= 4*sqrt(21*X)*H_floor(cuberoot(X)) <= 4*sqrt(21*X)*(1+log(X)/3)",
+      "asymptotic": "O(sqrt(X)*log(X))",
+      "counted_objects": "Distinct first indices for solutions in this branch, not all quadruples",
+      "method": "Canonical factorization m=a*b^2*c^3 and exact counting inequality; no independence assumption or finite extrapolation"
+    },
+    "neighbor": {
+      "prime_exclusion": "n^2+2 must be composite",
+      "large_prime_congruence": "(r-epsilon)^2 = 6*n-8 mod p if p divides n^2+2 and p>6*n-9",
+      "cofactor_definition": "w=(n^2+2)/p for any prime divisor p",
+      "both_branches": [
+        "n<20000*w^3+1",
+        "p<28*n^(5/3)"
+      ],
+      "small_branch": [
+        "n<240*w^(3/2)+1",
+        "p<40*n^(4/3)"
+      ],
+      "optional_log_bound": "log(n)<147*w/32 if n>=1024",
+      "prime_power_bound_claimed": false,
+      "infinitely_many_prime_values_claimed": false
+    },
+    "pell": {
+      "theorem": "Q does not divide r^2",
+      "combined_with_prior_input": "min{a>=1: Q divides r^a}=3",
+      "local_consequence": "For some prime p, 2*v_p(r)<v_p(Q)<=3*v_p(r), so v_p(Q)=3 or >=5",
+      "cube_consequence": "Some prime cube divides n or n-1",
+      "hypothetical_Q_divides_r2_height": "n<exp(30)<2^45",
+      "coefficient_pairs": 25,
+      "distinct_radicands": 13,
+      "counts": {
+        "pell_points_below_height": 188,
+        "integral_n_r": 160,
+        "n_ge_104": 140,
+        "correct_M": 66,
+        "strict_coarse_interval": 62,
+        "strict_log_interval": 11,
+        "modular_branch_exclusions": 22
+      },
+      "survivors": [],
+      "largest_witness_prime": 13,
+      "all_equations_excluded_by": "Both binomials vanish modulo witness p while k^2 is nonzero"
+    },
+    "cube_height": {
+      "theorem": "log(n)<28*kappa",
+      "consequence": "kappa>=2 and kappa>log(n)/28",
+      "integer_identity": "Q=a*b^2*kappa^3, r=a*b*kappa*v => kappa*r^2/Q=a*v^2",
+      "exact_comparison": "50111163/51380224 < 1",
+      "uniform_bound_on_all_n_claimed": false
+    }
+  },
+  "verification": {
+    "written_review": "Four written deductions checked by the root and separate AI collaborators; internal mathematical review only",
+    "sparsity_supporting_checks": {
+      "report": "v15_cubic_defect_sparsity_checks.json",
+      "limit": 100000,
+      "canonical_identity_checks": 100000,
+      "coarse_necessary_condition_indices": 45,
+      "rational_log_condition_indices": 13,
+      "these_are_original_equation_solutions": false
+    },
+    "neighbor_supporting_checks": {
+      "report": "v15_neighbor_prime_checks.json",
+      "actual_binomial_congruences": 110,
+      "local_divisor_transfer_cases": 44442,
+      "polynomial_identity_cases": 240,
+      "universal_proof_by_finite_extrapolation": false
+    },
+    "exhaustive_pell": {
+      "producer": "v15_pell_square_divisor.py",
+      "certificate": "v15_pell_square_divisor_results.json",
+      "auditor": "v15_pell_independent_audit.py",
+      "audit_report": "v15_pell_independent_audit.json",
+      "producer_method": "Exact smallest-positive-y certification and first-order Pell recurrence",
+      "independent_method": "Continued-fraction fundamental units, direct minimality, second-order recurrence, factorial-table Lucas at original lower indices",
+      "completeness": "Written height and minimal-unit descent proof, certified first point beyond the height in each family",
+      "exact_counts_agree": true,
+      "max_witness_prime": 13
+    },
+    "exact_constants": {
+      "script": "v15_theory_constants.py",
+      "report": "v15_theory_audit.json",
+      "comparisons": 6,
+      "scope": "Numerical rational comparisons only"
+    },
+    "new_lean_execution": false,
+    "new_deepseek_api_calls": 0,
+    "new_complete_cas_calls": 0,
+    "external_peer_review": false,
+    "no_machine_formalization_of_v15_claimed": true,
+    "runtime_limitation": "No Lean executable, pinned mathlib checkout or MISTRAL_API_KEY binding available in this execution environment; no formal proof bodies modified"
+  },
+  "remaining": {
+    "original_four_variable_problem_solved": false,
+    "original_equation_solution_found": false,
+    "whole_offset_three_branch_solved": false,
+    "primitive_defect_H_lower_bound": 21,
+    "H_lower_bound_source": "v12, unchanged",
+    "residual_n_finite": false,
+    "next_structural_problem": "Combine the v14 two-factor large-prime support, Q exponent obstruction, cube-height bound, neighbor-prime conditions, and existing CRT/valuation conditions without imposing arbitrary prime cutoffs"
+  },
+  "files": [
+    {
+      "path": "PROGRESS_v15_ja.md",
+      "bytes": 11985,
+      "sha256": "5d2c4c800b32461e1eb2e6da92d5dc394893afdf90bbae0910930962983f9cea",
+      "git_blob_sha1": "e295bc353283b4828d496d3e3a9fbdce605aa0d3",
+      "change": "new"
+    },
+    {
+      "path": "v15_cube_height.md",
+      "bytes": 4403,
+      "sha256": "878cd6abad0f313934865b3fee39b9fe0fa7e93cc64659eeb579f4fa094e2442",
+      "git_blob_sha1": "a44ff1fa710e899a1683172d28227ac41c007563",
+      "change": "new"
+    },
+    {
+      "path": "v15_cubic_defect_sparsity.md",
+      "bytes": 7067,
+      "sha256": "68c41cbade708ba1d2b80d0e742398ec06f7250437b16bafa9c9fbcbc28c664e",
+      "git_blob_sha1": "b928b4683be580fdadd7f61339a59b309a5ee219",
+      "change": "new"
+    },
+    {
+      "path": "v15_cubic_defect_sparsity_checks.json",
+      "bytes": 2060,
+      "sha256": "5921c536800b6aa22ff349849d07d28f7e5eaf915a3071766f065b9f30af0cb6",
+      "git_blob_sha1": "68fa5e8fafbe5087e11b5d592a58aa80d1c15cfb",
+      "change": "new"
+    },
+    {
+      "path": "v15_cubic_defect_sparsity_checks.py",
+      "bytes": 6760,
+      "sha256": "53467df1a2e87454031e3b8899210231d80d290ce6f44b20a3b13339673e6eee",
+      "git_blob_sha1": "a6a11e0e182446443efed479bd33f4a82045e18e",
+      "change": "new"
+    },
+    {
+      "path": "v15_neighbor_prime_checks.json",
+      "bytes": 6156,
+      "sha256": "4fbd0c3a5055f250e8af2854bc934f69e20366b522a05695da85c88b06db7c00",
+      "git_blob_sha1": "237c9c04e6a020a2b106108d86c5f98290e4054f",
+      "change": "new"
+    },
+    {
+      "path": "v15_neighbor_prime_checks.py",
+      "bytes": 4808,
+      "sha256": "e4b423ee26a0fe5a34b64c45bf5f91a62b717791e869a2dfda4c10ceffdbe1e2",
+      "git_blob_sha1": "06c1a8e4ff7737cdc89cd381923cf08eafd08805",
+      "change": "new"
+    },
+    {
+      "path": "v15_neighbor_prime_obstruction.md",
+      "bytes": 8598,
+      "sha256": "490fa2be8a1c105bb4ff21278d23d68946f902aeccdcc747c1f7782543609123",
+      "git_blob_sha1": "3ae85f1b01bec733afae644b98ba490e7e605fa3",
+      "change": "new"
+    },
+    {
+      "path": "v15_pell_independent_audit.json",
+      "bytes": 12831,
+      "sha256": "277c7c445bb022c9943695bcc300a3065dee076441013207e1cd59abab08a550",
+      "git_blob_sha1": "430ccaeb4f94f7e5acc1dde72d586a41be4b9045",
+      "change": "new"
+    },
+    {
+      "path": "v15_pell_independent_audit.py",
+      "bytes": 13813,
+      "sha256": "f4fe2fc411774d2c9eef880ad8672aca5d747cbd993b94d9ab1b3ffb5a0a193b",
+      "git_blob_sha1": "913567cbc9f1655aa83340cda7e11be04dba3633",
+      "change": "new"
+    },
+    {
+      "path": "v15_pell_square_divisor.md",
+      "bytes": 11305,
+      "sha256": "4991287390be947e596de0ecf6c542921d30efc92f5458c37241f6c05199f62b",
+      "git_blob_sha1": "f3e08e75b759bd5506cbac732058b8c312561714",
+      "change": "new"
+    },
+    {
+      "path": "v15_pell_square_divisor.py",
+      "bytes": 10063,
+      "sha256": "09acde2b08f87b02782c727c2779e6a9505f14a6996d742589f57737116ac745",
+      "git_blob_sha1": "dbd51af05aede669138fa77e710eefbb4a474c99",
+      "change": "new"
+    },
+    {
+      "path": "v15_pell_square_divisor_results.json",
+      "bytes": 71492,
+      "sha256": "9f60f76a09845876532074b2141e1321cd8289b382a4d0f92e132780bfcebbe3",
+      "git_blob_sha1": "f6195eba5d3ce03a1002357ef5cbad7a73c3f1f5",
+      "change": "new"
+    },
+    {
+      "path": "v15_theory_audit.json",
+      "bytes": 1617,
+      "sha256": "d92f46f317d5eb524ef1457b8e0c4f3efdee7b48e422793208d3a5522068aad5",
+      "git_blob_sha1": "1f8cb0bdcaa884b8da291fe9fbc55bb96e9df3d3",
+      "change": "new"
+    },
+    {
+      "path": "v15_theory_constants.py",
+      "bytes": 2562,
+      "sha256": "dccb88873d808d593753284345952b42bf32f60cca418655ce080de846d5a9bd",
+      "git_blob_sha1": "336f79dfe432e00d803c3af5851bffba45cfeb8b",
+      "change": "new"
+    },
+    {
+      "path": "README.md",
+      "bytes": 23890,
+      "sha256": "49e757c7fd01e0737a1e670edc81d5f1c0e25c0fd90adf0c83e175a6be2cafdc",
+      "git_blob_sha1": "1164fa1a8e2045d6de7ba7a4d24986715f8fca8a",
+      "change": "updated_navigation"
+    },
+    {
+      "path": "RESEARCH_LOG.md",
+      "bytes": 18341,
+      "sha256": "d0463200b3e040082ef4f56f1d2f1c23678a6f2ab1aaafb74fb044eb68a00261",
+      "git_blob_sha1": "b43007d3d66b747b723e4992c463fa2d94e18303",
+      "change": "updated_navigation"
+    }
+  ],
+  "file_count_excluding_manifest": 17,
+  "new_file_count_including_manifest": 16,
+  "updated_navigation_files": [
+    "README.md",
+    "RESEARCH_LOG.md"
+  ],
+  "hash_convention": "SHA-256 of UTF-8 bytes and Git blob SHA-1; manifest excludes its own hash. Final commit/tree provide the manifest blob and publication integrity.",
+  "publication_boundary": "The research branch is the authorized record. Repository visibility, merge state, existing Lean proofs, fixed goals, and separate DeepSeek work are not modified by v15."
+}

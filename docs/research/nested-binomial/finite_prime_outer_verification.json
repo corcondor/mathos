@@ -1,0 +1,18 @@
+{
+  "verification_passed": true,
+  "arithmetic": "Exact integers and Lucas congruences; no floating point.",
+  "coverage": "Independent e-first enumeration with exact binomial binary searches.",
+  "modular_arithmetic": "Independent math.comb evaluation of base-prime digits.",
+  "candidate_count": 295411,
+  "by_offset": {
+    "2": 141865,
+    "3": 153546
+  },
+  "certified_count": 295411,
+  "unresolved_count": 0,
+  "unresolved": [],
+  "distinct_witness_primes": 20,
+  "largest_witness_prime": 71,
+  "certificate_sha256": "0764e15f5264ffdfe2fb85898d29acfc21828da283ff9af07128b023b88a4bb0",
+  "verification_seconds": 1.649788016002276
+}

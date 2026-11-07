@@ -1,0 +1,127 @@
+{
+  "branch": "upper",
+  "candidate_counts": {
+    "21": 4152,
+    "22": 4736,
+    "23": 5072,
+    "24": 5880,
+    "25": 6247,
+    "26": 6630,
+    "27": 7570,
+    "28": 7984,
+    "29": 8629,
+    "30": 9547,
+    "31": 10525,
+    "32": 11304,
+    "33": 11796,
+    "34": 12940,
+    "35": 13816,
+    "36": 14953,
+    "37": 16758,
+    "38": 17328,
+    "39": 17914,
+    "40": 19975
+  },
+  "certificate_sha256": "128e778e9a5c6de11e697c8b4ed7e697d201b1345e90cf260cce0d2b5c534d51",
+  "coverage": "independent adjacent-pair Pell enumeration with coarser proved height",
+  "ell_max": 40,
+  "ell_min": 21,
+  "formal_proof_assistant_executed": false,
+  "groups": [
+    {
+      "coarse_k_limit": "219667417262",
+      "d_count": 8191,
+      "ells": [
+        21
+      ],
+      "ks": 141
+    },
+    {
+      "coarse_k_limit": "2165293113020",
+      "d_count": 16383,
+      "ells": [
+        22,
+        23
+      ],
+      "ks": 174
+    },
+    {
+      "coarse_k_limit": "66088511536553",
+      "d_count": 32767,
+      "ells": [
+        24,
+        25,
+        26
+      ],
+      "ks": 208
+    },
+    {
+      "coarse_k_limit": "1990280943581606",
+      "d_count": 65535,
+      "ells": [
+        27,
+        28,
+        29
+      ],
+      "ks": 244
+    },
+    {
+      "coarse_k_limit": "6176733962839469",
+      "d_count": 131071,
+      "ells": [
+        30
+      ],
+      "ks": 287
+    },
+    {
+      "coarse_k_limit": "183448998696332258",
+      "d_count": 262143,
+      "ells": [
+        31,
+        32,
+        33
+      ],
+      "ks": 334
+    },
+    {
+      "coarse_k_limit": "1751104078464989744",
+      "d_count": 524287,
+      "ells": [
+        34,
+        35
+      ],
+      "ks": 387
+    },
+    {
+      "coarse_k_limit": "5403406870691968355",
+      "d_count": 1048575,
+      "ells": [
+        36
+      ],
+      "ks": 433
+    },
+    {
+      "coarse_k_limit": "158049650967740074412",
+      "d_count": 2097151,
+      "ells": [
+        37,
+        38,
+        39
+      ],
+      "ks": 494
+    },
+    {
+      "coarse_k_limit": "486306618362277152039",
+      "d_count": 4194303,
+      "ells": [
+        40
+      ],
+      "ks": 561
+    }
+  ],
+  "j": 1,
+  "residues": "factorial-table Lucas implementation",
+  "seconds": 115.57803326199792,
+  "status": "pass",
+  "verified_candidates": 213756
+}

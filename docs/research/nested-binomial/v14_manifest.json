@@ -1,0 +1,258 @@
+{
+  "version": "v14",
+  "date_jst": "2026-11-06",
+  "status": "PASS",
+  "scope": "ell=1, j=i-3, both k=r and k=A-r; squared indices on original RHS",
+  "theorem": "At least two distinct members of n,n-1,n-2 have a prime >=11 to an exponent not divisible by3. Such primes are distinct.",
+  "primitive_corollary": "#{p>=11 : v_p(H*T) not congruent0 mod3}>=2 for primitive H,T.",
+  "uniform_excluded_family": "H*T=2^a*3^b*5^c*7^d*p^e*u^3 for every prime p>=11, a,b,c,d,e>=0 and u>=1. No height bound is imposed.",
+  "previous_inputs": [
+    "6*H*r^3=T*n*(n-1)*(n-2)",
+    "gcd(H,T)=1",
+    "H divides n-2",
+    "n>=104",
+    "3*n<r<10*n/3",
+    "if n>=1024, r<3*n+3*n/(4*log(n))"
+  ],
+  "previous_reduction_sources": [
+    "v11_effective_defect_cf.md sections1-2",
+    "v10_valuation_recovery.md section3",
+    "v6_offset_composite.md section1"
+  ],
+  "new_complete_solver": {
+    "pari_version": [
+      2,
+      17,
+      4
+    ],
+    "thueinit_flag": 1,
+    "support_primes": [
+      3,
+      5,
+      7
+    ],
+    "rhs": 2,
+    "coefficient_pairs": 125,
+    "calls": 250,
+    "direct_signed_solutions": 13,
+    "positive_odd_first_indices": [
+      3,
+      5,
+      7,
+      9,
+      27,
+      245
+    ],
+    "process_exit_code": 0,
+    "stderr_empty": true,
+    "user_supplied_variable_bound": null,
+    "dual_encodings_same_backend": true,
+    "elapsed_seconds_from_execution": 3.489011564000066
+  },
+  "reused_v13_complete_solver": {
+    "commit": "58dd0ab25e7d653c947c1717006b98a4ae947c71",
+    "support_primes": [
+      2,
+      3,
+      5,
+      7
+    ],
+    "rhs": 1,
+    "coefficient_pairs": 625,
+    "historical_calls": 1250,
+    "positive_first_indices_count": 24,
+    "solver_rerun_in_v14": false,
+    "saved_records_reaudited_in_v14": true
+  },
+  "finite_classification": {
+    "raw_union_count": 58,
+    "valid_n_ge_3_count": 57,
+    "valid_n_below_104_count": 39,
+    "sharp_maximum_under_two_supported_core_condition": 13720,
+    "maximum_witness": [
+      "13720=5*14^3",
+      "13718=2*19^3"
+    ],
+    "n_ge_104": [
+      126,
+      127,
+      128,
+      162,
+      225,
+      226,
+      245,
+      252,
+      450,
+      2401,
+      2402,
+      4375,
+      4376,
+      4802,
+      6860,
+      6861,
+      8750,
+      13720
+    ],
+    "all_18_rejected": true,
+    "survivors": []
+  },
+  "audits": {
+    "pair_support_verifier": "PASS",
+    "independent_audit": "PASS",
+    "every_coefficient_pair_covered": true,
+    "all_signed_solution_sets_equal_after_monic_conversion": true,
+    "all_57_actual_core_witnesses_checked": true,
+    "all_18_exact_integer_rational_rejections_checked": true,
+    "actual_gp_input_and_raw_stdout_audited": true,
+    "both_auditors_executed_with_published_filenames": true,
+    "mathematical_note_and_table_reviewed_by_separate_ai_collaborators": true,
+    "external_peer_review": false
+  },
+  "verification_boundary": {
+    "computer_assisted": true,
+    "depends_on_prior_reductions": true,
+    "thue_completeness_depends_on_pari_implementation": true,
+    "independent_complete_thue_backend": false,
+    "new_lean_execution": false,
+    "new_deepseek_api_call": false,
+    "selmer_group_computed": false,
+    "full_original_problem_solved": false,
+    "concrete_original_solution_found": false,
+    "H_numeric_lower_bound": 21,
+    "H_numeric_lower_bound_changed": false,
+    "always_two_large_primes_in_T_alone": false,
+    "bound_on_n_for_remaining_original_branch": false,
+    "bennett_rhs1_uniqueness_used_for_rhs2": false
+  },
+  "runtime_note": "The documented authenticated DeepSeek binding and prior Lean runtime are unavailable in this workspace. Existing proof bodies and frozen goal types are unchanged.",
+  "environment_record": "v13_pari_environment.json",
+  "source_provenance": "Versioned solver source and gap2 raw outputs are byte-identical copies of actually executed scratch artifacts. Both audit JSON reports were regenerated using versioned filenames.",
+  "new_artifacts_excluding_manifest": [
+    {
+      "path": "PROGRESS_v14_ja.md",
+      "size_bytes": 8369,
+      "sha256": "687da756252debe049c28381b0da21b14068e1e321a5023848efdeac0cfdf224",
+      "git_blob_sha1": "8c081d4bcbb461ce1dea735263836f34ba84df4a"
+    },
+    {
+      "path": "v14_two_factor_support.md",
+      "size_bytes": 15521,
+      "sha256": "8bc8b9fdf078a2c2ca4273f635c6f33cbaf2171d3861ede2d5e30ca1d897c7dc",
+      "git_blob_sha1": "f59d8b9cac4e9c6c02cec75363b9dda0998b55d3"
+    },
+    {
+      "path": "v14_thue_gap_verifier.py",
+      "size_bytes": 6359,
+      "sha256": "2a54a569f774a48f40654de5fbc5b4b4d33af113409f65acb358e0b079e40dfa",
+      "git_blob_sha1": "52b32282bf4091e12f18991b6f62500ebfacaaa8"
+    },
+    {
+      "path": "v14_gap2_results.json",
+      "size_bytes": 31736,
+      "sha256": "d2969872228b60b0f23310dc0d19c52f75781373c2eedd735d6e5625f9887ed5",
+      "git_blob_sha1": "13b135cb92865a5ec381c3cb041cb91fff22c04a"
+    },
+    {
+      "path": "v14_gap2_results.gp",
+      "size_bytes": 9588,
+      "sha256": "7b1f7296bd17867007d8e6b049c009beba9207d88b6e8d1d201d583d909cdf0b",
+      "git_blob_sha1": "66a12ae82815895d76383fe0a77cdd9b873c776c"
+    },
+    {
+      "path": "v14_gap2_results.stdout",
+      "size_bytes": 2264,
+      "sha256": "eb0f3a560d001c094dc37db901758db428fb3f80aa4e46f94aa292dd0f4cff15",
+      "git_blob_sha1": "d25f4cbcc21b57dcebcfdb9fcad071623d37bff0"
+    },
+    {
+      "path": "v14_gap2_results.stderr",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "v14_pair_support_verifier.py",
+      "size_bytes": 7213,
+      "sha256": "80607fe1064aab17478d1b9c01d3ce6545242eebf0dc3bd1468dcf549a528271",
+      "git_blob_sha1": "75f3d6af262efd30c2ab62e01df59b98b9299bb7"
+    },
+    {
+      "path": "v14_pair_support_results.json",
+      "size_bytes": 28381,
+      "sha256": "4d429f55639f6763d3f5fa76930694eb40b4cca942d102daa97c1afb377d4724",
+      "git_blob_sha1": "4b148634130fc83c5ae22e692aacf797a1eebcf5"
+    },
+    {
+      "path": "v14_independent_audit.py",
+      "size_bytes": 7413,
+      "sha256": "a139eb9d5b832ee7732c0f998c1e393fc058400d79aab1a42a7faf096461a9a2",
+      "git_blob_sha1": "5588c6b107e2b95d9f928f78a09332d17d45686d"
+    },
+    {
+      "path": "v14_independent_audit.json",
+      "size_bytes": 11722,
+      "sha256": "5a15e76c20e91d6043592982383b5cb06edbcb7b89a04f12da3f76d04ac40eb4",
+      "git_blob_sha1": "3f2da0e7de1a9b478881b72831cfc0d198a48711"
+    }
+  ],
+  "updated_navigation_files": [
+    {
+      "path": "README.md",
+      "size_bytes": 21852,
+      "sha256": "0e09201a60c9023463b831ac089a2afccf2101b1726eb865f6a269220f70596a",
+      "git_blob_sha1": "5ad86d63ec3ada94d2170c70599322b0ca393e8a"
+    },
+    {
+      "path": "RESEARCH_LOG.md",
+      "size_bytes": 16014,
+      "sha256": "aa22e4cd6c2ccedca38c8b01a2eda64450c56e07c327fc2f50e4248b85146a29",
+      "git_blob_sha1": "3bdd919e71c6142c95ea7e26c7939dd1e09771ef"
+    }
+  ],
+  "reused_artifacts": [
+    {
+      "path": "v13_thue_support_results.json",
+      "size_bytes": 136833,
+      "sha256": "12566aca99e940aa68df1d76184d6eed84f20966a1aad785cc5aa69e13ce63c4",
+      "git_blob_sha1": "19688c37318b9a05e938cc7ebf7f9b371674be2d"
+    },
+    {
+      "path": "v13_thue_support_results.gp",
+      "size_bytes": 48618,
+      "sha256": "292152f2aebd9d6886ace1fabfb3444af1a6dde9642fdc0ad11eea8789bdb5af",
+      "git_blob_sha1": "70ce33cdcb4b79b166a90a7b9bdd03a2fdf968ea"
+    },
+    {
+      "path": "v13_thue_support_results.stdout",
+      "size_bytes": 13433,
+      "sha256": "7f76ed5b0a58b45d8807e39262fbb37dcebe9ad15d894207f103bf45c3562cb5",
+      "git_blob_sha1": "2febde01386983d50285af43c0700b2754a0c8a6"
+    },
+    {
+      "path": "v13_thue_support_verifier.py",
+      "size_bytes": 3773,
+      "sha256": "04e2a9611cc182a9996e85bafb0909c67ad556e3deb2412fc6faa9e467130fdf",
+      "git_blob_sha1": "de90b0c9ed1bac74ddb7983fafa179cf5ba02a48"
+    },
+    {
+      "path": "v13_encoding_audit.json",
+      "size_bytes": 3566,
+      "sha256": "681af50893b2a8a86beaf974c809e6e85a16eafeef30754a990490711a910bf8",
+      "git_blob_sha1": "26c8a44287d34958e7bb7801ec2aaa686ccdf488"
+    },
+    {
+      "path": "v13_pari_environment.json",
+      "size_bytes": 2133,
+      "sha256": "0f7b6a7a7d0b46abad13234919f46cb94ac86a105dba23a94ea7939282fbc5d2",
+      "git_blob_sha1": "dd183b51bfc99a346bb8269240457e465abdc4f2"
+    },
+    {
+      "path": "v13_uniform_cube_support.md",
+      "size_bytes": 10637,
+      "sha256": "be9d4389ef2ee0bb9bddd137866e0a814ac4013fd45747ffd8eaf309a9aefc87",
+      "git_blob_sha1": "949344f1d4974771eeb01304459a56ed7f100ffa"
+    }
+  ],
+  "manifest_self_hash": "Omitted to avoid self-reference; the Git commit records this file.",
+  "official_complete_solver_documentation": "https://pari.math.u-bordeaux.fr/dochtml/html/Polynomials_and_power_series.html#thue"
+}

@@ -1,0 +1,45 @@
+{
+  "module": "GeometricReduction",
+  "imports": "import Mathlib.Tactic\nimport Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass",
+  "definitions": "def Xcoord (c r y : ℚ) : ℚ := -c * r / y\ndef Zcoord (c y : ℚ) : ℚ := c / y\ndef invY (c z : ℚ) : ℚ := c / z\ndef invR (_c x z : ℚ) : ℚ := -x / z\ndef mordellModel (c : ℚ) : WeierstrassCurve ℚ := ⟨0, 0, 0, 0, c ^ 2⟩",
+  "goals": [
+    [
+      "forward_map_equation",
+      "theorem forward_map_equation (c r y : ℚ) (hy : y ≠ 0) (hc : c ≠ 0) (h : y ^ 3 - y = c * r ^ 3) : (Zcoord c y) ^ 2 = (Xcoord c r y) ^ 3 + c ^ 2"
+    ],
+    [
+      "inverse_map_equation",
+      "theorem inverse_map_equation (c x z : ℚ) (hz : z ≠ 0) (hc : c ≠ 0) (h : z ^ 2 = x ^ 3 + c ^ 2) : (invY c z) ^ 3 - invY c z = c * (invR c x z) ^ 3"
+    ],
+    [
+      "inv_forward_pair",
+      "theorem inv_forward_pair (c r y : ℚ) (hy : y ≠ 0) (hc : c ≠ 0) : invY c (Zcoord c y) = y ∧ invR c (Xcoord c r y) (Zcoord c y) = r"
+    ],
+    [
+      "forward_inv_pair",
+      "theorem forward_inv_pair (c x z : ℚ) (hz : z ≠ 0) (hc : c ≠ 0) : Xcoord c (invR c x z) (invY c z) = x ∧ Zcoord c (invY c z) = z"
+    ],
+    [
+      "mordellModel_delta",
+      "theorem mordellModel_delta (c : ℚ) : (mordellModel c).Δ = -432 * c ^ 4"
+    ],
+    [
+      "mordellModel_delta_ne_zero",
+      "theorem mordellModel_delta_ne_zero (c : ℚ) (hc : c ≠ 0) : (mordellModel c).Δ ≠ 0"
+    ],
+    [
+      "mordellModel_isElliptic",
+      "theorem mordellModel_isElliptic (c : ℚ) (hc : c ≠ 0) : (mordellModel c).IsElliptic"
+    ],
+    [
+      "mordellModel_j_zero",
+      "theorem mordellModel_j_zero (c : ℚ) [(mordellModel c).IsElliptic] : (mordellModel c).j = 0"
+    ],
+    [
+      "research_curve_forward",
+      "theorem research_curve_forward (S T r y : ℚ) (hS : S ≠ 0) (hT : T ≠ 0) (hy : y ≠ 0) (h : 6 * S * r ^ 3 = T * (y ^ 3 - y)) : (Zcoord (6 * S / T) y) ^ 2 = (Xcoord (6 * S / T) r y) ^ 3 + (6 * S / T) ^ 2"
+    ]
+  ],
+  "notes": "研究曲線 6*S*r³=T*(y³-y) を Mordell 型 y³-y=c*r³ (c=6*S/T) とみなし、有理写像 (r,y)↦(X,Z)=(-cr/y, c/y) で z²=x³+c² へ移す。逆写像 (x,z)↦(invR,invY) が両方向の合成で恒等になること、モデル Δ=-432c⁴≠0、IsElliptic、j=0 を小さな補題に分割。ランク計算や解の非存在は主張しない。除外図表 y=0 は c≠0 のとき (r,y)=(0,0) に対応し、研究の y>=103 はこれを避ける。",
+  "planning_review": "DeepSeek proposed the configuration; the host corrected the inverse-coordinate definition and typeclass binder before freezing the goals. All proof bodies and proof repairs are delegated to DeepSeek."
+}

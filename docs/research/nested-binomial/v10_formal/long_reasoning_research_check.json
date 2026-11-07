@@ -1,0 +1,36 @@
+{
+  "model": "deepseek-v4-1-flash-1017",
+  "finish_reason": "stop",
+  "elapsed_seconds": 31.869,
+  "settings": {
+    "profile": "long_research",
+    "reasoning_effort": "high",
+    "max_tokens": 65536,
+    "request_timeout_seconds": 900,
+    "max_attempts": 20,
+    "lean_timeout_seconds": 180,
+    "capacity_retries": 2,
+    "capacity_backoff_seconds": 5
+  },
+  "usage": {
+    "prompt_tokens": 22406,
+    "total_tokens": 34557,
+    "completion_tokens": 12151,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10148
+    }
+  },
+  "content_kind": "list",
+  "initial_request": {
+    "elapsed_seconds": 74.229,
+    "finish_reason": "length",
+    "reasoning_tokens": 32768,
+    "adopted": false
+  },
+  "private_github_url": "https://github.com/corcondor/mathos/pull/1",
+  "context_commit": "f2bf3d41d676d1a9b2b8683e913a26c059f848ef",
+  "proof_result": "GeometricDescent: six fixed theorems passed Lean"
+}

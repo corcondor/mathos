@@ -1,0 +1,596 @@
+{
+  "complete_four_cofactor_cases": {
+    "coefficient_lists": {
+      "1": [],
+      "2": [],
+      "3": [
+        10
+      ],
+      "4": [
+        13
+      ]
+    },
+    "surviving_cases": 0,
+    "w3_delta0_derived_cases": [
+      {
+        "Q1": 5,
+        "b": 1,
+        "n": 6,
+        "q": 1,
+        "rejection": "n<104"
+      },
+      {
+        "Q1": 125,
+        "b": 3,
+        "n": 126,
+        "q": 41,
+        "rejection": "q+1 does not divide 1000"
+      }
+    ],
+    "w4_delta1_d2_residues_mod7": [
+      3,
+      2,
+      5,
+      3
+    ],
+    "w4_delta1_d6_derived_values": [
+      7,
+      7987
+    ],
+    "w4_independent_divisor_lattice": [
+      {
+        "22_cubed_mod_Q1": 46,
+        "Q1": 57,
+        "b": 0,
+        "c": 3,
+        "n": 343,
+        "q": 85,
+        "r": 1106,
+        "r_cubed_mod_Q1": 26
+      },
+      {
+        "22_cubed_mod_Q1": 5,
+        "Q1": 29,
+        "b": 2,
+        "c": 1,
+        "n": 175,
+        "q": 43,
+        "r": 560,
+        "r_cubed_mod_Q1": 4
+      },
+      {
+        "22_cubed_mod_Q1": 645,
+        "Q1": 1429,
+        "b": 2,
+        "c": 3,
+        "n": 8575,
+        "q": 2143,
+        "r": 27860,
+        "r_cubed_mod_Q1": 1084
+      }
+    ]
+  },
+  "exceptional_bases": {
+    "base2_boundary": [
+      {
+        "a": 7,
+        "factorization": [
+          [
+            131,
+            1
+          ]
+        ],
+        "n": 131
+      },
+      {
+        "a": 8,
+        "factorization": [
+          [
+            7,
+            1
+          ],
+          [
+            37,
+            1
+          ]
+        ],
+        "n": 259
+      },
+      {
+        "a": 9,
+        "factorization": [
+          [
+            5,
+            1
+          ],
+          [
+            103,
+            1
+          ]
+        ],
+        "n": 515
+      }
+    ],
+    "base3_boundary": [
+      {
+        "Q0": 82,
+        "a": 5,
+        "n": 246,
+        "open_gap": [
+          738,
+          820
+        ]
+      },
+      {
+        "Q0": 244,
+        "Q1": 731,
+        "a": 6,
+        "n": 732,
+        "required_divisor_of_r": 89182,
+        "strict_upper_r": 2440
+      }
+    ],
+    "ordinary_exact_binomial_and_local_checks": [
+      {
+        "X_residue": 1,
+        "a": 7,
+        "first_allowed_r": 416,
+        "modulus": 32,
+        "n": 131,
+        "p": 2,
+        "valuation_A_minus_1": 6
+      },
+      {
+        "X_residue": 1,
+        "a": 8,
+        "first_allowed_r": 832,
+        "modulus": 64,
+        "n": 259,
+        "p": 2,
+        "valuation_A_minus_1": 7
+      },
+      {
+        "X_residue": 1,
+        "a": 9,
+        "first_allowed_r": 1664,
+        "modulus": 128,
+        "n": 515,
+        "p": 2,
+        "valuation_A_minus_1": 8
+      },
+      {
+        "X_residue": 1,
+        "a": 10,
+        "first_allowed_r": 3328,
+        "modulus": 256,
+        "n": 1027,
+        "p": 2,
+        "valuation_A_minus_1": 9
+      },
+      {
+        "X_residue": 1,
+        "a": 11,
+        "first_allowed_r": 6656,
+        "modulus": 512,
+        "n": 2051,
+        "p": 2,
+        "valuation_A_minus_1": 10
+      },
+      {
+        "X_residue": 1,
+        "a": 12,
+        "first_allowed_r": 13312,
+        "modulus": 1024,
+        "n": 4099,
+        "p": 2,
+        "valuation_A_minus_1": 11
+      },
+      {
+        "X_residue": 1,
+        "a": 5,
+        "first_allowed_r": 810,
+        "modulus": 81,
+        "n": 246,
+        "p": 3,
+        "valuation_A_minus_1": 4
+      },
+      {
+        "X_residue": 1,
+        "a": 6,
+        "first_allowed_r": 2430,
+        "modulus": 243,
+        "n": 732,
+        "p": 3,
+        "valuation_A_minus_1": 5
+      },
+      {
+        "X_residue": 1,
+        "a": 7,
+        "first_allowed_r": 7290,
+        "modulus": 729,
+        "n": 2190,
+        "p": 3,
+        "valuation_A_minus_1": 6
+      },
+      {
+        "X_residue": 1,
+        "a": 8,
+        "first_allowed_r": 21870,
+        "modulus": 2187,
+        "n": 6564,
+        "p": 3,
+        "valuation_A_minus_1": 7
+      }
+    ],
+    "small_exponents": "p=3,a<=4 and p=2,a<=6 are covered by prior j<=100 exclusion",
+    "surviving_boundary_cases": 0
+  },
+  "exceptional_cofactor_extensions": {
+    "absorbed_into_pure_powers": [
+      "2*2^a=2^(a+1)",
+      "4*2^a=2^(a+2)",
+      "3*3^a=3^(a+1)"
+    ],
+    "coefficient37_delta0": "Coprime Q0,Q1>1 cannot both divide 37^3",
+    "coefficient37_delta1_complete_cases": [
+      {
+        "33_cubed_mod_Q0": 6,
+        "M": 5,
+        "Q0": 21,
+        "Q1": 31,
+        "c": 1
+      },
+      {
+        "33_cubed_mod_Q0": 41,
+        "M": 160,
+        "Q0": 641,
+        "Q1": 961,
+        "c": 2
+      },
+      {
+        "33_cubed_mod_Q0": 16076,
+        "M": 4965,
+        "Q0": 19861,
+        "Q1": 29791,
+        "c": 3
+      }
+    ],
+    "last_boundary": {
+      "Q0": 325,
+      "Q1": 487,
+      "n": 975,
+      "required_divisor_of_r": 31655,
+      "strict_upper_r": 3250
+    },
+    "local_congruence_examples": [
+      {
+        "M": 27,
+        "X_residue": 1,
+        "a": 4,
+        "modulus": 9,
+        "n": 165,
+        "p": 3,
+        "valuation_A_minus_1": 3,
+        "w": 2
+      },
+      {
+        "M": 81,
+        "X_residue": 1,
+        "a": 5,
+        "modulus": 27,
+        "n": 489,
+        "p": 3,
+        "valuation_A_minus_1": 4,
+        "w": 2
+      },
+      {
+        "M": 243,
+        "X_residue": 1,
+        "a": 6,
+        "modulus": 81,
+        "n": 1461,
+        "p": 3,
+        "valuation_A_minus_1": 5,
+        "w": 2
+      },
+      {
+        "M": 729,
+        "X_residue": 1,
+        "a": 7,
+        "modulus": 243,
+        "n": 4377,
+        "p": 3,
+        "valuation_A_minus_1": 6,
+        "w": 2
+      },
+      {
+        "M": 16,
+        "X_residue": 1,
+        "a": 6,
+        "modulus": 4,
+        "n": 195,
+        "p": 2,
+        "valuation_A_minus_1": 5,
+        "w": 3
+      },
+      {
+        "M": 32,
+        "X_residue": 1,
+        "a": 7,
+        "modulus": 8,
+        "n": 387,
+        "p": 2,
+        "valuation_A_minus_1": 6,
+        "w": 3
+      },
+      {
+        "M": 64,
+        "X_residue": 1,
+        "a": 8,
+        "modulus": 16,
+        "n": 771,
+        "p": 2,
+        "valuation_A_minus_1": 7,
+        "w": 3
+      },
+      {
+        "M": 128,
+        "X_residue": 1,
+        "a": 9,
+        "modulus": 32,
+        "n": 1539,
+        "p": 2,
+        "valuation_A_minus_1": 8,
+        "w": 3
+      },
+      {
+        "M": 256,
+        "X_residue": 1,
+        "a": 10,
+        "modulus": 64,
+        "n": 3075,
+        "p": 2,
+        "valuation_A_minus_1": 9,
+        "w": 3
+      },
+      {
+        "M": 9,
+        "X_residue": 1,
+        "a": 3,
+        "modulus": 3,
+        "n": 111,
+        "p": 3,
+        "valuation_A_minus_1": 2,
+        "w": 4
+      },
+      {
+        "M": 27,
+        "X_residue": 1,
+        "a": 4,
+        "modulus": 9,
+        "n": 327,
+        "p": 3,
+        "valuation_A_minus_1": 3,
+        "w": 4
+      },
+      {
+        "M": 81,
+        "X_residue": 1,
+        "a": 5,
+        "modulus": 27,
+        "n": 975,
+        "p": 3,
+        "valuation_A_minus_1": 4,
+        "w": 4
+      },
+      {
+        "M": 243,
+        "X_residue": 1,
+        "a": 6,
+        "modulus": 81,
+        "n": 2919,
+        "p": 3,
+        "valuation_A_minus_1": 5,
+        "w": 4
+      },
+      {
+        "M": 729,
+        "X_residue": 1,
+        "a": 7,
+        "modulus": 243,
+        "n": 8751,
+        "p": 3,
+        "valuation_A_minus_1": 6,
+        "w": 4
+      }
+    ],
+    "squarefree_boundary_cases": [
+      {
+        "Q0": 55,
+        "Q0_factorization": [
+          [
+            5,
+            1
+          ],
+          [
+            11,
+            1
+          ]
+        ],
+        "n": 165
+      },
+      {
+        "Q0": 163,
+        "Q0_factorization": [
+          [
+            163,
+            1
+          ]
+        ],
+        "n": 489
+      },
+      {
+        "Q0": 65,
+        "Q0_factorization": [
+          [
+            5,
+            1
+          ],
+          [
+            13,
+            1
+          ]
+        ],
+        "n": 195
+      },
+      {
+        "Q0": 129,
+        "Q0_factorization": [
+          [
+            3,
+            1
+          ],
+          [
+            43,
+            1
+          ]
+        ],
+        "n": 387
+      },
+      {
+        "Q0": 257,
+        "Q0_factorization": [
+          [
+            257,
+            1
+          ]
+        ],
+        "n": 771
+      },
+      {
+        "Q0": 37,
+        "Q0_factorization": [
+          [
+            37,
+            1
+          ]
+        ],
+        "n": 111
+      },
+      {
+        "Q0": 109,
+        "Q0_factorization": [
+          [
+            109,
+            1
+          ]
+        ],
+        "n": 327
+      }
+    ],
+    "surviving_cases": 0
+  },
+  "formalization": "No Lean execution is claimed by this checker.",
+  "identities_and_constants": {
+    "choose_pair_identity_examples": 4949,
+    "exact_height_constant": "6*(10*20/3)^3=(4000/3)^2",
+    "factorization_and_gcd_examples": 497,
+    "linear_identity_examples": 3760,
+    "small_q_constant_examples": 1000
+  },
+  "limits": "Samples do not replace the uniform written proofs or solve the remaining equation.",
+  "methods": "Exact integer arithmetic, rational constants, direct binomials, and independent digit residues",
+  "odd_prime_local_and_grid": {
+    "coefficient_endpoint_examples": 9362,
+    "conditions": "n>=104 and p^a>6w",
+    "examples_with_p_dividing_w": 60,
+    "largest_sample_n": 14979820847955,
+    "local_congruence_examples": 4681,
+    "ordinary_exact_binomial_checks": [
+      {
+        "X_mod_p": 1,
+        "a": 3,
+        "n": 346,
+        "p": 7,
+        "w": 1
+      },
+      {
+        "X_mod_p": 1,
+        "a": 2,
+        "n": 245,
+        "p": 11,
+        "w": 2
+      },
+      {
+        "X_mod_p": 1,
+        "a": 2,
+        "n": 1086,
+        "p": 19,
+        "w": 3
+      },
+      {
+        "X_mod_p": 1,
+        "a": 1,
+        "n": 127,
+        "p": 31,
+        "w": 4
+      },
+      {
+        "X_mod_p": 1,
+        "a": 2,
+        "n": 346,
+        "p": 7,
+        "w": 7
+      },
+      {
+        "X_mod_p": 1,
+        "a": 2,
+        "n": 1334,
+        "p": 11,
+        "w": 11
+      }
+    ],
+    "parameter_set": {
+      "a": [
+        1,
+        5
+      ],
+      "primes": [
+        7,
+        11,
+        19,
+        23,
+        31,
+        43,
+        47,
+        59,
+        67,
+        71,
+        79,
+        83,
+        103,
+        107,
+        127,
+        131,
+        139,
+        151,
+        163,
+        167,
+        179,
+        191,
+        199
+      ],
+      "w": [
+        1,
+        48
+      ]
+    },
+    "scope": "These examples corroborate the uniform proof, not an equation search."
+  },
+  "scope": "ell=1,j=i-3; both k branches; original squared-index equation",
+  "source_sha256": {
+    "v11_mixed_structure.md": "91a20c8065d31e5beed94dae86d4e74c896c99993cf4765c00b2387611d66d02",
+    "v11_mixed_structure_checks.py": "aafed8aa2996dfa6d9a98b25ed49f4d60c6c8d54a91b5fd4efcf2cdae15a682c"
+  },
+  "status": "PASS"
+}

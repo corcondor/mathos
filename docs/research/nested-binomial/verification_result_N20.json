@@ -1,0 +1,19 @@
+{
+  "verification_passed": true,
+  "N": 20,
+  "gap_constant": 12,
+  "lower_modular_families": 3207,
+  "upper_modular_families": 43784,
+  "upper_hensel_families": 16246,
+  "total_families": 63237,
+  "initial_hensel_branches_checked": 1292235,
+  "hensel_lift_steps_checked": 220799,
+  "unresolved_families": 0,
+  "seconds": 277.66,
+  "certificate_sha256": {
+    "modular_obstructions_N20.json": "96c49599b0179dd0847be1e63aaf5d6ad5a598c32429869110b6a0abfbda2df9",
+    "hensel_certificates_N20.json": "2e86a7a86dd46be8b231f0d379009bd1d275f376452e2ee6e764cc00bcd1337e"
+  },
+  "scope": "No valid nonnegative integer solution with 1 <= j,l <= N; i,k arbitrary.",
+  "method": "Separate standard-library verifier; factorial residue tables, prefix/suffix derivatives, q-adic digit corrections."
+}

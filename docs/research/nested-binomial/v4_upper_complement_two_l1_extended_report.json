@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "i_min": 23,
+  "i_exclusive_max": 2097152,
+  "small_cutoff": 1024,
+  "outer_branches": 2,
+  "candidates": 15103216,
+  "survivors": 0,
+  "max_interval_width": 6697,
+  "max_witness_prime": 23,
+  "low_endpoint_checks": 2096128,
+  "high_endpoint_checks": 2096128,
+  "zero_width_intervals": 0,
+  "endpoint_adjustments": 0,
+  "elapsed_seconds": 7.99132,
+  "prime_witness_counts": {
+    "2": 7610327,
+    "3": 5048995,
+    "5": 1970001,
+    "7": 409393,
+    "11": 59089,
+    "13": 5052,
+    "17": 335,
+    "19": 23,
+    "23": 1
+  }
+}

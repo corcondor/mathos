@@ -1,0 +1,7292 @@
+{
+  "status": "PASS",
+  "pari_version": [
+    2,
+    17,
+    4
+  ],
+  "support_primes": [
+    2,
+    3,
+    5,
+    7
+  ],
+  "pair_count": 625,
+  "pari_calls": 1250,
+  "thueinit_flag": 1,
+  "unbounded_variables": [
+    "n",
+    "a",
+    "b"
+  ],
+  "same_backend_twice": true,
+  "positive_n": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    15,
+    16,
+    21,
+    25,
+    28,
+    36,
+    49,
+    50,
+    64,
+    81,
+    126,
+    225,
+    2401,
+    4375,
+    6860
+  ],
+  "source_sha256": "04e2a9611cc182a9996e85bafb0909c67ad556e3deb2412fc6faa9e467130fdf",
+  "gp_input_sha256": "292152f2aebd9d6886ace1fabfb3444af1a6dde9642fdc0ad11eea8789bdb5af",
+  "gp_stdout_sha256": "7f76ed5b0a58b45d8807e39262fbb37dcebe9ad15d894207f103bf45c3562cb5",
+  "records": [
+    {
+      "A": 1,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 2,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -1,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 4,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 5,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 6,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 7,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          2,
+          1
+        ]
+      ],
+      "positive_n": [
+        8
+      ]
+    },
+    {
+      "A": 1,
+      "B": 9,
+      "all_integer_solutions": [
+        [
+          -2,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -2,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 10,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 12,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 14,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 15,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 18,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 20,
+      "all_integer_solutions": [
+        [
+          -19,
+          -7
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -19,
+          -7
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 21,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 25,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 28,
+      "all_integer_solutions": [
+        [
+          -3,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -3,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 30,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 35,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 36,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 42,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 45,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 49,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 50,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 60,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 63,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          4,
+          1
+        ]
+      ],
+      "positive_n": [
+        64
+      ]
+    },
+    {
+      "A": 1,
+      "B": 70,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 75,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 84,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 90,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 98,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 100,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 105,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 126,
+      "all_integer_solutions": [
+        [
+          -5,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -5,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 140,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 147,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 150,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 175,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 180,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 196,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 210,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 225,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 245,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 252,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 294,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 300,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 315,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 350,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 420,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 441,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 450,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 490,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 525,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 588,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 630,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 700,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 735,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 882,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 900,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 980,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1050,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1225,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1260,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1470,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1575,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 1764,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 2100,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 2205,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 2450,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 2940,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 3150,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 3675,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 4410,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 4900,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 6300,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 7350,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 8820,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 11025,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 14700,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 22050,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1,
+      "B": 44100,
+      "all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          1,
+          0
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        2
+      ]
+    },
+    {
+      "A": 2,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -2,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 15,
+      "all_integer_solutions": [
+        [
+          2,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          4,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          2,
+          1
+        ]
+      ],
+      "positive_n": [
+        16
+      ]
+    },
+    {
+      "A": 2,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 105,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 315,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 525,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 735,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 1575,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 2205,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 3675,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2,
+      "B": 11025,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 2,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          3,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        3
+      ]
+    },
+    {
+      "A": 3,
+      "B": 4,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -3,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 10,
+      "all_integer_solutions": [
+        [
+          3,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          9,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          3,
+          2
+        ]
+      ],
+      "positive_n": [
+        81
+      ]
+    },
+    {
+      "A": 3,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 25,
+      "all_integer_solutions": [
+        [
+          -2,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -6,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 70,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 140,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 350,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 490,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 700,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 980,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 2450,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3,
+      "B": 4900,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          4,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        4
+      ]
+    },
+    {
+      "A": 4,
+      "B": 5,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -4,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 105,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 315,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 525,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 735,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 1575,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 2205,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 3675,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4,
+      "B": 11025,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 4,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          5,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        5
+      ]
+    },
+    {
+      "A": 5,
+      "B": 6,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -5,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 42,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 84,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 126,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 252,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 294,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 588,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 882,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 5,
+      "B": 1764,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 5,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          6,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        6
+      ]
+    },
+    {
+      "A": 6,
+      "B": 7,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -6,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 35,
+      "all_integer_solutions": [
+        [
+          -9,
+          -5
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -54,
+          -5
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 49,
+      "all_integer_solutions": [
+        [
+          -2,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -12,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          -1,
+          -2
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -7,
+          -2
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 6,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          7,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        7
+      ]
+    },
+    {
+      "A": 7,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 30,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 60,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 90,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 150,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 180,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 300,
+      "all_integer_solutions": [
+        [
+          7,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          49,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          7,
+          2
+        ]
+      ],
+      "positive_n": [
+        2401
+      ]
+    },
+    {
+      "A": 7,
+      "B": 450,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7,
+      "B": 900,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          9,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "positive_n": [
+        9
+      ]
+    },
+    {
+      "A": 9,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 10,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -9,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 70,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 140,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 350,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 490,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 700,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 980,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 2450,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 9,
+      "B": 4900,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          -2,
+          -3
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -20,
+          -3
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 9,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          10,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        10
+      ]
+    },
+    {
+      "A": 10,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 10,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 12,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 15,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -14,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 2,
+      "all_integer_solutions": [
+        [
+          -1,
+          -2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -15,
+          -2
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 14,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          15,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        15
+      ]
+    },
+    {
+      "A": 15,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 15,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 35,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 18,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          7,
+          19
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          140,
+          19
+        ]
+      ],
+      "positive_solutions": [
+        [
+          7,
+          19
+        ]
+      ],
+      "positive_n": [
+        6860
+      ]
+    },
+    {
+      "A": 20,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 21,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -20,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 20,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 20,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          21,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        21
+      ]
+    },
+    {
+      "A": 21,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 21,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 3,
+      "all_integer_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          25,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "positive_n": [
+        25
+      ]
+    },
+    {
+      "A": 25,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 6,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 42,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 84,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 126,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 252,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 294,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 588,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 882,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 25,
+      "B": 1764,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          28,
+          3
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          3
+        ]
+      ],
+      "positive_n": [
+        28
+      ]
+    },
+    {
+      "A": 28,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 28,
+      "B": 225,
+      "all_integer_solutions": [
+        [
+          -2,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -56,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 30,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 30,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 30,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 6,
+      "all_integer_solutions": [
+        [
+          5,
+          9
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          175,
+          9
+        ]
+      ],
+      "positive_solutions": [
+        [
+          5,
+          9
+        ]
+      ],
+      "positive_n": [
+        4375
+      ]
+    },
+    {
+      "A": 35,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 35,
+      "B": 36,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -35,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 35,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          36,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        36
+      ]
+    },
+    {
+      "A": 36,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 175,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 245,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 36,
+      "B": 1225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 42,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 42,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 42,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 45,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 6,
+      "all_integer_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          49,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "positive_n": [
+        49
+      ]
+    },
+    {
+      "A": 49,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 30,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 50,
+      "all_integer_solutions": [
+        [
+          -1,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -49,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 60,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 90,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 150,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 180,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 300,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 450,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 49,
+      "B": 900,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 49,
+      "all_integer_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          50,
+          1
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "positive_n": [
+        50
+      ]
+    },
+    {
+      "A": 50,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 50,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 60,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 60,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 60,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          -1,
+          -4
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -63,
+          -4
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 63,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 70,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 70,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 70,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 28,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 75,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 84,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 84,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 84,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 90,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 90,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 90,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 98,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 21,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 63,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 147,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 100,
+      "B": 441,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 105,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 105,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 105,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 126,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ],
+        [
+          126,
+          5
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          5
+        ]
+      ],
+      "positive_n": [
+        126
+      ]
+    },
+    {
+      "A": 126,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 126,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 140,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 140,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 140,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 147,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 150,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 150,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 150,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 6,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 175,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 180,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 180,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 180,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 15,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 45,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 75,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 196,
+      "B": 225,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 210,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 14,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 28,
+      "all_integer_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          225,
+          2
+        ]
+      ],
+      "positive_solutions": [
+        [
+          1,
+          2
+        ]
+      ],
+      "positive_n": [
+        225
+      ]
+    },
+    {
+      "A": 225,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 98,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 225,
+      "B": 196,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 6,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 245,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 252,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 252,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 252,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 294,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 294,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 294,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 300,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 300,
+      "B": 7,
+      "all_integer_solutions": [
+        [
+          -2,
+          -7
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          -600,
+          -7
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 300,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 315,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 315,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 315,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 350,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 350,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 350,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 420,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 10,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 20,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 50,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 441,
+      "B": 100,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 450,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 450,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 450,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 490,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 490,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 490,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 525,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 525,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 525,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 588,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 588,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 588,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 630,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 700,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 700,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 700,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 735,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 735,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 735,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 882,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 882,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 882,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 900,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 900,
+      "B": 7,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 900,
+      "B": 49,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 980,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 980,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 980,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1050,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 6,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 12,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 18,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1225,
+      "B": 36,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1260,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1470,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1575,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1575,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1575,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1764,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1764,
+      "B": 5,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 1764,
+      "B": 25,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2100,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2205,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2205,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2205,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2450,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2450,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2450,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 2940,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3150,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3675,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3675,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 3675,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4410,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4900,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4900,
+      "B": 3,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 4900,
+      "B": 9,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 6300,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 7350,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 8820,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 11025,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 11025,
+      "B": 2,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 11025,
+      "B": 4,
+      "all_integer_solutions": [],
+      "transformed_all_integer_solutions": [],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 14700,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 22050,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    },
+    {
+      "A": 44100,
+      "B": 1,
+      "all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "transformed_all_integer_solutions": [
+        [
+          0,
+          -1
+        ]
+      ],
+      "positive_solutions": [],
+      "positive_n": []
+    }
+  ]
+}

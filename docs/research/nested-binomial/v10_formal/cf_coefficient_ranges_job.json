@@ -1,0 +1,34 @@
+{
+  "module": "CFCoefficientRanges",
+  "imports": "import Mathlib.Tactic\nimport CFApproximationCore",
+  "definitions": "def coefficientCandidates (aNext : ℤ) : Finset (ℤ × ℤ) := ((Finset.Icc (-1 : ℤ) 4).product (Finset.Icc (-2 : ℤ) 2)) ∪ (((Finset.Icc (-2 : ℤ) 2).product (Finset.Icc (-3 : ℤ) 3)).image (fun p : ℤ × ℤ => (p.1 * aNext + p.2, p.1)))",
+  "local_dependencies": [
+    "CFApproximationCore.lean"
+  ],
+  "goals": [
+    [
+      "b_strict_bound",
+      "theorem b_strict_bound (alpha : ℝ) (p q P Q Pm Qm N a b : ℤ) (hq : 0 < q) (hQ : 0 < Q) (hqN : q < N) (hpq : p = a * P + b * Pm) (hqq : q = a * Q + b * Qm) (hdet : |P * Qm - Pm * Q| = 1) (happrox : |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)) (hconv : |(Q : ℝ) * alpha - (P : ℝ)| < 1 / (N : ℝ)) (hNpos : 0 < N) (hqNhalf : 2 * q < N) : |(b : ℝ)| < 3 * (Q : ℝ) / (2 * (q : ℝ)) + 1 / 2"
+    ],
+    [
+      "smaller_half_a_bounds",
+      "theorem smaller_half_a_bounds (a b q Qm Qm1 : ℤ) (hq : 0 < q) (hQm : 0 < Qm) (hQm1_nonneg : 0 ≤ Qm1) (hQm1_le : Qm1 ≤ Qm) (hq_ge : Qm ≤ q) (hb_abs : |b| ≤ 2) (hb_ne : b ≠ 0) (hb_strict : |(b : ℝ)| < 3 * (Qm : ℝ) / (2 * (q : ℝ)) + 1 / 2) (hq_eq : q = a * Qm + b * Qm1) : -1 ≤ a ∧ a ≤ 4"
+    ],
+    [
+      "smaller_half_b_zero",
+      "theorem smaller_half_b_zero (p q Pm Qm a : ℤ) (hq : 0 < q) (hQm : 0 < Qm) (hpq : p = a * Pm) (hqq : q = a * Qm) (hred : Nat.Coprime (Int.natAbs p) (Int.natAbs q)) (hcop : Nat.Coprime (Int.natAbs Pm) (Int.natAbs Qm)) : a = 1"
+    ],
+    [
+      "larger_half_c_bounds",
+      "theorem larger_half_c_bounds (alpha : ℝ) (p q P Q Pn Qn N b c : ℤ) (hq : 0 < q) (hQn : 0 < Qn) (hqN : q < N) (hpq : p = b * Pn + c * P) (hqq : q = b * Qn + c * Q) (hdet : |P * Qn - Pn * Q| = 1) (happrox : |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)) (hconv : |(Qn : ℝ) * alpha - (Pn : ℝ)| < 1 / (N : ℝ)) (hNpos : 0 < N) (hq_ge_half : Qn ≤ 2 * q) : -3 ≤ c ∧ c ≤ 3"
+    ],
+    [
+      "coefficientCandidates_spec",
+      "theorem coefficientCandidates_spec (a b aNext : ℤ) : (a, b) ∈ coefficientCandidates aNext ↔ (-2 ≤ b ∧ b ≤ 2) ∧ ((-1 ≤ a ∧ a ≤ 4) ∨ ∃ c : ℤ, -3 ≤ c ∧ c ≤ 3 ∧ a = b * aNext + c)"
+    ],
+    [
+      "coefficientCandidates_card_le",
+      "theorem coefficientCandidates_card_le (aNext : ℤ) : (coefficientCandidates aNext).card ≤ 65"
+    ]
+  ]
+}

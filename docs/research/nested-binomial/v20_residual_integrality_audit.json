@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "coefficient_identities": [
+    "bezout_9",
+    "defining_equation_elimination",
+    "square_to_quartic",
+    "denominator_saturation",
+    "rational_reverse_reconstruction",
+    "Z_rearrangement"
+  ],
+  "residues": {
+    "rho_tuples": 3402,
+    "global_mod9_classes": [
+      1,
+      4,
+      6,
+      7
+    ],
+    "rho11_and12_excluded": true,
+    "parity_cases": 8,
+    "gcd_proof": "Bezout forces gcd|9; full mod9 table removes a second factor3. No prime bound is used."
+  },
+  "cube_cores": {
+    "N3_sizes": [
+      1,
+      3,
+      2,
+      2,
+      1,
+      2
+    ],
+    "coefficient_count_cases": 18,
+    "unbounded_argument": "v3(V-U)=2 forces unequal pair(2,d+3f-2) when sum>4, and(2,2) when sum=4; modulo3 eliminates f."
+  },
+  "reverse_reconstruction": {
+    "residual_examples": 10,
+    "integer_source_examples": 6,
+    "reverse_roots": 20,
+    "gcd_rejections": 1,
+    "rho_rejections": 1
+  },
+  "certificate_sha256": "8fab4ea47637fbb0871e5a641678d3aaffc1e8079158e3d1d3976b77b566e575",
+  "note_sha256": "c40b0994eae56dddf41d3f14288d9e4a621b4937bf4a69fa2ecaad8a0d376bf5",
+  "verifier_sha256": "c62e7608c414c9b9e25dfb46fdf96bcb4afa0f571ccb52eb88accbc436ca68ab",
+  "producer_imported": false,
+  "sympy_used": false,
+  "scope": "Written universal proof plus exact independent arithmetic; no Lean or original-equation solution claim"
+}

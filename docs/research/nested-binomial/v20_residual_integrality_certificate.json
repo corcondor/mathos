@@ -1,0 +1,1447 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "identity_checks": {
+    "bezout_9": true,
+    "combined_defining_equations": true,
+    "square_to_quartic": true,
+    "rational_reconstruction": true,
+    "saturation_identity": true,
+    "Z_rearrangement": true
+  },
+  "residue_tables": {
+    "q_mod9": [
+      {
+        "t_mod9": 0,
+        "q_mod9": 3,
+        "t_cubed_mod9": 0,
+        "gcd_allowed": 3
+      },
+      {
+        "t_mod9": 1,
+        "q_mod9": 7,
+        "t_cubed_mod9": 1,
+        "gcd_allowed": 1
+      },
+      {
+        "t_mod9": 2,
+        "q_mod9": 4,
+        "t_cubed_mod9": 8,
+        "gcd_allowed": 1
+      },
+      {
+        "t_mod9": 3,
+        "q_mod9": 3,
+        "t_cubed_mod9": 0,
+        "gcd_allowed": 3
+      },
+      {
+        "t_mod9": 4,
+        "q_mod9": 4,
+        "t_cubed_mod9": 1,
+        "gcd_allowed": 1
+      },
+      {
+        "t_mod9": 5,
+        "q_mod9": 7,
+        "t_cubed_mod9": 8,
+        "gcd_allowed": 1
+      },
+      {
+        "t_mod9": 6,
+        "q_mod9": 3,
+        "t_cubed_mod9": 0,
+        "gcd_allowed": 3
+      },
+      {
+        "t_mod9": 7,
+        "q_mod9": 1,
+        "t_cubed_mod9": 1,
+        "gcd_allowed": 1
+      },
+      {
+        "t_mod9": 8,
+        "q_mod9": 1,
+        "t_cubed_mod9": 8,
+        "gcd_allowed": 1
+      }
+    ],
+    "rho_rows": [
+      {
+        "b": 1,
+        "a_mod9": 0,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 2,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 3,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 4,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 5,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 6,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 7,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 1,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 0,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 2,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 3,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 4,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 5,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 6,
+        "rho_mod9": [
+          6
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 7,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 2,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1,
+          4,
+          7
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 3,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 6,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 9,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 18,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 27,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 54,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 81,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 162,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 243,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 1,
+        "rho_mod9": [
+          1
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 2,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 4,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 5,
+        "rho_mod9": [
+          7
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 7,
+        "rho_mod9": [
+          4
+        ]
+      },
+      {
+        "b": 486,
+        "a_mod9": 8,
+        "rho_mod9": [
+          1
+        ]
+      }
+    ],
+    "rho_global_classes": [
+      1,
+      4,
+      6,
+      7
+    ],
+    "rho_tuples_checked": 3402,
+    "parity_rows": [
+      {
+        "a_mod2": 0,
+        "b_mod2": 1,
+        "rows_n_t_rho_Z": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "a_mod2": 1,
+        "b_mod2": 0,
+        "rows_n_t_rho_Z": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "a_mod2": 1,
+        "b_mod2": 1,
+        "rows_n_t_rho_Z": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ]
+        ]
+      }
+    ],
+    "role": "Complete residue tables for the stated congruences. The all-prime gcd theorem uses Bezout plus the q mod9 table."
+  },
+  "cube_core_tables": {
+    "prime3": [
+      {
+        "v3_b": 0,
+        "formal_pairs": [
+          [
+            0,
+            0
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            0
+          ]
+        ],
+        "Z_divisible_by3_required": false,
+        "infinite_exponent_rule": null,
+        "proof_uses_exponent_cutoff": false
+      },
+      {
+        "v3_b": 1,
+        "formal_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "Z_divisible_by3_required": true,
+        "infinite_exponent_rule": null,
+        "proof_uses_exponent_cutoff": false
+      },
+      {
+        "v3_b": 2,
+        "formal_pairs": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "Z_divisible_by3_required": true,
+        "infinite_exponent_rule": "If d+3f>4: (2,d+3f-2) or reverse; if d+3f=4: (2,2).",
+        "proof_uses_exponent_cutoff": false
+      },
+      {
+        "v3_b": 3,
+        "formal_pairs": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "Z_divisible_by3_required": true,
+        "infinite_exponent_rule": "If d+3f>4: (2,d+3f-2) or reverse; if d+3f=4: (2,2).",
+        "proof_uses_exponent_cutoff": false
+      },
+      {
+        "v3_b": 4,
+        "formal_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            2,
+            2
+          ]
+        ],
+        "Z_divisible_by3_required": false,
+        "infinite_exponent_rule": "If d+3f>4: (2,d+3f-2) or reverse; if d+3f=4: (2,2).",
+        "proof_uses_exponent_cutoff": false
+      },
+      {
+        "v3_b": 5,
+        "formal_pairs": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "Z_divisible_by3_required": false,
+        "infinite_exponent_rule": "If d+3f>4: (2,d+3f-2) or reverse; if d+3f=4: (2,2).",
+        "proof_uses_exponent_cutoff": false
+      }
+    ],
+    "prime2": [
+      {
+        "b_even": true,
+        "a_odd": true,
+        "formal_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "b_even": false,
+        "a_odd": true,
+        "formal_pairs": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "b_even": false,
+        "a_odd": false,
+        "formal_pairs": [
+          [
+            0,
+            0
+          ]
+        ],
+        "allowed_pairs": [
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    ],
+    "type_counts": [
+      {
+        "b": 1,
+        "a_odd": false,
+        "old_small_prime_types": 1,
+        "new_small_prime_types": 1,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 1,
+        "a_odd": true,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 3,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 2,
+        "a_odd": true,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 2,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 3,
+        "a_odd": false,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 3,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 3,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 9,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 6,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 6,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 9,
+        "a_odd": false,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 2,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 9,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 6,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 18,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 4,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 27,
+        "a_odd": false,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 2,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 27,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 6,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 54,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 4,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 81,
+        "a_odd": false,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 1,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 81,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 3,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 162,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 2,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 243,
+        "a_odd": false,
+        "old_small_prime_types": 3,
+        "new_small_prime_types": 2,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 243,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 6,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      },
+      {
+        "b": 486,
+        "a_odd": true,
+        "old_small_prime_types": 9,
+        "new_small_prime_types": 4,
+        "multiply_by": "3^omega_{p>=5}(9a^2-b^2)"
+      }
+    ]
+  },
+  "examples": {
+    "overinclusive_sextic_examples": [
+      {
+        "a": 31,
+        "b": 1,
+        "rho": 124,
+        "y": 48732,
+        "Z": 836,
+        "U": 21296,
+        "V": 27436,
+        "common_factor": 4,
+        "gcd_filter": false,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "12",
+            "n": "-32/93",
+            "t_integer": true,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "405",
+            "n": "19683/31",
+            "t_integer": true,
+            "n_integer": false
+          }
+        ]
+      },
+      {
+        "a": 84,
+        "b": 1,
+        "rho": 477,
+        "y": 1067913,
+        "Z": 6578,
+        "U": 512072,
+        "V": 555841,
+        "common_factor": 253,
+        "gcd_filter": true,
+        "rho_filter": false,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "2024/53",
+            "n": "-129536/75843",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "2277",
+            "n": "64009/9",
+            "t_integer": true,
+            "n_integer": false
+          }
+        ]
+      },
+      {
+        "a": 373,
+        "b": 2,
+        "rho": 13573,
+        "y": 88991706,
+        "Z": 62776,
+        "U": 21810176,
+        "V": 22685677,
+        "common_factor": 1121,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "1150146/13573",
+            "n": "-771445296/184226329",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "3363",
+            "n": "21299/3",
+            "t_integer": true,
+            "n_integer": false
+          }
+        ]
+      },
+      {
+        "a": 77,
+        "b": 9,
+        "rho": 520,
+        "y": 847152,
+        "Z": 592,
+        "U": 28416,
+        "V": 65712,
+        "common_factor": 1776,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "64/65",
+            "n": "-16/12675",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "182",
+            "n": "1372/3",
+            "t_integer": true,
+            "n_integer": false
+          }
+        ]
+      }
+    ],
+    "integer_reconstruction_examples": [
+      {
+        "a": 6469,
+        "b": 486,
+        "rho": 501997,
+        "y": 541323147582,
+        "Z": 84588,
+        "U": 430383744,
+        "V": 683449893,
+        "common_factor": 63441,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "2105694/501997",
+            "n": "-12984973616/252000988009",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "2223",
+            "n": "41553",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 41553,
+        "source_r": 126882,
+        "source_t": 2223,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          2,
+          0
+        ]
+      },
+      {
+        "a": 2551,
+        "b": 243,
+        "rho": 52792,
+        "y": 33731238240,
+        "Z": 26320,
+        "U": 49744800,
+        "V": 89066880,
+        "common_factor": 473760,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "17108/6599",
+            "n": "-742224/43546801",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "2632",
+            "n": "73696",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 73696,
+        "source_r": 223720,
+        "source_t": 2632,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          0,
+          2
+        ]
+      },
+      {
+        "a": 12037,
+        "b": 486,
+        "rho": 1286089,
+        "y": 3459396534390,
+        "Z": 294994,
+        "U": 3122216496,
+        "V": 3995883369,
+        "common_factor": 189639,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "13263640/1286089",
+            "n": "-472274304000/1654024915921",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "5545",
+            "n": "138625",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 138625,
+        "source_r": 421420,
+        "source_t": 5545,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          0,
+          2
+        ]
+      },
+      {
+        "a": 26782735681436534646286989230015977,
+        "b": 54,
+        "rho": 1019638458006857887043591257783958063596729487443699889688395809243,
+        "y": 38341415370991647443118877735504011108211203147174983373134890758727374865878892489763756728552633957410,
+        "Z": 13264727631920127036450990601356448065412925583681106434521616286155,
+        "U": 355013105286959698547397016069479430861039485937957597439055353178781513827058791735994740275867841090,
+        "V": 355013105286959698547397016069483737809538350120838390952331512723577279985513291407778532475106861825,
+        "common_factor": 75473701575396082412086466481859569315,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "252588765004635558705222442851976247792482760103213644502755341994062960431403486114953739656284145/1019638458006857887043591257783958063596729487443699889688395809243",
+            "n": "-14303201634270460440995467077821406940424774562913345642120129232808905085920533544462696204356548830160286055184370866632606366829996459484451179828403701954928850/1039662585046602894740578168352933651046911084221406887931730636642787247353458777690546865593215186932545106454257338237324844233049",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "696598675502436607409906329433235420",
+            "n": "108785369383737973503877149475097188315",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 108785369383737973503877149475097188315,
+        "source_r": 327052706826716357119041354754724800365,
+        "source_t": 696598675502436607409906329433235420,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          1,
+          2
+        ]
+      },
+      {
+        "a": 3444650348600321823330771757615464517,
+        "b": 81,
+        "rho": 11252367339215536032854029707435089340655206417287118658648963532987800,
+        "y": 81629542906673052166761914137997606871277912260942540255317540502950812283691794743360261364723931154321107552,
+        "Z": 146350168602137075600298853948359385755029853887570931753563461063617888,
+        "U": 503886067325142297325690828012330870999099995548927755592606594537747237789190871154571928714750793261647968,
+        "V": 503886067325142297325690828012330942226553242240486321633535880807324518799596718269628828874433541976884224,
+        "common_factor": 14543309689288648347817078361005095275616,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "29886495990631718072715195124387896281256925501926759633388950659682799151208563471300321280120025279476/1406545917401942004106753713429386167581900802160889832331120441623475",
+            "n": "-2334819897494281617258027510843121597720042535216902419962753083185253451249347797624741224910368711378744207947685193077304726907429333795125601728917973603971991158784048/1978371417760070658655860710162735982689095405463310331188604043029639334283536363458163419873586942166774617612674146873325115293671075625",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "89582147136736083033377169229546642560",
+            "n": "20977142168815802252502431909486399850592",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 20977142168815802252502431909486399850592,
+        "source_r": 63021008653584142840540672897688746194336,
+        "source_t": 89582147136736083033377169229546642560,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          2,
+          2
+        ]
+      },
+      {
+        "a": 13986084566437274402357307453896702349817,
+        "b": 162,
+        "rho": 92816409736363011322306949114652344342172553329877788150279494648546483255311,
+        "y": 5467757757981838077305127760823989626235389378212593600695379256774868028808574178699314573015786513994813294913983556046,
+        "Z": 1206899661048139252374702009570155176866630219084572304049050927047659154053407,
+        "U": 16875795549326660732423233829703671685324724702654054889472040913605259107779000710798229993567542133688219484899684014,
+        "V": 16875795549326660732423233829703671686498666520880473509882152029449481810792444836728403173196572150230381100989103369,
+        "common_factor": 117958628938694420654590543058825852401368279,
+        "gcd_filter": true,
+        "rho_filter": true,
+        "roots": [
+          {
+            "sign": -1,
+            "t": "4005173297097376223426824987438537361066462630949229390436220940601204155775192214541027595354660960203407668081277/92816409736363011322306949114652344342172553329877788150279494648546483255311",
+            "n": "-20650094298775193208238442984997804851742791425307645336578775902667032490383075147591349242451005648919646058925755697224111960652397320999451342382275121523711833933369644489466802231943654/8614885916348422404956229668791471907003985760497584327428414221686969216320263140169463648990293718440967602675660492670574962923760728099391307609706721",
+            "t_integer": false,
+            "n_integer": false
+          },
+          {
+            "sign": 1,
+            "t": "363681340054310139459781874357224636050060",
+            "n": "170263459131429393121255301571296045256626383",
+            "t_integer": true,
+            "n_integer": true
+          }
+        ],
+        "source_n": 170263459131429393121255301571296045256626383,
+        "source_r": 511154058734342489503225686588245360405929209,
+        "source_t": 363681340054310139459781874357224636050060,
+        "source_status": "v19 auxiliary candidate, already rejected by original-equation modular witnesses",
+        "v3_core_pair": [
+          2,
+          2
+        ]
+      }
+    ],
+    "examples_are_original_solutions": false
+  },
+  "new_uniform_conclusions": [
+    "gcd(a,rho)=gcd(a,3)",
+    "rho mod9 in {1,4,6,7}",
+    "rho>=13 using prior rho>=11",
+    "rho=a+b mod2",
+    "at most N2*N3(v3(b))*3^omega_{p>=5}(D) cube coefficient types"
+  ],
+  "proof_scope": "Written Bezout/valuation proof plus exact finite residue verification; not a search-based universal inference",
+  "producer_sha256": "df81910745a9c1e7565438a8fededda7cbb10bb2f1c61f290ddff33d1d4fca76",
+  "note_sha256": "c40b0994eae56dddf41d3f14288d9e4a621b4937bf4a69fa2ecaad8a0d376bf5",
+  "claims_not_made": [
+    "Lean execution",
+    "DeepSeek execution",
+    "full original equation solved",
+    "complete Selmer group"
+  ]
+}

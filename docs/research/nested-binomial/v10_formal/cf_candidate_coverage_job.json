@@ -1,0 +1,19 @@
+{
+  "module": "CFCandidateCoverage",
+  "imports": "import Mathlib.Tactic\nimport CFApproximationCore\nimport CFCoefficientRanges",
+  "definitions": "",
+  "local_dependencies": [
+    "CFApproximationCore.lean",
+    "CFCoefficientRanges.lean"
+  ],
+  "goals": [
+    [
+      "reduced_approximation_mem_coefficientCandidates",
+      "theorem reduced_approximation_mem_coefficientCandidates (alpha : ℝ) (p q P Q Pm Qm Pn Qn aNext : ℤ) (hq : 0 < q) (hQ : 0 < Q) (hQm_nonneg : 0 ≤ Qm) (hQn : 0 < Qn) (hQm_le_Q : Qm ≤ Q) (hQ_le_q : Q ≤ q) (hq_lt_Qn : q < Qn) (hdet : |P * Qm - Pm * Q| = 1) (hPnext : Pn = aNext * P + Pm) (hQnext : Qn = aNext * Q + Qm) (hred : Nat.Coprime (Int.natAbs p) (Int.natAbs q)) (hcopPQ : Nat.Coprime (Int.natAbs P) (Int.natAbs Q)) (happrox : |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)) (hconv_cur : |(Q : ℝ) * alpha - (P : ℝ)| < 1 / (Qn : ℝ)) (hconv_next : |(Qn : ℝ) * alpha - (Pn : ℝ)| < 1 / (Qn : ℝ)) : ∃ a b c : ℤ, p = a * P + b * Pm ∧ q = a * Q + b * Qm ∧ c = a - b * aNext ∧ p = b * Pn + c * P ∧ q = b * Qn + c * Q ∧ (a, b) ∈ coefficientCandidates aNext"
+    ],
+    [
+      "finite_prefix_interval",
+      "theorem finite_prefix_interval (Q : ℕ → ℕ) (n H q : ℕ) (hn : 0 < n) (hQstrict : ∀ i, i < n → Q i < Q (i + 1)) (hQ0 : Q 0 = 1) (hQn : H ≤ Q n) (hq1 : 1 ≤ q) (hqH : q < H) : ∃ i : ℕ, i < n ∧ Q i ≤ q ∧ q < Q (i + 1)"
+    ]
+  ]
+}

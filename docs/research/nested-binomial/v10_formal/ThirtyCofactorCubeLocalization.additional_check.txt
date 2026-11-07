@@ -1,0 +1,4 @@
+'NestedBinomialV10.prime_cube_dvd_coprime_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.coprime_Q_factors' depends on axioms: [propext, Quot.sound]
+'NestedBinomialV10.prime_cube_dvd_index_or_pred' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cube_prime_localization' depends on axioms: [propext, Classical.choice, Quot.sound]

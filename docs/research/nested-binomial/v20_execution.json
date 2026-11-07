@@ -1,0 +1,54 @@
+{
+  "date_jst": "2026-11-07",
+  "scope": "Fresh execution of exact checks and independent verifiers in the assembled v20 directory",
+  "records": [
+    {
+      "command": "python v20_logarithmic_gap_checks.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.322058459,
+      "output": "{\n  \"status\": \"PASS\",\n  \"check_count\": 29,\n  \"lower_gap_thresholds\": [\n    {\n      \"n_minimum\": 1024,\n      \"bound\": \"t > 2*n/(5*log(n))\",\n      \"w_bound\": \"w < (7/16)*J*log(n)\"\n    },\n    {\n      \"n_minimum\": 32768,\n      \"bound\": \"t > 9*n/(20*log(n))\",\n      \"w_bound\": \"w < (3/8)*J*log(n)\"\n    }\n  ],\n  \"global_heights\": {\n    \"small\": \"n < 2^12*J^(3/2)*(1+log(J)); uses existing J>=17 for low n\",\n    \"complement\": \"n < 2^25*J^3*(1+log(J))^2\"\n  },\n  \"analytic_complement_J_exclusion\": \"All 1<=J<=8, without a delta or n scan\",\n  \"note_sha256\": \"bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6\",\n  \"checker_sha256\": \"f0e1018593490701d2192a40914c410bcae24a57f47efe937130332f58d12bfc\"\n}\n"
+    },
+    {
+      "command": "python v20_sharper_defect_height_checks.py --output v20_sharper_defect_height_checks.json",
+      "exit_code": 0,
+      "wall_time_seconds": 0.99709415,
+      "output": "{\n  \"status\": \"PASS\",\n  \"scope\": \"Exact finite constants and symbolic identities supporting a written universal proof; not Lean verification.\",\n  \"note_sha256\": \"8f921aac18023e6f2d9209bfac1a293dbdf6f72a3bb11dabd8857be84d34e0e1\",\n  \"checks_count\": 27,\n  \"checks\": {\n    \"integral_lower_log2\": true,\n    \"log_n_lower_constant\": true,\n    \"log_n_lower_above_100\": true,\n    \"x_upper_constant\": true,\n    \"x_below_one_hundredth\": true,\n    \"exponential_log2_upper\": true,\n    \"derivative_log_below_three\": true,\n    \"log48_below_four\": true,\n    \"main_linear_constant\": true,\n    \"positive_gap_margin\": true,\n    \"A_lower_at_21\": true,\n    \"A_above_16n_squared\": true,\n    \"b_below_four_n\": true,\n    \"four_a_over_n_below_13\": true,\n    \"threshold_log_below_180\": true,\n    \"threshold_binomial_margin\": true,\n    \"threshold_log_over_n\": true,\n    \"threshold_n_ratio\": true,\n    \"square_alpha_over_log_bound\": true,\n    \"defect_exact_coefficient\": true,\n    \"defect_coefficient_below_17\": true,\n    \"lower_range_defect_margin\": true,\n    \"base_two_height_conversion\": true,\n    \"bit_height_reduction\": true,\n    \"quadratic_height_identity\": true,\n    \"analytic_constant_identity\": true,\n    \"A_exp_lower_margin\": true\n  },\n  \"new_bounds\": {\n    \"upper_gap_threshold\": \"n >= 2^256\",\n    \"upper_gap\": \"r - 3*n < 47*n/(100*log(n))\",\n    \"defect_height\": \"log(n) < 17*delta; n < 2^(25*delta)\",\n    \"low_range_input\": \"Previously established delta >= 25\"\n  },\n  \"unresolved\": \"delta is unbounded; the original equation is unsolved\"\n}\n\n"
+    },
+    {
+      "command": "python v20_sharper_defect_height_independent_audit.py",
+      "exit_code": 0,
+      "wall_time_seconds": 1.069419295,
+      "output": "{\n  \"status\": \"PASS_INDEPENDENT_WRITTEN_AND_SYMBOLIC_AUDIT\",\n  \"note_sha256\": \"8f921aac18023e6f2d9209bfac1a293dbdf6f72a3bb11dabd8857be84d34e0e1\",\n  \"symbolic_identities\": 3,\n  \"blocking_findings\": []\n}\n"
+    },
+    {
+      "command": "python v20_binary_height_24.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.074911029,
+      "output": "{\n  \"status\": \"PASS\",\n  \"theorem\": \"Every original solution in ell=1,j=i-3 satisfies n < 2^(24*delta)\",\n  \"upper_gap\": \"t < 231*n/(500*log(n)) for n>=2^600\",\n  \"check_count\": 19,\n  \"note_sha256\": \"42ada7b821e7de6d2f4aa8035f3dac20ac66b4694e83b487d63385c0cd52855c\",\n  \"checker_sha256\": \"9d480060d94f30ce326a7816981c87219d2b6d392bdd7f546a8842fe1c28daa7\"\n}\n"
+    },
+    {
+      "command": "python v20_complement_J_verify.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.984364653,
+      "output": "{\n  \"status\": \"PASS\",\n  \"conclusion\": \"Complementary canonical J>=33 under the written inherited and new v20 analytic inputs\",\n  \"certificate_file\": \"v20_complement_J_certificate.json.gz\",\n  \"certificate_sha256\": \"c765b4efc5d400f4e29f89c00c3e0a6f691eaec2f837db11018c4c02f15b0a81\",\n  \"verifier_sha256\": \"3fb4bfb479892ccec38506d501df4856a9e78c196840944a1db38d978d607003\",\n  \"gap_note_sha256\": \"bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6\",\n  \"counts\": {\n    \"raw_divisor_records\": 608102,\n    \"normalized_n\": 429917,\n    \"coefficient_families\": 5323,\n    \"second_divisor\": 862,\n    \"w_divides_N\": 5\n  },\n  \"all_5323_coefficient_families_reconstructed\": true,\n  \"all_cube_divisor_domains_reconstructed\": true,\n  \"all_862_second_divisor_points_reconstructed\": true,\n  \"all_five_consecutive_square_obstructions_checked\": true,\n  \"uses_producer_or_CAS\": false,\n  \"independence\": \"Sieve factorization, recursive divisors, set-normalized n, alternate S expression, binary integer square roots\",\n  \"no_bound_on_delta\": true,\n  \"no_arbitrary_n_cutoff\": true,\n  \"original_binomial_Lucas_witnesses_needed\": false,\n  \"wall_seconds\": 0.911786,\n  \"limitations\": \"Written analytic gap and divisor-transfer proofs are inputs; no new Lean/API execution or full equation classification\"\n}\n"
+    },
+    {
+      "command": "python v20_fixed_parameter_verify.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.584308728,
+      "output": "{\n  \"status\": \"PASS\",\n  \"queries\": [\n    {\n      \"J\": 17,\n      \"branch\": \"small\",\n      \"delta\": 25\n    },\n    {\n      \"J\": 33,\n      \"branch\": \"complement\",\n      \"delta\": 25\n    }\n  ],\n  \"counts\": {\n    \"coefficient_families\": 1062,\n    \"divisor_polynomials\": 31682\n  },\n  \"root_certificate_types\": {\n    \"quadratic\": 11842,\n    \"adjacent_bracket\": 16155,\n    \"domain_start\": 3685\n  },\n  \"primes_proved_by_recursive_Lucas_certificates\": 1111,\n  \"all_coefficient_families_and_G_divisors_complete\": true,\n  \"all_root_isolation_certificates_checked\": true,\n  \"undecided_count\": 0,\n  \"imports_producer_or_SymPy\": false,\n  \"certificate_sha256\": \"2fae3b054c771919bff0e876560075bf0e43f1ec8ff4aae33ce19eec1e849a45\",\n  \"verifier_sha256\": \"9ec662a4998660398d6c604dce27f776037c339cbd945a017028f119351e383d\",\n  \"input_note_sha256\": \"612c3973d28962340870bdfcab891fb549e2ce3af15faaf8c2a5ed073bb8d025\",\n  \"wall_seconds\": 0.277885,\n  \"scope\": \"Exact finite parameter queries only; general completeness uses the v19 integer eliminant and new monotonicity proof\"\n}\n"
+    },
+    {
+      "command": "python v20_root_isolation_checks.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.762543083,
+      "output": "{\n  \"status\": \"PASS\",\n  \"positive_integer_roots_recovered\": 8,\n  \"negative_sign_quartic_roots_correctly_rejected\": 4,\n  \"includes_n104_domain_boundary\": true,\n  \"largest_positive_n_digits\": 61,\n  \"scope\": \"Isolator validation fixtures, not original binomial solutions\",\n  \"solver_sha256\": \"43cfaa15151d1f3809b70b8ae503007e042ae19cc3e3ed706de5a2f940b4eaf6\",\n  \"checker_sha256\": \"38a656b8c9dfa4ff9174f9b2ed85a85f584c5052dbeeb717f85f94a85840d48f\"\n}\n"
+    },
+    {
+      "command": "python v20_residual_integrality_verify.py",
+      "exit_code": 0,
+      "wall_time_seconds": 0.339171426,
+      "output": "{\n  \"status\": \"PASS\",\n  \"date_jst\": \"2026-11-07\",\n  \"coefficient_identities\": [\n    \"bezout_9\",\n    \"defining_equation_elimination\",\n    \"square_to_quartic\",\n    \"denominator_saturation\",\n    \"rational_reverse_reconstruction\",\n    \"Z_rearrangement\"\n  ],\n  \"residues\": {\n    \"rho_tuples\": 3402,\n    \"global_mod9_classes\": [\n      1,\n      4,\n      6,\n      7\n    ],\n    \"rho11_and12_excluded\": true,\n    \"parity_cases\": 8,\n    \"gcd_proof\": \"Bezout forces gcd|9; full mod9 table removes a second factor3. No prime bound is used.\"\n  },\n  \"cube_cores\": {\n    \"N3_sizes\": [\n      1,\n      3,\n      2,\n      2,\n      1,\n      2\n    ],\n    \"coefficient_count_cases\": 18,\n    \"unbounded_argument\": \"v3(V-U)=2 forces unequal pair(2,d+3f-2) when sum>4, and(2,2) when sum=4; modulo3 eliminates f.\"\n  },\n  \"reverse_reconstruction\": {\n    \"residual_examples\": 10,\n    \"integer_source_examples\": 6,\n    \"reverse_roots\": 20,\n    \"gcd_rejections\": 1,\n    \"rho_rejections\": 1\n  },\n  \"certificate_sha256\": \"8fab4ea47637fbb0871e5a641678d3aaffc1e8079158e3d1d3976b77b566e575\",\n  \"note_sha256\": \"c40b0994eae56dddf41d3f14288d9e4a621b4937bf4a69fa2ecaad8a0d376bf5\",\n  \"verifier_sha256\": \"c62e7608c414c9b9e25dfb46fdf96bcb4afa0f571ccb52eb88accbc436ca68ab\",\n  \"producer_imported\": false,\n  \"sympy_used\": false,\n  \"scope\": \"Written universal proof plus exact independent arithmetic; no Lean or original-equation solution claim\"\n}\n"
+    }
+  ]
+}

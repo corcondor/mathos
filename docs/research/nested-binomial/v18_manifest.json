@@ -1,0 +1,503 @@
+{
+  "version": "v18",
+  "date": "2026-11-07 JST",
+  "repository": "corcondor/mathos",
+  "branch": "research/nested-binomial-2026-11-05",
+  "pull_request": 1,
+  "prior_repository_snapshot": "f30d62549a61fe94db964d544230de48b667fcaf",
+  "equation": "binom(binom(i,j),binom(k,ell)) = binom(i^2,j^2) + binom(k^2,ell^2)",
+  "scope": {
+    "ell": 1,
+    "j": "i-3",
+    "n": "i",
+    "A": "binom(n,3)",
+    "m": "6*n-9",
+    "r": "min(k,A-k)",
+    "branches": [
+      "k=r",
+      "k=A-r"
+    ],
+    "u": "r-3*n+3",
+    "M": "gcd(n,3)*gcd(n-1,6)",
+    "Q": "n*(n-1)/M",
+    "delta": "Q/gcd(Q,r^2)",
+    "C": "M*delta",
+    "K": "delta*r^2/Q"
+  },
+  "prior_inputs": [
+    {
+      "path": "docs/research/nested-binomial/v15_neighbor_prime_obstruction.md",
+      "git_blob_sha1": "3ae85f1b01bec733afae644b98ba490e7e605fa3",
+      "bytes": 8598
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_lower_gap.md",
+      "git_blob_sha1": "1e072810b6519f7773cf3b6253fe92d9281f80d5",
+      "bytes": 6426
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_quadratic_neighbors.md",
+      "git_blob_sha1": "974446722dd6b9f65ff80bc140df7fdf5b715988",
+      "bytes": 7746
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell.md",
+      "git_blob_sha1": "c1a2a3c43eab49c0036126dd4706dcebef71ee9e",
+      "bytes": 14887
+    },
+    {
+      "path": "docs/research/nested-binomial/v16_square_defect_pell_summary.json",
+      "git_blob_sha1": "b4783ff7791e932a8b2179fff154c5bb2abe8994",
+      "bytes": 8609
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_manifest.json",
+      "git_blob_sha1": "5e85d8cbb3d21c1653fcefec98cd92e8cc6b9eba",
+      "bytes": 17325
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_cofactor_certificate.json.gz",
+      "git_blob_sha1": "f9ecb8453f6cc8f2de84db6a834824b3d99d26eb",
+      "bytes": 49290
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect.md",
+      "git_blob_sha1": "ae4b1a2eff29ff7a34a0e076db744951516bf0ca",
+      "bytes": 10316
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_checks.json",
+      "git_blob_sha1": "46e5c075140c6ff022d9227f0e8ddac541362dc1",
+      "bytes": 4162
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_neighbor_defect_independent_audit.json",
+      "git_blob_sha1": "c0f40dfc31fea72e43819c584564b4aa1a6f7bb5",
+      "bytes": 2901
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_quadratic_prime_powers.md",
+      "git_blob_sha1": "de64bd225fec075c2e2d507eff99c9228802373c",
+      "bytes": 15204
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap.md",
+      "git_blob_sha1": "d49eda164eadd4cdf4957019e9919adc70d0194a",
+      "bytes": 13970
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_independent_audit.json",
+      "git_blob_sha1": "64a3319a44f8376c26c4f3045475611186fcd782",
+      "bytes": 115299
+    },
+    {
+      "path": "docs/research/nested-binomial/v17_square_root_gap_results.json",
+      "git_blob_sha1": "9cfbf6295abc9598b756bf062de0a8baaea69dda",
+      "bytes": 330324
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_common_divisor.md",
+      "git_blob_sha1": "e18dd1d93224905f3670c5c8e7c500c240419e72",
+      "bytes": 5553
+    },
+    {
+      "path": "docs/research/nested-binomial/v6_offset_composite.md",
+      "git_blob_sha1": "afc5e371baf652ede2f736d41fcfde8f9202e317",
+      "bytes": 10180
+    }
+  ],
+  "navigation_baselines": {
+    "docs/research/nested-binomial/README.md": "846617ffdb65d78142cd9f3b7deef26f07307c76",
+    "docs/research/nested-binomial/RESEARCH_LOG.md": "71fe4d027db721d9e1c8867ed2469a8c97982e0e"
+  },
+  "results": {
+    "residual_gap": {
+      "lower_bounds": [
+        "u>n^(5/8)/40",
+        "u>n^(7/11)/96"
+      ],
+      "integer_versions": [
+        "n^5<40^8*u^8",
+        "n^7<96^11*u^11"
+      ],
+      "notation": "rho is the auxiliary v17 residual j_*, not the original binomial index",
+      "dual_heights": [
+        "a<rho*(rho+32*b^2)",
+        "a^2<1095*b^4*rho^3"
+      ],
+      "fixed_a": "n^3<(10164/289)^3*1095^2*b^5*a^11; n=O(a^(11/3)) for the twelve b",
+      "fixed_rho": "n^2<(10164/289)^2*1095^5*b^18*rho^11; n=O(rho^(11/2))",
+      "sign_domains": "rho>=7*b^2 uses positive q1 remainder; smaller rho uses first separation",
+      "dependency": "v17 h>81M uses its saved complete finite classification"
+    },
+    "short_lcm": {
+      "offsets": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "applicability": "6 divides (c+2)*n-3*c",
+      "inner_valuation": "p>=11 implies v_p(binom(n^2,m))>=v_p(n^2-c)-1",
+      "both_branches": "R_r=product over admissible c of ((n^2-c)/gcd(n^2-c,L_r)) with primes>=17 retained; R_r|k^2, gcd(R_r,Q)=1, R_r^3*Q^2|k^6",
+      "small_branch": "n^2-c divides L_r^2, equivalently p^ceil(e/2)<=r for every exact prime power",
+      "small_branch_odd_exponent": "p^e exactly divides n^2-c, e odd, w=(n^2-c)/p^e imply p<12*w",
+      "complementary_square_lcm_claimed": false,
+      "lcm_endpoint": "L_r=L_(r-1)"
+    },
+    "canonical_cofactor": {
+      "N": "n^2+2",
+      "S_epsilon": "(r-epsilon)^2-6*n+8",
+      "T_epsilon": "S_epsilon-9*N",
+      "general_domain": "q is any positive divisor of gcd(N,S_epsilon); w=N/q, J=T_epsilon/q>0",
+      "canonical": "G=gcd(N,T_epsilon); w=N/G, J=T_epsilon/G, gcd(w,J)=1",
+      "small_integer_difference": "(n-1)^2<36*J*(30000*w^2+9600*w*J+784*J^2)",
+      "complementary_integer_difference": "n-1<42*J*(15552*w^2+5400*w*J+481*J^2)",
+      "small_heights": [
+        "n<16*J^6",
+        "J>=2",
+        "n^14<2^352*J^33",
+        "w^7<2^101*J^13"
+      ],
+      "complementary_heights": [
+        "n^3<2^352*J^33",
+        "w<2^49*J^5"
+      ],
+      "old_gap_only": [
+        "small: n^6<2^155*J^15, w<2^15*J^2",
+        "complementary: n<2^155*J^15, w<2^68*J^7"
+      ],
+      "canonical_gcd": [
+        "small: gcd(delta,J)|25",
+        "complementary: gcd(delta,J)|72"
+      ],
+      "canonical_coefficient_gcd": [
+        "small: gcd(c0,c1)|20",
+        "complementary: gcd(c0,c1)|21"
+      ],
+      "all_prime_powers": "W=gcd(N,3*L_m)=gcd(N,6*L_m), R=N/W imply R|S_epsilon and gcd(R,Q)=1",
+      "excess_scope": "R is 1 or one prime power; not a product of distinct excess prime bases",
+      "prime_power_consequence": "small branch, p>=5, p^e||N, a=floor(log_p m), e>2a implies e=2a+1 and p<2809*delta*(N/p^e)",
+      "transferred_cofactor_exclusion": [
+        "N/gcd(N,S_epsilon)>=65",
+        "gcd(N,3*L_m)>=65"
+      ]
+    },
+    "defect_resultants": {
+      "small_branch": "R_r divides K<68*delta",
+      "complementary_branch": "T_c,r divides E_c(C,K), the primitive part of (36K-Cc(c+8))^2-C^2*c*(5c+4)^2",
+      "nonzero": "c nonsquare makes E_c nonzero; coefficient content only has prime factors 2 and 3",
+      "negative_repeated_condition": "some admissible c has p^2|(n^2-c) and p^2>m",
+      "conditional_negative_height": "n<2^38*delta^4",
+      "conditional_c10_height": "p^2|(n^2-10), p^2>m imply p|(2K^2-20CK+5C^2), n<2^18*delta^4",
+      "positive_scope": "n=3 mod6; S=(n^2+1)/gcd(n^2+1,L_m)",
+      "positive_small": "S divides K^2+(K+C)^2<10000*delta^2",
+      "positive_complementary": "S=1 or one odd prime power; sign k=+1 or -1 modulo S selects 648K^2+36CK+25C^2 or 648K^2+1764CK+1681C^2",
+      "positive_repeated_condition": "p^2|(n^2+1), p^2>m",
+      "conditional_positive_heights": [
+        "small: n<2^24*delta^4",
+        "complementary: n<2^42*delta^4"
+      ],
+      "unconditional_delta_polynomial_height_claimed": false
+    }
+  },
+  "verification": {
+    "final_directory_runs": "Four producers and four independent auditors exited 0 and reported PASS",
+    "written_review": "Separate AI collaborators plus root; not external peer review",
+    "residual": {
+      "producer_identities": 5,
+      "producer_rational_margins": 7,
+      "independent_identities": 4,
+      "independent_rational_margins": 7,
+      "supporting_necessary_pairs": 48,
+      "supporting_n_limit": 100000,
+      "all_n_extrapolation": false
+    },
+    "short_lcm": {
+      "endpoint_constants": 118,
+      "complete_cubic_candidates": 828,
+      "complete_seventh_candidates": 2,
+      "square_indices": [
+        47,
+        156,
+        1167
+      ],
+      "forced_divisor_indices": [
+        156,
+        1167
+      ],
+      "survivors": [],
+      "independent_full_record_match": true,
+      "independent_method": "sieve, binary integer square root, independent forced-divisor factorization",
+      "supporting_inner": 309,
+      "supporting_outer": 312,
+      "actual_binomial_pairs": 6
+    },
+    "cofactor": {
+      "producer_polynomial_groups": 4,
+      "producer_rational_margins": 11,
+      "common_divisor_cases": 170,
+      "canonical_cases": 96,
+      "producer_actual_binomial_cases": 24,
+      "producer_general_lemma_cases": 1379,
+      "independent_identities": 5,
+      "independent_rational_margins": 10,
+      "independent_actual_prime_power_pairs": 10,
+      "independent_local_defect_cases": 50240,
+      "J1_proof": "analytic n<16J^6, using v17 square-root bound; exploratory enumeration is not needed",
+      "exploratory_J1_data_included": false
+    },
+    "resultants": {
+      "producer_coefficient_identities": 40,
+      "independent_identities": 40,
+      "independent_exact_grid_evaluations": 1080,
+      "complete_extrema": 12,
+      "producer_residue_checks": {
+        "negative": 468,
+        "positive": 288
+      },
+      "independent_residue_checks": {
+        "negative": 1920,
+        "positive": 864
+      }
+    },
+    "prior_certificate_logical_reuse": {
+      "summary_sha256": "39a5df958b3536b80d796ee65bd01196f9b56035dc3d3952086142023bfd22bc",
+      "compressed_sha256": "7a496312c8fcd614b683d4ee0a60268ec218c4bd0991104554457b001fdb8c88",
+      "uncompressed_sha256": "e171f8b5844e50b577b17acee313a10207943450e626a16a7a781847556078df",
+      "full_enumeration_reexecuted": false,
+      "primality_required": false,
+      "counts": {
+        "families": 8712,
+        "divisor_points": 590028,
+        "normalized_n": 350188,
+        "second_divisor": 1260,
+        "integral_p": 20,
+        "p_large": 11,
+        "square": 0
+      },
+      "logical_scope": "All q dividing N and S; q>m falls in saved non-primality-filtered domain, q<=m in saved bounded n domain"
+    },
+    "source_proof_report_bindings": {
+      "v18_residual_gap_checks.json": {
+        "source_sha256": "v18_residual_gap_checks.py",
+        "proof_note_sha256": "v18_residual_gap.md"
+      },
+      "v18_residual_independent_audit.json": {
+        "source_sha256": "v18_residual_independent_audit.py",
+        "proof_note_sha256": "v18_residual_gap.md"
+      },
+      "v18_short_lcm_checks.json": {
+        "source_sha256": "v18_short_lcm_checks.py",
+        "proof_note_sha256": "v18_short_lcm.md"
+      },
+      "v18_short_lcm_independent_audit.json": {
+        "source_sha256": "v18_short_lcm_independent_audit.py",
+        "producer_report_sha256": "v18_short_lcm_checks.json",
+        "proof_note_sha256": "v18_short_lcm.md"
+      },
+      "v18_neighbor_cofactor_checks.json": {
+        "source_sha256": "v18_neighbor_cofactor_checks.py",
+        "proof_note_sha256": "v18_neighbor_cofactor_height.md",
+        "supporting_residual_report_sha256": "v18_residual_gap_checks.json"
+      },
+      "v18_neighbor_cofactor_independent_review.json": {
+        "source_sha256": "v18_neighbor_cofactor_independent_review.py",
+        "reviewed_sha256": "v18_neighbor_cofactor_height.md",
+        "gap_sample_input_sha256": "v18_residual_gap_checks.json"
+      },
+      "v18_defect_resultants_checks.json": {
+        "source_sha256": "v18_defect_resultants_checks.py",
+        "proof_note_sha256": "v18_defect_resultants.md"
+      },
+      "v18_defect_resultants_independent_audit.json": {
+        "auditor_source_sha256": "v18_defect_resultants_independent_audit.py",
+        "proof_note_sha256": "v18_defect_resultants.md",
+        "producer_report_sha256": "v18_defect_resultants_checks.json",
+        "short_lcm_input_sha256": "v18_short_lcm.md"
+      }
+    },
+    "finite_support_samples_prove_universal_theorems": false,
+    "new_lean_execution": false,
+    "new_deepseek_api_calls": 0,
+    "new_complete_CAS_solver_calls": 0
+  },
+  "reproduction": {
+    "working_directory": "docs/research/nested-binomial",
+    "standard_library_commands": [
+      "python3 v18_residual_gap_checks.py",
+      "python3 v18_residual_independent_audit.py",
+      "python3 v18_short_lcm_checks.py",
+      "python3 v18_short_lcm_independent_audit.py",
+      "python3 v18_neighbor_cofactor_checks.py",
+      "python3 v18_neighbor_cofactor_independent_review.py",
+      "python3 v18_defect_resultants_checks.py",
+      "python3 v18_defect_resultants_independent_audit.py"
+    ],
+    "dependency_order": "cofactor producer reads residual report and existing v17 certificate"
+  },
+  "boundaries": {
+    "primitive_H_lower_bound": 21,
+    "candidate_first_index_count": "O(sqrt(X)*log(X))",
+    "whole_branch_solved": false,
+    "original_equation_solved": false,
+    "original_solutions_found": false,
+    "parallel_DeepSeek_goal_proofs_or_state_changed_by_this_update": false,
+    "global_bound_on_a_rho_delta_or_J": false
+  },
+  "files": [
+    {
+      "path": "docs/research/nested-binomial/PROGRESS_v18_ja.md",
+      "bytes": 14408,
+      "sha256": "552e0d287fc41426e6920a5571cac0589c108351101a6120a4150cd095b70bf6",
+      "git_blob_sha1": "25705e099718f675a7a136c12d0d214aed43fe3f"
+    },
+    {
+      "path": "docs/research/nested-binomial/README.md",
+      "bytes": 30436,
+      "sha256": "2ca06c50438a47de047cf5bc51a7129a4733183c1e03f35c038566ce410c1b3f",
+      "git_blob_sha1": "66e4cb8a6e681622ce688afaa728c92851f3c669"
+    },
+    {
+      "path": "docs/research/nested-binomial/RESEARCH_LOG.md",
+      "bytes": 27584,
+      "sha256": "b575cc414aa46e908281bc45ef02ecf7617156702582fc37a2130de023657b0a",
+      "git_blob_sha1": "d90eeeaf7c850764e842178e33d8333f337d7cc0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants.md",
+      "bytes": 8958,
+      "sha256": "a9de3326fc494e137ae14c739a3f2ff15f6d72806dca77739502e573161a0bb1",
+      "git_blob_sha1": "3e0962dd0968096b4dde0a670a441321899581c0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants_checks.json",
+      "bytes": 5837,
+      "sha256": "a9d81440f51918acf0526ef3d6cde9a21227ff9d00e69881f2634c0c6b6e7be1",
+      "git_blob_sha1": "10accaa64acdde5d4e6b4032f7da877d04f1b9bc"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants_checks.py",
+      "bytes": 5503,
+      "sha256": "d674985c4a59724660723ea9d5f8ea4f71b153d399e3d549f969ffdf31d898c5",
+      "git_blob_sha1": "02830a66150c135026767d7ed133174905005478"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants_independent_audit.json",
+      "bytes": 6650,
+      "sha256": "d55b927d81a769bb22ca1f4af000e0d82857ee0b8a141ae5abf5f471bf1e9292",
+      "git_blob_sha1": "fd61ff68b3b4303413314667dd8c351f2eb1b5f3"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_defect_resultants_independent_audit.py",
+      "bytes": 9006,
+      "sha256": "60f0690f8d1e6afcf4daf216b7a8113a8dd6932a7116c97227d5490e22bce991",
+      "git_blob_sha1": "be69d629777fe63514464eb122563880430d5d9b"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_checks.json",
+      "bytes": 40237,
+      "sha256": "9c07cd14ce7b4b8531e4182fd2569de774f1f272c6e3d67c777b8bbbae482f66",
+      "git_blob_sha1": "5a0889ee2e7435b6ece36c54be75de86ab2e1163"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_checks.py",
+      "bytes": 12505,
+      "sha256": "96a885e0396f38510bdfc5dbd275e6c8415f5438b19469593bc42438c0f69dfe",
+      "git_blob_sha1": "d1c74328cfae2faa442e85e4067c3a2ed3b69fe5"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_height.md",
+      "bytes": 16676,
+      "sha256": "c055e541abdb0774b67b85c43034d524ace2f537784613b549845421cc3e8933",
+      "git_blob_sha1": "c045fcc92cc9d95588f9daa32de93c57a73ea074"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_independent_review.json",
+      "bytes": 63490,
+      "sha256": "d4f0fd1e54dab5b8d24ae8e85bf9d30f470f70fdff57f56c9ee7d87ab7a478ee",
+      "git_blob_sha1": "4d3e42c47a3c12d7799f12c52c8c1133f6823288"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_neighbor_cofactor_independent_review.py",
+      "bytes": 14253,
+      "sha256": "236146f505341bb72267bd558cd9619f727c6c135ee05e27e161fa40f5f36600",
+      "git_blob_sha1": "94dcb738c894c782316c75381163fc0b0108d390"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_gap.md",
+      "bytes": 9518,
+      "sha256": "32cf9f073f179542abc9a7e03bd8d630b14a848ab25952abe3bd3884dc85fbf2",
+      "git_blob_sha1": "b038eadc81f1605e5e6a7dff87dc9e5386195999"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_gap_checks.json",
+      "bytes": 20162,
+      "sha256": "fd37c0f0dcb34bb675c9def1500d0239b40344ebdf78c6177b369fdcd0c0a900",
+      "git_blob_sha1": "0be9eec0e66b9d604cf18ef1461db70300209170"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_gap_checks.py",
+      "bytes": 9156,
+      "sha256": "0cb27e572fbbf18347c644b346003900a5d1571e1e93f41859da711ff208c76c",
+      "git_blob_sha1": "ca260b40981fe787f87a03097456a7068bf2d8f0"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_independent_audit.json",
+      "bytes": 2358,
+      "sha256": "10ea2f8ddcce6c3f5da6dac11bd5925dd7da518c26665d4f3fd4b49337f38cd1",
+      "git_blob_sha1": "93345c57588262a49c7bb5b584f7113a8011c0fb"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_residual_independent_audit.py",
+      "bytes": 5960,
+      "sha256": "957b0ef3bc6f8e41969992c90f94227ed0ff1a3dbddd3dac48bbaa3d0487a76b",
+      "git_blob_sha1": "65b40d5bd6f4acca8ca458cf1491d53b3b6512ba"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_review_ja.md",
+      "bytes": 6956,
+      "sha256": "cbc7d4401cc24dbdf221f289e988b6253edb8d5c2fb1664492580ae3b262d91d",
+      "git_blob_sha1": "3071ac7ad845a16d73969d750ca4562e7022634c"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm.md",
+      "bytes": 10563,
+      "sha256": "3ed645d66992d89f8f207b017f6ff274c7f2f73baddcfe58c784cac6707bfd78",
+      "git_blob_sha1": "63fd3846485ca3a02979ea47f7bbe24687667310"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm_checks.json",
+      "bytes": 93943,
+      "sha256": "be617347402d2ad4172db561cba4134dd2dce03a2100c239255e0a2ed3ad6ead",
+      "git_blob_sha1": "7787e18780629d7e9f7f939f9e5a0b4e592347ce"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm_checks.py",
+      "bytes": 10353,
+      "sha256": "d201343a54a875301f0f5b0f0cfe87c40e6b3510e4804200ba750a98ec11d217",
+      "git_blob_sha1": "d9f09666f2c6c84f605dad984dcd949b7b329034"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm_independent_audit.json",
+      "bytes": 2505,
+      "sha256": "1ab419b9ccb792648f39cac520d92a85f1af9324b23af0c2bda33c988e29cbe1",
+      "git_blob_sha1": "805ce32bf62913154ec646569f858728c0b6f717"
+    },
+    {
+      "path": "docs/research/nested-binomial/v18_short_lcm_independent_audit.py",
+      "bytes": 4859,
+      "sha256": "8c628de06b9bb5dd0cf570c1c88920b1b7526501adf93bd9b0eb633fce9196d9",
+      "git_blob_sha1": "7d50038db26b2f82bca26935825cdc87b8d96d85"
+    }
+  ],
+  "manifest_self_hash_omitted": true
+}

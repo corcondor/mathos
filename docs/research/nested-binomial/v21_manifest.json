@@ -1,0 +1,65 @@
+{
+  "version": "v21",
+  "date": "2026-11-07 JST",
+  "branch": "research/nested-binomial-2026-11-05",
+  "based_on_v20": "08da42759139cd7971f92f00d86ac42d615670d6",
+  "scope": "ell=1,j=i-3, both original k branches",
+  "conclusions": [
+    "a^2<152*rho*ln(rho)",
+    "n<2^24*sqrt(rho)*(ln(rho))^(5/2)",
+    "L*h^2-18*T*h*c+81*W^2*c^2=0",
+    "rho>=4099"
+  ],
+  "finite_certificate": {
+    "rho_min": 13,
+    "rho_max": 4096,
+    "initial_triples": 36892376,
+    "residual_square_points": 65,
+    "integer_t": 16,
+    "integer_n": 14,
+    "branch_points": 8,
+    "delta_ge_25": 3,
+    "original_solutions": 0,
+    "independent_verifier": "PASS"
+  },
+  "evidence_limits": [
+    "written analytic proofs",
+    "integer polynomial coefficient identities",
+    "two independently implemented exhaustive finite scans",
+    "not Lean kernel formalized",
+    "no external peer review",
+    "global branch unresolved"
+  ],
+  "files": [
+    {
+      "path": "PROGRESS_v21_ja.md",
+      "size_bytes": 5430,
+      "git_blob_sha1": "4505f1269617c1577f3a4e67aed4a815a7f73d12",
+      "sha256": "bddafbd961ebc24d67c0beddc1ac281e59c9f7f5c4e3ab73925709413c928040"
+    },
+    {
+      "path": "v21_proofs.md",
+      "size_bytes": 4881,
+      "git_blob_sha1": "f86b74a96719d7e1bb3f5711055e6adebccfd6dd",
+      "sha256": "a9c9ed1676b5aa14849fd02981e6d71a2c1ef611a572e45ec427a7cce18c4b39"
+    },
+    {
+      "path": "v21_residual_audit.py",
+      "size_bytes": 4395,
+      "git_blob_sha1": "4979db85b8593886e40640258a0704f2d3229ef8",
+      "sha256": "007447138a9d647083e1314d547f969aa6a31c5496574ee460979cd4f0316b22"
+    },
+    {
+      "path": "v21_residual_verify.py",
+      "size_bytes": 7276,
+      "git_blob_sha1": "cfe31fda01ff7f6dcbbcaf582a383f8dcb487859",
+      "sha256": "473b3cc94642c7b424459916ddb8abb47a2fbd7f2dce19cf226ca3001a6c96b6"
+    },
+    {
+      "path": "v21_residual_certificate.json",
+      "size_bytes": 1735,
+      "git_blob_sha1": "8a128bd018fac9fc7c05723c05af5306e28a81de",
+      "sha256": "43bba4ea7abc745bd65bf95f2904864f3097308dc7e02506866a37f174a3f754"
+    }
+  ]
+}

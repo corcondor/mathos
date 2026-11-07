@@ -1,0 +1,6 @@
+'NestedBinomialV10.b_strict_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.smaller_half_a_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.smaller_half_b_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.larger_half_c_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.coefficientCandidates_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.coefficientCandidates_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]

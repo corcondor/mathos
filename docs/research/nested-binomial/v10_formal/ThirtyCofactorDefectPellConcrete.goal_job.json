@@ -1,0 +1,24 @@
+{
+  "module": "ThirtyCofactorDefectPellConcrete",
+  "imports": "import Mathlib.Data.Nat.GCD.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith",
+  "definitions": "",
+  "goals": [
+    [
+      "defect_pell_dy_sq",
+      "theorem defect_pell_dy_sq (n d y : ℕ) (hn : 1 ≤ n) (h : (2 * n - 1) ^ 2 = d * y ^ 2 + 1) : d * y ^ 2 = 4 * (n * (n - 1))"
+    ],
+    [
+      "defect_pell_coefficient_eq",
+      "theorem defect_pell_coefficient_eq (C K s d : ℕ) (hs : 0 < s) (h : s ^ 2 * d = C * K) : d = C * K / s ^ 2"
+    ],
+    [
+      "defect_pell_d_bound",
+      "theorem defect_pell_d_bound (C K s d : ℕ) (hC : 0 < C) (hs : 0 < s) (h : s ^ 2 * d = C * K) (hK : 927 * K < 10400 * C) : 927 * d < 10400 * C * C"
+    ],
+    [
+      "defect_pell_linear",
+      "theorem defect_pell_linear (C K s d n r y : ℕ) (hC : 0 < C) (hs : 0 < s) (hCK : s ^ 2 * d = C * K) (hK : K * n * (n - 1) = C * r ^ 2) (hn : 1 ≤ n) (hpell : (2 * n - 1) ^ 2 = d * y ^ 2 + 1) : K * y = 2 * s * r"
+    ]
+  ],
+  "local_dependencies": []
+}

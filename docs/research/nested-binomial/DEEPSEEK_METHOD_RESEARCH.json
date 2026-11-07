@@ -1,0 +1,526 @@
+{
+  "active_method_id": "defect-localization",
+  "methods": {
+    "finite-cover-certificate": {
+      "id": "finite-cover-certificate",
+      "title": "Finite interval-cover certificate for the interrupted Pell covering job",
+      "kind": "certificate_design",
+      "hypothesis": "ThirtyCofactorPellCovering is a finite covering statement, not a Pell-solvability theorem. A certificate that separates the four possible M values, exact integer bounds for L, and the resulting 25 (M,L) pairs should let Lean check the job compositionally. This should reduce repair loops because each obligation is a small arithmetic fact and the frozen theorem type is never weakened.",
+      "procedure": [
+        "Reopen ThirtyCofactorPellCovering-2987558f and record the four frozen goals and exact types; do not edit theorem statements.",
+        "Prove cofactor_M_cases from gcd divisibility: gcd n 3 divides 3 and gcd(n-1) 6 divides 6, and the two factors cannot both contribute a factor 3, so the product lies in {1,2,3,6}.",
+        "Normalize M*r^2 = L*n*(n-1). From 3n<r derive L>9M, hence 9M+1<=L. From 3r<10n and n>=104 derive 927L<10400M by cross-multiplication.",
+        "Split on M in {1,2,3,6}; convert each strict rational interval into explicit integer lower and upper bounds for L.",
+        "Define the explicit 25-pair list (1,10..11), (2,19..22), (3,28..33), (6,55..67) and prove the disjunction for L by interval arithmetic.",
+        "Package the four goals into the fixed module; compile with real Lean and inspect exact errors before any repair.",
+        "If nonlinear gcd normalization blocks, add small helper lemmas for gcd divisibility and integer division rather than changing hypotheses."
+      ],
+      "success_criterion": "All four frozen goals of ThirtyCofactorPellCovering-2987558f compile with Lean exit 0, only propext/Classical.choice/Quot.sound, no holes or native_decide, and unchanged theorem types; the job is accepted and publishable.",
+      "failure_criterion": "If the derived interval admits an L outside the 25 pairs, or Lean cannot close a specific gcd/division obligation after exact diagnosis, record the failing goal and interval; revise the certificate or drop the method. An interrupted or usage-missing run is not counted as mathematical failure.",
+      "references": [
+        "PROGRESS_v16_ja.md",
+        "v16_square_defect_pell.md",
+        "v16_lower_gap.md",
+        "v16_manifest.json"
+      ],
+      "status": "observed; causal superiority unestablished",
+      "author": "DeepSeek",
+      "not_a_proof": true,
+      "checker_or_budget_changes_allowed": false
+    },
+    "defect-localization": {
+      "id": "defect-localization",
+      "title": "Localize the remaining obstruction in the exact square defect before global Pell search",
+      "kind": "mathematical_strategy",
+      "hypothesis": "The v16 exact denominator delta=Q/gcd(Q,r^2) and primitive defect H impose p-adic constraints stronger than the global Pell equation alone. Proving these local constraints as reusable Lean lemmas can eliminate entire delta-families or reduce the final ThirtyCofactorGoal to finite congruence/valuation obligations, without assuming Pell completeness, Bennett, or a new Thue theorem.",
+      "procedure": [
+        "Formalize the v16 identities delta | r, delta^3 | Q, and gcd(delta,H)=1 with exact hypotheses as small Lean lemmas.",
+        "For each prime p | delta, derive v_p(A)=v_p(Q) and the allowed range of v_p(r) from Q | r^3; separate p=2,3 and p>=5.",
+        "Combine these valuations with 3n<r<10n/3, S | (n-2), and the cofactor condition to obtain congruence restrictions on n modulo p^e.",
+        "Use the restrictions to rule out a nontrivial delta-family or to produce a finite residue table; do not introduce an unproved distribution or Pell-completeness assumption.",
+        "Feed only the resulting fixed lemmas to the goal worker and compare against the frozen baseline; record whether the final target's hypothesis set actually shrinks."
+      ],
+      "success_criterion": "At least one new fixed Lean lemma eliminates a nontrivial delta-family or strictly reduces the hypotheses needed by a frozen target, with no new assumptions and real Lean verification.",
+      "failure_criterion": "If the local valuations are compatible with all delta>=13, or the reduction needs an unproved prime-distribution/Thue/Pell theorem, record the compatible family or missing lemma and revise or drop the method. A written v16 argument or Python audit is not counted as Lean success.",
+      "references": [
+        "v16_square_defect_pell.md",
+        "v16_repeated_neighbor_primes.md",
+        "v16_quadratic_neighbors.md",
+        "PROGRESS_v16_ja.md"
+      ],
+      "status": "experimental",
+      "author": "DeepSeek",
+      "not_a_proof": true,
+      "checker_or_budget_changes_allowed": false
+    }
+  },
+  "evaluations": [
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPellCovering-2987558f",
+      "trial": 0,
+      "contract_sha256": "a7d14f0a7796f5fd93626a4443d52e7ebc73cdc5d7884d96292bcc52baf739f2",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-2",
+          "result_sha256": "8bda738d6f77d606673730d169575e30cd6a92037a03eefef9aec2179eb2d2a3"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "L_lower_bound",
+          "L_upper_bound",
+          "Q_dvd_sq_pair_covering",
+          "cofactor_M_cases"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "L_lower_bound",
+          "L_upper_bound",
+          "Q_dvd_sq_pair_covering",
+          "cofactor_M_cases"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 136700,
+        "reported_reasoning_tokens": 130882,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 20.245,
+        "error_categories": {
+          "other_error": 1
+        },
+        "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "d66bf1cd911a0a99dc66236d31bdd669ad44dafeb85fef2533a883b6ace96b44",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: all four frozen obligations (cofactor_M_cases, L_lower_bound, L_upper_bound, Q_dvd_sq_pair_covering) now pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The compositional split predicted by the hypothesis held: the M∈{1,2,3,6} case analysis, the two integer inequalities from M·r²=L·n(n−1), and the exact 25-pair disjunction each closed as small arithmetic facts. Only one repair was needed (L_lower_bound attempt 1 failed on type-class synthesis, not on the mathematics; attempt 2 succeeded). The covering list is now machine-checked and is the documented input to the Pell reduction. Limitations: single sequential trial, no matched baseline (baseline was empty), reported tokens (~136.7k completion, ~130.9k reasoning) cover candidate responses only and exclude planner/scope/repair critics; this does not establish causal superiority of the method, and it proves only the covering disjunction, not Q∤r², Pell solvability, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorValuation-4ecb3364",
+      "trial": 0,
+      "contract_sha256": "0efc81bd55fd79666ef3fe3401806e9f3527e75a98f7588640b1d6aeea38b21e",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "f10be318f3b47477f20b27eb96abc7c87e1214df9ccd94be726b8a0964bf5ca4"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 10,
+        "accepted_theorems": [
+          "factorization_choose_three",
+          "factorization_mul_prime_pow",
+          "factorization_two_of_odd",
+          "six_mul_choose_three"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "factorization_choose_three",
+          "factorization_mul_prime_pow",
+          "factorization_two_of_odd",
+          "six_mul_choose_three"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 350029,
+        "reported_reasoning_tokens": 340091,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 25.439,
+        "error_categories": {
+          "library_api": 1,
+          "proof_gap": 4,
+          "unused_binding": 5,
+          "candidate_validation": 1,
+          "syntax": 1,
+          "no_goals": 1
+        },
+        "attempts_with_Lean_timing": 9,
+        "attempts_without_Lean_timing": 1,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "f6386573b2af0fa5c5368fddeac5d81a7bb7af6ed837d6752c02acbca8a56ec3",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: all four frozen obligations verified by real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The method's decomposition principle transferred only partially, because this job is a valuation identity rather than a finite interval-cover certificate. Goals 1-3 (factorization_mul_prime_pow, factorization_two_of_odd, six_mul_choose_three) closed in 1-2 attempts each, consistent with the small-arithmetic-fact prediction. Goal 4 (factorization_choose_three), the substantive v10 §4 (14) identity with the p=2 parity split, needed 5 attempts, including one full 131072-token reasoning exhaustion (incomplete output) and three proof-gap failures. Reported candidate completion tokens 350029 (reasoning 340091); recorded Lean time 25.439s over 9 timed attempts (1 untimed). No matched baseline exists for this job; the trial is sequential and non-randomized; the method card was designed for finite-cover certificates. This does not establish causal superiority or general effectiveness, and it proves only the valuation identity, not the exponent domain, Q∤r², or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPellReduction-cec6b56e",
+      "trial": 0,
+      "contract_sha256": "a4b9aa39ba39b39314222deaa1859a2f5c126f7e939229cba183e14a0297bc0d",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "40edb9de3096ea60cc999a7215dd8ab465ac2ac345f1417a3a02fd84abb535e5"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 3,
+        "accepted_theorems": [
+          "covering_to_pell",
+          "pell_parametrization"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "covering_to_pell",
+          "pell_parametrization"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 99450,
+        "reported_reasoning_tokens": 95871,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 7.697,
+        "error_categories": {
+          "library_api": 1,
+          "unused_binding": 2
+        },
+        "attempts_with_Lean_timing": 3,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "206b8a8fe2ffecffbec9f039000b041761b8c48d2b03f23f99a19cbdc888561b",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: both frozen obligations (pell_parametrization, covering_to_pell) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The method's finite-cover principle transferred only partly: this job is a parametric Pell reduction, not an interval-cover certificate. The generic parametrization closed after one library-API repair (wrong argument order in a squarefree/divisibility lemma), and the covering composition closed on the first attempt by reusing the published 25-pair covering and M*r^2=L*n(n-1). Reported candidate completion tokens 99450 (reasoning 95871); recorded Lean time 7.697s over 3 timed attempts. No matched baseline exists for this job; sequential, non-randomized. This proves only the Pell parametrization from the covering data, not the 13 d-values, fundamental solutions, height bound, Q∤r^2, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorExponentDomain-5bcafd16",
+      "trial": 0,
+      "contract_sha256": "aa920e874edec69eea55143cfa7c21d049d1f8cb8906619ab37c68c3984c7a12",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "10e69a627b2614809718cd3438a62f7b0ecf07df051dc8a887fc96e49359e18d"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "exponent_domain_iff",
+          "q_bound_ge_five",
+          "q_bound_three",
+          "q_bound_two"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "exponent_domain_iff",
+          "q_bound_ge_five",
+          "q_bound_three",
+          "q_bound_two"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 55030,
+        "reported_reasoning_tokens": 53719,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 14.339,
+        "error_categories": {
+          "unused_binding": 5,
+          "proof_gap": 1
+        },
+        "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "d5568ceff1ae07672877382eca70a8e121015d85f5af0826a8cf568ea82920d3",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial: all four frozen obligations (exponent_domain_iff, q_bound_ge_five, q_bound_two, q_bound_three) pass real Lean with only propext/Classical.choice/Quot.sound and no hand edits. Measured: 5 attempt records, 55030 reported completion tokens (53719 reasoning), 14.339s recorded Lean time over 5 timed attempts, error classes {unused_binding:5, proof_gap:1}, zero seed recompilations, zero attempts without usage. The predicted split held in the weak sense only: the three polynomial bounds closed quickly as small monotone-power comparisons, but the substantive obligation was not an interval cover at all — exponent_domain_iff is a pure omega-arithmetic equivalence, and the q_bounds are power-monotonicity chains. Across four trials on this method (PellCovering, Valuation, PellReduction, ExponentDomain) the recurring transferable element is 'split the frozen statement into small independent integer obligations with explicit bounds and prove each separately', while the interval-cover/certificate-list part was actually used only in the PellCovering trial. Limitations: sequential non-randomized trials, empty matched baselines, candidate-response token scope excludes planner/scope/repair critics, and this module proves only the exponent-domain equivalence and three polynomial bounds — not p ≤ 6w, not n < 9w^4+2, not Q∤r², and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorPrimeBound-296796b2",
+      "trial": 0,
+      "contract_sha256": "49e62f0421106f25642be2538cb8a2dcd142ca284a471077cef8534b95033e46",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "attempt_records_sha256": "e2fd9ea21fc6f5cef1931dfb2ccb426cd62d312bc3c7bba54e0a53b7bc79a47f",
+          "module_review_report_available": false
+        },
+        {
+          "run": "run-2",
+          "result_sha256": "2147f7c8b7bdffd3147d479f439246851bb11d9c3630e4ece9e8828b8f694fe5"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 10,
+        "accepted_theorems": [
+          "factorization_div_gcd_le",
+          "height_bound_ge_five",
+          "pow_factorization_choose_six_w",
+          "prime_pow_bound"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "factorization_div_gcd_le",
+          "height_bound_ge_five",
+          "pow_factorization_choose_six_w",
+          "prime_pow_bound"
+        ],
+        "seed_recompilations": 4,
+        "reported_completion_tokens": 76490,
+        "reported_reasoning_tokens": 75441,
+        "attempts_without_usage": 4,
+        "recorded_Lean_seconds": 26.109,
+        "error_categories": {
+          "proof_gap": 1,
+          "library_api": 1
+        },
+        "attempts_with_Lean_timing": 10,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "80abcdfb06e0f5c2125846c68bd7ac2f68d14a7da96a616d1b9aca45ebfeeae0",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Trial complete and accepted: all four frozen obligations (pow_factorization_choose_six_w, factorization_div_gcd_le, prime_pow_bound, height_bound_ge_five) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits). The earlier run's only failure was the final review call (Mistral HTTP 520), not a proof failure; the preserved bodies recompiled as seeds (4 seed recompilations with usage null, not counted as newly generated). Measured on this contract: 10 attempt records, 76490 reported completion tokens (75441 reasoning) over the generating attempts, 26.109s recorded Lean time, error classes {proof_gap:1, library_api:1}; one repair each on prime_pow_bound (proof gap) and height_bound_ge_five (library API). The job is not a finite interval cover: it is a Legendre valuation bound p^{v_p(C(6w,2w))} ≤ 6w, a monotonicity step under gcd division, and a polynomial height bound (25 p^a ≤ 216 w^3 ⟹ w p^a < 9 w^4). As in the Valuation, PellReduction and ExponentDomain trials, the element that actually transferred was splitting the frozen statement into small independent integer obligations with explicit bounds; the interval-cover/certificate-list element was again unused. Limitations: sequential non-randomized trial, empty matched baseline, candidate-response token scope excludes planner/scope/repair critics, and the module proves only auxiliary bounds (p^b ≤ 6w and the height bound), not p ≤ 6w as a standalone prime bound, not the 983-record finite exclusion, and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "finite-cover-certificate",
+      "job_id": "ThirtyCofactorSquareDefect-df603e79",
+      "trial": 0,
+      "contract_sha256": "bed2a49938b1a20dc3fd8333de8db826ee1c4d0d7336765b6d00faece4ed721b",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "deeb448c38d097abce2a408ff01ed6c4b86c45318c6149dbf3c106f496ed343e"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 7,
+        "accepted_theorems": [
+          "defect_cube_dvd",
+          "defect_cube_dvd_choose_three",
+          "defect_dvd_r",
+          "defect_gt_one"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "defect_cube_dvd",
+          "defect_cube_dvd_choose_three",
+          "defect_dvd_r",
+          "defect_gt_one"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 142034,
+        "reported_reasoning_tokens": 139391,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 16.236,
+        "error_categories": {
+          "library_api": 2,
+          "proof_gap": 1
+        },
+        "attempts_with_Lean_timing": 7,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "148332068884226fb7a27bb343a5f174c58ee40699cf34cc48e9e1acf9b9909c",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial: all four frozen obligations (defect_dvd_r, defect_cube_dvd, defect_gt_one, defect_cube_dvd_choose_three) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits) and the module is published at 46183128. Measured: 7 attempt records, 142034 reported completion tokens (139391 reasoning), 16.236s recorded Lean time over 7 timed attempts, error classes {library_api:2, proof_gap:1}, zero seed recompilations, zero attempts without usage. As in the Valuation, PellReduction, ExponentDomain and PrimeBound trials, the element that actually transferred was splitting the frozen statement into small independent integer obligations with explicit hypotheses (here: delta | r, delta^3 | Q, delta > 1, delta^3 | C(i,3), each stated separately about delta = Q/gcd(Q,r^2)); the finite interval-cover/certificate-list element was again unused. defect_dvd_r needed 2 library-API repairs (guessed Nat.zero_dvd_iff/pow_eq_zero names), defect_gt_one 1 proof-gap repair (omega), while defect_cube_dvd and defect_cube_dvd_choose_three closed first try. Limitations: sequential non-randomized trial, empty matched baseline, candidate-response token scope excludes planner/scope/repair critics, and the module proves only the generic defect divisibility theory — not delta >= 13, not gcd(delta,H)=1, not Q ∤ r^2, not the Pell/983-record checks, and neither frozen target.",
+      "advisory_decision": "revise",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    },
+    {
+      "method_id": "defect-localization",
+      "job_id": "ThirtyCofactorCubeLocalization-e8f08c57",
+      "trial": 0,
+      "contract_sha256": "6aa3218177b1936bb4f07875026828f2eb9163adcf3e846d48bb8198a3c2e6b8",
+      "baseline_metrics": {
+        "attempt_records": 0,
+        "accepted_theorems": [],
+        "newly_generated_verified_theorems_with_known_usage": [],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 0,
+        "reported_reasoning_tokens": 0,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 0,
+        "error_categories": {},
+        "attempts_with_Lean_timing": 0,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "run_evidence": [
+        {
+          "run": "run-1",
+          "result_sha256": "0a0c03152dbe00000fba9926a60e11b358248725c4a55a9846a3f4b96a9ec58b"
+        }
+      ],
+      "metrics": {
+        "attempt_records": 5,
+        "accepted_theorems": [
+          "coprime_Q_factors",
+          "cube_prime_localization",
+          "prime_cube_dvd_coprime_factor",
+          "prime_cube_dvd_index_or_pred"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "coprime_Q_factors",
+          "cube_prime_localization",
+          "prime_cube_dvd_coprime_factor",
+          "prime_cube_dvd_index_or_pred"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 46302,
+        "reported_reasoning_tokens": 44726,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 12.392,
+        "error_categories": {
+          "library_api": 1
+        },
+        "attempts_with_Lean_timing": 5,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "evidence_id": "b56ca1a3335be6a93703281910e9b24f10b8e07f5012c216166dd9c9a1dbb33b",
+      "actual_job_status": "published",
+      "trial_end_status": "published",
+      "model_conclusion": "Accepted trial on the defect-localization program: all four frozen obligations (prime_cube_dvd_coprime_factor, coprime_Q_factors, prime_cube_dvd_index_or_pred, cube_prime_localization) pass real Lean (exit 0, only propext/Classical.choice/Quot.sound, no hand edits) and the module is published at 01f5af67. Measured: 5 attempt records, 4 newly generated verified theorems with known usage, 46302 reported completion tokens (44726 reasoning), 12.392s recorded Lean time over 5 timed attempts, error classes {library_api:1}, zero seed recompilations, zero attempts without usage. The localization step the method predicted is now real: the cube q^3 | Q forced by Q | r^3 and not Q | r^2 is located in exactly one of the two coprime factors, hence in i or i-1, and the published separation gives q = 2 or Coprime q (w*p). Limitations: the hypothesis hnot (not Q | r^2) is still the unformalized v15 input, so this trial localizes the obstruction but does not eliminate it; sequential non-randomized trial with empty matched baseline; candidate-response token scope excludes planner/scope/repair critics. Not claimed: delta >= 13, gcd(delta,H) = 1, Q ∤ r^2 itself, the Pell/983-record checks, or either frozen target.",
+      "advisory_decision": "keep",
+      "causal_effect_established": false,
+      "comparison_limit": "Sequential, non-randomized observations on a frozen contract; context and attempts can differ"
+    }
+  ],
+  "pending_trials": [
+    {
+      "job_id": "ThirtyCofactorTargetCubeLocalization-75e7178a",
+      "method_id": "defect-localization",
+      "trial": 0,
+      "metrics": {
+        "attempt_records": 2,
+        "accepted_theorems": [
+          "delta_gt_one_imp_not_dvd_sq",
+          "target_cube_localization"
+        ],
+        "newly_generated_verified_theorems_with_known_usage": [
+          "delta_gt_one_imp_not_dvd_sq",
+          "target_cube_localization"
+        ],
+        "seed_recompilations": 0,
+        "reported_completion_tokens": 9845,
+        "reported_reasoning_tokens": 9276,
+        "attempts_without_usage": 0,
+        "recorded_Lean_seconds": 4.394,
+        "error_categories": {
+          "unused_binding": 2
+        },
+        "attempts_with_Lean_timing": 2,
+        "attempts_without_Lean_timing": 0,
+        "token_measurement_scope": "Candidate response records only; excludes planner, scope/repair critics and final review",
+        "completion_tokens_are_not_a_billing_guarantee": true
+      },
+      "model_evaluation_pending": true
+    }
+  ],
+  "causal_effect_established": false,
+  "proofs_require_the_unchanged_Lean_checker": true
+}

@@ -1,0 +1,356 @@
+{
+  "status": "PASS",
+  "scope": "ell=1,j=i-3, original squared-index equation",
+  "polynomial_coefficient_identities": 40,
+  "complete_interval_extrema": [
+    {
+      "c": 2,
+      "content": 8,
+      "coefficients_K2_CK_C2": [
+        162,
+        -180,
+        1
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "11503",
+        "194906609/10609"
+      ],
+      "maximum": "194906609/10609"
+    },
+    {
+      "c": 3,
+      "content": 6,
+      "coefficients_K2_CK_C2": [
+        216,
+        -396,
+        1
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "13933",
+        "723913427/31827"
+      ],
+      "maximum": "723913427/31827"
+    },
+    {
+      "c": 5,
+      "content": 4,
+      "coefficients_K2_CK_C2": [
+        324,
+        -1170,
+        5
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "15719",
+        "293437045/10609"
+      ],
+      "maximum": "293437045/10609"
+    },
+    {
+      "c": 6,
+      "content": 24,
+      "coefficients_K2_CK_C2": [
+        54,
+        -252,
+        5
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "2111",
+        "126498335/31827"
+      ],
+      "maximum": "126498335/31827"
+    },
+    {
+      "c": 7,
+      "content": 54,
+      "coefficients_K2_CK_C2": [
+        24,
+        -140,
+        7
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "691",
+        "417381101/286443"
+      ],
+      "maximum": "417381101/286443"
+    },
+    {
+      "c": 8,
+      "content": 16,
+      "coefficients_K2_CK_C2": [
+        81,
+        -576,
+        56
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "1433",
+        "40197304/10609"
+      ],
+      "maximum": "40197304/10609"
+    },
+    {
+      "c": 10,
+      "content": 648,
+      "coefficients_K2_CK_C2": [
+        2,
+        -20,
+        5
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "13",
+        "27800645/859329"
+      ],
+      "maximum": "27800645/859329"
+    },
+    {
+      "c": 11,
+      "content": 2,
+      "coefficients_K2_CK_C2": [
+        648,
+        -7524,
+        2695
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "12533",
+        "1651945/10609"
+      ],
+      "maximum": "12533"
+    },
+    {
+      "c": 12,
+      "content": 48,
+      "coefficients_K2_CK_C2": [
+        27,
+        -360,
+        176
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "877",
+        "14782448/31827"
+      ],
+      "maximum": "877"
+    },
+    {
+      "c": 13,
+      "content": 108,
+      "coefficients_K2_CK_C2": [
+        12,
+        -182,
+        117
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "549",
+        "118721369/286443"
+      ],
+      "maximum": "549"
+    },
+    {
+      "c": 14,
+      "content": 8,
+      "coefficients_K2_CK_C2": [
+        162,
+        -2772,
+        2275
+      ],
+      "checked_points": [
+        "9",
+        "10400/927"
+      ],
+      "absolute_values": [
+        "9551",
+        "89474125/10609"
+      ],
+      "maximum": "9551"
+    },
+    {
+      "c": 15,
+      "content": 6,
+      "coefficients_K2_CK_C2": [
+        216,
+        -4140,
+        4235
+      ],
+      "checked_points": [
+        "9",
+        "10400/927",
+        "115/12"
+      ],
+      "absolute_values": [
+        "15529",
+        "478188655/31827",
+        "31205/2"
+      ],
+      "maximum": "31205/2"
+    }
+  ],
+  "exact_positive_margins": {
+    "K_over_delta": "212/309",
+    "negative_primitive_max": "11316595/95481",
+    "negative_height": "649267441655/6",
+    "c10_height": "53837/2",
+    "positive_small_prime": "83/2",
+    "positive_complementary_prime": "272614",
+    "positive_small_height": "663287/6",
+    "positive_complementary_height": "10388279066615/6"
+  },
+  "supporting_residue_checks": {
+    "negative": 468,
+    "positive": 288,
+    "negative_examples": [
+      [
+        2,
+        17,
+        1,
+        6,
+        3,
+        1,
+        2
+      ],
+      [
+        2,
+        17,
+        1,
+        6,
+        3,
+        2,
+        4
+      ],
+      [
+        2,
+        17,
+        1,
+        6,
+        3,
+        7,
+        14
+      ],
+      [
+        2,
+        17,
+        1,
+        11,
+        12,
+        1,
+        1
+      ],
+      [
+        2,
+        17,
+        1,
+        11,
+        12,
+        2,
+        2
+      ],
+      [
+        2,
+        17,
+        1,
+        11,
+        12,
+        7,
+        7
+      ],
+      [
+        2,
+        17,
+        2,
+        45,
+        29,
+        1,
+        256
+      ],
+      [
+        2,
+        17,
+        2,
+        45,
+        29,
+        2,
+        223
+      ],
+      [
+        2,
+        17,
+        2,
+        45,
+        29,
+        7,
+        58
+      ],
+      [
+        2,
+        17,
+        2,
+        244,
+        258,
+        1,
+        2
+      ],
+      [
+        2,
+        17,
+        2,
+        244,
+        258,
+        2,
+        4
+      ],
+      [
+        2,
+        17,
+        2,
+        244,
+        258,
+        7,
+        14
+      ]
+    ],
+    "these_prove_universal_statements": false
+  },
+  "source_sha256": "d674985c4a59724660723ea9d5f8ea4f71b153d399e3d549f969ffdf31d898c5",
+  "proof_note_sha256": "a9de3326fc494e137ae14c739a3f2ff15f6d72806dca77739502e573161a0bb1",
+  "new_lean_execution": false,
+  "new_deepseek_api_calls": 0,
+  "complete_CAS_solver": false,
+  "whole_problem_solved": false
+}

@@ -1,0 +1,38 @@
+{
+  "installed_executable_version": "2.17.4",
+  "method": "dpkg-deb --extract into task-local prefix; no system installation or authentication changes",
+  "wrapper_path": "/workspace/scratch/305fc41e8436/tools/gp",
+  "binary_path": "/workspace/scratch/305fc41e8436/tools/pari-2.17.4/usr/bin/gp",
+  "wrapper_sha256": "57aa07731179216d41730979fce65f2992f514350ff0e55aa7e47878fa7470bb",
+  "binary_sha256": "3047b91227d496a67ed53872f476f8113b76c783da6b2f35dc1804c138d17275",
+  "packages": [
+    {
+      "url": "https://deb.debian.org/debian/pool/main/p/pari/pari-gp_2.17.4-1~bpo13+1_amd64.deb",
+      "path": "/workspace/scratch/305fc41e8436/tools/pari-gp_2.17.4-1~bpo13+1_amd64.deb",
+      "exit_code": 0,
+      "stderr": "",
+      "size_bytes": 4013272,
+      "sha256": "07d2ccef3dbbd748e97863f91a329d97a9b2e1974d990f86f66ba63eb4607f4d"
+    },
+    {
+      "url": "https://deb.debian.org/debian/pool/main/p/pari/libpari-gmp-tls9_2.17.4-1~bpo13+1_amd64.deb",
+      "path": "/workspace/scratch/305fc41e8436/tools/libpari-gmp-tls9_2.17.4-1~bpo13+1_amd64.deb",
+      "exit_code": 0,
+      "stderr": "",
+      "size_bytes": 4475756,
+      "sha256": "6e84dd1b597d9ddee4f48793d946554138050ea61fe4a0be4e108f53ab178c12"
+    }
+  ],
+  "version_command": [
+    "/workspace/scratch/305fc41e8436/tools/gp",
+    "--version"
+  ],
+  "version_stdout": "",
+  "version_stderr": "                  GP/PARI CALCULATOR Version 2.17.4 (released)\n          amd64 running linux (x86-64/GMP-6.3.0 kernel) 64-bit version\n          compiled: Jul  7 2026, gcc version 14.2.0 (Debian 14.2.0-19)\n                           threading engine: pthread\n                (readline v8.2 disabled, extended help enabled)\n",
+  "smoke_input": "print(version());\nprint(thue(thueinit(x^3-2,1),1));\nquit;\n",
+  "smoke_stdout": "[2, 17, 4]\n[[-1, -1], [1, 0]]\n",
+  "smoke_stderr": "",
+  "smoke_exit_code": 0,
+  "official_thue_docs": "https://pari.math.u-bordeaux.fr/dochtml/html-stable/Polynomials_and_power_series.html#thue",
+  "source_note": "2.19.0 source was downloaded separately; it was not compiled or installed. The GP wrapper remains pinned to extracted 2.17.4."
+}

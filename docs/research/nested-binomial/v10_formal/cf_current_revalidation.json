@@ -1,0 +1,342 @@
+{
+  "checked_at_utc": "2026-11-05T18:05:13.929059+00:00",
+  "validation_kind": "Python exact-arithmetic verifier, not Lean kernel verification",
+  "original_certificate_hashes_matched": true,
+  "whole_equation_solved": false,
+  "result": {
+    "status": "PASS",
+    "max_S": 12,
+    "curves": 5214,
+    "irrational_curves": 5213,
+    "rational_curves": 1,
+    "continued_fraction_terms": 4877566,
+    "reduced_fractions_checked": 25394330,
+    "surviving_points": 0,
+    "by_S": [
+      {
+        "S": 1,
+        "curves": 66,
+        "irrational_curves": 66,
+        "rational_curves": 0,
+        "continued_fraction_terms": 7412,
+        "reduced_fractions_checked": 38185,
+        "surviving_points": 0
+      },
+      {
+        "S": 2,
+        "curves": 133,
+        "irrational_curves": 133,
+        "rational_curves": 0,
+        "continued_fraction_terms": 29999,
+        "reduced_fractions_checked": 155542,
+        "surviving_points": 0
+      },
+      {
+        "S": 3,
+        "curves": 200,
+        "irrational_curves": 200,
+        "rational_curves": 0,
+        "continued_fraction_terms": 67610,
+        "reduced_fractions_checked": 350369,
+        "surviving_points": 0
+      },
+      {
+        "S": 4,
+        "curves": 267,
+        "irrational_curves": 267,
+        "rational_curves": 0,
+        "continued_fraction_terms": 119657,
+        "reduced_fractions_checked": 623155,
+        "surviving_points": 0
+      },
+      {
+        "S": 5,
+        "curves": 334,
+        "irrational_curves": 334,
+        "rational_curves": 0,
+        "continued_fraction_terms": 188373,
+        "reduced_fractions_checked": 975346,
+        "surviving_points": 0
+      },
+      {
+        "S": 6,
+        "curves": 401,
+        "irrational_curves": 401,
+        "rational_curves": 0,
+        "continued_fraction_terms": 269886,
+        "reduced_fractions_checked": 1404511,
+        "surviving_points": 0
+      },
+      {
+        "S": 7,
+        "curves": 468,
+        "irrational_curves": 468,
+        "rational_curves": 0,
+        "continued_fraction_terms": 367130,
+        "reduced_fractions_checked": 1913847,
+        "surviving_points": 0
+      },
+      {
+        "S": 8,
+        "curves": 535,
+        "irrational_curves": 535,
+        "rational_curves": 0,
+        "continued_fraction_terms": 480002,
+        "reduced_fractions_checked": 2501278,
+        "surviving_points": 0
+      },
+      {
+        "S": 9,
+        "curves": 602,
+        "irrational_curves": 601,
+        "rational_curves": 1,
+        "continued_fraction_terms": 607177,
+        "reduced_fractions_checked": 3160468,
+        "surviving_points": 0
+      },
+      {
+        "S": 10,
+        "curves": 669,
+        "irrational_curves": 669,
+        "rational_curves": 0,
+        "continued_fraction_terms": 751641,
+        "reduced_fractions_checked": 3910137,
+        "surviving_points": 0
+      },
+      {
+        "S": 11,
+        "curves": 736,
+        "irrational_curves": 736,
+        "rational_curves": 0,
+        "continued_fraction_terms": 907633,
+        "reduced_fractions_checked": 4728751,
+        "surviving_points": 0
+      },
+      {
+        "S": 12,
+        "curves": 803,
+        "irrational_curves": 803,
+        "rational_curves": 0,
+        "continued_fraction_terms": 1081046,
+        "reduced_fractions_checked": 5632741,
+        "surviving_points": 0
+      }
+    ],
+    "certificates": [
+      {
+        "path": "v9_cf_certificates/S01.json",
+        "bytes": 6659,
+        "sha256": "209528c72fea3bb596584afe8e8b3177d4c168b50cc05c9a82ab8403dcd93891"
+      },
+      {
+        "path": "v9_cf_certificates/S02.json",
+        "bytes": 23924,
+        "sha256": "1320aae5d6c27a6a5d957690311e5800e160990b2408d1d465f4255e9c2a00f3"
+      },
+      {
+        "path": "v9_cf_certificates/S03.json",
+        "bytes": 52153,
+        "sha256": "1381213d6515ef88dce78381a24b36d89ed48595e846e97cfce550a6ed6fe02e"
+      },
+      {
+        "path": "v9_cf_certificates/S04.json",
+        "bytes": 91397,
+        "sha256": "32bfd965c74a321a2d2ca793144d57987dc49e65506be994eb89006325d84587"
+      },
+      {
+        "path": "v9_cf_certificates/S05.json",
+        "bytes": 141810,
+        "sha256": "b1a97477ad82106aa19d250a60edda649c2ee78d65e87af552d6ab219f22590b"
+      },
+      {
+        "path": "v9_cf_certificates/S06.json",
+        "bytes": 203314,
+        "sha256": "5072fbf646b3458e34b043b7f2da554c8dbd8b2f049ae760fb4204eeb96a1221"
+      },
+      {
+        "path": "v9_cf_certificates/S07.json",
+        "bytes": 275927,
+        "sha256": "81121b038b6af128f6bf1b9c1f10b7e938ef2126981c3db5d40a65e2238afe1c"
+      },
+      {
+        "path": "v9_cf_certificates/S08.json",
+        "bytes": 359524,
+        "sha256": "3185404ac4728bc5b350d6283fc93fdeda9b7d53d062c00620787e3de22ead2e"
+      },
+      {
+        "path": "v9_cf_certificates/S09.json",
+        "bytes": 453836,
+        "sha256": "49b90c6c8b6a508e97127944edb13112f559258c535686fce79f480618580585"
+      },
+      {
+        "path": "v9_cf_certificates/S10.json",
+        "bytes": 560785,
+        "sha256": "f038c3be9c2d523f08b97082d79be26a8ad892d42ca66ac63c3303cc96bd5716"
+      },
+      {
+        "path": "v9_cf_certificates/S11.json",
+        "bytes": 677325,
+        "sha256": "a628a19532de608cc6e9b3717a446a6bfc43ca2d9b959d5890dd7e197aa21437"
+      },
+      {
+        "path": "v9_cf_certificates/S12.json",
+        "bytes": 805689,
+        "sha256": "5960c06157714759c7f8c8228b81066ec2757ce3c456bd1eda67d341844d53f6"
+      }
+    ],
+    "recovered_integer_points": [
+      {
+        "S": 1,
+        "T": 225,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 2,
+        "T": 450,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 3,
+        "T": 675,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 4,
+        "T": 900,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 5,
+        "T": 1024,
+        "n": "6",
+        "r": "16",
+        "result": "n below 104"
+      },
+      {
+        "S": 5,
+        "T": 1089,
+        "n": "11",
+        "r": "33",
+        "result": "n below 104"
+      },
+      {
+        "S": 5,
+        "T": 1125,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 6,
+        "T": 1350,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 7,
+        "T": 1331,
+        "n": "8",
+        "r": "22",
+        "result": "n below 104"
+      },
+      {
+        "S": 7,
+        "T": 1575,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 7,
+        "T": 1600,
+        "n": "7",
+        "r": "20",
+        "result": "n below 104"
+      },
+      {
+        "S": 8,
+        "T": 1800,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 9,
+        "T": 2025,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 10,
+        "T": 1681,
+        "n": "82",
+        "r": "246",
+        "result": "n below 104"
+      },
+      {
+        "S": 10,
+        "T": 2048,
+        "n": "6",
+        "r": "16",
+        "result": "n below 104"
+      },
+      {
+        "S": 10,
+        "T": 2178,
+        "n": "11",
+        "r": "33",
+        "result": "n below 104"
+      },
+      {
+        "S": 10,
+        "T": 2197,
+        "n": "5",
+        "r": "13",
+        "result": "n below 104"
+      },
+      {
+        "S": 10,
+        "T": 2250,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 11,
+        "T": 2450,
+        "n": "22",
+        "r": "70",
+        "result": "n below 104"
+      },
+      {
+        "S": 11,
+        "T": 2475,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      },
+      {
+        "S": 12,
+        "T": 2700,
+        "n": "10",
+        "r": "30",
+        "result": "n below 104"
+      }
+    ],
+    "all_arithmetic_exact": true,
+    "original_n_interval_scanned": false,
+    "continued_fraction_completeness_Lean_formalized": false,
+    "whole_original_equation_solved": false,
+    "source_sha256": "689482112b0c983e5750a5ab72cff7ace89c236b75935f20158526f12bd79a18"
+  }
+}

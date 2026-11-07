@@ -1,0 +1,190 @@
+{
+  "status": "PASS",
+  "model": "deepseek-v4-1-flash-1017",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "checked_at_utc": "2026-11-07T13:18:57.402678+00:00",
+  "module": "ThirtyCofactorDefectBridge",
+  "source_sha256": "7ff9610141e5026634fd25204a9b41822abdaa758424b11d711238379aac0601",
+  "theorems": [
+    "defect_coprime_pell_coefficient",
+    "defect_pell_identity"
+  ],
+  "records": [
+    {
+      "theorem": "defect_coprime_pell_coefficient",
+      "attempt": 1,
+      "exit_code": 1,
+      "accepted": false,
+      "source_sha256": "695c554224c2729281318d1242ea1486ebb7b390cf3ab2b1b7947d7e340fbef1",
+      "usage": {
+        "prompt_tokens": 26992,
+        "total_tokens": 38611,
+        "completion_tokens": 11619,
+        "prompt_tokens_details": {
+          "cached_tokens": 16000
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 11597
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 18.234,
+      "harness_diagnostics": {
+        "categories": [
+          "library_api"
+        ],
+        "fingerprint": "b0ec2cf7ca92d6f571add57086301446ff91cb9857b85931534c6220facee652",
+        "locations": [
+          {
+            "line": 6,
+            "column": 36,
+            "kind": "error",
+            "message": "Application type mismatch: The argument"
+          }
+        ],
+        "warnings": [],
+        "untrusted_axioms": [
+          "sorryAx"
+        ],
+        "resource_only": false,
+        "hints": [
+          "Retrieve the real pinned declaration and its argument order; do not guess lemma names."
+        ],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 1,
+          "categories": [
+            "library_api"
+          ],
+          "elapsed_seconds": 18.234
+        }
+      ]
+    },
+    {
+      "theorem": "defect_coprime_pell_coefficient",
+      "attempt": 2,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "af95e2dd644905ea0151bfee72f06d25ff9a3949a7168f5be6c51a099fddfe6d",
+      "usage": {
+        "prompt_tokens": 27446,
+        "total_tokens": 32930,
+        "completion_tokens": 5484,
+        "prompt_tokens_details": {
+          "cached_tokens": 26880
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5438
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 1.935,
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.935
+        }
+      ]
+    },
+    {
+      "theorem": "defect_pell_identity",
+      "attempt": 1,
+      "exit_code": 0,
+      "accepted": true,
+      "source_sha256": "7ff9610141e5026634fd25204a9b41822abdaa758424b11d711238379aac0601",
+      "usage": {
+        "prompt_tokens": 27123,
+        "total_tokens": 37629,
+        "completion_tokens": 10506,
+        "prompt_tokens_details": {
+          "cached_tokens": 16000
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 10144
+        }
+      },
+      "request_settings": {
+        "profile": "deep_research",
+        "reasoning_effort": "max",
+        "max_tokens": 131072,
+        "request_timeout_seconds": 1800,
+        "max_attempts": 20,
+        "lean_timeout_seconds": 180,
+        "capacity_retries": 2,
+        "capacity_backoff_seconds": 5
+      },
+      "seed_recompile": false,
+      "lean_elapsed_seconds": 1.744,
+      "harness_diagnostics": {
+        "categories": [],
+        "fingerprint": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "locations": [],
+        "warnings": [],
+        "untrusted_axioms": [],
+        "resource_only": false,
+        "hints": [],
+        "reported_goal_states": ""
+      },
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [],
+          "elapsed_seconds": 1.744
+        }
+      ]
+    }
+  ],
+  "review": {
+    "verdict": "PASS",
+    "feedback": "Both statements are correctly scoped. The first theorem assumes 0 < Q, which is needed to make the gcd positive and the quotient expressions the intended delta and K; it proves exactly gcd(delta,K)=1 and does not claim K>0 or delta>=13. The second theorem is a valid Nat identity from M*Q=n*(n-1); it needs no positivity assumption, and its intended application has Q>0. It proves only the scaled identity C*r^2=K*n*(n-1), not the full Pell equation or later bounds. The names are descriptive and do not overstate the proved content."
+  },
+  "proof_author": "DeepSeek API, all bodies and repairs; no manual proof edits",
+  "harness_policy": {
+    "initial_heartbeats": 400000,
+    "max_heartbeats": 3200000,
+    "initial_rec_depth": 1024,
+    "max_rec_depth": 4096,
+    "critic_repeat_threshold": 2
+  },
+  "whole_equation_solved": false
+}

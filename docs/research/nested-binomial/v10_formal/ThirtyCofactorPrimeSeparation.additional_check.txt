@@ -1,0 +1,14 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPrimeSeparation.lean:5:43: warning: Variable name `hw` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hw
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPrimeSeparation.lean:5:56: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'NestedBinomialV10.odd_prime_not_dvd_Q' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cube_prime_coprime_or_two' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,35 @@
+{
+  "verified": true,
+  "arithmetic": "exact rational",
+  "log_terms": 128,
+  "results": [
+    {
+      "x": "17/50",
+      "inequality": "<",
+      "target": "13/20",
+      "certified_lower": "641035477881/1000000000000",
+      "certified_upper": "320517738941/500000000000"
+    },
+    {
+      "x": "64/625",
+      "inequality": ">",
+      "target": "33/100",
+      "certified_lower": "330324537203/1000000000000",
+      "certified_upper": "82581134301/250000000000"
+    },
+    {
+      "x": "49/100",
+      "inequality": ">",
+      "target": "69/100",
+      "certified_lower": "86618395903/125000000000",
+      "certified_upper": "27717886689/40000000000"
+    },
+    {
+      "x": "1/4",
+      "inequality": "<",
+      "target": "57/100",
+      "certified_lower": "281167572309/500000000000",
+      "certified_upper": "562335144619/1000000000000"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "all_even_a_at_least_8": "excluded by the proved identity 2d=a-1",
+  "checker_sha256": "1c5d44e111ff36b26f8b30f0b159f20dae1d904d0e49fc0b628f95883f4b5c75",
+  "combined_v7_v8_exclusion": "ell=1, j=i-3, i=3*p^a+2 for every prime p and a>=1",
+  "complete_exclusion": "ell=1, j=i-3, i=3^a+2, a>=1",
+  "exponent_bound": {
+    "input": "a>=9 odd, d=(a-1)/2",
+    "proved_inequality": "3^((a-3)/2) < 75 < 81",
+    "rational_bound_denominator_at_a9": 2615221161,
+    "rational_bound_numerator_at_a9": 193749612500,
+    "remaining_exponents": [
+      9
+    ]
+  },
+  "new_lean_formalization": false,
+  "original_equation": "choose(choose(i,j),choose(k,ell)) = choose(i^2,j^2)+choose(k^2,ell^2)",
+  "scope": "exact certificates for the uniform exponent bound and its one residual exponent",
+  "single_remaining_case": {
+    "a": 9,
+    "exclusion": "squarefree n forces r multiple of n; interval 3n<r<10n/3 has none",
+    "n": 19685,
+    "prime_factors": {
+      "127": 1,
+      "31": 1,
+      "5": 1
+    }
+  },
+  "small_exponent_coverage": [
+    {
+      "a": 1,
+      "exclusion": "previous complete j<=100 theorem",
+      "n": 5
+    },
+    {
+      "a": 2,
+      "exclusion": "previous complete j<=100 theorem",
+      "n": 11
+    },
+    {
+      "a": 3,
+      "exclusion": "previous complete j<=100 theorem",
+      "n": 29
+    },
+    {
+      "a": 4,
+      "exclusion": "previous complete j<=100 theorem",
+      "n": 83
+    },
+    {
+      "a": 5,
+      "exclusion": "forced r divisor 4270 exceeds 10n/3",
+      "n": 245
+    },
+    {
+      "a": 6,
+      "exclusion": "squarefree first index",
+      "n": 731,
+      "prime_factors": {
+        "17": 1,
+        "43": 1
+      }
+    },
+    {
+      "a": 7,
+      "exclusion": "squarefree first index",
+      "n": 2189,
+      "prime_factors": {
+        "11": 1,
+        "199": 1
+      }
+    }
+  ],
+  "status": "PASS",
+  "unbounded_scan": false,
+  "wieferich_distribution_assumption": false
+}

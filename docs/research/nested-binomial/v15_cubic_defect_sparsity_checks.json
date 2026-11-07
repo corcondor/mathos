@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "scope": "Finite consistency checks of a written uniform counting proof; not original-equation solutions",
+  "limit": 100000,
+  "canonical_identity_checks": 100000,
+  "necessary_divisibility_interval_indices": 45,
+  "witness_both_count": 26,
+  "weaker_rational_log_interval_indices_n_ge_1024": 13,
+  "candidate_sample": [
+    169,
+    243,
+    250,
+    361,
+    625,
+    784,
+    961,
+    1000,
+    1025,
+    1369,
+    2401,
+    3025,
+    3969,
+    4375,
+    5329,
+    5832,
+    6076,
+    6241,
+    6592,
+    6724,
+    6859,
+    6860,
+    7987,
+    9126,
+    9376
+  ],
+  "checkpoints": [
+    {
+      "X": 104,
+      "canonical_witnesses_C21": 53,
+      "all_integer_triples_C21": 91,
+      "canonical_witnesses_C19": 51,
+      "all_integer_triples_C19": 87,
+      "necessary_divisibility_interval_indices": 0,
+      "weaker_rational_log_interval_indices_n_ge_1024": 0
+    },
+    {
+      "X": 1000,
+      "canonical_witnesses_C21": 212,
+      "all_integer_triples_C21": 437,
+      "canonical_witnesses_C19": 206,
+      "all_integer_triples_C19": 420,
+      "necessary_divisibility_interval_indices": 8,
+      "weaker_rational_log_interval_indices_n_ge_1024": 0
+    },
+    {
+      "X": 10000,
+      "canonical_witnesses_C21": 822,
+      "all_integer_triples_C21": 1887,
+      "canonical_witnesses_C19": 794,
+      "all_integer_triples_C19": 1804,
+      "necessary_divisibility_interval_indices": 27,
+      "weaker_rational_log_interval_indices_n_ge_1024": 5
+    },
+    {
+      "X": 100000,
+      "canonical_witnesses_C21": 3086,
+      "all_integer_triples_C21": 7608,
+      "canonical_witnesses_C19": 2967,
+      "all_integer_triples_C19": 7264,
+      "necessary_divisibility_interval_indices": 45,
+      "weaker_rational_log_interval_indices_n_ge_1024": 13
+    }
+  ],
+  "uniform_theorem": "T(X) <= 4 sqrt(21X) H_floor(cuberoot(X)) <= 4 sqrt(21X) (1+log(X)/3)",
+  "proof_not_extrapolation": true,
+  "new_lean_execution": false,
+  "new_cas_calls": 0,
+  "source_sha256": "53467df1a2e87454031e3b8899210231d80d290ce6f44b20a3b13339673e6eee"
+}

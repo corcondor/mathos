@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "independent_method": "Trial factorization and binary-search exact integer cube roots; no imported certificate.",
+  "large_prime_t_pairs": 204,
+  "large_prime_bases": 119,
+  "maximum_prime_base": 17293,
+  "cube_test_counts": {
+    "P_at_least_7": 2131,
+    "P_2": 472,
+    "P_5": 300
+  },
+  "total_cube_tests": 2903,
+  "perfect_cubes": [],
+  "base_3_final_squarefree_case": 19685,
+  "scope": "Independent reproduction of the proof-derived finite remainder for all n=P^a+2 in ell=1,j=i-3."
+}

@@ -1,0 +1,7 @@
+{
+  "initial_heartbeats": 400000,
+  "max_heartbeats": 3200000,
+  "initial_rec_depth": 1024,
+  "max_rec_depth": 4096,
+  "critic_repeat_threshold": 2
+}

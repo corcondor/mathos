@@ -1,0 +1,3 @@
+'NestedBinomialV10.coprime_p_normalized_r' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.normalized_square_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.original_normalized_square_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]

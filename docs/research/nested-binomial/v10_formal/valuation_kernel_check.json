@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T10:30:48.520729+00:00",
+  "lean_version": "4.35.0",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "ad9b5d4dcfff449089b2ce5b20c5d8a36a512fde865a59f6e8ead4fbb11159cf",
+  "successful_executor_session": 20452,
+  "successful_result_chunk": "2f5300",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v10_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v10_formal/ValuationRecovery.olean",
+    "/workspace/scratch/8e52c1248371/v10_formal/ValuationRecovery.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "environment": {
+    "PATH_prefix": "/workspace/scratch/8e52c1248371/v4_runtime/lean-4.35.0-linux/bin",
+    "LD_PRELOAD": "/workspace/scratch/8e52c1248371/v4_runtime/own_executable_path.so"
+  },
+  "quantified_structural_theorems": true,
+  "major_named_theorems": 9,
+  "auxiliary_theorems": 3,
+  "original_equation_both_outer_branches_to_cubic_divisibility": true,
+  "prime_local_parity_recovery_formalized": true,
+  "prime_power_divisibility_formalized": true,
+  "critical_exponent_dichotomy_formalized": true,
+  "finite_exponent_parametrization_formalized": true,
+  "global_product_B_formalized": false,
+  "normalized_square_congruence_formalized": false,
+  "CRT_conditions_formalized": false,
+  "continued_fraction_transfer_formalized": false,
+  "small_cofactor_finite_domain_completeness_formalized": false,
+  "small_cofactor_all_finite_records_formalized": false,
+  "whole_original_equation_solved": false,
+  "sorry_used": false,
+  "native_decide_used": false,
+  "custom_axioms_used": false,
+  "standalone_lake_build_executed": false,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "independent_statement_and_proof_mapping_audits": "PASS by mixed-gcd and fixed-cofactor reviewers",
+  "log_capture": "Verbatim successful direct executor output after exit code 0."
+}

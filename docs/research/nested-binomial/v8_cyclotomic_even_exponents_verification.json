@@ -1,0 +1,641 @@
+{
+  "status": "PASS",
+  "scope": "Exact structural checks supporting separate uniform proofs; no search of the original nested-binomial equation",
+  "check_groups": 7,
+  "checks": [
+    "Exact square factorization, norm identity, and C=7t(2r-t)+2 when F=1",
+    "Complete residue tables for all sign, conjugation, parity, and CRT steps",
+    "Nontrivial arithmetic example p=653,y=247 satisfies the theorem",
+    "Exact congruence elimination and the two exceptional primes 151,211",
+    "60 exact generic cases of the outer valuation and normalized-residue block lemmas",
+    "16 exact generic product reductions, with direct-binomial cross-checks at s=1",
+    "Prime-only obstruction and complete independent finite checks for q=13,37"
+  ],
+  "squares_mod_7": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "F_equal_1_mod_3_pairs": [
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "odd_F_equal_1_mod_8_pairs": [
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      7,
+      5
+    ]
+  ],
+  "outer_digit_case_count": 60,
+  "outer_digit_cases": [
+    {
+      "q": 13,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 14,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 14,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 14,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 15,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 15,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 15,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 16,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 16,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "H": 16,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 14,
+      "p_mod_u": 2,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 14,
+      "p_mod_u": 3,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 14,
+      "p_mod_u": 7,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 15,
+      "p_mod_u": 2,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 15,
+      "p_mod_u": 3,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 15,
+      "p_mod_u": 7,
+      "valuation": 3
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 16,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 16,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "H": 16,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 3,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 5,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 20,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 20,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 20,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 21,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 21,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 21,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 22,
+      "p_mod_u": 2,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 22,
+      "p_mod_u": 3,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "H": 22,
+      "p_mod_u": 7,
+      "valuation": 1
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 3,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 5,
+      "p_mod_u": 7,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 20,
+      "p_mod_u": 2,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 20,
+      "p_mod_u": 3,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 20,
+      "p_mod_u": 7,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 21,
+      "p_mod_u": 2,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 21,
+      "p_mod_u": 3,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 21,
+      "p_mod_u": 7,
+      "valuation": 3
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 22,
+      "p_mod_u": 2,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 22,
+      "p_mod_u": 3,
+      "valuation": 2
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "H": 22,
+      "p_mod_u": 7,
+      "valuation": 2
+    }
+  ],
+  "product_reduction_case_count": 16,
+  "product_reduction_cases": [
+    {
+      "q": 13,
+      "s": 1,
+      "j_offset": 1,
+      "c": 1,
+      "original_bottom": 196,
+      "reduced_bottom": 15
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "j_offset": 1,
+      "c": 2,
+      "original_bottom": 196,
+      "reduced_bottom": 15
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "j_offset": 3,
+      "c": 1,
+      "original_bottom": 256,
+      "reduced_bottom": 19
+    },
+    {
+      "q": 13,
+      "s": 1,
+      "j_offset": 3,
+      "c": 2,
+      "original_bottom": 256,
+      "reduced_bottom": 19
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "j_offset": 1,
+      "c": 1,
+      "original_bottom": 400,
+      "reduced_bottom": 21
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "j_offset": 1,
+      "c": 2,
+      "original_bottom": 400,
+      "reduced_bottom": 21
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "j_offset": 3,
+      "c": 1,
+      "original_bottom": 484,
+      "reduced_bottom": 25
+    },
+    {
+      "q": 19,
+      "s": 1,
+      "j_offset": 3,
+      "c": 2,
+      "original_bottom": 484,
+      "reduced_bottom": 25
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "j_offset": 1,
+      "c": 1,
+      "original_bottom": 28900,
+      "reduced_bottom": 171
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "j_offset": 1,
+      "c": 2,
+      "original_bottom": 28900,
+      "reduced_bottom": 171
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "j_offset": 3,
+      "c": 1,
+      "original_bottom": 29584,
+      "reduced_bottom": 175
+    },
+    {
+      "q": 13,
+      "s": 2,
+      "j_offset": 3,
+      "c": 2,
+      "original_bottom": 29584,
+      "reduced_bottom": 175
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "j_offset": 1,
+      "c": 1,
+      "original_bottom": 131044,
+      "reduced_bottom": 363
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "j_offset": 1,
+      "c": 2,
+      "original_bottom": 131044,
+      "reduced_bottom": 363
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "j_offset": 3,
+      "c": 1,
+      "original_bottom": 132496,
+      "reduced_bottom": 367
+    },
+    {
+      "q": 19,
+      "s": 2,
+      "j_offset": 3,
+      "c": 2,
+      "original_bottom": 132496,
+      "reduced_bottom": 367
+    }
+  ],
+  "prime_only_obstruction_examples": [
+    {
+      "q": 13,
+      "left": 12,
+      "right": 1,
+      "primitive_cube_roots": [
+        3,
+        9
+      ]
+    },
+    {
+      "q": 37,
+      "left": 1,
+      "right": 36,
+      "primitive_cube_roots": [
+        10,
+        26
+      ]
+    }
+  ],
+  "new_external_completeness_theorem_used": false,
+  "full_large_prime_branch_solved": false,
+  "not_lean_formalized": true
+}

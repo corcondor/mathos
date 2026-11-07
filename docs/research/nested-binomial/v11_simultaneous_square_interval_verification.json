@@ -1,0 +1,376 @@
+{
+  "status": "PASS",
+  "synthetic_cases": 2760,
+  "support_branches": 4320,
+  "integer_square_tests": 1492,
+  "positive_reduced_candidates": 95,
+  "max_integer_tests_per_support": 4,
+  "cases_E_at_least_512": 896,
+  "zero_support_cases": 25,
+  "original_binomial_examples": [
+    {
+      "n": 104,
+      "E": 17,
+      "K": 1792921,
+      "F": 2678,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 105,
+      "E": 1,
+      "K": 4392656450,
+      "F": 93730,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 106,
+      "E": 1,
+      "K": 581533225,
+      "F": 48230,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 111,
+      "E": 1,
+      "K": 49201894225,
+      "F": 221815,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 127,
+      "E": 1,
+      "K": 7112889,
+      "F": 13335,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 128,
+      "E": 1,
+      "K": 28451556,
+      "F": 21336,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 129,
+      "E": 1,
+      "K": 29822521,
+      "F": 21844,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 169,
+      "E": 1,
+      "K": 35530586,
+      "F": 30394,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 195,
+      "E": 1,
+      "K": 1480760428225,
+      "F": 1216865,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 233,
+      "E": 77,
+      "K": 91314098,
+      "F": 13514,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 289,
+      "E": 287,
+      "K": 612,
+      "F": 204,
+      "candidates_u": [],
+      "supports": 1,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 327,
+      "E": 1,
+      "K": 266738014205,
+      "F": 1154855,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 343,
+      "E": 31,
+      "K": 393129,
+      "F": 4389,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 387,
+      "E": 1,
+      "K": 91878838769025,
+      "F": 9585345,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 489,
+      "E": 1,
+      "K": 46894595804162,
+      "F": 9684482,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 512,
+      "E": 1,
+      "K": 1886599225,
+      "F": 347480,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 686,
+      "E": 19,
+      "K": 8446050,
+      "F": 28770,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 729,
+      "E": 1,
+      "K": 26260491894,
+      "F": 1190826,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 771,
+      "E": 1,
+      "K": 5789491028577025,
+      "F": 76088705,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 975,
+      "E": 7,
+      "K": 3872079200405,
+      "F": 4400045,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 1024,
+      "E": 73,
+      "K": 22791076,
+      "F": 38192,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 1330,
+      "E": 83,
+      "K": 347144856100,
+      "F": 1178380,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 2048,
+      "E": 1,
+      "K": 974483385458,
+      "F": 11168432,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 4096,
+      "E": 23,
+      "K": 14758605225,
+      "F": 1943760,
+      "candidates_u": [],
+      "supports": 0,
+      "remaining_polynomial_congruence_candidates_r": []
+    },
+    {
+      "n": 6860,
+      "E": 1143,
+      "K": 50,
+      "F": 1330,
+      "candidates_u": [],
+      "supports": 2,
+      "remaining_polynomial_congruence_candidates_r": []
+    }
+  ],
+  "positive_reduced_examples": [
+    {
+      "E": 15,
+      "K": 1,
+      "units": {
+        "3": 2,
+        "5": 4
+      },
+      "candidates_u": [
+        14
+      ],
+      "supports": [
+        {
+          "Z": 1,
+          "H": 15,
+          "J": 1,
+          "R": 1,
+          "W_low": 181,
+          "W_high": 227,
+          "m_low": 12,
+          "m_high": 15,
+          "integer_tests": 4,
+          "candidates_u": [
+            14
+          ]
+        }
+      ],
+      "original_equation_solution": false
+    },
+    {
+      "E": 1001,
+      "K": 1,
+      "units": {
+        "7": 1,
+        "11": 10,
+        "13": 10
+      },
+      "candidates_u": [
+        56
+      ],
+      "supports": [
+        {
+          "Z": 1,
+          "H": 1001,
+          "J": 1,
+          "R": 419,
+          "W_low": 2974,
+          "W_high": 3745,
+          "m_low": 3,
+          "m_high": 3,
+          "integer_tests": 1,
+          "candidates_u": []
+        },
+        {
+          "Z": 7,
+          "H": 143,
+          "J": 49,
+          "R": 64,
+          "W_low": 61,
+          "W_high": 76,
+          "m_low": 0,
+          "m_high": 0,
+          "integer_tests": 1,
+          "candidates_u": [
+            56
+          ]
+        },
+        {
+          "Z": 11,
+          "H": 91,
+          "J": 121,
+          "R": 17,
+          "W_low": 25,
+          "W_high": 30,
+          "m_low": 1,
+          "m_high": 0,
+          "integer_tests": 0,
+          "candidates_u": []
+        },
+        {
+          "Z": 13,
+          "H": 77,
+          "J": 169,
+          "R": 69,
+          "W_low": 18,
+          "W_high": 22,
+          "m_low": 0,
+          "m_high": -1,
+          "integer_tests": 0,
+          "candidates_u": []
+        }
+      ],
+      "original_equation_solution": false
+    },
+    {
+      "E": 707,
+      "K": 1,
+      "units": {
+        "7": 1,
+        "101": 23
+      },
+      "candidates_u": [
+        49
+      ],
+      "supports": [
+        {
+          "Z": 1,
+          "H": 707,
+          "J": 1,
+          "R": 482,
+          "W_low": 2359,
+          "W_high": 2970,
+          "m_low": 3,
+          "m_high": 3,
+          "integer_tests": 1,
+          "candidates_u": []
+        },
+        {
+          "Z": 7,
+          "H": 101,
+          "J": 49,
+          "R": 49,
+          "W_low": 49,
+          "W_high": 60,
+          "m_low": 0,
+          "m_high": 0,
+          "integer_tests": 1,
+          "candidates_u": [
+            49
+          ]
+        }
+      ],
+      "original_equation_solution": false
+    }
+  ],
+  "all_arithmetic_exact": true,
+  "uniform_claim_basis": "written mathematical proof, not extrapolation from samples",
+  "whole_original_equation_solved": false,
+  "source_sha256": "3c5870a685d52cc896ceb93a5d06020262305fc62535a73c1a7435309c903ca4"
+}

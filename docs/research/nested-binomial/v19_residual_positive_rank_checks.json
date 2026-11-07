@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "polynomial_identities": {
+    "P0_lies_on_curve": true,
+    "discriminant_factorization": true,
+    "P0_tangent_numerator": true,
+    "P3_lies_on_curve": true,
+    "P3_tangent_slope": true,
+    "P3_doubled_x_equals_original": true
+  },
+  "mod8_classes": 48,
+  "mod9_classes": 72,
+  "possible_torsion_exception": [
+    [
+      3,
+      1
+    ]
+  ],
+  "exception_P0": [
+    35,
+    288
+  ],
+  "exception_2P0": [
+    -61,
+    0
+  ],
+  "exception_point_exact_order": 4,
+  "exception_residual_F": 4853,
+  "uniform_proof": "Nagell-Lutz plus d|24a and exact 2/3-adic classification; see companion note",
+  "formalization": "No new Lean execution",
+  "checker_sha256": "864613ac61466ff3c506d6e2d9f08ec4fe8ffc5b11d6ef8d202dc404fc99b538",
+  "note_sha256": "9b6f13ce2abcea4db71765b76f75cb3ac78cd9c2fa9d321f60b879193de04248"
+}

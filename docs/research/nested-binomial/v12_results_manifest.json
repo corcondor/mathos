@@ -1,0 +1,99 @@
+{
+  "version": "v12",
+  "date": "2026-11-06",
+  "domain": "ell=1,j=i-3, primitive effective defect H",
+  "excluded_H": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "rows": [
+    {
+      "H": 14,
+      "curves": 402,
+      "cf_terms": 631116,
+      "reduced_fractions": 3953244,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 2,
+      "full_certificate_sha256": "a3f0783089ef966466787ca1af8651ab9b87c8deb3703936a91043e2b601b763"
+    },
+    {
+      "H": 15,
+      "curves": 536,
+      "cf_terms": 902372,
+      "reduced_fractions": 5647349,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 1,
+      "full_certificate_sha256": "c578cd4b8124d6c4b93c80dcd5992c06cee10cc6ed54ec8d2f35634da77034ce"
+    },
+    {
+      "H": 16,
+      "curves": 536,
+      "cf_terms": 961489,
+      "reduced_fractions": 6022772,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 0,
+      "full_certificate_sha256": "9f548ec5348f3ddf3a059045006fad17c7d60d8f87580ae317283d1cb65c1e88"
+    },
+    {
+      "H": 17,
+      "curves": 1072,
+      "cf_terms": 2046526,
+      "reduced_fractions": 12808969,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 2,
+      "full_certificate_sha256": "6c8a7bdf2aa707b18e6d275ceb4680d5647af8153a6d2eb7f14b5d0059a7a642"
+    },
+    {
+      "H": 18,
+      "curves": 402,
+      "cf_terms": 811770,
+      "reduced_fractions": 5088052,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 0,
+      "full_certificate_sha256": "b895cd75ba9d72e732423617788e0ac2654acb6db785f254dcccb2fbee98b613"
+    },
+    {
+      "H": 19,
+      "curves": 1206,
+      "cf_terms": 2571477,
+      "reduced_fractions": 16107260,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 2,
+      "full_certificate_sha256": "ffb3e2543e4b08bcf2531b8bbf393fe1fe3b91efc4d5d3233df08f69c812e4c9"
+    },
+    {
+      "H": 20,
+      "curves": 536,
+      "cf_terms": 1202708,
+      "reduced_fractions": 7532638,
+      "survivors": 0,
+      "raw_points_below_required_n_104": 0,
+      "full_certificate_sha256": "2c1d2ca7b3eea61a78a8b295fa5ab774695daa175c62f28601bda7fb42387a44"
+    }
+  ],
+  "totals": {
+    "curves": 4690,
+    "cf_terms": 9127458,
+    "reduced_fractions": 57160284,
+    "full_cube_computations": 8536,
+    "survivors": 0
+  },
+  "independent_verifier_source_sha256": "4b435d24673f622e63178c70477d23f65b6a61d75d1f6ff498c09fe578b04eac",
+  "independent_verifier_committed": true,
+  "full_archive_sha256": "693fca59bdbb1bc1fe8d0b0355e0fb7727a392685bc16a147459dc295e878bf0",
+  "full_archive_committed_to_GitHub": false,
+  "full_archive_available_as_user_chat_attachment": true,
+  "dependent_prior_lemmas": [
+    "v9_gcd_defect_continued_fractions.md",
+    "v11_effective_defect_cf.md"
+  ],
+  "derived_necessary_bound": "H>=21",
+  "lean_entire_proof_formalized": false,
+  "external_peer_reviewed": false,
+  "whole_equation_solved": false
+}

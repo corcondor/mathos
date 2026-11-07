@@ -1,0 +1,37 @@
+{
+  "verification_passed": true,
+  "scope": {
+    "j_min": 21,
+    "j_max": 99,
+    "prime_upper_index": true,
+    "all_offsets_at_least": 2,
+    "branch": "B <= A-B and j>l and B>=3*j",
+    "height_prerequisite": "A < B^3 < 1000*j^3",
+    "l1_included": true
+  },
+  "candidate_count": 13458,
+  "certified_count": 13458,
+  "unresolved_count": 0,
+  "unresolved": [],
+  "by_offset": {
+    "2": 6631,
+    "8": 366,
+    "7": 555,
+    "6": 1151,
+    "5": 1602,
+    "4": 1627,
+    "3": 1526
+  },
+  "by_second_lower_index": {
+    "l1": 11819,
+    "l_ge_2": 1639
+  },
+  "prime_index_pair_count": 93,
+  "largest_p": 103,
+  "distinct_witness_primes": 7,
+  "largest_witness_prime": 17,
+  "coverage": "Independent central-binomial p bound; effective-index-first enumeration.",
+  "arithmetic": "Exact integers; independent direct-digit Lucas checks.",
+  "certificate_sha256": "11db19f887a58aea9260b8079f48ebf7516d7e3e0bbfe7033035270998247d14",
+  "verification_seconds": 0.06769902499945601
+}

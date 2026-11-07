@@ -1,0 +1,22 @@
+{
+  "verification_passed": true,
+  "scope": "Upper branch t <= B, |i-k|=1, M>=21, 23<=max(i,k)<256",
+  "effective_pairs_checked": 1372807,
+  "nonzero_gaps_below_10n": 468,
+  "exceptions_to_effective_pairs_11_or_22": [
+    [
+      23,
+      1,
+      2,
+      -208
+    ],
+    [
+      24,
+      1,
+      2,
+      -229
+    ]
+  ],
+  "parameters_satisfying_all_necessary_conditions": [],
+  "arithmetic": "Exact arbitrary-precision integers; no floating point"
+}

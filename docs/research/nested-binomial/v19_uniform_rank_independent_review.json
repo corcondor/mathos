@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "review": "written uniform proof independently read; no logical gap found",
+  "polynomial_method": "13x13 exact grid plus degree <=12 in each variable",
+  "polynomial_identities": 5,
+  "grid_points": 169,
+  "exception_P0": [
+    35,
+    288
+  ],
+  "exception_double": [
+    -61,
+    0
+  ],
+  "checked_logic": [
+    "Nagell-Lutz applies without minimality",
+    "P0 has nonzero y, so its double is affine",
+    "rational lambda with integral square is integral",
+    "gcd(a,b)=1 justifies d|24a",
+    "primes >=5 excluded by gcd(d,a)|3",
+    "v2(d) in {0,2}, v3(d) in {0,1}",
+    "d|12 plus a>b gives only (3,1)",
+    "exception is order4 and its only positive residual is nonsquare"
+  ],
+  "sources": {
+    "v19_residual_positive_rank.md": "9b6f13ce2abcea4db71765b76f75cb3ac78cd9c2fa9d321f60b879193de04248",
+    "v19_residual_positive_rank_checks.py": "864613ac61466ff3c506d6e2d9f08ec4fe8ffc5b11d6ef8d202dc404fc99b538",
+    "v19_uniform_rank_independent_review.py": "ed07532a959067f4ab478f69591df8c78f22f938048fd4783eb6128a045c2803"
+  },
+  "scope": "written proof + exact integer verification; no new Lean or API execution"
+}

@@ -1,0 +1,186 @@
+{
+  "status": "PASS",
+  "certificate_sha256": "ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7",
+  "script_sha256": "0e246eb9919c916bf9ad4340b8c6a2cba30168c07471f12e0aac52285552d09d",
+  "supporting_counts": {
+    "raw_bivariate_bound_excluded": 93,
+    "raw_univariate_cubic_bound_excluded": 93,
+    "negative_neighbor_degree_two_bound_excluded": 262
+  },
+  "universal_vs_finite": "The inequalities for arbitrary roots and boxes are proved in the note; these counts are supporting checks on the complete fixed-defect candidate set",
+  "dual_nonisolation": {
+    "delta": 13,
+    "M": 6,
+    "C": 78,
+    "K": 703,
+    "points": [
+      {
+        "family_index": 159,
+        "power": 13,
+        "n": 170263459131429393121255301571296045256626383,
+        "r": 511154058734342489503225686588245360405929209,
+        "witnesses": [
+          {
+            "branch": "small",
+            "inner": 0,
+            "inner_zero_digit": {
+              "lower_digit": 1,
+              "position": 4,
+              "upper_digit": 0
+            },
+            "k_squared": 1,
+            "left": 0,
+            "left_zero_digit": {
+              "lower_digit": 1,
+              "position": 3,
+              "upper_digit": 0
+            },
+            "prime": 2,
+            "right": 1
+          },
+          {
+            "branch": "complement",
+            "inner": 0,
+            "inner_zero_digit": {
+              "lower_digit": 3,
+              "position": 4,
+              "upper_digit": 0
+            },
+            "k_squared": 4,
+            "left": 0,
+            "left_zero_digit": {
+              "lower_digit": 4,
+              "position": 0,
+              "upper_digit": 1
+            },
+            "prime": 5,
+            "right": 4
+          }
+        ]
+      },
+      {
+        "family_index": 159,
+        "power": 26,
+        "n": 115958582061599708765860614045821879754500480688471814165218099340074259182686100780145225,
+        "r": 348123432756715928337646072987628228829290551626857943460982853366856138060242997827025770,
+        "witnesses": [
+          {
+            "branch": "small",
+            "inner": 0,
+            "inner_zero_digit": {
+              "lower_digit": 4,
+              "position": 1,
+              "upper_digit": 0
+            },
+            "k_squared": 1,
+            "left": 0,
+            "left_zero_digit": {
+              "lower_digit": 6,
+              "position": 0,
+              "upper_digit": 4
+            },
+            "prime": 7,
+            "right": 1
+          },
+          {
+            "branch": "complement",
+            "inner": 0,
+            "inner_zero_digit": {
+              "lower_digit": 4,
+              "position": 1,
+              "upper_digit": 0
+            },
+            "k_squared": 4,
+            "left": 0,
+            "left_zero_digit": {
+              "lower_digit": 6,
+              "position": 0,
+              "upper_digit": 4
+            },
+            "prime": 7,
+            "right": 4
+          }
+        ]
+      }
+    ],
+    "common_box": {
+      "n_upper_exclusive": 348123432756715928337646072987628228829290551626857943460982853366856138060242997827025771,
+      "r_upper_exclusive": 348123432756715928337646072987628228829290551626857943460982853366856138060242997827025771
+    },
+    "monomials": [
+      "1",
+      "n",
+      "r",
+      "n^2",
+      "n*r",
+      "r^2"
+    ],
+    "scale_S": 121189924434319716616553807659456772147050463914102617116561799822468860330445330455640912802658658075120287820032940430843843505314163289724457892568677538251827766522999898144441,
+    "vectors": [
+      [
+        121189924434319716616553807659456772147050463914102617116561799822468860330445330455640912802658658075120287820032940430843843505314163289724457892568677538251827766522999898144441,
+        59272699865866010937667043262438758925264823105988852494429633119704425654984306971146266160210902954891817986634284718802178259516293,
+        177944705594127301788000544123258240912817442570706206326045524696863498023227480226359082302121899082713814834981132846885850044645139,
+        28989645515399927191465153511455469938625120342381412672733917956273866366967570451662689,
+        87030858189178982084411518246907057207322638162291515232416958093326877809183429659721047,
+        261278471760591651482051319468630709831454608730755401788936935372026295530219002719365681
+      ],
+      [
+        121189924434319716616553807659456772147050463914102617116561799822468860330445330455640912802658658075120287820032940430843843505314163289724457892568677538251827766522999898144441,
+        40367899644885432099232418040859640037352430773606841760581442429556286245020203503354705168155932441176285224594026198706605128091388667468321538909075941695838797922631197593475,
+        121189924434319716616553807659456772147050463914102617116561799822468860330445330455640912454535225318404359482386867443215614676023611662866514431585824171395689706280002071118670,
+        13446392753736753763998857748844421376201900690327175156602873949007924759281274218406815399458041264745793587040958238618204215446680806265083775043180026779927786371572090300625,
+        40367899644885432099232418040859640037352430773606841760581442429556286245020203503354705052197350379576576458733412152884725373590907978996507373690976601621579615236530417448250,
+        121189924434319716616553807659456772147050463914102617116561799822468860330445330455640912106411792561688431144740794455587385846733060036008570970602970804539551646037004244092900
+      ]
+    ],
+    "nonzero_independence_minor": 4892182707535867238985261155852862330087494349281385248279874664949377657480220110849851446106053551605767086046142047480789039222698426144987231949543954123782865670733669641373617996175773529077160488916922098343990164251513308286189437656973412037672023694549507018078833733595101727444476151843583318268590268254881954951345430555827705815844956242245262,
+    "both_squared_norms_less_than_6S2": true,
+    "deduction": "For the modular orthogonal lattice containing both evaluation vectors, lambda_2 < S*sqrt(6), contradicting the sufficient gap lambda_2 > eta^(2*(6-1))*S*sqrt(6) for every eta>=1. The note proves the analogous argument for every total degree t>=2.",
+    "not_original_solutions": "Both points have explicit modular witnesses excluding both original k branches in the full certificate"
+  },
+  "finite_field_complete_checks": [
+    {
+      "prime": 5,
+      "affine_point_count": 4,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 7,
+      "affine_point_count": 8,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 11,
+      "affine_point_count": 12,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 17,
+      "affine_point_count": 16,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 19,
+      "affine_point_count": 19
+    },
+    {
+      "prime": 23,
+      "affine_point_count": 22,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 29,
+      "affine_point_count": 28,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    },
+    {
+      "prime": 31,
+      "affine_point_count": 32,
+      "nonsingular_count_formula": "p-Legendre(C*K,p)"
+    }
+  ],
+  "lattice_solver_run": false,
+  "Lean_run": false,
+  "DeepSeek_call": false
+}

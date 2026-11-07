@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "scope": "Exact rational comparisons only; the general arguments are written proofs, not machine-formalized here.",
+  "comparisons": {
+    "cube_height": {
+      "left": "50111163/51380224",
+      "right": "1",
+      "positive_gap": "1269061/51380224"
+    },
+    "pell_height": {
+      "left": "14641/1600",
+      "right": "18755/2048",
+      "positive_gap": "363/51200"
+    },
+    "complementary_cofactor": {
+      "left": "2539773905578/6561",
+      "right": "400000000",
+      "positive_gap": "84626094422/6561"
+    },
+    "small_branch_cofactor": {
+      "left": "6967443587072/2187",
+      "right": "3317760000",
+      "positive_gap": "288497532928/2187"
+    },
+    "prime_bound_general": {
+      "left": "2060602/99",
+      "right": "21952",
+      "positive_gap": "112646/99"
+    },
+    "prime_bound_small_branch": {
+      "left": "65939264/1089",
+      "right": "64000",
+      "positive_gap": "3756736/1089"
+    }
+  },
+  "cube_height_exponential_base_case": {
+    "left": 268435456,
+    "strict_lower": 8193
+  },
+  "note_sha256": {
+    "v15_cube_height.md": "878cd6abad0f313934865b3fee39b9fe0fa7e93cc64659eeb579f4fa094e2442",
+    "v15_cubic_defect_sparsity.md": "68c41cbade708ba1d2b80d0e742398ec06f7250437b16bafa9c9fbcbc28c664e",
+    "v15_neighbor_prime_obstruction.md": "490fa2be8a1c105bb4ff21278d23d68946f902aeccdcc747c1f7782543609123",
+    "v15_pell_square_divisor.md": "4991287390be947e596de0ecf6c542921d30efc92f5458c37241f6c05199f62b"
+  },
+  "source_sha256": "dccb88873d808d593753284345952b42bf32f60cca418655ce080de846d5a9bd",
+  "new_lean_execution": false,
+  "new_cas_calls": 0
+}

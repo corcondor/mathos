@@ -1,0 +1,119 @@
+# v10：一般の付値回復補題と円分枝の有限合同計算のLean検証
+
+`ValuationRecovery.lean` は、有限個の数値例だけでなく、任意の自然数と
+任意の素数について量化された、今回の付値回復の核心補題を形式化する。
+Lean 4.35.0、mathlibコミット
+`56a005855ea17e0b0958f73ec801ae140b0a1679` で実際に実行し、
+終了コード0を確認した。
+
+## 形式化した内容
+
+\(\binom Ak=X+k^2\)、\(k\le A\) とし、
+\(r=\min(k,A-k)\) と置く。
+
+1. 外側の両分岐について \(A\mid r(X+r^2)\)。
+2. \(X,r\ne0\)、\(p\) 素数として、
+   \(3v_p(r)<v_p(A)\) なら \(v_p(X)=2v_p(r)\)。
+3. \(v_p(X)\) が奇数なら \(v_p(A)\le3v_p(r)\)。
+4. 偶数の場合に回復する指数
+   \(\min(v_p(A),3v_p(X)/2)\) の整除。
+5. 上の奇偶分岐で定義する `recoveredExponent` に対し、
+   \(p^{\text{recoveredExponent}}\mid r^3\)。
+   原方程式から直接適用する定理も含む。
+6. \(v_p(A)=3t+d\)、\(v_p(X)=2t\) のとき、
+   \(v_p(r)=t\) または \(v_p(r)\ge t+d\)。
+7. \(a=b+x\)、\(x\) 偶数、\(3x<2a\) のとき、
+   \(x=2t\)、\(a=b+2t\)、\(0\le t<b\) という有限指数の形。
+
+9個の主要な名前付き定理と3個の補助定理がある。
+原方程式から合同式への段階と、その後の付値の一般論を同じファイルで確認する。
+付値の積・冪・異なる付値の和に関するmathlibの定理を使用している。
+
+`sorry`、`admit`、`native_decide`、独自公理は使わない。
+出力した公理依存は通常の `propext`、`Classical.choice`、`Quot.sound`
+の範囲である。ログは実際の成功した実行出力を保存したもの。
+
+## 円分枝の20個の有限算術定理
+
+`CyclotomicFilters.lean` も、同じ固定バージョンで実際に実行し、
+終了コード0を確認した。Eisenstein整数の二つの整数座標による乗算を定義し、
+次の有限算術をカーネルで確認する。
+
+- 法2の全非零元の三乗、両方の余因子による指数剰余の制約。
+- 法5の全非零元の周期24、跡が0となる場合とスカラーとなる場合の制約。
+- 法7の全単元の周期6、両方の向き付き跡の条件。
+- q=19、31、67、367の具体的なノルム・跡・積。
+- q=19で使う法5・11の周期恒等式、および結合した全120周期。
+- q=223、229、367の表示の整数計算。
+
+20個の定理を `decide` と `norm_num` で実行しており、
+`sorry`、独自公理、`native_decide` は使わない。
+法2・法5・q=19の全120周期など、表示した多くの定理の公理依存は空である。
+法7の表示した定理は `propext`、具体的な積は `propext` と `Quot.sound`
+の範囲である。完全な実行メタデータは `cyclotomic_kernel_check.json`、
+実出力は `cyclotomic_kernel_check.log` に記録する。
+
+このモジュールは有限環の具体的な計算を扱う。Eisenstein整数全体の
+一意分解・単元の正規化・無制限の指数への帰結まで形式化したものではない。
+それらの証明は [円分枝のノート](../v10_cyclotomic_auxiliary_rings.md) にある。
+
+## 形式化していない範囲
+
+当初の2ファイルでは素数ごとの結果を積にまとめる \(B\) の全体と、
+正規化した平方合同式を形式化していなかった。この2点は、追加の
+`RecoveredDivisor.lean` と `NormalizedCancellation.lean` で形式化した。
+詳細と独立した今回の実行記録は
+[追加形式化の説明](ADDITIONAL_FORMALIZATION.md) にある。
+
+さらに `LocalSquareRecovery.lean` で平方非剰余による素数ごとの全回復、
+`CriticalPrimeCRT.lean` で局所分岐と一般のCRT存在・一意性、平方値の集約を形式化した。
+この2本の証明作成・修正はDeepSeek APIが担当し、Lean実行で検証した。
+
+`CFApproximationCore.lean` は、連分数による整数係数表示の存在・一意性と、
+近似定数3/2から|b|≤2を得る部分を追加する。全5,214曲線のLean検証や
+65組への完全な候補縮約までを済ませたという意味ではない。
+
+`GeometricReduction.lean` は幾何学的アプローチとして、有理座標の前後の変換、
+合成の恒等式、mathlibのWeierstrassモデルの判別式・非特異性・j=0を9定理で確認する。
+研究曲線への適用と未実施の降下・階数計算の区別は
+[幾何学的還元](../GEOMETRIC_APPROACH.md) を参照。
+
+改善した回復約数の積、中国剰余定理の全候補数と原問題への完全な接続、
+連分数証明書を新しい不足分へ移す解析的議論、
+30余因子の有限領域の完全性・全955添字の計算は、
+このLeanファイルでは形式化していない。
+
+それらは [一般証明](../v10_valuation_recovery.md)、
+[30余因子の証明](../v10_small_cofactors.md)、
+完全な整数証明書と独立再現コードに記録する。
+元の四変数問題全体のLean形式化や解決は主張しない。
+
+## 再現
+
+このフォルダにある固定バージョンのプロジェクトでは、mathlibの依存を
+取得・準備した後、次でソースを確認できる。
+
+```sh
+lake update
+lake exe cache get
+lake env lean ValuationRecovery.lean
+lake env lean CyclotomicFilters.lean
+lake build RecoveredDivisor NormalizedCancellation
+lake build LocalSquareRecovery CriticalPrimeCRT
+lake build CFApproximationCore
+lake build GeometricReduction
+```
+
+今回実際に使ったのは、既に準備済みのmathlib作業ディレクトリからの
+`lake env lean --root=... -o ... ValuationRecovery.lean` である。
+独立した `lake build` を実行したとは主張しない。
+実行コマンド、終了コード、ソースSHA-256、実行環境は
+`valuation_kernel_check.json` に記録する。
+
+実行環境で必要だった `LD_PRELOAD` は、自プロセスの実行パス検出を
+修正する既存の互換処理であり、Leanの証明検査を変更するものではない。
+通常の環境では不要である。既存ソースは
+[v4の互換処理](../v4_formal/own_executable_path.c) に保存されている。
+
+Root以外の2担当が、ソースの仮定と数学的定理の対応を独立に確認した。
+これはAIによる独立点検であり、外部研究者による査読ではない。

@@ -1,0 +1,24 @@
+test_domain_and_singular_curve (targeted_regressions.ArithmeticTests.test_domain_and_singular_curve) ... FAIL
+test_positive_neighbor_height_uses_n_squared_plus_one (targeted_regressions.ArithmeticTests.test_positive_neighbor_height_uses_n_squared_plus_one) ... ERROR
+
+======================================================================
+ERROR: test_positive_neighbor_height_uses_n_squared_plus_one (targeted_regressions.ArithmeticTests.test_positive_neighbor_height_uses_n_squared_plus_one)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/305fc41e8436/audit_v19/actions_fix/patched/scripts/research/v18_test.py", line 40, in test_positive_neighbor_height_uses_n_squared_plus_one
+    actual = next(x for x in rows if x['c'] == -1 and x['p'] == 37)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+======================================================================
+FAIL: test_domain_and_singular_curve (targeted_regressions.ArithmeticTests.test_domain_and_singular_curve)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/305fc41e8436/audit_v19/actions_fix/patched/scripts/research/v18_test.py", line 20, in test_domain_and_singular_curve
+    self.assertEqual(len(domain), 52)
+AssertionError: 83 != 52
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=1, errors=1)

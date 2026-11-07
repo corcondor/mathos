@@ -1,0 +1,201 @@
+th-lemma(mp(mp(mp(asserted(alpha >= c),
+                  rewrite((alpha >= c) == (alpha >= c)),
+                  alpha >= c),
+               rewrite((alpha >= c) == (alpha + -1*c >= 0)),
+               alpha + -1*c >= 0),
+            trans(monotonicity(rewrite(alpha + -1*c ==
+                                       -1*c + alpha),
+                               (alpha + -1*c >= 0) ==
+                               (-1*c + alpha >= 0)),
+                  rewrite((-1*c + alpha >= 0) ==
+                          (c + -1*alpha <= 0)),
+                  (alpha + -1*c >= 0) == (c + -1*alpha <= 0)),
+            c + -1*alpha <= 0),
+         mp(mp(mp(asserted(c > 3*rho),
+                  rewrite((c > 3*rho) == Not(c <= 3*rho)),
+                  Not(c <= 3*rho)),
+               rewrite(Not(c <= 3*rho) == Not(c <= 3*rho)),
+               Not(c <= 3*rho)),
+            monotonicity(rewrite((c <= 3*rho) ==
+                                 (c + -3*rho <= 0)),
+                         Not(c <= 3*rho) ==
+                         Not(c + -3*rho <= 0)),
+            Not(c + -3*rho <= 0)),
+         unit-resolution(def-axiom(Or(Or(Not(2*beta +
+                                        -1*lambda >=
+                                        0),
+                                        Not(chi + -1*lambda >=
+                                        0),
+                                        Not(2*beta +
+                                        -1*lambda <=
+                                        0)),
+                                      2*beta + -1*lambda >=
+                                      0)),
+                         unit-resolution(mp(mp(mp(mp(mp(mp(mp(asserted(Or(And(lambda ==
+                                        chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda))),
+                                        rewrite(Or(And(lambda ==
+                                        chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda)) ==
+                                        Or(And(lambda == chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda))),
+                                        Or(And(lambda == chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda))),
+                                        trans(monotonicity(rewrite(And(lambda ==
+                                        chi,
+                                        lambda <= 2*beta) ==
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta)))),
+                                        rewrite(And(lambda ==
+                                        2*beta,
+                                        lambda <= chi) ==
+                                        Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi)))),
+                                        rewrite(And(chi ==
+                                        2*beta,
+                                        chi <= lambda) ==
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda)))),
+                                        Or(And(lambda == chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda)) ==
+                                        Or(Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))),
+                                        Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))))),
+                                        rewrite(Or(Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))),
+                                        Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda)))) ==
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))))),
+                                        Or(And(lambda == chi,
+                                        lambda <= 2*beta),
+                                        And(lambda == 2*beta,
+                                        lambda <= chi),
+                                        And(chi == 2*beta,
+                                        chi <= lambda)) ==
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))))),
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))))),
+                                        rewrite(Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta)))) ==
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))))),
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta))))),
+                                        trans(monotonicity(monotonicity(rewrite(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi)) ==
+                                        Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))) ==
+                                        Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi)))),
+                                        monotonicity(rewrite(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda)) ==
+                                        Or(Not(chi == 2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))) ==
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda)))),
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+                                        chi),
+                                        Not(lambda <= 2*beta)))) ==
+                                        Or(Not(Or(Not(lambda ==
+                                        2*beta),
+                                        Not(lambda <= chi))),
+                                        Not(Or(Not(chi ==
+                                        2*beta),
+                                        Not(chi <= lambda))),
+                                        Not(Or(Not(lambda ==
+...

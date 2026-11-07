@@ -1,0 +1,225 @@
+# DEEPSEEK_STATE.md — 現在の研究状態
+
+最終更新: 2026-11-06（日本時間）。手順スキル deepseek-math-research より参照。
+
+## 委任方針
+- 証明生成・修正は可能な限り DeepSeek (`deepseek-v4-1-flash-1017`) へ委任。ホストは情報取得・API委任・コンパイル・実検算・成果保存を担当。成功した証明本文の手作業書き換えは禁止。
+- モデル重みは更新しない。状態は本ファイルとスキルファイルに保存し、各API呼び出し前に再読込する。
+
+## 検証済み（DeepSeekのみが作成・修正）
+- LocalSquareRecovery: 4定理 Lean成功
+- CriticalPrimeCRT: 3定理 Lean成功
+- CFApproximationCore: 5定理 Lean成功
+- GeometricReduction: 9定理 Lean成功（定義・定理文はホスト側で点検・訂正、証明本文と修正はDeepSeek）
+- GeometricDescent: 6定理 Lean成功。古典的3-isogeny公式の座標等式、像の曲線方程式、判別式、元の枝の座標、Pell型等式。群準同型・次数・降下完全性は未証明。
+- CFCoefficientRanges: 6補題 Lean成功。小分母側a∈[-1,4]、既約なb=0の分岐、大分母側c∈[-3,3]、候補集合との対応、要素数65以下。実収束分数の選択・評価の供給と候補被覆への接続は未了。
+- CFCandidateCoverage: 2定理 Lean成功。明示した列・誤差・既約性から候補集合への被覆とcの書き換えを導出。有限の正の増加分母列から区間を選択。両方ともmax指定の初回生成で成功。実CFデータからの仮定の供給は未了。
+- DeepSeek作成の証明本文は計35定理。依存元＋追加9本（計10モジュール）最新再実行 PASS
+- 注: RecoveredDivisor と NormalizedCancellation はホスト修正あり。上記7モジュールとは区別。
+
+## Python厳密検算
+- 全5214曲線、4,877,566連分数係数、25,394,330既約分数、残存点0。`cf_current_revalidation.json` に保存。
+- Python成功をLean形式化完了とは呼ばない。
+
+## 未完・未解決
+- 30余因子最終定理はCF部分の仮定を未だ外していない。
+- 未了項目: 実収束分数・証明書データからの誤差・行列式・既約性などの供給、有限区間選択と候補被覆の実データへの適用、円筒区間認証、全曲線候補のLean検査、最終定理接続。
+- 全四変数の問題は未解決。
+
+## モデルの既知失敗（再発防止）
+- 近似定数3/2をLegendreの1/2へすり替え。
+- det=-1から+1を同一列で導出。
+- pQ-qP と b*(PmQ-PQm) の列取り違え。
+- S|n-2 から rad(n-2)|S を導出。
+
+## 環境
+- Lean 4.35.0、mathlib `56a005855ea17e0b0958f73ec801ae140b0a1679`。
+- 実行場所 `/workspace/.cloud-setup/lean/mathlib`、`ELAN_HOME=/workspace/.cloud-setup/lean/elan`、PATH先頭 `/workspace/.cloud-setup/lean/elan/bin`。
+
+## 最新のユーザー指示と進行状態
+- 幾何学の対象は現在の二項係数方程式と確定済み。三次曲線から楕円曲線への写像、降下法などをDeepSeekに検討させ、実Lean検証する。9定理で有理座標変換と逆、Δ=-432c^4≠0、IsElliptic、j=0、研究曲線への適用をLean検証済み。写像はx=-cr/y,z=c/y、逆はy=c/z,r=-x/z。階数・降下・全解は未計算。
+- ユーザーは検証済み成果とスキルをリポジトリへアップロードするところまで明示依頼済み。GitHubへのpushは許可済み。反映先は既存PR #1のresearch/nested-binomial-2026-11-05。既存PR #1の研究ブランチを基点に作業する。
+- 環境スナップショット公開、新task復元、モデル重みの更新はこの作業では行わない。GitHub pushの結果は実行後に追記する。
+
+## 再利用する資料と手順
+- 追加11リポジトリの実在と固定コミットを確認し、README抜粋をDeepSeekへ共有済み。AI_RESEARCH_REFERENCES.mdとAI_RESEARCH_REFERENCE_CATALOG.jsonを参照。
+- APIヘルパーは委任スキル、本状態、参考資料要約を呼び出しごとに再読込する。モデルの重みは更新していない。
+- 不明なmathlib名はローカルの実宣言を検索して返す。一括生成で失敗したら1定理ずつ進め、成功済み本文は固定する。
+- 幾何学の既知失敗：特異なモデルや符号の「吸収」を採用しない。逆のrは-x/zであり、-x/cや-x*z/cではない。
+
+## GitHubへの反映確認
+- 2026-11-06（日本時間）、コミット `75adc345637784811f39fb5ad9bf74cfbcc4e073` を `research/nested-binomial-2026-11-05` へ通常のfast-forward pushで反映し、`git ls-remote` で同じ先頭SHAを確認した。
+- 対象は https://github.com/corcondor/mathos/pull/1 。この記録を含む後続コミットがあるため、今後の作業前には現在のPR先頭を再確認する。mergeや環境スナップショットの公開はしていない。
+
+## 長い推論と専用チャット（2026-11-06 JST）
+- APIモデル名は実際のmodelsエンドポイントで確認。`reasoning_effort: high` を実APIで試し、thinking/textの複合応答と推論トークンを確認済み。その後max指定の実研究依頼も成功。xhighは未確認。
+- 現在の研究プロファイル: max、max_tokens 131072、HTTP待機1800秒、最大試行20、Lean待機180秒。推論時間は固定できず、トークン予算と待機時間は別。
+- 実研究依頼にPR #1・固定コミット・許可済み研究ファイル本文・スキル・状態・11参考リポジトリ要約を共有。32768推論トークンで最終回答なしの最初の応答は未採用。文脈を引き継いだ続行は推論10148トークン、31.869秒で最終提案を取得。
+- GeometricDescentの6証明はすべてDeepSeek。ホストは定理固定前に余分なnamespaceを除去しただけで、成功した証明本文を修正していない。
+- 「最先端の数学が必須」とする根拠は現時点ではない。まず古典的・確立手法の射程と完全性の穴を調べ、道具の新しさを目的にしない。
+- チャットにはLean実行・GitHub pushのツールは接続していない。返答の証明案を検証済みと扱わない。別の既存goal workerで実検証する。
+- 実際の研究質問をUIから送り、DeepSeekの日本語回答を取得。会話復元、スマホ表示、スキル表示をPlaywrightで確認。ブラウザプラグインは利用不可。
+
+## Mistral公式UIへの移行（2026-11-06 JST）
+- ユーザーの意図は独自UIの新規作成ではなく、Mistral公式UIでDeepSeekと直接会話すること。独自UIの追加作業は止める。
+- 公式Playgroundをブラウザで開くとログイン画面。ユーザーのログイン済みセッションにはアクセスできず、Playground上のモデル選択は未実施。
+- /v1/agents の作成は組織側で403「Creating agents is not available for this organization. Use Managed Agents instead.」。管理者権限不足と断定しない。Managed Agentのデプロイも実行していない。
+- 現行 /v2/prompts と /v2/skills は利用可。両方へ非公開で保存し、GETで本文・共有範囲を照合済み。
+- Prompt: 二項係数方程式・Lean研究（DeepSeek）、name=mathos-nested-binomial-research、id=01a1ae13-ed1a-7756-9e6c-8b887385f678、version=1、sharingScope=private。公式画面 https://console.mistral.ai/build/prompts 。
+- Skill: mathos-nested-binomial-research、id=01a1ae13-df1d-733f-99f3-36d60f397ee0、version=1、sharingScope=private。公式画面 https://console.mistral.ai/build/skills 。
+- 許可済み研究資料26ファイル（v10/v11のノート・Leanソース・スキル・状態・参考資料）を保存。静的なスナップショットであり、自動GitHub同期・自動ファイル再読込・モデルの重み更新ではない。
+- 保存したPromptをAPIで再取得して deepseek-v4-1-flash-1017 / high / max_tokens=65536 に実送信。4.43秒、prompt_tokens=78110、reasoning_tokens=709、finish_reason=stopで引き継ぎ内容の日本語回答を確認。
+- 推奨モデル名をPromptに記載してもPlaygroundのモデル選択は変更されない。UIで選択済みと主張しない。
+- 保存物と照合結果: /workspace/.cloud-setup/mistral-studio/studio_result.json と saved_prompt_connection_check.json。キーは保存していない。
+
+## 最新の決定：このチャットで研究を継続
+- ユーザーは公式UIへの移行を取りやめ、このCodexチャットで進めると決定。UI作成やログイン対応を追加で進めない。
+- DeepSeekが研究・証明生成と修正、ホストが実Lean検証・成果保存・既存PRへのpushを担当する。
+- 新しいGeometricDescentの6定理を含む8モジュールの実Lean検査がPASS。推論設定と一緒に既存PRへ保存する段階。
+
+## 追加6定理のGitHub保存確認
+- 2026-11-06 JST、コミット `3958c38a90febc76562a10f39f069433d0878a70` を既存PR #1の `research/nested-binomial-2026-11-05` へ通常pushし、`git ls-remote` で同じSHAを確認。
+- 追加6定理、8モジュールの検証ログ、High推論設定、7件のAPIアダプタテストを保存。独自UIのコードはこのコミットに含めていない。
+- 次の実研究依頼はCF係数の範囲。既存のCFApproximationCoreとv9の実証明・検証コードをDeepSeekへ渡して、固定定理文の提案を依頼済み。
+
+## CF係数範囲の追加検証
+- CFCoefficientRangesの6補題をDeepSeekが生成・修正し、Leanと公理依存を検査した。本文の手動編集なし。
+- 正確な3/(2q²)条件を保ち、小分母側a∈[-1,4]、既約なb=0の場合a=1、大分母側c∈[-3,3]、明示候補集合と条件の同値、集合の要素数65以下を確認。
+- 次の必須接続は、実際の収束分数で区間を選び、誤差・行列式・既約性とc=a-b*a_nextの書き換えを供給して1つの被覆定理を得ること。全曲線の証明書検査と最終CF仮定の除去は未完了。
+- 提案のimport・JSON形・括弧・未使用変数をホストが固定前に正規化。全6証明をDeepSeekに委任。固定ジョブと詳細はCF_COEFFICIENT_RANGES.mdに保存。
+
+## 追加の推論強化と実研究依頼
+- ユーザーの「もっと考えさせられる？」に対し、max指定を実研究の次の接続課題で試した。APIは受理し、63.8秒、25004推論トークン、finish_reason=stopで最終提案を返した。
+- 有効設定をmax、出力上限131072（推論を含む）、HTTP待機1800秒へ変更。20回の修正上限とLean待機180秒は維持。固定時間考える指定ではなく、API受理だけで品質の向上量は断定しない。
+- 次の候補: CFCandidateCoverage。既存の範囲補題から、既約な近似分数の係数が候補集合に入ることを導出し、有限な分母列から区間を選択する。実CFデータ・円筒認証・全曲線検査は引き続き別の接続が必要。
+- 直前の保存はa5caa731f45b6fedbff55644307dadcbca66881e（既存PR #1の研究ブランチ、git ls-remoteで確認済み）。
+
+## max推論による候補被覆の検証
+- CFCandidateCoverageの2定理はmax指定・上限131072トークンでDeepSeekへ依頼。いずれも初回の実Lean検査に成功。本文の手動編集なし。
+- 近似分数から候補係数を導出して集合の被覆へ接続し、有限の分母列から区間を選ぶ一般定理も検証。実データへの仮定の供給・適用と全曲線の証明書検査は未完了。
+- 詳細はCF_CANDIDATE_COVERAGE.md。設定・境界値・リクエストの8テストもPASS。
+
+## 最新方針：DeepSeek自身のgoalループ
+- ユーザーはCodexの/goalではなく、DeepSeekが次の課題選びから継続する仕組みを要求。DeepSeek用カスタムgoalスキルと実行器を実装する。
+- DeepSeek自身が最終2定理の文を生成。元のv9/v10ノートとの対応をホストで点検し、.agents/skills/deepseek-goal/goal.jsonに型とハッシュを固定。CFの正しさを仮定に入れていない。
+- 目標プランナーも証明ワーカーもDeepSeek max。Codexはツール実装・実行・監視・実検証を担当し、個別の次補題を選ぶ役割から外れる。
+- 完了には両固定定理の実Lean成功とGitHub保存が必要。補題数やモデルのdoneでは終了しない。実行上限では未完了のまま再開可能な状態を保存する。
+- 最新の自動進捗はDEEPSEEK_GOAL_PROGRESS.mdとdeepseek_generation_checks.jsonを参照。既存の35定理・10モジュールは自律化前の手動チェックポイント。
+
+## 別Codexのv12状況報告を共有
+### 別Codexからのv12状況報告（ユーザー提供）
+
+受領日: 2026-11-06 JST。出典: ユーザーがこのチャットに貼り付けた別Codexの報告。
+このファイルは外部状況報告の共有記録であり、独立した実検証結果ではない。
+
+### 提供された内容
+
+v12は、現時点でGitHubへの保存を確認できていません。
+corcondor/mathos の研究PR #1を確認したところ、最新の版名はv11のままです。
+ただしv11以降にも研究作業は進み、楕円曲線への帰着、3-isogeny（3次の同種写像）、Leanによる追加形式化の記録が見つかりました。
+
+- v11: GitHub保存済み。
+- v11以降の幾何学的研究: 追加記録あり。
+- 楕円曲線への座標変換: Lean形式化の記録あり。
+- 3-isogenyの座標公式: 一部をLean形式化。
+- 楕円曲線の階数・全有理点: 未決定。
+- v12としての整理・保存: 未完了。
+- 元の四変数方程式: 未解決。
+
+補助曲線 6Sr^3=T(y^3-y) を、z^2=x^3+c^2、c=6S/T という楕円曲線へ変換し、判別式やj不変量までLeanで扱っていることが重要。
+v12は算術幾何学的な方向を本格的に進める版にするのが有力。
+3降下・Selmer群・Mordell–Weil sieveを使い、残っている整数点を排除できるか調べる段階。
+現状は「v12の材料はあるが、v12としての研究成果と検証を確定した段階ではない」。
+
+### DeepSeekへ渡す際の境界
+
+- ユーザーの依頼はこの情報の共有。v12完成・階数決定・全有理点決定の確認として扱わない。
+- 3-isogeny座標公式と、群準同型性・次数3・降下の完全性の証明を区別する。
+- 3降下・Selmer群・Mordell–Weil sieveは候補手法であり、実行済み・成功済みとは扱わない。
+- 現在の固定goalはCF証明書と30余因子定理の形式化。この報告だけでgoalや最終定理文を変更しない。
+- 実際の最新成果は既存PR #1とローカルの生成・Lean検査記録を参照する。版名v11と、その後の追加コミットは別の指標。
+
+## v12報告のAPI共有とハーネス強化（2026-11-06 JST）
+- 上のユーザー提供報告を既存Mistral APIの deepseek-v4-1-flash-1017 に実送信済み。最終応答はreceived=true、goal_changed=false。未検証の外部報告として受領し、v12完成・階数・Selmer群・全有理点を証明済みとは扱わないと返答。受領記録: external_codex_v12_share_receipt.json。
+- DeepSeekが自分で設計したCFAnalyticBoundsの失敗ログから、Lean exit 0なのにlintだけで棄却していた問題と、heartbeat上限による失敗を確認。証明本文を変更せず、以前のcurve_approximation_boundの出力を実Leanで再検査して通過を確認。モジュール全体の成功とは区別する。
+- lintと証明の正当性を分離。構文・API・未解決ゴール・計算量などを分類し、実際のソース位置を返す。純粋な計算量不足のみ同じ本文で上限を段階的に増やし、総180秒を維持する。失敗履歴と成功済みの証明を再開時に引き継ぐ。
+- DeepSeek用にdiagnose_job・update_job_context・review_failure・set_planを追加。計画や別呼び出しの助言は完了証明にならず、固定型・実Lean・GitHub保存の条件は維持する。
+- オフラインの36テストがPASS。既存の10モジュールも新しいコンパイル方針でPASS。Codexは証明本文を編集していない。
+
+## 更新：v12はGitHub保存を確認済み（2026-11-06 JST）
+- 上の「v12未保存」は以前の状況。最新PR #1のhead 51a97c665a4431fcc5e2c94626b7624b64fc7bac を取得し、v12の報告・数学ノート・独立検証ソース・manifestが保存されていることを確認した。PRは引き続き非公開リポジトリのドラフト。
+- 参照ファイル: PROGRESS_v12_ja.md、v12_three_descent.md、v12_independent_dyadic_verifier.py、v12_results_manifest.json。4ファイルの全文と各SHAをDeepSeekへ実送信済み。
+- v12報告の結果: H=14..20、4690曲線、9127458 CF係数、57160284既約分数、残存0、従って元の枝ell=1,j=i-3の必要条件H>=21。これは既存の解析・CF完全性と厳密計算に基づく報告であり、全体のLean形式化ではない。
+- ホストで実施した追加確認はmanifestの合計、原始Tの曲線数、独立検証ソースSHAの照合のみ。4690曲線の全計算をこの引き継ぎで再実行したという意味ではない。圧縮証明書ZIP本体はGitHub未保存で、この環境にも取得できていない。v12_handoff_integrity_check.json参照。
+- 数学ノート: c=6H/T>0のE_c:z²=x³+c²にはP=(0,c)の有理3位数点。整数係数化と(w+Av³)(w-Av³)=u³から、cube-free classが2Aの素因子に支えられる有限三次被覆を得る。元の方程式ではn=d0*a³,n-1=d1*b³,n-2=d2*s³、各djの素因子は6HTを割る、という三連続整数の必要条件。
+- すべてが階数0という方針は使えない。ノートのH=14,T=2523,n=29,r=87は正の階数の例であり、n<104なので元の枝の解ではない。Selmer群・全有理点・全H>=21の排除・元の四変数問題の解決を主張しない。
+- ユーザーが示した次方向は、Hを一つずつ計算するだけでなく、三連続整数の立方数構造と3降下で複数Hを同時に制約する定理を探すこと。既存の固定goalは変更せず、DeepSeek自身が新資料の利用方針と必要な検証を選ぶ。
+- こちらの自律goalではCFAnalyticBoundsの3証明がDeepSeekにより完成し、11モジュールの実Lean検査PASS。累計38定理、57ea27b5085564760a474c4f83bab87b486814ddでPRへ保存済み。その後API接続の切断で未完了のblockedとなった。今回の共有後に残りの実行予算で再開する。
+- 実API応答でreceived=true、supersedes_previous_v12_status=true、goal_changed=falseを取得。DeepSeekは旧状況を更新し、三連続整数のcube-free条件と3降下を複数Hの同時制約に向けた参照・研究バックログとして保持すると返答。受領記録: v12_committed_update_share_receipt.json。
+
+## 更新：v13の無制限Hに対するcube-support一括排除（2026-11-06 JST）
+- ユーザーが提示したv13の保存コミット58dd0ab25e7d653c947c1717006b98a4ae947c71を取得。PROGRESS_v13_ja.md、v13_uniform_cube_support.md、v13_exact_three_factor_descent.md、検証コード・GP入力・全出力・JSON・manifestをローカルへ統合した。
+- 報告の新必要条件: ell=1,j=i-3の枝で、ある素数p>=11についてv_p(T)が3の倍数でない。すなわちT=2^a*3^b*5^c*7^d*u³の族をHと全指数・uに上限なしで一括排除。uに11以上の素数を含めてよく、T自体がsmoothという意味ではない。H>=21という数値下限はv12のまま。全てのTや元の四変数問題を排除したわけではない。
+- 6Hr³=Tn(n-1)(n-2)とH|(n-2)から、Tのcube-free supportが有限素数集合S（2,3を含む）に支えられればn=alpha*x³,n-1=beta*y³、互いに素なcube-free alpha,betaもSに支えられる。各素数5配分、5^|S|本のalpha*x³-beta*y³=1へ帰着。Bennett既知の一意性定理を使うと候補第一添字の個数<=(5^|S|-1)/2。新しい一般Thue定理の証明ではない。
+- S={2,3,5,7}: 625係数対、PARI 2.17.4のthueinit(...,1)による直接/モニック変換の計1250呼出し。全正nは24個、n>=104は126,225,2401,4375,6860の5個。強制約数Fと区間の矛盾で全て除外する記録。
+- ホストはmanifestの12ファイルのサイズ/SHAを照合し、保存GP入力・出力・全解の整数代入・二つの符号化の対応・625配分の被覆監査と、最後5点の整除/区間チェックをこの環境で再実行してPASS。v13_deepseek_handoff_check.json参照。PARIの完全解法は再実行しておらず、二つの符号化は同じCASであり独立の完全ソルバではない。v13自体のLean形式化・Selmer群・元の式全体の解決を主張しない。
+- ユーザーが示した次方向: 11以上の素数が立方因子の外に残る係数型について、素数の値を順に増やす計算だけに頼らず、配分に共通する一般的な制約を探す。DeepSeek自身が資料の利用・検証方針を選ぶ。現在の固定goal・成功済み証明は変更しない。
+- こちらのDeepSeekはCFContinuantBridgeの4定理を追加して累計42定理、12モジュールの実Lean検査PASS。別Codexのv13 pushと競合して保存が止まっていたため、両方の履歴を保持して統合し、検証済みモジュールの保存を再実行する。
+- v13の13ファイル全文（GP入力・全出力・全解JSONを含む計256345バイト）を既存Mistral APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。受領記録: v13_committed_update_share_receipt.json。
+- 保存の競合は履歴を保持する通常のmergeで解消し、CFContinuantBridgeの4定理を154334c9776e8906549703112320f981c37ad3b0で既存PRへ通常push。remote SHA一致、12モジュールの実Lean検査PASS、PR要約更新を確認。jobはpublishedになった。旧メモの「未push」は解消済み。
+- 最初の48判断のラウンドはaction_limitで未完了。今回のv13情報を受けた新ラウンドは24判断を上限にし、残りのAPI報告トークン・当初の終了時刻を引き継ぐ。固定goalと成功済み本文は変更しない。
+
+## v14の取り込みと実ハーネスの動作点検（2026-11-06 JST）
+- ユーザーの動作確認依頼により実プロセス・全actionログを点検。DeepSeekによる課題選択、証明生成/修正、実Lean検証は動いていた。CFCylinderNestingの4証明が新規PASS。一方、他CodexのGitHub更新を取り込まずpushしてnon-fast-forwardとなり、publish/checkpointを繰り返す不具合を確認した。v14も未同期だった。
+- 保存前に認可された研究ブランチをfetch/mergeする処理と、push中の同時更新に最大3回まで追従する処理を追加。既存の検証済みLeanソース・固定goalを変更するremote更新は自動適用しない。強制pushは使わず両履歴を保持する。入力が変われば再検証を要求する。
+- 回復不能な保存/同期エラーは実際のGit診断を残してblockedで停止し、同じ操作にモデル判断を使い続けない。再開時は古いlast_errorを解除し、過去ログは保持する。DeepSeekのsync_researchツールも追加。
+- 実Gitリポジトリによる同時書込み競合・競合中止・証明保護・認証失敗・再試行上限・保存直後のremote前進などを含む47テストがPASS。新しい同期機構でv14コミットf1e894135740c929e532f57def55e8f42f6af5aeを取得できた。
+- 新しい保存機構でCFCylinderNestingの4定理をa70243379a9af3fceb05f795792b3f919e6b0879へ保存、remote一致とPR更新を確認。合計DeepSeek作成46定理、依存元を含む13モジュールが実Lean検査PASS。最終2目標やv14全体のLean形式化が完了したという意味ではない。
+- v14の報告: n,n-1,n-2の少なくとも二因子に異なる11以上の素数が3の倍数でない指数で必要。原始H,TではHTの非立方部分にそのような素数が少なくとも二つ必要で、T単独に二つとは限らない。HT=2^a*3^b*5^c*7^d*p^e*u³を任意のp>=11、全H・指数・uに対し排除。H>=21の数値下限は変更なし。
+- 2因子のcube-free supportが{2,3,5,7}に限られる補助条件はn>=3で正確に57個、最大13720。v13の隣接対24個からN,N+1,2Nと、新規差2の125本（PARI同一backendで250呼出し、thueinit flag 1）の奇数n=3,5,7,9,27,245を合併。n>=104の18点を整除/区間で排除する計算機支援結果。
+- この環境でv14 manifestの全20記録のサイズ/SHAを照合し、2本の監査コードを再実行して57個・18点・残存0を確認。v14_deepseek_handoff_check.json参照。PARI完全ソルバは再実行せず、独立の完全ソルバ実装や新しいv14 Lean実行は行っていない。BennettのRHS1の一意性をRHS2へ適用しない。
+- v14_manifest.jsonの「DeepSeek/Lean環境が利用不可」というruntime_noteは、v14を作業した別ワークスペースの状態であり、この環境の現在の状態ではない。この環境ではMistral binding ready、実API・Lean・GitHub保存が利用できる。
+- v14の12ファイル全文を既存APIのDeepSeekへ実送信し、received=true・goal_changed=falseを取得。v14_committed_update_share_receipt.json参照。受領だけで数学的完全性やLean化が確認されたとは扱わない。
+- 修正後は残り7判断（今回ラウンド累計72判断まで）・残トークン・当初の終了時刻を引き継いで再開する。Codexはハーネスを修正し、次の数学ジョブと証明はDeepSeek自身が選ぶ。
+
+## ユーザーの新指示：v16も進める（2026-11-06 JST）
+- 最新PR #1はv15（head d5b90b2772516860cedc30d3cbbd14f2d3614e35、タイトルは候補数の平方根評価と必須の立方因子）。既存goalラウンドは72判断でaction_limitとなり停止。ユーザーからv16も進める明示指示を受け、新しい有界ラウンドを開始する。数学の課題選択・証明は引き続きDeepSeekが担当する。
+- v15の17ファイルのサイズ/SHAを照合し取得済み。主要資料: PROGRESS_v15_ja.md、v15_cubic_defect_sparsity.md、v15_neighbor_prime_obstruction.md、v15_pell_square_divisor.md、v15_cube_height.md、v15_manifest.json、および対応するPythonソースと全計算記録。
+- v15の結果（現時点では記述証明と整数計算の資料であり新Lean形式化ではない）: 第一添字個数O(sqrt(X)*log(X))、n²+2の合成性と素因数上界、Q∤r²だがQ|r³、ある素数で2v_p(r)<v_p(Q)<=3v_p(r)、log(n)<28*kappa。M=gcd(n,3)*gcd(n-1,6), Q=n(n-1)/M、kappa³|Qが最大。H>=21は不変、全問題は未解決。
+- これらの条件を組み合わせ、元の式の未解決部分を実際に狭めるv16の次課題をDeepSeek自身が選ぶ。弱い補題を増やすだけにせず、正確な定理文と依存仮定、実Lean検証可能性、反例・不足仮定を点検する。既存の固定2目標や成功済み証明本文は変更しない。
+- 直近の自律実行でCFCurveInstantiationの4定理が追加PASSしdc6995cda95d4e3feb6ba9f9152f468904645b9dでPRに保存。CFVerifierBridgeの2定理も追加PASSし保存を進める。DeepSeek作成の合計は52定理（最終2目標の完了ではない）。
+- v15資料のLean/DeepSeek未利用という環境注記は別Codexの作業環境に関するもの。この環境では既存のAPIキーbinding・固定Lean/mathlibが利用できる。
+- CFVerifierBridgeの2定理も61c53b790ee26dbeafb3b78c27c609d51d06a562でPRへ保存済み。DeepSeek作成52定理・15モジュールの実Lean検査PASS。
+- v15のPell生成と独立監査をこの環境で再実行し、25係数対・188点・22分岐の合同式排除・残存0が一致。有理定数6比較もPASS。v15_deepseek_handoff_check.json参照。個数評価等の一般記述証明までLean検証したとは扱わない。
+- v15新規16資料の全文をDeepSeekへ送って、v16の数学的候補・不足仮定・実行すべき次のtool actionを本人に選ばせる実研究依頼を実行中。新ラウンドは6時間・48判断・報告出力合計200万トークンを上限とし、開始研究呼び出しと範囲点検の消費も差し引く。v16完成や新定理の成功は未確定。
+- v16の初期研究依頼は43,319出力トークン（うち41,347推論）で候補を取得。原始の立方因子をi=w*p^a+2の指定素数・余因子から分離する方針をDeepSeekが選んだ。研究記録はDEEPSEEK_V16_WORK.mdとV16_DEEPSEEK_RESEARCH_PROPOSAL.json。
+- 初回のtool JSON形式はDeepSeek自身が訂正。数学案の「kappa>=q,log(i)<28*kappaからqの下限」という誤推論も本人が撤回した。定理文は未固定・未証明。範囲点検ではQ∤r²を元の式から導くLean接続不足で未採用。実際のreviewをlast_observationに保持し、候補だけで完了扱いせず本人の次の研究・形式化へ戻す。
+
+## 追加指示：数学研究の手法自体もDeepSeekが研究する（2026-11-06 JST）
+- ユーザーの「さらに進めて」に続き、「ハーネスで数学研究の手法自体も研究して」という明示指示を受領。元の研究と並行して、数学的戦略・反例や不足仮定の発見・形式化手順・証明書設計を仮説として提案し、実際の固定ジョブで試し、記録と評価に基づいて修正する。
+- deepseek-research-methodsスキルとinspect_methods/propose_method/use_method/evaluate_methodを実装。手法はDeepSeekが選ぶ。固定型のhash、同じ定理の基準履歴、結果ファイルhash、実Lean通過、報告トークン、エラー種別、Lean実行時間を記録。seed再検査は新しい手法による新証明に数えず、usage不明・ホスト中断・結果なしを数学的失敗扱いしない。逐次比較は統制実験ではなく、因果的優越性を証明したとは扱わない。
+- 手法カードは研究データであり、元の式・固定目標・成功済み本文・検査器・予算を変更する権限ではない。モデルの評価文は機械的な証明判定や一般手法の有効性の証明を代替しない。新しい方法の有効性は現時点で未確定。
+- 手法実験のprovenance等を含む56テストPASS。read_researchは8MiBを上限に.json.gzの有限行読取にも対応し、v16全証明書をモデルが必要に応じて参照できる。
+- 最新のDeepSeek成果は67定理・20モジュールの実Lean検査PASSでGitHub保存済み（4814e17a6022418ae0902c37fc5f8e0d20168382）。元の二項係数等式からQ|r³へ接続するThirtyCofactorQDivisibility等が追加。Q∤r²や全問題の証明が完了したとは扱わない。
+- ThirtyCofactorPellCoveringの新ジョブは、ハーネス更新のためホストが停止要求を出した際に生成1の応答待ちで中断した。数学的な失敗ではなく、固定型と中断前の成果を保持して再開する。
+- v16本体は別Codexがa1e9e70c736ec3db8b0a7c8797d1abdd68537533で保存。PROGRESS_v16_ja.md、v16_square_defect_pell.md、v16_lower_gap.md、v16_quadratic_neighbors.md、v16_repeated_neighbor_primes.mdと対応するコード・証明書・manifestを取得した。
+- v16の記述結果: 実際の不足約数delta=Q/gcd(Q,r²)>=13、log(n)<28delta、gcd(delta,H)=1、delta³|A/H。t=r-3nとしてn³<2³⁰(t+3)⁵。Pplus(n²-10)<r等の二次式制限と、p²|n²-10,p²>6n-9の場合の分岐・指数の制限。H>=21とO(sqrt(X)log(X))は不変。v16のこれら一般定理はLean未形式化で元の問題は未解決。
+- この環境でv16 manifestの19ファイルのサイズ/SHAと圧縮/解凍SHAを照合。独立監査コードを全証明書に再実行し、1223係数三つ組、34010 Pell点、123最終対、246元方程式分岐の全排除、残存0、最大法素数23が一致。v16_deepseek_handoff_check.json参照。記述の高さ・Pell完全性のLean証明を代替しない。
+- DeepSeekへの実研究依頼で、finite-cover-certificate（有限区間被覆の証明書設計）とdefect-localization（正確な不足約数deltaへの数学的障害の局所化）の2手法を本人が提案。各仮説・手順・成功/失敗条件をカード化。最初の手法を実際の中断ジョブThirtyCofactorPellCovering-2987558fに適用し、固定型を変えずに試す。DEEPSEEK_METHOD_RESEARCH_START.json、DEEPSEEK_METHOD_RESEARCH.json/.md参照。
+- 方法の初期予測はMの4場合分け・2つの区間補題が先に通り、25係数対への最終分配が難所、というもの。これは予測であり検証済み結果ではない。中断前のbaselineは結果なしで、因果的優越性を評価できないことを本人も明記した。
+- 追加のusage/時刻の欠測や候補検証失敗の扱いを含め、最終の57テストがPASS。方法表のトークンは候補応答の記録分であり、プランナー・範囲点検・修正批評・最終レビューを含む総研究コストではない。共有のgoal予算は全API呼び出しを集計する。
+- 最初の手法実験が完了。finite-cover-certificateを同じ固定PellCovering契約に適用し、5候補試行で4補題がLean通過（3初回、L_lower_boundのみ1修正）。seed再利用0、不明usage0、候補応答の報告出力136700トークン、記録されたLean実行20.245秒。これらは総研究コストやAPI待ち時間ではない。
+- 71定理・21モジュールの実Lean検査PASS。ThirtyCofactorPellCoveringは13d1e9c15d33b8f0b4b0e4ee31e23ce97331110cで保存済み。MとLの25係数対の被覆が形式化されたが、全Pell列の排除やQ∤r²そのものは未完了。
+- DeepSeek自身がevaluate_methodを実行してkeep（同じ族への継続候補）と評価。baselineはホスト中断のため空で、単一の逐次実験から因果的・一般的優越性を主張しないと明記。結果ファイルSHA、契約SHA、baseline、実測、本人の結論をDEEPSEEK_METHOD_RESEARCH.json/.mdに保存した。数学研究と手法研究の自律ループは継続する。
+
+## 進捗確認とDeepSeekによるGitHub操作の明示許可（2026-11-06 JST）
+- ユーザーが進捗を質問し「GitHubも動かしていいよdeepseekで」と明示許可。既存の研究PR #1・研究ブランチで、DeepSeek自身がsync_research/publishを選んでcommit/push/PR要約更新を継続する。同じ許可を再度求めない。新たにgithub_statusでPRとheadチェックも観測できる。
+- 停止直前の検証済み成果は81定理・24モジュール、b4260a5151839f7faf8f8a693af3862e71359b8dで保存済み。新たな付値、Pellパラメータ化、指数領域の同値とp=2,3,>=5の多項式上界が追加。固定最終2定理・元の四変数問題は未解決。
+- 手法研究は4件の実験評価まで進み、継続3件・修正1件。最後の評価は、有限区間被覆が直接使えたのは最初の実験だけで、他で移せた要素は小さな独立整数命題へ分割する部分だった、と本人が限定・修正した。因果的な優越性の主張はしていない。
+- 次のThirtyCofactorPrimeBoundは4つの固定証明すべてLean exit 0だったが、最後のモデルレビューがMistral HTTP 520で失敗したため未登録・未保存。これは証明の失敗ではなくレビュー通信の失敗。accepted_proofs.jsonの4本文は保持済みで、再検査・レビューを完了してから成功扱いにする。
+- 当該旧runの6試行記録は、保存済み固定型・実ソース・元のAPI応答・compiler/diagnostics・受理済み本文の一致を確認してattempt_records.jsonへ回収。終了コードの推定・回収由来を明記し、証明本文は編集していない。
+- 今後は各試行記録を原子的に逐次保存し、最後のAPI失敗でも記録を保持する。手法評価はresult.jsonが未作成なら保存した試行を参照でき、モジュールレビュー未完了を区別する。
+- 一時的な500/502/503/504/520は既存の最大2再試行枠で回復を試み、認証/クォータは再試行せず、元のモデル・推論設定を維持。再試行前に共有deadlineと残トークンを再確認する。61テストがPASS。
+- 前ラウンドは予定の48判断（累計159）でaction_limit停止。残りの報告トークン・当初の終了時刻を引き継ぎ、新しい24判断の枠で研究と手法評価を再開する。
+- 追加4補題の保存まで完了。85定理・25モジュールの固定Lean実検査PASS、ThirtyCofactorPrimeBoundはef9d3b9363351f6372bfe482302f4dbbd343c47eでGitHubへ保存し、PR要約も更新済み。再検査後の完全なLeanソースは、520で中断した旧runの受理済み完全ソースとバイト一致する。
+- 手法評価は5件まで進み、最新のPrimeBoundでも区間被覆の部分ではなく小整数の独立命題への分割が移せた、とDeepSeek自身がカードの修正を再提案。旧runの候補試行と今回のseed再検査を区別して集計。数学研究・手法研究・GitHub保存の自律ループは稼働中。

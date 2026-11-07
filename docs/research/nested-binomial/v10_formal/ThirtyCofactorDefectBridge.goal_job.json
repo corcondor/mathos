@@ -1,0 +1,16 @@
+{
+  "module": "ThirtyCofactorDefectBridge",
+  "imports": "import Mathlib.Data.Nat.GCD.Basic",
+  "definitions": "",
+  "goals": [
+    [
+      "defect_coprime_pell_coefficient",
+      "theorem defect_coprime_pell_coefficient (Q r : ℕ) (hQ : 0 < Q) : Nat.Coprime (Q / Nat.gcd Q (r ^ 2)) (r ^ 2 / Nat.gcd Q (r ^ 2))"
+    ],
+    [
+      "defect_pell_identity",
+      "theorem defect_pell_identity (M Q n r : ℕ) (hM : M * Q = n * (n - 1)) : M * (Q / Nat.gcd Q (r ^ 2)) * r ^ 2 = (r ^ 2 / Nat.gcd Q (r ^ 2)) * n * (n - 1)"
+    ]
+  ],
+  "local_dependencies": []
+}

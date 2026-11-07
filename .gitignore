@@ -1,4 +1,5 @@
 __pycache__/
+/.mathos-codespaces/
 *.pyc
 .hf_rows_cache/
 *.parquet

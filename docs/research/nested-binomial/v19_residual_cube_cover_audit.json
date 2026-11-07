@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "date_jst": "2026-11-07",
+  "scope": "independent polynomial, finite-field, and reconstruction audit; no Lean",
+  "coefficient_identities": [
+    "unscaled_factorization",
+    "normalized_factorization",
+    "sign_elimination_identity",
+    "cover_ideal_membership",
+    "cubic_discriminant",
+    "sextic_discriminant_product",
+    "singular_s_zero",
+    "singular_s_minus_8_9",
+    "singular_s_minus_3_4"
+  ],
+  "finite_domain": {
+    "coefficient_families": 102,
+    "negative_Z_cases": 6221,
+    "boundary_cases": 102,
+    "prior_mod5_exclusions": 1252,
+    "all_negative_cases_have_good_reduction_nonresidue_witness": true,
+    "largest_prime": 61,
+    "domain_generation": "coarser independent box a<2b and -2b<Z<=0, exact residual inequalities"
+  },
+  "finite_fields": {
+    "complete_fibers": 496,
+    "good_elliptic_fibers": 464,
+    "method": "enumerate all x,y in Fp and reconstruct admissible square x-lifts",
+    "group_check": "explicit doubling of T equals -T at every good-reduction fiber"
+  },
+  "examples": {
+    "examples": 3,
+    "cube_class_counts": [
+      27,
+      2187,
+      2187
+    ],
+    "all_residual_and_recovery_identities_checked": true,
+    "original_binomial_solution_claimed": false
+  },
+  "certificate_sha256": "4d89d5f6824f30b5226d50fdbb94a451e64bcad87008e5044bfe084ee8ea3b01",
+  "local_tables_sha256": "1c941716d2c167ab00819b0cd7c9a6db4c3eb6f6c7abd0bcaaa6d3c0602fc800",
+  "verifier_sha256": "159bef63f3b94b82e43c863bb064811a4da80f7503873107377a466643588f59",
+  "producer_imported": false,
+  "sympy_used": false,
+  "sign_status": "Z>0 is already implied by v17 via the exact sign identity, not a new original exclusion."
+}

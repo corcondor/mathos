@@ -1,0 +1,4 @@
+'NestedBinomialV10.contsZ_det_coprime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.contsZ_den_ordering' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cylinder_error_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.certificate_coverage_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]

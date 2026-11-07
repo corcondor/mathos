@@ -1,0 +1,27 @@
+{
+  "modules": [
+    "CFAnalyticBounds",
+    "CFContinuantBridge",
+    "CFCylinderNesting",
+    "CFCurveInstantiation",
+    "CFVerifierBridge",
+    "ThirtyCofactorInputs",
+    "ThirtyCofactorSecondDivisor",
+    "ThirtyCofactorPrimeSeparation",
+    "ThirtyCofactorQDivisibility",
+    "ThirtyCofactorCubePrimeExtraction",
+    "ThirtyCofactorPellCovering",
+    "ThirtyCofactorValuation",
+    "ThirtyCofactorPellReduction",
+    "ThirtyCofactorExponentDomain",
+    "ThirtyCofactorPrimeBound",
+    "ThirtyCofactorSquareDefect",
+    "ThirtyCofactorCubeLocalization",
+    "ThirtyCofactorTargetCubeLocalization",
+    "ThirtyCofactorDefectBridge",
+    "ThirtyCofactorDefectPellReductionC",
+    "ThirtyCofactorDefectKRange",
+    "ThirtyCofactorDefectPellConcrete",
+    "CFCurveRecovery"
+  ]
+}

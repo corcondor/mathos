@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "scope": "Independent written proof review of all seven sections, with exact rational recomputation",
+  "input_file": "v20_logarithmic_gap.md",
+  "input_sha256": "bf732ca74c3f9492fa8af61f0afd36ee03bf29ac99d33b692d5a052f48d1aff6",
+  "written_review": [
+    "Factorial integral estimates retain both error terms",
+    "A/r<n^2/18 yields D bound with correct sign",
+    "Lower numerator ratio difference is 3n+15",
+    "Main subtraction gives exactly 3(1-log2)n-10logn+8log6-41",
+    "Both threshold differences have positive derivative beyond stated lower bound",
+    "t>5 justifies dropping the quadratic term in T1",
+    "N<(5001/5000)n^2 holds for n>=104",
+    "Both fixed-J height ratios are increasing on the needed domain",
+    "Small-branch low-n handling uses the existing J>=17 explicitly",
+    "J<=8 endpoint exponential comparison and monotonicity are valid"
+  ],
+  "exact_checks": {
+    "first_cofactor_exact": true,
+    "first_cofactor_margin": true,
+    "second_cofactor_exact": true,
+    "second_cofactor_margin": true,
+    "first_threshold_margin": true,
+    "second_threshold_margin": true,
+    "small_height_constant": true,
+    "complement_height_constant": true,
+    "J8_endpoint": true
+  },
+  "conclusion": "No logical gap found; new lower-gap results use the original equality through L>B.",
+  "limits": "Internal AI review, not an external referee or Lean formalization"
+}

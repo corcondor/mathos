@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "method": "Exact dyadic continued-fraction generation followed by the full 65-pair union at each step; no saved prefix certificate is read.",
+  "executed_as": "v9_gcd_cf_probe.py",
+  "delivered_identical_source": "v9_gcd_defect_cf_reproduction.py",
+  "source_sha256": "d14621296444ec5d2ee4e3166ef7d18492906c06e8084deac321050ca247165a",
+  "executor_session": 56242,
+  "final_result_chunk": "54dc71",
+  "exit_code": 0,
+  "max_S": 12,
+  "curves": 5214,
+  "continued_fraction_terms": 4877566,
+  "candidate_fractions_checked": 30534156,
+  "maximum_partial_quotient": 5710274,
+  "surviving_points": [],
+  "elapsed_seconds": 310.1880896950024,
+  "note": "The primary verifier partitions the two denominator halves and therefore checks fewer unnecessary fractions. Both methods must return the same empty survivor set."
+}

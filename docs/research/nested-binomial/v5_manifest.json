@@ -1,0 +1,140 @@
+{
+  "created_at_utc": "2026-11-05T06:51:05.372737+00:00",
+  "original_equation": "C(C(i,j),C(k,ell))=C(i^2,j^2)+C(k^2,ell^2)",
+  "global_solution_status": "not solved; no exhibited solution",
+  "previous_archive_sha256": "04b5b795a1c9254ca0ebcf3f58adfb2ba1271fe2e3f49e2bc9b3a4fce5ec895a",
+  "preserved_previous_entries": 117,
+  "new_files": [
+    {
+      "name": "PROGRESS_v5_ja.md",
+      "bytes": 12446,
+      "sha256": "f97182fd79f139640c88d8e0881e7051b8973b036e40bf65057cd36330d87a76"
+    },
+    {
+      "name": "v5_l1_expanded_band.md",
+      "bytes": 6964,
+      "sha256": "3c5b5f040526e77dacd843ee57f864811733d1c72f9c3cf3b27f732ba07a9882"
+    },
+    {
+      "name": "v5_l1_expanded_band.py",
+      "bytes": 5690,
+      "sha256": "3972cde1f1a74506fac22532994d538b29f28dd892391d64bdc688689c19af7f"
+    },
+    {
+      "name": "v5_l1_expanded_band_certificates.json",
+      "bytes": 6902150,
+      "sha256": "cddf422267205ffafd2e3472940048abf71a87500e1c0382163e746f2fe2c943"
+    },
+    {
+      "name": "v5_l1_expanded_band_verification.json",
+      "bytes": 684,
+      "sha256": "1af415c638bc058657a909a426e2d23d2d80f5bdb8cb4643d4896b54468e5691"
+    },
+    {
+      "name": "v5_l1_offset_four.md",
+      "bytes": 5103,
+      "sha256": "01dcd4e6e22eee80d37d06ab467d8bd2429efcca492002ebf19a568433907fa6"
+    },
+    {
+      "name": "v5_l1_offset_four.py",
+      "bytes": 5720,
+      "sha256": "fa39abbd331411a4b72c188378aff71b0fe52ff39d0ecfbb8af4135375c6d228"
+    },
+    {
+      "name": "v5_l1_offset_four_certificates.json",
+      "bytes": 4333049,
+      "sha256": "cb17bd9580f87aa017150fb33a3694b47d6f6f63a652a6a2e0373420686c98a4"
+    },
+    {
+      "name": "v5_l1_offset_four_prime_sieve.md",
+      "bytes": 4096,
+      "sha256": "9a44cd95e0e57e6836e73e4e700cea49ab5ce93523b544e37ee71a3834ab3407"
+    },
+    {
+      "name": "v5_l1_offset_four_verification.json",
+      "bytes": 695,
+      "sha256": "17299653d83ca233754301bb5d7fe06dd69c0bf124f2bf39f081b5c656e046da"
+    },
+    {
+      "name": "v5_large_prime_localization.md",
+      "bytes": 10923,
+      "sha256": "1da0225eb3497b4c20f7adb0cba23db71de799672f394d417f52545301f22266"
+    },
+    {
+      "name": "v5_large_prime_localization_checks.py",
+      "bytes": 6470,
+      "sha256": "ac08853c70474547db23fee90f6de20a5e529722359cfa86b21e1dfcf68b6c6a"
+    },
+    {
+      "name": "v5_large_prime_localization_verification.json",
+      "bytes": 3275,
+      "sha256": "a53b565a441b0090a9040a6c8e333fb6ad88f7ee444592571ca0380a4e5e2265"
+    },
+    {
+      "name": "v5_offset_three_checks.py",
+      "bytes": 5972,
+      "sha256": "07b82c5fd1c5efcb3b01b5e65deffae0bc86134ef69b4d229f78c3616ea5c2c2"
+    },
+    {
+      "name": "v5_offset_three_independent_audit.md",
+      "bytes": 3929,
+      "sha256": "e4af75a8d9f310e2f88e66f8116272cfe1fe96adb1e430724ce87db78fc05bb7"
+    },
+    {
+      "name": "v5_offset_three_structure.md",
+      "bytes": 8213,
+      "sha256": "4243dea9ca10e7c24bc7f4a20e1f2ddc9b7f37be223d3ccc353df0187d548709"
+    },
+    {
+      "name": "v5_offset_three_three_power.md",
+      "bytes": 7521,
+      "sha256": "515657d2692979ad77b245a41e3ca3c0b666fcc3b3e1b939665f8c909a14e04d"
+    },
+    {
+      "name": "v5_offset_three_verification.json",
+      "bytes": 3002,
+      "sha256": "5f0e33ab44d16a95a07d2256003b997116d7111852ef402225924694ea3ec584"
+    },
+    {
+      "name": "v5_upper_large_prime.md",
+      "bytes": 3210,
+      "sha256": "83c23331521aa81d8540b650c564ca521e7f00b57d9222bf7ad911df06cd2bca"
+    },
+    {
+      "name": "v5_formal/OffsetThree.lean",
+      "bytes": 8022,
+      "sha256": "12f5a58145b4dd8e1bd30d5ceed4dc7ecc2b6fa8ef4223ef09f15fe32da6ad8f"
+    },
+    {
+      "name": "v5_formal/README.md",
+      "bytes": 2915,
+      "sha256": "c204a7df57fd869538d4aa9452e4ed1d0304f58dae7fa7ec112af36adef773d8"
+    },
+    {
+      "name": "v5_formal/lakefile.toml",
+      "bytes": 292,
+      "sha256": "09ac9f0dee423d4eb5827bdbe0f6150cc5d130cd7b13d307cabf00b218f99492"
+    },
+    {
+      "name": "v5_formal/lean-toolchain",
+      "bytes": 25,
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    {
+      "name": "v5_formal/kernel_check.log",
+      "bytes": 707,
+      "sha256": "76550a8548f84abdae34c04e7c3fbdb8482617b2353014161bdecd84742a0139"
+    },
+    {
+      "name": "v5_formal/kernel_check.json",
+      "bytes": 1519,
+      "sha256": "5e532e2dc44149087f12b9f89c0a3781934a2eeada1c01177162114e2d14cf3b"
+    }
+  ],
+  "validation": {
+    "finite_certificates_match_verified_hashes": true,
+    "formal_source_matches_successful_kernel_check": true,
+    "old_archive_entries_preserved": true
+  },
+  "notes": "The uniform mathematical proofs are in the Markdown notes. Lean coverage is explicitly limited in v5_formal/README.md. The six powers-of-three residual rows were checked by three exact methods."
+}

@@ -1,0 +1,10 @@
+'NestedBinomial.ell_one_cube_divisibility' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomial.original_ell_one_cube_divisibility' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomial.original_other_term_divisibility' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomial.valuation_cubic_cap' depends on axioms: [propext, Quot.sound]
+'NestedBinomial.squarefree_gap_contradiction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomial.original_offset_three_squarefree_contradiction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'NestedBinomial.cube_mod_nine_ne_four_or_five' depends on axioms: [propext]
+

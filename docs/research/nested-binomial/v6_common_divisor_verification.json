@@ -1,0 +1,75 @@
+{
+  "status": "pass",
+  "scope": "Formula checks and complete small exponent remainder; the infinite theorem is the written proof.",
+  "common_divisor_samples": [
+    {
+      "n": 104,
+      "q0": 104,
+      "q1": 103,
+      "Q": 10712,
+      "A_mod_Q": 0,
+      "X_mod_Q": 0
+    },
+    {
+      "n": 106,
+      "q0": 106,
+      "q1": 35,
+      "Q": 3710,
+      "A_mod_Q": 0,
+      "X_mod_Q": 0
+    },
+    {
+      "n": 109,
+      "q0": 109,
+      "q1": 18,
+      "Q": 1962,
+      "A_mod_Q": 0,
+      "X_mod_Q": 0
+    },
+    {
+      "n": 250,
+      "q0": 250,
+      "q1": 83,
+      "Q": 20750,
+      "A_mod_Q": 0,
+      "X_mod_Q": 0
+    },
+    {
+      "n": 512,
+      "q0": 512,
+      "q1": 511,
+      "Q": 261632,
+      "A_mod_Q": 0,
+      "X_mod_Q": 0
+    }
+  ],
+  "d3_exponent_cases_above_103": [
+    250,
+    1000
+  ],
+  "d3_squarefree_successor_cases": [
+    250
+  ],
+  "d6_t19_exclusion": "9 divides 19^a-1 for all a=1,2,3",
+  "d6_t20_exclusion": "4 divides 5^a-1 for all a=1,2,3",
+  "n250": {
+    "A": 2573000,
+    "r": 830,
+    "prime": 83,
+    "lucas_small_binomial_residue": 65,
+    "direct_binomial_branches": [
+      {
+        "k": 830,
+        "left_mod_83": 65,
+        "right_mod_83": 0
+      },
+      {
+        "k": 2572170,
+        "left_mod_83": 65,
+        "right_mod_83": 0
+      }
+    ]
+  },
+  "whole_equation_solved": false,
+  "new_squarefree_successor_theorem_formalized_in_Lean": false
+}

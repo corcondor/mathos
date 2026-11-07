@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "date_utc": "2026-11-06 17:08:00 UTC",
+  "scope": "Final assembled research directory: four producers and five independent/supporting checks",
+  "checks": [
+    {
+      "kind": "producer",
+      "index": 0,
+      "exit_code": 0,
+      "wall_seconds": 0.090213094,
+      "output": "{\n  \"status\": \"PASS\",\n  \"polynomial_identities\": {\n    \"P0_lies_on_curve\": true,\n    \"discriminant_factorization\": true,\n    \"P0_tangent_numerator\": true,\n    \"P3_lies_on_curve\": true,\n    \"P3_tangent_slope\": true,\n    \"P3_doubled_x_equals_original\": true\n  },\n  \"mod8_classes\": 48,\n  \"mod9_classes\": 72,\n  \"possible_torsion_exception\": [\n    [\n      3,\n      1\n    ]\n  ],\n  \"exception_P0\": [\n    35,\n    288\n  ],\n  \"exception_2P0\": [\n    -61,\n    0\n  ],\n  \"exception_point_exact_order\": 4,\n  \"exception_residual_F\": 4853,\n  \"uniform_proof\": \"Nagell-Lutz plus d|24a and exact 2/3-adic classification; see companion note\",\n  \"formalization\": \"No new Lean execution\",\n  \"checker_sha256\": \"864613ac61466ff3c506d6e2d9f08ec4fe8ffc5b11d6ef8d202dc404fc99b538\",\n  \"note_sha256\": \"9b6f13ce2abcea4db71765b76f75cb3ac78cd9c2fa9d321f60b879193de04248\"\n}\n"
+    },
+    {
+      "kind": "producer",
+      "index": 1,
+      "exit_code": 0,
+      "wall_seconds": 2.076076701,
+      "output": "{\n  \"status\": \"PASS\",\n  \"identities\": 14,\n  \"rho_domain\": [\n    1,\n    10\n  ],\n  \"curves\": 45,\n  \"mod5_blocked_curves\": 11,\n  \"candidates\": 886683,\n  \"square_tests\": 775235,\n  \"square_discriminants\": 5,\n  \"survivors\": 0,\n  \"report\": \"/workspace/scratch/305fc41e8436/mathos/docs/research/nested-binomial/v19_elliptic_residual_checks.json\"\n}\n"
+    },
+    {
+      "kind": "producer",
+      "index": 2,
+      "exit_code": 0,
+      "wall_seconds": 2.08509533,
+      "output": "{\n  \"output\": \"/workspace/scratch/305fc41e8436/mathos/docs/research/nested-binomial/v19_canonical_J_certificate.json\",\n  \"sha256\": \"314edd42c7c884de81c46d9a56ba2af9a11d4829bd85c3f2caf699f99305d57e\",\n  \"totals\": {\n    \"primitive_w\": 6620,\n    \"raw_divisor_records\": 237434,\n    \"normalized_n\": 136852,\n    \"height_compatible\": 159\n  },\n  \"bezout_certificates\": 110,\n  \"max_certificate_prime\": 107\n}\n"
+    },
+    {
+      "kind": "producer",
+      "index": 3,
+      "exit_code": 0,
+      "wall_seconds": 2.470581308,
+      "output": "{\n  \"status\": \"PASS_COMPLETE_EXCLUSION\",\n  \"defects_processed\": [\n    13,\n    24\n  ],\n  \"counts\": {\n    \"coefficient_families\": 3571,\n    \"pell_points\": 145195,\n    \"integral\": 112424,\n    \"n_ge_104\": 112249,\n    \"actual_M\": 42527,\n    \"actual_delta\": 42527,\n    \"cube_divisibility\": 3798,\n    \"coarse_interval\": 3625,\n    \"post_log_candidates\": 93,\n    \"modular_branches_excluded\": 186,\n    \"modular_branches_remaining\": 0,\n    \"square_discriminants\": 4\n  },\n  \"witness_prime_histogram\": {\n    \"2\": 22,\n    \"3\": 3,\n    \"5\": 46,\n    \"7\": 24,\n    \"11\": 56,\n    \"13\": 18,\n    \"17\": 7,\n    \"19\": 4,\n    \"23\": 6\n  },\n  \"max_candidate_n\": 384184387047640625450129434282186515057663129735569636627844004104895998848174453808436120107730120939057567521778928760301794825299942365045506155164303943606132543398559293595790075702477197195979619588575122821614658422457241738651498960279434591672050538549020733193209419380375021654962311169,\n  \"wall_seconds\": 2.326325,\n  \"certificate_sha256\": \"ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7\"\n}\n"
+    },
+    {
+      "kind": "audit",
+      "label": "rank_independent",
+      "exit_code": 0,
+      "wall_seconds": 0.034333255,
+      "output": "{\n  \"status\": \"PASS\",\n  \"review\": \"written uniform proof independently read; no logical gap found\",\n  \"polynomial_method\": \"13x13 exact grid plus degree <=12 in each variable\",\n  \"polynomial_identities\": 5,\n  \"grid_points\": 169,\n  \"exception_P0\": [\n    35,\n    288\n  ],\n  \"exception_double\": [\n    -61,\n    0\n  ],\n  \"checked_logic\": [\n    \"Nagell-Lutz applies without minimality\",\n    \"P0 has nonzero y, so its double is affine\",\n    \"rational lambda with integral square is integral\",\n    \"gcd(a,b)=1 justifies d|24a\",\n    \"primes >=5 excluded by gcd(d,a)|3\",\n    \"v2(d) in {0,2}, v3(d) in {0,1}\",\n    \"d|12 plus a>b gives only (3,1)\",\n    \"exception is order4 and its only positive residual is nonsquare\"\n  ],\n  \"sources\": {\n    \"v19_residual_positive_rank.md\": \"9b6f13ce2abcea4db71765b76f75cb3ac78cd9c2fa9d321f60b879193de04248\",\n    \"v19_residual_positive_rank_checks.py\": \"864613ac61466ff3c506d6e2d9f08ec4fe8ffc5b11d6ef8d202dc404fc99b538\",\n    \"v19_uniform_rank_independent_review.py\": \"ed07532a959067f4ab478f69591df8c78f22f938048fd4783eb6128a045c2803\"\n  },\n  \"scope\": \"written proof + exact integer verification; no new Lean or API execution\"\n}\n"
+    },
+    {
+      "kind": "audit",
+      "label": "elliptic_independent",
+      "exit_code": 0,
+      "wall_seconds": 2.222118915,
+      "output": "{\n  \"status\": \"PASS\",\n  \"scope\": \"rho<=10 coverage, five reconstructed points, uniform mod5, elliptic coefficient identities\",\n  \"source_sha256\": {\n    \"v19_elliptic_residual.md\": \"481a14198266fbcceaae5157df39dbc77f175b2b5ba0c65a919d834289edb9b2\",\n    \"v19_elliptic_residual_checks.py\": \"90463537087be3b53118cd318f8021665fa4eb5a4700fadf157845607b359203\",\n    \"v19_elliptic_residual_checks.json\": \"3774b35a34ae9c7c6cc4e0227abf060e74b94f1406c69c33dcfbdef4e82aa614\"\n  },\n  \"finite_domain\": {\n    \"fibers\": 45,\n    \"mod5_blocked\": 11,\n    \"candidates\": 886683,\n    \"square_tests\": 775235\n  },\n  \"symbolic_identity_checks\": [\n    \"first_curve_map\",\n    \"first_curve_discriminant\",\n    \"second_curve_map\",\n    \"second_curve_discriminant\",\n    \"second_c4\",\n    \"quotient_discriminant\",\n    \"T_curve\",\n    \"T_tangent\",\n    \"T_flex\",\n    \"S_curve\",\n    \"S_tangent\",\n    \"S_flex\",\n    \"boundary\",\n    \"remainder\"\n  ],\n  \"torsion_boundary_rational_reconstructions\": true,\n  \"independence\": \"No source import; distinct remainder formula and lower-bound generation; SymPy coefficient algebra instead of producer sparse-polynomial class\",\n  \"conclusion\": \"rho>=11 follows for both original k branches from the cited v17/v18 necessary conditions.\",\n  \"not_reviewed\": \"External literature completeness/termination claims, optional PARI rank outputs, or new Lean formalization.\"\n}\n"
+    },
+    {
+      "kind": "audit",
+      "label": "J_independent",
+      "exit_code": 0,
+      "wall_seconds": 0.497304893,
+      "output": "{\n  \"status\": \"PASS\",\n  \"certificate_sha256\": \"314edd42c7c884de81c46d9a56ba2af9a11d4829bd85c3f2caf699f99305d57e\",\n  \"checker\": \"Python standard library only; no producer import or SymPy\",\n  \"complete_reconstructed_rows\": 159,\n  \"bezout_identities\": 110,\n  \"max_prime\": 107,\n  \"totals\": {\n    \"primitive_w\": 6620,\n    \"raw_divisor_records\": 237434,\n    \"normalized_n\": 136852,\n    \"height_compatible\": 159\n  },\n  \"scope\": \"Finite canonical J <= 16 only, under the stated inherited conditions.\"\n}\n"
+    },
+    {
+      "kind": "audit",
+      "label": "defect_independent",
+      "exit_code": 0,
+      "wall_seconds": 1.237532193,
+      "output": "{\n  \"status\": \"PASS\",\n  \"defects_completely_excluded\": [\n    13,\n    24\n  ],\n  \"scope\": \"Original squared-index equation; ell=1, j=i-3, n>=104; both k=r and k=C(n,3)-r\",\n  \"counts\": {\n    \"coefficient_families\": 3571,\n    \"pell_points\": 145195,\n    \"integral\": 112424,\n    \"n_ge_104\": 112249,\n    \"actual_M\": 42527,\n    \"actual_delta\": 42527,\n    \"cube_divisibility\": 3798,\n    \"coarse_interval\": 3625,\n    \"post_log_candidates\": 93,\n    \"modular_branches_excluded\": 186,\n    \"modular_branches_remaining\": 0,\n    \"square_discriminants\": 4\n  },\n  \"fundamental_units_independently_recomputed\": 2030,\n  \"all_cf_terms_and_norms_checked\": true,\n  \"all_coefficient_families_and_pell_powers_checked\": true,\n  \"all_first_omitted_points_cross_height\": true,\n  \"all_recorded_modular_witnesses_recomputed\": true,\n  \"producer_imported_or_executed\": false,\n  \"v16_module_imported_or_executed\": false,\n  \"independence\": \"Full CF period parity instead of first norm-one stopping; factorial-inverse digit coefficients instead of math.comb; binary exponent search for the logarithm bracket\",\n  \"certificate_sha256\": \"ce2cfe9b2968896890588274c705dd6bb9011e58eab09a5cddeb43fce6da33a7\",\n  \"verifier_sha256\": \"d76c4fe97f47f0255830ba97029ac404156cd297f981da9f0d95c3378879d701\",\n  \"producer_sha256_from_certificate\": \"9e0381cee0fdf43f93a47b9a2ac9d7a452d5c54ba8e004aecefd6c86d2376783\",\n  \"written_theory_dependency\": {\n    \"file\": \"v16_square_defect_pell.md\",\n    \"sections\": [\n      \"4: height\",\n      \"5: complete Pell reduction\",\n      \"6: candidate bound\"\n    ],\n    \"sha256\": \"f356928fd6235cb4e10d692dce0aec2be1f863d8b4d9882c66ad355cc520a822\"\n  },\n  \"wall_seconds\": 1.214404,\n  \"limitations\": \"Arithmetic certificate verification, not Lean formalization; global completeness depends on the recorded written v16 height and Pell proofs; unbounded delta is not covered\"\n}\n"
+    },
+    {
+      "kind": "audit",
+      "label": "crypto_conditions",
+      "exit_code": 0,
+      "wall_seconds": 0.126935764,
+      "output": "{\n  \"status\": \"PASS\",\n  \"supporting_counts\": {\n    \"raw_bivariate_bound_excluded\": 93,\n    \"raw_univariate_cubic_bound_excluded\": 93,\n    \"negative_neighbor_degree_two_bound_excluded\": 262\n  },\n  \"dual_conic\": {\n    \"C\": 78,\n    \"K\": 703,\n    \"distinct_points\": 2\n  },\n  \"finite_fields\": [\n    {\n      \"prime\": 5,\n      \"affine_point_count\": 4,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 7,\n      \"affine_point_count\": 8,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 11,\n      \"affine_point_count\": 12,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 17,\n      \"affine_point_count\": 16,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 19,\n      \"affine_point_count\": 19\n    },\n    {\n      \"prime\": 23,\n      \"affine_point_count\": 22,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 29,\n      \"affine_point_count\": 28,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    },\n    {\n      \"prime\": 31,\n      \"affine_point_count\": 32,\n      \"nonsingular_count_formula\": \"p-Legendre(C*K,p)\"\n    }\n  ]\n}\n"
+    }
+  ],
+  "not_claimed": [
+    "Lean formalization",
+    "DeepSeek API execution",
+    "full original equation classification",
+    "external human peer review"
+  ]
+}

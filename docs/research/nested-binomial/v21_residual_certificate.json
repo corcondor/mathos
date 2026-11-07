@@ -1,0 +1,110 @@
+{
+  "bound": 4096,
+  "counts": {
+    "attempts": 36892376,
+    "branch_points": 8,
+    "integer_n": 14,
+    "positive_integer_t": 16,
+    "primitive_filtered": 3114467,
+    "residual_squares": 65
+  },
+  "method": "exact standard library; Lucas mod prime for both k branches",
+  "points": [
+    {
+      "a": 38,
+      "b": 3,
+      "delta": 46,
+      "n": 12168,
+      "rho": 31,
+      "t": 1170,
+      "witnesses": {
+        "k=A-r": 5,
+        "k=r": 5
+      }
+    },
+    {
+      "a": 43,
+      "b": 2,
+      "delta": 19,
+      "n": 6859,
+      "rho": 67,
+      "t": 1140,
+      "witnesses": {
+        "k=A-r": 5,
+        "k=r": 2
+      }
+    },
+    {
+      "a": 38,
+      "b": 3,
+      "delta": 10,
+      "n": 1000,
+      "rho": 103,
+      "t": 330,
+      "witnesses": {
+        "k=A-r": 7,
+        "k=r": 7
+      }
+    },
+    {
+      "a": 53,
+      "b": 27,
+      "delta": 1,
+      "n": 243,
+      "rho": 298,
+      "t": 63,
+      "witnesses": {
+        "k=A-r": 2,
+        "k=r": 5
+      }
+    },
+    {
+      "a": 319,
+      "b": 27,
+      "delta": 35,
+      "n": 28126,
+      "rho": 1402,
+      "t": 1722,
+      "witnesses": {
+        "k=A-r": 11,
+        "k=r": 11
+      }
+    },
+    {
+      "a": 173,
+      "b": 6,
+      "delta": 1,
+      "n": 4375,
+      "rho": 1543,
+      "t": 1050,
+      "witnesses": {
+        "k=A-r": 11,
+        "k=r": 2
+      }
+    },
+    {
+      "a": 274,
+      "b": 9,
+      "delta": 28,
+      "n": 21952,
+      "rho": 1825,
+      "t": 2436,
+      "witnesses": {
+        "k=A-r": 5,
+        "k=r": 5
+      }
+    },
+    {
+      "a": 188,
+      "b": 3,
+      "delta": 14,
+      "n": 5832,
+      "rho": 2287,
+      "t": 1782,
+      "witnesses": {
+        "k=A-r": 5,
+        "k=r": 5
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+POINT rho=31 n=12168 t=1170 a=38 b=3 delta=46 p1=5 p2=5
+POINT rho=67 n=6859 t=1140 a=43 b=2 delta=19 p1=2 p2=5
+POINT rho=103 n=1000 t=330 a=38 b=3 delta=10 p1=7 p2=7
+POINT rho=298 n=243 t=63 a=53 b=27 delta=1 p1=5 p2=2
+POINT rho=1402 n=28126 t=1722 a=319 b=27 delta=35 p1=11 p2=11
+POINT rho=1543 n=4375 t=1050 a=173 b=6 delta=1 p1=2 p2=11
+POINT rho=1825 n=21952 t=2436 a=274 b=9 delta=28 p1=5 p2=5
+POINT rho=2287 n=5832 t=1782 a=188 b=3 delta=14 p1=5 p2=5
+RANGE 13 4096
+COUNTS attempts=36892376 primitive=3114467 square=65 t=16 n=14 branch=8 delta25=3

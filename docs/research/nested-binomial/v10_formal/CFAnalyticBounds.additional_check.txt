@@ -1,0 +1,54 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:84:60: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:84:64: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:93:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:93:27: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:96:23: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:144:27: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:144:31: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:84:64: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:93:27: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:144:31: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:96:23: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:169:52: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:169:56: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:194:34: warning: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:194:38: warning: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:169:56: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/CFAnalyticBounds.lean:194:38: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+'NestedBinomialV10.alpha_gt_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.curve_approximation_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.reduced_approximation_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

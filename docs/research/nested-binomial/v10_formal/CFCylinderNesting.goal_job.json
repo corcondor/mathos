@@ -1,0 +1,29 @@
+{
+  "module": "CFCylinderNesting",
+  "imports": "import Mathlib.Tactic\nimport CFContinuantBridge",
+  "definitions": "",
+  "local_dependencies": [
+    "CFApproximationCore.lean",
+    "CFCoefficientRanges.lean",
+    "CFCandidateCoverage.lean",
+    "CFContinuantBridge.lean"
+  ],
+  "goals": [
+    [
+      "certificate_cylinder_supply",
+      "theorem certificate_cylinder_supply (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (alpha : ℝ) (M : ℕ) (hbetween : (alpha - ((contsZ a (M + 1)).1 : ℝ) / ((contsZ a (M + 1)).2 : ℝ)) * (alpha - (((contsZ a (M + 1)).1 + (contsZ a M).1 : ℤ) : ℝ) / (((contsZ a (M + 1)).2 + (contsZ a M).2 : ℤ) : ℝ)) < 0) : ∃ u : ℝ, 1 < u ∧ alpha * (((contsZ a (M + 1)).2 : ℝ) * u + ((contsZ a M).2 : ℝ)) = ((contsZ a (M + 1)).1 : ℝ) * u + ((contsZ a M).1 : ℝ)"
+    ],
+    [
+      "cylinder_step",
+      "theorem cylinder_step (a : ℕ → ℤ) (alpha u : ℝ) (m : ℕ) (hm : 1 ≤ m) (hu : 1 < u) (hcyl : alpha * (((contsZ a (m + 1)).2 : ℝ) * u + ((contsZ a m).2 : ℝ)) = ((contsZ a (m + 1)).1 : ℝ) * u + ((contsZ a m).1 : ℝ)) : ∃ v : ℝ, (a m : ℝ) < v ∧ v < (a m : ℝ) + 1 ∧ alpha * (((contsZ a m).2 : ℝ) * v + ((contsZ a (m - 1)).2 : ℝ)) = ((contsZ a m).1 : ℝ) * v + ((contsZ a (m - 1)).1 : ℝ)"
+    ],
+    [
+      "terminal_cylinder_descends",
+      "theorem terminal_cylinder_descends (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (alpha u : ℝ) (M : ℕ) (hu : 1 < u) (hcyl : alpha * (((contsZ a (M + 1)).2 : ℝ) * u + ((contsZ a M).2 : ℝ)) = ((contsZ a (M + 1)).1 : ℝ) * u + ((contsZ a M).1 : ℝ)) : ∀ i : ℕ, i < M → ∃ v : ℝ, (a (i + 1) : ℝ) < v ∧ v < (a (i + 1) : ℝ) + 1 ∧ alpha * (((contsZ a (i + 1)).2 : ℝ) * v + ((contsZ a i).2 : ℝ)) = ((contsZ a (i + 1)).1 : ℝ) * v + ((contsZ a i).1 : ℝ)"
+    ],
+    [
+      "certificate_prefix_coverage",
+      "theorem certificate_prefix_coverage (a : ℕ → ℤ) (ha : ∀ i, 1 ≤ a i) (ha1 : 2 ≤ a 1) (alpha : ℝ) (M : ℕ) (hbetween : (alpha - ((contsZ a (M + 1)).1 : ℝ) / ((contsZ a (M + 1)).2 : ℝ)) * (alpha - (((contsZ a (M + 1)).1 + (contsZ a M).1 : ℤ) : ℝ) / (((contsZ a (M + 1)).2 + (contsZ a M).2 : ℤ) : ℝ)) < 0) (p q : ℤ) (hq : 0 < q) (hq_lt : q < (contsZ a (M + 1)).2) (hred : Nat.Coprime (Int.natAbs p) (Int.natAbs q)) (happrox : |alpha - (p : ℝ) / (q : ℝ)| < 3 / (2 * (q : ℝ) ^ 2)) : ∃ i : ℕ, i < M ∧ (contsZ a (i + 1)).2 ≤ q ∧ q < (contsZ a (i + 2)).2 ∧ ∃ a' b c : ℤ, p = a' * (contsZ a (i + 1)).1 + b * (contsZ a i).1 ∧ q = a' * (contsZ a (i + 1)).2 + b * (contsZ a i).2 ∧ c = a' - b * a (i + 1) ∧ p = b * (contsZ a (i + 2)).1 + c * (contsZ a (i + 1)).1 ∧ q = b * (contsZ a (i + 2)).2 + c * (contsZ a (i + 1)).2 ∧ (a', b) ∈ coefficientCandidates (a (i + 1))"
+    ]
+  ]
+}

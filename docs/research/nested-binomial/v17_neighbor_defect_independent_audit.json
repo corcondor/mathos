@@ -1,0 +1,165 @@
+{
+  "status": "PASS",
+  "producer_imported_or_executed": false,
+  "divisor_method": "Complete pairs d, N/d for 1<=d<=floor(sqrt(N)), N=c0^3; square-transfer filter d^2|N",
+  "small_index_method": "Every integer r in the proved interval for each 104<=n<=383",
+  "square_method": "Integer binary search",
+  "statistics": {
+    "families": 8712,
+    "divisor_points": 590028,
+    "normalized_n": 350188,
+    "second_divisor": 1260,
+    "integral_p": 20,
+    "p_large": 11,
+    "square": 0
+  },
+  "all_family_records_match": true,
+  "all_second_divisor_candidates_match": true,
+  "all_integral_p_candidates_match": true,
+  "all_square_witnesses_match": true,
+  "largest_generated_n": 1816487208,
+  "factorizations_checked": 848,
+  "small_indices": 280,
+  "small_r_values_checked": 22540,
+  "small_pairs": [
+    [
+      169,
+      546,
+      1
+    ],
+    [
+      243,
+      792,
+      1
+    ],
+    [
+      250,
+      830,
+      5
+    ],
+    [
+      361,
+      1140,
+      1
+    ]
+  ],
+  "last_square_witnesses": [
+    [
+      2,
+      22,
+      1,
+      676,
+      228489,
+      5030806,
+      2242
+    ],
+    [
+      6,
+      61,
+      1,
+      136,
+      3083,
+      188871,
+      434
+    ],
+    [
+      6,
+      66,
+      1,
+      676,
+      76163,
+      5030806,
+      2242
+    ],
+    [
+      17,
+      158,
+      1,
+      163,
+      1563,
+      247924,
+      497
+    ],
+    [
+      17,
+      188,
+      0,
+      160,
+      1506,
+      284080,
+      532
+    ],
+    [
+      18,
+      172,
+      1,
+      364,
+      7361,
+      1268268,
+      1126
+    ],
+    [
+      22,
+      225,
+      1,
+      784,
+      27939,
+      6290971,
+      2508
+    ],
+    [
+      33,
+      323,
+      1,
+      349,
+      3691,
+      1194279,
+      1092
+    ],
+    [
+      33,
+      355,
+      0,
+      223,
+      1507,
+      536315,
+      732
+    ],
+    [
+      33,
+      361,
+      1,
+      289,
+      2531,
+      915417,
+      956
+    ],
+    [
+      41,
+      394,
+      0,
+      276,
+      1858,
+      733700,
+      856
+    ]
+  ],
+  "constant_margins": [
+    "272/9",
+    "273745/243",
+    "110017/9900",
+    "133100096978944/793881",
+    "2097152/9",
+    "5200",
+    "10434"
+  ],
+  "survivors": [],
+  "certificate_sha256": "7a496312c8fcd614b683d4ee0a60268ec218c4bd0991104554457b001fdb8c88",
+  "uncompressed_certificate_sha256": "e171f8b5844e50b577b17acee313a10207943450e626a16a7a781847556078df",
+  "producer_sha256": "14d1d8a71d416631083f47fa6f0833558a16dd12a0480931f1b8d67606e093f7",
+  "proof_note_sha256": "94e7cedb7d0a194aeae8411e706cc380ddfb64e42b7344663ff1aa360b4fe406",
+  "auditor_sha256": "c5f90abc49ec91bfbdee894410863c1fc2040b55b3661033626fc9937abaa27b",
+  "new_lean_execution": false,
+  "external_peer_review": false,
+  "verification_boundary": "Exact independent reproduction of the complete finite cofactor certificate; depends on the separately reviewed written reductions and inherited branch theorems."
+}

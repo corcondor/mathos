@@ -1,0 +1,14 @@
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean:6:48: warning: Variable name `hM` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hM
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean:49:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel (pow_pos hs 2)).mp h1` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/workspace/mathos/docs/research/nested-binomial/v10_formal/ThirtyCofactorPellReduction.lean:62:8: warning: Unused tactic linter: `exact (Nat.mul_left_cancel hd).mp h1` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'NestedBinomialV10.pell_parametrization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.covering_to_pell' depends on axioms: [propext, Classical.choice, Quot.sound]

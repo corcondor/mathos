@@ -1,0 +1,160 @@
+{
+  "status": "PASS",
+  "scope": "Exact structural tests of uniform written proofs; no search of the original equation",
+  "valuation_formula_cases": 3196,
+  "independent_method": "Base-p carries, separate from the factorial-valuation proof",
+  "full_binomial_gcd_cases": 238,
+  "cases_with_vp_B_greater_than_one": 307,
+  "first_power_above_4w_cases": 407,
+  "valuation_cases_by_prime": {
+    "2": 60,
+    "3": 120,
+    "5": 174,
+    "7": 194,
+    "11": 226,
+    "13": 227,
+    "17": 236,
+    "19": 236,
+    "23": 237,
+    "29": 239,
+    "31": 247,
+    "37": 249,
+    "41": 250,
+    "43": 250,
+    "47": 251
+  },
+  "normalization_cases": 1000,
+  "sample_full_gcd_records": [
+    {
+      "w": 1,
+      "p": 2,
+      "a": 3,
+      "n": 10,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 4,
+      "n": 18,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 5,
+      "n": 34,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 6,
+      "n": 66,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 7,
+      "n": 130,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 8,
+      "n": 258,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 2,
+      "a": 9,
+      "n": 514,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 2,
+      "n": 11,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 3,
+      "n": 29,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 4,
+      "n": 83,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 5,
+      "n": 245,
+      "S": 1,
+      "divisor_bound": 1
+    },
+    {
+      "w": 1,
+      "p": 3,
+      "a": 6,
+      "n": 731,
+      "S": 1,
+      "divisor_bound": 1
+    }
+  ],
+  "full_gcd_test_max_n": 2500,
+  "test_parameter_range": {
+    "w": [
+      1,
+      30
+    ],
+    "a": [
+      1,
+      9
+    ],
+    "primes": [
+      2,
+      3,
+      5,
+      7,
+      11,
+      13,
+      17,
+      19,
+      23,
+      29,
+      31,
+      37,
+      41,
+      43,
+      47
+    ]
+  },
+  "uniform_defect_formula": "v_p(S)=v_p(C(6w,2w)/gcd(C(6w,2w),6)), if p does not divide w and p^a>4w",
+  "uniform_fixed_cofactor_bound": "log(i)<768w^2/gcd(w,6) and i<2^(1152w^2/gcd(w,6)) for any solution with i=wp^a+2, ell=1, j=i-3",
+  "stronger_divisor": "S divides (n-2)/gcd(n-2,6), and S divides (w/gcd(w,6))*p^v_p(D_w) in the exact-defect range",
+  "all_fixed_cofactor_remainders_checked": false,
+  "new_Lean_formalization": false,
+  "original_equation_solved": false,
+  "checker_sha256": "19dad76f7f1b65238723b4ed347ef3fa9e4cb14acc6dc7cfa5bd1687ea7f936d"
+}

@@ -1,0 +1,148 @@
+{
+  "status": "exploratory_not_a_global_proof",
+  "upper_i": 512,
+  "summaries": [
+    {
+      "p": 5,
+      "a": 2,
+      "i": 25,
+      "triples": 237,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 3,
+      "a": 3,
+      "i": 27,
+      "triples": 329,
+      "surviving_branches": 0,
+      "modulus_exponent": 10
+    },
+    {
+      "p": 2,
+      "a": 5,
+      "i": 32,
+      "triples": 593,
+      "surviving_branches": 0,
+      "modulus_exponent": 14
+    },
+    {
+      "p": 7,
+      "a": 2,
+      "i": 49,
+      "triples": 1631,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 2,
+      "a": 6,
+      "i": 64,
+      "triples": 2686,
+      "surviving_branches": 0,
+      "modulus_exponent": 16
+    },
+    {
+      "p": 3,
+      "a": 4,
+      "i": 81,
+      "triples": 4224,
+      "surviving_branches": 0,
+      "modulus_exponent": 12
+    },
+    {
+      "p": 11,
+      "a": 2,
+      "i": 121,
+      "triples": 9094,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 5,
+      "a": 3,
+      "i": 125,
+      "triples": 9680,
+      "surviving_branches": 0,
+      "modulus_exponent": 10
+    },
+    {
+      "p": 2,
+      "a": 7,
+      "i": 128,
+      "triples": 10100,
+      "surviving_branches": 1,
+      "modulus_exponent": 18
+    },
+    {
+      "p": 13,
+      "a": 2,
+      "i": 169,
+      "triples": 17329,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 3,
+      "a": 5,
+      "i": 243,
+      "triples": 35134,
+      "surviving_branches": 0,
+      "modulus_exponent": 14
+    },
+    {
+      "p": 2,
+      "a": 8,
+      "i": 256,
+      "triples": 38838,
+      "surviving_branches": 0,
+      "modulus_exponent": 20
+    },
+    {
+      "p": 17,
+      "a": 2,
+      "i": 289,
+      "triples": 49326,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 7,
+      "a": 3,
+      "i": 343,
+      "triples": 69043,
+      "surviving_branches": 0,
+      "modulus_exponent": 10
+    },
+    {
+      "p": 19,
+      "a": 2,
+      "i": 361,
+      "triples": 76349,
+      "surviving_branches": 0,
+      "modulus_exponent": 8
+    },
+    {
+      "p": 2,
+      "a": 9,
+      "i": 512,
+      "triples": 151952,
+      "surviving_branches": 0,
+      "modulus_exponent": 22
+    }
+  ],
+  "survivors": [
+    {
+      "p": 2,
+      "a": 7,
+      "i": 128,
+      "j": 87,
+      "r": 216,
+      "side": "lower",
+      "v_j": 0,
+      "v_r": 3,
+      "v_L": 6,
+      "v_X": 14
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "status": "pass",
+  "exit_code": 0,
+  "checked_at_utc": "2026-11-05T03:18:54.335245+00:00",
+  "lean_version": "4.35.0",
+  "lean_commit": "eb6cafb7290e8bd5f2937522d8d804f58f02bafc",
+  "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_sha256": "be8e12d4e46e52fb3eb82bd419589273144ab78e1989284ce35188f81ace0a0c",
+  "executed_command": [
+    "lake",
+    "env",
+    "lean",
+    "--root=/workspace/scratch/8e52c1248371/v4_formal",
+    "-o",
+    "/workspace/scratch/8e52c1248371/v4_formal/Divisibility.olean",
+    "/workspace/scratch/8e52c1248371/v4_formal/Divisibility.lean"
+  ],
+  "cwd": "/workspace/scratch/8e52c1248371/v4_runtime/mathlib4",
+  "kernel_check_log": "kernel_check.log",
+  "sorry_used": false,
+  "custom_axioms_used": false,
+  "native_decide_used": false,
+  "whole_diophantine_equation_solved": false,
+  "standalone_lake_build_executed": false,
+  "executor_compatibility_shim": "own_executable_path.c (own proc path readlink only; no changes to Lean binary, proof kernel or theorem assumptions)",
+  "successful_invocation": "direct executor shell with PATH and LD_PRELOAD, then lake env lean; not a Python subprocess",
+  "verification_tool_session": 16215
+}

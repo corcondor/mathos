@@ -1,0 +1,350 @@
+{
+  "title": "v23 finite exhaustive residual-range audit",
+  "range": {
+    "min": 4097,
+    "max": 32768
+  },
+  "previously_excluded": {
+    "min": 13,
+    "max": 4096
+  },
+  "uniform_necessary_residual_lower_bound": 32770,
+  "logical_scope": "original binomial equation; ell=1, j=i-3 branch, k=r or A-r",
+  "method": "v21 proven a-height bound, exact integer enumerators, exact point reconstruction, Lucas mismatch",
+  "algorithm_A": {
+    "source": "v23_residual_extension.cpp",
+    "subranges": [
+      {
+        "filename": "v23_residual_extension_4097_8192.log",
+        "attempts": 73744164,
+        "primitive": 6098258,
+        "square": 30,
+        "t": 4,
+        "n": 4,
+        "branch": 2,
+        "delta25": 0
+      },
+      {
+        "filename": "v23_residual_extension_8193_16384.log",
+        "attempts": 218374332,
+        "primitive": 17935926,
+        "square": 39,
+        "t": 7,
+        "n": 5,
+        "branch": 4,
+        "delta25": 4
+      },
+      {
+        "filename": "v23_residual_extension_16385_24576.log",
+        "attempts": 294067116,
+        "primitive": 24085333,
+        "square": 36,
+        "t": 7,
+        "n": 7,
+        "branch": 2,
+        "delta25": 1
+      },
+      {
+        "filename": "v23_residual_extension_24577_32768.log",
+        "attempts": 348968928,
+        "primitive": 28528984,
+        "square": 24,
+        "t": 0,
+        "n": 0,
+        "branch": 0,
+        "delta25": 0
+      }
+    ]
+  },
+  "algorithm_B": {
+    "source": "v23_independent_checker.cpp",
+    "square": 129,
+    "t": 18,
+    "n": 16,
+    "branch": 8,
+    "delta25": 5
+  },
+  "candidate_points": [
+    {
+      "rho": 4738,
+      "n": 13690,
+      "t": 2220,
+      "a": 367,
+      "b": 9,
+      "delta": 1,
+      "p1": 7,
+      "p2": 7,
+      "r": 43290,
+      "cube_cores": {
+        "dplus": 13690,
+        "dminus": 507,
+        "x": 1,
+        "y": 3
+      },
+      "common": {
+        "C": 3,
+        "K": 30,
+        "c": 1,
+        "h": 10
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 7,
+          "lhs": 0,
+          "rhs": 4
+        },
+        "A-r": {
+          "p": 7,
+          "lhs": 0,
+          "rhs": 1
+        }
+      }
+    },
+    {
+      "rho": 7288,
+      "n": 1025,
+      "t": 205,
+      "a": 383,
+      "b": 81,
+      "delta": 2,
+      "p1": 3,
+      "p2": 3,
+      "r": 3280,
+      "cube_cores": {
+        "dplus": 1025,
+        "dminus": 2,
+        "x": 1,
+        "y": 8
+      },
+      "common": {
+        "C": 4,
+        "K": 41,
+        "c": 4,
+        "h": 41
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 3,
+          "lhs": 0,
+          "rhs": 1
+        },
+        "A-r": {
+          "p": 3,
+          "lhs": 0,
+          "rhs": 1
+        }
+      }
+    },
+    {
+      "rho": 9988,
+      "n": 6860,
+      "t": 700,
+      "a": 653,
+      "b": 81,
+      "delta": 133,
+      "p1": 11,
+      "p2": 11,
+      "r": 21280,
+      "cube_cores": {
+        "dplus": 20,
+        "dminus": 1,
+        "x": 7,
+        "y": 19
+      },
+      "common": {
+        "C": 133,
+        "K": 1280,
+        "c": 133,
+        "h": 1280
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 11,
+          "lhs": 0,
+          "rhs": 3
+        },
+        "A-r": {
+          "p": 11,
+          "lhs": 0,
+          "rhs": 5
+        }
+      }
+    },
+    {
+      "rho": 13033,
+      "n": 8576,
+      "t": 2412,
+      "a": 467,
+      "b": 6,
+      "delta": 56,
+      "p1": 11,
+      "p2": 3,
+      "r": 28140,
+      "cube_cores": {
+        "dplus": 134,
+        "dminus": 25,
+        "x": 4,
+        "y": 7
+      },
+      "common": {
+        "C": 56,
+        "K": 603,
+        "c": 56,
+        "h": 603
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 11,
+          "lhs": 0,
+          "rhs": 4
+        },
+        "A-r": {
+          "p": 3,
+          "lhs": 0,
+          "rhs": 1
+        }
+      }
+    },
+    {
+      "rho": 13063,
+      "n": 166375,
+      "t": 9240,
+      "a": 1033,
+      "b": 18,
+      "delta": 55,
+      "p1": 2,
+      "p2": 7,
+      "r": 508365,
+      "cube_cores": {
+        "dplus": 1,
+        "dminus": 6162,
+        "x": 55,
+        "y": 3
+      },
+      "common": {
+        "C": 330,
+        "K": 3081,
+        "c": 110,
+        "h": 1027
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 2,
+          "lhs": 0,
+          "rhs": 1
+        },
+        "A-r": {
+          "p": 7,
+          "lhs": 0,
+          "rhs": 4
+        }
+      }
+    },
+    {
+      "rho": 16339,
+      "n": 1431126,
+      "t": 54567,
+      "a": 1393,
+      "b": 6,
+      "delta": 430,
+      "p1": 2,
+      "p2": 2,
+      "r": 4347945,
+      "cube_cores": {
+        "dplus": 18,
+        "dminus": 11449,
+        "x": 43,
+        "y": 5
+      },
+      "common": {
+        "C": 1290,
+        "K": 11907,
+        "c": 430,
+        "h": 3969
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 2,
+          "lhs": 0,
+          "rhs": 1
+        },
+        "A-r": {
+          "p": 2,
+          "lhs": 0,
+          "rhs": 1
+        }
+      }
+    },
+    {
+      "rho": 17242,
+      "n": 71875,
+      "t": 12075,
+      "a": 689,
+      "b": 3,
+      "delta": 55,
+      "p1": 7,
+      "p2": 2,
+      "r": 227700,
+      "cube_cores": {
+        "dplus": 575,
+        "dminus": 2,
+        "x": 5,
+        "y": 33
+      },
+      "common": {
+        "C": 330,
+        "K": 3312,
+        "c": 55,
+        "h": 552
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 7,
+          "lhs": 0,
+          "rhs": 2
+        },
+        "A-r": {
+          "p": 2,
+          "lhs": 0,
+          "rhs": 1
+        }
+      }
+    },
+    {
+      "rho": 19507,
+      "n": 9801,
+      "t": 627,
+      "a": 1096,
+      "b": 243,
+      "delta": 3,
+      "p1": 13,
+      "p2": 13,
+      "r": 30030,
+      "cube_cores": {
+        "dplus": 363,
+        "dminus": 1225,
+        "x": 3,
+        "y": 2
+      },
+      "common": {
+        "C": 18,
+        "K": 169,
+        "c": 18,
+        "h": 169
+      },
+      "modular_witnesses": {
+        "r": {
+          "p": 13,
+          "lhs": 6,
+          "rhs": 0
+        },
+        "A-r": {
+          "p": 13,
+          "lhs": 6,
+          "rhs": 1
+        }
+      }
+    }
+  ],
+  "status": "Two enumerators agree. Full first-order formal verification and external peer review not performed."
+}

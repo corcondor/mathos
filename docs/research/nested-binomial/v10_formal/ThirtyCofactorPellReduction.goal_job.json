@@ -1,0 +1,19 @@
+{
+  "module": "ThirtyCofactorPellReduction",
+  "imports": "import Mathlib.Tactic\nimport ThirtyCofactorPellCovering",
+  "definitions": "",
+  "goals": [
+    [
+      "pell_parametrization",
+      "theorem pell_parametrization (M L n r s d : ℕ) (hM : 0 < M) (hL : 0 < L) (hs : 0 < s) (hd : 0 < d) (hdSq : Squarefree d) (hn : 2 ≤ n) (hML : M * L = s ^ 2 * d) (h : M * r ^ 2 = L * n * (n - 1)) : ∃ y : ℕ, 2 * M * r = s * d * y ∧ (2 * n - 1) ^ 2 = d * y ^ 2 + 1"
+    ],
+    [
+      "covering_to_pell",
+      "theorem covering_to_pell (n r L : ℕ) (hn : 104 ≤ n) (hrlo : 3 * n < r) (hrhi : 3 * r < 10 * n) (hL : L * ((n / Nat.gcd n 3) * ((n - 1) / Nat.gcd (n - 1) 6)) = r ^ 2) : ∃ s d y : ℕ, 0 < s ∧ 0 < d ∧ 0 < y ∧ Squarefree d ∧ (Nat.gcd n 3 * Nat.gcd (n - 1) 6) * L = s ^ 2 * d ∧ 2 * (Nat.gcd n 3 * Nat.gcd (n - 1) 6) * r = s * d * y ∧ (2 * n - 1) ^ 2 = d * y ^ 2 + 1"
+    ]
+  ],
+  "local_dependencies": [
+    "ThirtyCofactorCubePrimeExtraction.lean",
+    "ThirtyCofactorPellCovering.lean"
+  ]
+}

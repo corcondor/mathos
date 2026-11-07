@@ -1,0 +1,177 @@
+name: v18 number theory computations
+
+on:
+  workflow_dispatch:
+    inputs:
+      a_max:
+        description: Maximum residual numerator a
+        type: number
+        default: 20
+      n_max:
+        description: Inclusive n scan limit (104 to 10000000; uncovered heights stay open)
+        type: number
+        default: 1000000
+      j_small_max:
+        description: Maximum canonical J for k=r
+        type: number
+        default: 100
+      j_complement_max:
+        description: Maximum canonical J for k=A-r
+        type: number
+        default: 30
+      curve_seconds:
+        description: Hard time limit per curve (partial CAS results are retained)
+        type: number
+        default: 120
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+      - research/v18-next-descent
+    paths:
+      - .github/workflows/v18-number-theory.yml
+      - scripts/research/v18_*.py
+      - docs/research/nested-binomial/v17_square_root_gap.md
+      - docs/research/nested-binomial/v18_neighbor_cofactor_height.md
+      - docs/research/nested-binomial/v18_residual_gap.md
+      - docs/research/nested-binomial/v18_short_lcm.md
+      - docs/research/nested-binomial/v18_short_lcm_checks.json
+      - docs/research/nested-binomial/v18_short_lcm_independent_audit.py
+      - docs/research/nested-binomial/v18_defect_resultants.md
+
+permissions:
+  contents: write
+
+# Serialize this workflow only. The independent DeepSeek/Lean harness is untouched.
+concurrency:
+  group: v18-number-theory-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  A_MAX: ${{ inputs.a_max || '20' }}
+  N_MAX: ${{ inputs.n_max || '1000000' }}
+  J_SMALL_MAX: ${{ inputs.j_small_max || '100' }}
+  J_COMPLEMENT_MAX: ${{ inputs.j_complement_max || '30' }}
+  CURVE_SECONDS: ${{ inputs.curve_seconds || '120' }}
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  finite:
+    if: contains(fromJSON('["research/nested-binomial-2026-11-05","research/v18-next-descent"]'), github.ref_name)
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Arithmetic regression checks
+        run: python3 -m unittest discover -s scripts/research -p 'v18_test.py' -v
+      - name: Fixed-J search (15 minute computation budget)
+        timeout-minutes: 20
+        run: >-
+          python3 scripts/research/v18_compute.py fixed-j --out _results
+          --n-max "$N_MAX" --j-small-max "$J_SMALL_MAX"
+          --j-complement-max "$J_COMPLEMENT_MAX" --seconds 900
+      - name: Independently reconstruct all 830 LCM exceptions
+        if: always()
+        run: python3 scripts/research/v18_compute.py lcm --out _results
+      - name: Enumerate small delta-J gcd types
+        if: always()
+        run: >-
+          python3 scripts/research/v18_compute.py auxiliary --out _results
+          --delta-max 200 --j-small-max "$J_SMALL_MAX"
+          --j-complement-max "$J_COMPLEMENT_MAX"
+      - name: Retain finite computation checkpoints
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: v18-finite
+          path: _results/
+          if-no-files-found: warn
+          retention-days: 30
+
+  ranks:
+    if: contains(fromJSON('["research/nested-binomial-2026-11-05","research/v18-next-descent"]'), github.ref_name)
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install SageMath 10.6 on Ubuntu
+        timeout-minutes: 20
+        uses: mamba-org/setup-micromamba@add3a49764cedee8ee24e82dfde87f5bc2914462 # v2
+        with:
+          environment-name: v18-sage
+          create-args: >-
+            sage=10.6
+            python=3.12
+            -c conda-forge
+            --strict-channel-priority
+          init-shell: bash
+          cache-environment: true
+          cache-downloads: true
+      - name: Sage runtime provenance
+        shell: bash -el {0}
+        run: |
+          sage --version
+          micromamba list --explicit > sage-environment.txt
+      - name: Residual curves (45 minute computation budget)
+        timeout-minutes: 51
+        shell: bash -el {0}
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: >-
+          sage -python scripts/research/v18_compute.py ranks --out _results
+          --a-max "$A_MAX" --shard "$SHARD" --shards 4
+          --curve-seconds "$CURVE_SECONDS" --seconds 2700
+      - name: Retain CAS checkpoints even after failure
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: v18-ranks-${{ matrix.shard }}
+          path: |
+            _results/
+            sage-environment.txt
+          if-no-files-found: warn
+          retention-days: 30
+
+  publish:
+    needs: [finite, ranks]
+    if: always() && contains(fromJSON('["research/nested-binomial-2026-11-05","research/v18-next-descent"]'), github.ref_name)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Collect available results from every shard
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        continue-on-error: true
+        with:
+          pattern: v18-*
+          path: _artifacts
+      - name: Render reports and SHA-256 manifest
+        env:
+          RUN_KEY: ${{ github.run_id }}-${{ github.run_attempt }}
+        run: >-
+          python3 scripts/research/v18_report.py --input _artifacts
+          --run-key "$RUN_KEY" --a-max "$A_MAX"
+      - name: Retain reviewable reports if branch publication is refused
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: v18-final-reports
+          path: |
+            docs/research/nested-binomial/v18_ranks_a*.md
+            docs/research/nested-binomial/v18_ranks_a*.json
+            docs/research/nested-binomial/v18_fixed_J_search.*
+            docs/research/nested-binomial/v18_modular_levels.json
+            docs/research/nested-binomial/v18_actions_latest.json
+            docs/research/nested-binomial/v18_actions_lcm.md
+            docs/research/nested-binomial/v18_actions/
+          retention-days: 30
+      - name: Commit results to the same research branch
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+        run: python3 scripts/research/v18_publish.py --branch "$TARGET_BRANCH"
