@@ -158,6 +158,8 @@ case "$command" in
             fail 'Existing MISTRAL_API_KEY must be accessible in this Codespace.'
         [[ $(git branch --show-current) == "$branch" ]] || fail "Open the $branch branch first."
         [[ -f $runtime/verified ]] || fail 'Lean setup must pass before enabling the autopilot.'
+        mkdir -p -- "$run_dir"
+        rm -f "$run_dir/PAUSE"
         touch "$runtime/autopilot.enabled"
         bash "$repo/.devcontainer/research" autostart
         ;;
@@ -186,6 +188,9 @@ case "$command" in
         if [[ -f $runtime/autopilot.log ]]; then tail -n 18 "$runtime/autopilot.log"; fi
         ;;
     status|pause)
+        if [[ $command == pause ]]; then
+            rm -f "$runtime/autopilot.enabled"
+        fi
         if [[ ! -d $run_dir ]]; then
             printf '%s\n' 'No Codespaces run has started. The checked-in proof modules are available.'
         else
