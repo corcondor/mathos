@@ -1,5 +1,8 @@
 # 入れ子の二項係数方程式の研究記録
 
+> **自動研究連携**：[公開時のGitHub Actions検証とDeepSeek仮説生成](AUTORESEARCH_PIPELINE_ja.md)。新しいvNNノートのPR時は数値検査、master公開時はActions APIキーがあれば独立した新規仮説を生成（**UNVERIFIEDのドラフトPR**）。Lean証明は別の固定環境で再検証。Codespacesの既存97アクション状態や固定Lean最終2目標は変更しない。
+
+
 > **v31（2026-11-08）**：六次平方条件 \(S²=F(a,b,ρ)\) について、**T=ρ/b²≡13 (mod25) ⇒ 5∤a** を巡回部分群の仮定なしに証明。さらに ℓ=v₅(8+9T) が奇数の場合、5進平方性と **5^((3ℓ+1)/2)∤(6a²+2b²+3ρ)** の同値条件を完全導出。別に、10素数の局所合同条件を厳密CRTで結合し、⟨R⟩ に写る候補の残存合同類密度を **1.48474%→1.20905%** に改善（元の四変数問題の全候補の密度ではない）。[v31証明](V31_PADIC_AND_WEIGHTED_SIEVE_ja.md)・[標準Python検算](v31_weighted_local_sieve.py)・[SymPy照合](v31_symbolic_crosscheck.py)・[証明書](v31_certificate.json)・[ハッシュ](v31_manifest.json)。深い5進衝突の全排除、特殊化のMordell–Weil基底認証、元の問題全体は未解決。\n\n> **v30追補（2026-11-07）**：v28・v29の局所公式を再検算し、**7∣ρ ⇒ m≡12,13,17,18 (mod 30)** を導出。5進条件とCRT結合して、元の補助整数点が **⟨R⟩ に写る**場合の残存合同類密度を **304/20475 ≈ 1.4847%** と算定（一般の四変数解の98.5%排除という意味ではない）。[v30証明追補](V30_LOCAL_CRT_NOTE_ja.md)・[再現Python](v30_local_crt_verify.py)・[DeepSeekへの研究引継ぎ](DEEPSEEK_V30_HANDOFF_ja.md)。DeepSeek依頼は[Issue #3](https://github.com/corcondor/mathos/issues/3)に登録済み。深い5進衝突とMordell–Weil基底は未解決。元の固定Lean最終2目標は変更していない。
 
 > **v29（2026-11-07）**：[5進特異ファイバーの証明](V29_PROOFS_ja.md)で T≡3 (mod25) の巡回部分群の解候補を排除。T≡13,18 (mod25) の深い衝突と非巡回有理点は未解決。
