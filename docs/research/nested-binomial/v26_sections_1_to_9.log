@@ -1,0 +1,10 @@
+PASS: symbolic group law for mR, |m|=1..9
+PASS: quadratic-denominator resultants for 8R and 9R
+m=4: {'divisors_checked': 3744, 'positive_rho_candidates': 346, 'a2_positive_integer': 346, 'a2_square': 24, 'primitive': 2, 'positive_z': 1, 'rho_mod9_ok': 0, 'rho_ge32770': 0, 'remaining': 0}
+m=5: {'divisors_checked': 3276, 'positive_rho_candidates': 1964, 'a2_positive_integer': 274, 'a2_square': 96, 'primitive': 13, 'positive_z': 12, 'rho_mod9_ok': 2, 'rho_ge32770': 0, 'remaining': 0}
+m=6: {'divisors_checked': 4224, 'positive_rho_candidates': 2298, 'a2_positive_integer': 1945, 'a2_square': 22, 'primitive': 2, 'positive_z': 0, 'rho_mod9_ok': 0, 'rho_ge32770': 0, 'remaining': 0}
+m=7: {'divisors_checked': 6084, 'positive_rho_candidates': 3716, 'a2_positive_integer': 680, 'a2_square': 203, 'primitive': 34, 'positive_z': 30, 'rho_mod9_ok': 2, 'rho_ge32770': 0, 'remaining': 0}
+m=8: {'divisors_checked': 122544, 'positive_rho_candidates': 34, 'a2_positive_integer': 12, 'a2_square': 0, 'primitive': 0, 'positive_z': 0, 'rho_mod9_ok': 0, 'rho_ge32770': 0, 'remaining': 0}
+m=9: {'divisors_checked': 77700, 'positive_rho_candidates': 65, 'a2_positive_integer': 42, 'a2_square': 12, 'primitive': 1, 'positive_z': 0, 'rho_mod9_ok': 0, 'rho_ge32770': 0, 'remaining': 0}
+PASS: no necessary-condition candidates in |m|<=9, assuming v23 rho>=32770
+certificate: /mnt/data/v26/v26_sections_1_to_9_certificate.json
