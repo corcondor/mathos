@@ -140,7 +140,7 @@ def main() -> int:
         while ENABLED.is_file():
             ledger = account_progress()
             status = stop_state()
-            if status in ("complete", "blocked", "paused"):
+            if status in ("complete", "blocked") or (status == "paused" and (RUN / "PAUSE").is_file()):
                 print("Autopilot stopped due to goal state:", status, flush=True)
                 break
             if ledger["tokens"] >= DAY_TOKEN_CAP or ledger["calls"] >= DAY_CALL_CAP:
