@@ -67,7 +67,7 @@ setup() (
     if [[ ! -x $ELAN_HOME/bin/elan ]]; then
         [[ $(uname -m) == x86_64 ]] || fail 'This Codespaces setup requires x86-64 Linux.'
         archive=$staging/elan.tar.gz
-        curl --fail --silent --show-error --location --retry 3 \
+        curl --fail --silent --show-error --location --retry 9 --retry-all-errors --retry-delay 4 --connect-timeout 20 --max-time 120 \
             https://github.com/leanprover/elan/releases/download/v4.2.3/elan-x86_64-unknown-linux-gnu.tar.gz \
             --output "$archive"
         printf '%s  %s\n' df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2 "$archive" |
