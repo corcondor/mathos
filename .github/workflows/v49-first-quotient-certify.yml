@@ -1,0 +1,54 @@
+name: Rank certification for first elliptic quotient
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - 'docs/research/nested-binomial/v49_first_quotient_rank.sage'
+      - '.github/workflows/v49-first-quotient-certify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  first-elliptic-quotient:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Compute proof rank and generators for two T values
+        shell: bash
+        run: |
+          set +e
+          mkdir -p first-quotient-logs
+          for item in '1 1 120' '100003 1 240'; do
+            read -r rho b limit <<<"$item"
+            output="first-quotient-logs/T${rho}${b}.log"
+            timeout --signal=TERM --kill-after=10s "${limit}s" \
+              docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v49_first_quotient_rank.sage "$rho" "$b" \
+              > "$output" 2>&1
+            result=$?
+            echo "EXIT_CODE=$result" >> "$output"
+            echo "FIRST_QUOTIENT rho=$rho b=$b status=$result"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-elliptic-quotient-rank-and-full-basis
+          path: first-quotient-logs/*.log
+          retention-days: 30
+      - name: Require proofs for successful job
+        run: |
+          grep -q '"status": "CERTIFIED_BY_SAGE_PROOF"' first-quotient-logs/T_1_1.log
+          grep -q 'EXIT_CODE=0' first-quotient-logs/T_1_1.log
+          grep -q '"status": "CERTIFIED_BY_SAGE_PROOF"' first-quotient-logs/T_100003_1.log
+          grep -q 'EXIT_CODE=0' first-quotient-logs/T_100003_1.log
