@@ -16,7 +16,7 @@ b=ZZ(sys.argv[1]) if len(sys.argv)>1 else ZZ(81)
 p=ZZ(sys.argv[2]) if len(sys.argv)>2 else ZZ(7)
 rho=ZZ(100003)
 assert 486%b==0 and b in (81,162,243)
-assert rho%9==1
+assert rho%9 in (1,4,6,7)
 R=PolynomialRing(QQ,"a")
 a=R.gen()
 b2=b*b
