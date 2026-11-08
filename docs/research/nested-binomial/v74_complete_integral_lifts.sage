@@ -14,12 +14,14 @@ import json,sys,time,traceback
 
 rho=ZZ(sys.argv[1]) if len(sys.argv)>1 else ZZ(7)
 b=ZZ(sys.argv[2]) if len(sys.argv)>2 else ZZ(1)
+pari_effort=int(sys.argv[3]) if len(sys.argv)>3 else 1
+assert 1<=pari_effort<=40
 assert rho>0 and b>0 and ZZ(486)%b==0
 M=b*(8*b*b+9*rho)
 E=EllipticCurve(QQ,[6*b,0,M,0,0])
 assert E.discriminant()!=0
 print("V74_BEGIN",json.dumps({"rho":int(rho),"b":int(b),
-   "sage":SAGE_VERSION,"integral_model_ainvariants":[str(v) for v in E.a_invariants()],
+   "sage":SAGE_VERSION,"pari_effort":pari_effort,"integral_model_ainvariants":[str(v) for v in E.a_invariants()],
    "original_lift_equation":"X=a²-b²-rho; Y²+6bXY+b(8b²+9rho)Y=X³",
    "mathematical_scope":"ALL integral points on THIS chosen integral Weierstrass model, provided proven saturated MW generators"}),flush=True)
 
@@ -55,7 +57,7 @@ def original_congruence_witness(n,k):
 
 try:
     t0=time.time()
-    rank=ZZ(E.rank(proof=True,algorithm="pari",pari_effort=1))
+    rank=ZZ(E.rank(proof=True,algorithm="pari",pari_effort=pari_effort))
     basis=list(E.gens(proof=True))
     certain=bool(E.gens_certain())
     print("V74_MW",json.dumps({"rank_proved":int(rank),
