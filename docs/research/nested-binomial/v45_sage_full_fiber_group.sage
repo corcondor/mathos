@@ -3,7 +3,8 @@
 #   sage -python docs/research/nested-binomial/v45_sage_full_fiber_group.sage RHO B
 # Exits status 0 only after provably complete rank + generators + saturation.
 # On incomplete proof, emits INCOMPLETE_NOT_CERTIFIED and exits nonzero.
-from sage.all import QQ, ZZ, EllipticCurve, version
+from sage.all import QQ, ZZ, EllipticCurve
+from sage.env import SAGE_VERSION
 import json
 import sys
 import traceback
@@ -22,7 +23,7 @@ def run(rho, b):
         "rho":int(rho),
         "b":int(b),
         "T":str(T),
-        "sage_version":str(version()),
+        "sage_version":str(SAGE_VERSION),
         "curve_a_invariants":[str(z) for z in E.a_invariants()],
         "discriminant":str(E.discriminant()),
         "explicit_section_R":str(R),
