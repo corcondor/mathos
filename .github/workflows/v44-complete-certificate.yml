@@ -1,0 +1,43 @@
+name: Full v44 integer-lift certificate (987 square points)
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v44-complete-certificate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-certificate:
+    name: Enumerate all residual lifts and attach the full exact certificate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute complete v44 range with bounded resource budget
+        env:
+          MATHOS_CERTIFICATE_PATH: audit-artifacts/v44_full_square_points.json
+        run: |
+          set -e
+          timeout --signal=TERM --kill-after=10s 720s \
+            python -u docs/research/nested-binomial/v44_all_integer_lifts_verify.py | tee v44_scan.log
+          sha256sum audit-artifacts/v44_full_square_points.json | tee audit-artifacts/v44_full_square_points.sha256
+          grep -q 'PASS: all lifts' v44_scan.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v44-exact-987-points-and-lucas-certificates
+          path: |
+            audit-artifacts/v44_full_square_points.json
+            audit-artifacts/v44_full_square_points.sha256
+            v44_scan.log
+          if-no-files-found: warn
+          retention-days: 90
