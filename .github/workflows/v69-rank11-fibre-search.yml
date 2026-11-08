@@ -1,0 +1,60 @@
+name: v69 certified rank1-rank1 bielliptic genus-two fibre search
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v69-rank11-fibre-search.yml'
+      - 'docs/research/nested-binomial/v69_rank11_fibre_search.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rank-one-pairs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { label: T01-12, parameters: '1,2,3,4,5,6,7,8,9,10,11,12' }
+          - { label: T13-24, parameters: '13,14,15,16,17,18,19,20,21,22,23,24' }
+          - { label: T25-36, parameters: '25,26,27,28,29,30,31,32,33,34,35,36' }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Rank proofs for both elliptic quotients
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 270s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v69_rank11_fibre_search.sage \
+            "${{ matrix.parameters }}" \
+            > "v69-${{ matrix.label }}.log" 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >> "v69-${{ matrix.label }}.log"
+          cat "v69-${{ matrix.label }}.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v69-certified-ranks-${{ matrix.label }}
+          path: v69-${{ matrix.label }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Verify complete batch or disclose incomplete
+        run: |
+          if grep -q SEARCH_COMPLETE "v69-${{ matrix.label }}.log"; then
+            echo "All twelve fibres attempted; see per-fibre rank certifications."
+          else
+            echo "::warning::Batch incomplete or timed out. Not a completed search."
+          fi
+          grep -q SEARCH_START "v69-${{ matrix.label }}.log"
