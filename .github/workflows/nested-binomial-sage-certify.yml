@@ -1,8 +1,8 @@
 name: Specialized elliptic MW certification in SageMath
 
 on:
-  pull_request:
-    branches: [master]
+  push:
+    branches: [research/nested-binomial-2026-11-05]
     paths:
       - '.github/workflows/nested-binomial-sage-certify.yml'
       - 'docs/research/nested-binomial/v45_sage_full_fiber_group.sage'
@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: mathos-sage-certify-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   sage-certify:
