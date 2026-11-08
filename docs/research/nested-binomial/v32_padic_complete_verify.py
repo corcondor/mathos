@@ -198,6 +198,11 @@ def main():
                     "root_count_over_Z5":expected,
                     "root_lifts_example":roots[:4],
                 })
+    # A fully finite residue sieve for an actual residual parameter >=32770.
+    excluded = [a for a in range(25) if not predict(a,1,32793)]
+    assert excluded == [0,7,10,15,18], excluded
+    assert all(square5(F(a,1,32793)) == (a not in excluded)
+               for a in range(25))
     for b in B_VALUES:
         for T in T_VALUES:
             for a in (0,1,2,5,18,125):
