@@ -1,0 +1,68 @@
+name: Specialized elliptic MW certification in SageMath
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - '.github/workflows/nested-binomial-sage-certify.yml'
+      - 'docs/research/nested-binomial/v45_sage_full_fiber_group.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mathos-sage-certify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sage-certify:
+    name: Prove specialized MW rank / full generators (or fail honestly)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 23
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Get pinned Sage 10.10 Docker image
+        run: |
+          docker pull sagemath/sagemath:10.10
+          mkdir -p sage-certificates
+      - name: Execute independent proof attempts with explicit time limits
+        id: runs
+        shell: bash
+        run: |
+          set -uo pipefail
+          for pair in '1 1 180' '100003 1 420'; do
+            read -r rho b seconds <<<"$pair"
+            log="sage-certificates/fiber_${rho}_${b}.log"
+            echo "Starting SageMath certified full Mordell-Weil group: rho=$rho b=$b, max=$seconds seconds" | tee "$log"
+            timeout --signal=TERM --kill-after=10s "_${seconds}s" \
+              docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v45_sage_full_fiber_group.sage "$rho" "$b" \
+              >>"$log" 2>&1
+            status=$?
+            echo "PROOF_EXIT_STATUS=$status" | tee -a "$log"
+            if [[ "$status" -ne 0 ]]; then
+              echo "::warning::Sage proof incomplete for rho=$rho b=$b (see artifact)."
+            fi
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sage-mw-certificate-attempts
+          path: sage-certificates/*.log
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Enforce that a CI green result means two actually proven fibre groups
+        shell: bash
+        run: |
+          set -e
+          grep -q '"status": "CERTIFIED_BY_SAGE_PROOF"' sage-certificates/fiber_1_1.log
+          grep -q 'PROOF_EXIT_STATUS=0' sage-certificates/fiber_1_1.log
+          grep -q '"status": "CERTIFIED_BY_SAGE_PROOF"' sage-certificates/fiber_100003_1.log
+          grep -q 'PROOF_EXIT_STATUS=0' sage-certificates/fiber_100003_1.log
+          echo 'Both MW groups certified, with full proof logs attached.'
