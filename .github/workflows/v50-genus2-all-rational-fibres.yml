@@ -1,0 +1,67 @@
+name: v50 full genus-two rational points via first elliptic quotient
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v50-genus2-all-rational-fibres.yml'
+      - 'docs/research/nested-binomial/v50_first_quotient_all_b.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify-genus-two-fibres:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 23
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath image
+        run: |
+          docker pull sagemath/sagemath:10.10
+          mkdir -p v50-fibre-logs
+      - name: Prove rank-zero criterion on every b dividing 486
+        shell: bash
+        run: |
+          set +e
+          for b in 1 2 3 6 9 18 27 54 81 162 243 486; do
+            out="v50-fibre-logs/rho100003_b$b.log"
+            timeout --signal=TERM --kill-after=10s 80s \
+              docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v50_first_quotient_all_b.sage 100003 "$b" \
+              >"$out" 2>&1
+            code=$?
+            echo "EXIT_CODE=$code" >>"$out"
+            echo "b=$b exit=$code $(grep -o 'CERTIFIED_FULL_GENUS2_RATIONAL_POINTS\|NOT_CLASSIFIED_BY_RANK_ZERO_METHOD\|INCOMPLETE_RANK_NOT_PROVED' "$out" | tail -1)"
+          done
+          timeout --signal=TERM --kill-after=10s 80s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v50_first_quotient_all_b.sage 1 1 \
+            > v50-fibre-logs/rho1_b1.log 2>&1
+          echo "EXIT_CODE=$?" >> v50-fibre-logs/rho1_b1.log
+      - name: Upload every proof and incomplete record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v50-genus-two-complete-rational-point-proofs
+          path: v50-fibre-logs/*.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Require at least the already independently certified b=1 proof
+        shell: bash
+        run: |
+          grep -q '"status": "CERTIFIED_FULL_GENUS2_RATIONAL_POINTS"' v50-fibre-logs/rho100003_b1.log
+          grep -q '"number_affine_C": 0' v50-fibre-logs/rho100003_b1.log
+          grep -q 'EXIT_CODE=0' v50-fibre-logs/rho100003_b1.log
+          grep -q '"status": "CERTIFIED_FULL_GENUS2_RATIONAL_POINTS"' v50-fibre-logs/rho1_b1.log
+          grep -q 'EXIT_CODE=0' v50-fibre-logs/rho1_b1.log
+          echo 'At least two complete genus-two rational point sets certified.'
