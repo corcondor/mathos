@@ -118,6 +118,11 @@ if __name__=="__main__":
             zero+=record['zero_rho']
     sq.sort();branches.sort()
     assert len(sq)==987 and len(branches)==9
+    assert [v for v in sq if v[0]<=32970]==[
+        (32773,3,362,61661061),
+        (32784,1,191,550088),
+        (32824,81,577,361059120),
+        (32884,9,211,4125492)],"Independent 201-rho audit mismatch"
     assert all_count==[29881,685305097,383326698,109488,987,50],all_count
     assert zero==28933
     expected=[
