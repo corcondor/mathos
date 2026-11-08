@@ -33,8 +33,27 @@ print("QC_START",json.dumps({"T":str(T),"p":int(p),"precision":int(prec),"sage":
 
 upstream="external/QC_bielliptic/qc_g2_bielliptic.sage"
 try:
-    print("QC_LOADING_PINNED_UPSTREAM",upstream,flush=True)
-    load(upstream)
+    # Compatibility patch for Sage 10.10 even-degree hyperelliptic weighted
+    # projective infinity. The upstream 2023 code uses (0:1:0), which newer
+    # Sage rejects for y²=4x⁶+... . The two valid infinity points are
+    # (1:2:0) and (1:-2:0). Keep the upstream commit immutable; make a
+    # separately named local adapter, with exactly three literal replacements.
+    from pathlib import Path
+    old_source=Path(upstream).read_text(encoding="utf-8")
+    replacements={
+       "D.remove(Hp(0,1,0))":"D = [V for V in D if V[2] != 0]",
+       "Q = HK(0, 1, 0)":"Q = HK(1, K(a6).sqrt(), 0)",
+       "if P == H(0, 1, 0) or P == HK(0, 1, 0):":"if P[2] == 0:",
+       "rational_points[l].append(H(0, 1, 0))":"rational_points[l].append(H(1, a6.sqrt(), 0))",
+    }
+    patched_source=old_source
+    for old_line,new_line in replacements.items():
+        assert patched_source.count(old_line)==1,(old_line,patched_source.count(old_line))
+        patched_source=patched_source.replace(old_line,new_line)
+    compat="external/QC_bielliptic/qc_g2_bielliptic_sage10_compat.sage"
+    Path(compat).write_text(patched_source,encoding="utf-8")
+    print("QC_INFINITY_COMPAT_PATCH",len(replacements),"replacements; pinned upstream unchanged",flush=True)
+    load(compat)
     print("QC_UPSTREAM_LOADED",flush=True)
     start=time.time()
     rational, unresolved=quadratic_chabauty_bielliptic(f,p,prec)
