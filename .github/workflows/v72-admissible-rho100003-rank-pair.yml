@@ -1,0 +1,48 @@
+name: v72 first admissible residual rho100003 full rank-pair checks
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v72-admissible-rho100003-rank-pair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-original-residual-fibres:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch pinned SageMath
+        run: docker pull sagemath/sagemath:10.10
+      - name: Certify both elliptic quotient ranks for actual permitted rho and b
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 200s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v69_rank11_fibre_search.sage \
+            '100003/6561,100003/26244,100003/59049' \
+            >v72-rho100003-rank-pairs.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v72-rho100003-rank-pairs.log
+          cat v72-rho100003-rank-pairs.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v72-rho100003-admissible-rank-pair-certificates
+          path: v72-rho100003-rank-pairs.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Distinguish certified ranks from incomplete attempts
+        run: |
+          grep -q 'SEARCH_START' v72-rho100003-rank-pairs.log
+          echo 'Results may be incomplete after timeout. Full genus-two points require QC and MW sieve.'
