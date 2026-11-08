@@ -25,7 +25,7 @@ assert s.factor(c4-144*(1-9*T))==0
 assert c4.subs(T,s.Rational(-8,9))==1296
 assert c6.subs(T,s.Rational(-8,9))==-6**6
 F=y*y+6*x*y+a3*y-x**3
-assert s.factor(F.subs(T,s.Rational(-8,9)))==y*(y+6*x)-x**3
+assert s.expand(F.subs(T,s.Rational(-8,9))-(y*(y+6*x)-x**3))==0
 assert F.subs({T:s.Rational(-8,9),x:0,y:0})==0
 print("PASS: c4 is unit at both bad factors; p|M has split node and type I_{3v_p(M)}")
 
