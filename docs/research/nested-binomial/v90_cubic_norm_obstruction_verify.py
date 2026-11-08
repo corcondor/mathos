@@ -86,4 +86,4 @@ for b in (9,18):
     print("REMAINING_EXPONENTS",b,[e["exponents"] for e in new])
 assert sum(len(x["surviving"]) for x in results.values())==10
 print("PASS: fixed-rho cube-core coefficient classes 30 -> 10 (6+4); supersedes v83 false F100291 elimination")
-print("SCOPE: nine coefficient types still need complete integer-point proof")
+print("SCOPE: TEN coefficient types still need complete integer-point proof")
