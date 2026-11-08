@@ -72,7 +72,7 @@ assert s.factor(Te-(xx-8)*(xx+1)/9)==0
 assert s.factor((a*a/b**2)-(3*a/b)-a*(a-3*b)/b**2)==0
 te=s.factor((2*ue*(ue*ue+3)-Te*(3+2*ue)+xx*(xx+1))/(2*Te))
 ne=s.factor((te*te+3*te+3+ue*(te+6)-ue*ue+Te)/(9*ue))
-assert te==6*(xx+4)/(xx-8)
+assert s.cancel(te-6*(xx+4)/(xx-8))==0
 assert s.cancel(ne-(xx+4)**3/((xx-8)**2*(xx+1)))==0
 print("PASS: Delta=0 exceptional curve classified; excluded by gcd(a,rho) for original solutions")
 print("CONCLUSION: all original-solution rational lifts have x>0,k!=0,Delta!=0 and admit (k,q) parametrization")
