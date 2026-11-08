@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at_utc": "2026-11-07T14:11:49.784571+00:00",
+  "checked_at_utc": "2026-11-08T03:18:43.298695+00:00",
   "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
   "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
   "records": [
@@ -998,6 +998,38 @@
         "/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFCurveRecovery.lean:95:76: warning: Variable name `hT` is not explicitly referenced.",
         "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
       ]
+    },
+    {
+      "source": "CFRationalCubeExclusionB.lean",
+      "source_sha256": "271edbb3131cd1a2289b3efda1186e46eef3e052024d6a58f00c64a22e60f6d3",
+      "log": "CFRationalCubeExclusionB.additional_check.txt",
+      "log_sha256": "87751494840ca12dd4ea5b9c013decbccce7c9523333ba7b96cb857c5f2016f1",
+      "exit_code": 0,
+      "proof_hole_or_custom_axiom_detected": false,
+      "command": [
+        "lean",
+        "-DmaxHeartbeats=400000",
+        "-DmaxRecDepth=1024",
+        "--root=/workspaces/mathos/docs/research/nested-binomial/v10_formal",
+        "-o",
+        "/tmp/nested-binomial-lean-id1lgugj/CFRationalCubeExclusionB.olean",
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFRationalCubeExclusionB.lean"
+      ],
+      "resource_attempts": [
+        {
+          "heartbeats": 400000,
+          "max_rec_depth": 1024,
+          "exit_code": 0,
+          "categories": [
+            "unused_binding"
+          ],
+          "elapsed_seconds": 3.555
+        }
+      ],
+      "warnings": [
+        "/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFRationalCubeExclusionB.lean:7:44: warning: Variable name `hv` is not explicitly referenced.",
+        "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:"
+      ]
     }
   ],
   "scope": "Recovery, local-square, CRT and CF-core modules listed in records; not complete curve exclusion",
@@ -1005,7 +1037,7 @@
   "finite_search_completeness_formalized": false,
   "whole_equation_solved": false,
   "reused_verification": {
-    "commit": "8443435da8da92cc26a26e2931174825c4a49760",
+    "commit": "d651d55f57ded43e34d17d2bda9dfc3a0caf8437",
     "sources": [
       "CFAnalyticBounds.lean",
       "CFApproximationCore.lean",
@@ -1013,6 +1045,7 @@
       "CFCoefficientRanges.lean",
       "CFContinuantBridge.lean",
       "CFCurveInstantiation.lean",
+      "CFCurveRecovery.lean",
       "CFCylinderNesting.lean",
       "CFVerifierBridge.lean",
       "CriticalPrimeCRT.lean",

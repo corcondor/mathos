@@ -1,0 +1,10 @@
+/workspaces/mathos/docs/research/nested-binomial/v10_formal/CFRationalCubeExclusionB.lean:7:44: warning: Variable name `hv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'NestedBinomialV10.cube_denominator_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cube_ratio_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NestedBinomialV10.cube_elimination' depends on axioms: [propext]
+'NestedBinomialV10.rational_cube_root_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
