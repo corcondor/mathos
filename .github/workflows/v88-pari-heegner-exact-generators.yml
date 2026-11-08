@@ -1,0 +1,52 @@
+name: v88 PARI exact Heegner generators and complete last integral fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v88-pari-heegner-exact-generators.yml'
+      - 'docs/research/nested-binomial/v88_pari_heegner_generator.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compute-exact-free-point:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    strategy:
+      fail-fast: false
+      matrix:
+        b: [9,18]
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull SageMath 10.10 with PARI
+        run: docker pull sagemath/sagemath:10.10
+      - name: Compute exact Heegner point, full saturation and all integral points
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 270s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v88_pari_heegner_generator.sage \
+            ${{ matrix.b }} >v88-rho100003-b${{ matrix.b }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v88-rho100003-b${{ matrix.b }}.log
+          grep -E 'V88_BEGIN|V88_PARI|V88_EXACT|V88_FULL|V88_SATURATED|V88_ALL|V88_COMPLETE|V88_INCOMPLETE|EXIT_CODE=' \
+            v88-rho100003-b${{ matrix.b }}.log | cut -c 1-1800 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v88-pari-heegner-rank-one-b${{ matrix.b }}
+          path: v88-rho100003-b${{ matrix.b }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Require certified saturated basis and all integer points, not just a candidate
+        run: |
+          grep -q V88_COMPLETE_ALL_INTEGRAL_POINTS v88-rho100003-b${{ matrix.b }}.log
+          grep -q EXIT_CODE=0 v88-rho100003-b${{ matrix.b }}.log
