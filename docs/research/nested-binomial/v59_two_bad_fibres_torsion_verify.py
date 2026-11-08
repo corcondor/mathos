@@ -57,9 +57,9 @@ for b in (1,2,3,6,9,18,27,54,81,162,243,486):
     for p,h in factor.items():
         if p in (2,3):continue
         if p%3==2 and h%3!=0:
-            assert 9 % gcd(9,3*h*(p-1))!=0
+            assert (3*h*(p-1))%9 != 0
         if p%4==3 and h%2!=0:
-            assert 12 % gcd(12,3*h*(p-1))!=0
+            assert (3*h*(p-1))%12 != 0
 print("PASS: concrete rho=100003, all 12 b, check both discriminant factors")
 print("THEOREM: 9-torsion forces v_p(8b²+9rho) multiple3 for p=2 (mod3)")
 print("THEOREM: 12-torsion forces v_p(8b²+9rho) even for p=3 (mod4)")
