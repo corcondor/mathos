@@ -71,7 +71,7 @@ for b in (9,18):
     assert len(old)==(12 if b==9 else 9)
     new=[];excluded=[]
     for c,d,t,es in old:
-        assert P%gcd(c*d*t*b,P)!=0
+        assert gcd(c*d*t*b,P)==1
         chi=pow(c,(P-1)//3,P)
         assert chi in {1,omega,omega*omega%P}
         entry={"exponents":es,"c":c,"d":d,"t":t,"cubic_character":chi}
