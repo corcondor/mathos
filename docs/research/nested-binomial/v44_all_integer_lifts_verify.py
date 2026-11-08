@@ -12,6 +12,7 @@ It is NOT an enumeration of all rational points of E_T(Q).
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from math import gcd, isqrt, comb
 import json
+import hashlib
 import os
 from pathlib import Path
 
@@ -157,8 +158,9 @@ if __name__=="__main__":
                   "rho_range":[START,END],"counts":result,
                   "integer_sextic_square_points":sq,
                   "recovered_branch_points":branches}
-        out.write_text(json.dumps(evidence,ensure_ascii=False,sort_keys=True,indent=2)+"\n",
-                       encoding="utf-8")
+        payload=json.dumps(evidence,ensure_ascii=False,sort_keys=True,indent=2)+"\n"
+        out.write_text(payload,encoding="utf-8")
         print("WROTE_CERTIFICATE:",out,"SQUARE_POINTS",len(sq),flush=True)
+        print("FULL_SQUARE_CERTIFICATE_SHA256:",hashlib.sha256(payload.encode("utf-8")).hexdigest(),flush=True)
     print(json.dumps(result,ensure_ascii=False,indent=2))
     print('PASS: all lifts, original equation modulo Lucas primes, both k branches')
