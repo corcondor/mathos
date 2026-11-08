@@ -10,7 +10,8 @@ Fp point, hence also for a Qp point. This is a uniform statement for
 ANY residual rho satisfying these conditions, not a height-cutoff search.
 
 Fixed rho=100003, combine the prior F7 and F100291 obstruction tests
-to reduce the original-integer-solution cube-core types from 21 to 9.
+to reduce the original-integer-solution cube-core types from 30 to 10.
+The previous v83 F100291 p-core=0 exclusion was invalid (see v91).
 """
 from itertools import product
 from math import gcd,isqrt
@@ -66,9 +67,11 @@ for b in (9,18):
     old=[]
     for c,d,t,es in types(b):
         if b==9 and not f7_possible(b,c,d,t):continue
-        if b==18 and es[100291]==0 and not fp100291_root(b,c,d,t):continue
+        # v83 F100291 cubic-root test was mathematically INVALID: v=z*u
+        # leaves the factor u in u*(d*z**3-c)-6*b*t*z=0.
+        # Do NOT exclude p-core=0 types by that old test.
         old.append((c,d,t,es))
-    assert len(old)==(12 if b==9 else 9)
+    assert len(old)==(12 if b==9 else 12)
     new=[];excluded=[]
     for c,d,t,es in old:
         assert gcd(c*d*t*b,P)==1
@@ -76,11 +79,11 @@ for b in (9,18):
         assert chi in {1,omega,omega*omega%P}
         entry={"exponents":es,"c":c,"d":d,"t":t,"cubic_character":chi}
         (new if chi==1 else excluded).append(entry)
-    assert len(new)==(6 if b==9 else 3)
+    assert len(new)==(6 if b==9 else 4)
     results[b]={"surviving":new,"excluded":excluded}
     print("FIBRE",b,"original",len(old),"excluded",len(excluded),
           "remaining",len(new))
     print("REMAINING_EXPONENTS",b,[e["exponents"] for e in new])
-assert sum(len(x["surviving"]) for x in results.values())==9
-print("PASS: fixed-rho cube-core coefficient classes 21 -> 9")
+assert sum(len(x["surviving"]) for x in results.values())==10
+print("PASS: fixed-rho cube-core coefficient classes 30 -> 10 (6+4); supersedes v83 false F100291 elimination")
 print("SCOPE: nine coefficient types still need complete integer-point proof")
