@@ -38,11 +38,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile checker syntax and reproduce v30 result
+      - name: Install pinned symbolic dependency
+        run: python -m pip install --disable-pip-version-check 'sympy==1.14.0'
+      - name: Compile and reproduce v30-v32 public certificates
         run: |
           python -m py_compile .github/scripts/nested_binomial_ai_proposal.py
           python -m py_compile docs/research/nested-binomial/v30_local_crt_verify.py
           python docs/research/nested-binomial/v30_local_crt_verify.py
+          python docs/research/nested-binomial/v32_padic_complete_verify.py
+          python docs/research/nested-binomial/v32_symbolic_verify.py
       - name: Verify changed version-specific scripts (no secrets available)
         env:
           BEFORE: ${{ github.event.before }}
