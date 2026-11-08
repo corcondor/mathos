@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""v86: compact F_100291 Frobenius-Bezout certificates for 3 cubic covers.
+"""v86 (v91 corrected): polynomial-only F_100291 Frobenius-Bezout certificates.
 
 All three polynomials below have no Fp root. Unlike exhaustive 100291
 trial evaluation, this certificate can be checked using O(log p) exact
 finite-field operations:
    R(Z) = Z^p - Z mod f(Z),  B(Z)*R(Z) = 1 mod f(Z).
 If f(z)=0 for z∈Fp, Fermat z^p=z and polynomial congruence imply
-R(z)=0. The Bezout certificate then gives 0=1, contradiction.
+R(z)=0. The Bezout certificate then gives 0=1, contradiction.\nThese rootless polynomials are NOT necessary equations for the original\ncubic coverings: v83 dropped a factor u in v=z*u. No integer candidates\nare excluded by this program; see V91_REPAIR_FALSE_F100291_EXCLUSION_ja.md.
 """
 from math import isqrt
 p=100291
@@ -61,4 +61,4 @@ for name,f,h,inv in cases:
       "Frob_minus_z_coefficients",h,
       "inverse_coefficients",inv)
 print("PASS: all three F100291 cubic root obstructions with short Frobenius/Bezout certificates")
-print("Scope: eliminates 3 of 12 original-branch cube-core coefficient types for b=18 at rho=100003; positive-rank integral point classification remains open")
+print("Scope: polynomial rootlessness ONLY; v91 proves this does NOT exclude any of the original cubic-cover types.")
