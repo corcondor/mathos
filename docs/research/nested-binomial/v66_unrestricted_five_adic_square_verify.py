@@ -39,7 +39,7 @@ for b in bs:
     for rho in range(5):
         normalized_t=rho*pow(b*b,-1,5)%5
         for a in range(5):
-            numerator=(b**6)*int(f.subs({u:s.Rational(a,b),T:s.Rational(rho,b*b)}))
+            numerator=int(s.cancel((b**6)*f.subs({u:s.Rational(a,b),T:s.Rational(rho,b*b)})))
             # Integral polynomial F(a,b,rho), independent of rational scaling:
             F=(4*a**6+(24*b*b-12*rho)*a**4
                +(36*b**4+60*b*b*rho+12*rho*rho)*a*a
