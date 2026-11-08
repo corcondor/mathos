@@ -42,7 +42,7 @@ jobs:
           set +e
           timeout --signal=TERM --kill-after=10s 340s \
             docker run --rm --network none \
-            --mount type=bind,source="$PWD",target=/work,readonly \
+            --mount type=bind,source="$PWD",target=/work \
             --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
             sagemath/sagemath:10.10 \
             sage docs/research/nested-binomial/v70_bielliptic_qc_trial.sage \
