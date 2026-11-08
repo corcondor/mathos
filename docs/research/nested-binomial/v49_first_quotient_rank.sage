@@ -25,7 +25,12 @@ try:
         raise RuntimeError("Uncertain generator basis")
     if len(gens)!=rank:
         raise RuntimeError("Rank and generator count mismatch")
-    basis,index,reg=E.saturation(gens,max_prime=-1)
+    if rank==0:
+        # The saturation of the empty free basis has no index returned by
+        # Sage in this version. The free part is already completely known.
+        basis,index,reg=[],ZZ(1),ZZ(1)
+    else:
+        basis,index,reg=E.saturation(gens,max_prime=-1)
     tors=E.torsion_subgroup()
     print(json.dumps({
         "status":"CERTIFIED_BY_SAGE_PROOF",
