@@ -1,0 +1,151 @@
+{
+  "version": "v32",
+  "status": "PASS (independent arithmetic checks; not Lean formal proof)",
+  "statement_scope": "necessary genus-2 5-adic square condition for T≡3 mod5; all u∈Z5 including 0 for zero-root classification",
+  "versions_of_input": [
+    "V31_PADIC_AND_WEIGHTED_SIEVE_ja.md"
+  ],
+  "test_sources": [
+    "v32_padic_complete_verify.py",
+    "v32_symbolic_verify.py"
+  ],
+  "exact_tests": {
+    "T_cases": 23,
+    "b_values": [
+      1,
+      2,
+      3,
+      486
+    ],
+    "residues_per_pair": 3125,
+    "total_cases": 287500,
+    "result": "Original sextic Q5 square classifier equals independent normalized local chart classifier for all tested pairs"
+  },
+  "symbolic_tests": {
+    "result": "PASS",
+    "checks": [
+      "F=H²+4Z³ identity",
+      "f mod5=-u²(u²+1)²",
+      "both deep 5-adic normalized cusp charts"
+    ]
+  },
+  "root_checks": {
+    "result": "PASS",
+    "approach": "explicit 5-adic Hensel digit lifts for every predicted 2/4-root test fibre",
+    "p_adic_roots_are_not_original_integer_solutions": true
+  },
+  "representative_table": [
+    {
+      "T": 3,
+      "k": 1,
+      "d": 1,
+      "measure": "18/25",
+      "root_count": 0
+    },
+    {
+      "T": 13,
+      "k": 1,
+      "d": 3,
+      "measure": "2498/3125",
+      "root_count": 0
+    },
+    {
+      "T": 38,
+      "k": 1,
+      "d": 2,
+      "measure": "1477/1875",
+      "root_count": 4
+    },
+    {
+      "T": 63,
+      "k": 1,
+      "d": 2,
+      "measure": "494/625",
+      "root_count": 0
+    },
+    {
+      "T": 18,
+      "k": 2,
+      "d": 1,
+      "measure": "4/5",
+      "root_count": 0
+    },
+    {
+      "T": 68,
+      "k": 2,
+      "d": 1,
+      "measure": "23/30",
+      "root_count": 2
+    },
+    {
+      "T": 93,
+      "k": 3,
+      "d": 1,
+      "measure": "22/25",
+      "root_count": 0
+    },
+    {
+      "T": 32773,
+      "k": 1,
+      "d": 1,
+      "measure": "18/25",
+      "root_count": 0
+    },
+    {
+      "T": 32788,
+      "k": 1,
+      "d": 2,
+      "measure": "1477/1875",
+      "root_count": 4
+    },
+    {
+      "T": 32838,
+      "k": 1,
+      "d": 2,
+      "measure": "494/625",
+      "root_count": 0
+    },
+    {
+      "T": 33013,
+      "k": 1,
+      "d": 3,
+      "measure": "2498/3125",
+      "root_count": 0
+    },
+    {
+      "T": 32793,
+      "k": 2,
+      "d": 1,
+      "measure": "4/5",
+      "root_count": 0
+    },
+    {
+      "T": 32818,
+      "k": 2,
+      "d": 1,
+      "measure": "23/30",
+      "root_count": 2
+    },
+    {
+      "T": 33343,
+      "k": 3,
+      "d": 1,
+      "measure": "22/25",
+      "root_count": 0
+    },
+    {
+      "T": 32968,
+      "k": 4,
+      "d": 1,
+      "measure": "667/750",
+      "root_count": 2
+    }
+  ],
+  "original_binomial_equation_solved": false,
+  "limitations": [
+    "No SageMath/Magma Mordell-Weil computation",
+    "No Lean proof of new v32 theorem",
+    "Independent testing over 287500 arithmetic inputs is not a proof of the infinite classification",
+    "Exact Haar densities and root counts follow from the stated Hensel/valuation argument, not mere extrapolation"
+  ]
+}
