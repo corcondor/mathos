@@ -46,6 +46,7 @@ jobs:
           python -m py_compile docs/research/nested-binomial/v30_local_crt_verify.py
           python docs/research/nested-binomial/v30_local_crt_verify.py
           python docs/research/nested-binomial/v32_padic_complete_verify.py
+          python docs/research/nested-binomial/v32_rational_T_audit.py
           python docs/research/nested-binomial/v32_symbolic_verify.py
       - name: Verify changed version-specific scripts (no secrets available)
         env:
