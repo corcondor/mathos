@@ -171,5 +171,20 @@
     "a_residues_each": 3125,
     "exact_tests": 100000,
     "criterion": "T=rho/b² genuinely nonintegral permitted; independent F vs normalized local valuation classification"
+  },
+  "explicit_finite_residue_example": {
+    "b": 1,
+    "rho": 32793,
+    "modulus": 25,
+    "forbidden_a_residues": [
+      0,
+      7,
+      10,
+      15,
+      18
+    ],
+    "allowed": 20,
+    "out_of": 25,
+    "scope": "necessary Q5-square condition only"
   }
 }
