@@ -1,0 +1,49 @@
+name: Alternate PARI exact Mordell-Weil group for rho=100003
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v48-pari-rank-certificate.yml'
+      - 'docs/research/nested-binomial/v48_pari_specialization.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch fixed Sage image
+        run: docker pull sagemath/sagemath:10.10
+      - name: Proof-oriented PARI rank and saturation
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 420s \
+            docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v48_pari_specialization.sage \
+            > v48_pari_rank_proof.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" | tee -a v48_pari_rank_proof.log
+          cat v48_pari_rank_proof.log
+          exit 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v48-rho100003-PARI-rank-and-saturation-attempt
+          path: v48_pari_rank_proof.log
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Mark green only if rank-and-basis proof actually succeeded
+        run: |
+          grep -q '"status": "CERTIFIED_BY_SAGE_PROOF"' v48_pari_rank_proof.log
+          grep -q 'EXIT_CODE=0' v48_pari_rank_proof.log
