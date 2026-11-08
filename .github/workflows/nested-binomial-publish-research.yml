@@ -66,10 +66,20 @@ jobs:
               r"docs/research/nested-binomial/v[0-9]+_[A-Za-z0-9_-]*verify\.py",p)]
           for p in scripts:
               print("Executing published numerical checker:",p,flush=True)
-              subprocess.run(["timeout","180",sys.executable,p],check=True)
+              env=os.environ.copy()
+              if p.endswith("/v44_all_integer_lifts_verify.py"):
+                  env["MATHOS_CERTIFICATE_PATH"]="audit-artifacts/v44_full_square_points.json"
+              subprocess.run(["timeout","180",sys.executable,p],check=True,env=env)
           print("Versioned numeric checks:",len(scripts),
                 "— no Lean/general theorem-completeness claim")
           PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v44-full-rational-integer-lift-certificate
+          path: audit-artifacts/v44_full_square_points.json
+          if-no-files-found: ignore
+          retention-days: 30
 
   independent-deepseek:
     needs: offline-verification
