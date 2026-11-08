@@ -89,7 +89,7 @@ try:
         "ranks_proved":[r1,r2],"rational_points_found":[str(z) for z in rational],
         "unresolved_padic_candidate_count":len(unresolved),
         "unresolved_padic_candidates":[str(z)[:500] for z in unresolved[:20]],
-        "elapsed_seconds":round(time.time()-start,1),
+        "elapsed_seconds":float(round(time.time()-start,1)),
         "status":"NO_UNRESOLVED_QC_CANDIDATES" if len(unresolved)==0 else "REQUIRES_MW_SIEVE_OR_HIGHER_PRECISION",
         "warning":"Complete rational point classification needs published QC precision and MW saturation assumptions verified; a numerical list alone is not a theorem."
     },ensure_ascii=False),flush=True)
