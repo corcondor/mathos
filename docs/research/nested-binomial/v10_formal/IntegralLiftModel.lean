@@ -47,8 +47,11 @@ theorem recover_sextic_square (a b rho Y : ℤ)
       integralLiftF a b rho := by
   rw [sextic_integral_model_identity]
   have hid := integral_weierstrass_identity b rho (integralLiftX a b rho) Y
-  rw [sub_eq_zero.mpr (sub_eq_zero.mpr h)] at hid
-  nlinarith [hid]
+  have hh : Y ^ 2 + 6 * b * integralLiftX a b rho * Y +
+      integralLiftM b rho * Y - (integralLiftX a b rho) ^ 3 = 0 :=
+    sub_eq_zero.mpr h
+  rw [hh, mul_zero] at hid
+  exact sub_eq_zero.mp hid
 
 #print axioms sextic_integral_model_identity
 #print axioms integral_weierstrass_identity
