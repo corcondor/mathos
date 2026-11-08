@@ -1,0 +1,52 @@
+name: v84 three-isogenous rational generator and integral-point proof
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v84-three-isogeny-full-integral.yml'
+      - 'docs/research/nested-binomial/v84_three_isogeny_free_point.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dual-isogeny-search:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    strategy:
+      fail-fast: false
+      matrix:
+        b: [9,18]
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull fixed SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Dual three-isogeny search, full saturation, and all integral points
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 210s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v84_three_isogeny_free_point.sage \
+            ${{ matrix.b }} >v84-b${{ matrix.b }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v84-b${{ matrix.b }}.log
+          grep -E 'V84_BEGIN|V84_3ISOGENY|V84_SEARCH|V84_NONTORSION|V84_SATURATION|V84_FULL|V84_ALL|V84_INCOMPLETE|EXIT_CODE=' \
+            v84-b${{ matrix.b }}.log | cut -c 1-1800 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v84-3isogeny-saturation-b${{ matrix.b }}
+          path: v84-b${{ matrix.b }}.log
+          if-no-files-found: error
+          retention-days: 35
+      - name: Green only when rank-1 saturation and all integral points are certified
+        run: |
+          grep -q V84_ALL_INTEGRAL_POINTS v84-b${{ matrix.b }}.log
+          grep -q EXIT_CODE=0 v84-b${{ matrix.b }}.log
