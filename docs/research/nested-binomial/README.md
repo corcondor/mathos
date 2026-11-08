@@ -1,5 +1,7 @@
 # 入れ子の二項係数方程式の研究記録
 
+> **v33〜v35（2026-11-08）— 楕円曲面の階数の決定と非巡回点の排除**：v33で第二楕円商の **E(Q̄(T))=ℤR**（幾何学的階数1・捩れ0・R primitive）をShioda–Tateと高さで導き、種数2補助曲線に有限のQ̄(T)-有理点がないことを証明。[v33証明](V33_GEOMETRIC_MORDELL_WEIL_ja.md)・[演算監査](v33_generic_mw_verify.py)。v34は **T=q²−1** で独立な新切断Qを構成、二次基底変換K3の **幾何学的/算術階数2・Picard数20** を証明。[v34証明](V34_QUADRATIC_K3_RANK_ja.md)・[有限体検算](v34_quadratic_k3_verify.py)。v35は **Q, R±Q** の整数復元を剰余定理 d∣45b³ で630候補に縮約し、厳密な条件を満たす整数候補がないことを完全検算。[v35証明](V35_BOUNDARY_K3_EXCLUSION_ja.md)・[再現](v35_boundary_combination_verify.py)。適用範囲は一般関数体と指定された二次基底変換族であり、原方程式全体の無解証明ではない。新定理はLean未形式化・外部査読なし。
+
 > **v32（2026-11-08）**：種数2補助曲線の **T≡3 (mod5) 全5進衝突**について、\(a\) に上限のない平方判定を完成。v31で残った **T≡18 (mod25)** も含み、零点は0・2・4個と分類、平方を満たす \(a\) の厳密Haar密度を6枝に分けて算出。零点のない場合は有限法で完全判定できる一方、単純5進零点がある場合は **どの固定の法5の冪でも一様な平方判定が不可能** と証明。[v32数学的証明](V32_PADIC_SQUARE_COMPLETION_ja.md)・[287,500件の完全検算](v32_padic_complete_verify.py)・[独立SymPy恒等式監査](v32_symbolic_verify.py)・[証明書](v32_certificate.json)。これらは元の整数点問題の必要条件であり、元問題の無解証明やLean形式証明ではない。
 
 > **自動研究連携**：[公開時のGitHub Actions検証とDeepSeek仮説生成](AUTORESEARCH_PIPELINE_ja.md)。新しいvNNノートのPR時は数値検査、master公開時はActions APIキーがあれば独立した新規仮説を生成（**UNVERIFIEDのドラフトPR**）。Lean証明は別の固定環境で再検証。Codespacesの既存97アクション状態や固定Lean最終2目標は変更しない。
