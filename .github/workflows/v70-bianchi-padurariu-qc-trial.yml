@@ -19,8 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { T: 7, p: 5, prec: 14 }
-          - { T: 18, p: 7, prec: 14 }
+          - { T: 7, p: 5, prec: 20 }
+          - { T: 11, p: 5, prec: 20 }
     steps:
       - uses: actions/checkout@v4
         with:
