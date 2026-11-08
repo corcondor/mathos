@@ -1,0 +1,45 @@
+name: v76 certify remaining b2 integral points with stronger PARI rank proof
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v76-complete-integral-b2-rho100003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certified-b2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Increase PARI effort from 1 to 10 for full MW basis and integral points
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 125s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v74_complete_integral_lifts.sage 100003 2 10 \
+            >v76-rho100003-b2.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >> v76-rho100003-b2.log
+          grep -E 'V74_BEGIN|V74_MW|V74_COMPLETE|V74_INCOMPLETE|EXIT_CODE' v76-rho100003-b2.log | cut -c 1-1600 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v76-full-integral-rho100003-b2
+          path: v76-rho100003-b2.log
+          if-no-files-found: error
+      - name: Red if rank/integral-point proof not completed
+        run: |
+          grep -q V74_COMPLETE v76-rho100003-b2.log
+          grep -q EXIT_CODE=0 v76-rho100003-b2.log
