@@ -1,0 +1,49 @@
+name: v61 unconditional Thue classification of first quotient order-9 torsion
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v61-nine-torsion-thue.yml'
+      - 'docs/research/nested-binomial/v61_nine_torsion_thue.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certified-thue:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Run complete PARI Thue solver with unconditional flag 1
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 420s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v61_nine_torsion_thue.sage \
+            >v61-thue-unconditional.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v61-thue-unconditional.log
+          tail -n 140 v61-thue-unconditional.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v61-all-20-unconditional-thue-equations
+          path: v61-thue-unconditional.log
+          if-no-files-found: error
+          retention-days: 60
+      - name: Reject unfinished or uncertified Thue results
+        run: |
+          grep -q 'THUEINIT_CERTIFIED' v61-thue-unconditional.log
+          grep -q '"status": "UNCONDITIONAL_THUE_COMPLETE"' v61-thue-unconditional.log
+          grep -q 'EXIT_CODE=0' v61-thue-unconditional.log
