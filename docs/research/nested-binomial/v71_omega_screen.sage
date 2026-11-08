@@ -19,11 +19,11 @@ for t,p in fibres:
     start=time.time()
     try:
         Omega=Omega_set(f,p,10,Es=[E1,E2],Emins=[E1.minimal_model(),E2.minimal_model()])
-        res={"T":t,"p":p,"Omega_count":len(Omega),"seconds":round(time.time()-start,1)}
+        res={"T":int(t),"p":int(p),"Omega_count":int(len(Omega)),"seconds":round(time.time()-start,1)}
         print("OMEGA_RESULT",json.dumps(res),flush=True)
         results.append(res)
     except Exception as e:
-        res={"T":t,"p":p,"error":type(e).__name__+":"+str(e)[:300]}
+        res={"T":int(t),"p":int(p),"error":type(e).__name__+":"+str(e)[:300]}
         print("OMEGA_INCOMPLETE",json.dumps(res),flush=True)
         results.append(res)
 print("OMEGA_SCREEN_COMPLETE",json.dumps(results,ensure_ascii=False),flush=True)
