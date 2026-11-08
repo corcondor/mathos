@@ -46,7 +46,7 @@ jobs:
             --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
             sagemath/sagemath:10.10 \
             sage docs/research/nested-binomial/v70_bielliptic_qc_trial.sage \
-            ${{ matrix.T }} ${{ matrix.p }} ${{ matrix.p }}rec \
+            ${{ matrix.T }} ${{ matrix.p }} ${{ matrix.prec }} \
             > "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log" 2>&1
           code=$?
           echo "EXIT_CODE=$code" >> "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log"
