@@ -47,12 +47,12 @@ for m in range(1,5):
             formula=sp.factor(sp.cancel(A/point[0]))
             assert sp.cancel(formula-expect[(m,sign)])==0,(m,sign,formula)
             assert sp.factor(point[1]**2-point[0]**3-B*point[0]**2-A*C*point[0]-4*A*A)==0
-assert sp.factor(expect[(2,-1)]-q*q)==-(2*q+1)*(3*q-1)/(q+5)
-assert sp.factor(expect[(3,-1)]-q*q)==-(3*q-1)*(3*q+1)*(4*q*q+q+1)/(4*q*(q*q+10*q+1))
-assert sp.factor(expect[(4,-1)]-q*q)==-4*(q-1)*(3*q+1)/(q+17)
-assert sp.factor(expect[(2,1)]-q*q)==(2*q-1)*(3*q+1)/(q-5)
-assert sp.factor(expect[(3,1)]-q*q)==(3*q-1)*(3*q+1)*(4*q*q-q+1)/(4*q*(q*q-10*q+1))
-assert sp.factor(expect[(4,1)]-q*q)==4*(q+1)*(3*q-1)/(q-17)
+assert sp.cancel((sp.factor(expect[(2,-1)]-q*q))-(-(2*q+1)*(3*q-1)/(q+5)))==0
+assert sp.cancel((sp.factor(expect[(3,-1)]-q*q))-(-(3*q-1)*(3*q+1)*(4*q*q+q+1)/(4*q*(q*q+10*q+1))))==0
+assert sp.cancel((sp.factor(expect[(4,-1)]-q*q))-(-4*(q-1)*(3*q+1)/(q+17)))==0
+assert sp.cancel((sp.factor(expect[(2,1)]-q*q))-((2*q-1)*(3*q+1)/(q-5)))==0
+assert sp.cancel((sp.factor(expect[(3,1)]-q*q))-((3*q-1)*(3*q+1)*(4*q*q-q+1)/(4*q*(q*q-10*q+1))))==0
+assert sp.cancel((sp.factor(expect[(4,1)]-q*q))-(4*(q+1)*(3*q-1)/(q-17)))==0
 
 def candidates(m):
     """Purely arithmetic resultant/divisor reduction, independent of SymPy."""
