@@ -7,7 +7,8 @@
   ],
   "test_sources": [
     "v32_padic_complete_verify.py",
-    "v32_symbolic_verify.py"
+    "v32_symbolic_verify.py",
+    "v32_rational_T_audit.py"
   ],
   "exact_tests": {
     "T_cases": 23,
@@ -19,7 +20,8 @@
     ],
     "residues_per_pair": 3125,
     "total_cases": 287500,
-    "result": "Original sextic Q5 square classifier equals independent normalized local chart classifier for all tested pairs"
+    "result": "Original sextic Q5 square classifier equals independent normalized local chart classifier for all tested pairs",
+    "total_tests_including_rational_parameter": 387500
   },
   "symbolic_tests": {
     "result": "PASS",
@@ -147,5 +149,27 @@
     "No Lean proof of new v32 theorem",
     "Independent testing over 287500 arithmetic inputs is not a proof of the infinite classification",
     "Exact Haar densities and root counts follow from the stated Hensel/valuation argument, not mere extrapolation"
-  ]
+  ],
+  "rational_parameter_tests": {
+    "status": "PASS",
+    "b_values": [
+      2,
+      3,
+      486
+    ],
+    "rho_range_tested": [
+      32770,
+      34999
+    ],
+    "rho_mod9_allowed": [
+      1,
+      4,
+      6,
+      7
+    ],
+    "representative_families": 32,
+    "a_residues_each": 3125,
+    "exact_tests": 100000,
+    "criterion": "T=rho/b² genuinely nonintegral permitted; independent F vs normalized local valuation classification"
+  }
 }
