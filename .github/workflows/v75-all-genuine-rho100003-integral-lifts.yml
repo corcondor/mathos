@@ -1,0 +1,56 @@
+name: v75 complete integral-point certificates on more genuine rho100003 fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v75-all-genuine-rho100003-integral-lifts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integral-point-certificates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { b: 2, seconds: 120 }
+          - { b: 3, seconds: 170 }
+          - { b: 6, seconds: 120 }
+          - { b: 162, seconds: 120 }
+          - { b: 243, seconds: 120 }
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Prove complete rank/generators and ALL integral points for genuine residual
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s ${{ matrix.seconds }}s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v74_complete_integral_lifts.sage \
+            100003 ${{ matrix.b }} > v75-rho100003-b${{ matrix.b }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >> v75-rho100003-b${{ matrix.b }}.log
+          grep -E 'V74_BEGIN|V74_MW|V74_COMPLETE|V74_INCOMPLETE|EXIT_CODE=' \
+            v75-rho100003-b${{ matrix.b }}.log | cut -c1-1900 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v75-certified-integral-rho100003-b${{ matrix.b }}
+          path: v75-rho100003-b${{ matrix.b }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Require full integer-point certificate (red if unfinished)
+        run: |
+          grep -q V74_COMPLETE v75-rho100003-b${{ matrix.b }}.log
+          grep -q EXIT_CODE=0 v75-rho100003-b${{ matrix.b }}.log
