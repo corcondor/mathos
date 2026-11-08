@@ -51,6 +51,28 @@ try:
         assert patched_source.count(old_line)==1,(old_line,patched_source.count(old_line))
         patched_source=patched_source.replace(old_line,new_line)
     compat="external/QC_bielliptic/qc_g2_bielliptic_sage10_compat.sage"
+    # Sage 10.10's algdep(P[0],1) can TypeError for a p-adic integer.
+    # A failed rational reconstruction must remain in the unresolved
+    # p-adic set, never be silently discarded or treated as a proof.
+    bad_start = "            except ValueError:\n                pol = algdep(P[0], 1)"
+    bad_end = "\n\n        assert(len("
+    assert patched_source.count(bad_start)==1
+    start=patched_source.index(bad_start)
+    end=patched_source.index(bad_end,start)
+    cautious_fallback="""            except ValueError:
+                try:
+                    rational_x=QQ(P[0].rational_reconstruction())
+                    RP=H.lift_x(rational_x)
+                    if RP[1] - P[1] == 0:
+                        rational_points[l].append(RP)
+                    elif RP[1] + P[1] == 0:
+                        rational_points[l].append(H(RP[0],-RP[1]))
+                    else:
+                        other_points[l].append(P)
+                except (AttributeError, TypeError, ValueError, ArithmeticError):
+                    other_points[l].append(P)"""
+    patched_source=patched_source[:start]+cautious_fallback+patched_source[end:]
+    print("QC_RATIONAL_RECONSTRUCTION_COMPAT: rejects unrecognized candidates only into unresolved set",flush=True)
     Path(compat).write_text(patched_source,encoding="utf-8")
     print("QC_INFINITY_COMPAT_PATCH",len(replacements),"replacements; pinned upstream unchanged",flush=True)
     load(compat)
