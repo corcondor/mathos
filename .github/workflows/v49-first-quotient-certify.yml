@@ -28,7 +28,7 @@ jobs:
           mkdir -p first-quotient-logs
           for item in '1 1 120' '100003 1 240'; do
             read -r rho b limit <<<"$item"
-            output="first-quotient-logs/T${rho}${b}.log"
+            output="first-quotient-logs/T_${rho}_${b}.log"
             timeout --signal=TERM --kill-after=10s "${limit}s" \
               docker run --rm --network none \
               --mount type=bind,source="$PWD",target=/work,readonly \
