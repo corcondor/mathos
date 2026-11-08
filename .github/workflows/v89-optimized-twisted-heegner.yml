@@ -1,0 +1,52 @@
+name: v89 optimized quadratic-twist Heegner free-point certificate
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v89-optimized-twisted-heegner.yml'
+      - 'docs/research/nested-binomial/v89_twisted_heegner_optimized.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  minimum-conductor-twist:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    strategy:
+      fail-fast: false
+      matrix:
+        b: [9,18]
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Fetch pinned SageMath with PARI
+        run: docker pull sagemath/sagemath:10.10
+      - name: Recover exact rank-one point via cheaper quadratic twist
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 140s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v89_twisted_heegner_optimized.sage ${{ matrix.b }} \
+            >v89-twisted-heegner-b${{ matrix.b }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v89-twisted-heegner-b${{ matrix.b }}.log
+          grep -E 'V89_BEGIN|V89_OPTIMAL|V89_HEEGNER|V89_EXACT|V89_FULL|V89_COMPLETE|V89_INCOMPLETE|EXIT_CODE' \
+            v89-twisted-heegner-b${{ matrix.b }}.log | cut -c1-2000 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v89-conductor-lowered-Heegner-b${{ matrix.b }}
+          path: v89-twisted-heegner-b${{ matrix.b }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Only green after all integral points certified
+        run: |
+          grep -q V89_COMPLETE v89-twisted-heegner-b${{ matrix.b }}.log
+          grep -q EXIT_CODE=0 v89-twisted-heegner-b${{ matrix.b }}.log
