@@ -38,10 +38,12 @@ try:
     candidates=[]
     # Search logarithmic naive heights sequentially; tight CPU bound is
     # enforced by the GitHub Actions runner.
-    for height in (3,5,7):
+    for height in (8,10,12):
         print("V82_POINT_SEARCH_START",json.dumps({"b":int(b),
             "height":height}),flush=True)
-        found=Emin.point_search(height,rank_bound=1)
+        found=Emin.point_search(height,rank_bound=2)
+        print("V82_RAW_POINT_SEARCH",json.dumps({"b":int(b),
+            "height":height,"found":[str(P) for P in found[:6]]}),flush=True)
         for Pmin in found:
             P=iso(Pmin)
             if P==E(0) or P[0]==0: continue  # Q-torsion exactly Z/3
@@ -52,7 +54,7 @@ try:
                  "height":height,"point":str(candidates[0])}),flush=True)
             break
     if not candidates:
-        raise RuntimeError("No nontorsion generator found to logarithmic height 7; theorem rank=1 still holds")
+        raise RuntimeError("No nontorsion generator found to logarithmic height 12; theorem rank=1 still holds")
     # This is a full saturation, NOT a small-prime-only check.
     print("V82_FULL_SATURATION_START",flush=True)
     basis,index,regulator=E.saturation([candidates[0]],max_prime=-1)
