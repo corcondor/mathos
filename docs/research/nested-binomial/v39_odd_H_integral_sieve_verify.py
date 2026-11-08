@@ -53,9 +53,9 @@ for name in ratios:
     assert sp.factor(sp.cancel(ratios[name]-expected[name]))==0,name
 
 # Three cases fail the strict a^2>p^2 immediately:
-assert sp.factor(expected["H"]-q*q)==-(3*q-1)/2
-assert sp.factor(expected["R+H"]-q*q)==-(3*q-1)*(3*q+1)/(2*(q+3))
-assert sp.factor(expected["2R+H"]-q*q)==-(3*q+1)*(5*q-1)/(2*(q+7))
+assert sp.cancel((sp.factor(expected["H"]-q*q))-(-(3*q-1)/2))==0
+assert sp.cancel((sp.factor(expected["R+H"]-q*q))-(-(3*q-1)*(3*q+1)/(2*(q+3))))==0
+assert sp.cancel((sp.factor(expected["2R+H"]-q*q))-(-(3*q+1)*(5*q-1)/(2*(q+7))))==0
 
 rows_rh=[]
 divisor_pairs=0
