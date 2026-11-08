@@ -63,6 +63,23 @@ print("PROVED: E_100003(Q)_tors = 0 and R infinite")
 # R generates E(F_13) of order 9 and is not three times another.
 print("PROVED: R not divisible by 2 or by 3 in E_100003(Q)")
 
+# First elliptic quotient in an integral Tate normal form when b=1:
+# y^2+6xy+(8+9T)y=x^3. P=(0,0) is exact order 3 (the line y=0
+# has triple contact there). Good reductions p=7 and 13 have group
+# orders 6 and 15, so the full rational torsion group is Z/3.
+first_a3=8+9*T
+first_delta=-243*T*first_a3**3
+def first_points(p):
+    assert first_delta%p!=0
+    count=1
+    for x in range(p):
+        disc=((6*x+first_a3)**2+4*x**3)%p
+        count+=1 if disc==0 else 2 if pow(disc,(p-1)//2,p)==1 else 0
+    return count
+assert first_points(7)==6 and first_points(13)==15
+assert gcd(6,15)==3
+print("PROVED: first elliptic quotient E1_100003(Q)_tors = Z/3, via #E(F7)=6 and #E(F13)=15")
+
 def sextic(a,b,r):
     x=a*a; v=b*b
     return 4*x**3+12*(2*v-r)*x*x+12*(3*v*v+5*v*r+r*r)*x-r*r*(3*v+4*r)
