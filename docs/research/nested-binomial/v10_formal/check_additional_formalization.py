@@ -106,7 +106,7 @@ def main():
     sources = [ROOT / "ValuationRecovery.lean", ROOT / "RecoveredDivisor.lean"]
     if (ROOT / "NormalizedCancellation.lean").exists():
         sources.append(ROOT / "NormalizedCancellation.lean")
-    for name in ["LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction", "GeometricDescent", "CFCoefficientRanges", "CFCandidateCoverage", "IntegralLiftModel", "LocalCubeCover7"]:
+    for name in ["LocalSquareRecovery", "CriticalPrimeCRT", "CFApproximationCore", "GeometricReduction", "GeometricDescent", "CFCoefficientRanges", "CFCandidateCoverage", "IntegralLiftModel", "LocalCubeCover7", "CFBoundedDivisorBridge"]:
         if (ROOT / (name + ".lean")).exists():
             sources.append(ROOT / (name + ".lean"))
     sources = include_goal_modules(sources)
