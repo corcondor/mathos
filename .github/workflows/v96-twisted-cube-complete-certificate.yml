@@ -1,0 +1,70 @@
+name: v96 complete 5214-curve twisted-cube CF certificate
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v96-twisted-cube-complete-certificate.yml'
+      - 'docs/research/nested-binomial/v96_twisted_cube_cf_complete.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-finite-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct all 5214 exact CF prefixes and apply twisted-cube sieve
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          timeout --signal=TERM --kill-after=15s 630s \
+            python -u docs/research/nested-binomial/v96_twisted_cube_cf_complete.py \
+              --min-s 1 --max-s 12 \
+              --output audit-artifacts/v96_twisted_cube_complete.json \
+              2>&1 | tee audit-artifacts/v96_twisted_cube_complete.log
+      - name: Independently check final recovered points and original v9 counts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('audit-artifacts/v96_twisted_cube_complete.json').read_text())
+          assert d['status']=='COMPLETE_EXACT_PYTHON_CERTIFICATE'
+          assert d['complete_5214_curves'] is True
+          assert d['range']==[1,12]
+          assert (d['curves'],d['irrational_curves'],d['rational_curves'])==(5214,5213,1)
+          assert d['continued_fraction_terms']==4877566
+          assert d['coefficient_types']==43922
+          assert d['strict_survivors']==0
+          expected={(1,225,10,30),(2,450,10,30),(4,900,10,30),
+                    (8,1800,10,30),(10,1681,82,246)}
+          actual={(z['S'],z['T'],int(z['n']),int(z['r']))
+                  for z in d['recovered_points']}
+          assert len(d['recovered_points'])==5 and actual==expected,(actual,expected)
+          assert all(int(z['n'])<104 and int(z['r'])==3*int(z['n'])
+                     for z in d['recovered_points'])
+          assert sum(x['curves'] for x in d['by_S'])==5214
+          assert sum(x['equation_matches'] for x in d['by_S'])==5
+          print('PASS: all 5214 curves and 43922 necessary coefficient options covered')
+          print('PASS: exact twisted-cube equation has only five small recovered points')
+          print('PASS: no points satisfy n>=104 and strict 3n<r<10n/3')
+          print('Scope: finite arithmetic certificate, not yet complete Lean formalization')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v96-full-5214-twisted-cube-certificate-and-log
+          path: audit-artifacts/v96_twisted_cube_complete.*
+          if-no-files-found: error
+          retention-days: 60
