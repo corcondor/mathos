@@ -31,7 +31,7 @@ C=6*b*X+M
 xref=M*(Y+C)/X**2
 yref=M*M*(Y+C)/X**3
 assert s.factor((yref*yref+6*b*xref*yref+M*yref-xref**3)
-                *X**6-M**3*(Y+C)*E)==0
+                *X**6+M**3*(Y+C)*E)==0
 print("PASS: exact torsion translation and reflection on first elliptic quotient")
 
 def add_mod3(a,b):return tuple((x+y)%3 for x,y in zip(a,b))
