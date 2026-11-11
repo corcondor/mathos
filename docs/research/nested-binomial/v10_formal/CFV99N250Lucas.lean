@@ -64,8 +64,22 @@ theorem cf_v99_n250_r830_not_nested_binomial
       cf_v99_inner_choose_mod83
   rcases hk with rfl | rfl
   · have hL : (Nat.choose 2573000 (Nat.choose 830 1)) % 83 = 65 := by
-      simpa [Nat.choose_one_right] using cf_v99_outer_choose_mod83
+      simpa only [Nat.choose_one_right] using cf_v99_outer_choose_mod83
     have hK : (Nat.choose (830 ^ 2) (1 ^ 2)) % 83 = 0 := by
+      norm_num [Nat.choose_one_right]
+    have hmod := congrArg (fun v : ℕ => v % 83) heq
+    rw [hA] at hmod
+    rw [Nat.add_mod] at hmod
+    rw [hX, hK] at hmod
+    have hL' : (Nat.choose 2573000 830) % 83 = 65 := by
+      simpa only [Nat.choose_one_right] using hL
+    omega
+  · have hsym : Nat.choose 2573000 2572170 = Nat.choose 2573000 830 := by
+      have h := Nat.choose_symm (show 830 ≤ 2573000 by decide)
+      simpa only [show (2573000 : ℕ) - 830 = 2572170 by decide] using h
+    have hL : (Nat.choose 2573000 (Nat.choose 2572170 1)) % 83 = 65 := by
+      simpa only [Nat.choose_one_right, hsym] using cf_v99_outer_choose_mod83
+    have hK : (Nat.choose (2572170 ^ 2) (1 ^ 2)) % 83 = 0 := by
       norm_num [Nat.choose_one_right]
     have hmod := congrArg (fun v : ℕ => v % 83) heq
     rw [hA] at hmod
@@ -74,18 +88,6 @@ theorem cf_v99_n250_r830_not_nested_binomial
     have hL' : (Nat.choose 2573000 2572170) % 83 = 65 := by
       simpa only [Nat.choose_one_right] using hL
     omega
-  · have hsym : Nat.choose 2573000 2572170 = Nat.choose 2573000 830 := by
-      have h := Nat.choose_symm (show 830 ≤ 2573000 by decide)
-      simpa only [show (2573000 : ℕ) - 830 = 2572170 by decide] using h
-    have hL : (Nat.choose 2573000 (Nat.choose 2572170 1)) % 83 = 65 := by
-      simpa [Nat.choose_one_right, hsym] using cf_v99_outer_choose_mod83
-    have hK : (Nat.choose (2572170 ^ 2) (1 ^ 2)) % 83 = 0 := by
-      norm_num [Nat.choose_one_right]
-    have hmod := congrArg (fun v : ℕ => v % 83) heq
-    rw [hA] at hmod
-    rw [Nat.add_mod] at hmod
-    rw [hX, hK] at hmod
-    norm_num [hL] at hmod
 
 #print axioms cf_v99_outer_choose_mod83
 #print axioms cf_v99_inner_choose_mod83
