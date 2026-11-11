@@ -31,13 +31,13 @@ jobs:
           timeout --signal=TERM --kill-after=15s 990s \
             python -u docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py \
             --min-s 31 --max-s 31 --output audit-artifacts/v99_31.json \
-            2>&1 | tee audit-artifacts/v99_25_31.log
+            2>&1 | tee audit-artifacts/v99_31.log
       - name: Audit every original-branch survivor using v17 prime factor restriction
         shell: bash
         run: |
           python - <<'PY'
           import json
-          d=json.load(open('audit-artifacts/v99_25_31.json'))
+          d=json.load(open('audit-artifacts/v99_31.json'))
           assert d['status']=='COMPLETE_EXACT_V98_ARITHMETIC'
           assert d['range']==[31,31]
           assert d['curves']==67*31-1
@@ -63,6 +63,6 @@ jobs:
         if: always()
         with:
           name: v99-S25-S31-all-convergents-and-v17-witness
-          path: audit-artifacts/v99_25_31.*
+          path: audit-artifacts/v99_31.*
           if-no-files-found: error
           retention-days: 60
