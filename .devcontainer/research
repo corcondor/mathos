@@ -91,7 +91,8 @@ setup() (
     # Mathlib.Tactic and the explicit imports cover the existing checked modules.
     "$DEEPSEEK_CACHE_COMMAND" Mathlib.Tactic Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass \
         Mathlib.Data.Nat.ChineseRemainder Mathlib.Data.Nat.Factorization.Basic \
-        Mathlib.Data.Nat.GCD.BigOperators Mathlib.NumberTheory.Padics.PadicVal.Basic
+        Mathlib.Data.Nat.GCD.BigOperators Mathlib.NumberTheory.Padics.PadicVal.Basic \
+        Mathlib.Data.Nat.Choose.Lucas
 )
 
 verify() {
