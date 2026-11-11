@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Independently test the 204-threshold and direct small-q branch
+      - name: Independently test the 17*S threshold and direct small-q branch
         shell: bash
         run: |
           set -euo pipefail
@@ -32,17 +32,17 @@ jobs:
           import sys
           sys.path.insert(0, 'docs/research/nested-binomial')
           from v98_legendre_bounded_divisor_verify import (
-              new_stats, check_small_denominators, LOW_BOUND, icbrt_floor)
-          assert LOW_BOUND == 204
-          assert 2*(229*12-1) < 27*LOW_BOUND
+              new_stats, check_small_denominators, cutoff, icbrt_floor)
+          assert cutoff(12)==204
+          assert all(2*(229*S-1)<27*cutoff(S) for S in range(1,25))
           assert icbrt_floor(27)==3 and icbrt_floor(26)==2
           d=new_stats()
           check_small_denominators(1,225,1<<192,d)
           assert len(d['recovered_points'])==1 and int(d['recovered_points'][0]['n'])==10
           assert d['strict_survivors']==0
-          print('PASS: q<204 exact early-stop and 204 Legendre threshold')
+          print('PASS: q<17*S exact early-stop and linear Legendre threshold')
           PY
-      - name: Reconstruct all 5214 prefixes, inspect only convergents when q >= 204
+      - name: Reconstruct all 5214 prefixes, inspect only convergents when q >= 17*S
         shell: bash
         run: |
           set -euo pipefail
@@ -58,15 +58,15 @@ jobs:
           import json
           d=json.load(open('audit-artifacts/v98.json'))
           assert d['status']=='COMPLETE_EXACT_V98_ARITHMETIC' and d['complete_5214_curves'] is True
-          assert d['range']==[1,12] and d['small_q_threshold']==204
+          assert d['range']==[1,12] and d['small_q_threshold_rule']=='q < 17*S'
           assert (d['curves'],d['irrational_curves'],d['rational_curves'],d['cf_terms']) == (5214,5213,1,4877566)
-          assert d['small_q_checked']==1058442
+          assert d['small_q_checked']==733810
           assert d['strict_survivors']==0 and d['large_S_divisible_points']==0
           expected={(1,225,10,30),(2,450,10,30),(4,900,10,30),
                     (8,1800,10,30),(10,1681,82,246)}
           pts=[(p['S'],p['T'],int(p['n']),int(p['r'])) for p in d['recovered_points']]
           assert len(pts)==5 and set(pts)==expected,pts
-          assert all(int(p['q'])<204 for p in d['recovered_points'])
+          assert all(int(p['q'])<17*p['S'] for p in d['recovered_points'])
           assert all(int(p['n'])<104 and int(p['r'])==3*int(p['n']) for p in d['recovered_points'])
           print('PASS: full 5214 exact arithmetic with Legendre-only large denominators')
           print('PASS: five recovered points, no admissible solutions')
