@@ -121,7 +121,7 @@ def run(min_s=1,max_s=12):
         curves=rational=irrational=terms=0
         H=1<<(192*S)
         for T in range(162*S+1,229*S):
-            assert 2*T<27*LOW_BOUND
+            assert 2*T<27*cutoff(S)
             curves+=1
             check_small_denominators(S,T,H,stats)
             word=exact_cf_prefix(S,T)
