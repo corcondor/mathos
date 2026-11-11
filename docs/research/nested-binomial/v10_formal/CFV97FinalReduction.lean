@@ -83,7 +83,7 @@ theorem cf_v97_curve_index_coverage
 /-- 66+133+...+803 = 5214. This just counts the curve pairs;
 it does not certify that each irrational curve has no solution. -/
 theorem cf_v97_curve_count :
-    (∑ S in Finset.Icc (1 : ℕ) 12, (67 * S - 1)) = 5214 := by
+    (Finset.Icc (1 : ℕ) 12).sum (fun S => 67 * S - 1) = 5214 := by
   decide
 
 /-- The one rational cube-root curve in the existing 5214-pair domain
