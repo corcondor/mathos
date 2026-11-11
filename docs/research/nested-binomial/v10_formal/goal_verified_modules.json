@@ -29,6 +29,7 @@
     "CFV97SquarefreeBridge",
     "CFV97CompleteParameters",
     "CFV97FinalReduction",
-    "CFV98DefectLegendreGate"
+    "CFV98DefectLegendreGate",
+    "CFV99N250Lucas"
   ]
 }
