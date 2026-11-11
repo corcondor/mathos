@@ -1,0 +1,68 @@
+name: v99 first nontrivial curve point, defects 25-31, cross-check v17
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v99-extended-defects-25-to-31.yml'
+      - 'docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py'
+      - 'docs/research/nested-binomial/v96_twisted_cube_cf_complete.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  v99-extended-sieve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check S=25..31 with exact CF and bounded divisor
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          timeout --signal=TERM --kill-after=15s 990s \
+            python -u docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py \
+            --min-s 25 --max-s 31 --output audit-artifacts/v99_25_31.json \
+            2>&1 | tee audit-artifacts/v99_25_31.log
+      - name: Audit every original-branch survivor using v17 prime factor restriction
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('audit-artifacts/v99_25_31.json'))
+          assert d['status']=='COMPLETE_EXACT_V98_ARITHMETIC'
+          assert d['range']==[25,31]
+          assert d['curves']==sum(67*S-1 for S in range(25,32))
+          assert d['cf_terms']>0
+          admissible=[p for p in d['recovered_points'] if p['result']=='SURVIVES']
+          print('Curve pairs:',d['curves'],'strict curve points:',len(admissible))
+          print('Candidate details:',admissible[:30])
+          # This is an evidence-based *new* hypothesis, checked after
+          # full arithmetic enumeration; unexpected cases must not be hidden.
+          expected={(31,6889,250,830)}
+          found={(p['S'],p['T'],int(p['n']),int(p['r'])) for p in admissible}
+          if found!=expected or len(admissible)!=1:
+              raise SystemExit(f'UNEXPECTED curve survivors (NOT excluded): {found}')
+          c=admissible[0]
+          n=int(c['n'])
+          assert n==250 and (n-1)%83==0
+          assert 83>1 and all(83%d for d in range(2,10))
+          assert 83**2>6*n-9
+          print('PASS: the only strict auxiliary curve point violates v17 P+(n-1)^2 <= 6*n-9')
+          print('SCOPE: v17 is a separately written theorem, not a Lean-certified universal assumption')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v99-S25-S31-all-convergents-and-v17-witness
+          path: audit-artifacts/v99_25_31.*
+          if-no-files-found: error
+          retention-days: 60
