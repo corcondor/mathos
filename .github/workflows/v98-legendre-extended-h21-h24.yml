@@ -1,0 +1,62 @@
+name: v98 extended defect 21 to 24 full Legendre certificate
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v98-legendre-extended-h21-h24.yml'
+      - 'docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py'
+      - 'docs/research/nested-binomial/v96_twisted_cube_cf_complete.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-extended-defects:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact S=21..24 curve enumeration by uniform Legendre criterion
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          timeout --signal=TERM --kill-after=15s 990s \
+            python -u docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py \
+              --min-s 21 --max-s 24 --output audit-artifacts/v98_H21_H24.json \
+              2>&1 | tee audit-artifacts/v98_H21_H24.log
+      - name: Inspect the exact certified residual counts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('audit-artifacts/v98_H21_H24.json'))
+          assert x['status']=='COMPLETE_EXACT_V98_ARITHMETIC'
+          assert x['range']==[21,24] and x['small_q_threshold_rule']=='q < 17*S'
+          assert x['curves']==sum(67*S-1 for S in range(21,25))
+          assert x['rational_curves']+x['irrational_curves']==x['curves']
+          print('Checked:',x['curves'],'curves and',x['cf_terms'],'CF terms')
+          print('Small point recoveries:',x['small_S_divisible_points'])
+          print('Large point recoveries:',x['large_S_divisible_points'])
+          print('Full strict survivors:',x['strict_survivors'])
+          print('Recovered points:',x['recovered_points'][:20])
+          if x['strict_survivors'] != 0:
+              raise SystemExit('NEW POSSIBLE CANDIDATES: investigate before claiming no solutions')
+          print('PASS: No admissible curve points for H=21..24 in exact arithmetic')
+          print('SCOPE: written Legendre theorem + exact Python certificate, not Lean final theorem')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v98-defect-21-to-24-certificate
+          path: audit-artifacts/v98_H21_H24.*
+          if-no-files-found: error
+          retention-days: 60
