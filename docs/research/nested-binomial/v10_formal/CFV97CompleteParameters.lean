@@ -91,7 +91,7 @@ theorem cf_v97_curve_twisted_cube_parameters
       _ = h * (s * z ^ 2) := by rw [hvz]
       _ = h * s * z ^ 2 := by ring
   have hntwist : n - 1 = h * A * s ^ 2 * z ^ 3 :=
-    cf_twisted_cube_recover_n g q h s A z hqtwist hgz hq
+    cf_twisted_cube_recover_n g q h s A z n hqtwist hgz hq
   exact ⟨h, e, A, s, z, hh, hh6, hedvd, hsquare, hA, hs, hTfact,
     hD, hhgcd, hqtwist, hgz, hntwist⟩
 
