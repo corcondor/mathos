@@ -7,12 +7,16 @@ on:
       - 'docs/research/nested-binomial/v10_formal/*.lean'
       - 'docs/research/nested-binomial/v10_formal/*.goal_job.json'
       - 'docs/research/nested-binomial/v10_formal/*.goal_check.json'
+      - '.devcontainer/research'
+      - '.github/workflows/nested-binomial-lean-check.yml'
   push:
     branches: [master, research/nested-binomial-2026-11-05]
     paths:
       - 'docs/research/nested-binomial/v10_formal/*.lean'
       - 'docs/research/nested-binomial/v10_formal/*.goal_job.json'
       - 'docs/research/nested-binomial/v10_formal/*.goal_check.json'
+      - '.devcontainer/research'
+      - '.github/workflows/nested-binomial-lean-check.yml'
   workflow_dispatch:
 
 permissions:
