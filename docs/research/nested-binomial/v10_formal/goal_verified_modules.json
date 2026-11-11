@@ -23,6 +23,7 @@
     "ThirtyCofactorDefectKRange",
     "ThirtyCofactorDefectPellConcrete",
     "CFCurveRecovery",
-    "CFRationalCubeExclusionB"
+    "CFRationalCubeExclusionB",
+    "CFV97PrimitiveGcd"
   ]
 }
