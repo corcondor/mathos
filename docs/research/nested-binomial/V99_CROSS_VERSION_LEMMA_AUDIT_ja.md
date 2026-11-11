@@ -50,3 +50,25 @@ S≤12の5214曲線でv98 [GitHub Actions 43013109674](https://github.com/corcon
 S=25..31の有限全証明書は [v99専用ワークフロー](https://github.com/corcondor/mathos/actions/workflows/v99-extended-defects-25-to-31.yml) が終了してからのみ結論を認定する。
 
 **未達**：5214曲線のカーネル内全網羅性、凍結CFSmallDefectGoal/ThirtyCofactorGoal、任意大きなS・rho・他のj,ell枝、元方程式の全整数解。古い未使用補題を用いた部分族の排除と、全域解決を明確に区別する。
+
+
+## 2026-11-11 実行済み証拠：S≤31の有限不適合を確認
+
+一度にS=25..31を実行した [Actions 43014023516](https://github.com/corcondor/mathos/actions/runs/43014023516) は S=31途中でタイムアウトしたため、ワークフロー全体はFAIL。**ただしS25..30の6本の個別集計が完走**している：計11,049曲線、34,212,847 CF項、各Sで厳密必要条件を満たす点0。この区間の小点は S=26,T=4704,n=28,r=84 のみで、n≥104を満たさない。
+
+残るS31は[独立した2,076曲線CI 43016417372](https://github.com/corcondor/mathos/actions/runs/43016417372)で**完走PASS**（7,217,974 CF項）。大小分母を完備し、原始収束分数の大分母で D|Tq を満たす点は0。S31で小分母から復元した2点のうち、強い必要条件 n≥104 と厳密ギャップを満たすものは **(S,T,n,r)=(31,6889,250,830) の1点のみ**。
+
+この1点の両k分岐を [CFV99N250Lucas.lean](v10_formal/CFV99N250Lucas.lean) の一般的な mod83 Lucas 計算で排除。実際の固定Lean4.35.0/固定mathlibの [Actions 43016425010](https://github.com/corcondor/mathos/actions/runs/43016425010) のログで **CFV99N250Lucas.lean: exit=0, no proof holes=True** を確認。従って v17の書面上の素因数上界に依存せず、この例外単体はLeanカーネルで排除されている。
+
+既存v9～v12のS≤20排除と今回のS=21..31の完全な有限数値計算の組合せから、**指定枝で元方程式が成立するなら有効不足分H≥32**。ここでH=A/gcd(A,r³)、元のS=A/gcd(A,X)ともH|SであるためS≥32。この数学的結果の形式化は個別例外のLucas証明のみLean対応であり、**全計算列挙のカーネル内検証はまだない**。
+
+## 既存mathlibで発見した形式化済みLegendre定理
+
+固定mathlib commit 56a005855ea17e0b0958f73ec801ae140b0a1679 の
+
+- Mathlib/NumberTheory/DiophantineApproximation/Basic.lean : Real.exists_rat_eq_convergent
+- Mathlib/NumberTheory/DiophantineApproximation/ContinuedFractions.lean : Real.exists_convs_eq_rat
+
+は \(|\xi-q|<1/(2\,q.den^2)\) ならその有理数が通常の収束分数である、という**既にカーネル証明済みの古典Legendre定理**を含む。新たに証明し直す必要はなく、今回のv98整数境界と実数評価、原始有理数の分母同定を入力として渡せる。
+
+なお、ここから全証明へ至るには (i) 近似誤差の分母同定を元曲線から形式化、(ii) 帰納的有限CF prefixとmathlibの収束分数の同一視、(iii) 全5214＋延長区間の有限排除証明書をLean内部で検査、(iv) 凍結最終2定理への接続が別々に必要である。Python PASSや一部のLean PASSから無条件の全4変数解決を主張しない。
