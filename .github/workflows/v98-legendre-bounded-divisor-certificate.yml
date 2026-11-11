@@ -1,0 +1,81 @@
+name: v98 v11 bounded-divisor Legendre full certificate
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v98-legendre-bounded-divisor-certificate.yml'
+      - 'docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py'
+      - 'docs/research/nested-binomial/v96_twisted_cube_cf_complete.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-v98-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independently test the 204-threshold and direct small-q branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, 'docs/research/nested-binomial')
+          from v98_legendre_bounded_divisor_verify import (
+              new_stats, check_small_denominators, LOW_BOUND, icbrt_floor)
+          assert LOW_BOUND == 204
+          assert 2*(229*12-1) < 27*LOW_BOUND
+          assert icbrt_floor(27)==3 and icbrt_floor(26)==2
+          d=new_stats()
+          check_small_denominators(1,225,1<<192,d)
+          assert len(d['recovered_points'])==1 and int(d['recovered_points'][0]['n'])==10
+          assert d['strict_survivors']==0
+          print('PASS: q<204 exact early-stop and 204 Legendre threshold')
+          PY
+      - name: Reconstruct all 5214 prefixes, inspect only convergents when q >= 204
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          timeout --signal=TERM --kill-after=15s 850s \
+            python -u docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py \
+              --min-s 1 --max-s 12 --output audit-artifacts/v98.json \
+              2>&1 | tee audit-artifacts/v98.log
+      - name: Verify complete counts, all recovered points, and no survivors
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('audit-artifacts/v98.json'))
+          assert d['status']=='COMPLETE_EXACT_V98_ARITHMETIC' and d['complete_5214_curves'] is True
+          assert d['range']==[1,12] and d['small_q_threshold']==204
+          assert (d['curves'],d['irrational_curves'],d['rational_curves'],d['cf_terms']) == (5214,5213,1,4877566)
+          assert d['small_q_checked']==1058442
+          assert d['strict_survivors']==0 and d['large_S_divisible_points']==0
+          expected={(1,225,10,30),(2,450,10,30),(4,900,10,30),
+                    (8,1800,10,30),(10,1681,82,246)}
+          pts=[(p['S'],p['T'],int(p['n']),int(p['r'])) for p in d['recovered_points']]
+          assert len(pts)==5 and set(pts)==expected,pts
+          assert all(int(p['q'])<204 for p in d['recovered_points'])
+          assert all(int(p['n'])<104 and int(p['r'])==3*int(p['n']) for p in d['recovered_points'])
+          print('PASS: full 5214 exact arithmetic with Legendre-only large denominators')
+          print('PASS: five recovered points, no admissible solutions')
+          print('SCOPE: exact Python integer certificate + written Legendre theorem, NOT Lean-finalized')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v98-full-5214-legendre-bounded-divisor-certificate
+          path: audit-artifacts/v98.*
+          if-no-files-found: error
+          retention-days: 60
