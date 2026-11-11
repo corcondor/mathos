@@ -28,6 +28,7 @@
     "CFV97CurvePrimitive",
     "CFV97SquarefreeBridge",
     "CFV97CompleteParameters",
-    "CFV97FinalReduction"
+    "CFV97FinalReduction",
+    "CFV98DefectLegendreGate"
   ]
 }
