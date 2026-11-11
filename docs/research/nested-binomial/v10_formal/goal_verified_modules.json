@@ -27,6 +27,7 @@
     "CFV97PrimitiveGcd",
     "CFV97CurvePrimitive",
     "CFV97SquarefreeBridge",
-    "CFV97CompleteParameters"
+    "CFV97CompleteParameters",
+    "CFV97FinalReduction"
   ]
 }
