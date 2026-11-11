@@ -1,0 +1,61 @@
+name: v100 exact inverse-binomial lattice & shifted-divisor certificate
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v100-inverse-binomial-lattice.yml'
+      - 'docs/research/nested-binomial/v100_inverse_binomial_lattice_sieve.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-integer-crossings:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enumerate exact integer crossings and shifted-divisor obstructions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v100_inverse_binomial_lattice_sieve.py \
+            --max-k 1000 --output audit-artifacts/v100_inverse_binomial.json | tee audit-artifacts/v100_inverse_binomial.log
+      - name: Independently inspect exact finite certificate and its scope
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('audit-artifacts/v100_inverse_binomial.json')
+          data=json.loads(p.read_text())
+          assert data['range']==[3,1000]
+          assert data['count']==998
+          assert data['first_divisibility_pass']==35
+          assert data['both_divisibility_pass']==0
+          assert data['full_equation_solutions']==0
+          assert data['records']==sorted(data['records'],key=lambda x:x['k'])
+          assert [x['k'] for x in data['records']]==list(range(3,1001))
+          assert all(not r['is_exact_solution'] for r in data['records'])
+          assert all(not (r['i_divides_kR'] and r['i_minus_1_divides_k_kminus1_Rplus1'])
+                     for r in data['records'])
+          print('PASS: j=1, ell=k-1, 2<=k<=1000: NO integer solutions')
+          print('PASS: k>=3 has exactly one candidate i per k via monotone gap')
+          print('PASS: first shifted divisibility 35; second intersection 0')
+          print('SCOPE: exact bounded computation, NOT a theorem for all k')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v100-inverse-binomial-lattice-k3-through-1000
+          path: audit-artifacts/v100_inverse_binomial.*
+          retention-days: 60
