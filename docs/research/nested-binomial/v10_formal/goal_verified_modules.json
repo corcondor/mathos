@@ -25,6 +25,7 @@
     "CFCurveRecovery",
     "CFRationalCubeExclusionB",
     "CFV97PrimitiveGcd",
-    "CFV97CurvePrimitive"
+    "CFV97CurvePrimitive",
+    "CFV97SquarefreeBridge"
   ]
 }
