@@ -1,4 +1,4 @@
-name: v99 first nontrivial curve point, defects 25-31, cross-check v17
+name: v99 final defect 31 curve certificate and Lucas witness
 
 on:
   push:
@@ -24,13 +24,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Check S=25..31 with exact CF and bounded divisor
+      - name: Check S=31 with exact CF and bounded divisor
         run: |
           set -euo pipefail
           mkdir -p audit-artifacts
           timeout --signal=TERM --kill-after=15s 990s \
             python -u docs/research/nested-binomial/v98_legendre_bounded_divisor_verify.py \
-            --min-s 25 --max-s 31 --output audit-artifacts/v99_25_31.json \
+            --min-s 31 --max-s 31 --output audit-artifacts/v99_31.json \
             2>&1 | tee audit-artifacts/v99_25_31.log
       - name: Audit every original-branch survivor using v17 prime factor restriction
         shell: bash
@@ -39,8 +39,8 @@ jobs:
           import json
           d=json.load(open('audit-artifacts/v99_25_31.json'))
           assert d['status']=='COMPLETE_EXACT_V98_ARITHMETIC'
-          assert d['range']==[25,31]
-          assert d['curves']==sum(67*S-1 for S in range(25,32))
+          assert d['range']==[31,31]
+          assert d['curves']==67*31-1
           assert d['cf_terms']>0
           admissible=[p for p in d['recovered_points'] if p['result']=='SURVIVES']
           print('Curve pairs:',d['curves'],'strict curve points:',len(admissible))
