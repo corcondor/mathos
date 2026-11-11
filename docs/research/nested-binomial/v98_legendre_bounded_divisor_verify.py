@@ -34,7 +34,7 @@ from pathlib import Path
 
 from v96_twisted_cube_cf_complete import icbrt_floor, exact_cf_prefix, verify_prefix
 
-MAX_S = 24
+MAX_S = 31
 
 def cutoff(S):
     # Since T<229*S, q>=17*S implies 2*T<458*S<459*S<=27*q.
@@ -138,7 +138,7 @@ def run(min_s=1,max_s=12):
                 rational+=1
                 # The rational root case is excluded by the existing
                 # Lean theorem CFRationalCubeExclusionB, not by Legendre.
-                # For S<=24, v^3|6S gives v<=5 and the rational-root gap
+                # For S<=31, v^3|6S gives v<=5 and the rational-root gap
                 # n-1<3*v/2 contradicts n>=104. The rational case is
                 # not tested with Legendre or counted as an irrational curve.
                 continue
