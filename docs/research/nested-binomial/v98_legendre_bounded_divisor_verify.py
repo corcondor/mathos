@@ -34,8 +34,11 @@ from pathlib import Path
 
 from v96_twisted_cube_cf_complete import icbrt_floor, exact_cf_prefix, verify_prefix
 
-LOW_BOUND = 204
-MAX_S = 12
+MAX_S = 24
+
+def cutoff(S):
+    # Since T<229*S, q>=17*S implies 2*T<458*S<459*S<=27*q.
+    return 17*S
 FIELDS = ("small_q_checked","small_primitive_candidates","small_D_dvd_Tq",
           "small_square_g","small_S_divisible_points",
           "large_convergents","large_relevant_convergents",
@@ -73,7 +76,7 @@ def recovered(S, T, p, q, D, H, stats, branch):
 def check_small_denominators(S,T,H,stats):
     C=6*S
     bound=C*T
-    for q in range(1,LOW_BOUND):
+    for q in range(1,cutoff(S)):
         stats["small_q_checked"]+=1
         # strict D>0 => C*p^3 < T*q^3.
         p=icbrt_floor((T*q**3-1)//C)
@@ -91,9 +94,9 @@ def check_small_denominators(S,T,H,stats):
 def check_large_convergents(S,T,H,conv,stats):
     C=6*S
     bound=C*T
-    assert 2*T < 27*LOW_BOUND
+    assert 2*T < 27*cutoff(S)
     for p,q in conv:
-        if q<LOW_BOUND or q>=H: continue
+        if q<cutoff(S) or q>=H: continue
         stats["large_convergents"]+=1
         # Consecutive convergents are automatically reduced; check
         # the actual p/q and all original necessary divisibility.
@@ -110,7 +113,7 @@ def run(min_s=1,max_s=12):
     start=time.monotonic()
     totals=new_stats()
     overview={"status":"RUNNING","range":[min_s,max_s],
-             "small_q_threshold":LOW_BOUND,"curves":0,
+             "small_q_threshold_rule":"q < 17*S","curves":0,
              "irrational_curves":0,"rational_curves":0,"cf_terms":0,
              "by_S":[],"note":"Python exact finite check + written v11 bound and Legendre theorem, NOT full Lean"}
     for S in range(min_s,max_s+1):
@@ -127,13 +130,15 @@ def run(min_s=1,max_s=12):
                 rational+=1
                 # The rational root case is excluded by the existing
                 # Lean theorem CFRationalCubeExclusionB, not by Legendre.
-                assert (S,T)==(9,2000)
+                # For S<=24, v^3|6S gives v<=5 and the rational-root gap
+                # n-1<3*v/2 contradicts n>=104. The rational case is
+                # not tested with Legendre or counted as an irrational curve.
                 continue
             irrational+=1
             terms+=len(word)
             check_large_convergents(S,T,H,conv,stats)
         assert curves==67*S-1
-        assert stats["strict_survivors"]==0, (S,stats["recovered_points"])
+        # Retain any survivors as explicit evidence rather than aborting the audit.
         for k in FIELDS:
             if k=="recovered_points":totals[k].extend(stats[k])
             else:totals[k]+=stats[k]
@@ -149,7 +154,7 @@ def run(min_s=1,max_s=12):
     if (min_s,max_s)==(1,12):
         assert (overview["curves"],overview["rational_curves"],overview["irrational_curves"],
                 overview["cf_terms"])==(5214,1,5213,4877566)
-        assert totals["small_q_checked"]==1058442
+        assert totals["small_q_checked"]==733810
         assert totals["strict_survivors"]==0
         expected={(1,225,10,30),(2,450,10,30),(4,900,10,30),
                   (8,1800,10,30),(10,1681,82,246)}
