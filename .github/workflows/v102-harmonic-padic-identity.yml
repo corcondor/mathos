@@ -1,0 +1,48 @@
+name: v102 exact harmonic congruence sanity (not exhaustive solution search)
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v102-harmonic-padic-identity.yml'
+      - 'docs/research/nested-binomial/v102_harmonic_padic_identity_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-local-identity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independent exact congruence checks for selected primes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v102_harmonic_padic_identity_audit.py \
+            --max-prime 31 --output audit-artifacts/v102_mod_p2.json | tee audit-artifacts/v102_mod_p2.log
+          python3 - <<'PY'
+          import json
+          j=json.load(open('audit-artifacts/v102_mod_p2.json'))
+          assert j['status']=='PASS_EXACT_MODULAR_SANITY'
+          assert j['pmax']==31
+          assert j['tested_formula_cases']>500
+          assert j['tested_local_congruence_lifts']>100
+          assert j['explicit_p5_p7_comparisons']=='PASS'
+          print('PASS: sample integer identities; ALL-prime theorem is in the written proof, not this finite test')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v102-mod-p2-harmonic-identity-sanity-check
+          path: audit-artifacts/v102_mod_p2.*
+          retention-days: 60
