@@ -42,8 +42,11 @@ private theorem cf_v99_inner_choose_mod83 :
   change (Nat.choose 62500 61009) % 83 =
     (Nat.choose (62500 % 83) (61009 % 83) *
      Nat.choose (62500 / 83) (61009 / 83)) % 83 at h
-  simpa [show (62500 : ℕ) % 83 = 1 by decide,
-    show (61009 : ℕ) % 83 = 4 by decide] using h
+  rw [show (62500 : ℕ) % 83 = 1 by decide,
+      show (61009 : ℕ) % 83 = 4 by decide] at h
+  have hzero : Nat.choose 1 4 = 0 :=
+    Nat.choose_eq_zero_of_lt (by decide)
+  simpa only [hzero, zero_mul, Nat.zero_mod] using h
 
 /-- Lucas' prime-83 certificate rules out the ONLY strict auxiliary
 point currently found at S=31, for both original k-branches. -/
@@ -68,7 +71,9 @@ theorem cf_v99_n250_r830_not_nested_binomial
     rw [hA] at hmod
     rw [Nat.add_mod] at hmod
     rw [hX, hK] at hmod
-    norm_num [hL] at hmod
+    have hL' : (Nat.choose 2573000 2572170) % 83 = 65 := by
+      simpa only [Nat.choose_one_right] using hL
+    omega
   · have hsym : Nat.choose 2573000 2572170 = Nat.choose 2573000 830 := by
       have h := Nat.choose_symm (show 830 ≤ 2573000 by decide)
       simpa only [show (2573000 : ℕ) - 830 = 2572170 by decide] using h
