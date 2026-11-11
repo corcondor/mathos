@@ -42,7 +42,7 @@ def cutoff(S):
 FIELDS = ("small_q_checked","small_primitive_candidates","small_D_dvd_Tq",
           "small_square_g","small_S_divisible_points",
           "large_convergents","large_relevant_convergents",
-          "large_D_bounded","large_D_dvd_Tq","large_square_g",
+          "large_modular_pass","large_D_bounded","large_D_dvd_Tq","large_square_g",
           "large_S_divisible_points","recovered_points","strict_survivors")
 
 def new_stats():
@@ -95,6 +95,9 @@ def check_large_convergents(S,T,H,conv,stats):
     C=6*S
     bound=C*T
     assert 2*T < 27*cutoff(S)
+    # If 0<D<=bound<modulus, its residue is exactly D.
+    modulus=1 << max(64,bound.bit_length()+1)
+    assert bound < modulus
     for p,q in conv:
         if q<cutoff(S) or q>=H: continue
         stats["large_convergents"]+=1
@@ -102,8 +105,13 @@ def check_large_convergents(S,T,H,conv,stats):
         # the actual p/q and all original necessary divisibility.
         if p<=3*q or math.gcd(q,S)!=1:continue
         stats["large_relevant_convergents"]+=1
+        residue=(T*pow(q,3,modulus)-C*pow(p,3,modulus))%modulus
+        if not (0<residue<=bound):continue
+        stats["large_modular_pass"]+=1
         D=T*q**3-C*p**3
+        # The residue filter is necessary only; verify the full difference.
         if not (0<D<=bound):continue
+        assert D==residue
         stats["large_D_bounded"]+=1
         assert math.gcd(p,q)==1
         recovered(S,T,p,q,D,H,stats,"large")
