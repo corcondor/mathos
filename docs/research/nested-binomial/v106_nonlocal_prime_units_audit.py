@@ -107,7 +107,7 @@ def unit_identity(k: int, d: int, R: int) -> dict:
     assert k % 2 == 1 and d % 2 == 0 and d >= 2
     assert isprime(q) and q > (d + 1)**2
     assert R % q == 0
-    assert D(d) < q**D(d).bit_length()  # harmless very weak positivity check
+    assert D(d) > 2*d*d  # small binomial coefficient exceeds 2d^2
     assert ((R // q) * D(d) - 2*d) % q == 0
     return {"k": k, "q": q, "d": d, "D_d": D(d),
             "R_over_q_mod_q": (R // q) % q}
