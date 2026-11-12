@@ -1,0 +1,53 @@
+name: v106 non-close factor certificates and 2-prime CRT obstruction
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v106-nonlocal-prime-crt.yml'
+      - 'docs/research/nested-binomial/v106_nonlocal_prime_units_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  algebraic-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check non-close factor certificates using polynomial gcd and 2-prime CRT
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v106_nonlocal_prime_units_audit.py \
+            --output audit-artifacts/v106_nonlocal_crt.json \
+            | tee audit-artifacts/v106_nonlocal_crt.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("audit-artifacts/v106_nonlocal_crt.json").read_text())
+          assert d["status"]=="PASS_EXACT_V106_NONLOCAL_AND_CRT"
+          assert d["full_original_equation_resolved"] is False
+          assert {e["k"] for e in d["nonclose_factor_examples"]}=={7,41}
+          assert all(e["result"]=="NO SOLUTION FOR ANY i" for e in d["nonclose_factor_examples"])
+          assert {e["k"] for e in d["fixed_two_prime_CRT_examples"]}=={99,819,821}
+          assert all(e["discharged_by_crt_collision"] for e in d["fixed_two_prime_CRT_examples"])
+          assert {e["k"]:e["derived_strict_q1_upper"] for e in d["fixed_two_prime_CRT_examples"]}[821]==33218493146713
+          print("PASS: arbitrary-distance polynomial-gcd factors; exact small-D unit inversion; 2-prime CRT contradiction")
+          print("SCOPE: exact finite examples; written universal argument is not Lean formalized")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v106-nonlocal-factor-and-two-prime-crt
+          path: audit-artifacts/v106_nonlocal_crt.*
+          retention-days: 60
