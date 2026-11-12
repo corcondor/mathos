@@ -30,6 +30,7 @@
     "CFV97CompleteParameters",
     "CFV97FinalReduction",
     "CFV98DefectLegendreGate",
-    "CFV99N250Lucas"
+    "CFV99N250Lucas",
+    "CFV106TwoPrimeCRTGap"
   ]
 }
