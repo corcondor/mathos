@@ -7,7 +7,7 @@ This is only the exact **final integer algebra** of the new theorem:
 two rational modular residues of opposite signs, at moduli q and q+h,
 force an explicit *k-independent bound* on q.
 
-The preceding Lucas-forced divisibility and the Wolstenholme/Wilson
+Registered in goal_verified_modules.json for the pinned Lean CI. The preceding Lucas-forced divisibility and the Wolstenholme/Wilson
 binomial-unit congruence remain written proofs in the v106 research note.
 Do NOT infer those analytic/combinatorial inputs from this Lean theorem.
 -/
