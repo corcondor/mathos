@@ -13,6 +13,7 @@ Mathematical scope:
 * It also checks that modulus 17^3 alone has a spurious in-range root
   at i=68, so a claimed universal one-prime exclusion would be false.
 
+Registered in goal_verified_modules.json for the pinned Lean 4.35.0 CI.
 The general k-height theorem, the all-k count of large primes, and the
 3/5-prime root-free criterion are NOT formalized here.
 No sorry, admit, native_decide or custom axioms.
