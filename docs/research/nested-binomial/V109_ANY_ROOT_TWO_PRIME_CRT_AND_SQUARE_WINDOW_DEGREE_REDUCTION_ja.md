@@ -149,3 +149,28 @@ k6のCRTは法899で\(\{0,290,434,464,724,898\}\)、k9は法1817で\(\{0\}\)。�
 - v108 k=8の Lean-kernel済み CRTの例。
 
 完全な元四変数等式の分類も、j=1,ell=k−1の全k排除もなお未解決。記述証明は本ノート、Lean核の個別検証は別の固定モジュールに分離。
+
+
+## 2026-11-12 実行済み証拠とLean形式化の正確な射程
+
+**整数・有限体多項式による独立した認証**：
+[GitHub Actions 43206301964](https://github.com/corcondor/mathos/actions/runs/43206301964) の全ステップ成功。
+[検証コード](v109_two_prime_any_roots_certificate.py) は k=6,8,9,14 の全例について、
+- q1,q2 がR_kを割る必要十分条件（平方剰余の下位1桁）、
+- G_k と X^{q−1}−1 の完全な有限体GCDと根の明示積、
+- 各第一根aに対する「≤k+3次」多項式PとシフトDの有限体GCD=1、
+- 2素数CRTの全剰余と \(2k<i<k³\) の不両立、
+を正確な整数演算で完了。4例全てで一次関係以上の重複や未知の有限体根を無視していない。
+
+**Leanカーネルによる証明成功**：
+[CFV109AnyRootTwoPrimeCRT.lean](v10_formal/CFV109AnyRootTwoPrimeCRT.lean) を目標モジュール台帳に登録。
+[GitHub Actions 43206594845](https://github.com/corcondor/mathos/actions/runs/43206594845) で固定Lean4.35.0/mathlibピンの実行を確認し、
+CFV109AnyRootTwoPrimeCRT.lean: exit=0, no proof holes=True をログから確認。以下は任意のi∈ℕについてカーネル内で証明：
+- k6_no_original_solution_below_cubic：0<i<216ならC(i,6)=i²+C(36,11)は不可能（法29と31）。
+- k9_no_original_solution_below_cubic：0<i<729ならC(i,9)=i²+C(81,17)は不可能（法23と79）。
+- k14_no_original_solution_below_cubic：0<i<2744ならC(i,14)=i²+C(196,27)は不可能（法191と181、**それぞれ追加の非零根がある**）。
+
+**高さ i<k³ はv101の別の記述証明から入力した仮定であり、このLeanモジュールには含めていない。**
+全kの「2素数CRTが必ず成功」および式109.6の一般定理のLean形式化も未完。原四変数等式全体についても未解決。
+
+注意：初回CIは、「法23、79両方の根集合が0のみ」という場合に正代表配列のminが空になるPython表示バグで失敗。**正の最小解を法Qの0クラスのQにする修正を加えた後の完走PASSは43206301964であり、以前のFAILを成果に数えていない**。
