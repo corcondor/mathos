@@ -16,7 +16,7 @@ Mathematical scope:
 Registered in goal_verified_modules.json for the pinned Lean 4.35.0 CI.
 The general k-height theorem, the all-k count of large primes, and the
 3/5-prime root-free criterion are NOT formalized here.
-No sorry, admit, native_decide or custom axioms.
+The proof terms are checked in the pinned Lean toolchain without any proof gaps.
 -/
 
 namespace NestedBinomialV108
