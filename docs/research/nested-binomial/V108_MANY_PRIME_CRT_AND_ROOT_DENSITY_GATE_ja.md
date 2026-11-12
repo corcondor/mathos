@@ -130,3 +130,16 @@ CRTによって、19·59=1121を法とする全4候補は
 - Gallagherのlarger sieveにより、全てのqで根の個数が小さければ短いi区間の候補数を制限できる。しかし \(H_k\) の根数に**一様な小さい上限**は証明されておらず、単純な次数上界k−1を用いるだけでは十分なlarge-sieve分母を保証できない。https://ecroot.math.gatech.edu/gallagher.pdf
 
 **検証状態**：一般下界(108.2/3)とroot-free→3/5素数衝突は記述証明。k8の2素数CRTとq17の反例は正確な整数演算および有限体GCDで独立照合。Lean定理は別ファイルで個別の成功ログを確認した場合のみ「kernel検証成功」と記す。
+
+
+## 2026-11-12：固定Lean 4.35.0での本物のKernel検証
+
+[CFV108TwoPrimeK8LocalGlobal.lean](v10_formal/CFV108TwoPrimeK8LocalGlobal.lean) を固定mathlibコミットで実行し、
+[GitHub Actions 43167649879](https://github.com/corcondor/mathos/actions/runs/43167649879) は**ワークフロー成功**。
+ログに CFV108TwoPrimeK8LocalGlobal.lean: exit=0, no proof holes=True と記録された。
+新規モジュールは次の2定理を証明した：
+- k8_original_equation_impossible_below_cubic_height：任意の正整数i<512に対する元式C(i,8)=i²+C(64,15)は矛盾。任意iへのLucas法19・法59、各有限体全根の正確な分類（決定的証明）、CRTの全4場合から導く。i<512自体は**v101の別の記述証明から入力する仮定**であり、このLean定理内部での高さ証明ではない。
+- k8_spurious_one_prime_root：i=68が法17³における元等式の解であり、元の整数等式は偽、という**局所・大域不一致の反例**。
+大きな素因数個数の全k≥1000の証明と奇偶3/5-rootfreeの**一般定理はこのLeanモジュールに含まない**。これらは本研究ノートの記述証明に依存し、全四変数の完全解決ではない。
+
+整数・有限体多項式の独立検算は [GitHub Actions 43166808644](https://github.com/corcondor/mathos/actions/runs/43166808644) でPASS。
