@@ -1,0 +1,59 @@
+name: v109 root-agnostic CRT and near-square degree reduction
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v109-any-root-two-prime-crt.yml'
+      - 'docs/research/nested-binomial/v109_two_prime_any_roots_certificate.py'
+      - 'docs/research/nested-binomial/v106_nonlocal_prime_units_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-algebra:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prove complete finite-field root factorization, CRT and small-degree polynomial coprimality
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v109_two_prime_any_roots_certificate.py \
+            --output audit-artifacts/v109_crt.json \
+            | tee audit-artifacts/v109_crt.log
+          python3 - <<'PY'
+          import json
+          d=json.load(open('audit-artifacts/v109_crt.json'))
+          assert d['status']=='PASS_V109_TWO_PRIME_ROOT_AGNOSTIC_AND_DEGREE_REDUCTION'
+          assert d['root_free_primes_NOT_required']
+          assert len(d['cases'])==4
+          assert {row['k'] for row in d['cases']}=={6,8,9,14}
+          for row in d['cases']:
+              assert len(row['small_degree_gcd_certificates'])==len(row['roots'][0]['root_set'])
+              assert all(z['gcd_over_second_prime']==[1] for z in row['small_degree_gcd_certificates'])
+              assert all(z['t_polynomial_degree']<=row['k']+3 for z in row['small_degree_gcd_certificates'])
+              assert row['least_positive_representative']>row['exclusive_i_upper_bound']
+              assert row['CRT_modulus']>row['exclusive_i_upper_bound']
+          assert len(next(x for x in d['cases'] if x['k']==14)['CRT_all_representatives'])==9
+          assert d['all_k_j1_ell_kminus1_solved']==False
+          print('PASS: roots verified completely by finite-field polynomial gcd; NO scan over original i')
+          print('PASS: all small-degree shifted polynomial gcds and independent CRT representatives exclude heights')
+          print('SCOPE: selected k instances; generic uniform two-prime theorem is written, not Lean kernel checked')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v109-two-prime-root-agnostic-local-global-certificates
+          path: audit-artifacts/v109_crt.*
+          retention-days: 60
