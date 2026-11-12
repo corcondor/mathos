@@ -32,6 +32,7 @@
     "CFV98DefectLegendreGate",
     "CFV99N250Lucas",
     "CFV106TwoPrimeCRTGap",
-    "CFV108TwoPrimeK8LocalGlobal"
+    "CFV108TwoPrimeK8LocalGlobal",
+    "CFV109AnyRootTwoPrimeCRT"
   ]
 }
