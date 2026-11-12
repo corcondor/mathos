@@ -131,7 +131,7 @@ def verify():
             "R_divisible_both":"exactly certified by k² mod q < 2k−1",
             "roots":[first,second],
             "CRT_modulus":Q,"CRT_all_representatives":reps,
-            "least_positive_representative":min(x for x in reps if x>0),
+            "least_positive_representative":min([x for x in reps if x>0]+[Q]),
             "exclusive_i_upper_bound":k**3,
             "small_degree_gcd_certificates":direct_reduction,
             "conclusion":"NO ORIGINAL SOLUTION FOR ANY i, conditional on v101 global height"
