@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "domain_justification": "a^2+3b^2 divides 24a => a^2 < 24a => a < 24",
+  "complete_pairs": 253,
+  "coprime_pairs": 171,
+  "all_solutions": [
+    [
+      3,
+      1
+    ]
+  ],
+  "note_sha256": "8ab5a2bb9145de43be5eaac89962d9ec941c8e22bdadc17805e010fe9d0b4d65",
+  "scope": "Written elementary proof plus complete verification of its bounded domain; no Lean execution."
+}
