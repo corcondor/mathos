@@ -1,0 +1,59 @@
+name: v73 actual original rho100003 three bielliptic QC workload checks
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v73-rho100003-omega-precheck.yml'
+      - 'docs/research/nested-binomial/v73_original_rho_omega.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-real-rho:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { b: 81, p: 7 }
+          - { b: 162, p: 5 }
+          - { b: 243, p: 5 }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch pinned academic QC implementation
+        run: |
+          git clone --quiet --depth 1 https://github.com/bianchifrancesca/QC_bielliptic.git external/QC_bielliptic
+          test "$(git -C external/QC_bielliptic rev-parse HEAD)" = '209117b1647f1114e10abb99c720bf911eb10e6f'
+      - name: Pull SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Measure correction set on actual integral sextic (no artificial bounds on rho)
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 150s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage docs/research/nested-binomial/v73_original_rho_omega.sage \
+            ${{ matrix.b }} ${{ matrix.p }} > v73-rho100003-b${{ matrix.b }}-omega.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >> v73-rho100003-b${{ matrix.b }}-omega.log
+          tail -n 40 v73-rho100003-b${{ matrix.b }}-omega.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v73-actual-rho100003-b${{ matrix.b }}-Omega
+          path: v73-rho100003-b${{ matrix.b }}-omega.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Honest marker, without claiming a completed QC proof
+        run: |
+          grep -Eq 'ORIGINAL_RESIDUAL_OMEGA_BEGIN|EXIT_CODE=124|EXIT_CODE=137' v73-rho100003-b${{ matrix.b }}-omega.log
+          echo 'Green is workload screening only, not a full rational point proof.'

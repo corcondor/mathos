@@ -1,0 +1,52 @@
+name: v68 rank-two bielliptic quadratic Chabauty precheck
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v68-bielliptic-qc-precheck.yml'
+      - 'docs/research/nested-binomial/v68_rank_two_bielliptic_precheck.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rank-two-precheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    strategy:
+      fail-fast: false
+      matrix:
+        T: [4,13]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Certify both elliptic quotient ranks and ordinary primes
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 240s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v68_rank_two_bielliptic_precheck.sage "${{ matrix.T }}" \
+            >v68-bielliptic-T${{ matrix.T }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >>v68-bielliptic-T${{ matrix.T }}.log
+          cat v68-bielliptic-T${{ matrix.T }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v68-T${{ matrix.T }}-proof-ranks-and-ordinary-primes
+          path: v68-bielliptic-T${{ matrix.T }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Honest result marker
+        run: |
+          grep -Eq 'RANK_PROVED|RANK_INCOMPLETE|EXIT_CODE=124|EXIT_CODE=137' "v68-bielliptic-T${{ matrix.T }}.log"
+          echo 'Green merely means the attempt was logged; read rank_certified.'

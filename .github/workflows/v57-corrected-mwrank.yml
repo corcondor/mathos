@@ -1,0 +1,56 @@
+name: v57 corrected mwrank-lib proofs for remaining elliptic fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v57-corrected-mwrank.yml'
+      - 'docs/research/nested-binomial/v57_corrected_mwrank.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-fibre-ranks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { kind: E1, rho: 100003, b: 9 }
+          - { kind: E1, rho: 100003, b: 18 }
+          - { kind: E2, rho: 100003, b: 1 }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath image
+        run: docker pull sagemath/sagemath:10.10
+      - name: Attempt proof=True with documented algorithm mwrank_lib
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 240s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v57_corrected_mwrank.sage \
+            "${{ matrix.kind }}" "${{ matrix.rho }}" "${{ matrix.b }}" \
+            > v57-rank-proof.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >> v57-rank-proof.log
+          cat v57-rank-proof.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v57-corrected-${{ matrix.kind }}-${{ matrix.rho }}-b${{ matrix.b }}
+          path: v57-rank-proof.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Require honest completion marker (not necessarily proof)
+        run: |
+          grep -Eq '"status": "CERTIFIED_RANK"|"status": "CERTIFIED_ALL_GENUS2_RATIONAL_POINTS"|"status": "INCOMPLETE"|EXIT_CODE=124|EXIT_CODE=137' v57-rank-proof.log
+          echo 'An unsuccessful proof is recorded as incomplete.'

@@ -22,6 +22,17 @@
     "ThirtyCofactorDefectPellReductionC",
     "ThirtyCofactorDefectKRange",
     "ThirtyCofactorDefectPellConcrete",
-    "CFCurveRecovery"
+    "CFCurveRecovery",
+    "CFRationalCubeExclusionB",
+    "CFV97PrimitiveGcd",
+    "CFV97CurvePrimitive",
+    "CFV97SquarefreeBridge",
+    "CFV97CompleteParameters",
+    "CFV97FinalReduction",
+    "CFV98DefectLegendreGate",
+    "CFV99N250Lucas",
+    "CFV106TwoPrimeCRTGap",
+    "CFV108TwoPrimeK8LocalGlobal",
+    "CFV109AnyRootTwoPrimeCRT"
   ]
 }

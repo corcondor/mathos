@@ -1,0 +1,56 @@
+name: v53 alternative mwrank rank proof and point search
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v53-mwrank-alternative.yml'
+      - 'docs/research/nested-binomial/v53_mwrank_alternative.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mwrank-alternative:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath image
+        run: |
+          docker pull sagemath/sagemath:10.10
+          mkdir -p v53-mwrank-logs
+      - name: Try proof=True mwrank and explicit non-torsion points
+        shell: bash
+        run: |
+          set +e
+          for item in 'E1 100003 9' 'E1 100003 18' 'E2 100003 1'; do
+            read -r kind rho b <<<"$item"
+            out="v53-mwrank-logs/$kind-$rho-$b.log"
+            timeout --signal=TERM --kill-after=10s 180s \
+              docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v53_mwrank_alternative.sage \
+              "$kind" "$rho" "$b" >"$out" 2>&1
+            code=$?
+            echo "EXIT_CODE=$code" >>"$out"
+            echo "$kind rho=$rho b=$b exit=$code $(grep -E 'PROVED_RANK_BY_MWRANK|CERTIFIED_NONTORSION_POINT|MWRANK_RANK_PROOF_UNAVAILABLE|POINT_SEARCH_INCOMPLETE' "$out" | tr '\n' ' ' | cut -c 1-250)"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v53-mwrank-rank-and-point-search-attempts
+          path: v53-mwrank-logs/*.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Check all attempts recorded
+        run: |
+          test -s v53-mwrank-logs/E1-100003-9.log
+          test -s v53-mwrank-logs/E1-100003-18.log
+          test -s v53-mwrank-logs/E2-100003-1.log
+          echo 'All three attempts recorded; green does not imply proof success.'

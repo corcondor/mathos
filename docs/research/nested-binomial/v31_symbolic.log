@@ -1,0 +1,2 @@
+PASS: F = H^2 + 4Z^3; f(mod 5,T=3) = -u^2(u^2+1)^2
+PASS: u^2 coefficient == 4 (mod 5), constant == -T^2(4T+3)

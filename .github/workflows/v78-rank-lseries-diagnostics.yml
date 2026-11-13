@@ -1,0 +1,50 @@
+name: v78 modular-symbol and root-number rank diagnostics for b9,b18
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v78-rank-lseries-diagnostics.yml'
+      - 'docs/research/nested-binomial/v78_lseries_rank_obstruction.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    strategy:
+      fail-fast: false
+      matrix:
+        b: [9,18]
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Test independent L-series root number and modular symbols
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 170s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v78_lseries_rank_obstruction.sage ${{ matrix.b }} \
+            > v78-rho100003-b${{ matrix.b }}.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >> v78-rho100003-b${{ matrix.b }}.log
+          cat v78-rho100003-b${{ matrix.b }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v78-rank-lseries-and-modular-b${{ matrix.b }}
+          path: v78-rho100003-b${{ matrix.b }}.log
+          if-no-files-found: error
+      - name: Report diagnostics only; never infer rank from a heuristic
+        run: |
+          grep -q V78_BEGIN v78-rho100003-b${{ matrix.b }}.log
+          echo 'No unproven rank statement is promoted.'

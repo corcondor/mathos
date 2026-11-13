@@ -1,0 +1,92 @@
+{
+  "version": "v64",
+  "date": "2026-11-08",
+  "branch": "ell=1,j=i-3",
+  "scope": "all positive residual rho with b|486 under inherited v20 integer-lift conditions",
+  "main_theorem": "If original equation has a solution in target branch, rank E1_{rho/b²}(Q)>=1.",
+  "elliptic_curve": "y²+6xy+(8+9T)y=x³, T=rho/b²",
+  "torsion_cases": [
+    {
+      "torsion": "Z/3",
+      "status": "uniformly excluded for original integer solutions if rank zero",
+      "input": "v50",
+      "proof": "x=0 => a²=b²+rho contrary strict inequality"
+    },
+    {
+      "torsion": "Z/6",
+      "status": "uniformly excluded for original integer solutions if rank zero",
+      "input": "v56",
+      "proof": "2-torsion parametrization; n<104 for v>=5, 588 structural cases for 1<v<5",
+      "verification": "https://github.com/corcondor/mathos/actions/runs/42459815542"
+    },
+    {
+      "torsion": "Z/9",
+      "status": "occurs exactly at T=46648/9; rank zero and genus-two curve has only infinities; no original integer solutions",
+      "input": "v61 and v62",
+      "verification": [
+        "https://github.com/corcondor/mathos/actions/runs/42462323854",
+        "https://github.com/corcondor/mathos/actions/runs/42462716966"
+      ],
+      "thue_equations": 20
+    },
+    {
+      "torsion": "Z/12",
+      "status": "impossible for any T=rho/b²>0, b|486",
+      "input": "v63",
+      "verification": "https://github.com/corcondor/mathos/actions/runs/42463177794",
+      "thue_equations": 6,
+      "thue_rhs": [
+        1,
+        3,
+        16,
+        32,
+        48,
+        96
+      ],
+      "unconditional_thue_solutions": {
+        "1": [
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "3": [],
+        "16": [
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "32": [],
+        "48": [],
+        "96": [
+          [
+            -2,
+            1
+          ],
+          [
+            2,
+            -1
+          ]
+        ]
+      },
+      "valid_positive_T": 0
+    }
+  ],
+  "complete_torsion_classification": "Z/9 iff T=46648/9; else Z/3 or Z/6",
+  "results_limitations": [
+    "No all-rational-point classification of positive-rank genus-two fibres",
+    "No complete specialized second elliptic quotient MW ranks for every T",
+    "No all-rho solution or no-solution theorem for nested-binomial equation",
+    "New v61/v63/v64 proofs not Lean formalized or peer-reviewed"
+  ],
+  "deepseek_status": "Mistral key absent in GitHub Actions, published workflows skip model API; Codespaces secret is separate"
+}

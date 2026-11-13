@@ -1,0 +1,56 @@
+name: v108 many-prime local-global certificate and counterexample
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v108-many-prime-local-global.yml'
+      - 'docs/research/nested-binomial/v108_local_global_root_density_audit.py'
+      - 'docs/research/nested-binomial/v106_nonlocal_prime_units_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-structural-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Polynomial gcd, independent CRT, exact Hensel counterexample, quantitative prime-count anchor
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v108_local_global_root_density_audit.py \
+            | tee audit-artifacts/v108_local_global.log
+          python3 - <<'PY'
+          import json
+          t=open('audit-artifacts/v108_local_global.log').read().strip()
+          assert t.startswith('V108_RESULT ')
+          d=json.loads(t[len('V108_RESULT '):])
+          assert d['status']=='PASS_V108_LOCAL_GLOBAL_COLLISION'
+          assert d['two_prime_crt']['representatives']==[0,531,589,1120]
+          assert d['two_prime_crt']['compatible_positive_i_below_512']==0
+          assert d['local_counterexample']['defect_mod_q_cubed']==0
+          assert d['local_counterexample']['defect']!=0
+          assert len(d['cofactor_root_free_fields'])==2
+          assert d['all_k_prime_count_analytic_certificate']['rational_base_at_k1000']
+          assert d['all_k_prime_count_analytic_certificate']['rational_monotonicity_step_at_k1000']
+          print('PASS: one-prime local lift can be inside height; two-prime CRT excludes all k=8 candidates')
+          print('PASS: prime-factor-count rational inequality base+monotonicity checks')
+          print('SCOPE: universal prime-count lower bound and 3/5-prime criterion are written proofs, not automated all-k verification')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v108-multiple-primes-CRT-and-false-lift
+          path: audit-artifacts/v108_local_global.log
+          retention-days: 60

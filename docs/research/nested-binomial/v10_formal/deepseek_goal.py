@@ -252,11 +252,21 @@ class GoalAgent:
         PROGRESS.write_text('\n'.join(rows) + '\n')
         self.methods.save_public()
 
+    def recent_version_notes(self):
+        """Names only: let DeepSeek choose which new research to read and verify."""
+        entries = []
+        for path in NOTES.glob('*.md'):
+            match = re.fullmatch(r'(?:V|v|PROGRESS_v)([0-9]+)[A-Za-z0-9_.-]*\.md', path.name)
+            if match and path.is_file():
+                entries.append((int(match.group(1)), path.name))
+        return [name for _, name in sorted(entries, key=lambda pair: (pair[0], pair[1]), reverse=True)[:12]]
+
     def snapshot(self):
         budget = self.run_dir / 'budget.json'
         generated = ROOT / 'deepseek_generation_checks.json'
         verified = json.loads(generated.read_text())
         return {'goal': self.goal, 'status': self.state['status'], 'steps': self.state['steps'],
+                'recent_version_notes': self.recent_version_notes(),
                 'jobs': {key: {'module': j['config']['module'], 'status': j['status'],
                               'goals': [g[0] for g in j['config']['goals']], 'why_needed': j['why_needed']}
                          for key, j in self.state['jobs'].items()},

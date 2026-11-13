@@ -1,0 +1,64 @@
+name: v70 genuine Bianchi-Padurariu quadratic Chabauty pilot
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v70-bianchi-padurariu-qc-trial.yml'
+      - 'docs/research/nested-binomial/v70_bielliptic_qc_trial.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qc-actual-computation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { T: 7, p: 5, prec: 20 }
+          - { T: 11, p: 5, prec: 20 }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch AND PIN the academic reference implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p external
+          git clone --quiet --depth 1 https://github.com/bianchifrancesca/QC_bielliptic.git external/QC_bielliptic
+          test "$(git -C external/QC_bielliptic rev-parse HEAD)" = '209117b1647f1114e10abb99c720bf911eb10e6f'
+          test -s external/QC_bielliptic/qc_g2_bielliptic.sage
+          echo "Using academic QC implementation at immutable commit 209117b"
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Run actual p-adic quadratic Chabauty in a time-bounded environment
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 340s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage docs/research/nested-binomial/v70_bielliptic_qc_trial.sage \
+            ${{ matrix.T }} ${{ matrix.p }} ${{ matrix.prec }} \
+            > "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log" 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >> "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log"
+          tail -n 100 "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v70-real-QC-T${{ matrix.T }}-p${{ matrix.p }}
+          path: v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Check honest outcome marker (not a proof success claim)
+        run: |
+          grep -Eq 'QC_FINISHED|QC_INCOMPLETE|QC_START' "v70-QC-T${{ matrix.T }}-p${{ matrix.p }}.log"
+          echo "Read QC status and p-adic candidates. Green does NOT certify the full rational point set."

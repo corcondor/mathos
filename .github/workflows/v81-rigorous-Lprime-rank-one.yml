@@ -1,0 +1,54 @@
+name: v81 Gross-Zagier Kolyvagin rank-one proof by rigorous L-prime interval
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v81-rigorous-Lprime-rank-one.yml'
+      - 'docs/research/nested-binomial/v81_rigorous_Lprime_rank_one.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certified-rank-one:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { b: 9, seconds: 340 }
+          - { b: 18, seconds: 390 }
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Rigorous nonvanishing interval for L-prime with explicit tail bound
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s ${{ matrix.seconds }}s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v81_rigorous_Lprime_rank_one.sage \
+            ${{ matrix.b }} >v81-Lprime-rho100003-b${{ matrix.b }}.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >> v81-Lprime-rho100003-b${{ matrix.b }}.log
+          grep -E 'V81_BEGIN|V81_NUMERIC|V81_RIGOROUS|V81_CERTIFIED|V81_INCOMPLETE|EXIT_CODE' \
+             v81-Lprime-rho100003-b${{ matrix.b }}.log | cut -c 1-1900 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v81-rigorous-Lprime-rho100003-b${{ matrix.b }}
+          path: v81-Lprime-rho100003-b${{ matrix.b }}.log
+          if-no-files-found: error
+      - name: Red when no rigorous L-prime nonvanishing certificate
+        shell: bash
+        run: |
+          grep -q 'V81_CERTIFIED_RANK_ONE' v81-Lprime-rho100003-b${{ matrix.b }}.log
+          grep -q 'EXIT_CODE=0' v81-Lprime-rho100003-b${{ matrix.b }}.log

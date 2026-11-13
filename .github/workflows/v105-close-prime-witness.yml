@@ -1,0 +1,39 @@
+name: v105 close-prime all-residue witness (no solution-space enumeration)
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v105-close-prime-witness.yml'
+      - 'docs/research/nested-binomial/v105_close_prime_witness.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-witness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prove exact q divides R, roots modulo q, and product exceeds p cubed for p=821
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 docs/research/nested-binomial/v105_close_prime_witness.py | tee v105_close_prime_witness.log
+          grep -q 'PASS_EXACT_V105_WITNESS' v105_close_prime_witness.log
+          echo 'PASS: no possible i for k=821, all residue classes treated simultaneously'
+          echo 'SCOPE: universal infinite-family proof is the written theorem with Maynard 2015'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v105-p821-close-prime-witness
+          path: v105_close_prime_witness.log
+          retention-days: 60

@@ -1,0 +1,24 @@
+{
+  "module": "CFRationalCubeExclusionB",
+  "imports": "import Mathlib.Data.Nat.GCD.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith",
+  "definitions": "",
+  "goals": [
+    [
+      "cube_denominator_dvd",
+      "theorem cube_denominator_dvd (S T u v : ℕ) (hv : 0 < v) (hcop : Nat.Coprime u v) (h : 6 * S * u ^ 3 = T * v ^ 3) : v ^ 3 ∣ 6 * S"
+    ],
+    [
+      "cube_ratio_bound",
+      "theorem cube_ratio_bound (S T u v : ℕ) (hS : 0 < S) (hT : T < 229 * S) (hv : 0 < v) (h : 6 * S * u ^ 3 = T * v ^ 3) : 2 * u < 7 * v"
+    ],
+    [
+      "cube_elimination",
+      "theorem cube_elimination (S T n r u v : ℕ) (hn : 2 ≤ n) (hT : 0 < T) (hcube : 6 * S * u ^ 3 = T * v ^ 3) (hcurve : 6 * S * r ^ 3 = T * n * (n - 1) * (n - 2)) : (v * r) ^ 3 + u ^ 3 * (n - 1) = (u * (n - 1)) ^ 3"
+    ],
+    [
+      "rational_cube_root_excluded",
+      "theorem rational_cube_root_excluded (S T n r u v : ℕ) (hS1 : 1 ≤ S) (hS : S ≤ 12) (hn : 104 ≤ n) (hT : 0 < T) (hTlt : T < 229 * S) (hv : 0 < v) (hcop : Nat.Coprime u v) (hcube : 6 * S * u ^ 3 = T * v ^ 3) (hcurve : 6 * S * r ^ 3 = T * n * (n - 1) * (n - 2)) : False"
+    ]
+  ],
+  "local_dependencies": []
+}

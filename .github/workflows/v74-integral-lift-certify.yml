@@ -1,0 +1,70 @@
+name: v74 complete integral elliptic lifts with certified Mordell-Weil basis
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v74-integral-lift-certify.yml'
+      - 'docs/research/nested-binomial/v74_integral_model_and_parameter_verify.py'
+      - 'docs/research/nested-binomial/v74_complete_integral_lifts.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-algebra:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Independent symbolic proof of the (k,q) map and integral model
+        run: |
+          python -m pip install sympy==1.14.0
+          python docs/research/nested-binomial/v74_integral_model_and_parameter_verify.py
+
+  complete-integral-points:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { rho: 7, b: 1, seconds: 140 }
+          - { rho: 24, b: 1, seconds: 140 }
+          - { rho: 100003, b: 81, seconds: 230 }
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Compute ALL integral points with certified generators or return INCOMPLETE
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s ${{ matrix.seconds }}s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v74_complete_integral_lifts.sage \
+            ${{ matrix.rho }} ${{ matrix.b }} \
+            > v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log 2>&1
+          exitcode=$?
+          echo "EXIT_CODE=$exitcode" >> v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log
+          tail -c 4500 v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log
+          echo
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v74-exact-integral-rho${{ matrix.rho }}-b${{ matrix.b }}
+          path: v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log
+          if-no-files-found: error
+          retention-days: 40
+      - name: Require a complete certificate, not a partial point search
+        shell: bash
+        run: |
+          grep -q 'V74_COMPLETE' v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log
+          grep -q 'EXIT_CODE=0' v74-integral-rho${{ matrix.rho }}-b${{ matrix.b }}.log

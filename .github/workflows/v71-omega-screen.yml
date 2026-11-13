@@ -1,0 +1,51 @@
+name: v71 cheap QC Omega workload screen across eight rank-one fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v71-omega-screen.yml'
+      - 'docs/research/nested-binomial/v71_omega_screen.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  omega-counts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Get academic reference QC implementation at exact SHA
+        run: |
+          git clone --quiet --depth 1 https://github.com/bianchifrancesca/QC_bielliptic.git external/QC_bielliptic
+          test "$(git -C external/QC_bielliptic rev-parse HEAD)" = '209117b1647f1114e10abb99c720bf911eb10e6f'
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Screen Omega set size, do not run expensive full QC
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 150s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage docs/research/nested-binomial/v71_omega_screen.sage > v71-omega-screen.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >> v71-omega-screen.log
+          tail -n 60 v71-omega-screen.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v71-all-eight-Omega-counts
+          path: v71-omega-screen.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Require disclosure of exact count or failure
+        run: |
+          grep -q 'OMEGA_SCREEN_COMPLETE' v71-omega-screen.log
+          echo 'Omega counts only, not certified rational-point classifications.'

@@ -1,0 +1,49 @@
+name: v103 p-adic digit uniqueness sanity (no i brute force)
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v103-padic-unique-lift.yml'
+      - 'docs/research/nested-binomial/v103_padic_unique_lift.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-identity-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate prime-power unit finite-difference identity and canonical digits
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v103_padic_unique_lift.py \
+            --output audit-artifacts/v103_lifts.json | tee audit-artifacts/v103_lifts.log
+          python3 - <<'PY'
+          import json
+          d=json.load(open("audit-artifacts/v103_lifts.json"))
+          assert d["status"]=="PASS_MODULAR_IDENTITY_SANITY"
+          assert d["verified_exact_jumps"]>500
+          assert d["verified_exact_lifts"]>30
+          assert all(0<=x["q_unique"]<x["k"]**2 for x in d["sample_roots"])
+          assert all(len(x["digits_low_to_high"])==2*x["a"] for x in d["sample_roots"])
+          print("PASS: exact p-adic lifting examples from the universal finite-difference formula")
+          print("SCOPE: example arithmetic only; full universal proof is written in v103, not Lean checked")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v103-prime-power-padic-unique-lift-audit
+          path: audit-artifacts/v103_lifts.*
+          retention-days: 60

@@ -1,0 +1,58 @@
+name: v52 PARI high-effort proof attempts for unresolved fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v52-pari-rank-retries.yml'
+      - 'docs/research/nested-binomial/v52_retry_pari_ranks.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  higher-effort-rank:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned Sage image
+        run: |
+          docker pull sagemath/sagemath:10.10
+          mkdir -p v52-pari-logs
+      - name: Attempt provable ranks (no result invented on failure)
+        shell: bash
+        run: |
+          set +e
+          for item in 'E1 100003 2 10 120' 'E1 100003 9 10 120' 'E1 100003 18 10 120' 'E2 100003 1 10 240'; do
+            read -r kind rho b effort seconds <<<"$item"
+            out="v52-pari-logs/$kind-$rho-$b.log"
+            timeout --signal=TERM --kill-after=10s "$seconds" \
+              docker run --rm --network none \
+              --mount type=bind,source="$PWD",target=/work,readonly \
+              --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+              sagemath/sagemath:10.10 \
+              sage -python docs/research/nested-binomial/v52_retry_pari_ranks.sage \
+              "$kind" "$rho" "$b" "$effort" >"$out" 2>&1
+            code=$?
+            echo "EXIT_CODE=$code" >>"$out"
+            echo "$kind rho=$rho b=$b exit=$code $(grep -o 'CERTIFIED_FULL_GENUS2_RATIONAL_POINTS\|CERTIFIED_FULL_SECOND_ELLIPTIC_MW_GROUP\|CERTIFIED_RANK_ONLY_NOT_FULL_GENUS2\|INCOMPLETE_RANK_NOT_PROVED' "$out" | tail -1)"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v52-high-effort-PARI-proof-or-incomplete-logs
+          path: v52-pari-logs/*.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Check every attempt produced an honest status
+        shell: bash
+        run: |
+          for f in v52-pari-logs/*.log; do
+            grep -Eq 'PROVED_RANK|INCOMPLETE_RANK_NOT_PROVED' "$f"
+            grep -q 'EXIT_CODE=' "$f"
+          done
+          echo 'All four attempted; inspect artifacts for which proofs succeeded.'

@@ -33,7 +33,10 @@ jobs:
       - name: Check explicit launch and required secret
         run: |
           bash -n .devcontainer/research
+          python3 -m py_compile .devcontainer/research_autopilot.py
           python3 -m json.tool .devcontainer/devcontainer.json > /dev/null
+          .devcontainer/research auto-status
+          env -u MISTRAL_API_KEY .devcontainer/research autostart
           .devcontainer/research status
           if output=$(env -u MISTRAL_API_KEY .devcontainer/research run 2>&1); then
             echo "The runner unexpectedly started without a key."

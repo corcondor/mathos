@@ -1,0 +1,50 @@
+name: v77 attempt complete integral-point proof for last two rho100003 fibres
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v77-last-two-rho100003-rank-and-integral.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  high-effort-last-fibres:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        b: [9,18]
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Try proof-mode rank plus all integral points, bounded to 150s
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 150s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v74_complete_integral_lifts.sage \
+            100003 ${{ matrix.b }} 20 > v77-rho100003-b${{ matrix.b }}.log 2>&1
+          status=$?
+          echo "EXIT_CODE=$status" >> v77-rho100003-b${{ matrix.b }}.log
+          grep -E 'V74_BEGIN|V74_MW|V74_COMPLETE|V74_INCOMPLETE|EXIT_CODE' \
+            v77-rho100003-b${{ matrix.b }}.log | cut -c1-2000 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v77-proved-or-incomplete-rho100003-b${{ matrix.b }}
+          path: v77-rho100003-b${{ matrix.b }}.log
+          if-no-files-found: error
+      - name: Red on incomplete proof; never claim success from search-only status
+        run: |
+          grep -q V74_COMPLETE v77-rho100003-b${{ matrix.b }}.log
+          grep -q EXIT_CODE=0 v77-rho100003-b${{ matrix.b }}.log

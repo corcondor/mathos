@@ -1,0 +1,80 @@
+name: v104 all-prime bilateral mod-p3 residue certificates
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v104-bilateral-p3-certificates.yml'
+      - 'docs/research/nested-binomial/v104_bilateral_p3_certificate.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-finite-factor-certificates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate all fixed-residue p3 prime-factor certificates and discharge exceptions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v104_bilateral_p3_certificate.py \
+            --max-distance 10 --output audit-artifacts/v104_bilateral.json \
+            2>&1 | tee audit-artifacts/v104_bilateral.log
+      - name: Independently verify raw p3 binomial arithmetic vs symbolic harmonic coefficients
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'docs/research/nested-binomial')
+          import v104_bilateral_p3_certificate as m
+          count=0
+          for p in m.sieve(113):
+              if p<5: continue
+              for d in range(1,min(10,p-1)+1):
+                  for side in ('low','high'):
+                      c=m.coeffs(d,side)
+                      r=d if side=='low' else p-d
+                      q=m.q2(p,c)
+                      i=p*q+r
+                      raw=m.exact_modular_gap(p,i,3)
+                      assert raw%(p*p)==0
+                      assert raw//(p*p)==m.modp3_unit(p,c),(p,d,side)
+                      count+=1
+          assert count==540
+          print('PASS: 540 independently evaluated exact binomial mod-p3 identities')
+          PY
+      - name: Check full factorization completeness and exceptional-prime discharge table
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          d=json.load(open('audit-artifacts/v104_bilateral.json'))
+          assert d['status']=='PASS_COMPLETE_EXACT_ALL_PRIME_EDGE_CERTIFICATE'
+          assert d['max_edge_distance']==10
+          assert d['residue_class_families']==20
+          assert d['third_digit_prime_exceptions_dispatched']==40
+          assert len(d['rows'])==20
+          for row in d['rows']:
+              assert len(row['discharged'])==len(row['all_p3_exceptions'])
+              for p in row['discharged']:
+                  assert ('nonzero mod' in p['reason'] or 'uniform exact inequality' in p['reason'])
+          print('PASS: 20 unbounded prime-residue families, 40 exactly discharged exceptions')
+          print('SCOPE: mathematical written proof plus exact finite-factor integer certificate, NOT Lean full theorem')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v104-complete-all-prime-20-edge-residue-certificate
+          path: audit-artifacts/v104_bilateral.*
+          retention-days: 60

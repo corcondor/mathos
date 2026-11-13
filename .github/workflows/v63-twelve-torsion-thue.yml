@@ -1,0 +1,49 @@
+name: v63 unconditional quartic Thue certification for 12-torsion exception
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v63-twelve-torsion-thue.yml'
+      - 'docs/research/nested-binomial/v63_twelve_torsion_thue.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove-twelve-torsion-parameters:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull pinned SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Certify all six positive quartic Thue right hand sides without GRH
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 420s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v63_twelve_torsion_thue.sage \
+            >v63-twelve-torsion-unconditional.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >>v63-twelve-torsion-unconditional.log
+          tail -n 120 v63-twelve-torsion-unconditional.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v63-complete-twelve-torsion-quartic-Thue-proof
+          path: v63-twelve-torsion-unconditional.log
+          if-no-files-found: error
+          retention-days: 60
+      - name: Require unconditionally certified complete enumeration
+        run: |
+          grep -q THUEINIT_CERTIFIED v63-twelve-torsion-unconditional.log
+          grep -q '"status": "UNCONDITIONAL_THUE_COMPLETE"' v63-twelve-torsion-unconditional.log
+          grep -q EXIT_CODE=0 v63-twelve-torsion-unconditional.log

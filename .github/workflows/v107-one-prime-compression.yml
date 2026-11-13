@@ -1,0 +1,58 @@
+name: v107 one-prime large-to-small q-adic compression and root lifting
+
+on:
+  push:
+    branches:
+      - research/nested-binomial-2026-11-05
+    paths:
+      - '.github/workflows/v107-one-prime-compression.yml'
+      - 'docs/research/nested-binomial/v107_one_prime_compression_audit.py'
+      - 'docs/research/nested-binomial/v106_nonlocal_prime_units_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-one-prime-algebra:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Sylvester-compatible q>2k-1 prime one-carry unit, root polynomial gcd and Hensel 3-digit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-artifacts
+          python3 -u docs/research/nested-binomial/v107_one_prime_compression_audit.py \
+            --output audit-artifacts/v107_compression.json \
+            | tee audit-artifacts/v107_compression.log
+          python3 - <<'PY'
+          import json
+          d=json.load(open('audit-artifacts/v107_compression.json'))
+          assert d['status']=='PASS_EXACT_V107_ONE_PRIME_COMPRESSION'
+          assert d['prime_witness_count']==5
+          assert d['root_lift_certificates']==7
+          assert d['all_cases_contradict_i_less_than_k_cubed']
+          assert not d['full_four_variable_problem_solved']
+          rows={r['k']:r for r in d['witnesses']}
+          assert [x['unique_mod_q2'] for x in rows[6]['lifts']]==[348,782]
+          assert rows[41]['lifts'][0]['unique_mod_q2']==1013433
+          assert rows[43]['lifts'][0]['unique_mod_q2']==2120356
+          assert all(r['q_modular_cubic_bound']>r['k_cubed'] for r in rows.values())
+          assert d['fixed_offset_remainder']['polynomial_remainder']==[38,-54]
+          print('PASS: one prime alone eliminates all i for k=5,6,10,41,43; no i enumeration')
+          print('PASS: low q-adic digits reconstructed from <=2k-1 factors, checked against actual binomial')
+          print('SCOPE: sample arithmetic only; general claims are written proofs, not Lean checked')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v107-one-prime-compression-root-lifts
+          path: audit-artifacts/v107_compression.*
+          retention-days: 60

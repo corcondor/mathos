@@ -1,0 +1,47 @@
+name: v62 certified rank and all genus-two rational points at unique 9-torsion T
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - '.github/workflows/v62-nine-torsion-rank.yml'
+      - 'docs/research/nested-binomial/v62_rank0_nine_torsion_fibre.sage'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rank-zero-and-all-points:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch SageMath 10.10
+        run: docker pull sagemath/sagemath:10.10
+      - name: Compute rank(proof=True) and rational-point square lifts
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=10s 240s \
+            docker run --rm --network none \
+            --mount type=bind,source="$PWD",target=/work,readonly \
+            --workdir /work --env HOME=/tmp --env DOT_SAGE=/tmp/.sage \
+            sagemath/sagemath:10.10 \
+            sage -python docs/research/nested-binomial/v62_rank0_nine_torsion_fibre.sage \
+            >v62-nine-torsion-rank-proof.log 2>&1
+          code=$?
+          echo "EXIT_CODE=$code" >>v62-nine-torsion-rank-proof.log
+          cat v62-nine-torsion-rank-proof.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v62-nine-torsion-unique-fibre-rank-and-genus-two
+          path: v62-nine-torsion-rank-proof.log
+          if-no-files-found: error
+          retention-days: 60
+      - name: Require actual certified rank-zero for a green check
+        run: |
+          grep -q '"status": "CERTIFIED_ALL_RATIONAL_GENUS2_POINTS"' v62-nine-torsion-rank-proof.log
+          grep -q 'EXIT_CODE=0' v62-nine-torsion-rank-proof.log

@@ -1,0 +1,107 @@
+name: DeepSeek bounded follow-up on each new nested-binomial version
+
+on:
+  push:
+    branches: [research/nested-binomial-2026-11-05]
+    paths:
+      - 'docs/research/nested-binomial/V[0-9]*.md'
+      - '.github/workflows/nested-binomial-deepseek-on-version.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: nested-binomial-deepseek-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  one-independent-idea:
+    if: github.repository == 'corcondor/mathos'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Detect whether a Mistral API key is available (never print it)
+        id: key
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        shell: bash
+        run: |
+          if [[ -n "$MISTRAL_API_KEY" ]]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::MISTRAL_API_KEY is not configured; no inference or charge."
+          fi
+      - name: Select newest versioned research note
+        id: source
+        if: steps.key.outputs.available == 'true'
+        shell: bash
+        run: |
+          source=$(python - <<'PY'
+          import re,subprocess
+          from pathlib import Path
+          root=Path("docs/research/nested-binomial")
+          try:
+              changed=subprocess.check_output(
+                ["git","diff","--diff-filter=A","--name-only","HEAD^","HEAD","--",str(root)],
+                text=True).splitlines()
+          except subprocess.CalledProcessError:
+              changed=[]
+          notes=[Path(x).name for x in changed
+                 if re.fullmatch(r"V[0-9]+[A-Za-z0-9_.-]*\.md",Path(x).name)]
+          if not notes:
+              notes=[p.name for p in root.glob("V[0-9]*.md")]
+          notes.sort(key=lambda x:(int(re.match(r"V([0-9]+)",x).group(1)),x))
+          print(notes[-1] if notes else "")
+          PY
+          )
+          echo "note=$source" >> "$GITHUB_OUTPUT"
+          echo "Selected public research note: $source"
+      - name: Ask DeepSeek for exactly one falsifiable research lemma
+        id: ai
+        if: steps.source.outputs.note != ''
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          NOTE: ${{ steps.source.outputs.note }}
+        run: |
+          python .github/scripts/nested_binomial_ai_proposal.py \
+            --source "$NOTE" \
+            --output "docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md"
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.ai.outcome == 'success'
+        with:
+          name: deepseek-unverified-version-${{ github.run_id }}
+          path: docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md
+          retention-days: 30
+      - name: Publish as UNVERIFIED draft PR, never as an accepted proof
+        if: steps.ai.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTE: ${{ steps.source.outputs.note }}
+        shell: bash
+        run: |
+          branch="auto/deepseek-${{ github.run_id }}"
+          git switch -c "$branch"
+          git config user.name "mathos-research-bot"
+          git config user.email "mathos-research-bot@users.noreply.github.com"
+          git add "docs/research/nested-binomial/proposals/deepseek-${{ github.run_id }}.md"
+          git commit -m "proposal: unverified DeepSeek idea from $NOTE"
+          if git push origin "HEAD:$branch"; then
+            gh pr create \
+              --draft \
+              --base research/nested-binomial-2026-11-05 \
+              --head "$branch" \
+              --title "UNVERIFIED DeepSeek idea from $NOTE" \
+              --body "Automated bounded DeepSeek proposal (max 6000 completion tokens). Mathematical hypothesis only, not checked by Lean or peer review. Review and test before promotion." \
+            || echo "::warning::Draft PR disabled; branch and artifact are available."
+          else
+            echo "::warning::Push disabled; artifact contains the proposal."
+          fi
