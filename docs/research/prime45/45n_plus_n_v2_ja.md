@@ -163,3 +163,30 @@ Python（標準ライブラリのみ）で以下を実施：
 コードの PASS は有限計算部分の検証を意味し、定理全体の形式検証・巨大数の素数証明ではない。定理 A〜C は上記の紙上証明に依拠する。
 
 関連背景：Niven の「integer sequences の均等分布」の定義、OEIS A084047（\(k^n+n\) の変化する底に関する記録）、Virbalas (2026) の generalized Sierpiński/Riesel と covering systems。最後の文献は **\(k b^n\pm1\)** に関するもので、この問題の解を直接与えるものではない。
+
+## 9. 大型候補に対する素因数の除外：10^9 まで
+
+標準 C++17 の分割 Eratosthenes 篩で **全素数 p≤1,000,000,000（50,847,534個）** を正確に列挙し、n=3878 と n=9424 それぞれについて
+
+\[
+(45^n+n)\bmod p
+=\bigl(\operatorname{powmod}(45,n,p)+n\bigr)\bmod p
+\]
+
+をすべて確認した。その結果 **両方とも因子は0個** だった。
+
+プログラムは small_factor_sieve_v2.cpp。コンパイル/実行方法：
+
+    g++ -std=c++17 -O3 docs/research/prime45/small_factor_sieve_v2.cpp -o sieve45
+    ./sieve45
+
+実行出力：
+
+    DONE limit=1000000000 primes_checked=50847534 factors_n3878=0 factors_n9424=0
+
+分割篩実装は約2.7MBのRAMで走り、実測約3.15秒（計測環境依存）。これは**10^9以下の素因数が存在しないことを厳密に証明する有限検算**であり、両方の巨大数が素数であることは証明しない。
+
+参考資料（目的・扱う数列が異なる文献も明示）：
+
+- [OEIS A084047](https://oeis.org/A084047)：底を可変にした k^n+n の素数に関する数列。
+- [Virbalas, *On the generalized Sierpiński and Riesel numbers* (2026)](https://revistas.unal.edu.co/index.php/bolma/article/view/125921)：指数に関する covering-system 技術の関連研究。ただし係数固定の k b^n±1 型であり、本問題を直接扱わない。
