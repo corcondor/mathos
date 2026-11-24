@@ -1,0 +1,32 @@
+name: Pell v4.1 arithmetic finish
+on:
+  push:
+    branches: [research/pell-prime-external-v3-20261125]
+    paths:
+      - 'docs/research/pell-prime-v3/V41Finish.lean'
+      - '.github/workflows/pell-v41-finish.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: |
+          git clone --depth 1 --branch v4.24.0 https://github.com/leanprover-community/mathlib4.git /tmp/mathlib
+          cd /tmp/mathlib
+          lake exe cache get
+          cp "$GITHUB_WORKSPACE/docs/research/pell-prime-v3/V41Finish.lean" .
+          set -o pipefail
+          lake env lean V41Finish.lean | tee /tmp/finish.log
+          ! grep -E 'sorryAx|trustCompiler|ofReduceBool|declaration uses.*sorry' /tmp/finish.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: finish-log
+          path: /tmp/finish.log
