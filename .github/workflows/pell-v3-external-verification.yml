@@ -2,6 +2,9 @@ name: Pell v3 independent external verification
 on:
   push:
     branches: [research/pell-prime-external-v3-20261125]
+    paths:
+      - 'docs/research/pell-prime-v3/external_adapters.py'
+      - 'docs/research/pell-prime-v3/PellDescent.lean'
   workflow_dispatch:
 permissions:
   contents: read

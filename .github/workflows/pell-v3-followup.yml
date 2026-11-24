@@ -1,0 +1,40 @@
+name: Pell v3.1 Coq correction and N+1 certificates
+on:
+  push:
+    branches: [research/pell-prime-external-v3-20261125]
+    paths:
+      - 'docs/research/pell-prime-v3/external_followup.py'
+      - '.github/workflows/pell-v3-followup.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  coqprime-fixed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_followup.py /tmp/pell
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends coq libcoq-coqprime
+          cd /tmp/pell
+          dpkg -L libcoq-coqprime | grep -E '/(Pock|PocklingtonCertificat|BasePrimes)\.vo'
+          coqc PellCoq.v
+  primefactor-plus:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_followup.py /tmp/pell
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: |
+          git clone https://github.com/Vilin97/PrimeFactorLean.git /tmp/pfl
+          cd /tmp/pfl
+          git checkout d26f6a704ba83c311601b47ec183f465a309c6f7
+          lake exe cache get
+          lake build +PrimeFactorLean.Proofs.Pocklington
+          cp /tmp/pell/PlusPell.lean .
+          lake env lean PlusPell.lean
