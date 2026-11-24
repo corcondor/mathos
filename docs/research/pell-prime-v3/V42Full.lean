@@ -10,16 +10,18 @@ theorem prime_power_ne_twice (p t s : ℕ) (hp : p.Prime) (ht : t.Prime)
   have htd : t∣2*p := by
     refine ⟨t^(s-1),?_⟩
     rw [←h]
-    rw [show s=(s-1)+1 by omega, pow_succ]
-    ring
+    calc
+      t^s = t^((s-1)+1) := congrArg (fun n : ℕ => t^n) (by omega)
+      _ = t*t^(s-1) := by rw [pow_succ]; ring
   have ht2 : t=2 := by
     rcases ht.dvd_mul.mp htd with h2|hp'
     · exact (Nat.prime_dvd_prime_iff_eq ht Nat.prime_two).mp h2
     · have htp := (Nat.prime_dvd_prime_iff_eq ht hp).mp hp'
       subst t
       have hsplit : p^s=p*(p*p^(s-2)) := by
-        rw [show s=(s-2)+2 by omega,pow_add]
-        ring
+        calc
+          p^s = p^((s-2)+2) := congrArg (fun n : ℕ => p^n) (by omega)
+          _ = _ := by rw [pow_add]; ring
       have hmul : p*(p*p^(s-2))=p*2 := by rw [←hsplit,h]; ring
       have hh := Nat.eq_of_mul_eq_mul_left hp.pos hmul
       have hdp : p∣2 := ⟨p^(s-2),hh.symm⟩
@@ -28,8 +30,18 @@ theorem prime_power_ne_twice (p t s : ℕ) (hp : p.Prime) (ht : t.Prime)
   have hEq : 2^(s-1)=p := by
     rw [show s=(s-1)+1 by omega,pow_succ] at h
     omega
-  have hprime : Nat.Prime (2^(s-1)) := hEq.symm ▸ hp
-  exact (Nat.Prime.pow_not_prime (x:=2) (by omega : 2≤s-1)) hprime
+  have hdiv : 2 ∣ p := by
+    refine ⟨2^(s-2),?_⟩
+    rw [←hEq]
+    calc
+      2^(s-1) = 2^((s-2)+1) := congrArg (fun n : ℕ => 2^n) (by omega)
+      _ = 2*2^(s-2) := by rw [pow_succ]; ring
+  have hp2 : 2=p := (Nat.prime_dvd_prime_iff_eq Nat.prime_two hp).mp hdiv
+  have hge : (4:ℕ) ≤ 2^(s-1) := by
+    calc
+      4=2^2 := rfl
+      _ ≤ 2^(s-1) := by gcongr <;> omega
+  omega
 
 -- Real signed odd roots; even roots are nonnegative, as in the original problem.
 def Equation (p q r s t : ℕ) : Prop :=
@@ -61,7 +73,10 @@ theorem no_square_case (p q r t : ℕ)
     have hsq := congrArg (fun x : ℝ => x^2) hadd
     nlinarith
   let C : ℤ := (p:ℤ)^2-(q:ℤ)^2*(r:ℤ)
-  have hpow : (a*b)^2=(C:ℝ) := product_power p q r 2 a b ha hb
+  have hpow : (a*b)^2=(C:ℝ) := by
+    dsimp [C]
+    push_cast
+    exact product_power p q r 2 a b ha hb
   have hu2R : (u:ℝ)^2=(C:ℝ) := hu ▸ hpow
   have hu2 : u^2=(C:ℚ) := by exact_mod_cast hu2R
   have hint : IsIntegral ℤ (u^2) := by rw [hu2]; exact isIntegral_algebraMap
@@ -74,8 +89,8 @@ theorem no_square_case (p q r t : ℕ)
   have htz : (t:ℤ)^2=2*(p:ℤ)+2*z := by exact_mod_cast htzR
   have hdivZ : (2:ℤ)∣(t:ℤ)^2 := ⟨(p:ℤ)+z,by linarith⟩
   have hdiv : 2∣t^2 := by exact_mod_cast hdivZ
-  have ht2 := (Nat.prime_dvd_prime_iff_eq Nat.prime_two ht).mp
-    (Nat.prime_two.dvd_of_dvd_pow hdiv)
+  have ht2 : t=2 := ((Nat.prime_dvd_prime_iff_eq Nat.prime_two ht).mp
+    (Nat.prime_two.dvd_of_dvd_pow hdiv)).symm
   have hznon : 0≤(z:ℝ) := hzR ▸ mul_nonneg han hbn
   have hpr : (2:ℝ)≤(p:ℝ) := by exact_mod_cast hp.two_le
   rw [ht2] at htzR
@@ -84,7 +99,7 @@ theorem no_square_case (p q r t : ℕ)
   have hp2 : p=2 := by exact_mod_cast hp2R
   have hz0 : (z:ℝ)=0 := by linarith
   have hzero : a*b=0 := hzR.symm.trans hz0
-  rw [hzero,hp2] at hpow
+  rw [hzero] at hpow
   norm_num [C,hp2] at hpow
   have hlow : 8≤q^2*r := by
     have hq2 : 4≤q^2 := by simpa using Nat.pow_le_pow_left hq.two_le 2
@@ -110,7 +125,7 @@ theorem odd_case (p q r s t : ℕ) (hp : p.Prime) (hq : q.Prime)
   have hne : (t:ℚ)^s≠2*(p:ℚ) := by
     exact_mod_cast prime_power_ne_twice p t s hp ht hs3
   obtain ⟨z,hz⟩ := radical_product_integral a b s hs ho (t:ℚ) (2*(p:ℚ))
-    ((p:ℤ)^2-(q:ℤ)^2*(r:ℤ)) htQ hvQ hprod hne
+    ((p:ℤ)^2-(q:ℤ)^2*(r:ℤ)) htQ (by push_cast; exact hpow) (by push_cast; exact hprod) hne
   have ht2 := odd_sum_prime_eq_two p t s hp ht hs3 ho a b z hadd hz hpow
   have hdiff : b<a := by
     apply ho.pow_lt_pow.mp
@@ -166,7 +181,9 @@ theorem radical_iff_pell_coeffs (p q r s t : ℕ)
     · simpa [d] using h1
     · simpa [d] using h2
     · intro hev
-      exact False.elim (ho.not_even hev)
+      obtain ⟨k,hk⟩ := ho
+      obtain ⟨l,hl⟩ := hev
+      omega
 
 #print axioms prime_power_ne_twice
 #print axioms no_square_case
