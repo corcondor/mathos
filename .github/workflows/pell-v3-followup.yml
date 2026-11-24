@@ -37,4 +37,19 @@ jobs:
           lake exe cache get
           lake build +PrimeFactorLean.Proofs.Pocklington
           cp /tmp/pell/PlusPell.lean .
+          cp /tmp/pell/PFLPell.lean .
+          cp "$GITHUB_WORKSPACE/docs/research/pell-prime-v3/PellDescent.lean" .
+      - name: Algebra and positive descent
+        run: cd /tmp/pfl && lake env lean PellDescent.lean
+      - name: N-1 and N+1 certificate checks
+        if: always()
+        run: |
+          cd /tmp/pfl
+          lake env lean PFLPell.lean
           lake env lean PlusPell.lean
+      - name: Actual verified factoring executable
+        if: always()
+        run: |
+          cd /tmp/pfl
+          lake build factor
+          lake exe factor auto 63018038200

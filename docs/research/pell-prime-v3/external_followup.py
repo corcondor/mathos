@@ -48,15 +48,19 @@ def write(d):
     generate(d)
     coq=d/"PellCoq.v"
     coq.write_text(coq.read_text().replace("From Coqprime Require Import PocklingtonRefl.","From Coq Require Import List ZArith Znumtheory.\nFrom Coqprime Require Import Pock.").replace("prime_2)","prime_2)").replace("vm_compute. reflexivity.","vm_compute; reflexivity."))
+    # Upstream v4.24 uses well-founded runtime definitions; rfl/decide got stuck.
+    # Use the native backend for the PFL checker; strict kernel replay is separate in Hex.
+    pfl=d/"PFLPell.lean"
+    pfl.write_text(pfl.read_text().replace("by first | rfl | decide","by native_decide"))
     # Use the proof-producing n+1 checker in PrimeFactorLean, for all eight targets.
     pre=["import PrimeFactorLean.Proofs.Pocklington","set_option maxRecDepth 100000","set_option maxHeartbeats 0","open PrimeFactorLean.Pocklington"]
     leaf="{ n := 44560482149, witnesses := [(239,1,2),(41,1,2),(31,2,2)] }"
     pre.append("def depCert : Certificate := { n := 44560482149, steps := ["+leaf+"] }")
-    pre.append("theorem depPrime : Nat.Prime 44560482149 := Certificate.check_sound depCert (by first | rfl | decide)")
+    pre.append("theorem depPrime : Nat.Prime 44560482149 := Certificate.check_sound depCert (by native_decide)")
     for n,D,ws in STEPS:
         lit="{ n := "+str(n)+", witnesses := [], D := "+str(D)+", plus := ["+", ".join(f"({q},{e},{u},{v})" for q,e,u,v in ws)+"] }"
         pre.append(f"def step{n} : Step := {lit}")
-        pre.append(f"theorem plusPrime{n} : Nat.Prime {n} := Step.check_sound step{n} [44560482149] (by intro p hp; simp at hp; subst p; exact depPrime) (by first | rfl | decide)\n#print axioms plusPrime{n}")
+        pre.append(f"theorem plusPrime{n} : Nat.Prime {n} := Step.check_sound step{n} [44560482149] (by intro p hp; simp at hp; subst p; exact depPrime) (by native_decide)\n#print axioms plusPrime{n}")
     (d/"PlusPell.lean").write_text("\n\n".join(pre)+"\n")
 if __name__=="__main__":
     verify();check();write(Path(sys.argv[1]))
