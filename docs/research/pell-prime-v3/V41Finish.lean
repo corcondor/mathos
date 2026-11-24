@@ -134,8 +134,8 @@ theorem coefs_even (D : ℕ) (hD : D%2=1) (n : ℕ) :
       ((coefs D (n+2)).1+(coefs D (n+2)).2)%2=0
     rcases ih with ⟨ha,hb⟩
     constructor
-    · rw [Nat.add_mod,Nat.mul_mod,ha,hb]; simp
-    · rw [Nat.add_mod,ha,hb]; simp
+    · rw [Nat.add_mod,Nat.mul_mod,ha,hb] <;> simp
+    · rw [Nat.add_mod,ha,hb] <;> simp
 
 theorem coefs_expand (D : ℕ) (d : ℝ) (hd : d^2=(D:ℝ)) (n : ℕ) :
     (1+d)^n=(coefs D n).1+(coefs D n).2*d ∧
@@ -181,7 +181,7 @@ theorem square_factor_eq (q r B D : ℕ) (hq : q.Prime) (hr : r.Prime)
     exact ⟨hqk,he'⟩
   · have hh : r*(r*D)=r*1 := by rw [hkr] at he'; nlinarith
     have hh' := Nat.eq_of_mul_eq_mul_left hr.pos hh
-    have hr1 := (Nat.mul_eq_one.mp hh').1
+    have hr_le : r ≤ r*D := by simpa using Nat.mul_le_mul_left r hD
     have := hr.two_le
     omega
 
@@ -200,8 +200,8 @@ theorem coefs_prime_force_two (D p q r s : ℕ) (hp : p.Prime) (hq : q.Prime)
     have hdvd : 2∣p := Nat.dvd_of_mod_eq_zero hE.1
     have h2p := (Nat.prime_dvd_prime_iff_eq Nat.prime_two hp).mp hdvd
     omega
-  subst D
-  exact ⟨rfl,hDr.symm,hP,hB⟩
+  rw [hD2] at hP hB
+  exact ⟨hD2,hDr.symm.trans hD2,hP,hB⟩
 
 #print axioms sum_power_lower
 #print axioms odd_sum_prime_eq_two
