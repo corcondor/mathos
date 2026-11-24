@@ -34,3 +34,11 @@ This universal identity makes any nontrivial (2n+1)-st root of unity yield a roo
 12. A. Schinzel, "An extension of the theorem on primitive divisors in algebraic number fields", Math. Comp. 61 (1993), https://www.ams.org/mcom/1993-61-203/S0025-5718-1993-1189523-2/ ; ideal primitive divisors of twisted differences, no proper-divisor guarantee.
 
 The first two references are used as concrete proof bridges; rank and primitive-divisor references guide the existing sieve; the rest are documented comparison routes, not imported as unjustified hypotheses. Bibliography is selective, not exhaustive. Master unchanged.
+
+
+## Verified status (v4.2)
+
+- Structural modules (Newton power sum, Capelli reduction, trace identity, negative Pell completeness): PASS, https://github.com/corcondor/mathos/actions/runs/45492120163 .
+- Odd-sum and coefficient reduction (t=2, square factor, r=2): PASS, https://github.com/corcondor/mathos/actions/runs/45491945611 .
+- Composed original equivalence: source V42Full.lean, repaired in 677adf1; CI not yet confirmed at time of recording, https://github.com/corcondor/mathos/actions/runs/45492500844 .
+- The above passing audits use only propext, Classical.choice, Quot.sound. Full simultaneous-prime finiteness remains unproved.
