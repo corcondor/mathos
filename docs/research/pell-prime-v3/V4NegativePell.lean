@@ -71,8 +71,7 @@ namespace PellPrimeResearch
 
 theorem coeff_two_step (n : ℕ) :
     coeff (n+2) = (3*(coeff n).1+4*(coeff n).2, 2*(coeff n).1+3*(coeff n).2) := by
-  simp only [coeff]
-  congr <;> ring
+  apply Prod.ext <;> simp only [coeff, Prod.fst_mk, Prod.snd_mk] <;> ring
 
 theorem small_negative_pell (x y : ℤ) (hx : 0 < x) (hy : 0 < y) (hy' : y < 3)
     (h : norm x y = -1) : x = 1 ∧ y = 1 := by

@@ -67,7 +67,8 @@ theorem prime_power_small_degree_integral
       simp [hu]
     have hmin : X^s-C (c:ℚ) = minpoly ℚ u :=
       minpoly.eq_of_irreducible_of_monic hirr hzero (monic_X_pow_sub_C _ hs.ne_zero)
-    have hle := natDegree_le_of_degree_le (minpoly.degree_le_of_ne_zero ℚ u hP hroot)
+    have hle : (minpoly ℚ u).natDegree ≤ P.natDegree :=
+      natDegree_le_of_dvd (minpoly.dvd ℚ u hroot) hP
     rw [← hmin, natDegree_X_pow_sub_C] at hle
     omega
   obtain ⟨q,hq⟩ := hq
