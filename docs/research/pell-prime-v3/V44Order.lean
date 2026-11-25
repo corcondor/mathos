@@ -60,7 +60,7 @@ theorem same_sign_unique {K : Type*} [Field K] (w : K) (hw : w ≠ 0)
   omega
 
 theorem H_intCast {K : Type*} [Field K] (z : ℤ) (n : ℕ) :
-    (H z n : K) = H (z : K) n := by
+    ((H z n : ℤ) : K) = H (z : K) n := by
   match n with
   | 0 => simp [H]
   | 1 => simp [H]
@@ -89,8 +89,7 @@ theorem B_zero_iff_order {K : Type*} [Field K] (w : K) (hw : w ≠ 0)
   have hb : (B n : K) = (-1:K)^n * H (-6:K) n := by
     unfold B
     push_cast
-    rw [H_intCast]
-    norm_num
+    simpa using congrArg (fun x : K => (-1:K)^n * x) (H_intCast (K:=K) (-6) n)
   rw [hb]
   have hne : (-1:K)^n ≠ 0 := pow_ne_zero _ (neg_ne_zero.mpr one_ne_zero)
   rw [mul_eq_zero, or_iff_right hne, ← ht]
