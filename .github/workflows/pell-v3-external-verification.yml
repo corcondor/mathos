@@ -1,0 +1,91 @@
+name: Pell v3 independent external verification
+on:
+  push:
+    branches: [research/pell-prime-external-v3-20261125]
+    paths:
+      - 'docs/research/pell-prime-v3/external_adapters.py'
+      - 'docs/research/pell-prime-v3/PellDescent.lean'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pari-flint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_adapters.py /tmp/pell
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y pari-gp libflint-dev
+          cd /tmp/pell
+          gp -q -f Pell.gp > pari.log 2>&1
+          cat pari.log
+          test "$(grep -c 'PASS PARI' pari.log)" -eq 8
+          cat > flintcheck.c <<'EOF'
+          #include <flint/fmpz.h>
+          #include <stdio.h>
+          int main(void) {
+            const char *v[]={"7","5","41","29","63018038201","44560482149","19175002942688032928599","13558774610046711780701"};
+            fmpz_t n; fmpz_init(n);
+            for(int i=0;i<8;i++){if(fmpz_set_str(n,v[i],10)||!fmpz_is_prime(n))return 1;printf("PASS FLINT %s\n",v[i]);}
+            fmpz_clear(n);return 0;
+          }
+          EOF
+          cc -O2 flintcheck.c -lflint -lgmp -o flintcheck
+          ./flintcheck | tee flint.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pari-flint-certificates
+          path: /tmp/pell/
+  coqprime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_adapters.py /tmp/pell
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y coq libcoq-coqprime
+          cd /tmp/pell
+          coqc --version
+          coqc PellCoq.v
+  hex:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_adapters.py /tmp/pell
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: |
+          git clone https://github.com/leanprover/hex-primality.git /tmp/hex
+          cd /tmp/hex
+          git checkout e89daa43f1c6f2038a59674598e2a5097e64c3df
+          lean --version
+          lake build HexPrimality
+          cp /tmp/pell/HexPell.lean .
+          lake env lean HexPell.lean
+  primefactor-mathlib:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 docs/research/pell-prime-v3/external_adapters.py /tmp/pell
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: |
+          git clone https://github.com/Vilin97/PrimeFactorLean.git /tmp/pfl
+          cd /tmp/pfl
+          git checkout d26f6a704ba83c311601b47ec183f465a309c6f7
+          lean --version
+          lake exe cache get
+          lake build PrimeFactorLean.Proofs.Pocklington
+          cp /tmp/pell/PFLPell.lean .
+          cp "$GITHUB_WORKSPACE/docs/research/pell-prime-v3/PellDescent.lean" .
+          lake env lean PFLPell.lean
+          lake env lean PellDescent.lean
+          lake exe factor auto 63018038200

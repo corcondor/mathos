@@ -1,0 +1,37 @@
+name: Pell v4 structural formalization
+on:
+  push:
+    branches: [research/pell-prime-external-v3-20261125]
+    paths:
+      - 'docs/research/pell-prime-v3/V4*.lean'
+      - '.github/workflows/pell-v4-structural.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  formalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [V4Radical, V4NegativePell, V4Trace]
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: |
+          git clone --depth 1 --branch v4.24.0 https://github.com/leanprover-community/mathlib4.git /tmp/mathlib
+          cd /tmp/mathlib
+          lake exe cache get
+          lean --version
+          cp "$GITHUB_WORKSPACE/docs/research/pell-prime-v3/${{ matrix.module }}.lean" .
+          set -o pipefail
+          lake env lean ${{ matrix.module }}.lean | tee /tmp/lean-result.log
+          ! grep -E 'sorryAx|trustCompiler|ofReduceBool|declaration uses.*sorry' /tmp/lean-result.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.module }}-log
+          path: /tmp/lean-result.log
