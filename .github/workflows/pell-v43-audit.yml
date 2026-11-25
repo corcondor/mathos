@@ -52,3 +52,43 @@ jobs:
         with:
           name: v43-kernel-audit
           path: /tmp/cyclotomic.log
+
+  order:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Verify v4.4 order of apparition
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch v4.24.0 https://github.com/leanprover-community/mathlib4.git /tmp/mathlib
+          cd /tmp/mathlib
+          test "$(git rev-parse HEAD)" = f897ebcf72cd16f89ab4577d0c826cd14afaafc7
+          lake exe cache get
+          cp "$GITHUB_WORKSPACE/docs/research/pell-prime-v3/"{V4Trace,V44Order}.lean .
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/V4Trace.olean V4Trace.lean
+          lake env lean V44Order.lean | tee /tmp/order.log
+          ! grep -E 'sorryAx|trustCompiler|ofReduceBool|declaration uses.*sorry' /tmp/order.log
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/order.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          expected={'H_zero_iff_pow','order_eq_prime_of_pow','H_zero_iff_order','cross_sign_impossible','same_sign_unique','H_intCast','A_zero_iff_order','B_zero_iff_order'}
+          seen=set()
+          for name,deps in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s):
+              assert {x.strip() for x in deps.split(',') if x.strip()} <= allowed, (name,deps)
+              if name.startswith('PellOrderV44.'): seen.add(name.split('.')[-1])
+          for name in re.findall(r"'([^']+)' does not depend on any axioms",s):
+              if name.startswith('PellOrderV44.'): seen.add(name.split('.')[-1])
+          assert expected <= seen, expected-seen
+          print('PASS: v4.4 kernel axiom allowlist',len(seen))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v44-order-audit
+          path: /tmp/order.log
