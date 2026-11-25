@@ -77,6 +77,8 @@ theorem HP_trace_root {K : Type*} [Field K] [CharZero K] (n : ℕ)
 
 -- Explicit quadratic annihilator of w over E = Q(w + w^-1).
 -- This avoids invoking a theorem about complex conjugation or real embeddings.
+set_option synthInstance.maxHeartbeats 400000 in
+set_option maxHeartbeats 2000000 in
 theorem quadratic_degree_bound {K : Type*} [Field K] [CharZero K] {w : K}
     (hw : w ≠ 0) :
     let E := IntermediateField.adjoin ℚ ({w+w⁻¹} : Set K)
